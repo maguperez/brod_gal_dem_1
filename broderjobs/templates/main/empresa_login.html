@@ -1,0 +1,33 @@
+{% extends 'main/index_empresa.html' %}
+{% block content_empresa %}
+
+        {%if message %}
+        <b>{{message}}</b>
+        {% endif%}
+        <form action="" method="post">{%csrf_token%}
+            <div class="login active" id="login">
+					<div class="content">
+						<label class="ingresa-email">Iniciar Sesi&oacute;n</label>
+						<div class="datos">
+                            {{ form.username }}
+		                    {{ form.password }}
+							<input type="text" placeholder="E-mail" />
+							<input type="password" placeholder="Contrase&ntilde;a" />
+						</div>
+						<div class="opciones">
+							<input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
+							<a>¿Olvidaste tu contrase&ntilde;a?</a>
+						</div>
+						<a class="ingresar" href="oportunidades.html">INGRESAR</a>
+						<div class="division">
+							<div class="full line"></div>
+							<div class="clear"></div>
+						</div>
+						<a class="registrate" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
+						<input type="submit" name="form" value="Submit" class="Ingresar" text="Ingresar" />
+                        <a class="close" onclick="desactivar('login'); activar('mensaje-central');">x</a>
+					</div>
+				</div>
+        </form>
+{% endblock%}
+

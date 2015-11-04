@@ -1,0 +1,29 @@
+{% extends 'main/index_empresa.html' %}
+{% block content_empresa %}
+
+        {%if message %}
+        <b>{{message}}</b>
+        {% endif%}
+        <form action="" method="post">{%csrf_token%}
+           <div class="login active" id="registro">
+					<div class="content">
+						<label class="saludo"></label>
+						<a class="registrate">Reg&iacute;strate con tu e-mail</a>
+						<div class="datos registro">
+							<input type="text" placeholder="Nombres" />
+							<input type="text" placeholder="Apellidos" />
+							<input type="text" placeholder="E-mail" />
+							<input type="text" placeholder="Nombre de la Empresa" />
+							<input type="text" placeholder="N&uacute;mero telef&oacute;nico" />
+							<input type="password" placeholder="Contrase&ntilde;a" />
+							<input type="password" placeholder="Confirmar contrase&ntilde;a" />
+					    </div>
+					    <div class="opciones">
+					        <input type="checkbox" id="acepto" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+					    </div>
+					    <a class="registrarme" href="oportunidades.html">REGISTRARME</a>
+					    <a class="close" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+			    </div>
+           </div>
+        </form>
+{% endblock%}

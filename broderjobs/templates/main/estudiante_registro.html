@@ -1,0 +1,50 @@
+{% extends 'main/index.html' %}
+{% block content %}
+	<form method="POST">{% csrf_token %}
+		{%if message %}
+        <b>{{message}}</b>
+        {% endif%}
+		<!--{{form.as_p}}-->
+		<div class="login active" id="registro">
+			<div class="content">
+				<label class="saludo">HOLA BRODER</label>
+				<a class="ingresa-facebook">REG&Iacute;STRATE CON FACEBOOK</a>
+				<label class="indicacion">Es m&aacute;s f&aacute;cil y r&aacute;pido</label>
+				<div class="division">
+					<div class="line"></div>
+					<label>o</label>
+					<div class="line"></div>
+					<div class="clear"></div>
+				</div>
+				<a class="registrate" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
+				<div class="registrate-email" id="registro-email">
+					<div class="datos registro">
+						{{ form.first_name }}
+						{{ form.last_name }}
+						{{ form.email }}
+						{{ form.password1 }}
+						{{ form.password2 }}
+						{{ form.fecha_nacimiento }}
+						<!--<input type="password" placeholder="Confirmar contrase&ntilde;a" />
+						<label class="indicacion">Cumplea&ntilde;os</label>
+						<input class="cumpleanos" type="text" placeholder="D&iacute;a" />
+						<input class="cumpleanos" type="text" placeholder="Mes" />
+						<input class="cumpleanos" type="text" placeholder="A&ntilde;o" />  -->
+					</div>
+					<div class="opciones">
+						<input type="checkbox" id="acepto" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+					</div>
+					<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
+				</div>
+				<a class="close" href="#"  href="/estudiante/"  onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+			</div>
+		</div>
+	</form>
+
+{% endblock%}
+{% block js %}
+<script>
+
+}
+</script>
+{% endblock %}
