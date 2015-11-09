@@ -1,14 +1,8 @@
+# coding=utf-8
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
-class RegisterForam(UserCreationForm):
-    firstname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
-    lastname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
-    email = forms.DateField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    password = forms.DateField(widget=forms.TextInput(attrs={'placeholder': 'Contrase&ntildea'}))
-    password2 = forms.DateField(widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contrase&ntildea'}))
-    fecha_nacimiento = forms.DateField(required=False)
+import datetime
 
 
 class LoginForm(forms.Form):
@@ -43,13 +37,31 @@ class RegisterForm(UserCreationForm):
     * Data not saved by the default behavior of UserCreationForm is saved.
     """
 
+    anos = []
+    for y in range(1950, (datetime.datetime.now().year - 10)):
+        anos.append((y, y))
+    items_anos = [('','Año')] + anos
+
+    meses = []
+    for y in range(1,12):
+        meses.append((y, y))
+    items_meses = [('','Mes')] + meses
+
+    dias = []
+    for y in range(1,31):
+        dias.append((y, y))
+    items_dias =[('','Dia')] + dias
+
     username = forms.CharField(required = False, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'username'}))
     email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
     last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
-    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contrase&ntildea', 'type':'password'}))
-    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contrase&ntildea', 'type':'password'}))
+    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
+    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contraseñaa', 'type':'password'}))
     fecha_nacimiento = forms.DateField(required=False)
+    ano = forms.ChoiceField(choices=items_anos, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    mes = forms.ChoiceField(choices=items_meses, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    dia = forms.ChoiceField(choices=items_dias, widget=forms.Select(attrs={'class': 'cumpleanos'}))
 
     def __init__(self, *args, **kwargs):
         """
@@ -58,6 +70,7 @@ class RegisterForm(UserCreationForm):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields.keyOrder = ['email', 'first_name', 'last_name',
                                 'password1', 'password2']
+
 
     def __generate_username(self, email):
         # TODO: Something more efficient?

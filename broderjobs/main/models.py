@@ -10,13 +10,13 @@ class Persona(models.Model):
     tipo_persona = models.CharField(max_length=1,default="E")
 
     def __unicode__(self):
-		return self.usuario.first_name+ " "+self.usuario.last_name
+		return '%s' % (self.usuario.first_name+ " "+self.usuario.last_name)
 
 class GradoEstudio(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return '%s' % (self.descripcion)
 
 class Pais(models.Model):
     descripcion = models.CharField(max_length="50")
@@ -25,7 +25,7 @@ class Pais(models.Model):
 		return self.descripcion
 
 class Ciudad(models.Model):
-    pais = models.OneToOneField(Pais)
+    pais = models.ForeignKey(Pais)
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
@@ -44,6 +44,12 @@ class Carrera(models.Model):
 		return self.descripcion
 
 class TipoPuesto:
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+		return self.descripcion
+
+class CargaHoraria:
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):

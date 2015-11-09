@@ -1,17 +1,20 @@
 
 from django.db import models
-from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto
+from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria
 
 
 class Estudiante(models.Model):
     persona = models.OneToOneField(Persona)
-    grado_estudio = models.OneToOneField(GradoEstudio, default=0)
-    universidad = models.OneToOneField(Universidad, default=0)
-    carerra = models.OneToOneField(Carrera, default=0)
-    pais = models.OneToOneField(Pais, default=0)
-    ciudad = models.OneToOneField(Ciudad, default=0)
-    #tipo_puesto = models.OneToOneRel(Estudiante_TipoPuesto, default=0),
-    carga_horaria = models.CharField(max_length=1, null=True)
+    grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True )
+    universidad = models.ForeignKey(Universidad,default=None, null=True, blank=True )
+    carrera = models.ForeignKey(Carrera, default=None, null=True, blank=True )
+    semestre_inicio_estudio = models.IntegerField(default=0, blank=True)
+    ano_inicio_estudio = models.IntegerField(default=0, blank=True)
+    semestre_graduacion = models.IntegerField(default=0, blank=True)
+    ano_graduacion= models.IntegerField(default=0, blank= True)
+    pais = models.ForeignKey(Pais, default=None, null=True, blank=True )
+    ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
+    #carga_horaria = models.ForeignKey(CargaHoraria, null=True)
 
     def __unicode__(self):
-		return self.persona
+		return '%s' % (self.persona)

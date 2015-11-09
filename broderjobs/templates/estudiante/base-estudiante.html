@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>Broder jobs</title>
+		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="/static/css/broder.css">
+		<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+	</head>
+	<body>
+		<header class="principal">
+			<div class="centered">
+				<a href="oportunidades.html"><img class="logo" src="/static/img/logo.png" alt="Broder jobs" /></a>
+				<div class="user">
+					<div class="menu" id="menu">
+						<i class="arrow-down white"></i>
+						<div class="v-line"></div>
+                        {% if user.is_authenticated %}
+							<a class="name">{{user.first_name|capfirst}}</a>
+                        {% endif %}
+						<div class="clear"></div>
+						<div class="contextual-menu" id="ctx-menu-header">
+							<div class="wrapper">
+								<div class="pin"></div>
+								<ul>
+									<li><a href="micv.html"><i class="cv"></i><span class="v-line gray"></span><span>Mi CV</span><div class="clear"></div></a></li>
+									<li><a href="configuracion.html"><i class="config"></i><span class="v-line gray"></span><span>Configuraci&oacute;n</span><div class="clear"></div></a></li>
+									<li><a href="index.html"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
+								<ul>
+							</div>
+						</div>
+					</div>
+					<img class="portrait" src="/static/img/profile/profile.png" alt="Perfil" />
+					<div class="clear"></div>
+				</div>
+				<div class="options">
+					<a class="procesos active" href="misprocesos.html">Procesos<label class="notificaciones">2</label></a>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		<header class="menu">
+			<div class="centered">
+				<a class="active" href="oportunidades.html">Oportunidades</a>
+				<a href="empresas.html">Empresas</a>
+				<a href="misprocesos.html">Mis procesos</a>
+				<div class="clear"></div>
+			</div>
+		</header>
+		{% block content %}
+        {% endblock %}
+		
+	</body>
+</html>
+
+<script>
+	$('#menu').click(function() {
+		if ($('#ctx-menu-header').hasClass('active'))
+			$('#ctx-menu-header').removeClass('active');
+		else
+			$('#ctx-menu-header').addClass('active')
+	});
+</script>

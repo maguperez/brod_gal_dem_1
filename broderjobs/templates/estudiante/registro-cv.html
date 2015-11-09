@@ -1,0 +1,122 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Broder jobs</title>
+		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="{% static "css/broder.css" %}">
+		<script type="text/javascript" src="{% static "js/jquery-1.8.2.min.js" %}"></script>
+	</head>
+	<body>
+		<section class="final-registro">
+			<img class="logo" src="{% static "img/logo_orange.png" %}" alt="broderjobs"/>
+			<div class="box">
+				<div class="content">
+					<form action="" method="post">{%csrf_token%}
+						{%if form.errors %}
+							{{ form.grado_estudio.errors }}
+							{{ form.universodad.errors }}
+							{{ form.carrera.errors }}
+							{{ form.ano_inicio_estudio.errors }}
+							{{ form.semestre_inicio_estudio.errors }}
+							{{ form.ano_graduacion.errors}}
+							{{ form.semestre_graduacion.errors}}
+							{{ form.pais.errors}}
+							{{ form.ciudad.errors}}
+						{% endif%}
+					<section>
+							{% if user.is_authenticated %}
+							<label class="hola">Hola <span class="bold">{{user.first_name|capfirst}}</span></label>
+							{% endif %}
+							<p class="indicacion">Ay&uacute;danos a ayudarte. Ingresa la siguiente informaci&oacute;n para poder mostrarte las oportunidades m&aacute;s adecuadas seg&uacute;n tu perfil y preferencias.</p>
+							<div class="datos">
+								<div>
+									<label>Grado de estudios</label>
+									<p>{{form.grado_estudio}}</p>
+								</div>
+								<div>
+									<label>Universidad</label>
+									<p>{{form.universidad}}</p>
+								</div>
+								<div>
+									<label>Carrera</label>
+									<p>{{form.carrera}}</p>
+								</div>
+								<div>
+									<label>Inicio de estudios</label>
+									<p>
+										{{form.semestre_inicio_estudio}}
+										{{form.ano_inicio_estudio}}
+									</p>
+								</div>
+								<div>
+									<label>Graduaci&oacute;n / Grad. estimada</label>
+									<p>
+										{{form.semestre_graduacion}}
+										{{form.ano_graduacion}}
+									</p>
+								</div>
+								<div>
+									<label>Pa&iacute;s</label>
+									<p>{{form.pais}}</p>
+								</div>
+								<div>
+									<label>Ciudad</label>
+									<p>{{form.ciudad}}</p>
+								</div>
+								<div>
+									<label>Tipo de puesto que buscas</label>
+									<p>
+										<input type="checkbox" id="practica" /><label for="practica">Pr&aacute;ctica</label>
+										<input type="checkbox" id="trainee" /><label for="trainee">Trainee</label>
+										<input type="checkbox" id="empleo" /><label for="empleo">Empleo</label>
+									</p>
+								</div>
+								<div>
+									<label>Carga horaria</label>
+									<p>
+										<input type="radio" name="horario" id="part-time" /><label for="part-time">Part time</label>
+										<input type="radio" name="horario" id="full-time" /><label for="full-time">Full time</label>
+									</p>
+								</div>
+								<div>
+								</div>
+							</div>
+							<input type="submit" name="form" value="Finalizar Registro"  class="finalizar-registro"/>
+						</section>
+					</form>
+				</div>
+			</div>
+		</section>
+
+	</body>
+</html>
+
+<script>
+	$('#menu').click(function() {
+		if ($('#ctx-menu-header').hasClass('active'))
+			$('#ctx-menu-header').removeClass('active');
+		else
+			$('#ctx-menu-header').addClass('active')
+	});
+	$('.popup').click(function(e) {
+		if ( $(e.target).closest('.popup-box').length === 0 ) {
+			window.history.back();
+			$('body').removeClass('static');
+		}
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('#postular').click(function(e) {
+		window.location = '#resultado-postulacion';
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+</script>

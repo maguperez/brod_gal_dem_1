@@ -1,7 +1,8 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response, redirect, HttpResponseRedirect
+from django.shortcuts import render_to_response, redirect, HttpResponseRedirect, render
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
+from  django.utils.dateparse import parse_date
 
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy
@@ -10,21 +11,26 @@ from django.core.context_processors import csrf
 
 
 class EstudianteResgistro(FormView):
-    template_name = 'main/estudiante_registro.html'
+    template_name = 'main/estudiante-registro.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('registrocv')
+    success_url = reverse_lazy('registro-cv')
 
     def form_valid(self, form):
         user = form.save()
         persona = Persona()
         persona.usuario = user
         persona.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
+        dia  = form.cleaned_data['dia']
+        mes  = form.cleaned_data['mes']
+        ano  = form.cleaned_data['ano']
+        nacimiento = parse_date(ano + '-' + mes + '-' + dia)
+        persona.fecha_nacimiento = nacimiento
         persona.tipo_persona = "E"
         persona.save()
         return super(EstudianteResgistro, self).form_valid(form)
 
 class EmpresaRegistro(FormView):
-    template_name = 'main/empresa_registro.html'
+    template_name = 'main/empresa-registro.html'
     form_class = RegisterForm
     success_url = reverse_lazy('empresa_registro')
 
@@ -48,7 +54,7 @@ def login_page(request):
                 if user.is_active:
                     login(request, user)
                     message = "Te haz identificado de modo correcto"
-                    return redirect('homepage')
+                    return redirect('oportunidad_listar')
                 else:
                     message = "tu usuario esta inactivo"
             else:
@@ -56,7 +62,7 @@ def login_page(request):
     else:
         form = LoginForm()
 
-    return render_to_response('main/estudiante_login.html',{'message': message,'form': form},
+    return render_to_response('main/estudiante-login.html',{'message': message,'form': form},
                                   context_instance=RequestContext(request))
 
 def empresa_login(request):
@@ -79,7 +85,7 @@ def empresa_login(request):
     else:
         form = LoginForm()
 
-    return render_to_response('main/empresa_login.html',{'message': message,'form': form},
+    return render_to_response('main/empresa-login.html',{'message': message,'form': form},
                                   context_instance=RequestContext(request))
 
 def homepage(request):
@@ -89,14 +95,13 @@ def estudiante(request):
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 def empresa(request):
-    return render_to_response('main/index_empresa.html',
+    return render_to_response('main/index-empresa.html',
                               context_instance=RequestContext(request))
 def logout_view(request):
     logout(request)
     return redirect('homepage')
 
 def register_user(request):
-    message = None
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -104,11 +109,19 @@ def register_user(request):
             persona = Persona()
             persona.usuario = user
             persona.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
+            dia = form.cleaned_data['dia']
+            mes  = form.cleaned_data['mes']
+            ano  = form.cleaned_data['ano']
+            fecha = parse_date(ano + '-' + mes + '-' + dia)
+            persona.fecha_nacimiento = fecha
             persona.tipo_persona = "E"
             persona.save()
-            return reverse_lazy('registrocv')
-    form = RegisterForm()
-    message = "esta mierda"
-    return render_to_response('main/estudiante_registro.html', {'message': message,'form': form}, context_instance=RequestContext(request))
+            new_user = authenticate(username=request.POST['email'],
+                                    password=request.POST['password1'])
+            login(request, new_user)
+            return redirect('registro_cv')
+    else:
+        form = RegisterForm()
+    return render(request, 'main/estudiante-registro.html', {'form': form})
 
 
