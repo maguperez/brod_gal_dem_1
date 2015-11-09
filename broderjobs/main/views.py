@@ -10,38 +10,6 @@ from .models import Persona
 from django.core.context_processors import csrf
 
 
-class EstudianteResgistro(FormView):
-    template_name = 'main/estudiante-registro.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('registro-cv')
-
-    def form_valid(self, form):
-        user = form.save()
-        persona = Persona()
-        persona.usuario = user
-        persona.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
-        dia  = form.cleaned_data['dia']
-        mes  = form.cleaned_data['mes']
-        ano  = form.cleaned_data['ano']
-        nacimiento = parse_date(ano + '-' + mes + '-' + dia)
-        persona.fecha_nacimiento = nacimiento
-        persona.tipo_persona = "E"
-        persona.save()
-        return super(EstudianteResgistro, self).form_valid(form)
-
-class EmpresaRegistro(FormView):
-    template_name = 'main/empresa-registro.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('empresa_registro')
-
-    def form_valid(self, form):
-        user = form.save()
-        persona = Persona()
-        persona.usuario = user
-        persona.tipo_persona = "R"
-        persona.save()
-        return super(EmpresaRegistro, self).form_valid(form)
-
 def login_page(request):
     message = None
     if request.method == "POST":
@@ -95,7 +63,7 @@ def estudiante(request):
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 def empresa(request):
-    return render_to_response('main/index-empresa.html',
+    return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
 def logout_view(request):
     logout(request)
@@ -123,5 +91,24 @@ def register_user(request):
     else:
         form = RegisterForm()
     return render(request, 'main/estudiante-registro.html', {'form': form})
+
+def register_user_empresa(request):
+    mensaje = None
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            persona = Persona()
+            persona.usuario = user
+            persona.tipo_persona = "R"
+            persona.telefono = form.cleaned_data['telefono']
+            persona.save()
+            new_user = authenticate(username=request.POST['email'],
+                                    password=request.POST['password1'])
+            login(request, new_user)
+            mensaje = "Se ha registrado satisfactoriamente"
+    else:
+        form = RegisterForm()
+    return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})
 
 

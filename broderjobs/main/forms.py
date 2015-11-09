@@ -59,9 +59,10 @@ class RegisterForm(UserCreationForm):
     password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
     password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contraseñaa', 'type':'password'}))
     fecha_nacimiento = forms.DateField(required=False)
-    ano = forms.ChoiceField(choices=items_anos, widget=forms.Select(attrs={'class': 'cumpleanos'}))
-    mes = forms.ChoiceField(choices=items_meses, widget=forms.Select(attrs={'class': 'cumpleanos'}))
-    dia = forms.ChoiceField(choices=items_dias, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    ano = forms.ChoiceField(choices=items_anos, required = False, widget=forms.Select(attrs={'class': 'cumpleanos', }))
+    mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    dia = forms.ChoiceField(choices=items_dias, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
 
     def __init__(self, *args, **kwargs):
         """

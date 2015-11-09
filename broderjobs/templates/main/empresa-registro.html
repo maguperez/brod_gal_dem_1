@@ -1,27 +1,44 @@
-{% extends 'main/index_empresa.html' %}
+{% extends 'main/index-empresa.html' %}
 {% block content_empresa %}
 
-        {%if message %}
-        <b>{{message}}</b>
+        {%if mensaje %}
+        <b>{{mensaje}}</b>
+        {% endif%}
+		{%if form.errors %}
+		{{ form.first_name.errors }}
+		{{ form.last_name.errors }}
+		{{ form.email.errors }}
+		{{ form.password1.errors }}
+		{{ form.password2.errors }}
+		{{ form.telefono.errors }}
         {% endif%}
         <form action="" method="post">{%csrf_token%}
-           <div class="login active" id="registro">
+          <div class="login active" id="registro">
 					<div class="content">
 						<label class="saludo"></label>
 						<a class="registrate">Reg&iacute;strate con tu e-mail</a>
 						<div class="datos registro">
-							<input type="text" placeholder="Nombres" />
+							{{form.first_name}}
+							{{form.last_name}}
+							{{form.email}}
+							{{form.nombre_empresa}}
+							{{form.telefono}}
+							{{form.password1}}
+							{{form.password2}}
+							<!--<input type="text" placeholder="Nombres" />
 							<input type="text" placeholder="Apellidos" />
 							<input type="text" placeholder="E-mail" />
 							<input type="text" placeholder="Nombre de la Empresa" />
 							<input type="text" placeholder="N&uacute;mero telef&oacute;nico" />
 							<input type="password" placeholder="Contrase&ntilde;a" />
-							<input type="password" placeholder="Confirmar contrase&ntilde;a" />
+							<input type="password" placeholder="Confirmar contrase&ntilde;a" />-->
 					    </div>
 					    <div class="opciones">
 					        <input type="checkbox" id="acepto" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 					    </div>
-					    <a class="registrarme" href="oportunidades.html">REGISTRARME</a>
+					    <!--<a class="registrarme" href="oportunidades.html">REGISTRARME</a>-->
+
+						<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
 					    <a class="close" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
 			    </div>
            </div>

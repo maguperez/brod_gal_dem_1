@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from .views import EstudianteResgistro, EmpresaRegistro
 
 
 urlpatterns = patterns('',
@@ -18,9 +17,11 @@ urlpatterns = patterns('',
 		 name='logout'),
 
 	#url(r'^estudiante_registro/$', EstudianteResgistro.as_view() , name = 'estudiante_registro'),
-	url(r'^estudiante-registro/$','main.views.register_user' , name = 'estudiante-registro'),
+	url(r'^estudiante-registro/$','main.views.register_user' , name = 'estudiante_registro'),
 
-	url(r'^empresa-registro/$', EmpresaRegistro.as_view() , name = 'empresa-registro')
+	#url(r'^empresa_registro/$', EmpresaRegistro.as_view() , name = 'empresa_registro')
+
+	url(r'^empresa-registro/$','main.views.register_user_empresa' , name = 'empresa_registro'),
 		#url(r'^logout/$' , 'main.views.logout', name='logout'),
 
 	#url(r'^cerrar/$' , 'django.contrib.auth.views.logout_then_login',

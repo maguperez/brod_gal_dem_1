@@ -1,4 +1,4 @@
-{% extends 'main/index_empresa.html' %}
+{% extends 'main/index-empresa.html' %}
 {% block content_empresa %}
 
         {%if message %}
@@ -23,6 +23,7 @@
 							<div class="full line"></div>
 							<div class="clear"></div>
 						</div>
+						<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
 						<a class="registrate" href="/empresa-registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
                         <a class="close" href="/empresa/">x</a>
 					</div>

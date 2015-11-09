@@ -15,55 +15,11 @@
 					<img class="logo" src="../static/img/logo.png" alt="Broder jobs" />
 					<ul>
 						<li><a class="btn-action" href="/estudiante/">Para Estudiantes</a></li>
-						<li><a class="link-header" href="/empresa_login/" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
-						<li><a class="link-header"  href="/empresa_registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
+						<li><a class="link-header" href="/empresa-login/" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
+						<li><a class="link-header"  href="/empresa-registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
 					</ul>
 					<div class="clear"></div>
 				</header>
-				<!--<div class="mensaje-central active" id="mensaje-central">
-					<h1>Anuncia gratis</h1>
-					<h3>Publica tus oportunidades de forma clara y atractiva para los j&oacute;venes profesionales</h3>
-				</div>
-				<div class="login" id="login">
-					<div class="content">
-						<label class="ingresa-email">Iniciar Sesi&oacute;n</label>
-						<div class="datos">
-							<input type="text" placeholder="E-mail" />
-							<input type="password" placeholder="Contrase&ntilde;a" />
-						</div>
-						<div class="opciones">
-							<input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
-							<a>¿Olvidaste tu contrase&ntilde;a?</a>
-						</div>
-						<a class="ingresar" href="oportunidades.html">INGRESAR</a>
-						<div class="division">
-							<div class="full line"></div>
-							<div class="clear"></div>
-						</div>
-						<a class="registrate" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
-						<a class="close" onclick="desactivar('login'); activar('mensaje-central');">x</a>
-					</div>
-				</div>
-				<div class="login" id="registro">
-					<div class="content">
-						<label class="saludo"></label>
-						<a class="registrate">Reg&iacute;strate con tu e-mail</a>
-						<div class="datos registro">
-							<input type="text" placeholder="Nombres" />
-							<input type="text" placeholder="Apellidos" />
-							<input type="text" placeholder="E-mail" />
-							<input type="text" placeholder="Nombre de la Empresa" />
-							<input type="text" placeholder="N&uacute;mero telef&oacute;nico" />
-							<input type="password" placeholder="Contrase&ntilde;a" />
-							<input type="password" placeholder="Confirmar contrase&ntilde;a" />
-						</div>
-						<div class="opciones">
-							<input type="checkbox" id="acepto" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
-						</div>
-						<a class="registrarme" href="oportunidades.html">REGISTRARME</a>
-						<a class="close" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
-					</div>
-				</div>!-->
 				{% block content_empresa%}
 				{% endblock %}
 				<footer>
