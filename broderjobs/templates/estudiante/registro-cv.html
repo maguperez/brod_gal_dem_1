@@ -25,6 +25,7 @@
 							{{ form.semestre_graduacion.errors}}
 							{{ form.pais.errors}}
 							{{ form.ciudad.errors}}
+							{{ form.tipo_puesto.errors}}
 						{% endif%}
 					<section>
 							{% if user.is_authenticated %}
@@ -69,9 +70,13 @@
 								<div>
 									<label>Tipo de puesto que buscas</label>
 									<p>
-										<input type="checkbox" id="practica" /><label for="practica">Pr&aacute;ctica</label>
-										<input type="checkbox" id="trainee" /><label for="trainee">Trainee</label>
-										<input type="checkbox" id="empleo" /><label for="empleo">Empleo</label>
+										{% for tipo_puesto in form.tipo_puesto %}
+											 {{ tipo_puesto.errors }}
+											 {{ tipo_puesto }}
+										<!--<input type="checkbox" id="practica" /><label for="practica">Pr&aacute;ctica</label>
+										<!--<input type="checkbox" id="trainee" /><label for="trainee">Trainee</label>
+										<input type="checkbox" id="empleo" /><label for="empleo">Empleo</label> -->
+										{% endfor %}
 									</p>
 								</div>
 								<div>

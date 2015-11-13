@@ -38,14 +38,14 @@ def empresa_login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST["username"]
+            email = request.POST["email"]
             password = request.POST["password"]
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=email, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     message = "Te haz identificado de modo correcto"
-                    return redirect('empresa')
+                    return redirect('oportunidad_listar')
                 else:
                     message = "tu usuario esta inactivo"
             else:

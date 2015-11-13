@@ -43,15 +43,29 @@ class Carrera(models.Model):
     def __unicode__(self):
 		return self.descripcion
 
-class TipoPuesto:
+class TipoPuesto(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
 		return self.descripcion
 
-class CargaHoraria:
+class CargaHoraria(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
 		return self.descripcion
+
+class Idioma(models.Model):
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+		return self.descripcion
+
+class Conocimiento(models.Model):
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+		return self.descripcion
+
+
 

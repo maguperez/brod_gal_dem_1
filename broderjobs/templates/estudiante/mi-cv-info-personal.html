@@ -1,0 +1,70 @@
+{% extends 'estudiante/mi-cv.html' %}
+{% block info%}
+
+<div class="content">
+					<section class="info-academica">
+						<h3 class="title"><i class="academic"></i>Informaci&oacute;n Acad&eacute;mica</h3>
+						<div class="detalle col-4-6">
+							<div>
+								<label>Inicio de estudios</label>
+								<p>
+									<select>
+										<option disabled selected>Semestre</option>
+									</select>
+									<select>
+										<option disabled selected>A&ntilde;o</option>
+									</select>
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<label>Graduaci&oacute;n / Grad. estimada</label>
+								<p>
+									<select>
+										<option disabled selected>Semestre</option>
+									</select>
+									<select>
+										<option disabled selected>A&ntilde;o</option>
+									</select>
+								</p>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+					<section class="info-personal">
+						<h3 class="title"><i class="info"></i>Informaci&oacute;n Personal</h3>
+						<div class="detalle col-4-6">
+							<div>
+								<label>Contacto</label>
+								<p>
+									<input type="text" placeholder="Correo electr&oacute;nico" />
+									<input type="text" placeholder="Celular" />
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<label>Ubicaci&oacute;n actual</label>
+								<p>
+									<select>
+										<option disabled selected>Pa&iacute;s</option>
+									</select>
+									<select>
+										<option disabled selected>Departamento</option>
+									</select>
+								</p>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<label>Fecha de nacimiento</label>
+								<p>
+									<input type="text" placeholder="D&iacute;a / Mes / A&ntilde;o" />
+								</p>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+					<a class="btn-save" onclick="window.history.back();">GUARDAR</a>
+				</div>
+            <a class="close" href="/estudiante/mi-cv/">Cerrar</a>
+
+{% endblock%}

@@ -1,32 +1,15 @@
 # coding=utf-8
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout
+from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto
 import datetime
 
 class RegistroCV(forms.ModelForm):
-
-
-
     class Meta:
             model = Estudiante
             fields = ('grado_estudio', 'carrera', 'universidad', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
-                     'ano_graduacion', 'pais', 'ciudad')
-            #widgets = {
-                # 'grado_estudio': forms.CharField(required = False,  widget=forms.Select(attrs={'class': 'full'})),
-            #     # 'universidad': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'})),
-            #     # 'carrera': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'})),
-            #     # 'semestre_inicio_estudio' : forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-2'})),
-            #     # 'ano_inicio_estudio': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-1'})),
-            #     # 'semestre_graduacion': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-2'})),
-            #     # 'ano_graduacion': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-1'})),
-            #     # 'pais': forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'})),
-            #     # 'ciudad': forms.ModelChoiceField(required=False, widget=forms.Select(attrs={'class': 'full'})),
-    #         # }
-    #         ano_inicio_estudio = forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-1'}))
-    # ano_graduacion = forms.ModelChoiceField(required = False, widget=forms.Select(attrs={'class': 'half-1'}))
-
+                     'ano_graduacion', 'pais', 'ciudad', 'tipo_puesto')
 
     def __init__(self, *args, **kwargs):
         super(RegistroCV, self).__init__(*args, **kwargs)
@@ -85,5 +68,24 @@ class RegistroCV(forms.ModelForm):
             ciudades.append((ciudad.id, ciudad.descripcion))
         self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})
         self.fields['ciudad'].choices = ciudades
+
+        #Carga Tipo de Puesto
+        self.fields["tipo_puesto"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["tipo_puesto"].help_text = ""
+        self.fields["tipo_puesto"].queryset = TipoPuesto.objects.all()
+
+# END CLASS #
+
+class ResumenForm(forms.Form):
+    resumen = forms.CharField(required=True, widget=forms.Textarea)
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        helper.label_class = 'col-md-2'
+        helper.field_class = 'col-md-10'
+        return helper
 
 

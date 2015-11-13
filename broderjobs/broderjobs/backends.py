@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 
+#
+# Esta clase permite loguearse con email o username
+#
 class EmailOrUsernameModelBackend(object):
     def authenticate(self, username=None, password=None):
         if '@' in username:

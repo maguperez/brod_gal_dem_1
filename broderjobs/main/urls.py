@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 
-urlpatterns = patterns('',
+urlpatterns =[
 
 	url(r'^$' , 'main.views.homepage', name='homepage'),
 
@@ -30,4 +30,4 @@ urlpatterns = patterns('',
 	#url(r'^estudiante_login/$' , 'django.contrib.auth.views.login',
 	#	{'template_name':'main/estudiante-login.html'}, name='login'),
 
-)
+]
