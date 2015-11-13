@@ -1,19 +1,23 @@
-
+# coding=utf-8
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
 from empresa.models import Empresa, Puesto
+from main import utilitarios
 
 
 class Estudiante(models.Model):
+    items_semestre = utilitarios.semestre_rango()
+    items_anos = utilitarios.anos_rango()
+
     persona = models.OneToOneField(Persona)
     grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True )
     universidad = models.ForeignKey(Universidad,default=None, null=True, blank=True )
     carrera = models.ForeignKey(Carrera, default=None, null=True, blank=True )
-    semestre_inicio_estudio = models.IntegerField(default=0, blank=True)
-    ano_inicio_estudio = models.IntegerField(default=0, blank=True)
-    semestre_graduacion = models.IntegerField(default=0, blank=True)
-    ano_graduacion= models.IntegerField(default=0, blank= True)
+    semestre_inicio_estudio = models.CharField(choices=items_semestre,max_length=2, default=None, null=True, blank=True)
+    ano_inicio_estudio = models.CharField(choices=items_anos, max_length=4, default=None, null=True,  blank=True, )
+    semestre_graduacion = models.CharField(choices=items_semestre, max_length=2, default=None, null=True, blank=True, )
+    ano_graduacion= models.CharField(choices=items_anos, max_length=4, default=None, null=True, blank=True)
     pais = models.ForeignKey(Pais, default=None, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
     carga_horaria = models.ForeignKey(CargaHoraria, null=True)
@@ -27,7 +31,7 @@ class Resumen(models.Model):
     descripcion = models.CharField(max_length="100", default=None, null=True, blank=True)
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode('%s' % (self.estudiante)) or u''
 
 class ActividadesExtra(models.Model):
     estudiante =  models.ForeignKey(Estudiante)

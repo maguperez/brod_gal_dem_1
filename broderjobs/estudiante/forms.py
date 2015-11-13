@@ -2,17 +2,19 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
-from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto
+from django.forms.models import ModelChoiceField
+from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria
 import datetime
+from main import utilitarios
 
-class RegistroCV(forms.ModelForm):
+class RegistroCVForm(forms.ModelForm):
     class Meta:
             model = Estudiante
             fields = ('grado_estudio', 'carrera', 'universidad', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
-                     'ano_graduacion', 'pais', 'ciudad', 'tipo_puesto')
+                     'ano_graduacion', 'pais', 'ciudad', 'tipo_puesto', 'carga_horaria')
 
     def __init__(self, *args, **kwargs):
-        super(RegistroCV, self).__init__(*args, **kwargs)
+        super(RegistroCVForm, self).__init__(*args, **kwargs)
 
         #Carga items a Grado de Estudio
         grado_estudios = []
@@ -36,24 +38,22 @@ class RegistroCV(forms.ModelForm):
         self.fields['universidad'].widget =forms.Select(attrs={'class': 'full'})
         self.fields['universidad'].choices = universidades
 
-        #Carga items a años
-        semestre = []
-        for y in range(0, 3):
-            semestre.append((y, y))
-        items_semestre =[('','Semestre')] + semestre
-        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-1'})
-        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-1'})
+        #Carga items Semestre
+        items_semestre = utilitarios.semestre_rango()
+        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-2'})
+        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-2'})
+
         self.fields['semestre_inicio_estudio'].choices = items_semestre
         self.fields['semestre_graduacion'].choices = items_semestre
 
         #Carga items a años
-        anos = []
-        for y in range(1999, datetime.datetime.now().year + 5):
-            anos.append((y, y))
-        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-2'})
-        self.fields['ano_inicio_estudio'].choices = anos
-        # self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-2'})
-        self.fields['ano_graduacion'].choices = anos
+
+        items_anos = utilitarios.anos_rango()
+        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-1'})
+        self.fields['ano_inicio_estudio'].choices = items_anos
+
+        self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-1'})
+        self.fields['ano_graduacion'].choices = items_anos
 
         #Carga items a Psis
         paises = []
@@ -69,10 +69,17 @@ class RegistroCV(forms.ModelForm):
         self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})
         self.fields['ciudad'].choices = ciudades
 
-        #Carga Tipo de Puesto
+        #Carga Tipo de
         self.fields["tipo_puesto"].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["tipo_puesto"].help_text = ""
         self.fields["tipo_puesto"].queryset = TipoPuesto.objects.all()
+
+        #Carga Horaria
+        cargas = []
+        for carga in CargaHoraria.objects.all():
+            cargas.append((carga.id, carga.descripcion))
+        self.fields["carga_horaria"].widget = forms.widgets.RadioSelect()
+        self.fields["carga_horaria"].choices =cargas
 
 # END CLASS #
 

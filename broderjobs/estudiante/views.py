@@ -2,7 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import RegistroCV, ResumenForm
+from .forms import RegistroCVForm, ResumenForm
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Estudiante, Resumen, EstudianteIdioma, EstudianteConocimiento, ActividadesExtra, ExperienciaProfesional, Voluntariado
@@ -14,7 +14,7 @@ from main import utilitarios
 def registro_cv(request):
 
     if request.method == 'POST':
-        form = RegistroCV(request.POST)
+        form = RegistroCVForm(request.POST)
         if form.is_valid():
             user = request.user
             persona = Persona.objects.get(usuario_id=user.id)
@@ -24,7 +24,10 @@ def registro_cv(request):
             pais =  form.cleaned_data['pais']
             ciudad = form.cleaned_data['ciudad']
             tipo_puesto = form.cleaned_data['tipo_puesto']
-            print(tipo_puesto)
+            ano_inicio = form.cleaned_data['ano_inicio_estudio']
+            semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
+            ano_graduacion = form.cleaned_data['ano_graduacion']
+            semestre_graduacion = form.cleaned_data['semestre_graduacion']
 
             estudiante = Estudiante()
             estudiante.persona = persona
@@ -33,7 +36,10 @@ def registro_cv(request):
             estudiante.carrera = carrera
             estudiante.pais = pais
             estudiante.ciudad = ciudad
-
+            estudiante.ano_inicio_estudio = ano_inicio
+            estudiante.semestre_inicio_estudio = semestre_inicio
+            estudiante.ano_graduacion = ano_graduacion
+            estudiante.semestre_graduacion = semestre_graduacion
             estudiante.save()
 
             estudiante.tipo_puesto = tipo_puesto
@@ -45,7 +51,7 @@ def registro_cv(request):
 
             return redirect('oportunidad_listar')
     else:
-        form = RegistroCV()
+        form = RegistroCVForm()
     return render(request, 'estudiante/registro-cv.html', {'form': form})
 
 @login_required(login_url='/estudiante-registro/')
@@ -68,7 +74,6 @@ class AjaxTemplateMixin(object):
             #split[-1] = '-inner'
             split.append('.html')
             self.ajax_template_name = ''.join(split)
-            print(self.ajax_template_name)
             if request.is_ajax():
                 self.template_name = self.ajax_template_name
             return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
@@ -79,8 +84,14 @@ class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
     success_url = reverse_lazy('mi_cv')
     success_message = "Guardado con exito!"
 
+    def get_initial(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        resumen = Resumen.objects.get(estudiante_id=estudiante.id)
+        return {'resumen': resumen.descripcion}
+
     def form_valid(self, form):
-        print("sssssssssssssssssssssssssssssssss")
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
@@ -89,7 +100,6 @@ class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
 
         resumen.save()
         return super(ResumenView, self).form_valid(form)
-
 
 class MiCVView(TemplateView):
 

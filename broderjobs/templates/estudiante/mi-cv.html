@@ -21,7 +21,7 @@
 							<section>
 								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
-									<p>{{resumen}}</p>
+									<p>{{resumen.descripcion}}</p>
 								</div>
 							</section>
 							<section>
@@ -116,7 +116,7 @@
 							{% else %}
 								<div><i class="done "></i>Informaci&oacute;n acad&eacute;mica</div>
 							{% endif %}
-							{% if resumen %}
+							{% if resumen.descripcion %}
 								<div><i class="done active "></i>Resumen</div>
 							{% else %}
 								<div><i class="done"></i>Resumen</div>
@@ -370,8 +370,10 @@
                 	if ( $(xhr).find('.has-error').length > 0 ) {
                     	$(modal).find('.modal-body').html(xhr);
                         formAjaxSubmit(form, modal);
+
 					} else {
                     	$(modal).modal('toggle');
+						location.reload();
 					}
 				},
                 error: function (xhr, ajaxOptions, thrownError) {

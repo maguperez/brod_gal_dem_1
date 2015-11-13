@@ -26,16 +26,6 @@ class UniqueUserEmailField(forms.EmailField):
 
 
 class RegisterForm(UserCreationForm):
-    """
-    Extends the built in UserCreationForm in several ways:
-
-    * Adds an email field, which uses the custom UniqueUserEmailField,
-      that is, the form does not validate if the email address already exists
-      in the User table.
-    * The username field is generated based on the email, and isn't visible.
-    * first_name and last_name fields are added.
-    * Data not saved by the default behavior of UserCreationForm is saved.
-    """
 
     anos = []
     for y in range(1950, (datetime.datetime.now().year - 10)):

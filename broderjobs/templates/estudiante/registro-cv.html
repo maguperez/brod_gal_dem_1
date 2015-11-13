@@ -73,17 +73,16 @@
 										{% for tipo_puesto in form.tipo_puesto %}
 											 {{ tipo_puesto.errors }}
 											 {{ tipo_puesto }}
-										<!--<input type="checkbox" id="practica" /><label for="practica">Pr&aacute;ctica</label>
-										<!--<input type="checkbox" id="trainee" /><label for="trainee">Trainee</label>
-										<input type="checkbox" id="empleo" /><label for="empleo">Empleo</label> -->
 										{% endfor %}
 									</p>
 								</div>
 								<div>
 									<label>Carga horaria</label>
 									<p>
-										<input type="radio" name="horario" id="part-time" /><label for="part-time">Part time</label>
-										<input type="radio" name="horario" id="full-time" /><label for="full-time">Full time</label>
+										{% for carga_horaria in form.carga_horaria %}
+											 {{ carga_horaria.errors }}
+											 {{ carga_horaria }}
+										{% endfor %}
 									</p>
 								</div>
 								<div>

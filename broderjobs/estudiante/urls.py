@@ -14,5 +14,5 @@ urlpatterns =[
 
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi_cv_resumen"),
 
-	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv_resumen"),
+	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv"),
 ]
