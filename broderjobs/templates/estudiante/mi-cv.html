@@ -1,13 +1,17 @@
-{% extends 'estudiante/base-estudiante.html' %}
+{% extends 'estudiante/base.html' %}
+{%block css%}
+
+{%endblock%}
+
 
 {% block content %}
 
 <section class="cv">
 			<div class="centered">
 				<div class="panel left principal">
-					<div class="box">
+					<div class="box"><button id="foto-button" class="link editar">Editar</button>
 						<header>
-							<img class="imagen" src="/static/img/profile/profile.png" />
+							<img class="imagen" src="{{estudiante.set_foto}}" />
 							<div class="detalle">
 								<h3>{{estudiante | upper}}</h3>
 								<label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio}}- {{estudiante.ano_graduacion}})</label>
@@ -15,7 +19,7 @@
 								<label>{{persona.telefono}} / {{usuario.email}}</label>
 							</div>
 							<div class="clear"></div>
-							<a class="editar btn-action" href="#info-personal">EDITAR</a>
+							<button id="info-personal-button" class="editar">EDITAR</button>
 						</header>
 						<div class="content">
 							<section>
@@ -157,13 +161,7 @@
 				<div class="clear"></div>
 			</div>
 		</section>
-<div class="popup info-personal" id="info-personal">
-    <div class="popup-box box">
-                {% block info %}
-                {% endblock %}
 
-    </div>
-</div>
 <div class="popup resumen" id="resumen">
 			<div class="popup-box box">
 				<div class="content">
@@ -373,7 +371,7 @@
 
 					} else {
                     	$(modal).modal('toggle');
-						location.reload();
+
 					}
 				},
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -383,6 +381,18 @@
 	 }
      $('#comment-button').click(function() {
      	$('#form-modal-body').load('resumen/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#foto-button').click(function() {
+     	$('#form-modal-body').load('foto/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#info-personal-button').click(function() {
+     	$('#form-modal-body').load('info-personal/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});

@@ -1,0 +1,29 @@
+{% load crispy_forms_tags %}
+
+
+<div class="row">
+	<form class="form-horizontal" action="{% url 'mi_cv_info_personal' %}" method="post">
+		
+		{{ form.grado_estudio|as_crispy_field }}
+		<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
+		< class="detalle col-3-7">
+			<div>
+				<label>Acepto propuestas de</label>
+				<p>
+					<input type="checkbox" id="practicas" name="propuestas" /><label for="practicas" class="radiobutton">Pr&aacute;cticas</label>
+					<input type="checkbox" id="trainee" name="propuestas" /><label for="trainee" class="radiobutton">Trainee</label>
+					<input type="checkbox" id="empleo" name="propuestas" /><label for="empleo" class="radiobutton">Empleo</label>
+				</p>
+				<div class="clear"></div>
+			</div>
+			<div>
+				<label>Carga horaria</label>
+				<p>
+					<input type="radio" id="part-time" name="carga" /><label for="part-time" class="radiobutton">Part time</label>
+					<input type="radio" id="full-time" name="carga" /><label for="full-time" class="radiobutton">Full time</label>
+				</p>
+			<div class="clear"></div>
+		</div>
+		<input type="submit" class="btn btn-submit col-md-offset-2">
+	</form>
+</div>

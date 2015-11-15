@@ -10,9 +10,11 @@ urlpatterns =[
 
 	#url(r'^mi-cv/$', 'estudiante.views.mi_cv', name='mi_cv'),
 
-	url(r'^mi-cv-info-personal/$' , 'estudiante.views.info_personal', name='info_personal'),
-
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi_cv_resumen"),
+
+	url(r'^mi-cv/foto/$', views.FotoView.as_view(), name="mi_cv_foto"),
+
+	url(r'^mi-cv/info-personal/$', views.InfoPersonalView.as_view(), name="mi_cv_info_personal"),
 
 	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv"),
 ]

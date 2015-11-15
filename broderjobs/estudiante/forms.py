@@ -5,6 +5,7 @@ from crispy_forms.layout import Layout
 from django.forms.models import ModelChoiceField
 from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria
 import datetime
+from django.contrib.auth.models import User
 from main import utilitarios
 
 class RegistroCVForm(forms.ModelForm):
@@ -86,13 +87,58 @@ class RegistroCVForm(forms.ModelForm):
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        helper.label_class = 'col-md-2'
-        helper.field_class = 'col-md-10'
-        return helper
+# END CLASS
 
+class FotoForm(forms.Form):
+    foto = forms.FileField(label='Selecione Imagen de Perfil')
+
+
+class UniqueUserEmailField(forms.EmailField):
+    def validate(self, value):
+        super(forms.EmailField, self).validate(value)
+        try:
+            User.objects.get(email = value)
+            raise forms.ValidationError("Email ya esta registrado")
+        except User.MultipleObjectsReturned:
+            raise forms.ValidationError("Email ya esta registrado")
+        except User.DoesNotExist:
+            pass
+
+class InfoPersonalForm(forms.Form):
+    grado_estudios = []
+    for grado_estudio in GradoEstudio.objects.all():
+        grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
+
+    carreras = []
+    for carrera in Carrera.objects.all():
+        carreras.append((carrera.id, carrera.descripcion))
+
+    universidades = []
+    for universidad in Universidad.objects.all():
+        universidades.append((universidad.id, universidad.descripcion))
+
+    paises = []
+    for pais in Pais.objects.all():
+        paises.append((pais.id, pais.descripcion))
+
+    ciudades = []
+    for ciudad in Ciudad.objects.all():
+        ciudades.append((ciudad.id, ciudad.descripcion))
+
+    items_anos = utilitarios.anos_rango()
+    #grado_estudio = forms.ChoiceField(choices= grado_estudios, required = False )
+    #carrera = forms.ChoiceField(choices= carreras, required = False, widget=forms.Select(attrs={'class': 'full'}))
+    #universidad = forms.ChoiceField(choices= universidades, required = False, widget=forms.Select(attrs={'class': 'full'}))
+    #semestre_inicio_estudio = forms.ChoiceField(choices=utilitarios.semestre_rango(), required = False, widget=forms.Select(attrs={'class': 'half-2'}))
+    #ano_inicio_estudio = forms.ChoiceField(choices=utilitarios.anos_rango(), required = False, widget=forms.Select(attrs={'class': 'half-1'}))
+    semestre_graduacion = forms.ChoiceField(choices=utilitarios.semestre_rango(), required = False, widget=forms.Select(attrs={'class': 'half-2'}))
+    ano_graduacion = forms.ChoiceField(choices=utilitarios.anos_rango(), required = False, widget=forms.Select(attrs={'class': 'half-1'}))
+    pais = forms.ChoiceField(choices= paises, required = False, widget=forms.Select(attrs={'class': 'full'}))
+    ciudad = forms.ChoiceField(choices= ciudades, required = False, widget=forms.Select(attrs={'class': 'full'}))
+    email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    fecha_nacimiento = forms.DateField(required=False)
+    ano = forms.ChoiceField(choices=utilitarios.anos_nacimiento(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos', }))
+    mes = forms.ChoiceField(choices=utilitarios.meses_del_ano(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    dia = forms.ChoiceField(choices=utilitarios.anos_nacimiento(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+    telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
 

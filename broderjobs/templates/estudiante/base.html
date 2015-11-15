@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
 	<head>
 		<title>Broder jobs</title>
@@ -5,17 +6,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 		{% block css %}
-		<link rel="stylesheet" href="/static/css/broder.css">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
 		{% endblock css %}
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<body>
 		<header class="principal">
 			<div class="centered">
-				<a href="oportunidades.html"><img class="logo" src="/static/img/logo.png" alt="Broder jobs" /></a>
+				<a href="oportunidades.html"><img class="logo" src="{% static "/static/img/logo.png" %}" alt="Broder jobs" /></a>
 				<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
@@ -35,7 +35,7 @@
 							</div>
 						</div>
 					</div>
-					<img class="portrait" src="/static/img/profile/profile.png" alt="Perfil" />
+					<img class="portrait" src="{% static "/static/img/profile/profile.png" %}" alt="Perfil" />
 					<div class="clear"></div>
 				</div>
 				<div class="options">

@@ -22,9 +22,18 @@ class Estudiante(models.Model):
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
     carga_horaria = models.ForeignKey(CargaHoraria, null=True)
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
+    foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
 
     def __unicode__(self):
 		return unicode('%s' % (self.persona)) or u''
+
+    @property
+    def set_foto(self):
+        if self.foto:
+            return self.foto.url
+        else:
+            return "/static/img/profile/profile_default.png"
+
 
 class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
