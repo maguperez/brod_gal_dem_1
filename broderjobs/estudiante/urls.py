@@ -26,5 +26,13 @@ urlpatterns =[
 
 	url(r'^mi-cv/experiencia-crear/$', views.ExperienciaCrearView.as_view(), name="mi_cv_experiencia_crear"),
 
+	url(r'^mi-cv/experiencia-eliminar/(?P<id>\d+)/$', views.ExperienciaEliminarView.as_view(), name="mi_cv_experiencia_eliminar"),
+	
+	url(r'^mi-cv/voluntariado/(?P<id>\d+)/$', views.VoluntariadoView.as_view(), name="mi_cv_voluntariado_editar"),
+
+	url(r'^mi-cv/voluntariado-crear/$', views.VoluntariadoCrearView.as_view(), name="mi_cv_voluntariado_crear"),
+
+	url(r'^mi-cv/voluntariado-eliminar/(?P<id>\d+)/$', views.VoluntariadoEliminarView.as_view(), name="mi_cv_voluntariado_eliminar"),
+
 	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv"),
 ]

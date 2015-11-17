@@ -64,7 +64,7 @@ class ExperienciaProfesional(models.Model):
 		return unicode('%s' % (self.persona)) or u''
 
 class Voluntariado(models.Model):
-    estudiante =  models.ForeignKey(Estudiante)
+    estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     cargo = models.CharField(max_length="50", default=None, null=True, blank=True)
     organizacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_desde = models.DateField(null=True)

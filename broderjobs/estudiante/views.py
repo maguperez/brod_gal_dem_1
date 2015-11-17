@@ -3,10 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
+from django.http import Http404
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
-from django.views.generic.edit import UpdateView,CreateView
+from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Puesto, Empresa
 from django.utils.dateparse import parse_date
@@ -295,6 +296,7 @@ class ExperienciaView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     #     print("ter")
     #     return super(InfoPersonalView, self).form_valid(form)
     #
+    
 class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
     form_class = forms.ExperienciaForm
     template_name = 'estudiante/mi-cv-experiencia-crear.html'
@@ -326,4 +328,59 @@ class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
         print("ter")
         return super(ExperienciaCrearView, self).form_valid(form)
 
+class ExperienciaEliminarView(DeleteView):
 
+    def get_object(self, queryset=None):
+        experiencia = ExperienciaProfesional.objects.get(id =self.request.GET.get('id'))
+        return experiencia
+        if experiencia is None:
+            raise Http404
+        return ex4
+
+class VoluntariadoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+    form_class = forms.VoluntariadoForm
+    template_name = 'estudiante/mi-cv-voluntariado-editar.html'
+    success_url = reverse_lazy('mi_cv')
+
+    def get_object(self, queryset=None):
+        voluntariado = Voluntariado.objects.get(id =self.request.GET.get('id'))
+        return voluntariado
+    
+class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
+    form_class = forms.VoluntariadoForm
+    template_name = 'estudiante/mi-cv-voluntariado-crear.html'
+    success_url = reverse_lazy('mi_cv')
+
+    def form_valid(self, form):
+        user = self.request.user
+        usuario = User.objects.get(pk = user.id)
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        voluntariado = Voluntariado()
+        puesto = form.cleaned_data['cargo']
+        empresa = form.cleaned_data['organizacion']
+        fecha_desde = form.cleaned_data['fecha_desde']
+        fecha_hasta = form.cleaned_data['fecha_hasta']
+        descripcion = form.cleaned_data['descripcion']
+        voluntariado.estudiante = estudiante
+        voluntariado.puesto = puesto
+        voluntariado.empresa = empresa
+        if fecha_desde is not None:
+            voluntariado.fecha_desde = fecha_desde
+        if fecha_hasta is not None:
+            voluntariado.fecha_hasta = fecha_hasta
+            voluntariado.voluntariado_actual = 'N'
+        else:
+            voluntariado.voluntariado_actual = 'S'
+        voluntariado.descripcion = descripcion
+        voluntariado.save()
+        return super(VoluntariadoCrearView, self).form_valid(form)
+
+class VoluntariadoEliminarView(DeleteView):
+
+    def get_object(self, queryset=None):
+        voluntariado = ExperienciaProfesional.objects.get(id =self.request.GET.get('id'))
+        return voluntariado
+        if voluntariado is None:
+            raise Http404
+        return ex4

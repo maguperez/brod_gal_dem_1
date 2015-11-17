@@ -30,18 +30,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.4074073">
-              <caret line="26" column="106" selection-start-line="26" selection-start-column="106" selection-end-line="26" selection-end-column="106" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mi-cv-info-personal.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-info-personal.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846">
-              <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
+            <state vertical-scroll-proportion="-1.7529411">
+              <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -50,18 +40,20 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.62069">
-              <caret line="223" column="21" selection-start-line="223" selection-start-column="21" selection-end-line="223" selection-end-column="21" />
+            <state vertical-scroll-proportion="-7.586207">
+              <caret line="226" column="50" selection-start-line="226" selection-start-column="50" selection-end-line="226" selection-end-column="50" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
-                <element signature="e#492#3685#0" expanded="false" />
-                <element signature="e#3735#4102#0" expanded="false" />
-                <element signature="e#4147#4513#0" expanded="false" />
-                <element signature="e#4576#4947#0" expanded="false" />
-                <element signature="e#5003#5448#0" expanded="false" />
-                <element signature="e#6080#6969#0" expanded="false" />
-                <element signature="e#7015#7472#0" expanded="false" />
-                <element signature="e#7525#8011#0" expanded="false" />
+                <element signature="e#506#3699#0" expanded="false" />
+                <element signature="e#3749#4116#0" expanded="false" />
+                <element signature="e#4161#4527#0" expanded="false" />
+                <element signature="e#4590#4961#0" expanded="false" />
+                <element signature="e#5017#5462#0" expanded="false" />
+                <element signature="e#5508#6050#0" expanded="false" />
+                <element signature="e#6094#6983#0" expanded="false" />
+                <element signature="e#7029#7486#0" expanded="false" />
+                <element signature="e#7539#8025#0" expanded="false" />
+                <element signature="e#8071#8561#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -71,50 +63,51 @@
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="83" selection-start-line="54" selection-start-column="83" selection-end-line="54" selection-end-column="83" />
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
                 <element signature="e#2110#2322#0" expanded="false" />
-                <element signature="e#3329#3877#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11447811">
-              <caret line="116" column="74" selection-start-line="116" selection-start-column="74" selection-end-line="116" selection-end-column="74" />
+            <state vertical-scroll-proportion="-2.7413793">
+              <caret line="360" column="43" selection-start-line="360" selection-start-column="43" selection-end-line="360" selection-end-column="43" />
               <folding>
                 <element signature="e#1#58#0" expanded="true" />
-                <element signature="e#787#2517#0" expanded="false" />
-                <element signature="e#2704#3630#0" expanded="false" />
-                <element signature="e#3669#4121#0" expanded="false" />
-                <element signature="e#4193#4934#0" expanded="false" />
-                <element signature="e#5015#7306#0" expanded="false" />
-                <element signature="e#5761#7306#0" expanded="false" />
-                <element signature="e#7381#8246#0" expanded="false" />
-                <element signature="e#8328#8889#0" expanded="false" />
-                <element signature="e#8963#9480#0" expanded="false" />
-                <element signature="e#9560#10119#0" expanded="false" />
+                <element signature="e#831#2561#0" expanded="false" />
+                <element signature="e#2748#3674#0" expanded="false" />
+                <element signature="e#3713#4165#0" expanded="false" />
+                <element signature="e#4237#4978#0" expanded="false" />
+                <element signature="e#5059#7350#0" expanded="false" />
+                <element signature="e#5805#7350#0" expanded="false" />
+                <element signature="e#7425#8290#0" expanded="false" />
+                <element signature="e#8372#8933#0" expanded="false" />
+                <element signature="e#9007#9524#0" expanded="false" />
+                <element signature="e#9604#10163#0" expanded="false" />
+                <element signature="e#10243#12557#0" expanded="false" />
+                <element signature="e#12646#13880#0" expanded="false" />
+                <element signature="e#13930#14159#0" expanded="false" />
+                <element signature="e#14240#14529#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mi-cv.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mi-cv.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.490566">
-              <caret line="426" column="33" selection-start-line="426" selection-start-column="33" selection-end-line="426" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.55737704">
+              <caret line="89" column="111" selection-start-line="89" selection-start-column="111" selection-end-line="89" selection-end-column="111" />
               <folding>
                 <element signature="n#section#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
                 <element signature="n#section#2;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
                 <element signature="n#section#3;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
                 <element signature="n#section#4;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#section#5;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
-                <element signature="n#section#6;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
                 <element signature="n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
                 <element signature="n#div#0;n#!!top" expanded="false" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -127,6 +120,56 @@
                 <element signature="n#div#7;n#!!top" expanded="false" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#7;n#!!top" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-cv-voluntariado-crear.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-crear.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="68" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-cv-voluntariado-editar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-editar.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.8846154">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-cv-voluntariado-eliminar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-eliminar.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.8846154">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-cv-experiencia-editar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-editar.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.65384614">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-cv-experiencia-crear.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-crear.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="7" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,10 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html" />
-        <option value="$PROJECT_DIR$/broderjobs/broderjobs/backends.py" />
-        <option value="$PROJECT_DIR$/broderjobs/broderjobs/middleware.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-resumen" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/base-estudiante.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-resumen-inner.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/base-empresa.html" />
@@ -189,12 +228,16 @@
         <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-info-personal.html" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
-        <option value="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-crear.html" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" />
-        <option value="$PROJECT_DIR$/broderjobs/estudiante/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-eliminar.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-crear.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-editar.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-eliminar.html" />
+        <option value="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/forms.py" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
+        <option value="$PROJECT_DIR$/broderjobs/estudiante/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" />
       </list>
     </option>
   </component>
@@ -643,8 +686,8 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37676057" sideWeight="0.4908397" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3274648" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37676057" sideWeight="0.4908397" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19325154" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -676,12 +719,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/broderjobs/estudiante/views.py</url>
-          <line>17</line>
+          <line>18</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/broderjobs/estudiante/views.py</url>
-          <line>8</line>
+          <line>9</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -708,48 +751,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-listar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
-          <folding>
-            <element signature="n#section#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-idioma.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846">
-          <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="e#161#1120#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-conocimiento.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="25" column="71" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="71" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="e#167#1126#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.047486033">
-          <caret line="1" column="95" selection-start-line="1" selection-start-column="95" selection-end-line="1" selection-end-column="95" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-foto.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2692308">
@@ -1086,14 +1087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.4074073">
-          <caret line="26" column="106" selection-start-line="26" selection-start-column="106" selection-end-line="26" selection-end-column="106" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-disponibilidad.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846">
@@ -1101,30 +1094,6 @@
           <folding>
             <element signature="e#169#1128#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-editar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308">
-          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-crear.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-info-personal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846">
-          <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,18 +1106,6 @@
             <element signature="e#226#422#0" expanded="false" />
             <element signature="e#475#925#0" expanded="false" />
             <element signature="e#971#5079#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="83" selection-start-line="54" selection-start-column="83" selection-end-line="54" selection-end-column="83" />
-          <folding>
-            <element signature="e#15#43#0" expanded="true" />
-            <element signature="e#2110#2322#0" expanded="false" />
-            <element signature="e#3329#3877#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1166,17 +1123,137 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-info-personal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-eliminar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1447732123145" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1447732123145" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-crear.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-crear.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="68" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-editar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-eliminar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-editar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7413793">
+          <caret line="360" column="43" selection-start-line="360" selection-start-column="43" selection-end-line="360" selection-end-column="43" />
+          <folding>
+            <element signature="e#1#58#0" expanded="true" />
+            <element signature="e#831#2561#0" expanded="false" />
+            <element signature="e#2748#3674#0" expanded="false" />
+            <element signature="e#3713#4165#0" expanded="false" />
+            <element signature="e#4237#4978#0" expanded="false" />
+            <element signature="e#5059#7350#0" expanded="false" />
+            <element signature="e#5805#7350#0" expanded="false" />
+            <element signature="e#7425#8290#0" expanded="false" />
+            <element signature="e#8372#8933#0" expanded="false" />
+            <element signature="e#9007#9524#0" expanded="false" />
+            <element signature="e#9604#10163#0" expanded="false" />
+            <element signature="e#10243#12557#0" expanded="false" />
+            <element signature="e#12646#13880#0" expanded="false" />
+            <element signature="e#13930#14159#0" expanded="false" />
+            <element signature="e#14240#14529#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7529411">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.586207">
+          <caret line="226" column="50" selection-start-line="226" selection-start-column="50" selection-end-line="226" selection-end-column="50" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+            <element signature="e#506#3699#0" expanded="false" />
+            <element signature="e#3749#4116#0" expanded="false" />
+            <element signature="e#4161#4527#0" expanded="false" />
+            <element signature="e#4590#4961#0" expanded="false" />
+            <element signature="e#5017#5462#0" expanded="false" />
+            <element signature="e#5508#6050#0" expanded="false" />
+            <element signature="e#6094#6983#0" expanded="false" />
+            <element signature="e#7029#7486#0" expanded="false" />
+            <element signature="e#7539#8025#0" expanded="false" />
+            <element signature="e#8071#8561#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#43#0" expanded="true" />
+            <element signature="e#2110#2322#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.490566">
-          <caret line="426" column="33" selection-start-line="426" selection-start-column="33" selection-end-line="426" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.55737704">
+          <caret line="89" column="111" selection-start-line="89" selection-start-column="111" selection-end-line="89" selection-end-column="111" />
           <folding>
             <element signature="n#section#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
             <element signature="n#section#2;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
             <element signature="n#section#3;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
             <element signature="n#section#4;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#section#5;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#section#6;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -1188,44 +1265,6 @@
             <element signature="n#div#6;n#!!top" expanded="false" />
             <element signature="n#div#7;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#0;n#div#0;n#div#7;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.62069">
-          <caret line="223" column="21" selection-start-line="223" selection-start-column="21" selection-end-line="223" selection-end-column="21" />
-          <folding>
-            <element signature="e#15#39#0" expanded="true" />
-            <element signature="e#492#3685#0" expanded="false" />
-            <element signature="e#3735#4102#0" expanded="false" />
-            <element signature="e#4147#4513#0" expanded="false" />
-            <element signature="e#4576#4947#0" expanded="false" />
-            <element signature="e#5003#5448#0" expanded="false" />
-            <element signature="e#6080#6969#0" expanded="false" />
-            <element signature="e#7015#7472#0" expanded="false" />
-            <element signature="e#7525#8011#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11447811">
-          <caret line="116" column="74" selection-start-line="116" selection-start-column="74" selection-end-line="116" selection-end-column="74" />
-          <folding>
-            <element signature="e#1#58#0" expanded="true" />
-            <element signature="e#787#2517#0" expanded="false" />
-            <element signature="e#2704#3630#0" expanded="false" />
-            <element signature="e#3669#4121#0" expanded="false" />
-            <element signature="e#4193#4934#0" expanded="false" />
-            <element signature="e#5015#7306#0" expanded="false" />
-            <element signature="e#5761#7306#0" expanded="false" />
-            <element signature="e#7381#8246#0" expanded="false" />
-            <element signature="e#8328#8889#0" expanded="false" />
-            <element signature="e#8963#9480#0" expanded="false" />
-            <element signature="e#9560#10119#0" expanded="false" />
           </folding>
         </state>
       </provider>

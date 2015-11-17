@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from django.forms.models import ModelChoiceField
-from .models import ExperienciaProfesional
+from .models import ExperienciaProfesional, Voluntariado
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria,Idioma, Conocimiento, Puesto
 import datetime
 
@@ -215,6 +215,20 @@ class ExperienciaForm(forms.ModelForm):
     class Meta:
         model = ExperienciaProfesional
         fields = ('puesto', 'empresa', 'fecha_desde','fecha_hasta', 'descripcion')
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+
+class VoluntariadoForm(forms.ModelForm):
+    fecha_desde = forms.DateField(required=False, widget=forms.DateInput())
+    fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+    class Meta:
+        model = Voluntariado
+        fields = ('cargo', 'organizacion', 'fecha_desde','fecha_hasta', 'descripcion')
 
     @property
     def helper(self):

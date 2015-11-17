@@ -83,21 +83,23 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="work"></i>Experiencia Profesional<button id="experiencia-crear-button" class="link editar">Editar</button></h3>
+								<h3 class="title"><i class="work"></i>Experiencia Profesional<button id="experiencia-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle timeline">
 									{% for experiencia in experiencias_profesionales %}
-										<div class="experiencia">
-											<p class="fecha">{{experiencia.fecha_desde}} - {{experiencia.hasta}}</p>
+										<div class="experiencia" id="{{experiencia.id}}">
+											<p class="fecha">{{experiencia.fecha_desde}} - {{experiencia.fecha_hasta}}</p>
 											<label class="tipo">{{experiencia.puesto}}</label>
 											<label class="nombre">{{experiencia.empresa}}</label>
-											<p>{{experiencia.descripcion}}</p>
-											<button id="{{experiencia.pk}}" class="link editar">Editar</button>
+											<pr>{{experiencia.descripcion}}</pr>
+											<button id="editar-{{experiencia.pk}}" class="experiencia-botton link editar" accion="editar">Editar</button>
+
+											<button id="eliminar-{{experiencia.pk}}" class="experiencia-botton link editar" accion="eliminat">Eliminar</button>
 										</div>
 									{% endfor %}
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="volunteer"></i>Voluntariado<a class="link editar" href="#voluntariado">Editar</a></h3>
+								<h3 class="title"><i class="volunteer"></i>Voluntariado<button id="voluntariado-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle timeline">
 									{% for voluntariado in voluntariados %}
 										<div>
@@ -105,6 +107,9 @@
 											<label class="tipo">{{voluntariado.cargo}}</label>
 											<label class="nombre">{{voluntariado.organizacion}}</label>
 											<p>{{voluntariado.descripcion}}</p>
+										
+											<button id="editar-{{voluntariado.pk}}" class="voluntariado-botton link editar" accion="editar">Editar</button>
+											<button id="eliminar-{{voluntariado.pk}}" class="voluntariado-botton link editar" accion="eliminat">Eliminar</button>
 										</div>
 									{% endfor %}
 								</div>
@@ -417,16 +422,48 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
-	 $('.experiencia').click(function() {
-		 var id = $(this).find("button").attr("id");
-     	$('#form-modal-body').load('experiencia/'+id+'/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
+	 $('.experiencia-botton').click(function() {
+		 var id = $(".experiencia").attr("id");
+		 var accion = $(this).attr("accion");
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('experiencia/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('experiencia-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
 	 });
 	 $('#experiencia-crear-button').click(function() {
 		 var id = $(this).find("button").attr("id");
      	$('#form-modal-body').load('experiencia-crear/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.voluntariado-botton').click(function() {
+		 var id = $(".voluntariado").attr("id");
+		 var accion = $(this).attr("accion");
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('voluntariado-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+	 });
+	 $('#voluntariado-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('voluntariado-crear/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
