@@ -1,11 +1,13 @@
 # coding=utf-8
 from django import forms
+from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from django.forms.models import ModelChoiceField
-from models import GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria
+from .models import ExperienciaProfesional
+from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria,Idioma, Conocimiento, Puesto
 import datetime
-from django.contrib.auth.models import User
+
 from main import utilitarios
 
 class RegistroCVForm(forms.ModelForm):
@@ -87,11 +89,30 @@ class RegistroCVForm(forms.ModelForm):
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
 
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        helper.label_class = 'col-md-2'
+        helper.field_class = 'col-md-10'
+        return helper
+
 # END CLASS
 
 class FotoForm(forms.Form):
     foto = forms.FileField(label='Selecione Imagen de Perfil')
 
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        # helper.label_class = 'col-md-2'
+        # helper.field_class = 'col-md-10'
+        return helper
+
+# END CLASS
 
 class UniqueUserEmailField(forms.EmailField):
     def validate(self, value):
@@ -104,41 +125,103 @@ class UniqueUserEmailField(forms.EmailField):
         except User.DoesNotExist:
             pass
 
-class InfoPersonalForm(forms.Form):
-    grado_estudios = []
-    for grado_estudio in GradoEstudio.objects.all():
-        grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
+# END CLASS
 
-    carreras = []
-    for carrera in Carrera.objects.all():
-        carreras.append((carrera.id, carrera.descripcion))
+class EstudianteForm(forms.ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = ('grado_estudio', 'universidad', 'carrera', 'semestre_inicio_estudio', 'ano_inicio_estudio',
+                  'semestre_graduacion', 'ano_graduacion', 'ciudad', 'pais')
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
 
-    universidades = []
-    for universidad in Universidad.objects.all():
-        universidades.append((universidad.id, universidad.descripcion))
-
-    paises = []
-    for pais in Pais.objects.all():
-        paises.append((pais.id, pais.descripcion))
-
-    ciudades = []
-    for ciudad in Ciudad.objects.all():
-        ciudades.append((ciudad.id, ciudad.descripcion))
-
-    items_anos = utilitarios.anos_rango()
-    #grado_estudio = forms.ChoiceField(choices= grado_estudios, required = False )
-    #carrera = forms.ChoiceField(choices= carreras, required = False, widget=forms.Select(attrs={'class': 'full'}))
-    #universidad = forms.ChoiceField(choices= universidades, required = False, widget=forms.Select(attrs={'class': 'full'}))
-    #semestre_inicio_estudio = forms.ChoiceField(choices=utilitarios.semestre_rango(), required = False, widget=forms.Select(attrs={'class': 'half-2'}))
-    #ano_inicio_estudio = forms.ChoiceField(choices=utilitarios.anos_rango(), required = False, widget=forms.Select(attrs={'class': 'half-1'}))
-    semestre_graduacion = forms.ChoiceField(choices=utilitarios.semestre_rango(), required = False, widget=forms.Select(attrs={'class': 'half-2'}))
-    ano_graduacion = forms.ChoiceField(choices=utilitarios.anos_rango(), required = False, widget=forms.Select(attrs={'class': 'half-1'}))
-    pais = forms.ChoiceField(choices= paises, required = False, widget=forms.Select(attrs={'class': 'full'}))
-    ciudad = forms.ChoiceField(choices= ciudades, required = False, widget=forms.Select(attrs={'class': 'full'}))
-    email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    fecha_nacimiento = forms.DateField(required=False)
-    ano = forms.ChoiceField(choices=utilitarios.anos_nacimiento(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos', }))
-    mes = forms.ChoiceField(choices=utilitarios.meses_del_ano(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
-    dia = forms.ChoiceField(choices=utilitarios.anos_nacimiento(), required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
+class InfoPersonalForm(EstudianteForm):
+    email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    fecha_nacimiento = forms.DateField(required=False, input_formats=['%Y-%m-%d'])
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+
+class DisponibilidadForm(forms.Form):
+    item_tipo_puesto = []
+    for p in TipoPuesto.objects.all():
+        item_tipo_puesto.append((p.id, p.descripcion))
+    item_carga_horaria = []
+    for c in CargaHoraria.objects.all():
+        item_carga_horaria.append((c.id, c.descripcion))
+
+    tipo_puesto = forms.MultipleChoiceField(
+        required = False,
+        label=u"Acepto Propuestas de",
+        choices=item_tipo_puesto,
+        widget=forms.widgets.CheckboxSelectMultiple)
+
+    carga_horaria = forms.ChoiceField(
+        required = False,
+        label=u"Cargo Horaria",
+        choices=item_carga_horaria,
+        widget=forms.widgets.RadioSelect,
+        initial=(c[2] for c in item_carga_horaria))
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+#END CLASS
+
+class IdiomaForm(forms.Form):
+    item_idioma = []
+    for i in Idioma.objects.all():
+        item_idioma.append((i.id, i.descripcion))
+
+    idioma = forms.MultipleChoiceField(choices= item_idioma, required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+# END CLASS
+
+class ConocimientoForm(forms.Form):
+    item_conocimiento = []
+    for c in Conocimiento.objects.all():
+        item_conocimiento.append((c.id, c.descripcion))
+
+    conocimiento = forms.MultipleChoiceField(choices= item_conocimiento, required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+
+class ExperienciaForm(forms.ModelForm):
+    fecha_desde = forms.DateField(widget=forms.DateInput())
+    fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+    class Meta:
+        model = ExperienciaProfesional
+        fields = ('puesto', 'empresa', 'fecha_desde','fecha_hasta', 'descripcion')
+
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        return helper
+
+
 

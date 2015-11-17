@@ -2,6 +2,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from empresa.models import Empresa
 import datetime
 
 
@@ -42,6 +44,13 @@ class RegisterForm(UserCreationForm):
         dias.append((y, y))
     items_dias =[('','Dia')] + dias
 
+     #Carga items a Grado de Estudio
+    empresas= []
+    for e in Empresa.objects.all():
+        empresas.append((e.id, e.nombre))
+    items_empresa =[('','Empresa')] + empresas
+
+
     username = forms.CharField(required = False, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'username'}))
     email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
@@ -53,6 +62,7 @@ class RegisterForm(UserCreationForm):
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
     dia = forms.ChoiceField(choices=items_dias, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
+    empresa = forms.ChoiceField(choices=items_empresa, required = False)
 
     def __init__(self, *args, **kwargs):
         """
@@ -67,7 +77,7 @@ class RegisterForm(UserCreationForm):
         # TODO: Something more efficient?
         highest_user_id = User.objects.all().order_by('-id')[0].id
         leading_part_of_email = email.split('@',1)[0]
-       # leading_part_of_email = re.sub(r'[^a-zA-Z0-9+]', '',
+        # leading_part_of_email = re.sub(r'[^a-zA-Z0-9+]', '',
         #                               leading_part_of_email)
         truncated_part_of_email = leading_part_of_email[:3] \
                                   + leading_part_of_email[-3:]

@@ -20,8 +20,10 @@ class Estudiante(models.Model):
     ano_graduacion= models.CharField(choices=items_anos, max_length=4, default=None, null=True, blank=True)
     pais = models.ForeignKey(Pais, default=None, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
-    carga_horaria = models.ForeignKey(CargaHoraria, null=True)
+    carga_horaria = models.ForeignKey(CargaHoraria,default=None,null=True, blank=True )
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
+    idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
+    conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
     foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
 
     def __unicode__(self):
@@ -34,10 +36,9 @@ class Estudiante(models.Model):
         else:
             return "/static/img/profile/profile_default.png"
 
-
 class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
-    descripcion = models.CharField(max_length="100", default=None, null=True, blank=True)
+    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
 
     def __unicode__(self):
 		return unicode('%s' % (self.estudiante)) or u''
@@ -51,16 +52,16 @@ class ActividadesExtra(models.Model):
 		return self.descripcion
 
 class ExperienciaProfesional(models.Model):
-    estudiante =  models.ForeignKey(Estudiante)
-    puesto = models.ForeignKey(Puesto)
+    estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    puesto = models.ForeignKey(Puesto, default=None, null=True, blank=True)
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
-    fecha_desde = models.DateField(null=True)
+    fecha_desde = models.DateField(default=None, null=True, blank=True)
     fecha_hasta = models.DateField(default=None, null=True, blank=True)
     trabajo_actual = models.CharField(max_length=1, default='N',)
     descripcion = models.CharField(max_length="100", default=None, null=True)
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode('%s' % (self.persona)) or u''
 
 class Voluntariado(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
@@ -73,17 +74,3 @@ class Voluntariado(models.Model):
 
     def __unicode__(self):
 		return self.descripcion
-
-class EstudianteIdioma(models.Model):
-    estudiante =  models.ForeignKey(Estudiante)
-    idioma =  models.ForeignKey(Idioma)
-
-    def __unicode__(self):
-		return '%s' % (self.estudiante)
-
-class EstudianteConocimiento(models.Model):
-    estudiante =  models.ForeignKey(Estudiante)
-    conocimiento =  models.ForeignKey(Conocimiento)
-
-    def __unicode__(self):
-		return self.estudiante.persona

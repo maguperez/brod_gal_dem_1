@@ -14,12 +14,12 @@
 							<img class="imagen" src="{{estudiante.set_foto}}" />
 							<div class="detalle">
 								<h3>{{estudiante | upper}}</h3>
-								<label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio}}- {{estudiante.ano_graduacion}})</label>
+								<label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
 								<label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
 								<label>{{persona.telefono}} / {{usuario.email}}</label>
 							</div>
 							<div class="clear"></div>
-							<button id="info-personal-button" class="editar">EDITAR</button>
+							<button id="info-personal-button" class="link editar">Editar</button>
 						</header>
 						<div class="content">
 							<section>
@@ -29,7 +29,7 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="time"></i>Disponibilidad<a class="link editar" href="#disponibilidad">Editar</a></h3>
+								<h3 class="title"><i class="time"></i>Disponibilidad<button id="disponibilidad-button" class="link editar">Editar</button></h3>
 								<div class="detalle col-3-7">
 									<div>
 										<label>Acepto propuestas de</label>
@@ -48,22 +48,22 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="language"></i>Idiomas<a class="link editar" href="#idiomas">Editar</a></h3>
+								<h3 class="title"><i class="language"></i>Idiomas<button id="idioma-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
 									<p>
-										{% for idioma in idiomas %}
-                    					<span class="tag">{{ idioma.idioma }}</span>
+										{% for idioma in estudiante.idioma.all %}
+                    					<span class="tag">{{ idioma.descripcion }}</span>
 										{% endfor %}
 									</p>
 									<div class="clear"></div>
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="knowledge"></i>Conocimientos<a class="link editar" href="#conocimientos">Editar</a></h3>
+								<h3 class="title"><i class="knowledge"></i>Conocimientos<button id="conocimiento-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
 									<p>
-										{% for conocimiento in conocimientos %}
-                    					<span class="tag">{{ conocimiento.conocimiento }}</span>
+										{% for conocimiento in estudiante.conocimiento.all %}
+                    					<span class="tag">{{ conocimiento.descripcion }}</span>
 										{% endfor %}
 									</p>
 									<div class="clear"></div>
@@ -83,14 +83,15 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="work"></i>Experiencia Profesional<a class="link editar" href="#profesional">Editar</a></h3>
+								<h3 class="title"><i class="work"></i>Experiencia Profesional<button id="experiencia-crear-button" class="link editar">Editar</button></h3>
 								<div class="detalle timeline">
 									{% for experiencia in experiencias_profesionales %}
-										<div>
+										<div class="experiencia">
 											<p class="fecha">{{experiencia.fecha_desde}} - {{experiencia.hasta}}</p>
 											<label class="tipo">{{experiencia.puesto}}</label>
 											<label class="nombre">{{experiencia.empresa}}</label>
 											<p>{{experiencia.descripcion}}</p>
+											<button id="{{experiencia.pk}}" class="link editar">Editar</button>
 										</div>
 									{% endfor %}
 								</div>
@@ -125,17 +126,17 @@
 							{% else %}
 								<div><i class="done"></i>Resumen</div>
 							{% endif %}
-							{% if Disponibilidad %}
+							{% if estudiante.tipo_puesto.all %}
 								<div><i class="done active "></i>Disponibilidad</div>
 							{% else %}
 								<div><i class="done"></i>Disponibilidad</div>
 							{% endif %}
-							{% if idiomas %}
+							{% if estudiante.idioma.all %}
 								<div><i class="done active "></i>Idiomas</div>
 							{% else %}
 								<div><i class="done"></i>Idiomas</div>
 							{% endif %}
-							{% if conocimientos %}
+							{% if estudiante.conocimiento.all %}
 								<div><i class="done active "></i>Conocimientos</div>
 							{% else %}
 								<div><i class="done"></i>Conocimientos</div>
@@ -348,8 +349,8 @@
                         <p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -369,9 +370,10 @@
                     	$(modal).find('.modal-body').html(xhr);
                         formAjaxSubmit(form, modal);
 
+
 					} else {
                     	$(modal).modal('toggle');
-
+						window.location.reload();
 					}
 				},
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -393,6 +395,38 @@
 	 });
 	 $('#info-personal-button').click(function() {
      	$('#form-modal-body').load('info-personal/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#disponibilidad-button').click(function() {
+     	$('#form-modal-body').load('disponibilidad/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#idioma-button').click(function() {
+     	$('#form-modal-body').load('idioma/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#conocimiento-button').click(function() {
+     	$('#form-modal-body').load('conocimiento/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.experiencia').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('experiencia/'+id+'/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#experiencia-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('experiencia-crear/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});

@@ -7,6 +7,7 @@ from  django.utils.dateparse import parse_date
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Persona
+from empresa.models import Representante, Empresa
 from django.core.context_processors import csrf
 
 
@@ -45,7 +46,7 @@ def empresa_login(request):
                 if user.is_active:
                     login(request, user)
                     message = "Te haz identificado de modo correcto"
-                    return redirect('oportunidad_listar')
+                    return redirect('empresa_oportunidad_listar')
                 else:
                     message = "tu usuario esta inactivo"
             else:
@@ -102,11 +103,19 @@ def register_user_empresa(request):
             persona.usuario = user
             persona.tipo_persona = "R"
             persona.telefono = form.cleaned_data['telefono']
+            e = form.cleaned_data['empresa']
+            print(e)
+            empresa = Empresa.objects.get(id=e)
+            print(empresa)
             persona.save()
-            new_user = authenticate(username=request.POST['email'],
-                                    password=request.POST['password1'])
+            representante = Representante()
+            representante.persona = persona
+            representante.empresa = empresa
+            representante.save()
+            new_user = authenticate(username=request.POST['email'], password=request.POST['password1'])
             login(request, new_user)
             mensaje = "Se ha registrado satisfactoriamente"
+            return redirect('empresa_oportunidad_listar')
     else:
         form = RegisterForm()
     return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})

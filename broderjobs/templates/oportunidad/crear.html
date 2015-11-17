@@ -1,0 +1,191 @@
+{% extends 'empresa/base.html' %}
+{% block content %}
+<form action="" method="post">{%csrf_token%}
+	<section class="oportunidad-detalle">
+			<div class="centered">
+				<div class="panel left principal">
+					<div class="box">
+						<header>
+							<div class="descripcion">
+								<h3>ANUNCIAR OPORTUNIDAD</h3>
+								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
+							</div>
+							<a class="btn-action" href="oportunidad.html">ANUNCIAR</a>
+							<a class="btn-action" href="oportunidad.html">GUARDAR</a>
+							<div class="clear"></div>
+						</header>
+						<div class="content">
+							<section class="perfil">
+								<h3 class="title"><i class="work"></i>Perfil de la oportunidad</h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>T&iacute;tulo de vacante</label>
+										<p>{{form.titulo}}</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Jornada de trabajo</label>
+										<p class="align-left">
+											{% for carga in form.carga_horaria %}
+											 {{ carga.errors }}
+											 {{ carga }}
+											{% endfor %}
+
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Localizaci&oacute;n</label>
+										<p>
+											{{form.pais}}
+											{{form.ciudad}}
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div class="less-margin">
+										<label>Remuneraci&oacute;n</label>
+										<p class="align-left">
+											{% for remuneracion in form.remuneracion %}
+											 {{ remuneracion.errors }}
+											 {{ remuneracion }}
+										{% endfor %}
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>&nbsp;</label>
+										<p>
+											{{form.remuneracion_min}}
+											{{form.remuneracion_max}}
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Fecha de cierre</label>
+										<p>
+											{{form.fecha_cierre}}
+										</p>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section class="informacion">
+								<h3 class="title"><i class="info"></i>Informaci&oacute;n b&aacute;sica</h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>Tipo de vacante *</label>
+										<p>
+											{% for puesto in form.tipo_puesto %}
+											 {{ puesto.errors }}
+											 {{ puesto }}
+										{% endfor %}
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div class="full less-margin">
+										<label>Resumen *</label>
+										{{form.resumen}}
+										<div class="clear"></div>
+									</div>
+									<div class="full">
+										<textarea></textarea>
+									</div>
+								</div>
+							</section>
+							<section class="perfil">
+								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
+								<div class="detalle col-4-6">
+									<div>
+										<label>Grado de estudio *</label>
+										<p>
+											{{form.grado_estudio}}
+											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Periodo de graduaci&oacute;n</label>
+										<p class="align-left">
+											Estudiantes de 7° hasta graduados hace un a&ntilde;o
+											<img src="../img/barra-deslizable.jpg" />
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Universidades de preferencia</label>
+										<p>
+											{{form.universidad}}
+											<label class="descripcion">Complete este campo s&oacute;lo si tiene una preferencia por los candidatos de alguna universidad. Introduzca las siglas de la universidad y seleccione de la lista.</label>
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Carrera *</label>
+										<p>
+											{{form.carrera}}
+											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las carreras compatibles con el área donde el profesional actuará.</label>
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Idiomas</label>
+										<p>{{form.idioma}}</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Conocimientos</label>
+										<p>{{form.conocimiento}}</p>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section class="beneficios">
+								<h3 class="title"><i class="like"></i>Beneficios</h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>Beneficios</label>
+										<p>{{form.beneficio}}</p>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section class="ubicacion">
+								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>Direcci&oacute;n</label>
+										<p><input class="full" type="text" placeholder="Escriba la direcci&oacute;n de su empresa." /></p>
+										<div class="clear"></div>
+									</div>
+									<div class="mapa">
+										<img src="../img/google-map.jpg" />
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="panel right">
+					<div class="box alcance">
+						<div class="content">
+							<section class="grafico">
+								<h4>Alcance de Candidatos</h4>
+								<label><i class="alcance alto"></i><span class="cifra">1993</span> candidatos</label>
+								<div class="grafico-alcance">
+									<div class="alto active">
+										<div class="adecuado">
+											<div class="bajo">
+												<label>&Oacute;ptimo</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+</form>
+{% endblock%}

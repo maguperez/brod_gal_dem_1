@@ -24,9 +24,14 @@ urlpatterns = [
 
     url(r'^estudiante/', include('estudiante.urls')),
 
+    url(r'^empresa/', include('empresa.urls')),
+
+    url(r'^oportunidad/', include('oportunidad.urls')),
+
     #ADMIN
     url(r'^admin/', include(admin.site.urls)),
 
     #LOGIN WITH SOACIAL
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

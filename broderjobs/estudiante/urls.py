@@ -16,5 +16,15 @@ urlpatterns =[
 
 	url(r'^mi-cv/info-personal/$', views.InfoPersonalView.as_view(), name="mi_cv_info_personal"),
 
+	url(r'^mi-cv/disponibilidad/$', views.DisponibilidadView.as_view(), name="mi_cv_disponibilidad"),
+
+	url(r'^mi-cv/idioma/$', views.IdiomaView.as_view(), name="mi_cv_idioma"),
+
+	url(r'^mi-cv/conocimiento/$', views.ConocimientoView.as_view(), name="mi_cv_conocimiento"),
+
+	url(r'^mi-cv/experiencia/(?P<id>\d+)/$', views.ExperienciaView.as_view(), name="mi_cv_experiencia_editar"),
+
+	url(r'^mi-cv/experiencia-crear/$', views.ExperienciaCrearView.as_view(), name="mi_cv_experiencia_crear"),
+
 	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv"),
 ]

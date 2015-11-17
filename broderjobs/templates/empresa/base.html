@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
 	<head>
 		<title>Broder jobs</title>
@@ -5,13 +6,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
-		<link rel="stylesheet" href="../css/broder.css">
-		<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		{% block css %}
+		{% endblock css %}
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<header class="principal">
 			<div class="centered">
-				<a href="oportunidades.html"><img class="logo" src="../img/logo.png" alt="Broder jobs" /></a>
+				<a href="oportunidades.html"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
@@ -34,7 +39,7 @@
 					<a class="mensajes">Mensajes</a>
 				</div>
 				<div class="actions">
-					<a href="anunciar_oportunidad.html">ANUNCIAR OPORTUNIDAD</a>
+					<a href="/oportunidad/crear/">ANUNCIAR OPORTUNIDAD</a>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -42,7 +47,7 @@
 		<header class="menu">
 			<div class="centered">
 				<a class="active" href="oportunidades.html">Oportunidades</a>
-				<a href="miempresa.html">Mi empresa</a>
+				<a href="{% url 'mi_empresa' %}">Mi empresa</a>
 				<div class="clear"></div>
 			</div>
 		</header>

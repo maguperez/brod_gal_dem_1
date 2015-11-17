@@ -1,61 +1,9 @@
 
+{% load crispy_forms_tags %}
 
-
-<div class="row">
-	<form class="form-horizontal" action="{% url 'mi_cv_info_personal' %}" method="post">{%csrf_token%}
-{{ form.errors }}
-{{ form.non_field_errors }}
-		<div class="content">
-			<section class="info-academica">
-				<h3 class="title"><i class="academic"></i>Informaci&oacute;n Acad&eacute;mica</h3>
-				<div class="detalle col-4-6">
-					<div>
-						<label>Inicio de estudios</label>
-						<p>
-							{{ form.semestre_inicio_estudio }}
-							{{ form.ano_inicio_estudio}}
-						</p>
-						<div class="clear"></div>
-					</div>
-					<div>
-						<label>Graduaci&oacute;n / Grad. estimada</label>
-						<p>
-							{{ form.semestre_graduacion }}
-							{{ form.ano_graduacion }}
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-			</section>
-			<section class="info-personal">
-				<h3 class="title"><i class="info"></i>Informaci&oacute;n Personal</h3>
-				<div class="detalle col-4-6">
-					<div>
-						<label>Contacto</label>
-						<p>
-							{{ form.email}}
-							{{ form.telefono}}
-						</p>
-							<div class="clear"></div>
-					</div>
-					<div>
-						<label>Ubicaci&oacute;n actual</label>
-						<p>
-							{{ form.pais}}
-							{{ form.ciudad }}
-						</p>
-						<div class="clear"></div>
-					</div>
-					<div>
-						<label>Fecha de nacimiento</label>
-						<p>
-							<input type="text" placeholder="D&iacute;a / Mes / A&ntilde;o" />
-						</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-			</section>
-			<input type="submit" class="btn btn-submit col-md-offset-2">
-		</div>
+<div style="margin:0 50px">
+	<form class="form-horizontal" action="{% url 'mi_cv_info_personal' %}" method="post">
+		{% crispy form %}
+		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>

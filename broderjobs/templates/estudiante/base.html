@@ -15,7 +15,7 @@
 	<body>
 		<header class="principal">
 			<div class="centered">
-				<a href="oportunidades.html"><img class="logo" src="{% static "/static/img/logo.png" %}" alt="Broder jobs" /></a>
+				<a href="oportunidades.html"><img class="logo" src="" alt="Broder jobs" /></a>
 				<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
@@ -35,7 +35,7 @@
 							</div>
 						</div>
 					</div>
-					<img class="portrait" src="{% static "/static/img/profile/profile.png" %}" alt="Perfil" />
+					<img class="portrait" src="{% url 'mi_cv_foto' %}" alt="Perfil" />
 					<div class="clear"></div>
 				</div>
 				<div class="options">
@@ -60,7 +60,7 @@
 		
 	</body>
 </html>
-{% block js %}
+
 		<!--<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>-->
        <script>
 			$('#menu').click(function() {
@@ -71,5 +71,5 @@
 			});
 		</script>
 
-
+{% block js %}
 {% endblock js %}

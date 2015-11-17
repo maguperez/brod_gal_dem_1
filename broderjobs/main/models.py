@@ -67,5 +67,17 @@ class Conocimiento(models.Model):
     def __unicode__(self):
 		return self.descripcion
 
+class TipoRemuneracion(models.Model):
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+		return self.descripcion
+
+class Beneficio(models.Model):
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+		return self.descripcion
+
 
 

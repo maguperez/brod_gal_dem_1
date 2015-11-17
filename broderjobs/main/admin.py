@@ -1,21 +1,29 @@
 from django.contrib import admin
-from .models import Persona, GradoEstudio, Pais, Ciudad, Universidad, Carrera, Idioma, TipoPuesto, CargaHoraria
+from . import models
 
-admin.site.register(Persona)
+admin.site.register(models.Persona)
 
-admin.site.register(GradoEstudio)
+admin.site.register(models.GradoEstudio)
 
-admin.site.register(Pais)
+admin.site.register(models.Pais)
 
-admin.site.register(Ciudad)
+admin.site.register(models.Ciudad)
 
-admin.site.register(Universidad)
+admin.site.register(models.Universidad)
 
-admin.site.register(Carrera)
+admin.site.register(models.Carrera)
 
-admin.site.register(Idioma)
+admin.site.register(models.Idioma)
 
-admin.site.register(CargaHoraria)
+admin.site.register(models.CargaHoraria)
 
-admin.site.register(TipoPuesto)
+admin.site.register(models.TipoPuesto)
+
+admin.site.register(models.Conocimiento)
+
+admin.site.register(models.TipoRemuneracion)
+
+admin.site.register(models.Beneficio)
+
+
 

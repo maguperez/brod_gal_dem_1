@@ -1,11 +1,10 @@
 {% load crispy_forms_tags %}
 
+<div style="margin:0 50px">
 
-<div class="row">
-	<form class="form-horizontal" action="{% url 'mi_cv_info_personal' %}" method="post">
-		
-		{{ form.grado_estudio|as_crispy_field }}
-		<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
+	<form class="form-horizontal" action="{% url 'mi_cv_disponibilidad' %}" method="post">
+		{% crispy form %}
+		<!--<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
 		< class="detalle col-3-7">
 			<div>
 				<label>Acepto propuestas de</label>
@@ -24,6 +23,7 @@
 				</p>
 			<div class="clear"></div>
 		</div>
+		<input type="submit" class="btn btn-submit col-md-offset-2">-->
 		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>
