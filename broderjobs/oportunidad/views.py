@@ -41,7 +41,6 @@ class OportunidadCrearView(FormView):
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
 
-        print("valido form")
 
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
@@ -50,7 +49,7 @@ class OportunidadCrearView(FormView):
         oportunidad.pais = pais
         oportunidad.ciudad = ciudad
         oportunidad.remuneracion = remuneracion
-        # oportunidad.beneficio = beneficio
+        oportunidad.beneficio = beneficio
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
@@ -65,10 +64,7 @@ class OportunidadCrearView(FormView):
         perfil.save()
 
         oportunidad.perfil_oportunidad = perfil
-        print("asigno perfil")
-
         oportunidad.save()
-        print("save")
         return super(OportunidadCrearView , self).form_valid(form)
 
 

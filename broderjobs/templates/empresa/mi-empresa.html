@@ -73,16 +73,18 @@
 								</div>
 							</section>
 							<section class="oportunidades">
+
 								<h3 class="title"><i class="oportunity"></i>Oportunidades</h3>
 								<ul class="list">
+									{% for oportunidad in oportunidades %}
 									<li>
 										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">Analista de mejora de estrategia de marca personal</h2></a>
+													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 													<div class="descripcion">
 														<div class="datos">
-															<div class="empresa"><i class="empresa"></i><label>GRA&Ntilde;A & MONTERO</label></div>
-															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-															<div class="remuneracion"><i class="remuneracion"></i><label>No especificado</label></div>
+															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+															<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
 														</div>
 														<div class="compatibilidad">
 															<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
@@ -90,35 +92,14 @@
 														</div>
 														<div class="ver-oportunidad">
 															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL 15.03.15</label>
+															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 														</div>
 														<div class="clear"></div>
 													</div>
 												<div class="clear"></div>
 										</div>
 									</li>
-									<li>
-										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">Jefe de estrategia de ventas</h2></a>
-													<div class="descripcion">
-														<div class="datos">
-															<div class="empresa"><i class="empresa"></i><label>PLAYSTATION</label></div>
-															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-															<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
-														</div>
-														<div class="compatibilidad">
-															<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-															<label class="resultado">Compatible</label>
-														</div>
-														<div class="ver-oportunidad">
-															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL 15.03.15</label>
-														</div>
-														<div class="clear"></div>
-													</div>
-												<div class="clear"></div>
-										</div>
-									</li>
+										{% endfor %}
 								</ul>
 								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
 							</section>

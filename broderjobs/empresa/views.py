@@ -8,7 +8,9 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Puesto, Empresa, Representante, Sector
+from .models import Puesto, Empresa, Representante, Sector
+from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
+from oportunidad.models import Oportunidad
 
 
 # Create your views here.
@@ -24,9 +26,10 @@ class MiEmpresaView(TemplateView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
+        context['oportunidades'] = oportunidades
         # context['persona'] = persona
         # context['estudiante'] = estudiante
         # context['edad'] = edad
