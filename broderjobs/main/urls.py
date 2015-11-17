@@ -14,8 +14,7 @@ urlpatterns =[
 
 	url(r'^empresa-login/$' , 'main.views.empresa_login', name='empresa-login'),
 
-	url(r'^cerrar/$' , 'django.contrib.auth.views.logout_then_login',
-		 name='logout'),
+	url(r'^cerrar/$' , 'django.contrib.auth.views.logout_then_login', name='logout'),
 
 	#url(r'^estudiante_registro/$', EstudianteResgistro.as_view() , name = 'estudiante_registro'),
 	url(r'^estudiante-registro/$','main.views.register_user' , name = 'estudiante_registro'),

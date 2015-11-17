@@ -100,19 +100,16 @@ class ResumenForm(forms.Form):
 
 # END CLASS
 
-class FotoForm(forms.Form):
-    foto = forms.FileField(label='Selecione Imagen de Perfil')
-
+class FotoForm(forms.ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = ('foto', 'persona')
     @property
     def helper(self):
         helper = FormHelper()
         helper.form_tag = False # don't render form DOM element
         helper.render_unmentioned_fields = True # render all fields
-        # helper.label_class = 'col-md-2'
-        # helper.field_class = 'col-md-10'
         return helper
-
-# END CLASS
 
 class UniqueUserEmailField(forms.EmailField):
     def validate(self, value):
@@ -124,8 +121,6 @@ class UniqueUserEmailField(forms.EmailField):
             raise forms.ValidationError("Email ya esta registrado")
         except User.DoesNotExist:
             pass
-
-# END CLASS
 
 class EstudianteForm(forms.ModelForm):
     class Meta:
@@ -178,7 +173,6 @@ class DisponibilidadForm(forms.Form):
         helper.form_tag = False # don't render form DOM element
         helper.render_unmentioned_fields = True # render all fields
         return helper
-#END CLASS
 
 class IdiomaForm(forms.Form):
     item_idioma = []
@@ -193,7 +187,6 @@ class IdiomaForm(forms.Form):
         helper.form_tag = False # don't render form DOM element
         helper.render_unmentioned_fields = True # render all fields
         return helper
-# END CLASS
 
 class ConocimientoForm(forms.Form):
     item_conocimiento = []

@@ -1,5 +1,6 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
+
 <form action="" method="post">{%csrf_token%}
 	<section class="oportunidad-detalle">
 			<div class="centered">
@@ -11,7 +12,7 @@
 								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
 							</div>
 							<a class="btn-action" href="oportunidad.html">ANUNCIAR</a>
-							<a class="btn-action" href="oportunidad.html">GUARDAR</a>
+							<input type="submit" name="form" value="GUARDAR" id="registrarme" class="btn-action"/>
 							<div class="clear"></div>
 						</header>
 						<div class="content">
@@ -45,9 +46,9 @@
 									<div class="less-margin">
 										<label>Remuneraci&oacute;n</label>
 										<p class="align-left">
-											{% for remuneracion in form.remuneracion %}
-											 {{ remuneracion.errors }}
-											 {{ remuneracion }}
+											{% for r in form.remuneracion %}
+											 {{ r.errors }}
+											 {{ r }}
 										{% endfor %}
 										</p>
 										<div class="clear"></div>
@@ -63,7 +64,7 @@
 									<div>
 										<label>Fecha de cierre</label>
 										<p>
-											{{form.fecha_cierre}}
+											{{form.fecha_cese}}
 										</p>
 										<div class="clear"></div>
 									</div>
@@ -84,11 +85,11 @@
 									</div>
 									<div class="full less-margin">
 										<label>Resumen *</label>
-										{{form.resumen}}
+
 										<div class="clear"></div>
 									</div>
 									<div class="full">
-										<textarea></textarea>
+										{{form.resumen}}
 									</div>
 								</div>
 							</section>

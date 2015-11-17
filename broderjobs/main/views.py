@@ -19,7 +19,8 @@ def login_page(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
-            if user is not None:
+            persona = Persona.objects.get(usuario_id=user.id)
+            if user is not None and persona.tipo_persona == 'E':
                 if user.is_active:
                     login(request, user)
                     message = "Te haz identificado de modo correcto"
@@ -42,7 +43,8 @@ def empresa_login(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
-            if user is not None:
+            persona = Persona.objects.get(usuario_id=user.id)
+            if user is not None and persona.tipo_persona == 'R':
                 if user.is_active:
                     login(request, user)
                     message = "Te haz identificado de modo correcto"
@@ -66,10 +68,6 @@ def estudiante(request):
 def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
-def logout_view(request):
-    logout(request)
-    return redirect('homepage')
-
 def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

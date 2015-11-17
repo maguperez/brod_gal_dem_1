@@ -1,6 +1,20 @@
 from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
 
+class ImagenSilder(models.Model):
+    titulo = models.CharField(max_length="50")
+    imagen = models.ImageField('imagen', upload_to='img/%Y/%m/%d', null=True, blank=True)
+
+    def __unicode__(self):
+        return self.titulo
+
+    @property
+    def set_imagen(self):
+        if self.imagen:
+            return self.imagen.url
+        # else:
+        #     return "/static/img/profile/profile_default.png"
+
 
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
@@ -40,6 +54,7 @@ class Empresa(models.Model):
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
     website = models.CharField(max_length="50", default=None, null=True, blank=True )
     logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
+    imagen_slider = models.ManyToManyField(ImagenSilder, default=None, blank=True, verbose_name="Imagenes")
 
     def __unicode__(self):
         return '%s' % (self.nombre)

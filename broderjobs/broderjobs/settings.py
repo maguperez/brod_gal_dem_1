@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'main',
     'estudiante',
     'empresa',
-    'oportunidad'
+    'oportunidad',
+
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

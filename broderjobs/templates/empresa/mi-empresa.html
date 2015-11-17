@@ -9,8 +9,8 @@
 							<img class="imagen" src="{{empresa.set_logo}}" />
 						</header>
 						<div class="content">
-							<h3 class="link">ADOBE</h3>
-							<label class="descripcion">{{empresa.nombre | upper}}</label>
+							<h3 class="link">{{empresa.nombre | upper}}</h3>
+							<label class="descripcion"></label>
 						</div>
 					</div>
 				</div>
@@ -18,9 +18,10 @@
 					<div class="box detail">
 						<header class="pos-relative">
 							<div class="slider"id="fade">
-								<img src="/static/img/oficina-11.png"  />
-								<!--<img src="/static/img/oficina-12.png"  />
-								<img src="/static/img/oficina-13.png"  />-->
+								{% for imagen in empresa.imagen_slider.all%}
+								<img src="{{imagen.set_imagen}}"  />
+
+								{% endfor%}
 							</div>
 							<a class="btn-edit">Editar</a>
 						</header>

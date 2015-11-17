@@ -94,25 +94,48 @@ class AjaxTemplateMixin(object):
                 self.template_name = self.ajax_template_name
             return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
 
-class FotoView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
-    template_name = 'estudiante/mi-cv-foto.html'
-    form_class = forms.FotoForm
-    success_url = reverse_lazy('mi_cv')
-    success_message = "Guardado con exito!"
+# class FotoView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
+#     template_name = 'estudiante/mi-cv-foto.html'
+#     form_class = forms.FotoForm
+#     success_url = reverse_lazy('mi_cv')
+#     success_message = "Guardado con exito!"
+#
+#     def get_initial(self):
+#         user = self.request.user
+#         persona = Persona.objects.get(usuario_id=user.id)
+#         estudiante = Estudiante.objects.get(persona_id=persona.id)
+#         return {'foto': estudiante.foto}
+#
+#     def form_valid(self, form):
+#         user = self.request.user
+#         persona = Persona.objects.get(usuario_id=user.id)
+#         estudiante = Estudiante.objects.get(persona_id=persona.id)
+#         estudiante.foto = form.cleaned_data['foto']
+#         print(estudiante.foto)
+#         estudiante.save()
+#         return super(FotoView, self).form_valid(form)
 
-    def get_initial(self):
+class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
+    form_class = forms.FotoForm
+    template_name = 'estudiante/mi-cv-foto.html'
+    print("aqui")
+    success_url =reverse_lazy('mi_cv')
+
+    def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id=persona.id)
-        return {'foto': estudiante.foto}
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        return estudiante
 
     def form_valid(self, form):
+
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
-        estudiante.foto = form.cleaned_data['foto']
-        print(estudiante.foto)
+        print(" oooooooooooo ")
+        estudiante.foto = self.request.FILES['foto']
         estudiante.save()
+        print(" estooooooooooooooooooo ")
         return super(FotoView, self).form_valid(form)
 
 class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
@@ -127,7 +150,6 @@ class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
         return estudiante
 
     def get_initial(self):
-        print("inicial")
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)

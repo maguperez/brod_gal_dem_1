@@ -22,32 +22,32 @@ class Pais(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class Ciudad(models.Model):
     pais = models.ForeignKey(Pais)
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class Universidad(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class Carrera(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class TipoPuesto(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class CargaHoraria(models.Model):
     descripcion = models.CharField(max_length="50")
@@ -59,25 +59,25 @@ class Idioma(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class Conocimiento(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class TipoRemuneracion(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 class Beneficio(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode(self.descripcion) or u''
 
 
 
