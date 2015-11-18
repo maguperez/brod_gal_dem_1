@@ -1,0 +1,52 @@
+{% extends 'estudiante/base.html' %}
+{%block css%}
+{%endblock%}
+{% block content %}
+<section class="usuarios">
+    <div class="centered">
+        <div class="panel left principal">
+            <div class="box">
+			    <div class="content">
+                    <section class="pos-relative">
+                       <!-- <form action="" method="post">{%csrf_token%}
+                            <h3 class="title"><i class="info"></i>Mi cuenta</h3>
+                            <a class="btn-action" href="configuracion.html">GUARDAR</a>
+                            <input type="submit" name="form" value="Finalizar Registro"  class="finalizar-registro"/>
+                            <div class="detalle col-3-7">
+                                <div>
+                                    <label>Nombre y Apellidos</label>
+                                    <p><input class="half" type="text" placeholder="Escriba su nombre completo" />
+
+                                    </p>
+                                    <div class="clear"></div>
+                                </div>
+                                <div>
+                                    <label>Contrase&ntilde;a actual</label>
+                                    <p><input class="half" type="text" placeholder="Escriba su contrase&ntilde;a actual" />
+
+                                    </p>
+                                    <div class="clear"></div>
+                                </div>
+                                <div>
+                                    <label>Contrase&ntilde;a nueva</label>
+                                    <p><input class="half" type="text" placeholder="Escriba su nueva contrase&ntilde;a" /></p>
+                                    <div class="clear"></div>
+                                </div>
+                                <div>
+                                    <label>Confirmar contrase&ntilde;a</label>
+                                    <p><input class="half" type="text" placeholder="Escriba otra vez su nueva contrase&ntilde;a" /></p>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </form>-->
+                        {{form.as_p}}
+                    </section>
+				</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</section>
+{% endblock content%}
+{% block js %}
+{% endblock %}

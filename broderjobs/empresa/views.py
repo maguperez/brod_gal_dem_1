@@ -18,6 +18,16 @@ from oportunidad.models import Oportunidad
 def oportunidad_listar(request):
     return render(request, 'empresa/oportunidades-listar.html')
 
+class ConfiguracionView(TemplateView):
+
+    template_name = 'empresa/configuracion.html'
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        usuario = User.objects.get(pk=user.id)
+        context = super(ConfiguracionView, self).get_context_data(**kwargs)
+        context['usuario'] = user
+        return context
+
 class MiEmpresaView(TemplateView):
     template_name = 'empresa/mi-empresa.html'
 

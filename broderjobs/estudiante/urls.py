@@ -8,7 +8,9 @@ urlpatterns =[
 
 	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='oportunidad_listar'),
 
-	#url(r'^mi-cv/$', 'estudiante.views.mi_cv', name='mi_cv'),
+	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="estudiante_configuracion"),
+
+	url(r'^editar-cuenta/$', views.EditarCuentaView.as_view(), name="estudiante_editar_cuenta"),
 
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi_cv_resumen"),
 
@@ -27,7 +29,7 @@ urlpatterns =[
 	url(r'^mi-cv/experiencia-crear/$', views.ExperienciaCrearView.as_view(), name="mi_cv_experiencia_crear"),
 
 	url(r'^mi-cv/experiencia-eliminar/(?P<id>\d+)/$', views.ExperienciaEliminarView.as_view(), name="mi_cv_experiencia_eliminar"),
-	
+
 	url(r'^mi-cv/voluntariado/(?P<id>\d+)/$', views.VoluntariadoView.as_view(), name="mi_cv_voluntariado_editar"),
 
 	url(r'^mi-cv/voluntariado-crear/$', views.VoluntariadoCrearView.as_view(), name="mi_cv_voluntariado_crear"),
@@ -35,4 +37,10 @@ urlpatterns =[
 	url(r'^mi-cv/voluntariado-eliminar/(?P<id>\d+)/$', views.VoluntariadoEliminarView.as_view(), name="mi_cv_voluntariado_eliminar"),
 
 	url(r'^mi-cv/$', views.MiCVView.as_view(), name="mi_cv"),
+
+	url(r'^empresa-lista/$', views.EmpresaListaView.as_view(), name="estudiante_empresa_lista"),
+
+	url(r'^empresa-busqueda/$', views.EmpresaBusquedaView.as_view(), name="estudiante_empresa_busqueda"),
+
+	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante_empresa_detalle"),
 ]

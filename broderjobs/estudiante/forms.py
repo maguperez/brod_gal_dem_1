@@ -98,8 +98,6 @@ class ResumenForm(forms.Form):
         helper.field_class = 'col-md-10'
         return helper
 
-# END CLASS
-
 class FotoForm(forms.ModelForm):
     class Meta:
         model = Estudiante

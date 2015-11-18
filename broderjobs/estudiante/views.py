@@ -4,6 +4,9 @@ from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.http import Http404
+from django.contrib.auth import views
+from django.core import serializers
+from django.http import HttpResponse
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
@@ -63,6 +66,48 @@ def registro_cv(request):
 def oportunidad_listar(request):
     return render(request, 'estudiante/oportunidad-listar.html')
 
+class ConfiguracionView(TemplateView):
+
+    template_name = 'estudiante/configuracion.html'
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        usuario = User.objects.get(pk=user.id)
+        persona = Persona.objects.get(usuario_id=usuario.id)
+
+        context = super(ConfiguracionView, self).get_context_data(**kwargs)
+        context['usuario'] = user
+        context['persona'] = persona
+        return context
+
+class EditarCuentaView(TemplateView):
+
+    template_name = 'estudiante/editar-cuenta.html'
+
+class EmpresaListaView(TemplateView):
+
+    template_name = 'estudiante/empresa-lista.html'
+    # def get(self, request, *args, **kwargs):
+		# id_autor = request.GET['id']
+		# libros = Libro.objects.filter(autor__id=id_autor)
+		# data = serializers.serialize('json', libros,
+		# 			fields=('nombre','resumen'))
+		# return HttpResponse(data, mimetype='application/json')
+
+class EmpresaDetalleView(TemplateView):
+
+    template_name = 'estudiante/empresa-lista.html'
+
+class EmpresaBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        print(busqueda)
+        empresas = Empresa.objects.filter(nombre__icontains=busqueda)
+        for e in range(0, len(empresas)):
+            empresas[e].logo = empresas[e].set_logo
+        data = serializers.serialize('json', empresas,
+                                     fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
+        return HttpResponse(data, content_type='application/json')
+
 class MiCVView(TemplateView):
 
     template_name = 'estudiante/mi-cv.html'
@@ -93,27 +138,6 @@ class AjaxTemplateMixin(object):
             if request.is_ajax():
                 self.template_name = self.ajax_template_name
             return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
-
-# class FotoView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
-#     template_name = 'estudiante/mi-cv-foto.html'
-#     form_class = forms.FotoForm
-#     success_url = reverse_lazy('mi_cv')
-#     success_message = "Guardado con exito!"
-#
-#     def get_initial(self):
-#         user = self.request.user
-#         persona = Persona.objects.get(usuario_id=user.id)
-#         estudiante = Estudiante.objects.get(persona_id=persona.id)
-#         return {'foto': estudiante.foto}
-#
-#     def form_valid(self, form):
-#         user = self.request.user
-#         persona = Persona.objects.get(usuario_id=user.id)
-#         estudiante = Estudiante.objects.get(persona_id=persona.id)
-#         estudiante.foto = form.cleaned_data['foto']
-#         print(estudiante.foto)
-#         estudiante.save()
-#         return super(FotoView, self).form_valid(form)
 
 class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     form_class = forms.FotoForm

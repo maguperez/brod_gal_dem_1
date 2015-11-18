@@ -7,15 +7,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
 		{% block css %}
 		{% endblock css %}
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<body>
 		<header class="principal">
 			<div class="centered">
-				<a href="oportunidades.html"><img class="logo" src="" alt="Broder jobs" /></a>
+				<a href="oportunidades.html"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
@@ -29,7 +30,7 @@
 								<div class="pin"></div>
 								<ul>
 									<li><a href="/estudiante/mi-cv/"><i class="cv"></i><span class="v-line gray"></span><span>Mi CV</span><div class="clear"></div></a></li>
-									<li><a href="configuracion.html"><i class="config"></i><span class="v-line gray"></span><span>Configuraci&oacute;n</span><div class="clear"></div></a></li>
+									<li><a href="/estudiante/configuracion/"><i class="config"></i><span class="v-line gray"></span><span>Configuraci&oacute;n</span><div class="clear"></div></a></li>
 									<li><a href="/cerrar/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
 								<ul>
 							</div>
@@ -48,7 +49,7 @@
 		<header class="menu">
 			<div class="centered">
 				<a class="active" href="oportunidades.html">Oportunidades</a>
-				<a href="empresas.html">Empresas</a>
+				<a href="/estudiante/empresa-lista/">Empresas</a>
 				<a href="misprocesos.html">Mis procesos</a>
 				<div class="clear"></div>
 			</div>

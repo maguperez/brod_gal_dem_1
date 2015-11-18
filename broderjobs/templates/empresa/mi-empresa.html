@@ -79,8 +79,8 @@
 									{% for oportunidad in oportunidades %}
 									<li>
 										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
-													<div class="descripcion">
+													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+													<div class="descripcion">e
 														<div class="datos">
 															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
 															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>

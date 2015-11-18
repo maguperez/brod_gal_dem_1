@@ -2,7 +2,8 @@ from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
 
 class ImagenSilder(models.Model):
-    titulo = models.CharField(max_length="50")
+    titulo = models.CharField(max_length="50", default=None, null=True, blank=True)
+    url = models.CharField(max_length="1000", default=None, null=True, blank=True)
     imagen = models.ImageField('imagen', upload_to='img/%Y/%m/%d', null=True, blank=True)
 
     def __unicode__(self):
@@ -15,13 +16,11 @@ class ImagenSilder(models.Model):
         # else:
         #     return "/static/img/profile/profile_default.png"
 
-
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
 
     def __unicode__(self):
         return self.descripcion
-
 
 class Puesto(models.Model):
     descripcion = models.CharField(max_length="50")
@@ -41,10 +40,18 @@ class FacturacionAnual(models.Model):
     def __unicode__(self):
         return self.descripcion
 
+class CategoriaEmpresa(models.Model):
+
+    descripcion = models.CharField(max_length="50")
+
+    def __unicode__(self):
+        return unicode('%s' % (self.persona)) or u''
+
 class Empresa(models.Model):
 
     nombre =  models.CharField(max_length="100", default=None, null=True, blank=True )
-    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True )
+    descripcion = models.CharField(max_length="200", default=None, null=True, blank=True )
+    quienes_somos = models.CharField(max_length="1000", default=None, null=True, blank=True )
     RUC = models.CharField(max_length="20", default=None, null=True, blank=True )
     sector = models.ForeignKey(Sector, default=None, null=True, blank=True )
     numero_funcionarios = models.ForeignKey(NumeroFuncionarios, default=None, null=True, blank=True)
@@ -55,6 +62,7 @@ class Empresa(models.Model):
     website = models.CharField(max_length="50", default=None, null=True, blank=True )
     logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
     imagen_slider = models.ManyToManyField(ImagenSilder, default=None, blank=True, verbose_name="Imagenes")
+    ranking_general = models.CharField(max_length="10", default=None, null=True, blank=True )
 
     def __unicode__(self):
         return '%s' % (self.nombre)
