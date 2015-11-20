@@ -84,20 +84,6 @@ class RegistroCVForm(forms.ModelForm):
         self.fields["carga_horaria"].widget = forms.widgets.RadioSelect()
         self.fields["carga_horaria"].choices =cargas
 
-# END CLASS #
-
-class ResumenForm(forms.Form):
-    resumen = forms.CharField(required=True, widget=forms.Textarea)
-
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        helper.label_class = 'col-md-2'
-        helper.field_class = 'col-md-10'
-        return helper
-
 class FotoForm(forms.ModelForm):
     class Meta:
         model = Estudiante
@@ -144,26 +130,30 @@ class InfoPersonalForm(EstudianteForm):
         helper.render_unmentioned_fields = True # render all fields
         return helper
 
-class DisponibilidadForm(forms.Form):
-    item_tipo_puesto = []
-    for p in TipoPuesto.objects.all():
-        item_tipo_puesto.append((p.id, p.descripcion))
-    item_carga_horaria = []
-    for c in CargaHoraria.objects.all():
-        item_carga_horaria.append((c.id, c.descripcion))
+class ResumenForm(forms.Form):
+    resumen = forms.CharField(required=True, widget=forms.Textarea)
 
-    tipo_puesto = forms.MultipleChoiceField(
-        required = False,
-        label=u"Acepto Propuestas de",
-        choices=item_tipo_puesto,
-        widget=forms.widgets.CheckboxSelectMultiple)
+    @property
+    def helper(self):
+        helper = FormHelper()
+        helper.form_tag = False # don't render form DOM element
+        helper.render_unmentioned_fields = True # render all fields
+        helper.label_class = 'col-md-2'
+        helper.field_class = 'col-md-10'
+        return helper
 
-    carga_horaria = forms.ChoiceField(
-        required = False,
-        label=u"Cargo Horaria",
-        choices=item_carga_horaria,
-        widget=forms.widgets.RadioSelect,
-        initial=(c[2] for c in item_carga_horaria))
+class DisponibilidadForm(forms.ModelForm):
+    class Meta:
+            model = Estudiante
+            fields = ('tipo_puesto', 'carga_horaria')
+            widgets = {
+                'tipo_puesto': forms.widgets.CheckboxSelectMultiple,
+                'carga_horaria': forms.widgets.RadioSelect()
+            }
+    def __init__(self, *args, **kwargs):
+        super(DisponibilidadForm, self).__init__(*args, **kwargs)
+        self.fields['carga_horaria'].empty_label = None
+        self.fields['tipo_puesto'].empty_label = None
 
     @property
     def helper(self):
@@ -173,11 +163,8 @@ class DisponibilidadForm(forms.Form):
         return helper
 
 class IdiomaForm(forms.Form):
-    item_idioma = []
-    for i in Idioma.objects.all():
-        item_idioma.append((i.id, i.descripcion))
 
-    idioma = forms.MultipleChoiceField(choices= item_idioma, required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
+    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
 
     @property
     def helper(self):

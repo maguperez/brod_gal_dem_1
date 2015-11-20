@@ -26,6 +26,8 @@ urlpatterns =[
 
 	url(r'^mi-cv/experiencia/(?P<id>\d+)/$', views.ExperienciaView.as_view(), name="mi_cv_experiencia_editar"),
 
+	url(r'^mi-cv/experiencia/$', views.ExperienciaView.as_view(), name="mi_cv_experiencia_editar"),
+
 	url(r'^mi-cv/experiencia-crear/$', views.ExperienciaCrearView.as_view(), name="mi_cv_experiencia_crear"),
 
 	url(r'^mi-cv/experiencia-eliminar/(?P<id>\d+)/$', views.ExperienciaEliminarView.as_view(), name="mi_cv_experiencia_eliminar"),

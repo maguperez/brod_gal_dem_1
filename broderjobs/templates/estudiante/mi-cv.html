@@ -5,7 +5,6 @@
 
 
 {% block content %}
-
 <section class="cv">
 			<div class="centered">
 				<div class="panel left principal">
@@ -40,9 +39,12 @@
 										</p>
 										<div class="clear"></div>
 									</div>
+
 									<div>
 										<label>Carga horaria</label>
-										<p>Full time</p>
+										<p>
+											<span class="tag">{{ estudiante.carga_horaria }}</span>
+										</p>
 										<div class="clear"></div>
 									</div>
 								</div>
@@ -91,9 +93,9 @@
 											<label class="tipo">{{experiencia.puesto}}</label>
 											<label class="nombre">{{experiencia.empresa}}</label>
 											<pr>{{experiencia.descripcion}}</pr>
-											<button id="editar-{{experiencia.pk}}" class="experiencia-botton link editar" accion="editar">Editar</button>
+											<button id="{{experiencia.pk}}" class="experiencia-botton link editar" accion="editar">Editar</button>
 
-											<button id="eliminar-{{experiencia.pk}}" class="experiencia-botton link editar" accion="eliminat">Eliminar</button>
+											<button id="e-{{experiencia.pk}}" class="experiencia-botton link editar" accion="eliminat">Eliminar</button>
 										</div>
 									{% endfor %}
 								</div>
@@ -448,7 +450,7 @@
 		});
 	 });
 	 $('.experiencia-botton').click(function() {
-		 var id = $(".experiencia").attr("id");
+		 var id = $(this).attr("id");
 		 var accion = $(this).attr("accion");
 		 if (accion == 'editar') {
 			 $('#form-modal-body').load('experiencia/' + id + '/', function () {
@@ -494,4 +496,4 @@
 		});
 	 });
  </script>
-{% endblock js%}
+{% endblock %}

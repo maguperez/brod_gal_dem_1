@@ -1,19 +1,20 @@
-
+import json
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.http import Http404
+from django.http import JsonResponse
 from django.contrib.auth import views
-from django.core import serializers
-from django.http import HttpResponse
-from django.views.generic import TemplateView, FormView
+#from django.core import serializers
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import TemplateView, FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
-from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Puesto, Empresa
-from django.utils.dateparse import parse_date
+from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
+from empresa.models import Puesto, Empresa, Sector
 from main import utilitarios
 
 
@@ -86,26 +87,37 @@ class EditarCuentaView(TemplateView):
 class EmpresaListaView(TemplateView):
 
     template_name = 'estudiante/empresa-lista.html'
-    # def get(self, request, *args, **kwargs):
-		# id_autor = request.GET['id']
-		# libros = Libro.objects.filter(autor__id=id_autor)
-		# data = serializers.serialize('json', libros,
-		# 			fields=('nombre','resumen'))
-		# return HttpResponse(data, mimetype='application/json')
 
 class EmpresaDetalleView(TemplateView):
 
-    template_name = 'estudiante/empresa-lista.html'
+    template_name = 'estudiante/empresa-detalle.html'
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+        empresa = get_object_or_404(Empresa, pk=id)
+        context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        return context
 
 class EmpresaBusquedaView(TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
-        print(busqueda)
         empresas = Empresa.objects.filter(nombre__icontains=busqueda)
-        for e in range(0, len(empresas)):
-            empresas[e].logo = empresas[e].set_logo
-        data = serializers.serialize('json', empresas,
-                                     fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
+        a_empresas =[]
+        for i in range(0, len(empresas)):
+            sector = empresas[i].nombre
+            if empresas[i].sector is not None:
+                sector = Sector.objects.get(id=empresas[i].sector.id).descripcion
+            e = {
+                "id": empresas[i].id,
+                "nombre": empresas[i].nombre,
+                "logo": empresas[i].set_logo,
+                "sector": sector,
+                "ranking_general": empresas[i].ranking_general,
+            }
+            a_empresas.append(e)
+        # data = serializers.serialize('json', a_empresas,
+        #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
+        data = json.dumps(a_empresas)
         return HttpResponse(data, content_type='application/json')
 
 class MiCVView(TemplateView):
@@ -116,7 +128,6 @@ class MiCVView(TemplateView):
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         edad = utilitarios.calular_edad(persona.fecha_nacimiento)
-
         context = super(MiCVView, self).get_context_data(**kwargs)
         context['usuario'] = user
         context['persona'] = persona
@@ -142,7 +153,6 @@ class AjaxTemplateMixin(object):
 class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv-foto.html'
-    print("aqui")
     success_url =reverse_lazy('mi_cv')
 
     def get_object(self, queryset=None):
@@ -156,10 +166,8 @@ class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
-        print(" oooooooooooo ")
         estudiante.foto = self.request.FILES['foto']
         estudiante.save()
-        print(" estooooooooooooooooooo ")
         return super(FotoView, self).form_valid(form)
 
 class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
@@ -180,10 +188,9 @@ class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
         return {
             'email': usuario.email,
             'telefono': persona.telefono,
-            'fechanacimiento': persona.fecha_nacimiento}
+            'fecha_nacimiento': persona.fecha_nacimiento}
 
     def form_valid(self, form):
-        print("fom")
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)
@@ -216,7 +223,6 @@ class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
         usuario.save()
         persona.save()
         estudiante.save()
-        print("ter")
         return super(InfoPersonalView, self).form_valid(form)
 
 class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
@@ -242,11 +248,17 @@ class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
         resumen.save()
         return super(ResumenView, self).form_valid(form)
 
-class DisponibilidadView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
+class DisponibilidadView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     template_name = 'estudiante/mi-cv-disponibilidad.html'
     form_class = forms.DisponibilidadForm
     success_url = reverse_lazy('mi_cv')
     success_message = "Guardado con exito!"
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        return estudiante
 
     def form_valid(self, form):
         user = self.request.user
@@ -288,61 +300,19 @@ class ConocimientoView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
         return super(ConocimientoView, self).form_valid(form)
 
 class ExperienciaView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
-    form_class = forms.ExperienciaForm
     template_name = 'estudiante/mi-cv-experiencia-editar.html'
+    form_class = forms.ExperienciaForm
     success_url = reverse_lazy('mi_cv')
+    success_message = "Guardado con exito!"
 
     def get_object(self, queryset=None):
-        experiencia = ExperienciaProfesional.objects.get(id =self.request.GET.get('id'))
+        id = self.kwargs["id"]
+        print(id)
+        experiencia = get_object_or_404(ExperienciaProfesional, id= id)
         return experiencia
 
-    # def get_initial(self):
-    #     print("inicial")
-    #     user = self.request.user
-    #     usuario = User.objects.get(pk = user.id)
-    #     persona = Persona.objects.get(usuario_id=user.id)
-    #     return {
-    #         'email': usuario.email,
-    #         'telefono': persona.telefono,
-    #         'fechanacimiento': persona.fecha_nacimiento}
-    #
-    # def form_valid(self, form):
-    #     print("fom")
-    #     user = self.request.user
-    #     usuario = User.objects.get(pk = user.id)
-    #     persona = Persona.objects.get(usuario_id=user.id)
-    #     grado_estudio = form.cleaned_data['grado_estudio']
-    #     universidad = form.cleaned_data['universidad']
-    #     carrera = form.cleaned_data['carrera']
-    #     pais =  form.cleaned_data['pais']
-    #     ciudad = form.cleaned_data['ciudad']
-    #     ano_inicio = form.cleaned_data['ano_inicio_estudio']
-    #     semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
-    #     ano_graduacion = form.cleaned_data['ano_graduacion']
-    #     semestre_graduacion = form.cleaned_data['semestre_graduacion']
-    #
-    #     estudiante = Estudiante.objects.get(persona_id=persona.id)
-    #     estudiante.grado_estudio = grado_estudio
-    #     estudiante.universidad = universidad
-    #     estudiante.carrera = carrera
-    #     estudiante.pais = pais
-    #     estudiante.ciudad = ciudad
-    #     estudiante.ano_inicio_estudio = ano_inicio
-    #     estudiante.semestre_inicio_estudio = semestre_inicio
-    #     estudiante.ano_graduacion = ano_graduacion
-    #     estudiante.semestre_graduacion = semestre_graduacion
-    #
-    #     # fecha = parse_date(form.cleaned_data['fecha_nacimiento'])
-    #     usuario.email = form.cleaned_data['email']
-    #     persona.telefono = form.cleaned_data['telefono']
-    #     #persona.fecha_nacimiento = fecha
-    #     usuario.save()
-    #     persona.save()
-    #     estudiante.save()
-    #     print("ter")
-    #     return super(InfoPersonalView, self).form_valid(form)
-    #
-    
+
+
 class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
     form_class = forms.ExperienciaForm
     template_name = 'estudiante/mi-cv-experiencia-crear.html'
@@ -371,7 +341,6 @@ class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
             experiencia.trabajo_actual = 'S'
         experiencia.descripcion = descripcion
         experiencia.save()
-        print("ter")
         return super(ExperienciaCrearView, self).form_valid(form)
 
 class ExperienciaEliminarView(DeleteView):

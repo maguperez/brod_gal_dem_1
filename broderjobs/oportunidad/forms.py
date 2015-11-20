@@ -20,6 +20,7 @@ class OportunidadForm(forms.ModelForm):
             'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'}),
             'beneficio': SelectMultiple()
         }
+
     def __init__(self, *args, **kwargs):
         super(OportunidadForm, self).__init__(*args, **kwargs)
         self.fields['carga_horaria'].empty_label = None

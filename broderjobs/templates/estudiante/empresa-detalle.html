@@ -1,0 +1,270 @@
+
+{% extends 'estudiante/base.html' %}
+{% load staticfiles %}
+{%block css%}
+{%endblock%}
+{% block content %}
+<section class="empresa">
+    <div class="centered">
+        <div class="panel left">
+            <div class="box">
+                <header>
+							<img src="../img/empresas/empresa-1.jpg" />
+						</header>
+                <div class="content">
+                    <h3 class="link">{{empresa.nombre | upper}}</h3>
+                    <label class="descripcion">{{empresa.sector | upper}}</label>
+                </div>
+            </div>
+			<div class="box evaluacion">
+						<div class="content">
+							<section class="titulo">
+								<h4 class="link">EVALUACI&Oacute;N DE LA EMPRESA</h4>
+							</section>
+							<section class="rating">
+								<div>
+									<ol>
+										<li><i class="rating-big full"></i></li>
+										<li><i class="rating-big full"></i></li>
+										<li><i class="rating-big full"></i></li>
+										<li><i class="rating-big full"></i></li>
+										<li><i class="rating-big"></i></li>
+									</ol>
+									<div class="clear"></div>
+								</div>
+								<label class="puntaje">4.90</label>
+								<a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
+							</section>
+						</div>
+					</div>
+        </div>
+        <div class="panel right principal">
+            <div class="box detail">
+                <header>
+							<div class="slider"id="fade">
+								<img src="../img/oficina-11.png"  />
+								<img src="../img/oficina-12.png"  />
+								<img src="../img/oficina-13.png"  />
+							</div>
+						</header>
+				<div class="content">
+                    <section class="about">
+								<h3 class="title"><i class="business"></i>Sobre la empresa</h3>
+								<div>
+									<p>Maecenas vel odio auctor, sodales enim nec, venenatis dolor. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida a. Cras molestie varius lacinia. Phasellus sit amet arcu efficitur, ultricies mauris aliquet, dapibus lorem. Nulla consequat risus sed pharetra congue.</p>
+								</div>
+								<div class="double">
+									<div>
+										<div>
+											<h4>N&uacute;mero de funcionarios</h4>
+											<label>M&aacute;s de 10,000</label>
+										</div>
+										<div>
+											<h4>Facturamiento anual</h4>
+											<label>M&aacute;s de 20'000,000 USD</label>
+										</div>
+										<div>
+											<h4>Sede Global</h4>
+											<label>Lima, Per&uacute;</label>
+										</div>
+									</div>
+									<div>
+										<div>
+											<h4>Sector</h4>
+											<label>Desarrollo de Software</label>
+										</div>
+										<div>
+											<h4>Fundaci&oacute;n</h4>
+											<label>1892</label>
+										</div>
+										<div>
+											<h4>Sitio web</h4>
+											<a href="http://adobe.com">www.adobe.com</a>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</section>
+					<section class="evaluacion">
+								<h3 class="title"><i class="like"></i>Evaluaci&oacute;n<span class="comment">(por colaboradores o ex-colaboradores)</span></h3>
+								<div class="criterios">
+									<div class="criterio">
+										<label class="calificacion">2.5</label>
+										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
+										<label class="nombre">Línea de carrera</label>
+									</div>
+									<div class="criterio">
+										<label class="calificacion">2.5</label>
+										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
+										<label class="nombre">Flexibilidad de horarios</label>
+									</div>
+									<div class="criterio">
+										<label class="calificacion">2.5</label>
+										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
+										<label class="nombre">Ambiente de trabajo</label>
+									</div>
+									<div class="criterio">
+										<label class="calificacion">2.5</label>
+										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
+										<label class="nombre">Salario y Beneficios</label>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</section>
+					<section class="oportunidades">
+								<h3 class="title"><i class="oportunity"></i>Oportunidades</h3>
+								<ul class="list">
+									<li>
+										<div class="oportunidad-box">
+													<a class="titulo" href="oportunidad.html"><h2 class="link">Analista de mejora de estrategia de marca personal</h2></a>
+													<div class="descripcion">
+														<div class="datos">
+															<div class="empresa"><i class="empresa"></i><label>GRA&Ntilde;A & MONTERO</label></div>
+															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
+															<div class="remuneracion"><i class="remuneracion"></i><label>No especificado</label></div>
+														</div>
+														<div class="compatibilidad">
+															<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
+															<label class="resultado">Compatible</label>
+														</div>
+														<div class="ver-oportunidad">
+															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+															<label class="cierre">CIERRA EL 15.03.15</label>
+														</div>
+														<div class="clear"></div>
+													</div>
+												<div class="clear"></div>
+										</div>
+									</li>
+									<li>
+										<div class="oportunidad-box">
+													<a class="titulo" href="oportunidad.html"><h2 class="link">Jefe de estrategia de ventas</h2></a>
+													<div class="descripcion">
+														<div class="datos">
+															<div class="empresa"><i class="empresa"></i><label>PLAYSTATION</label></div>
+															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
+															<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
+														</div>
+														<div class="compatibilidad">
+															<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
+															<label class="resultado">Compatible</label>
+														</div>
+														<div class="ver-oportunidad">
+															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+															<label class="cierre">CIERRA EL 15.03.15</label>
+														</div>
+														<div class="clear"></div>
+													</div>
+												<div class="clear"></div>
+										</div>
+									</li>
+								</ul>
+								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
+							</section>
+					<section class="ubicacion">
+								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
+								<div>
+									<p>Calle Varham 203, Camacho, La Molina</p>
+									<div class="mapa">
+										<img src="../img/google-map.jpg" />
+									</div>
+								</div>
+							</section>
+					<section class="redes">
+								<h3 class="title"><i class="network"></i>Redes sociales</h3>
+								<div>
+									<div class="facebook">
+										<h4>FACEBOOK</h4>
+									</div>
+									<div class="twitter">
+										<h4>TWITTER</h4>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</section>
+                </div>
+            </div>
+        </div>
+		<div class="clear"></div>
+    </div>
+</section>
+<div class="popup evaluacion-empresa" id="evaluacion">
+			<div class="box popup-box">
+				<div class="content">
+					<section>
+						<h3>Eval&uacute;a de manera an&oacute;nima</h3>
+						<label class="link empresa">ADOBE</label>
+						<label class="descripcion">DESARROLLO DE SOFTWARE</label>
+						<div class="calificacion">
+							<img class="imagen" src="../img/empresas/empresa-1.jpg" alt="ADOBE" />
+							<ul class="criterios">
+								<li>
+									<label>L&iacute;nea de carrera</label>
+									<ol><li><a>1</a></li></ol>
+									<ol><li><a>2</a></li></ol>
+									<ol><li><a>3</a></li></ol>
+									<ol><li><a>4</a></li></ol>
+									<ol><li><a>5</a></li></ol>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<label>Flexibilidad de horarios</label>
+									<ol><li><a>1</a></li></ol>
+									<ol><li><a>2</a></li></ol>
+									<ol><li><a>3</a></li></ol>
+									<ol><li><a>4</a></li></ol>
+									<ol><li><a>5</a></li></ol>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<label>Ambiente de trabajo</label>
+									<ol><li><a>1</a></li></ol>
+									<ol><li><a>2</a></li></ol>
+									<ol><li><a>3</a></li></ol>
+									<ol><li><a>4</a></li></ol>
+									<ol><li><a>5</a></li></ol>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<label>Salario y Beneficios</label>
+									<ol><li><a>1</a></li></ol>
+									<ol><li><a>2</a></li></ol>
+									<ol><li><a>3</a></li></ol>
+									<ol><li><a>4</a></li></ol>
+									<ol><li><a>5</a></li></ol>
+									<div class="clear"></div>
+								</li>
+							</ul>
+							<div class="clear"></div>
+						</div>
+					</section>
+					<section>
+						<input type="checkbox" id="declaro" /><label for="declaro">Declaro que trabajo o trabaj&eacute; en la empresa ADOBE</label>
+						<a class="btn-save" id="enviar-evaluacion">Enviar Evaluaci&oacute;n</a>
+					</section>
+					<section>
+						<h4 class="link">Tranquilo ;)</h4>
+						<p>La evaluación a la empresa es totalmente anónima; sin embargo, estamos comprometidos en proteger a nuestra comunidad de evaluaciones inadecuadas.</p>
+						<p>Por favor, lee las <a class="link">Directrices de la Comunidad</a> para obtener más información sobre los criterios de revisión.</p>
+					</section>
+				</div>
+				<a class="close">Cerrar</a>
+			</div>
+		</div>
+<div class="popup aviso" id="resultado-evaluacion">
+			<div class="popup-box box">
+				<div class="content">
+					<section class="header">
+						<h4 class="link">¡ENHORABUENA!</h4>
+					</section>
+					<section class="mensaje">
+						<p>La evaluaci&oacute;n se ha registrado satisfactoriamente y se proceder&aacute; con su verificaci&oacute;n para ser publicada. Muchas gracias por colaborar con la comunidad broderjobs.</p>
+					</section>
+				</div>
+				<a class="close">Cerrar</a>
+			</div>
+		</div>
+{% endblock content %}
+{% block js %}
+
+{%endblock js%}

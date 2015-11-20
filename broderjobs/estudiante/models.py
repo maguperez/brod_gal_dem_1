@@ -61,7 +61,7 @@ class ExperienciaProfesional(models.Model):
     descripcion = models.CharField(max_length="100", default=None, null=True)
 
     def __unicode__(self):
-		return unicode('%s' % (self.persona)) or u''
+		return unicode('%s' % (self.estudiante)) or u''
 
 class Voluntariado(models.Model):
     estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)

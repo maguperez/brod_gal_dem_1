@@ -19,9 +19,11 @@
 {% block js %}
 
 <script>
+   (function(){  fnBusqueda();})();
+
 	$('#busqueda').keyup(fnBusqueda);
 	function fnBusqueda(){
-		var busqueda = $(this).val();
+		var busqueda = $('#busqueda').val();
 		$.ajax({
 			data : {'busqueda':busqueda},
 			url: '/estudiante/empresa-busqueda/',
@@ -29,16 +31,18 @@
 			success: function(data){
 				var html = ""
 				for(var i = 0; i<data.length ; i++){
-                    html += '<li><a class="box" href="/estudiante/empresa-detalle/'+data[i].fields.id+'/">';
-                    html += '<header><img src="'+ data[i].fields.logo + '"/></header>';
-                    html += '<div class="content"><h3 class="link">'+ data[i].fields.nombre+'</h3>';
-					html +=	'<label class="descripcion">' + data[i].fields.sector + '</label>';
-                    html += '<div class="rating"><i class="rating"></i><label>'+data[i].fields.ranking_general+'</label></div></div></a></li>';
+                    html += '<li><a class="box" href=" /estudiante/empresa-detalle/'+data[i].id+'/">';
+                    html += '<header><img src="'+ data[i].logo + '"/></header>';
+                    html += '<div class="content"><h3 class="link">'+ data[i].nombre+'</h3>';
+					html +=	'<label class="descripcion">' + data[i].sector + '</label>';
+                    html += '<div class="rating"><i class="rating"></i><label>'+data[i].ranking_general+'</label></div></div></a></li>';
 				}
 				$('#datos').html(html);
 			}
 
 		});
+
+        document.ready
 	}
 
 </script>
