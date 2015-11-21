@@ -1,8 +1,7 @@
 {% load crispy_forms_tags %}
 
-
 <div style="margin: 0 50px">
-	<form class="form-horizontal" action="" method="post">
+	<form class="form-horizontal" action="{{ request.build_absolute_uri }}" method="post">
 		{% crispy form %}
 		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>

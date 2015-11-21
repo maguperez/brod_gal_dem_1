@@ -73,4 +73,4 @@ class Voluntariado(models.Model):
     descripcion = models.CharField(max_length="100", default=None, null=True, blank=True)
 
     def __unicode__(self):
-		return self.descripcion
+		return unicode('%s' % (self.cargo)) or u''

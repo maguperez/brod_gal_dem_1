@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect, HttpResponseRedirect, render
 from .forms import RegisterForm, LoginForm
@@ -11,7 +12,7 @@ from empresa.models import Representante, Empresa
 from django.core.context_processors import csrf
 
 
-def login_page(request):
+def login_estudiante(request):
     message = None
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -19,16 +20,16 @@ def login_page(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
-            persona = Persona.objects.get(usuario_id=user.id)
-            if user is not None and persona.tipo_persona == 'E':
-                if user.is_active:
-                    login(request, user)
-                    message = "Te haz identificado de modo correcto"
-                    return redirect('oportunidad_listar')
-                else:
-                    message = "tu usuario esta inactivo"
-            else:
-                message = "Email o contraea incorrecta"
+            if user is not None:
+                persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                if persona is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect('oportunidad-listar')
+                    else:
+                        message = "tu usuario esta inactivo"
+
+            message = "Email o contraea incorrecta"
     else:
         form = LoginForm()
 
@@ -43,16 +44,15 @@ def empresa_login(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
-            persona = Persona.objects.get(usuario_id=user.id)
-            if user is not None and persona.tipo_persona == 'R':
-                if user.is_active:
-                    login(request, user)
-                    message = "Te haz identificado de modo correcto"
-                    return redirect('empresa_oportunidad_listar')
-                else:
-                    message = "tu usuario esta inactivo"
-            else:
-                message = "Email o contraea incorrecta"
+            if user is not None:
+                persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                if persona is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect('oportunidad-listar')
+                    else:
+                        message = "tu usuario esta inactivo"
+            message = "Email o contraea incorrecta"
     else:
         form = LoginForm()
 
@@ -68,7 +68,7 @@ def estudiante(request):
 def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
-def register_user(request):
+def estudiante_registro(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -86,12 +86,12 @@ def register_user(request):
             new_user = authenticate(username=request.POST['email'],
                                     password=request.POST['password1'])
             login(request, new_user)
-            return redirect('registro_cv')
+            return redirect('registro-cv')
     else:
         form = RegisterForm()
     return render(request, 'main/estudiante-registro.html', {'form': form})
 
-def register_user_empresa(request):
+def empresa_registro(request):
     mensaje = None
     if request.method == 'POST':
         form = RegisterForm(request.POST)

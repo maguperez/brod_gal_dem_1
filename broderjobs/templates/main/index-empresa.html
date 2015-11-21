@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
 	<head>
 		<title>Broder jobs</title>
@@ -5,8 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
-		<link rel="stylesheet" href="../static/css/broder.css">
-		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<script type="text/javascript" src=".{% static 'js/jquery-1.8.2.min.js' %}"></script>
 	</head>
 	<body>
 		<div class="home empresas">
@@ -14,9 +15,9 @@
 				<header>
 					<img class="logo" src="../static/img/logo.png" alt="Broder jobs" />
 					<ul>
-						<li><a class="btn-action" href="/estudiante/">Para Estudiantes</a></li>
-						<li><a class="link-header" href="/empresa-login/" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
-						<li><a class="link-header"  href="/empresa-registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
+						<li><a class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
+						<li><a class="link-header" href="{%url 'empresa-login' %}" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
+						<li><a class="link-header"  href="{%url  'empresa-registro' %}" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
 					</ul>
 					<div class="clear"></div>
 				</header>
@@ -25,7 +26,7 @@
 				<footer>
 					<ul class="links">
 						<li class="link"><a>Cont&aacute;ctanos</a></li>
-						<li class="link"><a href="../static/terminos-y-condiciones.html">T&eacute;rminos y condiciones</a></li>
+						<li class="link"><a href="../terminos-y-condiciones.html">T&eacute;rminos y condiciones</a></li>
 						<li class="link"><a>Blog</a></li>
 					</ul>
 					<ul class="social">

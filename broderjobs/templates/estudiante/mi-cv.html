@@ -93,9 +93,9 @@
 											<label class="tipo">{{experiencia.puesto}}</label>
 											<label class="nombre">{{experiencia.empresa}}</label>
 											<pr>{{experiencia.descripcion}}</pr>
-											<button id="{{experiencia.pk}}" class="experiencia-botton link editar" accion="editar">Editar</button>
+											<button id="experiencia-{{experiencia.pk}}-editar" class="experiencia-botton link editar" >Editar</button>
 
-											<button id="e-{{experiencia.pk}}" class="experiencia-botton link editar" accion="eliminat">Eliminar</button>
+											<button id="experiencia-{{experiencia.pk}}-eliminar" class="experiencia-botton link editar">Eliminar</button>
 										</div>
 									{% endfor %}
 								</div>
@@ -103,15 +103,17 @@
 							<section>
 								<h3 class="title"><i class="volunteer"></i>Voluntariado<button id="voluntariado-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle timeline">
+
 									{% for voluntariado in voluntariados %}
+									{{voluntariado}}
 										<div>
-											<p class="fecha">{{voluntariado.fecha_desde}} - {{voluntariado.hasta}}</p>
+											<p class="fecha">{{voluntariado.fecha_desde}} - {{voluntariado.fecha_hasta}}</p>
 											<label class="tipo">{{voluntariado.cargo}}</label>
 											<label class="nombre">{{voluntariado.organizacion}}</label>
 											<p>{{voluntariado.descripcion}}</p>
 										
-											<button id="editar-{{voluntariado.pk}}" class="voluntariado-botton link editar" accion="editar">Editar</button>
-											<button id="eliminar-{{voluntariado.pk}}" class="voluntariado-botton link editar" accion="eliminat">Eliminar</button>
+											<button id="voluntario-{{voluntariado.pk}}-editar" class="voluntariado-botton link editar" accion="editar">Editar</button>
+											<button id="voluntario-{{voluntariado.pk}}-eliminar" class="voluntariado-botton link editar" accion="eliminat">Eliminar</button>
 										</div>
 									{% endfor %}
 								</div>
@@ -450,8 +452,9 @@
 		});
 	 });
 	 $('.experiencia-botton').click(function() {
-		 var id = $(this).attr("id");
-		 var accion = $(this).attr("accion");
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
 		 if (accion == 'editar') {
 			 $('#form-modal-body').load('experiencia/' + id + '/', function () {
 				 $('#form-modal').modal('toggle');
@@ -473,8 +476,9 @@
 		});
 	 });
 	 $('.voluntariado-botton').click(function() {
-		 var id = $(".voluntariado").attr("id");
-		 var accion = $(this).attr("accion");
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
 		 if (accion == 'editar') {
 			 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
 				 $('#form-modal').modal('toggle');

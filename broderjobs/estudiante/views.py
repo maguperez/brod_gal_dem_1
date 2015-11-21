@@ -26,7 +26,7 @@ def registro_cv(request):
         form = forms.RegistroCVForm(request.POST)
         if form.is_valid():
             user = request.user
-            persona = Persona.objects.get(usuario_id=user.id)
+            persona = get_object_or_404(Persona, usuario_id=user.id)
             grado_estudio = form.cleaned_data['grado_estudio']
             universidad = form.cleaned_data['universidad']
             carrera = form.cleaned_data['carrera']
@@ -37,9 +37,15 @@ def registro_cv(request):
             semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
             ano_graduacion = form.cleaned_data['ano_graduacion']
             semestre_graduacion = form.cleaned_data['semestre_graduacion']
+            carga_horaria = form.cleaned_data['carga_horaria']
 
             estudiante = Estudiante()
-            estudiante.persona = persona
+            try:
+                estudiante = Estudiante.objects.get(persona_id = persona.id)
+            except Estudiante.DoesNotExist:
+                estudiante = None
+            if estudiante is None:
+                 estudiante.persona = persona
             estudiante.grado_estudio = grado_estudio
             estudiante.universidad = universidad
             estudiante.carrera = carrera
@@ -49,6 +55,7 @@ def registro_cv(request):
             estudiante.semestre_inicio_estudio = semestre_inicio
             estudiante.ano_graduacion = ano_graduacion
             estudiante.semestre_graduacion = semestre_graduacion
+            estudiante.carga_horaria = carga_horaria
             estudiante.save()
 
             estudiante.tipo_puesto = tipo_puesto
@@ -58,7 +65,7 @@ def registro_cv(request):
             resumen.estudiante = estudiante
             resumen.save()
 
-            return redirect('oportunidad_listar')
+            return redirect('oportunidad-listar')
     else:
         form = forms.RegistroCVForm()
     return render(request, 'estudiante/registro-cv.html', {'form': form})
@@ -142,6 +149,8 @@ class MiCVView(TemplateView):
 class AjaxTemplateMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if not hasattr(self, 'ajax_template_name'):
+            print(self.template_name)
+            print(self.template_name.split('.html'))
             split = self.template_name.split('.html')
             #split[-1] = '-inner'
             split.append('.html')
@@ -153,7 +162,7 @@ class AjaxTemplateMixin(object):
 class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv-foto.html'
-    success_url =reverse_lazy('mi_cv')
+    success_url =reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -173,7 +182,7 @@ class FotoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
 class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class =forms.InfoPersonalForm
     template_name = 'estudiante/mi-cv-info-personal.html'
-    success_url = reverse_lazy('mi_cv')
+    success_url = reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -228,7 +237,7 @@ class InfoPersonalView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
 class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
     template_name = 'estudiante/mi-cv-resumen.html'
     form_class = forms.ResumenForm
-    success_url = reverse_lazy('mi_cv')
+    success_url = reverse_lazy('mi-cv')
     success_message = "Guardado con exito!"
 
     def get_initial(self):
@@ -251,8 +260,7 @@ class ResumenView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
 class DisponibilidadView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     template_name = 'estudiante/mi-cv-disponibilidad.html'
     form_class = forms.DisponibilidadForm
-    success_url = reverse_lazy('mi_cv')
-    success_message = "Guardado con exito!"
+    success_url = reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -269,54 +277,42 @@ class DisponibilidadView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
         estudiante.save()
         return super(DisponibilidadView, self).form_valid(form)
 
-class IdiomaView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
+class IdiomaView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     template_name = 'estudiante/mi-cv-idioma.html'
     form_class = forms.IdiomaForm
-    success_url = reverse_lazy('mi_cv')
-    success_message = "Guardado con exito!"
+    success_url = reverse_lazy('mi-cv')
 
-    def form_valid(self, form):
+    def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id=persona.id)
-        idioma = form.cleaned_data['idioma']
-        estudiante.idioma = idioma
-        estudiante.save()
-        return super(IdiomaView, self).form_valid(form)
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        return estudiante
 
-class ConocimientoView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
+class ConocimientoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
     template_name = 'estudiante/mi-cv-conocimiento.html'
     form_class = forms.ConocimientoForm
-    success_url = reverse_lazy('mi_cv')
-    success_message = "Guardado con exito!"
+    success_url = reverse_lazy('mi-cv')
 
-    def form_valid(self, form):
+    def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id=persona.id)
-        conocimiento = form.cleaned_data['conocimiento']
-        estudiante.conocimiento = conocimiento
-        estudiante.save()
-        return super(ConocimientoView, self).form_valid(form)
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        return estudiante
 
 class ExperienciaView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     template_name = 'estudiante/mi-cv-experiencia-editar.html'
     form_class = forms.ExperienciaForm
-    success_url = reverse_lazy('mi_cv')
-    success_message = "Guardado con exito!"
+    success_url = reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
         id = self.kwargs["id"]
-        print(id)
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
         return experiencia
 
-
-
-class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
+class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm
     template_name = 'estudiante/mi-cv-experiencia-crear.html'
-    success_url = reverse_lazy('mi_cv')
+    success_url = reverse_lazy('mi-cv')
 
     def form_valid(self, form):
         user = self.request.user
@@ -343,28 +339,25 @@ class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
         experiencia.save()
         return super(ExperienciaCrearView, self).form_valid(form)
 
-class ExperienciaEliminarView(DeleteView):
-
-    def get_object(self, queryset=None):
-        experiencia = ExperienciaProfesional.objects.get(id =self.request.GET.get('id'))
-        return experiencia
-        if experiencia is None:
-            raise Http404
-        return ex4
+class ExperienciaEliminarView(SuccessMessageMixin, AjaxTemplateMixin, DeleteView):
+    template_name = 'estudiante/mi-cv-experiencia-eliminar.html'
+    model = ExperienciaProfesional
+    success_url = reverse_lazy('mi-cv')
 
 class VoluntariadoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.VoluntariadoForm
     template_name = 'estudiante/mi-cv-voluntariado-editar.html'
-    success_url = reverse_lazy('mi_cv')
+    success_url = reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
-        voluntariado = Voluntariado.objects.get(id =self.request.GET.get('id'))
+        id = self.kwargs["id"]
+        voluntariado = Voluntariado.objects.get(id =id)
         return voluntariado
-    
-class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
+
+class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm
     template_name = 'estudiante/mi-cv-voluntariado-crear.html'
-    success_url = reverse_lazy('mi_cv')
+    success_url = reverse_lazy('mi-cv')
 
     def form_valid(self, form):
         user = self.request.user
@@ -372,14 +365,14 @@ class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         voluntariado = Voluntariado()
-        puesto = form.cleaned_data['cargo']
-        empresa = form.cleaned_data['organizacion']
+        cargo = form.cleaned_data['cargo']
+        organizacion = form.cleaned_data['organizacion']
         fecha_desde = form.cleaned_data['fecha_desde']
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         voluntariado.estudiante = estudiante
-        voluntariado.puesto = puesto
-        voluntariado.empresa = empresa
+        voluntariado.cargo = cargo
+        voluntariado.organizacion = organizacion
         if fecha_desde is not None:
             voluntariado.fecha_desde = fecha_desde
         if fecha_hasta is not None:
@@ -391,11 +384,8 @@ class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,CreateView):
         voluntariado.save()
         return super(VoluntariadoCrearView, self).form_valid(form)
 
-class VoluntariadoEliminarView(DeleteView):
+class VoluntariadoEliminarView(SuccessMessageMixin, AjaxTemplateMixin, DeleteView):
 
-    def get_object(self, queryset=None):
-        voluntariado = ExperienciaProfesional.objects.get(id =self.request.GET.get('id'))
-        return voluntariado
-        if voluntariado is None:
-            raise Http404
-        return ex4
+   template_name = 'estudiante/mi-cv-voluntariado-eliminar.html'
+   model = Voluntariado
+   success_url = reverse_lazy('mi-cv')
