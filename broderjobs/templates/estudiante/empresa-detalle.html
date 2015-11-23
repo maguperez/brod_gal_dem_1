@@ -9,8 +9,8 @@
         <div class="panel left">
             <div class="box">
                 <header>
-							<img src="../img/empresas/empresa-1.jpg" />
-						</header>
+					<img src="{{empresa.set_logo}}" />
+				</header>
                 <div class="content">
                     <h3 class="link">{{empresa.nombre | upper}}</h3>
                     <label class="descripcion">{{empresa.sector | upper}}</label>
@@ -41,45 +41,43 @@
         <div class="panel right principal">
             <div class="box detail">
                 <header>
-							<div class="slider"id="fade">
-								<img src="../img/oficina-11.png"  />
-								<img src="../img/oficina-12.png"  />
-								<img src="../img/oficina-13.png"  />
-							</div>
-						</header>
+					<div class="slider"id="fade">
+						<img src="{%static 'img/oficina-11.png' %}"  />
+					</div>
+				</header>
 				<div class="content">
                     <section class="about">
 								<h3 class="title"><i class="business"></i>Sobre la empresa</h3>
 								<div>
-									<p>Maecenas vel odio auctor, sodales enim nec, venenatis dolor. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida a. Cras molestie varius lacinia. Phasellus sit amet arcu efficitur, ultricies mauris aliquet, dapibus lorem. Nulla consequat risus sed pharetra congue.</p>
+									<p>{{empresa.quienes_somos}}.</p>
 								</div>
 								<div class="double">
 									<div>
 										<div>
 											<h4>N&uacute;mero de funcionarios</h4>
-											<label>M&aacute;s de 10,000</label>
+											<label>{{empresa.numero_funcionarios}}</label>
 										</div>
 										<div>
 											<h4>Facturamiento anual</h4>
-											<label>M&aacute;s de 20'000,000 USD</label>
+											<label>{{empresa.facturacion_anual}}</label>
 										</div>
 										<div>
 											<h4>Sede Global</h4>
-											<label>Lima, Per&uacute;</label>
+											<label>{{empresa.ciudad}}, {{empresa.pais}}</label>
 										</div>
 									</div>
 									<div>
 										<div>
 											<h4>Sector</h4>
-											<label>Desarrollo de Software</label>
+											<label>{{empresa.sector}}</label>
 										</div>
 										<div>
 											<h4>Fundaci&oacute;n</h4>
-											<label>1892</label>
+											<label>{{empresa.ano_fundacion}}</label>
 										</div>
 										<div>
 											<h4>Sitio web</h4>
-											<a href="http://adobe.com">www.adobe.com</a>
+											<a href="{{empresa.website}}">{{empresa.website}}</a>
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -114,50 +112,30 @@
 					<section class="oportunidades">
 								<h3 class="title"><i class="oportunity"></i>Oportunidades</h3>
 								<ul class="list">
+									{% for oportunidad in oportunidades %}
 									<li>
 										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">Analista de mejora de estrategia de marca personal</h2></a>
-													<div class="descripcion">
+													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+													<div class="descripcion">e
 														<div class="datos">
-															<div class="empresa"><i class="empresa"></i><label>GRA&Ntilde;A & MONTERO</label></div>
-															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-															<div class="remuneracion"><i class="remuneracion"></i><label>No especificado</label></div>
+															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+															<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
 														</div>
 														<div class="compatibilidad">
-															<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
+															<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
 															<label class="resultado">Compatible</label>
 														</div>
 														<div class="ver-oportunidad">
 															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL 15.03.15</label>
+															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 														</div>
 														<div class="clear"></div>
 													</div>
 												<div class="clear"></div>
 										</div>
 									</li>
-									<li>
-										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">Jefe de estrategia de ventas</h2></a>
-													<div class="descripcion">
-														<div class="datos">
-															<div class="empresa"><i class="empresa"></i><label>PLAYSTATION</label></div>
-															<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-															<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
-														</div>
-														<div class="compatibilidad">
-															<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
-															<label class="resultado">Compatible</label>
-														</div>
-														<div class="ver-oportunidad">
-															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL 15.03.15</label>
-														</div>
-														<div class="clear"></div>
-													</div>
-												<div class="clear"></div>
-										</div>
-									</li>
+									{% endfor %}
 								</ul>
 								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
 							</section>

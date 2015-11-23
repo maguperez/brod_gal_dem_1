@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
+from django.db.models import Q
 from django.http import Http404
 from django.http import JsonResponse
 from django.contrib.auth import views
@@ -15,6 +16,7 @@ from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector
+from oportunidad.models import Oportunidad
 from main import utilitarios
 
 
@@ -39,13 +41,13 @@ def registro_cv(request):
             semestre_graduacion = form.cleaned_data['semestre_graduacion']
             carga_horaria = form.cleaned_data['carga_horaria']
 
-            estudiante = Estudiante()
             try:
                 estudiante = Estudiante.objects.get(persona_id = persona.id)
             except Estudiante.DoesNotExist:
                 estudiante = None
             if estudiante is None:
-                 estudiante.persona = persona
+                estudiante = Estudiante()
+                estudiante.persona = persona
             estudiante.grado_estudio = grado_estudio
             estudiante.universidad = universidad
             estudiante.carrera = carrera
@@ -101,14 +103,16 @@ class EmpresaDetalleView(TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:2]
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
+        context['oportunidades'] = oportunidades
         return context
 
 class EmpresaBusquedaView(TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
-        empresas = Empresa.objects.filter(nombre__icontains=busqueda)
+        empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
         a_empresas =[]
         for i in range(0, len(empresas)):
             sector = empresas[i].nombre
@@ -299,8 +303,42 @@ class ConocimientoView(SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
         estudiante = Estudiante.objects.get(persona_id =persona.id)
         return estudiante
 
+class ActividadExtraView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+    form_class = forms.ActividadesExtraForm
+    template_name = 'estudiante/mi-cv-actividad-extra.html'
+    success_url = reverse_lazy('mi-cv')
+
+    def get_object(self, queryset=None):
+        id = self.kwargs["id"]
+        actividad_extra = ActividadesExtra.objects.get(id =id)
+        return actividad_extra
+
+class ActividadExtraCrearView(SuccessMessageMixin, AjaxTemplateMixin,FormView):
+    form_class = forms.ActividadesExtraForm
+    template_name = 'estudiante/mi-cv-actividad-extra.html'
+    success_url = reverse_lazy('mi-cv')
+
+    def form_valid(self, form):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        actividad_extra = ActividadesExtra()
+        organizacion = form.cleaned_data['organizacion']
+        descripcion = form.cleaned_data['descripcion']
+        actividad_extra.estudiante = estudiante
+        actividad_extra.organizacion = organizacion
+        actividad_extra.descripcion = descripcion
+        actividad_extra.save()
+        return super(ActividadExtraCrearView, self).form_valid(form)
+
+class ActividadExtraEliminarView(SuccessMessageMixin, AjaxTemplateMixin, DeleteView):
+
+   template_name = 'estudiante/mi-cv-actividad-extra-eliminar.html'
+   model = ActividadesExtra
+   success_url = reverse_lazy('mi-cv')
+
 class ExperienciaView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
-    template_name = 'estudiante/mi-cv-experiencia-editar.html'
+    template_name = 'estudiante/mi-cv-experiencia.html'
     form_class = forms.ExperienciaForm
     success_url = reverse_lazy('mi-cv')
 
@@ -311,7 +349,7 @@ class ExperienciaView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
 
 class ExperienciaCrearView(SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm
-    template_name = 'estudiante/mi-cv-experiencia-crear.html'
+    template_name = 'estudiante/mi-cv-experiencia.html'
     success_url = reverse_lazy('mi-cv')
 
     def form_valid(self, form):
@@ -346,7 +384,7 @@ class ExperienciaEliminarView(SuccessMessageMixin, AjaxTemplateMixin, DeleteView
 
 class VoluntariadoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.VoluntariadoForm
-    template_name = 'estudiante/mi-cv-voluntariado-editar.html'
+    template_name = 'estudiante/mi-cv-voluntariado.html'
     success_url = reverse_lazy('mi-cv')
 
     def get_object(self, queryset=None):
@@ -356,7 +394,7 @@ class VoluntariadoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
 
 class VoluntariadoCrearView(SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm
-    template_name = 'estudiante/mi-cv-voluntariado-crear.html'
+    template_name = 'estudiante/mi-cv-voluntariado.html'
     success_url = reverse_lazy('mi-cv')
 
     def form_valid(self, form):

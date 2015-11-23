@@ -2,8 +2,7 @@ from django.conf.urls import patterns, include, url
 from . import views
 
 
-urlpatterns =[
-
+urlpatterns = [
 	url(r'^registro-cv/', 'estudiante.views.registro_cv', name='registro-cv'),
 
 	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='oportunidad-listar'),
@@ -23,6 +22,12 @@ urlpatterns =[
 	url(r'^mi-cv/idioma/$', views.IdiomaView.as_view(), name="mi-cv-idioma"),
 
 	url(r'^mi-cv/conocimiento/$', views.ConocimientoView.as_view(), name="mi-cv-conocimiento"),
+	
+	url(r'^mi-cv/actividad-extra/(?P<id>\d+)/$', views.ActividadExtraView.as_view(), name="mi-cv-actividad-extra-editar"),
+
+	url(r'^mi-cv/actividad-extra-crear/$', views.ActividadExtraCrearView.as_view(), name="mi-cv-actividad-extra-crear"),
+
+	url(r'^mi-cv/actividad-extra-eliminar/(?P<pk>\d+)/$', views.ActividadExtraEliminarView.as_view(), name="mi-cv-actividad-extra-eliminar"),
 
 	url(r'^mi-cv/experiencia/(?P<id>\d+)/$', views.ExperienciaView.as_view(), name="mi-cv-experiencia-editar"),
 
@@ -44,5 +49,5 @@ urlpatterns =[
 
 	url(r'^empresa-busqueda/$', views.EmpresaBusquedaView.as_view(), name="estudiante-empresa-busqueda"),
 
-	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante-empresa-detalle"),
+	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante_empresa_detalle"),
 ]

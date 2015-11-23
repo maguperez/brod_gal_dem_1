@@ -72,7 +72,7 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas<a class="link editar" href="#extraacademico">Editar</a></h3>
+								<h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas<button id="actividad-extra-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle">
 									{% for actividad in actividades_extra %}
 											<div class="detalle">
@@ -80,6 +80,11 @@
 												<div class="clear"></div>
 												<label>{{actividad.organizacion | lower}}</label>
 												<div class="clear"></div>
+												<button id="actividad-{{actividad.pk}}-editar" class="actividad-extra-botton link editar" >Editar</button>
+
+												<button id="actividad-{{actividad.pk}}-eliminar" class="actividad-extra-botton link editar">Eliminar</button>
+
+
 											</div>
 									{% endfor %}
 								</div>
@@ -495,6 +500,30 @@
 	 $('#voluntariado-crear-button').click(function() {
 		 var id = $(this).find("button").attr("id");
      	$('#form-modal-body').load('voluntariado-crear/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.actividad-extra-botton').click(function() {
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('actividad-extra-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+	 });
+	 $('#actividad-extra-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('actividad-extra-crear/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});

@@ -1,0 +1,6 @@
+<form method="post" action="{{ request.build_absolute_uri }}">{% csrf_token %}
+    <p>Esta seguro que desea eliminar la actividad extraacademica en: </p>
+	<p> {{ object.organizacion }} como {{ object.descripcion }} </p>
+    <p><input type="submit" value="Aceptar" /></p>
+</form>
+</form>

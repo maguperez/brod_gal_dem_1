@@ -26,12 +26,15 @@
 		var busqueda = $('#busqueda').val();
 		$.ajax({
 			data : {'busqueda':busqueda},
-			url: '/estudiante/empresa-busqueda/',
+			url: '{%url "estudiante-empresa-busqueda" %}',
 			type: 'get',
 			success: function(data){
+
 				var html = ""
 				for(var i = 0; i<data.length ; i++){
-                    html += '<li><a class="box" href=" /estudiante/empresa-detalle/'+data[i].id+'/">';
+					var url = "{%url 'estudiante_empresa_detalle' 1 %}";
+					url = url.replace('1', data[i].id);
+                    html += '<li><a class="box" href="'+url+'">';
                     html += '<header><img src="'+ data[i].logo + '"/></header>';
                     html += '<div class="content"><h3 class="link">'+ data[i].nombre+'</h3>';
 					html +=	'<label class="descripcion">' + data[i].sector + '</label>';
