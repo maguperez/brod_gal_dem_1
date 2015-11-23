@@ -129,9 +129,26 @@
 
 <script>
 	$('documento').ready(function(){
-		$("#id_grado_estudio").select2({
+
+		var ids = ["id_grado_estudio","id_universidad","id_carrera","id_pais","id_ciudad"];
+
+		InicializarPlugin(ids);
+
+		/*$("#id_grado_estudio").select2({
 			placeholder: "Seleccione por favor",
   			allowClear: true
-		});
+		});*/
 	});
+
+	function InicializarPlugin(ids){
+
+		ids.forEach(function(id){
+			$("#"+id).select2({
+				placeholder: "Seleccione por favor",
+				allowClear: true
+			});
+		});
+	}
+
+
 </script>
