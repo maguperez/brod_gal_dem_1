@@ -21,6 +21,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a Grado de Estudio
         grado_estudios = []
+        grado_estudios.append(('', ''))
         for grado_estudio in GradoEstudio.objects.all():
             grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
         self.fields['grado_estudio'].widget = forms.Select(attrs={'class': 'full'})
@@ -28,6 +29,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a Carrera
         carreras = []
+        carreras.append(('', ''))
         for carrera in Carrera.objects.all():
             carreras.append((carrera.id, carrera.descripcion))
         self.fields['carrera'].widget =forms.Select(attrs={'class': 'full'})
@@ -36,6 +38,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a Universidad
         universidades = []
+        universidades.append(('', ''))
         for universidad in Universidad.objects.all():
             universidades.append((universidad.id, universidad.descripcion))
         self.fields['universidad'].widget =forms.Select(attrs={'class': 'full'})
@@ -60,6 +63,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a Psis
         paises = []
+        paises.append(('', ''))
         for pais in Pais.objects.all():
             paises.append((pais.id, pais.descripcion))
         self.fields['pais'].widget =forms.Select(attrs={'class': 'full'})
@@ -67,6 +71,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a ciudad
         ciudades = []
+        ciudades.append(('', ''))
         for ciudad in Ciudad.objects.all():
             ciudades.append((ciudad.id, ciudad.descripcion))
         self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})

@@ -7,7 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link rel="stylesheet" href="{% static 'css/select2.css' %}">
 		<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 	</head>
 	<body>
 		<section class="final-registro">
@@ -123,4 +125,30 @@
         if ($(id).hasClass('popup'))
 			$('body').addClass('static');
     });
+</script>
+
+<script>
+	$('documento').ready(function(){
+
+		var ids = ["id_grado_estudio","id_universidad","id_carrera","id_pais","id_ciudad"];
+
+		InicializarPlugin(ids);
+
+		/*$("#id_grado_estudio").select2({
+			placeholder: "Seleccione por favor",
+  			allowClear: true
+		});*/
+	});
+
+	function InicializarPlugin(ids){
+
+		ids.forEach(function(id){
+			$("#"+id).select2({
+				placeholder: "Seleccione por favor",
+				allowClear: true
+			});
+		});
+	}
+
+
 </script>
