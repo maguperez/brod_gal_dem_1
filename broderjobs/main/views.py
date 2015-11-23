@@ -21,7 +21,10 @@ def login_estudiante(request):
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
             if user is not None:
-                persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                try:
+                    persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                except persona.DoesNotExist:
+                    persona = None
                 if persona is not None:
                     if user.is_active:
                         login(request, user)
@@ -45,11 +48,15 @@ def empresa_login(request):
             password = request.POST["password"]
             user = authenticate(username=email, password=password)
             if user is not None:
-                persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                persona = Persona()
+                try:
+                    persona = Persona.objects.get(usuario_id=user.id, tipo_persona="R")
+                except persona.DoesNotExist:
+                    persona = None
                 if persona is not None:
                     if user.is_active:
                         login(request, user)
-                        return redirect('oportunidad-listar')
+                        return redirect('empresa-oportunidad-listar')
                     else:
                         message = "tu usuario esta inactivo"
             message = "Email o contraea incorrecta"
@@ -68,6 +75,7 @@ def estudiante(request):
 def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
+
 def estudiante_registro(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -101,10 +109,7 @@ def empresa_registro(request):
             persona.usuario = user
             persona.tipo_persona = "R"
             persona.telefono = form.cleaned_data['telefono']
-            e = form.cleaned_data['empresa']
-            print(e)
-            empresa = Empresa.objects.get(id=e)
-            print(empresa)
+            empresa = form.cleaned_data['empresa']
             persona.save()
             representante = Representante()
             representante.persona = persona

@@ -2,14 +2,15 @@ from django.conf.urls import patterns, include, url
 from . import views
 
 urlpatterns = [
-    url(r'^oportunidad-listar/', 'empresa.views.oportunidad_listar', name='empresa_oportunidad_listar'),
+    url(r'^oportunidad-listar/', views.OportunidadListarView.as_view(), name='empresa-oportunidad-listar'),
 
-    url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="empresa_configuracion"),
+    url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="empresa-configuracion"),
 
-    url(r'^mi-empresa/$', views.MiEmpresaView.as_view(), name="mi_empresa"),
+    url(r'^mi-empresa/$', views.MiEmpresaView.as_view(), name="mi-empresa"),
 
-    url(r'^mi-empresa/info-general/$', views.InfoGeneralView.as_view(), name="mi_empresa_info_general"),
+    url(r'^mi-empresa/info-general/$', views.InfoGeneralView.as_view(), name="mi-empresa-info-general"),
 
-    url(r'^mi-empresa/logo/$', views.LogoView.as_view(), name="mi_empresa_logo"),
+    url(r'^mi-empresa/logo/$', views.LogoView.as_view(), name="mi-empresa-logo"),
+
 
 ]

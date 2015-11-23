@@ -18,7 +18,7 @@ class OportunidadCrearView(FormView):
     form_class = forms.OportunidadCrearForm
     template_name = 'oportunidad/crear.html'
     print("entro perfil")
-    success_url = reverse_lazy('empresa_oportunidad_listar')
+    success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
         user = self.request.user

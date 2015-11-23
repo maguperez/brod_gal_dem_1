@@ -7,7 +7,10 @@ from models import Empresa, Representante, Sector
 class InfoGeneralForm(forms.ModelForm):
     class Meta:
         model = Empresa
-        fields = ('nombre', 'descripcion', 'sector', 'numero_funcionarios', 'facturacion_anual', 'ano_fundacion', 'pais', 'ciudad', 'website')
+        fields = ('nombre', 'RUC', 'quienes_somos', 'sector', 'numero_funcionarios', 'facturacion_anual', 'ano_fundacion', 'pais', 'ciudad', 'website')
+        widget = {
+            'quienessomos': forms.widgets.Textarea(),
+        }
 
     @property
     def helper(self):

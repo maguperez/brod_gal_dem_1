@@ -1,0 +1,84 @@
+
+{% extends 'empresa/base.html' %}
+{% block content %}
+
+ <section class="oportunidades-empresa">
+			<div class="centered">
+				<select class="filtro">
+					<option>Oportunidades Abiertas</option>
+					<option>Oportunidades Cerradas</option>
+				</select>
+				<div class="clear"></div>
+				<ul class="list">
+					{% for oportunidad in oportunidades.all%}
+					<li class="oportunidad-estadistica">
+						<div class="box header">
+							<img class="imagen" src="{{empresa.set_logo}}" />
+							<div class="descripcion">
+								<a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+							</div>
+							<div class="opciones" onclick="opciones(1)">
+								<i class="menu"></i>
+								<div class="contextual-menu" id="menu-1">
+									<div class="wrapper">
+										<div class="pin"></div>
+										<ul>
+											<li><a href=""><span>Editar</span><div class="clear"></div></a></li>
+											<li><a href="candidatos_oportunidad.html"><span>Ver candidatos</span><div class="clear"></div></a></li>
+											<li><a href="#"><span>Archivar</span><div class="clear"></div></a></li>
+										<ul>
+									</div>
+								</div>
+							</div>
+							<div class="estado">
+								<label>oportunidad {{oportunidad.estado}}</label>
+								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="visualizaciones">
+							<div class="box">
+								<div class="estadistica">
+									<div class="cifra">
+										<label>792</label>
+										<label>Visualizaciones</label>
+									</div>
+									<div class="grafico grafico-barras">
+										<img src="/static/img/estadisticas-barras.jpg" />
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="estadistica">
+									<div class="cifra">
+										<label>101</label>
+										<label>Inscripciones</label>
+									</div>
+									<div class="grafico usuarios">
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="inscripciones">
+							<div class="box">
+								<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
+								<div class="grafico grafico-inscripciones">
+									<img src="/static/img/estadisticas-inscripciones.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</section>
+ {% endblock %}

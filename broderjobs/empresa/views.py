@@ -40,13 +40,6 @@ class MiEmpresaView(TemplateView):
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
-        # context['persona'] = persona
-        # context['estudiante'] = estudiante
-        # context['edad'] = edad
-        # context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
-        # context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
-        # context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
-        # context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         return context
 
 class AjaxTemplateMixin(object):
@@ -64,7 +57,7 @@ class InfoGeneralView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
 
         form_class = forms.InfoGeneralForm
         template_name = 'empresa/mi-empresa-info-general.html'
-        success_url = reverse_lazy('mi_empresa')
+        success_url = reverse_lazy('mi-empresa')
 
         #get object
         def get_object(self, queryset=None):
@@ -77,7 +70,7 @@ class InfoGeneralView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
 class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.LogoForm
     template_name = 'empresa/mi-empresa-logo.html'
-    success_url = reverse_lazy('mi_empresa')
+    success_url = reverse_lazy('mi-empresa')
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -85,3 +78,17 @@ class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return empresa
+
+class OportunidadListarView(TemplateView):
+    template_name = 'empresa/oportunidad-listar.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)
+        context = super(OportunidadListarView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        context['oportunidades'] = oportunidades
+        return context

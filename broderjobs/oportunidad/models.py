@@ -3,6 +3,7 @@ from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
     Conocimiento, TipoRemuneracion, Beneficio
 from empresa.models import Empresa
+from main import utilitarios
 
 # Create your models here.
 
@@ -17,6 +18,8 @@ class PerfilOportunidad(models.Model):
 		unicode(self.pk) or u''
 
 class Oportunidad(models.Model):
+    items_estado = utilitarios.estado_oportunidad()
+
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
     titulo = models.CharField(max_length="100", default=None, null=True, blank=True )
     carga_horaria = models.ForeignKey(CargaHoraria, default=None, null=True, blank=True, verbose_name="Jornada Laboral" )
@@ -30,6 +33,7 @@ class Oportunidad(models.Model):
     beneficio = models.ForeignKey(Beneficio, default=None, null=True, blank=True, verbose_name="Beneficio")
     resumen = models.CharField(max_length="1000", default=None, null=True, blank=True )
     perfil_oportunidad = models.ForeignKey(PerfilOportunidad, default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_estado,max_length=1, default=None, null=True, blank=True)
 
     def __unicode__(self):
 		return '%s' % (self.titulo)

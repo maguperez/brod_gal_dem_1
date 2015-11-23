@@ -136,8 +136,10 @@ class MiCVView(TemplateView):
     template_name = 'estudiante/mi-cv.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        print(persona)
+        estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
+        print(estudiante)
         edad = utilitarios.calular_edad(persona.fecha_nacimiento)
         context = super(MiCVView, self).get_context_data(**kwargs)
         context['usuario'] = user
