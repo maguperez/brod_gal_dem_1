@@ -21,6 +21,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a Grado de Estudio
         grado_estudios = []
+        grado_estudios.append(('', ''))
         for grado_estudio in GradoEstudio.objects.all():
             grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
         self.fields['grado_estudio'].widget = forms.Select(attrs={'class': 'full'})
