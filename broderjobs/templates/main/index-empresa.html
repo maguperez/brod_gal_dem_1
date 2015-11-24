@@ -7,12 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
-		<script type="text/javascript" src=".{% static 'js/jquery-1.8.2.min.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/slidebars.min.css' %}">
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/slidebars.min.js' %}"></script>
 	</head>
 	<body>
 		<div class="home empresas">
 			<div class="container">
-				<header>
+				<nav class="navbar navbar-fixed-top sb-slide" role="navigation">
+					<div class="sb-toggle-left navbar-left visible-xs">
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+					</div>
 					<img class="logo" src="../static/img/logo.png" alt="Broder jobs" />
 					<ul>
 						<li><a class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
@@ -20,29 +29,53 @@
 						<li><a class="link-header"  href="{%url  'empresa-registro' %}" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
 					</ul>
 					<div class="clear"></div>
-				</header>
-				{% block content_empresa%}
-				{% endblock %}
-				<footer>
-					<ul class="links">
-						<li class="link"><a>Cont&aacute;ctanos</a></li>
-						<li class="link"><a href="../terminos-y-condiciones.html">T&eacute;rminos y condiciones</a></li>
-						<li class="link"><a>Blog</a></li>
-					</ul>
-					<ul class="social">
-						<li class="social"><a class="facebook">Facebook</a></li>
-						<li class="social"><a class="twitter">Twitter</a></li>
-					</ul>
-					<ul class="copy">
-						<li class="copy">Broder jobs&copy; 2015</li>
-					</ul>
-					<div class="clear"></div>
-				</footer>
+				</nav>
+				<div id = "sb-site" class="container">
+					<div class = "flex">
+						{% block content_empresa%}
+						{% endblock %}
+						<footer class= "hidden-xs">
+							<div class = "row">
+								<div class = "col-sm-4">
+									<ul class="links">
+										<li class="link"><a>Cont&aacute;ctanos</a></li>
+										<li class="link"><a href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones</a></li>
+										<li class="link"><a>Blog</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class="social text-center">
+										<li class="social"><a class="facebook">Facebook</a></li>
+										<li class="social"><a class="twitter">Twitter</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class = "copy text-center">
+										<li class="copy">Broder jobs&copy; 2015</li>
+									</ul>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</footer>
+					</div>
+				</div>
 			</div>
 		</div>
-		
+		<div class="sb-slidebar sb-left">
+			<nav>
+				<ul class="sb-menu">
+					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
+					<li class="sb-close"><a href="{%url 'estudiante'%}">Para Estudiantes</a></li>
+					<li class="sb-close"><a href="{%url 'empresa-login'%}">Iniciar sesión</a></li>
+					<li class="sb-close"><a href="{%url 'empresa-registro'%}">Regístrate</a></li>
+				</ul>
+			</nav>
+		</div>
 		
 		<script>
+			$(function() {
+				$.slidebars();
+			});
 			function activar(id) {
 				$('#' + id).addClass('active');
 			}
