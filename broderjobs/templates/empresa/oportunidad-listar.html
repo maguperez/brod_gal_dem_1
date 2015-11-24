@@ -1,7 +1,7 @@
 
 {% extends 'empresa/base.html' %}
 {% block content %}
-
+<div id="contenidojs"></div>
  <section class="oportunidades-empresa">
 			<div class="centered">
 				<select class="filtro">
@@ -82,3 +82,25 @@
 			</div>
 		</section>
  {% endblock %}
+
+{% block js%}
+<script>
+   (function(){  fnBusqueda();})();
+
+	$('#busqueda').keyup(fnBusqueda);
+	function fnBusqueda(){
+		var busqueda = $('#busqueda').val();
+		$.ajax({
+			data : {'busqueda':busqueda},
+			url: '{%url "empresa-oportunidad-busqueda" %}',
+			type: 'get',
+			success:function(object, status, response){
+
+				$("#contenidojs").html(response.responseText);
+			}
+
+		});
+	}
+
+</script>
+{% endblock %}

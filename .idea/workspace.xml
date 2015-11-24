@@ -27,11 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="empresa-login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="empresa-login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.032015067">
+            <state vertical-scroll-proportion="-0.3207547">
               <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/broderjobs/empresa/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8545781">
+              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -60,11 +70,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/broderjobs/estudiante/class.py" />
         <option value="$PROJECT_DIR$/broderjobs/oportunidad/forms.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-editar.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/main/index-empresa.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/main/empresa-registro.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/main/index.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-foto.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-conocimiento.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-disponibilidad.html" />
@@ -87,30 +97,30 @@
         <option value="$PROJECT_DIR$/broderjobs/main/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/main/estudiante-login.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/oportunidad-empleado-detalle.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/oportunidad-empleado-lista.html" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
+        <option value="$PROJECT_DIR$/broderjobs/main/forms.py" />
+        <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/forms.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
-        <option value="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
-        <option value="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidades-listar.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-logo.html" />
+        <option value="$PROJECT_DIR$/broderjobs/estudiante/forms.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" />
+        <option value="$PROJECT_DIR$/broderjobs/main/utilitarios.py" />
+        <option value="$PROJECT_DIR$/broderjobs/main/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/admin.py" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/crear.html" />
+        <option value="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" />
-        <option value="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
-        <option value="$PROJECT_DIR$/broderjobs/main/utilitarios.py" />
-        <option value="$PROJECT_DIR$/broderjobs/estudiante/forms.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/index.html" />
-        <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
-        <option value="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/estudiante-login.html" />
-        <option value="$PROJECT_DIR$/broderjobs/main/forms.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/estudiante-registro.html" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html" />
       </list>
     </option>
   </component>
@@ -215,11 +225,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -237,7 +243,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="empresa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -505,7 +511,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20499243" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -599,7 +605,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/broderjobs/estudiante/views.py</url>
-          <line>267</line>
+          <line>265</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -609,7 +615,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/broderjobs/estudiante/forms.py</url>
-          <line>144</line>
+          <line>149</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -622,6 +628,11 @@
           <line>133</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/broderjobs/oportunidad/views.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -630,7 +641,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="89" />
+      <option name="time" value="91" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -831,13 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.33648393">
@@ -1024,8 +1028,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032015067">
+        <state vertical-scroll-proportion="-0.3207547">
           <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8545781">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
           <folding />
         </state>
       </provider>

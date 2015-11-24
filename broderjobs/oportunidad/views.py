@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Oportunidad, PerfilOportunidad
+from .models import Oportunidad, PerfilRequerido
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
 
@@ -21,6 +21,7 @@ class OportunidadCrearView(FormView):
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
+
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id=persona.id)
@@ -54,7 +55,7 @@ class OportunidadCrearView(FormView):
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
 
-        perfil = PerfilOportunidad()
+        perfil = PerfilRequerido()
         perfil.grado_estudio = grado_estudio
         perfil.save()
         perfil.universidad = universidad
@@ -64,6 +65,11 @@ class OportunidadCrearView(FormView):
         perfil.save()
 
         oportunidad.perfil_oportunidad = perfil
+        if '_guardar' in self.request.POST:
+            oportunidad.estado = 'P'
+        elif '_anunciar' in self.request.POST:
+            oportunidad.estado = 'A'
+
         oportunidad.save()
         return super(OportunidadCrearView , self).form_valid(form)
 

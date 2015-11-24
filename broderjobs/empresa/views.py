@@ -2,8 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
+from django.db.models import Q
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
+from django.core import serializers
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic import TemplateView, FormView
@@ -11,7 +14,7 @@ from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad
-
+import json
 
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
@@ -92,3 +95,27 @@ class OportunidadListarView(TemplateView):
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         return context
+
+class OportunidadBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        # busqueda = request.GET['busqueda']
+        busqueda = 'A'
+        oportunidades = Oportunidad.objects.filter(Q(estado__icontains=busqueda))
+        a_empresas =[]
+        # for i in range(0, len(empresas)):
+        #     sector = empresas[i].nombre
+        #     if empresas[i].sector is not None:
+        #         sector = Sector.objects.get(id=empresas[i].sector.id).descripcion
+        #     e = {
+        #         "id": empresas[i].id,
+        #         "nombre": empresas[i].nombre,
+        #         "logo": empresas[i].set_logo,
+        #         "sector": sector,
+        #         "ranking_general": empresas[i].ranking_general,
+        #     }
+        #     a_empresas.append(e)
+        data = serializers.serialize('json', oportunidades,
+                                     fields=('id','empresa', 'titulo', 'fecha_cese' ))
+        # data = json.dumps(a_empresas)
+        #data = json.dumps(oportunidades)
+        return HttpResponse(data, content_type='application/json')
