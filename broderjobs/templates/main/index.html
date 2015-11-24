@@ -88,20 +88,21 @@
 				$(event.target).addClass('active');
 				$('.mensaje-central').addClass('invisible');
 			});
-			$('.container').click(function(e) {
+			/*$('.container').click(function(e) {
 				if ( $(e.target).closest('.login').length === 0 && $(e.target).closest('.link-header').length === 0 ) {
 					desactivar('login');
 					desactivar('registro');
 					activar('mensaje-central');
 					$('.mensaje-central').removeClass('invisible');
 				}
-			});
+			});*/
 			$(document).keydown(function(e) {
 				if (e.keyCode == 27) {
 					desactivar('login');
 					desactivar('registro');
 					activar('mensaje-central');
 					$('.mensaje-central').removeClass('invisible');
+					location.href = "{%url 'estudiante'%}";
 				}
 			});
 			$('.close').click(function() {
