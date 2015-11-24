@@ -1,5 +1,9 @@
 {% extends 'main/index-empresa.html' %}
+{% load staticfiles %}
 {% block content_empresa %}
+
+		<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/additional-methods.min.js' %}"></script>
 
         {%if message %}
         <b>{{message}}</b>
