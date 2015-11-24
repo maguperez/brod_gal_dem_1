@@ -273,7 +273,7 @@ a.delete:hover {background-position: 0 -9px;}
 .home .login .ingresar, .home .login .registrarme {width: 100px; height: 25px; line-height: 25px; margin: 20px auto; text-align: center; color: #fff; font-family: 'Roboto Condensed'; font-size: 0.9em; background: #f50; padding-right:0 px; border: none; cursor: pointer; display: inherit;}
 .home .login .registrate {margin: -10px 0; display: block; text-align: center; color: #fff; font-size: 0.7em;}
 .home .login .registrate-email {max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -moz-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -o-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;}
-.home .login .registrate-email:target {max-height: 300px; opacity: 1;}
+.home .login .registrate-email:target {max-height: 500px; opacity: 1;}
 .home .login .registrate-email .terminos-condiciones {font-size: 1em;}
 .home .login .indicacion {margin-top: 10px; display: block; text-align: center; color: #fff; font-size: 0.7em;}
 .home .login .division {margin: 25px 0;}
@@ -868,10 +868,5 @@ img.img-me {
 /*ERROR LABEL*/
 .error + .tooltip .tooltip-inner { background-color: #f50 !Important; }
 .error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; }
-.home .login .alert-warning {
-    background-color: rgba(255,85,0,0.3);
-    border-color: rgba(255,85,0,0.3);
-    color: white;
-    border-radius: 0px;
-    text-align: center;
-    font-family: Roboto Condensed;}
+.home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
+.home #registro #acepto { vertical-align: top; }

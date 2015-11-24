@@ -1,16 +1,11 @@
 {% extends 'main/index.html' %}
+{% load staticfiles %}
 {% block content %}
+
+	<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/additional-methods.min.js' %}"></script>
 	<form method="POST">{% csrf_token %}
-		{%if message %}
-        <b>{{message}}</b>
-        {% endif%}
-		{%if form.errors %}
-		{{ form.first_name.errors }}
-		{{ form.last_name.errors }}
-		{{ form.email.errors }}
-		{{ form.password1.errors }}
-		{{ form.password2.errors }}
-        {% endif%}
+
 		<!--{{form.as_p}}-->
 		<div class="login active" id="registro">
 			<div class="content">
@@ -35,10 +30,28 @@
 						{{form.dia}}
 						{{form.mes}}
 						{{form.ano}}
-					</div>
+					</div><br>
 					<div class="opciones">
-						<input type="checkbox" id="acepto" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+						<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 					</div>
+
+					{%if message %}
+					<div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						{{message}}
+					</div>
+					{% endif%}
+					{%if form.errors %}
+					<div class="alert alert-warning alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						{{ form.first_name.errors }}
+						{{ form.last_name.errors }}
+						{{ form.email.errors }}
+						{{ form.password1.errors }}
+						{{ form.password2.errors }}
+					</div>
+					{% endif%}
+
 					<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
 				</div>
 				<a class="close" href="/estudiante/"  href="/estudiante/"  onclick="desactivar('registro'); activar('mensaje-central');">x</a>
@@ -49,5 +62,107 @@
 {% endblock%}
 {% block js %}
 <script>
+	$(function(){
+        $("form").validate({
+            errorPlacement: function (error, element) {
+				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
+					$(element).is("[name=ano]")){
+					$("#id_dia").tooltip('destroy');
+					$("#id_dia").tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$("#id_dia").tooltip('show');
+				}
+				else {
+					$(element).tooltip('destroy');
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$(element).tooltip('show');
+				}
+            },
+            success: function (label, element) {
+				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
+					$(element).is("[name=ano]")){
+					$("#id_dia").tooltip('hide');
+				}
+				else {
+					$(element).tooltip('hide');
+				}
+
+            },
+            rules: {
+				first_name: {
+					required: true,
+				},
+				last_name: {
+					required: true,
+				},
+                email: {
+                    required: true,
+                    email: true
+                },
+                password1: {
+                    required: true
+                },
+				password2: {
+                    required: true,
+					equalTo: "#id_password1"
+                },
+				dia: {
+					required: true,
+				},
+				mes: {
+					required: true,
+				},
+				ano: {
+					required: true,
+				},
+				groups: {
+					date: "dia mes ano"
+				},
+				tyc: {
+					required: true
+				}
+            },
+            messages: {
+				first_name: {
+					required: "Este campo es obligatorio",
+				},
+				last_name: {
+					required: "Este campo es obligatorio",
+				},
+                email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo valido"
+                },
+                password1: {
+                    required: "Este campo es obligatorio"
+                },
+				password2: {
+                    required: "Este campo es obligatorio",
+					equalTo: "Las contraseñas deben ser iguales"
+                },
+				dia: {
+					required: "La fecha de nacimiento es obligatoria",
+				},
+				mes: {
+					required: "La fecha de nacimiento es obligatoria",
+				},
+				ano: {
+					required: "La fecha de nacimiento es obligatoria",
+				},
+				tyc: {
+					required: "Debe aceptar los términos y condiciones",
+				}
+            }
+        });
+    });
 </script>
 {% endblock %}
