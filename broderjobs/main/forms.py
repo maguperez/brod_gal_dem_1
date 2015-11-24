@@ -9,7 +9,7 @@ import datetime
 
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Contrase&ntildea', 'type':'password'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
 
 
 class UniqueUserEmailField(forms.EmailField):

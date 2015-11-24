@@ -256,8 +256,7 @@ a.delete:hover {background-position: 0 -9px;}
 .home .mensaje-central {width: 100%; position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
 .home .mensaje-central h1 {color: #fff; font-size: 4em;}
 .home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em;}
-.home .login {
-    width: 268px; margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; margin: 80px !Important;}
+.home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; margin: 80px !Important;}
 .home .login .content {position: relative;}
 .home .login.active {opacity: 1; pointer-events: all;}
 .home .login .saludo {margin-bottom: 10px; text-align: center; color: #fff; font-family: 'Roboto Condensed'; display: block;}

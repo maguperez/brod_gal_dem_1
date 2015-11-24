@@ -1,6 +1,8 @@
 {% extends 'main/index.html' %}
+{% load staticfiles %}
 {% block content %}
-
+		<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/additional-methods.min.js' %}"></script>
         {%if message %}
         <b>{{message}}</b>
         {% endif%}
@@ -35,5 +37,20 @@
                 </div>
             </div>
         </form>
+
 {% endblock%}
-<p></p>
+
+{% block js%}
+<script>
+    $(function(){
+        $("form").validate({
+            rules: {
+
+            },
+            messages: {
+
+            }
+        })
+    });
+</script>
+{% endblock %}
