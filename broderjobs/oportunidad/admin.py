@@ -4,4 +4,4 @@ from . import models
 
 admin.site.register(models.Oportunidad)
 
-admin.site.register(models.PerfilOportunidad)
+admin.site.register(models.PerfilRequerido)
