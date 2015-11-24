@@ -3,9 +3,6 @@
 {% block content %}
 		<script src="{% static 'js/jquery.validate.min.js' %}"></script>
         <script src="{% static 'js/additional-methods.min.js' %}"></script>
-        {%if message %}
-        <b>{{message}}</b>
-        {% endif%}
 
         <form action="" method="post">{%csrf_token%}
             <div class="login active" id="login">
@@ -27,6 +24,12 @@
 						<input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
 						<a>¿Olvidaste tu contrase&ntilde;a?</a>
 					</div>
+                    {%if message %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        {{message}}</div>
+                    {% endif%}
+
 					<input type="submit" name="form" value="INGRESAR" class="Ingresar" text="Ingresar" />
 					<div class="division">
 						<div class="full line"></div>
@@ -44,11 +47,37 @@
 <script>
     $(function(){
         $("form").validate({
-            rules: {
+            errorPlacement: function (error, element) {
 
+                $(element).tooltip('destroy');
+                $(element).tooltip({
+                    animation: true,
+                    placement: "left",
+                    title: $(error).text(),
+                    trigger: "manual"
+                } );
+                $(element).tooltip('show');
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true
+                }
             },
             messages: {
-
+                email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+                password: {
+                    required: "Este campo es obligatorio"
+                }
             }
         })
     });

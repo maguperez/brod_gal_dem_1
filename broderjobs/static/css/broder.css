@@ -280,7 +280,7 @@ a.delete:hover {background-position: 0 -9px;}
 .home .login .division .line {width: 45%; height: 1px; background: rgba(255,255,255,0.5); float: left;}
 .home .login .division .line.full {width: 100%;}
 .home .login .division label {width: 10%; line-height: 1px; float: left; text-align: center; color: #fff;}
-.home .login .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;}
+.home .login .content > .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;}
 .home footer {width: 100%; padding: 12px 0; position: fixed; bottom: 0; left: 0; background: rgba(0,0,0,0.3); z-index:1;}
 .home footer ul.links {margin-top: 8px; text-indent: 30px;}
 
@@ -636,8 +636,9 @@ header.menu a.active {margin-bottom: -1px; border-bottom: 3px solid #f50;}
 /*DEMO*/
 .demo {width: 30%; padding: 15px 0; position: fixed; bottom: 70px; left: 35%; text-align: center; opacity: 0.5; color: #ddd; font-size: 1.2em; border-radius: 25px; box-shadow: 0 0 10px #000; background: #000;}
 
+/*SIDEBAR*/
 #sb-site {
-	box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.3); /* Shadow cast onto the slidebars when opened. */
+	box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.3);
     display: table !important;
 }
 #sb-site form{
@@ -864,3 +865,13 @@ img.img-me {
 .sb-slidebar ul.sb-nav li span:hover {
 	color: #C7C7C7;
 }
+/*ERROR LABEL*/
+.error + .tooltip .tooltip-inner { background-color: #f50 !Important; }
+.error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; }
+.home .login .alert-warning {
+    background-color: rgba(255,85,0,0.3);
+    border-color: rgba(255,85,0,0.3);
+    color: white;
+    border-radius: 0px;
+    text-align: center;
+    font-family: Roboto Condensed;}

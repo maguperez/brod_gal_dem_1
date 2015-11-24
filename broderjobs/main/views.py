@@ -30,9 +30,9 @@ def login_estudiante(request):
                         login(request, user)
                         return redirect('oportunidad-listar')
                     else:
-                        message = "tu usuario esta inactivo"
+                        message = "Tu usuario esta inactivo"
 
-            message = "Email o contraea incorrecta"
+            message = "Email o contraseña incorrecta"
     else:
         form = LoginForm()
 
@@ -59,7 +59,7 @@ def empresa_login(request):
                         return redirect('empresa-oportunidad-listar')
                     else:
                         message = "tu usuario esta inactivo"
-            message = "Email o contraea incorrecta"
+            message = "Email o contraseña incorrecta"
     else:
         form = LoginForm()
 
