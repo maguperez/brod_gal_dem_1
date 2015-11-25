@@ -88,6 +88,9 @@
 				$(event.target).addClass('active');
 				$('.mensaje-central').addClass('invisible');
 			});
+			$("select").on("change", function(){
+				$(this).css("color", $(this).val() == "" ? "#ccc" : "black");
+			});
 			/*$('.container').click(function(e) {
 				if ( $(e.target).closest('.login').length === 0 && $(e.target).closest('.link-header').length === 0 ) {
 					desactivar('login');
