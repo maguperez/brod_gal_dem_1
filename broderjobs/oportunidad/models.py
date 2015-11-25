@@ -35,6 +35,9 @@ class Oportunidad(models.Model):
     resumen = models.CharField(max_length="1000", default=None, null=True, blank=True )
     perfil_requerido = models.ForeignKey(PerfilRequerido, default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_estado, max_length=1, default=None, null=True, blank=True)
+    direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
+    longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
+    latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
 
     def __unicode__(self):
 		return unicode(self.titulo) or u''

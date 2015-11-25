@@ -64,9 +64,11 @@
 								</div>
 							</section>
 							<section class="ubicacion">
-								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<a class="editar link" href="#editar-ubicacion">Editar</a></h3>
+								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
 								<div>
-									<p>Calle Varham 203, Camacho, La Molina</p>
+									<p>{{empresa.direccion_map}}</p>
+									<p>{{empresa.longitud}}</p>
+									<p>{{empresa.latitud}}</p>
 									<div class="mapa">
 										<img src="/static/img/google-map.jpg" />
 									</div>

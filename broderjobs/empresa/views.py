@@ -82,6 +82,18 @@ class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return empresa
 
+class UbicacionView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+    form_class = forms.UbicacionForm
+    template_name = 'empresa/mi-empresa-ubicacion.html'
+    success_url = reverse_lazy('mi-empresa')
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        return empresa
+
 class OportunidadListarView(TemplateView):
     template_name = 'empresa/oportunidad-listar.html'
 

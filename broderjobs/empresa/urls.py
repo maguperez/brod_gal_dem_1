@@ -14,6 +14,8 @@ urlpatterns = [
 
     url(r'^mi-empresa/logo/$', views.LogoView.as_view(), name="mi-empresa-logo"),
 
+    url(r'^mi-empresa/ubicacion/$', views.UbicacionView.as_view(), name="mi-empresa-ubicacion"),
+
 
 
 ]
