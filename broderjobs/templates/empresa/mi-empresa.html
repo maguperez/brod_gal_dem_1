@@ -1,5 +1,6 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="empresa">
 	<div class="centered">
 				<div class="panel left">
@@ -67,11 +68,9 @@
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
 								<div>
 									<p>{{empresa.direccion_map}}</p>
-									<p>{{empresa.longitud}}</p>
-									<p>{{empresa.latitud}}</p>
-									<div class="mapa">
-										<img src="/static/img/google-map.jpg" />
-									</div>
+									<p id = "id_latitud">{{empresa.latitud}}</p>
+									<p id = "id_longitud">{{empresa.longitud}}</p>
+									<div id = "map" class="mapa" style="width: 630px; height: 230px"></div>
 								</div>
 							</section>
 							<section class="oportunidades">
@@ -336,6 +335,44 @@
 
 {% block js %}
  <script>
+	 $(function(){
+		 Empresa.inicializar_mapa();
+	 })
+	 var Empresa = {
+		map: null,
+		marca: null,
+		inicializar_mapa: function () {
+			var mapCanvas = document.getElementById('map');
+			var mapOptions = {
+				center: new google.maps.LatLng(44.5403, -78.5463),
+				zoom: 8,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			Empresa.map = new google.maps.Map(mapCanvas, mapOptions);
+
+			if ($("#id_latitud").html() != "") {
+				var latitud = $("#id_latitud").html();
+				var longitud = $("#id_longitud").html();
+				var punto = new google.maps.LatLng(latitud, longitud);
+				Empresa.marcar_mapa(punto);
+			}
+		},
+		 marcar_mapa: function(coordenadas){
+			 var coordenadas = "";
+			 if ($("#id_latitud").html() != "") {
+				var latitud = $("#id_latitud").html();
+				var longitud = $("#id_longitud").html();
+				coordenadas = new google.maps.LatLng(latitud, longitud);
+			}
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Empresa.map
+            });
+            Empresa.marca = marker;
+            Empresa.map.setCenter(coordenadas);
+
+        }
+	};
 	 var formAjaxSubmit = function(form, modal) {
 		 $(form).submit(function (e) {
          	e.preventDefault();
@@ -377,5 +414,7 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
+
+
  </script>
 {% endblock %}
