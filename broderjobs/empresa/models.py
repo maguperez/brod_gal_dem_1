@@ -1,5 +1,6 @@
 from django.db import models
-from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
+from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
+    Conocimiento
 
 class ImagenSilder(models.Model):
     titulo = models.CharField(max_length="50", default=None, null=True, blank=True)
@@ -63,6 +64,10 @@ class Empresa(models.Model):
     logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
     imagen_slider = models.ManyToManyField(ImagenSilder, default=None, blank=True, verbose_name="Imagenes")
     ranking_general = models.CharField(max_length="10", default=None, null=True, blank=True )
+    direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
+    longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
+    latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
+
 
     def __unicode__(self):
         return '%s' % (self.nombre)

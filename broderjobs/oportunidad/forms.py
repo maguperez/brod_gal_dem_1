@@ -1,7 +1,8 @@
 # coding=utf-8
 from django import forms
 from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple
-from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, TipoRemuneracion, Carrera
+from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
+    TipoRemuneracion, Carrera
 
 class OportunidadForm(forms.ModelForm):
 

@@ -118,7 +118,7 @@ def empresa_registro(request):
             new_user = authenticate(username=request.POST['email'], password=request.POST['password1'])
             login(request, new_user)
             mensaje = "Se ha registrado satisfactoriamente"
-            return redirect('empresa_oportunidad_listar')
+            return redirect('empresa-oportunidad-listar')
     else:
         form = RegisterForm()
     return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})

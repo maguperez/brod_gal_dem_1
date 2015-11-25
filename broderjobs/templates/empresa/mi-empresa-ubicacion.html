@@ -1,0 +1,10 @@
+
+
+<div style="margin:0 50px">
+	<form class="form-horizontal" action="{% url 'mi-empresa-ubicacion' %}" method="post">{%csrf_token%}
+        direccion: {{form.direccion_map}}
+        longitud: {{form.longitud}}
+        latitud: {{form.latitud}}
+		<input type="submit" class="btn btn-submit col-md-offset-2">
+	</form>
+</div>
