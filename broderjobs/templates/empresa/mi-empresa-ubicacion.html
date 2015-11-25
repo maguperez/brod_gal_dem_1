@@ -1,5 +1,5 @@
 
-
+<script src="https://maps.googleapis.com/maps/api/js?callback=Ubicacion.inicializar_mapa"></script>
 <div style="margin:0 50px">
 	<form class="form-horizontal" action="{% url 'mi-empresa-ubicacion' %}" method="post">{%csrf_token%}
         direccion: {{form.direccion_map}}
@@ -8,3 +8,57 @@
 		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>
+<div id = "map" style = "height: 350px"></div>
+<script>
+    var Ubicacion = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(44.5403, -78.5463),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);
+            google.maps.event.addListener(Ubicacion.map, 'click', function(event) {
+                if (Ubicacion.marca == null)
+                    Ubicacion.marcar_mapa(event.latLng);
+                else
+                    alert("Sólo puede añadir una marca para indicar la ubicación del evento. En caso de haberse equivocado, haga click derecho en la marca ya existente para borrarla, y coloque la nueva marca en el lugar deseado");
+
+            });
+            if ($("#id_latitud").val() != ""){
+                var latitud = $("#id_latitud").val();
+                var longitud = $("#id_longitud").val();
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Ubicacion.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function(coordenadas){
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Ubicacion.map
+            });
+            Ubicacion.marca = marker;
+            google.maps.event.addListener(marker, "rightclick", function (point) {
+                Ubicacion.borrar_marca();
+            });
+            Ubicacion.map.setCenter(coordenadas);
+            $("#id_latitud").val(coordenadas.lat());
+            $("#id_longitud").val(coordenadas.lng());
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").val(response[0]["formatted_address"]);
+            });
+        },
+        borrar_marca: function(){
+            Ubicacion.marca.setMap(null);
+            Ubicacion.marca = null;
+        },
+    }
+</script>
