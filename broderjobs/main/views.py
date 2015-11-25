@@ -28,7 +28,7 @@ def login_estudiante(request):
                 if persona is not None:
                     if user.is_active:
                         login(request, user)
-                        return redirect('oportunidad-listar')
+                        return redirect('estudiante-oportunidad-listar')
                     else:
                         message = "Tu usuario esta inactivo"
 

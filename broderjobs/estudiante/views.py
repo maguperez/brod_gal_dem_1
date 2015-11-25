@@ -67,7 +67,7 @@ def registro_cv(request):
             resumen.estudiante = estudiante
             resumen.save()
 
-            return redirect('oportunidad-listar')
+            return redirect('estudiante-oportunidad-listar')
     else:
         form = forms.RegistroCVForm()
     return render(request, 'estudiante/registro-cv.html', {'form': form})
@@ -137,16 +137,15 @@ class MiCVView(TemplateView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id=user.id)
-        print(persona)
         estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
-        print(estudiante)
-        edad = utilitarios.calular_edad(persona.fecha_nacimiento)
         context = super(MiCVView, self).get_context_data(**kwargs)
+        if persona.fecha_nacimiento is not None:
+            edad = utilitarios.calular_edad(persona.fecha_nacimiento)
+            context['edad'] = edad
         context['usuario'] = user
         context['persona'] = persona
         context['estudiante'] = estudiante
-        context['edad'] = edad
-        context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
+        context['resumen'] = Resumen.objects.filter(estudiante_id=estudiante.id)[:1]
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)

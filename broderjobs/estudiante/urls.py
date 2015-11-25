@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
 	url(r'^registro-cv/', 'estudiante.views.registro_cv', name='registro-cv'),
 
-	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='oportunidad-listar'),
+	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
 	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="estudiante-configuracion"),
 
