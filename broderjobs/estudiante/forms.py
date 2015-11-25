@@ -11,9 +11,12 @@ import datetime
 from main import utilitarios
 
 class RegistroCVForm(forms.ModelForm):
+
+    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
+    universidades_hidden = forms.CharField(widget=forms.HiddenInput())
     class Meta:
             model = Estudiante
-            fields = ('grado_estudio', 'carrera', 'universidad', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
+            fields = ('grado_estudio', 'carrera', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
                      'ano_graduacion', 'pais', 'ciudad', 'tipo_puesto', 'carga_horaria')
 
     def __init__(self, *args, **kwargs):
@@ -36,13 +39,13 @@ class RegistroCVForm(forms.ModelForm):
         self.fields['carrera'].choices = carreras
 
 
-        #Carga items a Universidad
-        universidades = []
-        universidades.append(('', ''))
-        for universidad in Universidad.objects.all():
-            universidades.append((universidad.id, universidad.descripcion))
-        self.fields['universidad'].widget =forms.Select(attrs={'class': 'full'})
-        self.fields['universidad'].choices = universidades
+        # #Carga items a Universidad
+        # universidades = []
+        # universidades.append(('', ''))
+        # for universidad in Universidad.objects.all():
+        #     universidades.append((universidad.id, universidad.descripcion))
+        # self.fields['universidad'].widget =forms.Select(attrs={'class': 'full'})
+        # self.fields['universidad'].choices = universidades
 
         #Carga items Semestre
         items_semestre = utilitarios.semestre_rango()

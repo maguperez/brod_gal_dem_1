@@ -20,5 +20,4 @@ urlpatterns =[
 
 	url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
 
-
 ]

@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.http import JsonResponse
 from django.contrib.auth import views
-#from django.core import serializers
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
@@ -30,7 +30,8 @@ def registro_cv(request):
             user = request.user
             persona = get_object_or_404(Persona, usuario_id=user.id)
             grado_estudio = form.cleaned_data['grado_estudio']
-            universidad = form.cleaned_data['universidad']
+            universidades = form.cleaned_data['universidades_hidden']
+            print(universidades)
             carrera = form.cleaned_data['carrera']
             pais = form.cleaned_data['pais']
             ciudad = form.cleaned_data['ciudad']
@@ -49,7 +50,7 @@ def registro_cv(request):
                 estudiante = Estudiante()
                 estudiante.persona = persona
             estudiante.grado_estudio = grado_estudio
-            estudiante.universidad = universidad
+            # estudiante.universidad = universidades
             estudiante.carrera = carrera
             estudiante.pais = pais
             estudiante.ciudad = ciudad
@@ -428,3 +429,11 @@ class VoluntariadoEliminarView(SuccessMessageMixin, AjaxTemplateMixin, DeleteVie
    template_name = 'estudiante/mi-cv-voluntariado-eliminar.html'
    model = Voluntariado
    success_url = reverse_lazy('mi-cv')
+
+class UniversidadBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        universidades = Universidad.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', universidades,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')

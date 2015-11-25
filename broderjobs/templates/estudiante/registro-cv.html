@@ -57,17 +57,12 @@
 								</div>
 
 								<div>
-									<label>Grado de estudios</label>
-									<input type="text" id="test" class="full">
-								</div>
-
-
-								<div>
 									<label>Universidad</label>
-									<p>{{form.universidad}}</p>
+									<p>
+										{{form.universidades}}
+										{{form.universidades_hidden}}
+									</p>
 								</div>
-
-
 								<div>
 									<label>Carrera</label>
 									<p>{{form.carrera}}</p>
@@ -155,15 +150,51 @@
 <script>
 	$('documento').ready(function(){
 
-		var ids = ["id_grado_estudio","id_universidad","id_carrera","id_pais","id_ciudad"];
+		var ids = ["id_grado_estudio"];
 
-		var algo = '{{grado_estudios}}';
 
-		$("#test").autocomplete({
-			source: ids
+		$("#id_universidades").autocomplete({
+			//source: ids
+			source : function(r,res){
+				//res(ids);
+
+				$.ajax({
+					data : {'busqueda': r.term},
+					url: '{%url "universidad-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.value = obj.pk;
+									obje.label = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								res(arreglo);
+							}
+						}
+					}
+
+				});
+
+				 document.ready
+			},
+			select: function(event, ui) {
+					// prevent autocomplete from updating the textbox
+					event.preventDefault();
+					// manually update the textbox and hidden field
+					$(this).val(ui.item.value);
+					document.getElementById('id_universidades_hidden').value = ui.item.value;
+					document.getElementById(this.id).value = ui.item.label;
+				}
 		});
 
-		//InicializarPlugin(ids);
+		InicializarPlugin(ids);
 
 		/*$("#id_grado_estudio").select2({
 			placeholder: "Seleccione por favor",
@@ -180,6 +211,5 @@
 			});
 		});
 	}
-
 
 </script>
