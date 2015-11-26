@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="88ad666c-f84e-4988-a98e-c27108962ad3" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\forms.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\forms.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\models.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\models.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\urls.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\urls.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\views.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\empresa\views.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\main\models.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\main\models.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\main\views.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\main\views.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\oportunidad\models.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\oportunidad\models.pyc.orig" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\templates\estudiante\configuracion.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/configuracion.html" />
-      <change type="MOVED" beforePath="C:\Users\Soporte\Repositorios GIT\brod_gal_dem_1\broderjobs\templates\estudiante\editar-cuenta.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/editar-cuenta.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" afterPath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/urls.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/urls.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/main/urls.py" afterPath="$PROJECT_DIR$/broderjobs/main/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/views.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/main/views.py" afterPath="$PROJECT_DIR$/broderjobs/main/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="88ad666c-f84e-4988-a98e-c27108962ad3" name="Default" comment="" />
     <ignored path="Broderjobs.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -53,6 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="registro-cv.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html">
@@ -81,14 +56,22 @@
             <state vertical-scroll-proportion="0.34593022">
               <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/main/urls.py">
+      <file leaf-file-name="mi-empresa-ubicacion.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -96,17 +79,22 @@
 =======
             <state vertical-scroll-proportion="-0.6296296">
               <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+=======
+            <state vertical-scroll-proportion="-6.836364">
+              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
               <folding>
-                <element signature="e#0#51#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="empresa-detalle.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html">
+      <file leaf-file-name="broder.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
               <caret line="25" column="27" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="27" />
@@ -114,14 +102,19 @@
             <state vertical-scroll-proportion="-20.153847">
               <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+            <state vertical-scroll-proportion="0.81621623">
+              <caret line="877" column="121" selection-start-line="877" selection-start-column="121" selection-end-line="877" selection-end-column="121" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
+      <file leaf-file-name="mi-empresa.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <state vertical-scroll-proportion="-0.0">
               <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
@@ -129,14 +122,19 @@
 =======
             <state vertical-scroll-proportion="0.0">
               <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="43" />
+=======
+            <state vertical-scroll-proportion="-1.6585366">
+              <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
               <folding>
-                <element signature="e#1110#3237#0" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
               </folding>
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -151,6 +149,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -167,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-info-personal.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-resumen.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-voluntariado-crear.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-experiencia-eliminar.html" />
@@ -206,11 +205,8 @@
         <option value="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/forms.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-        <option value="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
@@ -218,6 +214,10 @@
         <option value="$PROJECT_DIR$/broderjobs/templates/main/configuracion.html" />
         <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" />
+        <option value="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
+        <option value="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
       </list>
     </option>
   </component>
@@ -258,7 +258,10 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -305,7 +308,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,96 +326,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="estudiante" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="empresa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oportunidad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="estudiante" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -678,20 +605,28 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21104388" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21406959" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21331058" sideWeight="0.5121029" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
 =======
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3208191" sideWeight="0.48789713" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32026145" sideWeight="0.48789713" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -699,7 +634,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843137" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3993174" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
@@ -753,7 +687,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/broderjobs/estudiante/forms.py</url>
-          <line>152</line>
+          <line>155</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -789,13 +723,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/broderjobs/main/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-actividad-extra.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26459143">
@@ -828,13 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24324325">
-          <caret line="275" column="52" selection-start-line="275" selection-start-column="52" selection-end-line="275" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -932,6 +852,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+<<<<<<< HEAD
         </state>
       </provider>
     </entry>
@@ -969,6 +890,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="120" column="49" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
           <folding />
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -979,7 +902,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="71" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="71" />
           <folding>
-            <element signature="e#15#43#0" expanded="true" />
+            <element signature="e#15#43#0" expanded="false" />
             <element signature="e#1954#2075#0" expanded="false" />
           </folding>
         </state>
@@ -997,7 +920,7 @@
         <state vertical-scroll-proportion="0.7959866">
           <caret line="66" column="90" selection-start-line="66" selection-start-column="90" selection-end-line="66" selection-end-column="90" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
             <element signature="e#723#830#0" expanded="false" />
             <element signature="e#864#971#0" expanded="false" />
             <element signature="e#1017#1124#0" expanded="false" />
@@ -1025,7 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="282.30768">
           <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,9 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#39#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1046,8 +965,11 @@
           <caret line="16" column="93" selection-start-line="16" selection-start-column="93" selection-end-line="16" selection-end-column="93" />
 =======
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1059,8 +981,11 @@
 =======
         <state vertical-scroll-proportion="0.19767442">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1077,27 +1002,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37223974">
-          <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44476745">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2830188">
           <caret line="16" column="92" selection-start-line="16" selection-start-column="92" selection-end-line="16" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1105,7 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25073746">
           <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1116,7 +1023,6 @@
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
 =======
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1124,10 +1030,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32328767">
           <caret line="25" column="80" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="80" />
+<<<<<<< HEAD
           <folding>
             <element signature="e#4156#4451#0" expanded="false" />
           </folding>
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+          <folding />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1135,7 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35103244">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1143,15 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18378378">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="19" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1160,7 +1060,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="84" column="71" selection-start-line="84" selection-start-column="71" selection-end-line="84" selection-end-column="71" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="e#0#57#0" expanded="false" />
             <element signature="e#946#1005#0" expanded="false" />
             <element signature="e#1051#1350#0" expanded="false" />
             <element signature="e#1391#1965#0" expanded="false" />
@@ -1181,8 +1081,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
 =======
           <caret line="4" column="81" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="81" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1200,14 +1103,19 @@
           <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
 =======
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="19" />
           <folding />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+          <caret line="0" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="19" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/main/urls.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <state vertical-scroll-proportion="0.19767442">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
@@ -1218,14 +1126,17 @@
             <element signature="e#0#51#0" expanded="true" />
           </folding>
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.153847">
+        <state vertical-scroll-proportion="0.0">
           <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1246,8 +1157,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="7.6538463">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1259,8 +1173,11 @@
 =======
         <state vertical-scroll-proportion="0.2236842">
           <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+<<<<<<< HEAD
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
           <folding />
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1272,8 +1189,11 @@
 =======
         <state vertical-scroll-proportion="0.51792115">
           <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
+<<<<<<< HEAD
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
           <folding />
+=======
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
         </state>
       </provider>
     </entry>
@@ -1288,31 +1208,79 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35150376">
           <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="43" />
           <folding>
             <element signature="e#1110#3237#0" expanded="false" />
           </folding>
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+=======
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/base.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45698926">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/static/js/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34829444">
+          <caret line="5" column="14158" selection-start-line="5" selection-start-column="14158" selection-end-line="5" selection-end-column="14158" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.836364">
+          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6585366">
+          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <state vertical-scroll-proportion="-0.0">
           <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
@@ -1328,6 +1296,10 @@
         <state vertical-scroll-proportion="0.34593022">
           <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
 >>>>>>> cedb882052b85a994c48a525933a6e6f2066caba
+=======
+        <state vertical-scroll-proportion="0.81621623">
+          <caret line="877" column="121" selection-start-line="877" selection-start-column="121" selection-end-line="877" selection-end-column="121" />
+>>>>>>> d69cf371909293281ad809245f4f2e84f08fb3cc
           <folding />
         </state>
       </provider>
