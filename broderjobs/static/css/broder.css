@@ -45,8 +45,9 @@ p {text-align: justify; line-height: 20px;}
 
 /*CONTROLES*/
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
-input[type="text"], select {height: 30px; line-height: 30px; padding: 0 6px; margin-top: -6px; font-size: 1.1em; border: none; background: #f9f9f9;}
-select {padding-right: 50px; -webkit-appearance: none; -webkit-border-radius: 0; border-radius: 0; background: #f9f9f9 url('../img/assets/sort.png') 90% 50% no-repeat;}
+input[type="text"], select {height: 30px; line-height: 30px; padding: 0 6px; margin-top: -6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important;}
+textarea { background: #f9f9f9 !Important; }
+select {padding-right: 50px; /*-webkit-appearance: none;*/ -webkit-border-radius: 0; border-radius: 0; background: #f9f9f9 url('../img/assets/sort.png') 90% 50% no-repeat;}
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: 0; -moz-outline: 0; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat;}
 input[type="radio"] + label {font-size: 1em;}
 input[type="radio"]:hover {background-position: 0 -11px;}
@@ -875,3 +876,12 @@ img.img-me {
 .home #registro #acepto { vertical-align: top; }
 
 .empresa .panel.left .content h3.link { margin: 0px !important; }
+button.link { border: none; background-color: transparent; font-weight: normal; outline: none; font-size: 13px !Important; }
+.modal-dialog { padding: 3px; position: relative; border: 1px solid #ddd; background: #eee; border-radius: 2px; box-shadow: 0 5px 15px rgba(0,0,0,.5); }
+.modal-content {
+    box-shadow: none !Important; border: 1px solid #ddd !Important; border-radius: 2px  !Important; }
+.empresa .redes h4 { margin: 0px; }
+.header-container { width: 100%; position: fixed; z-index: 1; }
+.header-container .menu { background-color: white; }
+.empresa .centered { padding-top: 150px}
+label.descripcion { font-weight: normal; }

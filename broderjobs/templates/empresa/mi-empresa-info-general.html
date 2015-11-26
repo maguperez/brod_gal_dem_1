@@ -1,8 +1,73 @@
-{% load crispy_forms_tags %}
+
 
 <div style="margin:0 50px">
-	<form class="form-horizontal" action="{% url 'mi-empresa-info-general' %}" method="post">
-		{% crispy form %}
-		<input type="submit" class="btn btn-submit col-md-offset-2">
+	<form id = "empresa-info_general" class="" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
+		<div class = "form-group">
+			<label class = "control-label">Nombre comercial *</label>
+				{{ form.nombre }}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Quienes somos *</label>
+			<textarea id = "txt-quienes_somos"></textarea>
+				{{ form.quienes_somos }}
+		</div>
+
+		<div class = "form-group">
+			<label class = "control-label">Titulo de vacacante *</label>
+				{{ form.RUC }}
+			<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Teléfono *</label>
+				{{ form.RUC }}
+			<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Sector</label>
+			{{ form.sector }}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Número de funcionarios</label>
+			{{ form.numero_funcionarios }}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Facturación anual</label>
+			{{ form.facturacion_anual }}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Fundación</label>
+			{{ form.ano_fundacion }}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label col-sm-12">Sede Global</label>
+			<div class = "row">
+				<div class = "col-sm-6">
+					{{ form.pais }}
+				</div>
+				<div class = "col-sm-6">
+					{{ form.ciudad }}
+				</div>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Website</label>
+			{{ form.website }}
+		</div>
+
+		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
 	</form>
 </div>
+<script>
+	$(function(){
+		$("#empresa-info_general input").addClass("form-control");
+		$("#empresa-info_general select").addClass("form-control");
+		$("#empresa-info_general textarea").addClass("form-control");
+		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
+		$("#id_quienes_somos").hide();
+
+		$("#txt-quienes_somos").on("blur", function(){
+			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
+		});
+		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
+	});
+</script>

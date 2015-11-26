@@ -6,7 +6,7 @@
 				<div class="panel left">
 					<div class="box">
 						<header class="pos-relative">
-							<button id="logo-button" class="link editar btn-edit">Editar</button>
+							<button id="logo-button" class="editar btn-edit">Editar</button>
 							<img class="imagen" src="{{empresa.set_logo}}" />
 						</header>
 						<div class="content">
@@ -121,7 +121,7 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-</section>
+</section><!--
 <div class="popup evaluacion-empresa" id="evaluacion">
 			<div class="box popup-box">
 				<div class="content">
@@ -315,6 +315,7 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
+		-->
 <div id="form-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -326,7 +327,8 @@
                         <p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<input type="submit" class="btn btn-primary btn-submit" data-dismiss="modal" value = "Guardar">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -387,7 +389,7 @@
 
 
 					} else {
-                    	$(modal).modal('toggle');
+                    	//$(modal).modal('toggle');
 						window.location.reload();
 					}
 				},
@@ -415,6 +417,9 @@
 			google.maps.event.trigger(Ubicacion.map, "resize");
 		});
 	 });
+	 $("#form-modal .btn-submit").on("click", function(){
+		 $(this).parents("#form-modal").find("form").submit();
+	 })
 
  </script>
 {% endblock %}
