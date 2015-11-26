@@ -875,3 +875,4 @@ img.img-me {
 .home #registro #acepto { vertical-align: top; }
 
 .empresa .panel.left .content h3.link { margin: 0px !important; }
+button.link { border: none; background-color: transparent; font-weight: normal; outline: none; font-size: 13px !Important; }
