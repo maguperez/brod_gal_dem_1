@@ -6,9 +6,7 @@ urlpatterns = [
 
     url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="empresa-oportunidad-busqueda"),
 
-    # url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="empresa-oportunidad-detalle"),
-
-    url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="empresa-configuracion"),
+#     url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="empresa-oportunidad-detalle"),
 
     url(r'^mi-empresa/$', views.MiEmpresaView.as_view(), name="mi-empresa"),
 
@@ -17,7 +15,5 @@ urlpatterns = [
     url(r'^mi-empresa/logo/$', views.LogoView.as_view(), name="mi-empresa-logo"),
 
     url(r'^mi-empresa/ubicacion/$', views.UbicacionView.as_view(), name="mi-empresa-ubicacion"),
-
-
 
 ]

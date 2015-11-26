@@ -7,8 +7,6 @@ urlpatterns = [
 
 	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
-
-
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi-cv-resumen"),
 
 	url(r'^mi-cv/foto/$', views.FotoView.as_view(), name="mi-cv-foto"),
