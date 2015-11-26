@@ -3,13 +3,15 @@ from django import forms
 from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple
 from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
     TipoRemuneracion, Carrera
+from main import utilitarios
 
 class OportunidadForm(forms.ModelForm):
 
     class Meta:
         model = Oportunidad
         fields = ('titulo', 'carga_horaria', 'pais', 'ciudad', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
-                  'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion')
+                  'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion', 'estado',
+                  'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera' )
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacacnte', 'class': 'full'}),
             'carga_horaria': RadioSelect(),
@@ -30,6 +32,7 @@ class OportunidadForm(forms.ModelForm):
         self.fields['beneficio'].empty_label = None
         self.fields['pais'].empty_label = "Pais"
         self.fields['ciudad'].empty_label = "Ciudad"
+        self.fields['grado_estudio'].empty_label = "Seleccione"
 
 class OportunidadCrearForm(OportunidadForm):
 
@@ -38,3 +41,25 @@ class OportunidadCrearForm(OportunidadForm):
     idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
     conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
     carrera = forms.ModelMultipleChoiceField(queryset=Carrera.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+
+# class OportunidadEditarForm(forms.Form):
+#
+#     titulo = forms.TextInput(attrs={'placeholder': 'escriba el titulo de su vacacnte', 'class': 'full'}),
+#     carga_horaria = forms.ModelChoiceField(queryset=CargaHoraria.objects.all(), widget= forms.RadioSelect() ),
+#     tipo_puesto = forms.ModelChoiceField(queryset=TipoPuesto.objects.all(), widget= forms.RadioSelect() ),
+#     remuneracion = forms.ModelChoiceField(queryset=TipoRemuneracion.objects.all(), widget= forms.RadioSelect()),
+#     resumen = forms.Textarea(),
+#     remuneracion_min =  forms.TextInput(attrs={'placeholder': 'Valor minimo'}),
+#     remuneracion_max = forms.TextInput(attrs={'placeholder': 'Valor maximo'}),
+#     fecha_cese = forms.DateInput(attrs={'placeholder': 'Dia / Mes / Año'}),
+#     beneficio = forms.ModelChoiceField(queryset=Beneficio.objects.all(), widget= forms.RadioSelect()),
+#
+#     grado_estudio = forms.ModelChoiceField(queryset=GradoEstudio.objects.all(), empty_label="Grado Estudio", required = False, widget=forms.Select(attrs={'class': 'full', }))
+#     universidad = forms.ModelMultipleChoiceField(queryset=Universidad.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+#     idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+#     conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+#     carrera = forms.ModelMultipleChoiceField(queryset=Carrera.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+#
+#     def __init__(self, *args, **kwargs):
+#         super(OportunidadEditarForm, self).__init__(*args, **kwargs)
+

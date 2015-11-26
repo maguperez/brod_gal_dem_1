@@ -123,3 +123,4 @@ class OportunidadBusquedaView(TemplateView):
         # data = json.dumps(a_empresas)
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
+

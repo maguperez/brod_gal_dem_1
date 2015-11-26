@@ -1,20 +1,18 @@
-
-<script src="https://maps.googleapis.com/maps/api/js?callback=Ubicacion.inicializar_mapa"></script>
 <div style="margin:0 50px">
 	<form class="form-horizontal" action="{% url 'mi-empresa-ubicacion' %}" method="post">{%csrf_token%}
-        direccion: {{form.direccion_map}}
-        longitud: {{form.longitud}}
-        latitud: {{form.latitud}}
+        {{form.direccion_map}}
+        {{form.longitud}}
+        {{form.latitud}}
 		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>
-<div id = "map" style = "height: 350px"></div>
+<div id = "ubicacion-map" style = "height: 350px"></div>
 <script>
     var Ubicacion = {
         map: null,
         marca: null,
         inicializar_mapa: function() {
-            var mapCanvas = document.getElementById('map');
+            var mapCanvas = document.getElementById('ubicacion-map');
             var mapOptions = {
                 center: new google.maps.LatLng(44.5403, -78.5463),
                 zoom: 8,
@@ -60,5 +58,17 @@
             Ubicacion.marca.setMap(null);
             Ubicacion.marca = null;
         },
-    }
+    };
+    var interval;
+    $(function(){
+        interval = setInterval(function(){
+            if ($("#ubicacion-map").width != 0){
+                clearInterval(interval);
+                Ubicacion.inicializar_mapa();
+            }
+        }, 1000);
+
+        $("#id_latitud, #id_longitud, #id_direccion_map").hide();
+    });
+
 </script>

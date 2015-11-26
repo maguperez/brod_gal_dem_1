@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'estudiante',
     'empresa',
     'oportunidad',
+    'endless_pagination',
 
 )
 
@@ -80,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -90,17 +92,13 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'BroderJobs1',
-        # 'USER': 'sa',
         'USER': 'broder',
-        # 'PASSWORD': 'abc#123',
         'PASSWORD': 'br753des',
         'HOST': '191.168.19.11',
-        # 'HOST': 'localhost',
         'PORT': '5434',
     }
 }

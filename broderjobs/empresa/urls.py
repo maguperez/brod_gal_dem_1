@@ -6,7 +6,7 @@ urlpatterns = [
 
     url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="empresa-oportunidad-busqueda"),
 
-#     url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="empresa-oportunidad-detalle"),
+#   url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="empresa-oportunidad-detalle"),
 
     url(r'^mi-empresa/$', views.MiEmpresaView.as_view(), name="mi-empresa"),
 

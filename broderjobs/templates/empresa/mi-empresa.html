@@ -6,7 +6,7 @@
 				<div class="panel left">
 					<div class="box">
 						<header class="pos-relative">
-							<button id="logo-button" class="link editar">Editar</button>
+							<button id="logo-button" class="link editar btn-edit">Editar</button>
 							<img class="imagen" src="{{empresa.set_logo}}" />
 						</header>
 						<div class="content">
@@ -68,9 +68,9 @@
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
 								<div>
 									<p>{{empresa.direccion_map}}</p>
-									<p id = "id_latitud">{{empresa.latitud}}</p>
-									<p id = "id_longitud">{{empresa.longitud}}</p>
-									<div id = "map" class="mapa" style="width: 630px; height: 230px"></div>
+									<p id = "empresa-id_latitud">{{empresa.latitud}}</p>
+									<p id = "empresa-id_longitud">{{empresa.longitud}}</p>
+									<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
 								</div>
 							</section>
 							<section class="oportunidades">
@@ -342,7 +342,7 @@
 		map: null,
 		marca: null,
 		inicializar_mapa: function () {
-			var mapCanvas = document.getElementById('map');
+			var mapCanvas = document.getElementById('empresa-map');
 			var mapOptions = {
 				center: new google.maps.LatLng(44.5403, -78.5463),
 				zoom: 8,
@@ -350,18 +350,18 @@
 			};
 			Empresa.map = new google.maps.Map(mapCanvas, mapOptions);
 
-			if ($("#id_latitud").html() != "") {
-				var latitud = $("#id_latitud").html();
-				var longitud = $("#id_longitud").html();
+			if ($("#empresa-id_latitud").html() != "") {
+				var latitud = $("#empresa-id_latitud").html();
+				var longitud = $("#empresa-id_longitud").html();
 				var punto = new google.maps.LatLng(latitud, longitud);
 				Empresa.marcar_mapa(punto);
 			}
 		},
 		 marcar_mapa: function(coordenadas){
 			 var coordenadas = "";
-			 if ($("#id_latitud").html() != "") {
-				var latitud = $("#id_latitud").html();
-				var longitud = $("#id_longitud").html();
+			 if ($("#empresa-id_latitud").html() != "") {
+				var latitud = $("#empresa-id_latitud").html();
+				var longitud = $("#empresa-id_longitud").html();
 				coordenadas = new google.maps.LatLng(latitud, longitud);
 			}
             var marker = new google.maps.Marker({
@@ -412,9 +412,9 @@
      	$('#form-modal-body').load('ubicacion/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
+			google.maps.event.trigger(Ubicacion.map, "resize");
 		});
 	 });
-
 
  </script>
 {% endblock %}
