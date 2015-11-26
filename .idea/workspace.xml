@@ -40,11 +40,22 @@
       <file leaf-file-name="mi-empresa-ubicacion.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.836364">
-              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            <state vertical-scroll-proportion="-1.5454545">
+              <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mi-empresa-info-general.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2692308">
+              <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,8 +63,8 @@
       <file leaf-file-name="broder.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81621623">
-              <caret line="877" column="121" selection-start-line="877" selection-start-column="121" selection-end-line="877" selection-end-column="121" />
+            <state vertical-scroll-proportion="0.8468468">
+              <caret line="891" column="34" selection-start-line="891" selection-start-column="34" selection-end-line="891" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -62,8 +73,8 @@
       <file leaf-file-name="mi-empresa.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.6585366">
-              <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+            <state vertical-scroll-proportion="-4.1463413">
+              <caret line="391" column="26" selection-start-line="391" selection-start-column="26" selection-end-line="391" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
               </folding>
@@ -104,7 +115,6 @@
         <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/oportunidad-empleado-detalle.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/oportunidad-empleado-lista.html" />
         <option value="$PROJECT_DIR$/broderjobs/main/forms.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidades-listar.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-logo.html" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/forms.py" />
@@ -135,8 +145,9 @@
         <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" />
         <option value="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" />
         <option value="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
       </list>
     </option>
@@ -224,7 +235,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -242,11 +253,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="empresa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -858,13 +869,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35103244">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18378378">
@@ -977,14 +981,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/static/js/bootstrap.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34829444">
@@ -993,30 +989,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
+    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.836364">
-          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6585366">
-          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+        <state vertical-scroll-proportion="-4.1463413">
+          <caret line="391" column="26" selection-start-line="391" selection-start-column="26" selection-end-line="391" selection-end-column="26" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5454545">
+          <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81621623">
-          <caret line="877" column="121" selection-start-line="877" selection-start-column="121" selection-end-line="877" selection-end-column="121" />
+        <state vertical-scroll-proportion="0.8468468">
+          <caret line="891" column="34" selection-start-line="891" selection-start-column="34" selection-end-line="891" selection-end-column="34" />
           <folding />
         </state>
       </provider>
