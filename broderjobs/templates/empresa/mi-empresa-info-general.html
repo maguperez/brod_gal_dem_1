@@ -1,8 +1,17 @@
-{% load crispy_forms_tags %}
+
 
 <div style="margin:0 50px">
-	<form class="form-horizontal" action="{% url 'mi-empresa-info-general' %}" method="post">
-		{% crispy form %}
+	<form class="form-horizontal" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
+		{{ form.nombre }}
+		{{ form.RUC }}
+		{{ form.quienes_somos }}
+		{{ form.sector }}
+		{{ form.numero_funcionarios }}
+		{{ form.facturacion_anual }}
+		{{ form.ano_fundacion }}
+		{{ form.pais }}
+		{{ form.ciudad }}
+		{{ form.website }}
 		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
 	</form>
 </div>
