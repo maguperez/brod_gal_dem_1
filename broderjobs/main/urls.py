@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from . import views
 
 
 
@@ -19,5 +20,9 @@ urlpatterns =[
 	url(r'^estudiante-registro/$','main.views.estudiante_registro' , name = 'estudiante-registro'),
 
 	url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
+
+	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="configuracion"),
+
+	url(r'^editar-cuenta/$', views.EditarCuentaView.as_view(), name="editar-cuenta"),
 
 ]

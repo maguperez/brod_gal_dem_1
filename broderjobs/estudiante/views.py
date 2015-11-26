@@ -77,23 +77,6 @@ def registro_cv(request):
 def oportunidad_listar(request):
     return render(request, 'estudiante/oportunidad-listar.html')
 
-class ConfiguracionView(TemplateView):
-
-    template_name = 'estudiante/configuracion.html'
-    def get_context_data(self, **kwargs):
-        user = self.request.user
-        usuario = User.objects.get(pk=user.id)
-        persona = Persona.objects.get(usuario_id=usuario.id)
-
-        context = super(ConfiguracionView, self).get_context_data(**kwargs)
-        context['usuario'] = user
-        context['persona'] = persona
-        return context
-
-class EditarCuentaView(TemplateView):
-
-    template_name = 'estudiante/editar-cuenta.html'
-
 class EmpresaListaView(TemplateView):
 
     template_name = 'estudiante/empresa-lista.html'

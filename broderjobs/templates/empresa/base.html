@@ -26,8 +26,8 @@
 								<div class="pin"></div>
 								<ul>
 									<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
-									<li><a href="mi_cuenta.html"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
-									<li><a href="/cerrar/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
+									<li><a href="{%url 'configuracion'%}"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
+									<li><a href="{%url 'salir' %}"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
 								<ul>
 							</div>
 						</div>
@@ -38,14 +38,14 @@
 					<a class="mensajes">Mensajes</a>
 				</div>
 				<div class="actions">
-					<a href="/oportunidad/crear/">ANUNCIAR OPORTUNIDAD</a>
+					<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
 				</div>
 				<div class="clear"></div>
 			</div>
 		</header>
 		<header class="menu">
 			<div class="centered">
-				<a class="active" href="oportunidades.html">Oportunidades</a>
+				<a class="active" href="{% url 'empresa-oportunidad-listar'%}">Oportunidades</a>
 				<a href="{% url 'mi-empresa' %}">Mi empresa</a>
 				<div class="clear"></div>
 			</div>
