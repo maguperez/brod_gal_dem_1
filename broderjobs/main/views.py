@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, redirect, HttpResponseRedirect,
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from  django.utils.dateparse import parse_date
-
+from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Persona
@@ -122,5 +122,23 @@ def empresa_registro(request):
     else:
         form = RegisterForm()
     return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})
+
+
+class ConfiguracionView(TemplateView):
+
+    template_name = 'main/configuracion.html'
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        usuario = User.objects.get(pk=user.id)
+        persona = Persona.objects.get(usuario_id=usuario.id)
+
+        context = super(ConfiguracionView, self).get_context_data(**kwargs)
+        context['usuario'] = user
+        context['persona'] = persona
+        return context
+
+class EditarCuentaView(TemplateView):
+
+    template_name = 'main/editar-cuenta.html'
 
 

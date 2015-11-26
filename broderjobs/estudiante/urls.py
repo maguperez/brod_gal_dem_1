@@ -7,9 +7,7 @@ urlpatterns = [
 
 	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
-	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="estudiante-configuracion"),
 
-	url(r'^editar-cuenta/$', views.EditarCuentaView.as_view(), name="estudiante-editar-cuenta"),
 
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi-cv-resumen"),
 
