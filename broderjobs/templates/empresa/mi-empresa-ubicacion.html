@@ -20,11 +20,7 @@
             };
             Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);
             google.maps.event.addListener(Ubicacion.map, 'click', function(event) {
-                if (Ubicacion.marca == null)
-                    Ubicacion.marcar_mapa(event.latLng);
-                else
-                    alert("Sólo puede añadir una marca para indicar la ubicación del evento. En caso de haberse equivocado, haga click derecho en la marca ya existente para borrarla, y coloque la nueva marca en el lugar deseado");
-
+                Ubicacion.marcar_mapa(event.latLng);
             });
             if ($("#id_latitud").val() != ""){
                 var latitud = $("#id_latitud").val();
@@ -56,8 +52,10 @@
             });
         },
         borrar_marca: function(){
-            Ubicacion.marca.setMap(null);
-            Ubicacion.marca = null;
+            if (Ubicacion.marca != null) {
+                Ubicacion.marca.setMap(null);
+                Ubicacion.marca = null;
+            }
         },
     };
     var interval;
@@ -70,6 +68,7 @@
         }, 1000);
 
         $("#id_latitud, #id_longitud, #id_direccion_map").hide();
+
     });
 
 </script>

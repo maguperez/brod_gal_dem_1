@@ -350,7 +350,7 @@ header.principal .options .procesos {background: transparent url('../img/icons/p
 header.principal .actions {margin-top: 10px;}
 header.principal .actions a {padding: 8px 15px; border: 1px solid #fff; color: #fff; border-radius: 7px; font-size: 0.95em;}
 header.principal .actions a:hover {color: #f50; background: #fff;}
-header.menu {width: 100%; margin-bottom: 50px; border-bottom: 1px solid #ddd;}
+header.menu {width: 100%;  border-bottom: 1px solid #ddd; background-color: white;}
 header.menu a {height: 47px; line-height: 50px; margin: 0 25px 2px 25px; font-family: 'Helvetica'; font-size: 1.1em; float: left; color: #a5a5a5}
 header.menu a:hover, header.menu a.active {color: #f50; text-decoration: none}
 header.menu a.active {margin-bottom: -1px; border-bottom: 3px solid #f50;}
@@ -886,7 +886,6 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
     box-shadow: none !Important; border: 1px solid #ddd !Important; border-radius: 2px  !Important; }
 .empresa .redes h4 { margin: 0px; }
 .header-container { width: 100%; position: fixed; z-index: 1; }
-.header-container .menu { background-color: white; }
 .empresa .centered, .oportunidades-empresa .centered
 { padding-top: 150px}
 label.descripcion { font-weight: normal; }
