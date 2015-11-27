@@ -2,119 +2,54 @@
 {% block content %}
 <section class="oportunidades-estudiante">
 			<div class="centered">
-				<input class="search" type="text" placeholder="Buscar por puesto, empresa, ciudad, etc." />
+				<input id="busqueda" class="search" type="text" placeholder="Buscar por puesto, empresa, ciudad, etc." />
 				<div class="centered"></div>
-				<ul class="panel left principal">
-					<li>
-						<div class="box oportunidad-box">
-							<div class="content">
-								<a href="oportunidad.html"><img class="imagen" src="../img/empresas/empresa-6.jpg" alt="Gra&ntilde;a y Montero" /></a>
-								<div class="detalle">
-									<a class="titulo" href="oportunidad.html"><h2 class="link">Analista de mejora de estrategia de marca personal</h2></a>
-									<div class="descripcion">
-										<div class="datos">
-											<div class="empresa"><i class="empresa"></i><label>GRA&Ntilde;A & MONTERO</label></div>
-											<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-											<div class="remuneracion"><i class="remuneracion"></i><label>No especificado</label></div>
-										</div>
-										<div class="compatibilidad">
-											<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
-											<label class="resultado">Compatible</label>
-										</div>
-										<div class="ver-oportunidad">
-											<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-											<label class="cierre">CIERRA EL 15.03.15</label>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="box oportunidad-box">
-							<div class="content">
-								<a href="oportunidad.html"><img class="imagen" src="../img/empresas/empresa-4.jpg" alt="Gra&ntilde;a y Montero" /></a>
-								<div class="detalle">
-									<a class="titulo" href="oportunidad.html"><h2 class="link">Jefe de estrategia de ventas</h2></a>
-									<div class="descripcion">
-										<div class="datos">
-											<div class="empresa"><i class="empresa"></i><label>PLAYSTATION</label></div>
-											<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-											<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
-										</div>
-										<div class="compatibilidad">
-											<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
-											<label class="resultado">Compatible</label>
-										</div>
-										<div class="ver-oportunidad">
-											<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-											<label class="cierre">CIERRA EL 15.03.15</label>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="box oportunidad-box">
-							<div class="content">
-								<a href="oportunidad.html"><img class="imagen" src="../img/empresas/empresa-3.jpg" alt="Gra&ntilde;a y Montero" /></a>
-								<div class="detalle">
-									<a class="titulo" href="oportunidad.html"><h2 class="link">Dise&ntilde;ador gr&aacute;fico de piezas digitales multimedia</h2></a>
-									<div class="descripcion">
-										<div class="datos">
-											<div class="empresa"><i class="empresa"></i><label>DELL</label></div>
-											<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-											<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
-										</div>
-										<div class="compatibilidad">
-											<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
-											<label class="resultado">Compatible</label>
-										</div>
-										<div class="ver-oportunidad">
-											<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-											<label class="cierre">CIERRA EL 15.03.15</label>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="box oportunidad-box">
-							<div class="content">
-								<a href="oportunidad.html"><img class="imagen" src="../img/empresas/empresa-1.jpg" alt="Gra&ntilde;a y Montero" /></a>
-								<div class="detalle">
-									<a class="titulo" href="oportunidad.html"><h2 class="link">Programador de redes interna</h2></a>
-									<div class="descripcion">
-										<div class="datos">
-											<div class="empresa"><i class="empresa"></i><label>ADOBE</label></div>
-											<div class="ubicacion"><i class="ubicacion"></i><label>Lima, Per&uacute;</label></div>
-											<div class="remuneracion"><i class="remuneracion"></i><label>S/. 4000.00</label></div>
-										</div>
-										<div class="compatibilidad">
-											<div class="grafico"><img src="../img/compatibilidad.jpg" /></div>
-											<label class="resultado">Compatible</label>
-										</div>
-										<div class="ver-oportunidad">
-											<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-											<label class="cierre">CIERRA EL 15.03.15</label>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-					</li>
+				<ul class="panel left principal" id="datos">
 				</ul>
 				<div class="clear"></div>
 			</div>
 		</section>
 {% endblock%}
+
+{% block js %}
+
+<script>
+   (function(){  fnBusqueda();})();
+
+	$('#busqueda').keyup(fnBusqueda);
+	function fnBusqueda(){
+		var busqueda = $('#busqueda').val();
+		$.ajax({
+			data : {'busqueda':busqueda},
+			url: '{%url "estudiante-oportunidad-busqueda" %}',
+			type: 'get',
+			success: function(data){
+
+				var html = ""
+				for(var i = 0; i<data.length ; i++){
+					var url = "{%url 'estudiante-oportunidad-detalle' 1 %}";
+					url = url.replace('1', data[i].id);
+
+					html += '<li><div class="box oportunidad-box"><div class="content">';
+					html += '<a href="'+url+'"><img class="imagen" src="'+ data[i].logo + '"/></a>';
+					html += '<div class="detalle">';
+					html += '<a class="titulo" href=""><h2 class="link">'+data[i].titulo+'</h2></a>'
+					html += '<div class="descripcion"><div class="datos">';
+                    html += '<div class="empresa"><i class="empresa"></i><label>'+data[i].empresa+'</label></div>';
+                    html += '<div class="ubicacion"><i class="ubicacion"></i><label>'+data[i].ubicacion+'</label></div>';
+					html +=	'<div class="remuneracion"><i class="remuneracion"></i><label>'+data[i].remuneracion+'</label></div></div>';
+					html += '<div class="compatibilidad"><div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div><label class="resultado">Compatible</label></div>';
+					html += '<div class="ver-oportunidad"><a class="btn-action" href="'+url+'">VER OPORTUNIDAD</a>';
+					html += '<label class="cierre">CIERRA '+ data[i].fecha_cese + '</label></div><div class="clear"></div></div></div><div class="clear"></div></div></div></li>';
+				}
+				$('#datos').html(html);
+			}
+
+		});
+
+        document.ready
+	}
+
+</script>
+
+{% endblock js %}

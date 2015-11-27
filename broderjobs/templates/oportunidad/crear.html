@@ -2,6 +2,10 @@
 {% block content %}
 
 <form action="" method="post">{%csrf_token%}
+	{%for item in form%}
+	{{item.error}}
+	{%endfor%}
+
 	<section class="oportunidad-detalle">
 			<div class="centered">
 				<div class="panel left principal">

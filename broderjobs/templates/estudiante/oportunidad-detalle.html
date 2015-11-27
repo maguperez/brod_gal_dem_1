@@ -1,0 +1,124 @@
+{% extends 'estudiante/base.html' %}
+{% block content %}
+<section class="oportunidad-detalle">
+			<div class="centered">
+				<div class="panel left principal">
+					<div class="box">
+						<header class="oportunidad-resumen">
+							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
+							<div class="detalle">
+								<h1>{{oportunidad.titulo}}</h1>
+								<a href=""><h4 class="link">{{empresa.nombre | upper}}</h4></a>
+								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
+								<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
+							</div>
+							<div class="postulacion">
+								<a class="btn-action" id="postular">POSTULAR</a>
+								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+							</div>
+							<div class="clear"></div>
+						</header>
+						<div class="content">
+							<section class="informacion">
+								<h3 class="title"><i class="info"></i>{{oportunidad.titulo}}</h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>Tipo de vacante</label>
+										<p>{{oportunidad.tipo_puesto}}</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Jornada de trabajo</label>
+										<p>{{oportunidad.carga_horaria}}</p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Resumen</label>
+										<p>
+                                            {{oportunidad.resumen}}
+                                        </p><div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section class="perfil">
+								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
+								<div class="detalle col-4-6">
+									<div>
+										<label>Carrera</label>
+
+										<p>
+                                            {% for carrera in oportunidad.carrera.all%}
+                                            <span class="tag">{{carrera}}</span>
+                                            {%endfor%}
+                                        </p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Conocimientos</label>
+										<p>
+                                            {% for conocimiento in oportunidad.conocimiento.all%}
+                                            <span class="tag">{{conocimiento}}</span>
+                                            {%endfor%}
+                                        </p>
+                                        <div class="clear"></div>
+									</div>
+									<div>
+										<label>Idiomas</label>
+										<p>
+                                            {% for idioma in oportunidad.idioma.all%}
+                                            <span class="tag">{{idioma}}</span>
+                                            {%endfor%}
+                                        </p>
+										<div class="clear"></div>
+									</div>
+									<div>
+										<label>Graduaci&oacute;n / Graduaci&oacute;n estimada</label>
+										<p>2do Semestre 2015 - 2do Semestre 2016</p>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section class="beneficios">
+								<h3 class="title"><i class="like"></i>Beneficios</h3>
+								<div class="detalle">
+                                    <p>
+                                        {% for beneficio in oportunidad.beneficio.all%}
+                                            <span class="tag">{{beneficio}}</span>
+                                        {%endfor%}
+									<div class="clear"></div>
+								</div>
+							</section>
+							<section class="ubicacion">
+								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
+								<div class="detalle">
+									<p>Calle Varham 203, Camacho, La Molina</p>
+									<div class="clear"></div>
+									<div class="mapa">
+										<img src="../img/google-map.jpg" />
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+		<div class="popup aviso" id="resultado-postulacion">
+			<div class="popup-box box">
+				<div class="content">
+					<section class="header">
+						<h4 class="link">CONFIRMACI&Oacute;N</h4>
+					</section>
+					<section class="mensaje">
+						<p>Tu postulaci&oacute;n ha sido registrada con &eacute;xito, ahora s&oacute;lo queda esperar por el contacto de la empresa. ¡Buena suerte!</p>
+					</section>
+				</div>
+				<a class="close">Cerrar</a>
+			</div>
+		</div>
+{% endblock%}
+
+{% block js %}
+
+{%endblock%}

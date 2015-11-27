@@ -420,3 +420,41 @@ class UniversidadBusquedaView(TemplateView):
         data = serializers.serialize('json', universidades,
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
+
+class OportunidadDetalleView(TemplateView):
+
+    template_name = 'estudiante/oportunidad-detalle.html'
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+
+        oportunidad =  get_object_or_404(Oportunidad, pk=id)
+        empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        context = super(OportunidadDetalleView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        context['oportunidad'] = oportunidad
+        return context
+
+class OportunidadBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        oportunidades = Oportunidad.objects.filter(Q(titulo__icontains=busqueda))
+        a_oportunidades =[]
+        for i in range(0, len(oportunidades)):
+            empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
+            ciudad = empresa.ciudad
+            pais = empresa.pais
+            e = {
+                "id": oportunidades[i].id,
+                "titulo": oportunidades[i].titulo,
+                "empresa": empresa.nombre,
+                "logo": empresa.set_logo,
+                "ubicacion": str(ciudad) + ', ' +str(pais),
+                "fecha_cese": str(oportunidades[i].fecha_cese),
+                "remuneracion": str(oportunidades[i].remuneracion),
+            }
+            a_oportunidades.append(e)
+        # data = serializers.serialize('json', a_empresas,
+        #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
+        data = json.dumps(a_oportunidades)
+        return HttpResponse(data, content_type='application/json')
+

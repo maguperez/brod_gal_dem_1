@@ -15,13 +15,13 @@ from empresa.models import Representante, Empresa
 
 # Create your views here.
 class OportunidadCrearView(FormView):
-    form_class = forms.OportunidadCrearForm
+    form_class = forms.OportunidadForm
     template_name = 'oportunidad/crear.html'
     print("entro perfil")
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
-
+        print("entro valida")
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id=persona.id)
@@ -55,6 +55,7 @@ class OportunidadCrearView(FormView):
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
+
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma

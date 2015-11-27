@@ -48,4 +48,8 @@ urlpatterns = [
 	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante_empresa_detalle"),
 
 	url(r'^universidad-busqueda/$', views.UniversidadBusquedaView.as_view(), name="universidad-busqueda"),
+
+	url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
+
+	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),
 ]
