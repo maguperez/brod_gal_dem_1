@@ -1,5 +1,3 @@
-
-
 <div style="margin:0 50px">
 	<form id = "empresa-info_general" class="" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
 		<div class = "form-group">
@@ -8,7 +6,7 @@
 		</div>
 		<div class = "form-group">
 			<label class = "control-label">Quienes somos *</label>
-			<textarea id = "txt-quienes_somos"></textarea>
+			<textarea id = "txt-quienes_somos" name="quienes_somos_clone"></textarea>
 				{{ form.quienes_somos }}
 		</div>
 
@@ -69,5 +67,67 @@
 			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
 		});
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
+		$("#empresa-info_general").validate({
+            errorPlacement: function (error, element) {
+					debugger;
+				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
+					$("#id_pais").tooltip('destroy');
+					$("#id_pais").tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$("#id_pais").tooltip('show');
+				}
+				else {
+					$(element).tooltip('destroy');
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$(element).tooltip('show');
+				}
+            },
+            success: function (label, element) {
+				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
+					$("#id_pais").tooltip('hide');
+				}
+				else {
+					$(element).tooltip('hide');
+				}
+
+            },
+            rules: {
+				nombre: {
+					required: true,
+				},
+				quienes_somos_clone: {
+					required: true,
+				},
+                RUC: {
+                    required: true
+                },
+                telefono: {
+                    required: true
+                }
+            },
+            messages: {
+				nombre: {
+					required: "Este campo es obligatorio",
+				},
+				quienes_somos_clone: {
+					required: "Este campo es obligatorio",
+				},
+                RUC: {
+                    required: "Este campo es obligatorio",
+                },
+                telefono: {
+                    required: "Este campo es obligatorio"
+                }
+            }
+        });
 	});
 </script>
