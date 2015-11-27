@@ -26,8 +26,9 @@
 					{{message}}</div>
 				{% endif%}
 				<input type="submit" name="form" value="INGRESAR" id="registrarme" class="Ingresar"/>
-				<a class="registrate" href="/empresa-registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
-				<a class="close" href="/empresa/">x</a>
+				<a class="registrate" href="/empresa-registro/"
+                   onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
+				<a class="close" href="/empresa/" onclick="desactivar('login'); activar('mensaje-central');">x</a>
 			</div>
 		</div>
     </form>

@@ -282,7 +282,8 @@ a.delete:hover {background-position: 0 -9px;}
 .home .login .division .line {width: 45%; height: 1px; background: rgba(255,255,255,0.5); float: left;}
 .home .login .division .line.full {width: 100%;}
 .home .login .division label {width: 10%; line-height: 1px; float: left; text-align: center; color: #fff;}
-.home .login .content > .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;}
+.home .login .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;
+    color: #a5a5a5 !Important; opacity: 1 !Important}
 .home footer {width: 100%; padding: 12px 0; position: fixed; bottom: 0; left: 0; background: rgba(0,0,0,0.3); z-index:1;}
 .home footer ul.links {margin-top: 8px; text-indent: 30px;}
 

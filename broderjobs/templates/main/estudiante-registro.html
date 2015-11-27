@@ -27,9 +27,7 @@
 						{{ form.password1 }}
 						{{ form.password2 }}
 						<label class="indicacion">Fecha de Nacimiento</label>
-						{{form.dia}}
-						{{form.mes}}
-						{{form.ano}}
+								{{form.dia}}{{form.mes}}{{form.ano}}
 					</div><br>
 					<div class="opciones">
 						<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
@@ -54,7 +52,8 @@
 
 					<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
 				</div>
-				<a class="close" href="/estudiante/"  href="/estudiante/"  onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+				<a class="close" href="/estudiante/"
+				   onclick="desactivar('registro'); activar('mensaje-central');">x</a>
 			</div>
 		</div>
 	</form>
@@ -67,14 +66,14 @@
             errorPlacement: function (error, element) {
 				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
 					$(element).is("[name=ano]")){
-					$("#id_ano").tooltip('destroy');
-					$("#id_ano").tooltip({
+					$("#id_dia").tooltip('destroy');
+					$("#id_dia").tooltip({
 						animation: true,
-						placement: "right",
+						placement: "left",
 						title: $(error).text(),
 						trigger: "manual"
 					} );
-					$("#id_ano").tooltip('show');
+					$("#id_dia").tooltip('show');
 				}
 				else {
 					$(element).tooltip('destroy');
@@ -90,7 +89,7 @@
             success: function (label, element) {
 				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
 					$(element).is("[name=ano]")){
-					$("#id_ano").tooltip('hide');
+					$("#id_dia").tooltip('hide');
 				}
 				else {
 					$(element).tooltip('hide');
@@ -164,6 +163,7 @@
             }
         });
 		$("#link-registro").addClass("active");
+		$(".cumpleanos").css("margin-right", "3px")
     });
 </script>
 {% endblock %}
