@@ -69,6 +69,7 @@
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
+					debugger;
 				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
 					$("#id_pais").tooltip('destroy');
 					$("#id_pais").tooltip({

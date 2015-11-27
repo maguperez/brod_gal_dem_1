@@ -377,7 +377,7 @@
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {
-		 var valid = form.validate().valid();
+		 var valid = $(form).validate().valid();
 			 if (valid){
 
 		 $(form).submit(function (e) {
