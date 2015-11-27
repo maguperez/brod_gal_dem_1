@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Oportunidad, PerfilRequerido
+from .models import Oportunidad
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
 
@@ -21,7 +21,6 @@ class OportunidadCrearView(FormView):
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
-        print("entro valida")
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante =get_object_or_404(Representante, persona_id=persona.id)
@@ -62,7 +61,7 @@ class OportunidadCrearView(FormView):
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         print(beneficio)
-        # oportunidad.beneficio = beneficio
+        oportunidad.beneficio = beneficio
         if '_guardar' in self.request.POST:
             oportunidad.estado = 'P'
         elif '_anunciar' in self.request.POST:
@@ -83,8 +82,6 @@ class OportunidadEditarView(UpdateView):
         return oportunidad
 
     def form_valid(self, form):
-        print("entro valida")
-
         estado =  form.cleaned_data['estado']
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
@@ -103,9 +100,7 @@ class OportunidadEditarView(UpdateView):
         id = self.kwargs["id"]
         oportunidad = Oportunidad.objects.get(id = id)
 
-        print(estado)
         oportunidad.estado = estado
-        print(oportunidad.estado)
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
         oportunidad.pais = pais
@@ -122,7 +117,6 @@ class OportunidadEditarView(UpdateView):
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
-        print(beneficio)
-        # oportunidad.beneficio = beneficio
+        oportunidad.beneficio = beneficio
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
