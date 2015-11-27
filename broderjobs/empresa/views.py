@@ -3,7 +3,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.core import serializers
@@ -14,22 +14,14 @@ from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad
+from django.core.paginator import Paginator, InvalidPage
+
 import json
 
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
 def oportunidad_listar(request):
     return render(request, 'empresa/oportunidades-listar.html')
-
-class ConfiguracionView(TemplateView):
-
-    template_name = 'empresa/configuracion.html'
-    def get_context_data(self, **kwargs):
-        user = self.request.user
-        usuario = User.objects.get(pk=user.id)
-        context = super(ConfiguracionView, self).get_context_data(**kwargs)
-        context['usuario'] = user
-        return context
 
 class MiEmpresaView(TemplateView):
     template_name = 'empresa/mi-empresa.html'
@@ -131,3 +123,4 @@ class OportunidadBusquedaView(TemplateView):
         # data = json.dumps(a_empresas)
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
+

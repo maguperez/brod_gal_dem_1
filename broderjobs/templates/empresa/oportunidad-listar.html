@@ -1,7 +1,7 @@
-
 {% extends 'empresa/base.html' %}
+{% load endless %}
+
 {% block content %}
-<div id="contenidojs"></div>
  <section class="oportunidades-empresa">
 			<div class="centered">
 				<select class="filtro">
@@ -10,6 +10,7 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list">
+					{% paginate 4 oportunidades %}
 					{% for oportunidad in oportunidades.all%}
 					<li class="oportunidad-estadistica">
 						<div class="box header">
@@ -18,13 +19,13 @@
 								<a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
 							</div>
-							<div class="opciones" onclick="opciones(1)">
+							<div class="opciones" onclick="opciones({{oportunidad.id}})">
 								<i class="menu"></i>
-								<div class="contextual-menu" id="menu-1">
+								<div class="contextual-menu" id="menu-{{oportunidad.id}}">
 									<div class="wrapper">
 										<div class="pin"></div>
 										<ul>
-											<li><a href=""><span>Editar</span><div class="clear"></div></a></li>
+											<li><a href="{%url 'oportunidad-editar' oportunidad.id%}"><span>Editar</span><div class="clear"></div></a></li>
 											<li><a href="candidatos_oportunidad.html"><span>Ver candidatos</span><div class="clear"></div></a></li>
 											<li><a href="#"><span>Archivar</span><div class="clear"></div></a></li>
 										<ul>
@@ -32,7 +33,15 @@
 								</div>
 							</div>
 							<div class="estado">
-								<label>oportunidad {{oportunidad.estado}}</label>
+								{%if oportunidad.estado == 'P' %}
+									<label>oportunidad pendiente</label>
+								{%endif%}
+								{%if oportunidad.estado == 'A' %}
+									<label>oportunidad abierta</label>
+								{%endif%}
+								{%if oportunidad.estado == 'C' %}
+									<label>oportunidad cerrada</label>
+								{%endif%}
 								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
 							</div>
 							<div class="clear"></div>
@@ -78,11 +87,11 @@
 						<div class="clear"></div>
 					</li>
 					{% endfor %}
+					{% show_pages %}
 				</ul>
 			</div>
 		</section>
  {% endblock %}
-
 {% block js%}
 <script>
    (function(){  fnBusqueda();})();

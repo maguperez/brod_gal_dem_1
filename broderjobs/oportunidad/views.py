@@ -15,13 +15,13 @@ from empresa.models import Representante, Empresa
 
 # Create your views here.
 class OportunidadCrearView(FormView):
-    form_class = forms.OportunidadCrearForm
+    form_class = forms.OportunidadForm
     template_name = 'oportunidad/crear.html'
     print("entro perfil")
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
-
+        print("entro valida")
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id=persona.id)
@@ -42,7 +42,6 @@ class OportunidadCrearView(FormView):
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
 
-
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
         oportunidad.titulo = titulo
@@ -54,17 +53,13 @@ class OportunidadCrearView(FormView):
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
+        oportunidad.grado_estudio = grado_estudio
+        oportunidad.save()
 
-        perfil = PerfilRequerido()
-        perfil.grado_estudio = grado_estudio
-        perfil.save()
-        perfil.universidad = universidad
-        perfil.carrera = carrera
-        perfil.idioma = idioma
-        perfil.conocimiento = conocimiento
-        perfil.save()
-
-        oportunidad.perfil_oportunidad = perfil
+        oportunidad.universidad = universidad
+        oportunidad.carrera = carrera
+        oportunidad.idioma = idioma
+        oportunidad.conocimiento = conocimiento
         if '_guardar' in self.request.POST:
             oportunidad.estado = 'P'
         elif '_anunciar' in self.request.POST:
@@ -73,5 +68,13 @@ class OportunidadCrearView(FormView):
         oportunidad.save()
         return super(OportunidadCrearView , self).form_valid(form)
 
+class OportunidadEditarView(UpdateView):
+    form_class = forms.OportunidadForm
+    template_name = 'oportunidad/editar.html'
+    success_url = reverse_lazy('empresa-oportunidad-listar')
 
+    def get_object(self, queryset=None):
+        id = self.kwargs["id"]
+        oportunidad = Oportunidad.objects.get(pk = id)
 
+        return oportunidad

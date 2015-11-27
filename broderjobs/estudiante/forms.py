@@ -14,29 +14,39 @@ class RegistroCVForm(forms.ModelForm):
 
     universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
     universidades_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
+    carreras_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
+    paises_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
             model = Estudiante
-            fields = ('grado_estudio', 'carrera', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
-                     'ano_graduacion', 'pais', 'ciudad', 'tipo_puesto', 'carga_horaria')
+            fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
+                     'ano_graduacion', 'tipo_puesto', 'carga_horaria')
 
     def __init__(self, *args, **kwargs):
         super(RegistroCVForm, self).__init__(*args, **kwargs)
 
         #Carga items a Grado de Estudio
         grado_estudios = []
-        grado_estudios.append(('', ''))
+        grado_estudios.append(('', 'Seleccione'))
         for grado_estudio in GradoEstudio.objects.all():
             grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
         self.fields['grado_estudio'].widget = forms.Select(attrs={'class': 'full'})
         self.fields['grado_estudio'].choices = grado_estudios
 
         #Carga items a Carrera
-        carreras = []
-        carreras.append(('', ''))
-        for carrera in Carrera.objects.all():
-            carreras.append((carrera.id, carrera.descripcion))
-        self.fields['carrera'].widget =forms.Select(attrs={'class': 'full'})
-        self.fields['carrera'].choices = carreras
+        # carreras = []
+        # carreras.append(('', ''))
+        # for carrera in Carrera.objects.all():
+        #     carreras.append((carrera.id, carrera.descripcion))
+        # self.fields['carrera'].widget =forms.Select(attrs={'class': 'full'})
+        # self.fields['carrera'].choices = carreras
 
 
         # #Carga items a Universidad
@@ -49,8 +59,8 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items Semestre
         items_semestre = utilitarios.semestre_rango()
-        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-2'})
-        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-2'})
+        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
+        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
 
         self.fields['semestre_inicio_estudio'].choices = items_semestre
         self.fields['semestre_graduacion'].choices = items_semestre
@@ -58,27 +68,27 @@ class RegistroCVForm(forms.ModelForm):
         #Carga items a años
 
         items_anos = utilitarios.anos_rango()
-        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-1'})
+        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
         self.fields['ano_inicio_estudio'].choices = items_anos
 
-        self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-1'})
+        self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
         self.fields['ano_graduacion'].choices = items_anos
 
         #Carga items a Psis
-        paises = []
-        paises.append(('', ''))
-        for pais in Pais.objects.all():
-            paises.append((pais.id, pais.descripcion))
-        self.fields['pais'].widget =forms.Select(attrs={'class': 'full'})
-        self.fields['pais'].choices = paises
+        # paises = []
+        # paises.append(('', ''))
+        # for pais in Pais.objects.all():
+        #     paises.append((pais.id, pais.descripcion))
+        # self.fields['pais'].widget =forms.Select(attrs={'class': 'full'})
+        # self.fields['pais'].choices = paises
 
         #Carga items a ciudad
-        ciudades = []
-        ciudades.append(('', ''))
-        for ciudad in Ciudad.objects.all():
-            ciudades.append((ciudad.id, ciudad.descripcion))
-        self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})
-        self.fields['ciudad'].choices = ciudades
+        # ciudades = []
+        # ciudades.append(('', ''))
+        # for ciudad in Ciudad.objects.all():
+        #     ciudades.append((ciudad.id, ciudad.descripcion))
+        # self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})
+        # self.fields['ciudad'].choices = ciudades
 
         #Carga Tipo de
         self.fields["tipo_puesto"].widget = forms.widgets.CheckboxSelectMultiple()

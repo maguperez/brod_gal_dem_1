@@ -2,21 +2,26 @@
 {% block content %}
 
 <form action="" method="post">{%csrf_token%}
-	{%for item in form%}
-	{{item.error}}
-	{%endfor%}
-
 	<section class="oportunidad-detalle">
 			<div class="centered">
+                <div>
+					<ol class="breadcrumb">
+						<li class="active">{{oportunidad.titulo}}</li>
+						<li>Editar oportunidad</li>
+					</ol>
+					<div class="clear"></div>
+				</div>
 				<div class="panel left principal">
 					<div class="box">
 						<header>
 							<div class="descripcion">
-								<h3>ANUNCIAR OPORTUNIDAD</h3>
+								<h3>Editar Oportunidad</h3>
 								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
+
 							</div>
-							<input type="submit" name="_anunciar" value="ANUNCIAR" id="anunciat" class="btn-action"/>
-							<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action"/>
+
+                            <label>Estado:  </label>{{form.estado}}
+                            <input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />
 							<div class="clear"></div>
 						</header>
 						<div class="content">
@@ -175,16 +180,23 @@
 						<div class="content">
 							<section class="grafico">
 								<h4>Alcance de Candidatos</h4>
-								<label><i class="alcance alto"></i><span class="cifra">1993</span> candidatos</label>
+								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>
 								<div class="grafico-alcance">
-									<div class="alto active">
-										<div class="adecuado">
-											<div class="bajo">
-												<label>&Oacute;ptimo</label>
+									<div class="alto inactive">
+										<div class="adecuado inactive">
+											<div class="bajo active">
+												<label>Bajo</label>
 											</div>
 										</div>
 									</div>
 								</div>
+							</section>
+							<section class="caracteristicas">
+								<label><span class="bold">Carrera: </span>Ingenier&iacute;a Industrial, Administraci&oacute;n, Hoteler&iacute;a</label>
+								<label><span class="bold">Idiomas: </span>Ingl&eacute;s avanzado</label>
+								<label><span class="bold">Conocimientos: </span>Office</label>
+								<label><span class="bold">Jornada: </span>Full time</label>
+								<label><span class="bold">Ubicaci&oacute;n: </span>Lima, Per&uacute;</label>
 							</section>
 						</div>
 					</div>

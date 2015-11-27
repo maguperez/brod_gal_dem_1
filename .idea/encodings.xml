@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/main/empresa-registro.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/main/estudiante-registro.html" charset="UTF-8" />

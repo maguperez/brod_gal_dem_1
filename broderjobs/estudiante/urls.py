@@ -7,8 +7,6 @@ urlpatterns = [
 
 	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
-
-
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi-cv-resumen"),
 
 	url(r'^mi-cv/foto/$', views.FotoView.as_view(), name="mi-cv-foto"),
@@ -50,4 +48,14 @@ urlpatterns = [
 	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante_empresa_detalle"),
 
 	url(r'^universidad-busqueda/$', views.UniversidadBusquedaView.as_view(), name="universidad-busqueda"),
+
+	url(r'^carrera-busqueda/$', views.CarreraBusquedaView.as_view(), name="carrera-busqueda"),
+
+	url(r'^pais-busqueda/$', views.PaisBusquedaView.as_view(), name="pais-busqueda"),
+
+	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
+
+	url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
+
+	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),
 ]
