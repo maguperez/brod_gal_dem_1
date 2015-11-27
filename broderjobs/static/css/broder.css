@@ -282,7 +282,8 @@ a.delete:hover {background-position: 0 -9px;}
 .home .login .division .line {width: 45%; height: 1px; background: rgba(255,255,255,0.5); float: left;}
 .home .login .division .line.full {width: 100%;}
 .home .login .division label {width: 10%; line-height: 1px; float: left; text-align: center; color: #fff;}
-.home .login .content > .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;}
+.home .login .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;
+    color: #a5a5a5 !Important; opacity: 1 !Important}
 .home footer {width: 100%; padding: 12px 0; position: fixed; bottom: 0; left: 0; background: rgba(0,0,0,0.3); z-index:1;}
 .home footer ul.links {margin-top: 8px; text-indent: 30px;}
 
@@ -321,7 +322,10 @@ a.delete:hover {background-position: 0 -9px;}
 .final-registro .datos p {margin-top: 15px;}
 .final-registro .datos .full {width: 100%;}
 .final-registro .datos .half-2 {width: 65%;}
-.final-registro .datos .half-1 {width: 33%;}
+
+/*AGREGADO POR JONATHAN 20151127_0950*/
+.final-registro .datos .half-medio {width: 49%;}
+/*******/
 .final-registro .datos select, .final-registro .datos input[type="text"] {border: 1px solid #e5e5e5;}
 .final-registro .datos input[type="checkbox"] + label {margin-right: 30px; font-size: 1.1em;}
 .final-registro .finalizar-registro {width: 150px; height: 35px; line-height: 35px; margin: 20px auto -10px auto; text-align: center; font-size: 1.1em; font-family: 'Roboto Condensed'; color: #fff; background: #f50; display: block; border: none; cursor: pointer; display: inherit;}
@@ -883,5 +887,8 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .empresa .redes h4 { margin: 0px; }
 .header-container { width: 100%; position: fixed; z-index: 1; }
 .header-container .menu { background-color: white; }
-.empresa .centered, .oportunidades-empresa .centered, .oportunidad-detalle .centered { padding-top: 150px}
+.empresa .centered, .oportunidades-empresa .centered
+{ padding-top: 150px}
 label.descripcion { font-weight: normal; }
+ul.links, ul.social { margin-bottom: 0px !Important;}
+ul.copy { margin-top: 8px; margin-right: 50px; }

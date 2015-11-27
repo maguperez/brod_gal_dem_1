@@ -23,11 +23,11 @@
 						<div class="navicon-line"></div>
 						<div class="navicon-line"></div>
 					</div>
-					<img class="logo" src="../static/img/logo.png" alt="Broder jobs" />
+					<img class="logo" src="{%static 'img/logo.png' %}" alt="Broder jobs" />
 					<ul>
-						<li><a class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
-						<li><a class="link-header" href="{%url 'empresa-login' %}" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
-						<li><a class="link-header"  href="{%url  'empresa-registro' %}" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
+						<li><a id = "link-main" class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
+						<li><a id = "link-sesion" class="link-header" href="{%url 'empresa-login' %}" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
+						<li><a id = "link-registro" class="link-header"  href="{%url  'empresa-registro' %}" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
 					</ul>
 					<div class="clear"></div>
 				</nav>

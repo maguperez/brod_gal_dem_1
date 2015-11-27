@@ -421,6 +421,32 @@ class UniversidadBusquedaView(TemplateView):
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 
+class CarreraBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        carreras = Carrera.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', carreras,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class PaisBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        paises = Pais.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', paises,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class CiudadBusquedaView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        pais = request.GET['pais']
+        print(pais)
+        ciudades = Ciudad.objects.filter(descripcion__icontains=busqueda, pais_id=pais )
+        data = serializers.serialize('json', ciudades,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
 class OportunidadDetalleView(TemplateView):
 
     template_name = 'estudiante/oportunidad-detalle.html'
