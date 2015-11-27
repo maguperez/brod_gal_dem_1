@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="88ad666c-f84e-4988-a98e-c27108962ad3" name="Default" comment="Merge branch 'develop' of https://github.com/maguperez/brod_gal_dem_1 into develop&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/urls.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="88ad666c-f84e-4988-a98e-c27108962ad3" name="Default" comment="Merge branch 'develop' of https://github.com/maguperez/brod_gal_dem_1 into develop&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;" />
     <ignored path="Broderjobs.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
