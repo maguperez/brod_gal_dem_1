@@ -7,17 +7,6 @@ from main import utilitarios
 
 # Create your models here.
 
-class PerfilRequerido(models.Model):
-    grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True, verbose_name="grado estudios")
-    universidad = models.ManyToManyField(Universidad, default=None, blank=True, verbose_name="universidad")
-    carrera = models.ManyToManyField(Carrera, default=None, blank=True, verbose_name="carrera")
-    idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
-    conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
-    perfil = models.CharField(max_length="10", default=None, null=True, blank=True )
-
-    def __unicode__(self):
-		return unicode(self.perfil) or u''
-
 class Oportunidad(models.Model):
     items_estado = utilitarios.estado_oportunidad()
 
@@ -31,9 +20,8 @@ class Oportunidad(models.Model):
     remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )
     fecha_cese = models.DateField(default=None,null=True, blank=True )
     tipo_puesto = models.ForeignKey(TipoPuesto,default=None, null=True, blank=True, verbose_name="Tipo Puesto")
-    beneficio = models.ForeignKey(Beneficio, default=None, null=True, blank=True, verbose_name="Beneficio")
+    beneficio = models.ManyToManyField(Beneficio, default=None, blank=True, verbose_name="Beneficios")
     resumen = models.CharField(max_length="1000", default=None, null=True, blank=True )
-    # perfil_requerido = models.ForeignKey(PerfilRequerido, default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_estado, max_length=1, default=None, null=True, blank=True)
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
