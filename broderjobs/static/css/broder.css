@@ -884,7 +884,8 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .empresa .redes h4 { margin: 0px; }
 .header-container { width: 100%; position: fixed; z-index: 1; }
 .header-container .menu { background-color: white; }
-.empresa .centered { padding-top: 150px}
+.empresa .centered, .oportunidades-empresa .centered
+{ padding-top: 150px}
 label.descripcion { font-weight: normal; }
 ul.links, ul.social { margin-bottom: 0px !Important;}
 ul.copy { margin-top: 8px; margin-right: 50px; }
