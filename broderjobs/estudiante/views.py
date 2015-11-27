@@ -30,11 +30,10 @@ def registro_cv(request):
             user = request.user
             persona = get_object_or_404(Persona, usuario_id=user.id)
             grado_estudio = form.cleaned_data['grado_estudio']
-            universidades = form.cleaned_data['universidades_hidden']
-            print(universidades)
-            carrera = form.cleaned_data['carrera']
-            pais = form.cleaned_data['pais']
-            ciudad = form.cleaned_data['ciudad']
+            id_universidad = form.cleaned_data['universidades_hidden']
+            id_carrera = form.cleaned_data['carreras_hidden']
+            id_pais = form.cleaned_data['paises_hidden']
+            id_ciudad = form.cleaned_data['ciudades_hidden']
             tipo_puesto = form.cleaned_data['tipo_puesto']
             ano_inicio = form.cleaned_data['ano_inicio_estudio']
             semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
@@ -50,10 +49,18 @@ def registro_cv(request):
                 estudiante = Estudiante()
                 estudiante.persona = persona
             estudiante.grado_estudio = grado_estudio
-            # estudiante.universidad = universidades
-            estudiante.carrera = carrera
-            estudiante.pais = pais
-            estudiante.ciudad = ciudad
+            universidad = Universidad.objects.get(id= id_universidad )
+            if universidad is not None:
+                estudiante.universidad = universidad
+            carrera = Carrera.objects.get(id = id_carrera)
+            if carrera is not None:
+                estudiante.carrera = carrera
+            pais = Pais.objects.get(id= id_pais)
+            if pais is not None:
+                estudiante.pais = pais
+            ciudad = Ciudad.objects.get(id = id_ciudad)
+            if ciudad is not None:
+                estudiante.ciudad = ciudad
             estudiante.ano_inicio_estudio = ano_inicio
             estudiante.semestre_inicio_estudio = semestre_inicio
             estudiante.ano_graduacion = ano_graduacion
@@ -64,9 +71,13 @@ def registro_cv(request):
             estudiante.tipo_puesto = tipo_puesto
             estudiante.save()
 
-            resumen = Resumen()
-            resumen.estudiante = estudiante
-            resumen.save()
+            # resumen = Resumen(estudiante_id = estudiante.id)
+            # if Resumen is None:
+            #     resumen.estudiante = estudiante
+            #     resumen.save()
+            r, created = Resumen.objects.get_or_create(estudiante_id = estudiante.id)
+            if created is True:
+                r.save()
 
             return redirect('estudiante-oportunidad-listar')
     else:
@@ -129,7 +140,7 @@ class MiCVView(TemplateView):
         context['usuario'] = user
         context['persona'] = persona
         context['estudiante'] = estudiante
-        context['resumen'] = Resumen.objects.filter(estudiante_id=estudiante.id)[:1]
+        context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)

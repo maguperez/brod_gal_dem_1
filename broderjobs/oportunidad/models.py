@@ -3,6 +3,7 @@ from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
     Conocimiento, TipoRemuneracion, Beneficio
 from empresa.models import Empresa
+from estudiante.models import Estudiante
 from main import utilitarios
 
 # Create your models here.
@@ -34,4 +35,9 @@ class Oportunidad(models.Model):
 
     def __unicode__(self):
 		return unicode(self.titulo) or u''
+
+class Postulacion(models.Model):
+    Oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    Estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    Fecha = models.DateField(default=None,null=True, blank=True )
 
