@@ -20,8 +20,7 @@ class OportunidadForm(forms.ModelForm):
             'resumen': Textarea(),
             'remuneracion_min': TextInput(attrs={'placeholder': 'Valor minimo'}),
             'remuneracion_max': TextInput(attrs={'placeholder': 'Valor maximo'}),
-            'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'}),
-            'beneficio': SelectMultiple()
+            'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'})
         }
 
     def __init__(self, *args, **kwargs):
@@ -29,7 +28,6 @@ class OportunidadForm(forms.ModelForm):
         self.fields['carga_horaria'].empty_label = None
         self.fields['tipo_puesto'].empty_label = None
         self.fields['remuneracion'].empty_label = None
-        self.fields['beneficio'].empty_label = None
         self.fields['pais'].empty_label = "Pais"
         self.fields['ciudad'].empty_label = "Ciudad"
         self.fields['grado_estudio'].empty_label = "Seleccione"

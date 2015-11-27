@@ -34,14 +34,15 @@
             }
         },
         marcar_mapa: function(coordenadas){
+            Ubicacion.borrar_marca();
             var marker = new google.maps.Marker({
                 position: coordenadas,
                 map: Ubicacion.map
             });
             Ubicacion.marca = marker;
-            google.maps.event.addListener(marker, "rightclick", function (point) {
+            /*google.maps.event.addListener(marker, "rightclick", function (point) {
                 Ubicacion.borrar_marca();
-            });
+            });*/
             Ubicacion.map.setCenter(coordenadas);
             $("#id_latitud").val(coordenadas.lat());
             $("#id_longitud").val(coordenadas.lng());

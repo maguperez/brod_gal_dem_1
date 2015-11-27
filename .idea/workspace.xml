@@ -2,34 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88ad666c-f84e-4988-a98e-c27108962ad3" name="Default" comment="Merge branch 'develop' of https://github.com/maguperez/brod_gal_dem_1 into develop&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/migrations/0018_auto_20151126_1534.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" />
-      <change type="DELETED" beforePath="D:\Proyectos\BroderJobs\brod_gal_dem_1\broderjobs\oportunidad\forms.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="D:\Proyectos\BroderJobs\brod_gal_dem_1\broderjobs\oportunidad\forms.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="D:\Proyectos\BroderJobs\brod_gal_dem_1\broderjobs\oportunidad\views.pyc.bak" afterPath="" />
-      <change type="DELETED" beforePath="D:\Proyectos\BroderJobs\brod_gal_dem_1\broderjobs\oportunidad\views.pyc.orig" afterPath="" />
-      <change type="DELETED" beforePath="D:\Proyectos\BroderJobs\brod_gal_dem_1\broderjobs\templates\empresa\configuracion.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/migrations/0019_auto_20151127_1015.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/admin.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/css/broder.css" afterPath="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/oportunidad/crear.html" afterPath="$PROJECT_DIR$/broderjobs/templates/oportunidad/crear.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/forms.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/empresa-login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/empresa-registro.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/empresa-registro.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/estudiante-login.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/estudiante-login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/estudiante-registro.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/estudiante-registro.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/forms.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-info-general.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/index-empresa.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/index-empresa.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/index.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-ubicacion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-listar.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-listar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" afterPath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/urls.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/urls.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/views.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/views.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -94,7 +79,7 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36084905">
+            <state vertical-scroll-proportion="0.6740088">
               <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
                 <element signature="e#4807#5102#0" expanded="false" />
@@ -116,8 +101,8 @@
       <file leaf-file-name="broder.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.172414">
-              <caret line="325" column="34" selection-start-line="325" selection-start-column="24" selection-end-line="325" selection-end-column="34" />
+            <state vertical-scroll-proportion="-6.7586207">
+              <caret line="326" column="34" selection-start-line="326" selection-start-column="34" selection-end-line="326" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -634,7 +619,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21732026" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5392157" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27732465" sideWeight="0.48789713" order="6" side_tool="false" content_ui="tabs" />
@@ -729,23 +714,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv-actividad-extra.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26459143">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-lista.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1076,15 +1044,15 @@
         <state vertical-scroll-proportion="0.60465115">
           <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.172414">
-          <caret line="325" column="34" selection-start-line="325" selection-start-column="24" selection-end-line="325" selection-end-column="34" />
+        <state vertical-scroll-proportion="-6.7586207">
+          <caret line="326" column="34" selection-start-line="326" selection-start-column="34" selection-end-line="326" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1116,9 +1084,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/__init__.pyc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/broderjobs/backends.pyc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36084905">
+        <state vertical-scroll-proportion="0.6740088">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
             <element signature="e#4807#5102#0" expanded="false" />

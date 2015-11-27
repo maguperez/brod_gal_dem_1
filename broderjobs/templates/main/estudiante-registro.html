@@ -27,9 +27,7 @@
 						{{ form.password1 }}
 						{{ form.password2 }}
 						<label class="indicacion">Fecha de Nacimiento</label>
-						{{form.dia}}
-						{{form.mes}}
-						{{form.ano}}
+								{{form.dia}}{{form.mes}}{{form.ano}}
 					</div><br>
 					<div class="opciones">
 						<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
@@ -54,7 +52,8 @@
 
 					<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
 				</div>
-				<a class="close" href="/estudiante/"  href="/estudiante/"  onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+				<a class="close" href="/estudiante/"
+				   onclick="desactivar('registro'); activar('mensaje-central');">x</a>
 			</div>
 		</div>
 	</form>
@@ -163,6 +162,8 @@
 				}
             }
         });
+		$("#link-registro").addClass("active");
+		$(".cumpleanos").css("margin-right", "3px")
     });
 </script>
 {% endblock %}
