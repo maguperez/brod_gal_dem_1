@@ -15,6 +15,7 @@ from .models import Puesto, Empresa, Representante, Sector
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad
 from django.core.paginator import Paginator, InvalidPage
+from django.template import RequestContext
 
 import json
 
@@ -124,3 +125,14 @@ class OportunidadBusquedaView(TemplateView):
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
 
+from endless_pagination.decorators import page_template
+@page_template('empresa/oportunidad_listar_index.html')  # just add this decorator
+def oportunidad_listar(
+        request, template='empresa/oportunidad-listar.html', extra_context=None):
+    context = {
+        'oportunidades': Oportunidad.objects.all(),
+    }
+    if extra_context is not None:
+        context.update(extra_context)
+    return render_to_response(
+        template, context, context_instance=RequestContext(request))

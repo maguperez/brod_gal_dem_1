@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 from . import views
 
 urlpatterns = [
-    url(r'^oportunidad-listar/', views.OportunidadListarView.as_view(), name='empresa-oportunidad-listar'),
+    # url(r'^oportunidad-listar/', views.OportunidadListarView.as_view(), name='empresa-oportunidad-listar'),
+    url(r'^oportunidad-listar/', 'empresa.views.oportunidad_listar', name='empresa-oportunidad-listar'),
 
     url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="empresa-oportunidad-busqueda"),
 
