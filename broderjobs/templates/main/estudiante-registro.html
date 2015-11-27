@@ -67,14 +67,14 @@
             errorPlacement: function (error, element) {
 				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
 					$(element).is("[name=ano]")){
-					$("#id_dia").tooltip('destroy');
-					$("#id_dia").tooltip({
+					$("#id_ano").tooltip('destroy');
+					$("#id_ano").tooltip({
 						animation: true,
-						placement: "left",
+						placement: "right",
 						title: $(error).text(),
 						trigger: "manual"
 					} );
-					$("#id_dia").tooltip('show');
+					$("#id_ano").tooltip('show');
 				}
 				else {
 					$(element).tooltip('destroy');
@@ -90,7 +90,7 @@
             success: function (label, element) {
 				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
 					$(element).is("[name=ano]")){
-					$("#id_dia").tooltip('hide');
+					$("#id_ano").tooltip('hide');
 				}
 				else {
 					$(element).tooltip('hide');
@@ -163,6 +163,7 @@
 				}
             }
         });
+		$("#link-registro").addClass("active");
     });
 </script>
 {% endblock %}

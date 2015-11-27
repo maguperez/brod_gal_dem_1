@@ -25,7 +25,7 @@
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 					{{message}}</div>
 				{% endif%}
-				<input type="submit" name="form" value="REGISTRARME" id="registrarme" class="Ingresar"/>
+				<input type="submit" name="form" value="INGRESAR" id="registrarme" class="Ingresar"/>
 				<a class="registrate" href="/empresa-registro/" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
 				<a class="close" href="/empresa/">x</a>
 			</div>
@@ -69,7 +69,8 @@
                     required: "Este campo es obligatorio"
                 }
             }
-        })
+        });
+        $("#link-sesion").addClass("active");
     });
 </script>
 {% endblock %}
