@@ -14,6 +14,7 @@
 		<script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<body>
+	<div class = "header-container">
 		<header class="principal">
 			<div class="centered">
 				<a href="oportunidades.html"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
@@ -54,6 +55,7 @@
 				<div class="clear"></div>
 			</div>
 		</header>
+		</div>
 		{% block content %}
         {% endblock %}
 		{% block popup %}

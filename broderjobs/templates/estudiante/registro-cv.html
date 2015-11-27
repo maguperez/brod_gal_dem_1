@@ -17,15 +17,20 @@
 
 		<link rel="stylesheet" href="{% static 'css/select2.css' %}">
 
-		<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
-
+		<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
+		<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
-		<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+
 		<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+
+		<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+		<script src="{% static 'js/additional-methods.min.js' %}"></script>
+
 	</head>
 	<body>
 		<section class="final-registro">
@@ -349,4 +354,120 @@
 		});
 	}
 
+</script>
+
+
+<script>
+    $(function(){
+
+
+        $("form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+
+				console.log(element[0].id);
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true
+                },
+				universidades: {
+                    required: true
+                },
+				carreras: {
+					required: true
+				},
+				grado_estudio: {
+                    required: true
+                },
+				semestre_inicio_estudio:{
+                    required: true
+                },
+				ano_inicio_estudio:{
+                    required: true
+                },
+				semestre_graduacion:{
+                    required: true
+                },
+				ano_graduacion:{
+                    required: true
+                },
+				paises:{
+                    required: true
+                },
+				ciudades:{
+                    required: true
+                }
+
+            },
+            messages: {
+                email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+                password: {
+                    required: "Este campo es obligatorio"
+                },
+				universidades: {
+                    required: "Este campo es obligatorio"
+                },
+				carreras: {
+                    required: "Este campo es obligatorio"
+                },
+				grado_estudio: {
+                    required: "Este campo es obligatorio"
+                },
+				semestre_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				semestre_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				paises:{
+                    required: "Este campo es obligatorio"
+                },
+				ciudades:{
+                    required: "Este campo es obligatorio"
+                }
+
+            }
+        });
+
+        $("#link-sesion").addClass("active");
+    });
 </script>
