@@ -34,13 +34,13 @@
 							</div>
 							<div class="estado">
 								{%if oportunidad.estado == 'P' %}
-									<label>oportunidad pendiente</label>
+									<label>pendiente</label>
 								{%endif%}
 								{%if oportunidad.estado == 'A' %}
-									<label>oportunidad abierta</label>
+									<label>abierta</label>
 								{%endif%}
 								{%if oportunidad.estado == 'C' %}
-									<label>oportunidad cerrada</label>
+									<label>cerrada</label>
 								{%endif%}
 								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
 							</div>

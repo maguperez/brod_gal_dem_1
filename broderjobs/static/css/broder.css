@@ -886,10 +886,13 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
     box-shadow: none !Important; border: 1px solid #ddd !Important; border-radius: 2px  !Important; }
 .empresa .redes h4 { margin: 0px; }
 .header-container { width: 100%; position: fixed; z-index: 1; }
+.empresa .centered, .oportunidades-empresa .centered
 .empresa > .centered,
 .empresas > .centered,
 .oportunidades-empresa > .centered,
-.oportunidades-estudiante > .centered
+.oportunidades-estudiante > .centered,
+.cv > .centered,
+.oportunidad-detalle > .centered
 { padding-top: 150px}
 label.descripcion { font-weight: normal; }
 ul.links, ul.social { margin-bottom: 0px !Important;}
