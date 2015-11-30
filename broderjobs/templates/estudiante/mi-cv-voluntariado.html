@@ -1,5 +1,5 @@
 <div style="margin: 0 50px">
-	<form action="{{ request.build_absolute_uri }}" method="post">{%csrf_token%}
+	<form id = "cv-voluntariado" action="{{ request.build_absolute_uri }}" method="post">{%csrf_token%}
 		<div class="form-horizontal">
 			<div class ="form-group">
 				<label class = "col-sm-3">Cargo</label>
@@ -31,6 +31,23 @@
 </div>
 <script>
 	$(function(){
+		$(".modal-dialog").css("width", "700px")
+		$("#cv-voluntariado input").addClass("form-control");
+		$("#cv-voluntariado select").addClass("form-control");
+		$("#cv-voluntariado textarea").addClass("form-control");
 		$("#form-modal .modal-title").html('<i class="volunteer"></i> &nbsp;Voluntariado');
+		$("#id_descripcion").hide();
+		$("#txt-descripcion").on("input", function(){
+			$("#id_descripcion").val($("#txt-descripcion").val());
+		});
+		$("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Experiencia profesional');
+		$('.input-daterange input').each(function() {
+			$(this).datepicker({
+				language: 'es',
+				format: "mm-yyyy",
+				startView: "months",
+				minViewMode: "months"
+			});
+		});
 	});
 </script>
