@@ -11,7 +11,7 @@ class OportunidadForm(forms.ModelForm):
         model = Oportunidad
         fields = ('titulo', 'carga_horaria', 'pais', 'ciudad', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
                   'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion', 'estado',
-                  'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera' )
+                  'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacacnte', 'class': 'full'}),
             'carga_horaria': RadioSelect(),
@@ -20,7 +20,10 @@ class OportunidadForm(forms.ModelForm):
             'resumen': Textarea(),
             'remuneracion_min': TextInput(attrs={'placeholder': 'Valor minimo'}),
             'remuneracion_max': TextInput(attrs={'placeholder': 'Valor maximo'}),
-            'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'})
+            'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'}),
+            'direccion_map': TextInput(attrs={'placeholder': 'Direccion', 'class': 'full'}),
+            'longitud': TextInput(attrs={'placeholder': 'longitud'}),
+            'latitud': TextInput(attrs={'placeholder': 'latitud'}),
         }
 
     def __init__(self, *args, **kwargs):
