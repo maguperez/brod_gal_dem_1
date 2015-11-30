@@ -19,7 +19,10 @@
 {% block js %}
 
 <script>
-   (function(){  fnBusqueda();})();
+   (function(){
+	   fnBusqueda();
+	   $("#link-empresa").addClass("active");
+   })();
 
 	$('#busqueda').keyup(fnBusqueda);
 	function fnBusqueda(){

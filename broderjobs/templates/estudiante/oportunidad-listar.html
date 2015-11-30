@@ -14,7 +14,10 @@
 {% block js %}
 
 <script>
-   (function(){  fnBusqueda();})();
+   (function(){
+	   fnBusqueda();
+	   $("#link-oportunidad").addClass("active");
+   })();
 
 	$('#busqueda').keyup(fnBusqueda);
 	function fnBusqueda(){

@@ -16,7 +16,7 @@
 								<label>{{persona.telefono}} / {{usuario.email}}</label>
 							</div>
 							<div class="clear"></div>
-							<button id="info-personal-button" class="link editar">Editar</button>
+							<button id="info-personal-button" class="link btn-action editar">Editar</button>
 						</header>
 						<div class="content">
 							<section>
@@ -191,7 +191,12 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<style>
+	#info-personal-button {
+		text-transform: uppercase;
+		border: 1px solid #f50 !Important;
+	}
+</style>
 {% endblock content%}
 {% block js %}
  <script>
