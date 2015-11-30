@@ -1,0 +1,40 @@
+{% extends 'estudiante/base.html' %}
+{%block css%}
+
+{%endblock%}
+{% block content %}
+<section class="misprocesos">
+			<div class="centered">
+				<div class="panel left principal">
+					<table class="dark" id="procesos">
+						<thead>
+							<tr>
+								<th>Empresa</th>
+								<th>Informaci&oacute;n</th>
+								<th>Estado<a><i class="arrow-down white"></i></a></th>
+							</tr>
+						</thead>
+						<tbody>
+                        {%for postulacion in postulaciones%}
+							<tr>
+								<td class="align-left"><img class="imagen" src="{{postulacion.logo}}" /></td>
+								<td class="align-left">
+									<label>{{postulacion.titulo}}</label>
+									<div class="dato"><i class="empresa"></i><label>{{postulacion.empresa}}</label></div>
+									<div class="dato"><i class="ubicacion"></i><label>{{postulacion.ubicacion}}}</label></div>
+									<div class="dato"><i class="remuneracion"></i><label>{{postulacion.remuneracion}}</label></div>
+								</td>
+								<td>{{postulacion.estado}}</td>
+							</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+
+
+{% endblock content%}
+{% block js %}
+{% endblock%}

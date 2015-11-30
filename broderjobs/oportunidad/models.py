@@ -40,7 +40,9 @@ class Oportunidad(models.Model):
 		return unicode(self.titulo) or u''
 
 class Postulacion(models.Model):
-    Oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
-    Estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
-    Fecha = models.DateField(default=None,null=True, blank=True )
+    oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    fecha = models.DateField(default=None,null=True, blank=True )
 
+    def __unicode__(self):
+		return unicode(self.estudiante) or u''

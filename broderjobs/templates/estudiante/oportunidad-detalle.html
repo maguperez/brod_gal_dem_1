@@ -117,27 +117,37 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
-		<div id="form-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
-                    </div>
-            <div id="form-modal-body" class="modal-body">
-                        <p>One fine body&hellip;</p>
-			</div>
-            <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 {% endblock%}
 
 {% block js %}
 <script>
-	$("#link-oportunidad").addClass("active");
+	$('#postular').click(function(e) {
+		fnPostular();
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+	function fnPostular(){
+		var id = {{oportunidad.id}};
+		$.ajax({
+			data : {'id':id},
+			url: '{%url "estudiante-oportunidad-postular" %}',
+			type: 'get',
+			success: function(data){
+				window.location = '#resultado-postulacion';
+			}
+
+		});
+
+        document.ready
+	}
+
 </script>
+
 {%endblock%}
