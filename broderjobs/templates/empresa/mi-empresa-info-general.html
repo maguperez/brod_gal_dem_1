@@ -63,7 +63,7 @@
 		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
 		$("#id_quienes_somos").hide();
 
-		$("#txt-quienes_somos").on("blur", function(){
+		$("#txt-quienes_somos").on("input", function(){
 			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
 		});
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
