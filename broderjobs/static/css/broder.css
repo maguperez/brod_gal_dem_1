@@ -383,7 +383,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label {line-height: 25px; font-size: 1em;}
 
 /*OPORTUNIDAD DETALLE*/
-.oportunidades-estudiante .search {width: 330px; margin-bottom: 20px;}
+.oportunidades-estudiante .search {width: 330px; margin-bottom: 20px; background: rgba(0, 0, 0, 0) url(../img/icons/search.png) 100% 50% no-repeat !important;}
 .oportunidad-detalle .breadcrumb {margin-bottom: 30px;}
 .oportunidad-detalle header {position: relative;}
 .oportunidad-detalle header h3 {color: #848484; font-weight: bold;}
@@ -414,7 +414,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .panel.right {width: 23%;}
 
 /*EMPRESAS ESTUDIANTE*/
-.empresas .search {width: 285px; margin-bottom: 20px;}
+.empresas .search {width: 285px; margin-bottom: 20px;background: rgba(0, 0, 0, 0) url(../img/icons/search.png) 100% 50% no-repeat !important;}
 .empresas .list .box {width: 23.5%; margin-bottom: 18px; float: left;}
 .empresas .list li:nth-child(4n+2) .box, .empresas .list li:nth-child(4n+3) .box, .empresas .list li:nth-child(4n+4) .box {margin-left: 1.7%;}
 .empresas .list .box:hover {box-shadow: 0 0 10px #555;}
