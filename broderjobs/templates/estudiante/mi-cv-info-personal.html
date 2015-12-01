@@ -1,9 +1,75 @@
-
-{% load crispy_forms_tags %}
-
 <div style="margin:0 50px">
-	<form class="form-horizontal" action="{% url 'mi-cv-info-personal' %}" method="post">
-		{% crispy form %}
-		<input type="submit" class="btn btn-submit col-md-offset-2">
+	<form action="{% url 'mi-cv-info-personal' %}" method="post">
+		{%csrf_token%}
+		<div class="form-horizontal">
+			<h4><i class="academic"></i> &nbsp;Información académica</h4>
+			<div class ="form-group">
+				<label class = "col-sm-3">Grado estudio</label>
+				<div class = "col-sm-9">
+					{{form.grado_estudio}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Universidad</label>
+				<div class = "col-sm-9">
+					{{form.universidad}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Carrera</label>
+				<div class = "col-sm-9">
+					{{form.carrera}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Inicio de estudios</label>
+				<div class = "col-sm-4">
+					{{form.semestre_inicio_estudio}}
+				</div>
+				<div class = "col-sm-4">
+					{{form.ano_inicio_estudio}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Graduación / Grad. estimada</label>
+				<div class = "col-sm-4">
+					{{form.semestre_graduacion}}
+				</div>
+				<div class = "col-sm-4">
+					{{form.ano_graduacion}}
+				</div>
+			</div>
+			<h4><i class="info"></i> &nbsp;Información personal</h4>
+			<div class ="form-group">
+				<label class = "col-sm-3">Contacto</label>
+				<div class = "col-sm-4">
+					{{form.email}}
+				</div>
+				<div class = "col-sm-4">
+					{{form.telefono}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Ubicacion actual</label>
+				<div class = "col-sm-4">
+					{{form.pais}}
+				</div>
+				<div class = "col-sm-4">
+					{{form.ciudad}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-3">Fecha de nacimiento</label>
+				<div class = "col-sm-8">
+					{{form.fecha_nacimiento}}
+				</div>
+			</div>
+		</div>
 	</form>
 </div>
+<script>
+	$(function(){
+		$("form input, form select, form textarea").addClass("form-control");
+		$(".modal-title").html('&nbsp;Información');
+	});
+</script>

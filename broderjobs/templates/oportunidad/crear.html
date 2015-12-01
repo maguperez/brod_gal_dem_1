@@ -22,75 +22,78 @@
 						<div class="content">
 							<section class="perfil">
 								<h3 class="title"><i class="work"></i>Perfil de la oportunidad</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>T&iacute;tulo de vacante</label>
-										<p>{{form.titulo}}</p>
-										<div class="clear"></div>
-									</div>
-									<div>
-										<label>Jornada de trabajo</label>
-										<p class="align-left">
-											{% for carga in form.carga_horaria %}
-											 {{ carga.errors }}
-											 {{ carga }}
-											{% endfor %}
+								<div class="detalle ">
 
-										</p>
+									<div class ="form-group">
+										<label class = "col-sm-3 control-label">T&iacute;tulo de vacante</label>
+										<div class = "col-sm-9">
+											{{form.titulo}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Localizaci&oacute;n</label>
-										<p>
+									<div class ="form-group carga_horaria">
+										<label class = "col-sm-3 control-label">Jornada de trabajo</label>
+										<div class = "col-sm-9">
+											{% for carga in form.carga_horaria %}
+											 	{{ carga.errors }}
+											 	{{ carga }}
+											{% endfor %}
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div class ="form-group">
+										<label class = "col-sm-3 control-label">Localizaci&oacute;n</label>
+										<div class = "col-sm-4">
 											{{form.pais}}
+										</div>
+										<div class = "col-sm-4">
 											{{form.ciudad}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="less-margin">
-										<label>Remuneraci&oacute;n</label>
-										<p class="align-left">
+									<div class ="form-group remuneracion">
+										<label class = "col-sm-3 control-label">Remuneraci&oacute;n</label>
+										<div class = "col-sm-9">
 											{% for r in form.remuneracion %}
-											 {{ r.errors }}
-											 {{ r }}
-										{% endfor %}
-										</p>
-										<div class="clear"></div>
+											 	{{ r.errors }}
+											 	{{ r }}
+											{% endfor %}
+										</div>
 									</div>
-									<div>
-										<label>&nbsp;</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-4">
 											{{form.remuneracion_min}}
+										</div>
+										<div class = "col-sm-4">
 											{{form.remuneracion_max}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Fecha de cierre</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Fecha de cierre</label>
+										<div class = "col-sm-4">
 											{{form.fecha_cese}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							</section>
 							<section class="informacion">
 								<h3 class="title"><i class="info"></i>Informaci&oacute;n b&aacute;sica</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Tipo de vacante *</label>
-										<p>
+								<div class="detalle">
+									<div class ="form-group tipo_puesto">
+										<label class = "col-sm-3 control-label">Tipo de vacante *</label>
+										<div class = "col-sm-9">
 											{% for puesto in form.tipo_puesto %}
-											 {{ puesto.errors }}
-											 {{ puesto }}
-										{% endfor %}
-										</p>
+											 	{{ puesto.errors }}
+											 	{{ puesto }}
+											{% endfor %}
+										</div>
 										<div class="clear"></div>
 									</div>
 									<div class="full less-margin">
 										<label>Resumen *</label>
-
-										<div class="clear"></div>
 									</div>
 									<div class="full">
 										{{form.resumen}}
@@ -99,73 +102,89 @@
 							</section>
 							<section class="perfil">
 								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
-								<div class="detalle col-4-6">
-									<div>
-										<label>Grado de estudio *</label>
-										<p>
+								<div class="detalle">
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Grado de estudio *</label>
+										<div class = "col-sm-9">
 											{{form.grado_estudio}}
 											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Periodo de graduaci&oacute;n</label>
-										<p class="align-left">
-											Estudiantes de 7° hasta graduados hace un a&ntilde;o
-											<img src="../img/barra-deslizable.jpg" />
-										</p>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Periodo de graduaci&oacute;n</label>
+										<div class = "col-sm-9">
+											<p class="align-left">
+												Estudiantes de 7° hasta graduados hace un a&ntilde;o
+												<img src="../img/barra-deslizable.jpg" />
+											</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Universidades de preferencia</label>
-										<p>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Universidades de preferencia</label>
+										<div class = "col-sm-9">
 											{{form.universidad}}
 											<label class="descripcion">Complete este campo s&oacute;lo si tiene una preferencia por los candidatos de alguna universidad. Introduzca las siglas de la universidad y seleccione de la lista.</label>
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Carrera *</label>
-										<p>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Carrera *</label>
+										<div class = "col-sm-9">
 											{{form.carrera}}
 											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las carreras compatibles con el área donde el profesional actuará.</label>
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Idiomas</label>
-										<p>{{form.idioma}}</p>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Idiomas</label>
+										<div class = "col-sm-9">
+											{{form.idioma}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Conocimientos</label>
-										<p>{{form.conocimiento}}</p>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Conocimientos</label>
+										<div class = "col-sm-9">
+											{{form.conocimiento}}
+										</div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							</section>
 							<section class="beneficios">
 								<h3 class="title"><i class="like"></i>Beneficios</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Beneficios</label>
-										<p>{{form.beneficio}}</p>
+								<div class="detalle">
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Beneficios</label>
+										<div class = "col-sm-9">
+											{{form.beneficio}}
+										</div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							</section>
-							<section class="ubicacion">
+							<section class="Oportunidad">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Direcci&oacute;n</label>
-										<!--<p><input class="full" type="text" placeholder="Escriba la direcci&oacute;n de su empresa." /></p>-->
-										<p>{{form.direccion_map}}</p> {{form.latitud}} {{form.longitud}}
+								<div class="detalle ">
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Direcci&oacute;n</label>
+										<div class = "col-sm-9">
+											{{form.direccion_map}}
+										</div>
+									</div><br><br>
+									<div class ="form-group ">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-3">
+											{{form.latitud}}
+										</div>
+										<div class = "col-sm-3">
+											{{form.longitud}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="mapa">
-										<img src="../img/google-map.jpg" />
-									</div>
+									<div id="map" style = "height: 350px; width: 100%"></div>
 								</div>
 							</section>
 						</div>
@@ -194,4 +213,74 @@
 			</div>
 		</section>
 </form>
+<style>
+[name=remuneracion],
+[name=carga_horaria],
+[name=tipo_puesto]{
+    display: inline-block;
+}
+.remuneracion>div>label,
+.carga_horaria>div>label,
+.tipo_puesto>div>label{
+    width: 32%
+}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+	var Oportunidad = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(44.5403, -78.5463),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Oportunidad.map = new google.maps.Map(mapCanvas, mapOptions);
+            google.maps.event.addListener(Oportunidad.map, 'click', function(event) {
+                Oportunidad.marcar_mapa(event.latLng);
+            });
+            if ($("#id_latitud").val() != ""){
+                var latitud = $("#id_latitud").val();
+                var longitud = $("#id_longitud").val();
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Oportunidad.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function(coordenadas){
+            Oportunidad.borrar_marca();
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Oportunidad.map
+            });
+            Oportunidad.marca = marker;
+            google.maps.event.addListener(marker, "rightclick", function (point) {
+                Oportunidad.borrar_marca();
+            });
+            Oportunidad.map.setCenter(coordenadas);
+            $("#id_latitud").val(coordenadas.lat());
+            $("#id_longitud").val(coordenadas.lng());
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").val(response[0]["formatted_address"]);
+            });
+        },
+        borrar_marca: function(){
+            if (Oportunidad.marca != null) {
+                Oportunidad.marca.setMap(null);
+                Oportunidad.marca = null;
+            }
+        },
+    };
+	$(function(){
+		$("input, select, textarea").addClass("form-control");
+		Oportunidad.inicializar_mapa();
+	});
+
+</script>
 {% endblock%}
