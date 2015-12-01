@@ -1,9 +1,22 @@
-{% load crispy_forms_tags %}
-
 <div style="margin:0 50px">
 
-	<form class="form-horizontal" action="{% url 'mi-cv-disponibilidad' %}" method="post">
-		{% crispy form %}
+	<form id = "cv-disponibilidad" class="form-horizontal" action="{% url 'mi-cv-disponibilidad' %}" method="post">
+		{%csrf_token%}
+		<div class="form-horizontal">
+			<div class ="form-group">
+				<label class = "col-sm-5">Acepto propuestas de</label>
+				<div class = "col-sm-7">
+					{{form.tipo_puesto}}
+				</div>
+			</div>
+			<div class ="form-group">
+				<label class = "col-sm-5">Carga horaria</label>
+				<div class = "col-sm-7">
+					{{form.carga_horaria}}
+				</div>
+			</div>
+		</div>
+
 		<!--<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
 		< class="detalle col-3-7">
 			<div>
@@ -24,6 +37,19 @@
 			<div class="clear"></div>
 		</div>
 		<input type="submit" class="btn btn-submit col-md-offset-2">-->
-		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>
+<style>
+	#cv-disponibilidad .form-group ul{
+		display: table;
+    	width: 100%;
+	}
+	#cv-disponibilidad .form-group ul li{
+		display: table-cell;
+	}
+</style>
+<script>
+	$(function(){
+		$("#form-modal .modal-title").html('<i class="time"></i> &nbsp;Disponibilidad');
+	});
+</script>

@@ -117,11 +117,37 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
-
 {% endblock%}
 
 {% block js %}
 <script>
-	$("#link-oportunidad").addClass("active");
+	$('#postular').click(function(e) {
+		fnPostular();
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+	function fnPostular(){
+		var id = {{oportunidad.id}};
+		$.ajax({
+			data : {'id':id},
+			url: '{%url "estudiante-oportunidad-postular" %}',
+			type: 'get',
+			success: function(data){
+				window.location = '#resultado-postulacion';
+			}
+
+		});
+
+        document.ready
+	}
+
 </script>
+
 {%endblock%}

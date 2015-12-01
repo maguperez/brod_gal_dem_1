@@ -45,9 +45,9 @@ p {text-align: justify; line-height: 20px;}
 
 /*CONTROLES*/
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
-input[type="text"], select {height: 30px; line-height: 30px; padding: 0 6px; margin-top: -6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important;}
-textarea { background: #f9f9f9 !Important; }
-select {padding-right: 50px; /*-webkit-appearance: none;*/ -webkit-border-radius: 0; border-radius: 0; background: #f9f9f9 url('../img/assets/sort.png') 90% 50% no-repeat;}
+input[type="text"], select {padding: 0 6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
+textarea { background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important; }
+select {padding-right: 50px; -webkit-appearance: none;  -webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: 0; -moz-outline: 0; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat;}
 input[type="radio"] + label {font-size: 1em;}
 input[type="radio"]:hover {background-position: 0 -11px;}
@@ -76,20 +76,20 @@ input[type="checkbox"]:disabled + label {opacity: 0.3;}
 .invisible {opacity: 0; pointer-events: none;}
 
 /*TABLAS*/
-table {width: 100%; border-spacing: 0; border-collapse: collapse;}
-table thead {text-align: center;}
-table th {padding: 12px 10px; color: #848484; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center;}
-table th i {margin-left: 5px; margin-bottom: 2px;}
-table td {text-align: center;}
-table.dark thead {border: 1px solid #848484;}
-table.dark th {padding: 10px 12px; color: #fff; background: #848484; border: none; text-align: left;}
-table.dark tbody {border: 1px solid #ddd;}
-table td {padding: 10px 12px; cursor: pointer;}
-table tr:nth-child(2n+1) td {background: #f9f9f9;}
-table tr:nth-child(2n+1):hover:not(.active) td {background: #eee;}
-table tr:nth-child(2n) td {background: #fff;}
-table tr:nth-child(2n):hover:not(.active) td {background: #f0f0f0;}
-table .align-left {text-align: left;}
+table.bj-table {width: 100%; border-spacing: 0; border-collapse: collapse;}
+table.bj-table thead {text-align: center;}
+table.bj-table th {padding: 12px 10px; color: #848484; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center;}
+table.bj-table th i {margin-left: 5px; margin-bottom: 2px;}
+table.bj-table td {text-align: center;}
+table.bj-table.dark thead {border: 1px solid #848484;}
+table.bj-table.dark th {padding: 10px 12px; color: #fff; background: #848484; border: none; text-align: left;}
+table.bj-table.dark tbody {border: 1px solid #ddd;}
+table.bj-table td {padding: 10px 12px; cursor: pointer;}
+table.bj-table tr:nth-child(2n+1) td {background: #f9f9f9;}
+table.bj-table tr:nth-child(2n+1):hover:not(.active) td {background: #eee;}
+table.bj-table tr:nth-child(2n) td {background: #fff;}
+table.bj-table tr:nth-child(2n):hover:not(.active) td {background: #f0f0f0;}
+table.bj-table .align-left {text-align: left;}
 
 /*ICONS HEADER*/
 i.arrow-down.white {width: 8px; height: 5px; background: transparent url('../img/icons/arrow_down_white.png') 0 0 no-repeat; display: inline-block;}
@@ -892,7 +892,8 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .oportunidades-empresa > .centered,
 .oportunidades-estudiante > .centered,
 .cv > .centered,
-.oportunidad-detalle > .centered
+.oportunidad-detalle > .centered,
+.usuarios > .centered
 { padding-top: 150px}
 label.descripcion { font-weight: normal; }
 ul.links, ul.social { margin-bottom: 0px !Important;}

@@ -32,12 +32,17 @@ class Oportunidad(models.Model):
     carrera = models.ManyToManyField(Carrera, default=None, blank=True, verbose_name="carrera")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
+    direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
+    longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
+    latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
 
     def __unicode__(self):
 		return unicode(self.titulo) or u''
 
 class Postulacion(models.Model):
-    Oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
-    Estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
-    Fecha = models.DateField(default=None,null=True, blank=True )
+    oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    fecha = models.DateField(default=None,null=True, blank=True )
 
+    def __unicode__(self):
+		return unicode(self.estudiante) or u''

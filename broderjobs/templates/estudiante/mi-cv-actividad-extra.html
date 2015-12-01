@@ -1,8 +1,26 @@
-{% load crispy_forms_tags %}
-
 <div style="margin: 0 50px">
-	<form class="form-horizontal" action="{{ request.build_absolute_uri }}" method="post">
-		{% crispy form %}
-		<input type="submit" class="btn btn-submit col-md-offset-2">
+	<form id = "cv-actividad_extra" class="" action="{{ request.build_absolute_uri }}" method="post">{%csrf_token%}
+		<div class = "form-group">
+			<label class = "control-label">Organización</label>
+				{{form.organizacion}}
+		</div>
+		<div class = "form-group">
+			<label class = "control-label">Descripción</label>
+			<textarea id = "txt-descripcion" name="descripcion"></textarea>
+				{{form.descripcion}}
+
+		</div>
 	</form>
 </div>
+
+<script>
+	$(function(){
+		$("#cv-actividad_extra input").addClass("form-control");
+		$("#cv-actividad_extra textarea").addClass("form-control");
+		$("#form-modal .modal-title").html('<i class="clip"></i> &nbsp;Actividades extraacadémicas');
+		$("#id_descripcion").hide();
+		$("#txt-descripcion").on("input", function(){
+			$("#id_descripcion").val($("#txt-descripcion").val());
+		});
+	});
+</script>
