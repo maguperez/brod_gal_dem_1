@@ -6,7 +6,7 @@
 <section class="misprocesos">
 			<div class="centered">
 				<div class="panel left principal">
-					<table class="dark" id="procesos">
+					<table class="dark bj-table" id="procesos">
 						<thead>
 							<tr>
 								<th>Empresa</th>
@@ -37,4 +37,9 @@
 
 {% endblock content%}
 {% block js %}
+<script>
+	$(function(){
+		$("#link-procesos").addClass("active");
+	})
+</script>
 {% endblock%}
