@@ -214,11 +214,19 @@ class ConocimientoForm(forms.ModelForm):
 class ExperienciaForm(forms.ModelForm):
     fecha_desde = forms.DateField(widget=forms.DateInput())
     fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+
+    puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puestos', 'class': 'full'}))
+    puestos_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    empresas = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Empresas', 'class': 'full'}))
+    empresas_hidden = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
         model = ExperienciaProfesional
-        fields = ('puesto', 'empresa', 'fecha_desde','fecha_hasta', 'descripcion')
+        fields = ('fecha_desde','fecha_hasta', 'descripcion')
         widget = {
-            'descripcion': forms.widgets.Textarea,
+            'descripcion': forms.widgets.Textarea
+
         }
 
     @property
