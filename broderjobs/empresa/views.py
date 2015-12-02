@@ -125,14 +125,41 @@ class OportunidadBusquedaView(TemplateView):
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
 
-from endless_pagination.decorators import page_template
-@page_template('empresa/oportunidad_listar_index.html')  # just add this decorator
-def oportunidad_listar(
-        request, template='empresa/oportunidad-listar.html', extra_context=None):
-    context = {
-        'oportunidades': Oportunidad.objects.all(),
-    }
-    if extra_context is not None:
-        context.update(extra_context)
-    return render_to_response(
-        template, context, context_instance=RequestContext(request))
+
+from django.http import HttpResponse
+from django.core.paginator import InvalidPage, Paginator
+
+
+def oportunidades(request):
+    oportunidades = Oportunidad.objects.all().order_by('fecha_publicacion')
+    a_oportunidades =[]
+    for i in range(0, len(oportunidades)):
+        empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
+        ciudad = empresa.ciudad
+        pais = empresa.pais
+        e = {
+            "id": oportunidades[i].id,
+            "titulo": oportunidades[i].titulo,
+            "empresa": empresa.nombre,
+            "logo": empresa.set_logo,
+            "ubicacion": str(ciudad) + ', ' +str(pais),
+            "fecha_cese": str(oportunidades[i].fecha_cese),
+            "remuneracion": str(oportunidades[i].remuneracion),
+        }
+        a_oportunidades.append(e)
+    paginator = Paginator(oportunidades, 5)
+    if request.method == 'GET':
+        if request.is_ajax():
+            if request.GET.get('callback'):
+                # Paginate based on the page number in the GET request
+                page_number = request.GET.get('callback');
+                try:
+                    page_objects = paginator.page(page_number)
+                except InvalidPage:
+                    return HttpResponse({'end':'end'},content_type="json")
+                # Serialize the paginated objects
+                data = serializers.serialize("json", page_objects)
+                return HttpResponse(data, content_type='application/json')
+    oportunidades = paginator.page(1)
+    data = serializers.serialize("json", oportunidades)
+    return HttpResponse(data, content_type='application/json')

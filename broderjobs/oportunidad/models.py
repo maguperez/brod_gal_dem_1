@@ -19,6 +19,8 @@ class Oportunidad(models.Model):
     remuneracion = models.ForeignKey(TipoRemuneracion, default=None, null=True, blank=True, verbose_name="Remuneracion")
     remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )
+    fecha_creacion = models.DateField(default=None,null=True, blank=True)
+    fecha_publicacion = models.DateField(default=None,null=True, blank=True)
     fecha_cese = models.DateField(default=None,null=True, blank=True )
     tipo_puesto = models.ForeignKey(TipoPuesto,default=None, null=True, blank=True, verbose_name="Tipo Puesto")
     beneficio = models.ManyToManyField(Beneficio, default=None, blank=True, verbose_name="Beneficios")

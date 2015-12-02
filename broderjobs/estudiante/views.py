@@ -486,7 +486,14 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
 class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
-        oportunidades = Oportunidad.objects.filter(Q(titulo__icontains=busqueda))
+        oportunidades = Oportunidad.objects.filter(
+            Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
+            Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
+            Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains = busqueda) |
+            Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains = busqueda) |
+            Q(remuneracion__descripcion__icontains=busqueda),
+            estado = 'A'
+        ).order_by('fecha_publicacion')
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
             empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
@@ -556,4 +563,5 @@ class ProcesosView(LoginRequiredMixin, TemplateView):
         context = super(ProcesosView, self).get_context_data(**kwargs)
         context['postulaciones'] = postulaciones
         return context
+
 
