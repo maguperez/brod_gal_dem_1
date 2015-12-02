@@ -55,6 +55,10 @@ urlpatterns = [
 
 	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
 
+	url(r'^estudiante-empresa-busqueda/$', views.EstudianteEmpresaBusquedaView.as_view(), name="empresa-busqueda"),
+
+	url(r'^estudiante-puesto-busqueda/$', views.EstudiantePuestoBusquedaView.as_view(), name="puesto-busqueda"),
+
 	url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
 
 	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),

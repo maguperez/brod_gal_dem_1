@@ -1,13 +1,36 @@
+<!--Agregado por Jonathan-->
+{% load staticfiles %}
+
+		<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+		<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
+
+
+		<link rel="stylesheet" href="{% static 'css/select2.css' %}">
+
+		<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
+		<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+
+<!--Fin agregado Jonathan-->
 <div style="margin: 0 50px">
 	<form id = "cv-experiencia" action="{{ request.build_absolute_uri }}" method="post">{%csrf_token%}
 		<div class="form-horizontal">
 			<div class ="form-group">
 				<label class = "col-sm-3">Cargo</label>
 				<div class = "col-sm-4">
-					{{form.puesto}}
+					{{form.puestos_hidden}}
+					{{form.puestos}}
 				</div>
 				<div class = "col-sm-4">
-					{{form.empresa}}
+					{{form.empresas_hidden}}
+					{{form.empresas}}
 				</div>
 			</div>
 
@@ -48,5 +71,95 @@
 				minViewMode: "months"
 			});
 		});
+
+		$("#id_puestos").autocomplete({
+			//source: ids
+			appendTo: "#form-modal",
+			source : function(r,res){
+				//res(ids);
+
+				$.ajax({
+					data : {'busqueda': r.term},
+					url: '{%url "puesto-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.value = obj.pk;
+									obje.label = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								res(arreglo);
+							}
+						}
+					}
+
+				});
+
+				 document.ready
+			},
+			select: function(event, ui) {
+					// prevent autocomplete from updating the textbox
+					event.preventDefault();
+					// manually update the textbox and hidden field
+					$(this).val(ui.item.value);
+					GuardarValorHidden('id_puestos_hidden',this.id,ui);
+				}
+		});
+
+		$("#id_empresas").autocomplete({
+			//source: ids
+			appendTo: "#form-modal",
+			source : function(r,res){
+				//res(ids);
+
+				$.ajax({
+					data : {'busqueda': r.term},
+					url: '{%url "empresa-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.value = obj.pk;
+									obje.label = obj.fields.nombre;
+
+									arreglo.push(obje);
+								});
+
+								res(arreglo);
+							}
+						}
+					}
+
+				});
+
+				 document.ready
+			},
+			select: function(event, ui) {
+					// prevent autocomplete from updating the textbox
+					event.preventDefault();
+					// manually update the textbox and hidden field
+					$(this).val(ui.item.value);
+					GuardarValorHidden('id_empresas_hidden',this.id,ui);
+				}
+		});
+
 	});
+
+	function GuardarValorHidden(idHidden, idElemento, ui){
+		document.getElementById(idHidden).value = ui.item.value;
+		document.getElementById(idElemento).value = ui.item.label;
+	}
+
+
 </script>

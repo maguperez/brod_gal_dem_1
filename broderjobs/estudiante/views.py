@@ -470,6 +470,22 @@ class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 
+class EstudianteEmpresaBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        empresas = Empresa.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', empresas,
+                                     fields=('id','nombre'))
+        return HttpResponse(data, content_type='application/json')
+
+class EstudiantePuestoBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        puestos = Puesto.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', puestos,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
 class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
     login_required = True
     template_name = 'estudiante/oportunidad-detalle.html'
