@@ -278,7 +278,7 @@
         },
     };
 	$(function(){
-		$("input, select, textarea").addClass("form-control");
+		$("input:not([type=submit]), select, textarea").addClass("form-control");
 		Oportunidad.inicializar_mapa();
 	});
 

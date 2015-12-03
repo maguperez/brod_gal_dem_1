@@ -19,7 +19,7 @@
 
 <script>
 	(function(){
-
+		$("#link-oportunidades").addClass("active");
 	  var addOportunidad = function(obj,el) {
 		  var op = '';
 		  op += '<li class="oportunidad-estadistica">';
@@ -43,6 +43,7 @@
 		  op += '<label>'+'obj.estado'+'</label>';
 		  op += '<label>CIERRA EL' + obj.fecha_cese+'</label>';
 		  op += '</div><div class="clear"></div></div>';
+		  op += '<div class="row"><div class = "col-sm-12">';
 		  op += '<div class="visualizaciones"><div class="box"> <div class="estadistica"> <div class="cifra">';
 		  op += '<label>792</label>';
 		  op += '<label>Visualizaciones</label>';
@@ -68,7 +69,7 @@
 		  op += '<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>';
 		  op += '<div class="grafico grafico-inscripciones">';
 		  op += '<img src="/static/img/estadisticas-inscripciones.jpg" />';
-		  op += '</div></div></div><div class="clear"></div></li>';
+		  op += '</div></div></div><div class="clear"></div></div></div></li>';
 
 		  $(el).html(op);
 

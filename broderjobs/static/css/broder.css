@@ -7,7 +7,7 @@ body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img 
 body.static {overflow: hidden;}
 body > section {margin-bottom: 50px;}
 h1 {font-size: 23px}
-h2 {font-size: 13em}
+h2 {font-size: 19px; margin-top: 0px !important;}
 h3 {font-size: 16px}
 h4 {font-size: 13px}
 ul, ol {list-style: none;}
@@ -543,16 +543,17 @@ header.menu .centered { height: 47px; }
 .oportunidades-empresa .oportunidad-estadistica .estado label:nth-child(1) {width: 130px; height: 23px; line-height: 23px; margin-bottom: 5px; background: #f50; color: #fff;}
 .oportunidades-empresa .oportunidad-estadistica .estado label:nth-child(2) {font-size: 0.75em;}
 .oportunidades-empresa .oportunidad-estadistica .visualizaciones {width: 28%; float: left;}
-.oportunidades-empresa .oportunidad-estadistica .visualizaciones .box {height: 135px; padding: 20px 15px;}
+.oportunidades-empresa .oportunidad-estadistica .visualizaciones .box {height: 190px; padding: 20px 15px;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica:not(:last-child) {margin-bottom: 20px;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica .cifra {width: 45%; float: left;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica label {display: block;}
-.oportunidades-empresa .oportunidad-estadistica .estadistica label:nth-child(1) {margin-top: 3px; font-size: 2.4em; font-weight: bold;}
+.oportunidades-empresa .oportunidad-estadistica .estadistica label:nth-child(2) {font-weight: normal; }
+.oportunidades-empresa .oportunidad-estadistica .estadistica label:nth-child(1) { line-height: normal !Important; margin-top: 3px; font-size: 2.4em; font-weight: bold; margin-bottom: 0px !Important;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica .grafico {width: 55%; float: left;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica .grafico.usuarios img {width: 20%;}
 .oportunidades-empresa .oportunidad-estadistica .estadistica .grafico.usuarios img:not(:nth-child(3n+1)) {margin-left: 16%;}
 .oportunidades-empresa .oportunidad-estadistica .inscripciones {width: 72%; height: 175px; float: left;}
-.oportunidades-empresa .oportunidad-estadistica .inscripciones .box {height: 135px; margin-left: 5px; padding: 20px 0 20px 19px;}
+.oportunidades-empresa .oportunidad-estadistica .inscripciones .box {height: 190px; margin-left: 5px; padding: 20px 0 20px 19px;}
 .oportunidades-empresa .oportunidad-estadistica .inscripciones .titulo {margin-bottom: 20px; font-size: 1.05em; font-family: 'Helvetica'; display: block;}
 
 /*OPORTUNIDAD EMPRESA*/
