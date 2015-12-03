@@ -73,11 +73,13 @@
                     email: true
                 },
                 password1: {
-                    required: true
+                    required: true,
+					min: 6
                 },
 				password2: {
                     required: true,
-					equalTo: "#id_password1"
+					equalTo: "#id_password1",
+					min: 6
                 },
 				groups: {
 					date: "dia mes ano"
@@ -98,11 +100,13 @@
                     email: "Introduzca un correo valido"
                 },
                 password1: {
-                    required: "Este campo es obligatorio"
+                    required: "Este campo es obligatorio",
+					min: "La contraseña debe tener al menos seis (6) caracteres"
                 },
 				password2: {
                     required: "Este campo es obligatorio",
-					equalTo: "Las contraseñas deben ser iguales"
+					equalTo: "Las contraseñas deben ser iguales",
+					min: "La contraseña debe tener al menos seis (6) caracteres"
                 },
 				tyc: {
 					required: "Debe aceptar los términos y condiciones",

@@ -58,7 +58,8 @@
                     email: true
                 },
                 password: {
-                    required: true
+                    required: true,
+                    min: 6
                 }
             },
             messages: {
@@ -67,7 +68,8 @@
                     email: "Introduzca un correo válido"
                 },
                 password: {
-                    required: "Este campo es obligatorio"
+                    required: "Este campo es obligatorio",
+                    min: "La contraseña debe tener al menos seis (6) caracteres"
                 }
             }
         });
