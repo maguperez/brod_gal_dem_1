@@ -247,6 +247,10 @@
 <script>
 	$(function(){
 		$("#link-empresa").addClass("active");
+		$('.popup .close').click(function(e) {
+			window.history.back();
+			$('body').removeClass('static');
+		});
 	});
 </script>
 {%endblock js%}

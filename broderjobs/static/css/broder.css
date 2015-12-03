@@ -1,15 +1,15 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0;}
-body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial' !important; font-weight: normal; font-size: 0.9em; color: #a5a5a5;}
+body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13px; color: #a5a5a5;}
 ::-webkit-input-placeholder {color: #ccc}
 :-moz-placeholder {color: #ccc}
 ::-moz-placeholder {color: #ccc}
 :-ms-input-placeholder {color: #ccc}
 body.static {overflow: hidden;}
 body > section {margin-bottom: 50px;}
-h1 {font-size: 1.8em !important;}
-h2 {font-size: 1.7em !Important;}
-h3 {font-size: 1.25em !important;}
-h4 {font-size: 0.9em !important;}
+h1 {font-size: 23px}
+h2 {font-size: 13em}
+h3 {font-size: 16px}
+h4 {font-size: 13px}
 ul, ol {list-style: none;}
 a {text-decoration: none; cursor: pointer;}
 p {text-align: justify; line-height: 20px;}
@@ -156,7 +156,7 @@ i.alcance.bajo {background-position: 0 0;}
 
 /*BUTTONS*/
 a {transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -webkit-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -moz-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -o-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear;}
-.btn-action {border: 1px solid #f50; color: #f50; font-size: 0.85em; text-align: center; display: block;}
+.btn-action {border: 1px solid #f50; color: #f50; font-size: 12px; text-align: center; display: block;}
 .btn-action:hover {color: #fff; background-color: #f50 !important;}
 .btn-save {width: 80px; height: 30px; line-height: 30px; color: #fff; font-size: 0.85em; text-align: center; background: #5d9cf9; display: block;}
 .btn-save:hover {background: #8cbcf4;}
@@ -215,10 +215,10 @@ a.delete:hover {background-position: 0 -9px;}
 .contextual-menu.active {opacity: 1; pointer-events: all;}
 .contextual-menu .wrapper {padding: 3px 0;}
 .contextual-menu .pin {width: 10px; height: 9px; position: absolute; top: -9px; right: -1px; background: transparent url('../img/assets/contextual_menu.png') 0 0 no-repeat;}
-.contextual-menu a {height: 15px; padding: 13px; display: block;}
+.contextual-menu a {/*height: 15px;*/ padding: 13px; display: block;}
 .contextual-menu a i, .contextual-menu a span {float: left;}
 .contextual-menu a i {margin-top: -2px;}
-.contextual-menu a .v-line {margin: 0 10px;}
+.contextual-menu a .v-line { margin: 0 10px; height: 15px; }
 .contextual-menu a:hover {color: #f50;}
 
 /*PANELES*/
@@ -261,7 +261,7 @@ a:hover { text-decoration: none !Important }
 .home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em;}
 .home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; margin: 80px !Important;}
 .home .login .content {position: relative; min-width: 270px}
-.home .login.active {opacity: 1; pointer-events: all;}
+.home .login.active {opacity: 1; pointer-events: all; z-index: 1050}
 .home .login .saludo {margin-bottom: 10px; text-align: center; color: #fff; font-family: 'Roboto Condensed'; display: block;}
 .home .login .ingresa-facebook {width: 268px; height: 37px; line-height: 37px; color: #fff; font-family: 'Roboto Condensed'; text-align: center; text-indent: -30px; font-size: 1.15em; background: transparent url('../img/buttons/ingresa_facebook.png') 0 0 no-repeat; display: block;}
 .home .login .ingresa-email {text-align: center; color: #fff; display: block;}
@@ -271,14 +271,14 @@ a:hover { text-decoration: none !Important }
 .home .login .datos input{width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #333; font-size: 0.8em;}
 .home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #ccc; font-size: 0.8em;}
 .home .login .opciones {margin-top: -5px; text-align: center;}
-.home .login .opciones a, .home .login .opciones label{font-size: 10px; color: #fff;}
+.home .login .opciones a, .home .login .opciones label{font-size: 11px; color: #fff;}
 .home .login .opciones input{margin: 0 5px -1px 0;}
 .home .login .ingresar, .home .login .registrarme {width: 100px; height: 25px; line-height: 25px; margin: 20px auto; text-align: center; color: #fff; font-family: 'Roboto Condensed'; font-size: 0.9em; background: #f50; padding-right:0 px; border: none; cursor: pointer; display: inherit;}
-.home .login .registrate {margin: -10px 0; display: block; text-align: center; color: #fff; font-size: 0.7em;}
+.home .login .registrate {margin: -10px 0; display: block; text-align: center; color: #fff; font-size: 11px;}
 .home .login .registrate-email {max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -moz-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -o-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;}
 .home .login .registrate-email:target {max-height: 500px; opacity: 1;}
 .home .login .registrate-email .terminos-condiciones {font-size: 1em;}
-.home .login .indicacion {margin-top: 10px; display: block; text-align: center; color: #fff; font-size: 0.7em;}
+.home .login .indicacion {margin-top: 10px; display: block; text-align: center; color: #fff; font-size: 11px}
 .home .login .division {margin: 25px 0;}
 .home .login .division .line {width: 45%; height: 1px; background: rgba(255,255,255,0.5); float: left;}
 .home .login .division .line.full {width: 100%;}
@@ -352,7 +352,7 @@ header.principal .actions {margin-top: 10px;}
 header.principal .actions a {padding: 8px 15px; border: 1px solid #fff; color: #fff; border-radius: 7px; font-size: 0.95em;}
 header.principal .actions a:hover {color: #f50; background: #fff;}
 header.menu {width: 100%;  border-bottom: 1px solid #ddd; background-color: white;}
-header.menu a {height: 47px; line-height: 50px; margin: 0 25px 2px 25px; font-family: 'Helvetica'; font-size: 1.1em; float: left; color: #a5a5a5}
+header.menu a {height: 47px; line-height: 50px; margin: 0 25px 2px 25px; font-family: 'Helvetica'; font-size: 16px; float: left; color: #a5a5a5}
 header.menu a:hover, header.menu a.active {color: #f50; text-decoration: none}
 header.menu a.active {margin-bottom: -1px; border-bottom: 3px solid #f50;}
 header.menu .centered { height: 47px; }
@@ -364,7 +364,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-box .detalle {width: 76%;}
 .oportunidad-box .detalle.full {width: 100%;}
 .oportunidad-box .titulo {margin-bottom: 7px; display: block;}
-.oportunidad-box .titulo h2 {font-family: 'Roboto Light' !Important; font-size: 1.5em !Important; text-shadow: 0 0 1px rgba(93, 156, 249, 0.5); margin: 0px !Important; font-weight: normal !Important;}
+.oportunidad-box .titulo h2 {font-family: 'Roboto Light'; font-size:19px; text-shadow: 0 0 1px rgba(93, 156, 249, 0.5); margin: 0px !Important; font-weight: normal !Important;}
 .oportunidad-box .datos, .oportunidad-box .compatibilidad, .oportunidad-box .ver-oportunidad {float: left;}
 .oportunidad-box .datos {width: 38%; margin-top: 10px; line-height: 30px; font-size: 0.95em;}
 .oportunidad-box .datos i {margin-top: 8px;}
@@ -378,10 +378,11 @@ header.menu .centered { height: 47px; }
 .oportunidad-resumen .imagen, .oportunidad-resumen .detalle {float: left;}
 .oportunidad-resumen .postulacion {float: right;}
 .oportunidad-resumen .imagen {width: 130px; height: 130px;}
-.oportunidad-resumen .detalle {width: 360px; margin-left: 60px !important;}
+.oportunidad-resumen .detalle {width: 350px; margin-left: 60px !important;}
 .oportunidad-resumen .detalle h1, .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label {display: block;}
 .oportunidad-resumen .detalle h1 {margin: 12px 0 5px 0; color: #848484;}
-.oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label {line-height: 25px; font-size: 1em;}
+.oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label,
+.oportunidad-resumen .detalle a h4{line-height: 25px !important; font-size: 14px;}
 
 /*OPORTUNIDAD DETALLE*/
 .oportunidades-estudiante .search {width: 330px; margin-bottom: 20px; background: rgba(0, 0, 0, 0) url(../img/icons/search.png) 100% 50% no-repeat !important;}
@@ -422,11 +423,11 @@ header.menu .centered { height: 47px; }
 .empresas .list .box header, .empresa .left .box header {padding: 0; margin: -1px;}
 .empresas .list .box header img, .empresa .left .box header img {width: 100%;}
 .empresas .list .box .content, .empresa .left .box .content {padding: 10px 15px;}
-.empresas .list .box .descripcion, .empresa .left .box .descripcion {margin: 4px 0 6px 0; font-size: 0.85em; display: block;}
+.empresas .list .box .descripcion, .empresa .left .box .descripcion {margin: 4px 0 6px 0; font-size: 12px; display: block;}
 .empresas .list .box .rating label{line-height: 25px; margin: 3px 0 0 7px; font-size: 1.4em; font-weight: bold;}
 
 /*EMPRESA*/
-.empresa .evaluacion.box {margin-top: 10px; padding: 6px; text-align: center;}
+.empresa .evaluacion.box {margin-top: 10px; padding: 5px; text-align: center;}
 .empresa .evaluacion.box .titulo {padding-bottom: 12px !important;}
 .empresa .evaluacion.box .rating {padding-top: 10px !important;}
 .empresa .evaluacion.box .rating .puntaje {margin-top: 10px; font-size: 1.2em; font-weight: bold; display: block;}
@@ -451,17 +452,17 @@ header.menu .centered { height: 47px; }
 .popup.evaluacion-empresa  .popup-box {width: 700px;}
 .popup.evaluacion-empresa  .content {padding: 20px 50px;}
 .popup.evaluacion-empresa section:not(:last-child) {padding: 25px 0 !important; border-bottom: 1px solid #ddd !important;}
-.popup.evaluacion-empresa h3 {margin-bottom: 25px; font-weight: normal; font-size: 1.5em;}
+.popup.evaluacion-empresa h3 {font-family: 'Roboto Condensed'; margin-bottom: 25px; font-weight: normal; font-size: 1.5em;}
 .popup.evaluacion-empresa .empresa, .popup.evaluacion-empresa .descripcion {display: block;}
-.popup.evaluacion-empresa .empresa {margin-bottom: 3px; font-size: 1.05em;}
-.popup.evaluacion-empresa .descripcion {margin-bottom: 15px; font-size: 0.75em;}
+.popup.evaluacion-empresa .empresa {margin-bottom: 3px; font-size: 15px;}
+.popup.evaluacion-empresa .descripcion {margin-bottom: 15px; font-size: 10px;}
 .popup.evaluacion-empresa .imagen {width: 180px; float: left;}
 .popup.evaluacion-empresa .criterios {margin-left: 55px; float: left;}
 .popup.evaluacion-empresa .criterios > li {padding: 14px 0;}
 .popup.evaluacion-empresa .criterios label, .popup.evaluacion-empresa .criterios ol {float: left;}
-.popup.evaluacion-empresa .criterios label {width: 185px; height: 20px; line-height: 20px; font-size: 1em;}
+.popup.evaluacion-empresa .criterios label {width: 185px; height: 20px; line-height: 20px; font-size: 14px;}
 .popup.evaluacion-empresa .criterios a {width: 17px; height: 20px; padding: 0 5px; display: block; text-indent: -20000px; background: transparent url('../img/icons/rating.png') 0 0 no-repeat;}
-.popup.evaluacion-empresa input[type="checkbox"] + label {font-size: 1em;}
+.popup.evaluacion-empresa input[type="checkbox"] + label {font-size: 14px;}
 .popup.evaluacion-empresa .btn-save {width: 140px; font-size: 1.05em;}
 .popup.evaluacion-empresa h4 {font-size: 1.05em;}
 .popup.evaluacion-empresa p {margin-top: 20px; font-size: 0.9em;}
@@ -678,25 +679,7 @@ header.menu .centered { height: 47px; }
 }
 
 .navbar {
-	box-shadow: /* Shadow beneath the bar and edge highlights. */
-		/* Layered single pixel shadows to create a one sided shadow effect. */
-		0 5px 0 0 rgba(0, 0, 0, 0.01),
-		0 4px 0 0 rgba(0, 0, 0, 0.02),
-		0 3px 0 0 rgba(0, 0, 0, 0.04),
-		0 2px 0 0 rgba(0, 0, 0, 0.06),
-		0 1px 0 0 rgba(0, 0, 0, 0.08),
-		/* Top highlight */
-		0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
-		/* Left highlight */
-		1px 0 0 0 rgba(255, 255, 255, 0.1) inset,
-		/* Right highlight */
-		-1px 0 0 0 rgba(255, 255, 255, 0.1) inset,
-		/* Bottom lowlight */
-		0 -1px 0 0 rgba(0, 0, 0, 0.1) inset;
 
-	/* Glass gradient overlay. */
-	background-image: -webkit-linear-gradient(top, rgba(255,255,255, 0.05) 50%, rgba(0,0,0, 0.02) 51%); /*  Webkit syntax. */
-	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.02) 51%); /* Final syntax. */
 	background-size: 100%;
 	background-repeat: no-repeat;
 
