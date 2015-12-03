@@ -53,6 +53,25 @@ def estado_oportunidad():
     anos.append(('C', 'Cerrado'))
     return anos
 
+def estado_postlacion():
+    anos = []
+    anos.append(('P', 'Postulacion'))
+    anos.append(('E', 'En Evaluacion'))
+    anos.append(('F', 'Finalizado'))
+    return anos
+
+def estado_mensaje():
+    anos = []
+    anos.append(('G', 'Guardado'))
+    anos.append(('E', 'Eliminado'))
+    return anos
+
+def estado_registro():
+    anos = []
+    anos.append(('A', 'Activo'))
+    anos.append(('I', 'Inactivado'))
+    return anos
+
 
 
 

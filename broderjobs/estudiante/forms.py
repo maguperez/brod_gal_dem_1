@@ -102,16 +102,12 @@ class RegistroCVForm(forms.ModelForm):
         self.fields["carga_horaria"].widget = forms.widgets.RadioSelect()
         self.fields["carga_horaria"].choices =cargas
 
-class FotoForm(forms.ModelForm):
-    class Meta:
-        model = Estudiante
-        fields = ('foto', 'persona')
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
+class FotoForm(forms.Form):
+
+   foto = forms.ImageField(label= "Seleccione la Imagen que desea cargar")
+   #  class Meta:
+   #      model = Estudiante
+   #      fields = ('foto', 'persona')
 
 class UniqueUserEmailField(forms.EmailField):
     def validate(self, value):

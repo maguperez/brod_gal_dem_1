@@ -1,10 +1,23 @@
 
-{% load crispy_forms_tags %}
-
 
 <div style="margin: 0 50px">
-	<form class="form-horizontal" enctype="multipart/form-data"  action="{% url 'mi-cv-foto' %}" method="post">
-		{% crispy form %}
+
+	{% if form.errors %}
+		{% for field in form %}
+			{% for error in field.errors %}
+				<div class="alert alert-error">
+					<strong>{{ error|escape }}</strong>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% for error in form.non_field_errors %}
+			<div class="alert alert-error">
+				<strong>{{ error|escape }}</strong>
+			</div>
+		{% endfor %}
+	{% endif %}
+	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+		{{form.as_p}}
 		<input type="submit" class="btn btn-submit col-md-offset-2">
 	</form>
 </div>
