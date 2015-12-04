@@ -53,7 +53,7 @@ def estado_oportunidad():
     anos.append(('C', 'Cerrado'))
     return anos
 
-def estado_postlacion():
+def estado_postulacion():
     anos = []
     anos.append(('P', 'Postulacion'))
     anos.append(('E', 'En Evaluacion'))

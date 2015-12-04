@@ -48,11 +48,11 @@ class Oportunidad(models.Model):
 		return unicode(self.titulo) or u''
 
 class Postulacion(models.Model):
+    items_estado = utilitarios.estado_postulacion()
+
     oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
-    fecha = models.DateField(default=None,null=True, blank=True )
-    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-
+    estado_postulacion =  models.CharField(choices=items_estado, max_length=1, default='A', null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
