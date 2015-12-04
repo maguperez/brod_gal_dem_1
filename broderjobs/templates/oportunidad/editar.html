@@ -20,93 +20,105 @@
 
 							</div>
 
-                            <label>Estado:  </label>{{form.estado}}
+                            <div class = "col-sm-3"><label>Estado:  </label>{{form.estado}}</div>
                             <input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />
 							<div class="clear"></div>
 						</header>
 						<div class="content">
 							<section class="perfil">
 								<h3 class="title"><i class="work"></i>Perfil de la oportunidad</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>T&iacute;tulo de vacante</label>
-										<p>{{form.titulo}}</p>
+								<div class="detalle form-horizontal">
+									<div class ="form-group">
+										<label class = "col-sm-3">T&iacute;tulo de vacante</label>
+										<div class = "col-sm-9">
+											{{form.titulo}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Jornada de trabajo</label>
-										<p class="align-left">
+									<div class ="form-group jornada_trabajo">
+										<label class = "col-sm-3">Jornada de trabajo</label>
+										<div class = "col-sm-9">
 											{% for carga in form.carga_horaria %}
-											 {{ carga.errors }}
-											 {{ carga }}
+												 {{ carga.errors }}
+												 {{ carga }}
 											{% endfor %}
-
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Localizaci&oacute;n</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Localizaci&oacute;n</label>
+										<div class = "col-sm-4">
 											{{form.pais}}
+										</div>
+										<div class = "col-sm-4">
 											{{form.ciudad}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="less-margin">
-										<label>Remuneraci&oacute;n</label>
-										<p class="align-left">
+									<div class ="form-group remuneracion">
+										<label class = "col-sm-3">Remuneraci&oacute;n</label>
+										<div class = "col-sm-9">
 											{% for r in form.remuneracion %}
-											 {{ r.errors }}
-											 {{ r }}
-										{% endfor %}
-										</p>
+											 	{{ r.errors }}
+											 	{{ r }}
+											{% endfor %}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>&nbsp;</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-4">
 											{{form.remuneracion_min}}
+										</div>
+										<div class = "col-sm-4">
 											{{form.remuneracion_max}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Fecha de cierre</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Fecha de cierre</label>
+										<div class = "col-sm-8">
 											{{form.fecha_cese}}
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							</section>
 							<section class="informacion">
 								<h3 class="title"><i class="info"></i>Informaci&oacute;n b&aacute;sica</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Tipo de vacante *</label>
-										<p>
+								<div class="detalle form-horizontal">
+									<div class ="form-group tipo_puesto">
+										<label class = "col-sm-3">Tipo de vacante *</label>
+										<div class = "col-sm-9">
 											{% for puesto in form.tipo_puesto %}
-											 {{ puesto.errors }}
-											 {{ puesto }}
-										{% endfor %}
-										</p>
+											 	{{ puesto.errors }}
+											 	{{ puesto }}
+											{% endfor %}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="full less-margin">
-										<label>Resumen *</label>
-
+									<div class ="form-group tipo_puesto">
+										<label class = "col-sm-3">Resumen *</label>
+										<div class = "col-sm-9">
+											{{form.resumen}}
+										</div>
 										<div class="clear"></div>
-									</div>
-									<div class="full">
-										{{form.resumen}}
 									</div>
 								</div>
 							</section>
 							<section class="perfil">
 								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
 								<div class="detalle col-4-6">
+									<div class ="form-group tipo_puesto">
+										<label class = "col-sm-3">Grado de estudio *</label>
+										<div class = "col-sm-9">
+											{{form.grado_estudio}}
+											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
+										</div>
+										<div class="clear"></div>
+									</div>
 									<div>
-										<label>Grado de estudio *</label>
+										<label></label>
 										<p>
 											{{form.grado_estudio}}
 											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
@@ -206,4 +218,16 @@
 			</div>
 		</section>
 </form>
+<style>
+	.jornada_trabajo label,
+	.remuneracion label,
+	.tipo_puesto label{
+		width: 25%;
+	}
+</style>
+<script>
+	$(function(){
+		$("input:not([type=submit]), select, textarea").addClass("form-control");
+	})
+</script>
 {% endblock%}
