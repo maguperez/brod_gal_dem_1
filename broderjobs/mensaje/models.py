@@ -20,6 +20,9 @@ class Mensaje(models.Model):
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
+    def __unicode__(self):
+        return self.asunto
+
 class Mensaje_Destinatario(models.Model):
     items_estado = utilitarios.estado_mensaje()
 
@@ -31,3 +34,6 @@ class Mensaje_Destinatario(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return self.usuario_destinatario

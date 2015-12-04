@@ -18,6 +18,7 @@ from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesiona
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector
 from oportunidad.models import Oportunidad, Postulacion
+from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utilitarios
 from main.utilitarios import LoginRequiredMixin
 
@@ -239,7 +240,6 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     form_class =forms.InfoPersonalForm
     template_name = 'estudiante/mi-cv-info-personal.html'
     success_url = reverse_lazy('mi-cv')
-
     def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
@@ -605,7 +605,7 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
 
         postulaciones =[]
         for i in range(0, len(p)):
-            oportunidad = Oportunidad.objects.get(id = p[i].oportunidad.id)
+            oportunidad = get_object_or_404(Oportunidad, id = p[i].oportunidad.id)
             empresa = Empresa.objects.get(id=oportunidad.empresa.id)
             ciudad = empresa.ciudad
             pais = empresa.pais
@@ -635,10 +635,15 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         postulacion =  get_object_or_404(Postulacion, pk=id)
         oportunidad =  get_object_or_404(Oportunidad, pk = postulacion.oportunidad.id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        try:
+            mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user, mensaje__postulacion_id = postulacion.id)
+        except mensajes.DoesNotExist:
+            mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
         context['postulacion'] = oportunidad
         context['oportunidad'] = oportunidad
         context['empresa'] = empresa
+        context['mensajes'] = mensajes
         return context
 
 
