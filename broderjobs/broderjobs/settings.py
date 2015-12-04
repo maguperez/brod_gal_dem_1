@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BroderJobs',
+        'NAME': 'BroderJobs1',
         'USER': 'broder',
         'PASSWORD': 'br753des',
         'HOST': '191.168.19.11',

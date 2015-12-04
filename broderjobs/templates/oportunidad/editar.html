@@ -1,6 +1,10 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
-
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <form action="" method="post">{%csrf_token%}
 	<section class="oportunidad-detalle">
 			<div class="centered">
@@ -77,7 +81,7 @@
 									</div>
 									<div class ="form-group">
 										<label class = "col-sm-3">Fecha de cierre</label>
-										<div class = "col-sm-8">
+										<div class = "col-sm-4">
 											{{form.fecha_cese}}
 										</div>
 										<div class="clear"></div>
@@ -108,8 +112,8 @@
 							</section>
 							<section class="perfil">
 								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
-								<div class="detalle col-4-6">
-									<div class ="form-group tipo_puesto">
+								<div class="detalle">
+									<div class ="form-group">
 										<label class = "col-sm-3">Grado de estudio *</label>
 										<div class = "col-sm-9">
 											{{form.grado_estudio}}
@@ -117,72 +121,77 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label></label>
-										<p>
-											{{form.grado_estudio}}
-											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
-										</p>
-										<div class="clear"></div>
-									</div>
-									<div>
-										<label>Periodo de graduaci&oacute;n</label>
-										<p class="align-left">
+									<div class ="form-group">
+										<label class = "col-sm-3">Periodo de graduaci&oacute;n</label>
+										<div class = "col-sm-9">
 											Estudiantes de 7° hasta graduados hace un a&ntilde;o
 											<img src="../img/barra-deslizable.jpg" />
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Universidades de preferencia</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Universidades de preferencia</label>
+										<div class = "col-sm-9">
 											{{form.universidad}}
 											<label class="descripcion">Complete este campo s&oacute;lo si tiene una preferencia por los candidatos de alguna universidad. Introduzca las siglas de la universidad y seleccione de la lista.</label>
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Carrera *</label>
-										<p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Carrera *</label>
+										<div class = "col-sm-9">
 											{{form.carrera}}
 											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las carreras compatibles con el área donde el profesional actuará.</label>
-										</p>
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Idiomas</label>
-										<p>{{form.idioma}}</p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Idiomas</label>
+										<div class = "col-sm-9">
+											{{form.idioma}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div>
-										<label>Conocimientos</label>
-										<p>{{form.conocimiento}}</p>
+									<div class ="form-group">
+										<label class = "col-sm-3">Conocimientos</label>
+										<div class = "col-sm-9">
+											{{form.conocimiento}}
+										</div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							</section>
 							<section class="beneficios">
 								<h3 class="title"><i class="like"></i>Beneficios</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Beneficios</label>
-										<p>{{form.beneficio}}</p>
-										<div class="clear"></div>
+								<div class ="form-group">
+									<label class = "col-sm-3">Beneficios</label>
+									<div class = "col-sm-9">
+										{{form.beneficio}}
 									</div>
+									<div class="clear"></div>
 								</div>
 							</section>
-							<section class="ubicacion">
+							<section class="Editar">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
-								<div class="detalle col-3-7">
-									<div>
-										<label>Direcci&oacute;n</label>
-										<!--<p><input class="full" type="text" placeholder="Escriba la direcci&oacute;n de su empresa." /></p>-->
-										<p>{{form.direccion_map}}</p> {{form.latitud}} {{form.longitud}}
+								<div class="detalle">
+									<div class ="form-group">
+										<label class = "col-sm-3">Direcci&oacute;n</label>
+										<div class = "col-sm-9">
+											{{form.direccion_map}}
+										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="mapa">
-										<img src="../img/google-map.jpg" />
+									<div class ="form-group">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-3">
+											{{form.latitud}}
+										</div>
+										<div class = "col-sm-3">
+											{{form.longitud}}
+										</div>
+										<div class="clear"></div>
 									</div>
+									<div id = "map"></div>
 								</div>
 							</section>
 						</div>
@@ -224,10 +233,70 @@
 	.tipo_puesto label{
 		width: 25%;
 	}
+	#map {
+		width: 100%;
+		height: 350px;
+	}
 </style>
 <script>
 	$(function(){
-		$("input:not([type=submit]), select, textarea").addClass("form-control");
+		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
+		$("#id_fecha_cese").datepicker({
+			language: 'es',
+			format: "dd-mm-yyyy",
+		});
+		Editar.inicializar_mapa();
 	})
+	var Editar = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(44.5403, -78.5463),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Editar.map = new google.maps.Map(mapCanvas, mapOptions);
+            google.maps.event.addListener(Editar.map, 'click', function(event) {
+                Editar.marcar_mapa(event.latLng);
+            });
+            if ($("#id_latitud").val() != ""){
+                var latitud = $("#id_latitud").val();
+                var longitud = $("#id_longitud").val();
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Editar.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function(coordenadas){
+            Editar.borrar_marca();
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Editar.map
+            });
+            Editar.marca = marker;
+            google.maps.event.addListener(marker, "rightclick", function (point) {
+                Editar.borrar_marca();
+            });
+            Editar.map.setCenter(coordenadas);
+            $("#id_latitud").val(coordenadas.lat());
+            $("#id_longitud").val(coordenadas.lng());
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").val(response[0]["formatted_address"]);
+            });
+        },
+        borrar_marca: function(){
+            if (Editar.marca != null) {
+                Editar.marca.setMap(null);
+                Editar.marca = null;
+            }
+        },
+    };
 </script>
+
 {% endblock%}
