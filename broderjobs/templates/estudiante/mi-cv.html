@@ -3,6 +3,28 @@
 
 {%endblock%}
 {% block content %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
+
+
+<link rel="stylesheet" href="{% static 'css/select2.css' %}">
+
+<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
+<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+
 <section class="cv">
 
 			<div class="centered">
@@ -182,7 +204,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h2 class="modal-title">Modal title</h2>
                     </div>
             <div id="form-modal-body" class="modal-body">
                         <p>One fine body&hellip;</p>
