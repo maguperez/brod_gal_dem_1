@@ -4,9 +4,10 @@ from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrer
     Conocimiento, TipoRemuneracion, Beneficio
 from empresa.models import Empresa
 from estudiante.models import Estudiante
-from main import utilitarios
+from django.contrib.auth.models import User
 
-# Create your models here.
+from main import utilitarios
+items_registro = utilitarios.estado_registro()
 
 class Oportunidad(models.Model):
     items_estado = utilitarios.estado_oportunidad()
@@ -19,13 +20,10 @@ class Oportunidad(models.Model):
     remuneracion = models.ForeignKey(TipoRemuneracion, default=None, null=True, blank=True, verbose_name="Remuneracion")
     remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )
-    fecha_creacion = models.DateField(default=None,null=True, blank=True)
-    fecha_publicacion = models.DateField(default=None,null=True, blank=True)
-    fecha_cese = models.DateField(default=None,null=True, blank=True )
     tipo_puesto = models.ForeignKey(TipoPuesto,default=None, null=True, blank=True, verbose_name="Tipo Puesto")
     beneficio = models.ManyToManyField(Beneficio, default=None, blank=True, verbose_name="Beneficios")
     resumen = models.CharField(max_length="1000", default=None, null=True, blank=True )
-    estado =  models.CharField(choices=items_estado, max_length=1, default=None, null=True, blank=True)
+    estado_opotunidad =  models.CharField(choices=items_estado, max_length=1, default=None, null=True, blank=True)
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
@@ -37,14 +35,29 @@ class Oportunidad(models.Model):
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
+    fecha_publicacion = models.DateField(default=None,null=True, blank=True)
+    fecha_cese = models.DateField(default=None,null=True, blank=True )
+
+    usuario = models.ForeignKey(User, default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
 
     def __unicode__(self):
 		return unicode(self.titulo) or u''
 
 class Postulacion(models.Model):
+    items_estado = utilitarios.estado_postulacion()
+
     oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
-    fecha = models.DateField(default=None,null=True, blank=True )
+    estado_postulacion =  models.CharField(choices=items_estado, max_length=1, default='A', null=True, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
 		return unicode(self.estudiante) or u''
+

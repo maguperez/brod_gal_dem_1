@@ -1,10 +1,12 @@
 # coding=utf-8
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
 from empresa.models import Empresa, Puesto
 from main import utilitarios
 
+items_registro = utilitarios.estado_registro()
 
 class Estudiante(models.Model):
     items_semestre = utilitarios.semestre_rango()
@@ -26,6 +28,10 @@ class Estudiante(models.Model):
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
     foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
 
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
     def __unicode__(self):
 		return unicode('%s' % (self.persona)) or u''
 
@@ -40,6 +46,10 @@ class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
     descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
 
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
     def __unicode__(self):
 		return unicode('%s' % (self.estudiante)) or u''
 
@@ -47,6 +57,10 @@ class ActividadesExtra(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
     organizacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
 		return self.descripcion
@@ -60,6 +74,10 @@ class ExperienciaProfesional(models.Model):
     trabajo_actual = models.CharField(max_length=1, default='N',)
     descripcion = models.CharField(max_length="100", default=None, null=True)
 
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
     def __unicode__(self):
 		return unicode('%s' % (self.estudiante)) or u''
 
@@ -71,6 +89,10 @@ class Voluntariado(models.Model):
     fecha_hasta = models.DateField(default=None, null=True, blank=True)
     voluntariado_actual = models.CharField(max_length=1, default='N')
     descripcion = models.CharField(max_length="100", default=None, null=True, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
 		return unicode('%s' % (self.cargo)) or u''

@@ -5,8 +5,6 @@ from . import views
 urlpatterns = [
 	url(r'^registro-cv/', 'estudiante.views.registro_cv', name='registro-cv'),
 
-	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
-
 	url(r'^mi-cv/resumen/$', views.ResumenView.as_view(), name="mi-cv-resumen"),
 
 	url(r'^mi-cv/foto/$', views.FotoView.as_view(), name="mi-cv-foto"),
@@ -59,12 +57,16 @@ urlpatterns = [
 
 	url(r'^estudiante-puesto-busqueda/$', views.EstudiantePuestoBusquedaView.as_view(), name="puesto-busqueda"),
 
+	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
+
 	url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
 
 	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),
 
 	url(r'^oportunidad-postular/$', views.OportunidadPostularView.as_view(), name="estudiante-oportunidad-postular"),
 
-	url(r'^mis-procesos/$', views.ProcesosView.as_view(), name="estudiante-procesos"),
+	url(r'^proceso-lista/$', views.ProcesoListaView.as_view(), name="estudiante-proceso-lista"),
+
+	url(r'^proceso-detalle/(?P<id>\d+)/$', views.ProcesoDetalleView.as_view(), name="estudiante-proceso-detalle"),
 
 ]

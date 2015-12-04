@@ -1,5 +1,6 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
+{%load endless%}
  <section class="oportunidades-empresa">
 			<div class="centered">
 				<select class="filtro">
@@ -9,7 +10,83 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista">
-
+					{% paginate 3 oportunidades %}
+						{% for oportunidad in oportunidades.all%}
+					<li class="oportunidad-estadistica">
+						<div class="box header">
+							<img class="imagen" src="{{empresa.set_logo}}" />
+							<div class="descripcion">
+								<a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+							</div>
+							<div class="opciones" onclick="opciones({{oportunidad.id}})">
+								<i class="menu"></i>
+								<div class="contextual-menu" id="menu-{{oportunidad.id}}">
+									<div class="wrapper">
+										<div class="pin"></div>
+										<ul>
+											<li><a href="{%url 'oportunidad-editar' oportunidad.id%}"><span>Editar</span><div class="clear"></div></a></li>
+											<li><a href="candidatos_oportunidad.html"><span>Ver candidatos</span><div class="clear"></div></a></li>
+											<li><a href="#"><span>Archivar</span><div class="clear"></div></a></li>
+										<ul>
+									</div>
+								</div>
+							</div>
+							<div class="estado">
+								{%if oportunidad.estado == 'P' %}
+									<label>pendiente</label>
+								{%endif%}
+								{%if oportunidad.estado == 'A' %}
+									<label>abierta</label>
+								{%endif%}
+								{%if oportunidad.estado == 'C' %}
+									<label>cerrada</label>
+								{%endif%}
+								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="visualizaciones">
+							<div class="box">
+								<div class="estadistica">
+									<div class="cifra">
+										<label>792</label>
+										<label>Visualizaciones</label>
+									</div>
+									<div class="grafico grafico-barras">
+										<img src="/static/img/estadisticas-barras.jpg" />
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="estadistica">
+									<div class="cifra">
+										<label>101</label>
+										<label>Inscripciones</label>
+									</div>
+									<div class="grafico usuarios">
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<img src="/static/img/profile/profile.png" />
+										<div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="inscripciones">
+							<div class="box">
+								<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
+								<div class="grafico grafico-inscripciones">
+									<img src="/static/img/estadisticas-inscripciones.jpg" />
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</li>
+						{% endfor %}
 				</ul>
 			</div>
 		</section>
@@ -18,119 +95,6 @@
 {% block js%}
 
 <script>
-	(function(){
-
-	  var addOportunidad = function(obj,el) {
-		  var op = '';
-		  op += '<li class="oportunidad-estadistica">';
-		  op += '<div class="box header">';
-		  op += '<img class="imagen" src="' +obj.logo+ '" />';
-		  op += '<div class="descripcion">';
-		  op += '<a href="candidatos_oportunidad.html"><h2 class="link">'+obj.titulo+'</h2></a>';
-		  op += '<div class="empresa"><i class="empresa"></i><label>'+obj.empresa+'</label></div>';
-		  op += '</div>';
-		  op += '<div class="opciones" onclick="opciones('+obj.id+')">';
-		  op += '<i class="menu"></i>';
-		  op += '<div class="contextual-menu" id="menu-'+obj.id+'">';
-		  op += '<div class="wrapper">';
-		  op += '<div class="pin"></div>';
-		  op += '<ul>';
-		  op += '<li><a href=""><span>Editar</span><div class="clear"></div></a></li>';
-		  op += '<li><a href="candidatos_oportunidad.html"><span>Ver candidatos</span><div class="clear"></div></a></li>';
-		  op += '<li><a href=""><span>Archivar</span><div class="clear"></div></a></li>';
-		  op += '<ul></div></div></div>';
-		  op += '<div class="estado">';
-		  op += '<label>'+'obj.estado'+'</label>';
-		  op += '<label>CIERRA EL' + obj.fecha_cese+'</label>';
-		  op += '</div><div class="clear"></div></div>';
-		  op += '<div class="visualizaciones"><div class="box"> <div class="estadistica"> <div class="cifra">';
-		  op += '<label>792</label>';
-		  op += '<label>Visualizaciones</label>';
-		  op += '</div>';
-		  op += '<div class="grafico grafico-barras">';
-		  op +=	'<img src="/static/img/estadisticas-barras.jpg" />';
-		  op += '</div>';
-		  op += '<div class="clear"></div>';
-		  op += '</div>';
-		  op += '<div class="estadistica">';
-		  op += '<div class="cifra">';
-		  op += '<label>101</label>';
-		  op += '<label>Inscripciones</label>';
-		  op += '</div>';
-		  op += '<div class="grafico usuarios">';
-		  op += '<img src="/static/img/profile/profile.png" />';
-		  op += '<div class="clear"></div>';
-		  op += '</div>';
-		  op += '<div class="clear"></div>';
-		  op += '</div></div></div>';
-		  op += '<div class="inscripciones">';
-		  op += '<div class="box">';
-		  op += '<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>';
-		  op += '<div class="grafico grafico-inscripciones">';
-		  op += '<img src="/static/img/estadisticas-inscripciones.jpg" />';
-		  op += '</div></div></div><div class="clear"></div></li>';
-
-		  $(el).html(op);
-
-	  };
-
-	  //https://dannyvankooten.com/delay-scroll-handlers-javascript/
-	  var content = true;
-	  var timer;
-	  if (content) {
-		$(window).scroll(function() {
-		  if(timer) {
-			window.clearTimeout(timer);
-		  }
-		  timer = window.setTimeout(function() {
-			if(($(window).scrollTop() + $(window).height() > $(document).height()) - 300 && content) {
-			  loadItems();
-			}
-		  }, 200);
-		});
-	  }
-
-	  // Scroll globals
-	  var pageNum = 0; // The latest page loaded
-	  var hasNextPage = true; // Indicates whether to expect another page after this one
-	  var loadItems = function() {
-		// If the next page doesn't exist, just quit now
-		if (hasNextPage === false) {
-		  return false;
-		}
-		// Update the page number
-		pageNum = pageNum + 1;
-		// Configure the url we're about to hit
-		$.ajax({
-		  type: "GET",
-		  url: '{%url "empresa-oportunidad-busqueda" %}',
-		  data: {callback: pageNum},
-		  dataType: 'json',
-		  success: function(data) {
-			// Update global next page variable
-			//hasNextPage = true;//.hasNext;
-			for (var i in data) {
-			  addOportunidad(data[i].fields, '#oportunidad-lista');
-			}
-		  },
-		  error: function() {
-			// When I get a 400 back, fail safely
-			hasNextPage = false;
-			content = false;
-			var op = $('<class="oportunidad-estadistica">No more news</li>');
-			op.appendTo('#oportunidad-lista');
-			$('#loading-image').hide();
-		  },
-		});
-	  };
-	  loadItems(); // loads first five stories on page load
-	  //binds ajax start/stop events to a loading gif
-	  $('#loading-image').bind('ajaxStart', function(){
-		$(this).show();
-	  }).bind('ajaxStop', function(){
-		$(this).hide();
-	  });
-	}());
 
 </script>
 

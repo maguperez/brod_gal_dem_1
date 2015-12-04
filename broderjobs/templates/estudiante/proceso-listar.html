@@ -16,7 +16,7 @@
 						</thead>
 						<tbody>
                         {%for postulacion in postulaciones%}
-							<tr>
+							<tr id="{{postulacion.id}}">
 								<td class="align-left"><img class="imagen" src="{{postulacion.logo}}" /></td>
 								<td class="align-left">
 									<label>{{postulacion.titulo}}</label>
@@ -39,7 +39,12 @@
 {% block js %}
 <script>
 	$(function(){
-		$("#link-procesos").addClass("active");
+		$("#procesos tr").click(function() {
+			id = $(this).attr("id");
+			var url = "{%url 'estudiante-proceso-detalle' 1 %}";
+			url = url.replace('1', id);
+			window.location.replace(url);
+		});
 	})
 </script>
 {% endblock%}

@@ -138,9 +138,11 @@ class EmpresaBusquedaView(TemplateView):
         data = json.dumps(a_empresas)
         return HttpResponse(data, content_type='application/json')
 
-class MiCVView(LoginRequiredMixin, TemplateView):
+class MiCVView(LoginRequiredMixin, FormView):
 
+    form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv.html'
+
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id=user.id)
@@ -158,11 +160,32 @@ class MiCVView(LoginRequiredMixin, TemplateView):
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         return context
 
+    def form_valid(self, form):
+        foto = self.request.FILES['foto']
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        estudiante.foto = self.request.FILES['foto']
+        estudiante.save()
+        return super(MiCVView, self).form_valid(form)
+    #
+    # # def post(self, request, *args, **kwargs):
+    # #     form_class = self.get_form_class()
+    # #     form = self.get_form(form_class)
+    #     # foto = self.request.FILES['foto']
+    #     # user = self.request.user
+    #     # persona = Persona.objects.get(usuario_id=user.id)
+    #     # estudiante = Estudiante.objects.get(persona_id=persona.id)
+    #     # estudiante.foto = self.request.FILES['foto']
+    #     # estudiante.save()
+    #     if form.is_valid():
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form, **kwargs)
+
 class AjaxTemplateMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if not hasattr(self, 'ajax_template_name'):
-            print(self.template_name)
-            print(self.template_name.split('.html'))
             split = self.template_name.split('.html')
             #split[-1] = '-inner'
             split.append('.html')
@@ -171,19 +194,40 @@ class AjaxTemplateMixin(object):
                 self.template_name = self.ajax_template_name
             return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
 
-class FotoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
+class FotoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv-foto.html'
     success_url =reverse_lazy('mi-cv')
 
-    def get_object(self, queryset=None):
-        user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id =persona.id)
-        return estudiante
+    # def get_object(self, queryset=None):
+    #     user = self.request.user
+    #     persona = Persona.objects.get(usuario_id=user.id)
+    #     estudiante = Estudiante.objects.get(persona_id =persona.id)
+    #     return estudiante
+
+    def post(self, request, *args, **kwargs):
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if request.is_ajax():
+            print("entro al post")
+            foto = self.request.FILES['foto']
+            user = self.request.user
+            persona = Persona.objects.get(usuario_id=user.id)
+            estudiante = Estudiante.objects.get(persona_id=persona.id)
+            estudiante.foto = foto
+            estudiante.save()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form, **kwargs)
 
     def form_valid(self, form):
-
+        print("entro foto")
+        foto = self.request.FILES['foto']
+        print(foto)
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
@@ -505,16 +549,19 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
         oportunidades = Oportunidad.objects.filter(
             Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
-            Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains = busqueda) |
-            Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains = busqueda) |
-            Q(remuneracion__descripcion__icontains=busqueda),
+            Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains=busqueda) |
+            Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains=busqueda),
             estado = 'A'
-        ).order_by('fecha_publicacion')
+        ).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
             empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
             ciudad = empresa.ciudad
             pais = empresa.pais
+            if oportunidades[i].remuneracion is None or  oportunidades[i].remuneracion == 'No especificado' :
+                remuneracion = 'No Especificado'
+            else:
+                remuneracion = str(oportunidades[i].remuneracion_min)+ ' - ' + str(oportunidades[i].remuneracion_max)
             e = {
                 "id": oportunidades[i].id,
                 "titulo": oportunidades[i].titulo,
@@ -522,7 +569,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
                 "logo": empresa.set_logo,
                 "ubicacion": str(ciudad) + ', ' +str(pais),
                 "fecha_cese": str(oportunidades[i].fecha_cese),
-                "remuneracion": str(oportunidades[i].remuneracion),
+                "remuneracion": remuneracion,
             }
             a_oportunidades.append(e)
         # data = serializers.serialize('json', a_empresas,
@@ -547,9 +594,9 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
 
-class ProcesosView(LoginRequiredMixin, TemplateView):
+class ProcesoListaView(LoginRequiredMixin, TemplateView):
     login_required = True
-    template_name = 'estudiante/mis-procesos.html'
+    template_name = 'estudiante/proceso-listar.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id = user.id)
@@ -576,8 +623,22 @@ class ProcesosView(LoginRequiredMixin, TemplateView):
             postulaciones.append(e)
         # data = serializers.serialize('json', a_empresas,
         #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
-        context = super(ProcesosView, self).get_context_data(**kwargs)
+        context = super(ProcesoListaView, self).get_context_data(**kwargs)
         context['postulaciones'] = postulaciones
+        return context
+
+class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
+    login_required = True
+    template_name = 'estudiante/proceso-detalle.html'
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+        postulacion =  get_object_or_404(Postulacion, pk=id)
+        oportunidad =  get_object_or_404(Oportunidad, pk = postulacion.oportunidad.id)
+        empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
+        context['postulacion'] = oportunidad
+        context['oportunidad'] = oportunidad
+        context['empresa'] = empresa
         return context
 
 

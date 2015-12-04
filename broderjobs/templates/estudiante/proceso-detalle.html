@@ -1,0 +1,185 @@
+{% extends 'estudiante/base.html' %}
+{%block css%}
+
+{%endblock%}
+{% block content %}
+<section class="proceso-detalle" style="padding-top: 150px">
+			<div class="centered">
+				<div class="box">
+					<div class="content">
+						<section class="oportunidad-resumen">
+							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
+							<div class="detalle">
+								<h1>{{oportunidad.titulo}}</h1>
+								<a href=""><h4 class="link">{{empresa.nombre |upper}}</h4></a>
+								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
+								<label>Remuneraci&oacute;n: S/ {{oportunidad.remuneracion_min}} - {{oportunidad.remuneracion_max}} </label>
+							</div>
+							<div class="estado">
+								<label>Estado del proceso:</label>
+								<label>{{postulacion.estado_postulacion}}</label>
+							</div>
+							<div class="clear"></div>
+						</section>
+						<section class="contenido">
+							<div class="menu">
+								<a class="active" id="menu-estado">Estado</a>
+								<a id="menu-mensajes">Mensajes</a>
+							</div>
+							<div class="detail">
+								<div class="estado active" id="content-estado">
+									<div class="grafico">
+										<div class="step postulacion active">
+                                            {%if oportunidad.estado_oportunidad != 'F' %}
+											<i class="done active"></i>
+                                            {% else %}
+                                            <i class="done "></i>
+                                            {%endif%}
+											<label class="titulo">Postulaci&oacute;n</label>
+											<label class="fecha">El 26.04.15</label>
+										</div>
+										<div class="dots active">
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+										</div>
+										<div class="step evaluacion active">
+                                            {%if oportunidad.estado_oportunidad != 'P' %}
+											<i class="done active"></i>
+                                            {% else %}
+                                            <i class="done "></i>
+                                            {%endif%}
+											<label class="titulo">En evaluaci&oacute;n</label>
+											<label class="fecha"></label>
+										</div>
+										<div class="dots">
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+											<i class="dot"></i>
+										</div>
+										<div class="step finalizado">
+                                            {%if oportunidad.estado_oportunidad == 'F' %}
+											<i class="done active"></i>
+                                            {% else %}
+											<i class="done"></i>
+                                            {%endif%}
+											<label class="titulo">Finalizado</label>
+											<label class="fecha"></label>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<p>Tu postulaci&oacute;n ha sido registrada satisfactoriamente y te encuentras en la etapa de {{postulacion.estado_postulacion}}, te notificaremos cuando el proceso haya finalizado.</p>
+								</div>
+								<div class="mensajes" id="content-mensajes">
+									<table>
+										<tbody>
+											<tr class="unread">
+												<td>G&M Administraci&oacute;n</td>
+												<td>¡Enhorabuena!</td>
+												<td>11:32 hrs</td>
+											</tr>
+											<tr class="unread">
+												<td>BRODER</td>
+												<td>Recomendaciones</td>
+												<td>27/04/2015</td>
+											</tr>
+                                            {%for m in mensajes.all%}
+											<tr>
+												<td>{{m.empresa}}</td>
+												<td>{{m.asunto}}!</td>
+												<td>{{m.fecha_creacion}}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="popup mensaje" id="popup-mensaje">
+			<div class="popup-box">
+				<div class="content">
+					<section class="header">
+						<h4 class="link" id="mensaje-empresa"></h4>
+						<label class="info" id="mensaje-fecha-recibido">Recibido el JUEVES 15/03/2015 a las 21:09 horas</label>
+					</section>
+					<section class="mensaje">
+						<label class="asunto" id="mensaje-asunto">¡ENHORABUENA!</label>
+						<p id="mensaje-contenido">Maecenas vel odio auctor, sodales enim nec, venenatis dolor. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida a. Cras molestie varius lacinia. Phasellus sit amet arcu efficitur, ultricies mauris aliquet, dapibus lorem. Nulla consequat risus sed pharetra congue.</p>
+					</section>
+				</div>
+				<a class="close">Cerrar</a>
+			</div>
+		</div>
+
+{% endblock content%}
+{% block js %}
+<script>
+    $('#menu').click(function() {
+		if ($('#ctx-menu-header').hasClass('active'))
+			$('#ctx-menu-header').removeClass('active');
+		else
+			$('#ctx-menu-header').addClass('active')
+	});
+	$('.popup').click(function(e) {
+		if ( $(e.target).closest('.popup-box').length === 0 ) {
+			window.history.back();
+			$('body').removeClass('static');
+		}
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('#menu-estado').click(function() {
+		$('.contenido .detail > div').removeClass('active');
+		$('.contenido .menu a').removeClass('active');
+		$('#content-estado').addClass('active');
+		$('#menu-estado').addClass('active');
+	});
+	$('#menu-mensajes').click(function() {
+		$('.contenido .detail > div').removeClass('active');
+		$('.contenido .menu a').removeClass('active');
+		$('#content-mensajes').addClass('active');
+		$('#menu-mensajes').addClass('active');
+	});
+	$('#content-mensajes tr').click(function() {
+		window.location = '#popup-mensaje';
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+</script>
+{% endblock%}

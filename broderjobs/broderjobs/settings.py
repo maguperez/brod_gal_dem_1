@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'empresa',
     'oportunidad',
     'endless_pagination',
+    'mensaje',
 
 )
 
