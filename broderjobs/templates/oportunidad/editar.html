@@ -3,7 +3,9 @@
 {% load staticfiles %}
 <script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/slider.css' %}">
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <form action="" method="post">{%csrf_token%}
 	<section class="oportunidad-detalle">
@@ -21,9 +23,7 @@
 							<div class="descripcion">
 								<h3>Editar Oportunidad</h3>
 								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
-
 							</div>
-
                             <div class = "col-sm-3"><label>Estado:  </label>{{form.estado}}</div>
                             <input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />
 							<div class="clear"></div>
@@ -125,7 +125,7 @@
 										<label class = "col-sm-3">Periodo de graduaci&oacute;n</label>
 										<div class = "col-sm-9">
 											Estudiantes de 7° hasta graduados hace un a&ntilde;o
-											<img src="../img/barra-deslizable.jpg" />
+											<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -179,7 +179,7 @@
 										<div class = "col-sm-9">
 											{{form.direccion_map}}
 										</div>
-										<div class="clear"></div>
+										<br>
 									</div>
 									<div class ="form-group">
 										<label class = "col-sm-3"></label>
@@ -245,6 +245,7 @@
 			language: 'es',
 			format: "dd-mm-yyyy",
 		});
+		$("#slider-periodo").slider({});
 		Editar.inicializar_mapa();
 	})
 	var Editar = {
