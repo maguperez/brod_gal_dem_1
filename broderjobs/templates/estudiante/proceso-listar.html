@@ -39,6 +39,7 @@
 {% block js %}
 <script>
 	$(function(){
+		$("#link-procesos").addClass("active");
 		$("#procesos tr").click(function() {
 			id = $(this).attr("id");
 			var url = "{%url 'estudiante-proceso-detalle' 1 %}";

@@ -2,7 +2,7 @@
 	<form action="{% url 'mi-cv-info-personal' %}" method="post">
 		{%csrf_token%}
 		<div class="form-horizontal">
-			<h4><i class="academic"></i> &nbsp;Información académica</h4>
+			<h3><i class="academic"></i> &nbsp;Información académica</h3><br>
 			<div class ="form-group">
 				<label class = "col-sm-3">Grado estudio</label>
 				<div class = "col-sm-9">
@@ -38,8 +38,8 @@
 				<div class = "col-sm-4">
 					{{form.ano_graduacion}}
 				</div>
-			</div>
-			<h4><i class="info"></i> &nbsp;Información personal</h4>
+			</div><br>
+			<h3><i class="info"></i> &nbsp;Información personal</h3><br>
 			<div class ="form-group">
 				<label class = "col-sm-3">Contacto</label>
 				<div class = "col-sm-4">
@@ -71,5 +71,9 @@
 	$(function(){
 		$("form input, form select, form textarea").addClass("form-control");
 		$(".modal-title").html('&nbsp;Información');
+		$("#id_fecha_nacimiento").datepicker({
+			language: 'es',
+			format: "dd-mm-yyyy",
+		})
 	});
 </script>
