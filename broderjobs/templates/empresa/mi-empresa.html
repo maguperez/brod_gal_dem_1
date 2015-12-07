@@ -3,328 +3,132 @@
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="empresa">
 	<div class="centered">
-				<div class="panel left">
-					<div class="box">
-						<header class="pos-relative">
-							<button id="logo-button" class="editar btn-edit">Editar</button>
-							<img class="imagen" src="{{empresa.set_logo}}" />
-						</header>
-						<div class="content">
-							<h3 class="link">{{empresa.nombre | upper}}</h3>
-							<label class="descripcion">{{empresa.sector | upper}}</label>
-						</div>
-					</div>
-				</div>
-				<div class="panel right principal">
-					<div class="box detail">
-						<header class="pos-relative">
-							<div class="slider"id="fade">
-								{% for imagen in empresa.imagen_slider.all%}
-								<img src="{{imagen.set_imagen}}"  />
-
-								{% endfor%}
-							</div>
-							<a class="btn-edit">Editar</a>
-						</header>
-						<div class="content">
-							<section class="about">
-								<h3 class="title"><i class="business"></i>Sobre la empresa<button id="info-general-button" class="link editar">Editar</button></h3>
-								<div>
-									<p>{{empresa.quienes_somos}}</p>
-								</div>
-								<div class="double">
-									<div>
-										<div>
-											<h4>N&uacute;mero de funcionarios</h4>
-											<label>{{empresa.numero_funcionarios}}</label>
-										</div>
-										<div>
-											<h4>Facturamiento anual</h4>
-											<label>{{empresa.facturacion_anual}}</label>
-										</div>
-										<div>
-											<h4>Sede Global</h4>
-											<label>{{empresa.ciudad}}, {{empresa.pais}}</label>
-										</div>
-									</div>
-									<div>
-										<div>
-											<h4>Sector</h4>
-											<label>{{empresa.sector}}</label>
-										</div>
-										<div>
-											<h4>Fundaci&oacute;n</h4>
-											<label>{{empresa.ano_fundacion}}</label>
-										</div>
-										<div>
-											<h4>Sitio web</h4>
-											<a href="{{empresa.website}}">{{empresa.website}}</a>
-										</div>
-									</div>
-									<div class="clear"></div>
-								</div>
-							</section>
-							<section class="ubicacion">
-								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
-								<div>
-									<p>{{empresa.direccion_map}}</p>
-									<p id = "empresa-id_latitud">{{empresa.latitud}}</p>
-									<p id = "empresa-id_longitud">{{empresa.longitud}}</p>
-									<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
-								</div>
-							</section>
-							<section class="oportunidades">
-
-								<h3 class="title"><i class="oportunity"></i>Oportunidades</h3>
-								<ul class="list">
-									{% for oportunidad in oportunidades %}
-									<li>
-										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
-													<div class="descripcion">e
-														<div class="datos">
-															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
-															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
-															<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
-														</div>
-														<div class="compatibilidad">
-															<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-															<label class="resultado">Compatible</label>
-														</div>
-														<div class="ver-oportunidad">
-															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
-														</div>
-														<div class="clear"></div>
-													</div>
-												<div class="clear"></div>
-										</div>
-									</li>
-										{% endfor %}
-								</ul>
-								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
-							</section>
-							<section class="redes">
-								<h3 class="title"><i class="network"></i>Redes sociales<a class="editar link" href="#editar-redes">Editar</a></h3>
-								<div>
-									<div class="facebook">
-										<h4>FACEBOOK</h4>
-									</div>
-									<div class="twitter">
-										<h4>TWITTER</h4>
-									</div>
-									<div class="clear"></div>
-								</div>
-							</section>
-						</div>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-</section><!--
-<div class="popup evaluacion-empresa" id="evaluacion">
-			<div class="box popup-box">
+		<div class="panel left">
+			<div class="box">
+				<header class="pos-relative">
+					<button id="logo-button" class="editar btn-edit">Editar</button>
+					<img class="imagen" src="{{empresa.set_logo}}" />
+				</header>
 				<div class="content">
-					<section>
-						<h3>Eval&uacute;a de manera an&oacute;nima</h3>
-						<label class="link empresa">ADOBE</label>
-						<label class="descripcion">DESARROLLO DE SOFTWARE</label>
-						<div class="calificacion">
-							<img class="imagen" src="/static/img/empresas/empresa-1.jpg" alt="ADOBE" />
-							<ul class="criterios">
-								<li>
-									<label>L&iacute;nea de carrera</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
-									<div class="clear"></div>
-								</li>
-								<li>
-									<label>Flexibilidad de horarios</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
-									<div class="clear"></div>
-								</li>
-								<li>
-									<label>Ambiente de trabajo</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
-									<div class="clear"></div>
-								</li>
-								<li>
-									<label>Salario y Beneficios</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
-									<div class="clear"></div>
-								</li>
-							</ul>
+					<h3 class="link">{{empresa.nombre | upper}}</h3>
+					<label class="descripcion">{{empresa.sector | upper}}</label>
+				</div>
+			</div>
+		</div>
+		<div class="panel right principal">
+			<div class="box detail">
+				<header class="pos-relative">
+					<div class="slider"id="fade">
+						{% for imagen in empresa.imagen_slider.all%}
+							<img src="{{imagen.set_imagen}}"  />
+						{% endfor%}
+					</div>
+					<a class="btn-edit">Editar</a>
+				</header>
+				<div class="content">
+					<section class="about">
+						<h3 class="title"><i class="business"></i>Sobre la empresa<button id="info-general-button" class="link editar">Editar</button></h3>
+						<div>
+							<p>{{empresa.quienes_somos}}</p>
+						</div>
+						<div class="double">
+							<div>
+								<div>
+									<h4>N&uacute;mero de funcionarios</h4>
+									<label>{{empresa.numero_funcionarios}}</label>
+								</div>
+								<div>
+									<h4>Facturamiento anual</h4>
+									<label>{{empresa.facturacion_anual}}</label>
+								</div>
+								<div>
+									<h4>Sede Global</h4>
+									<label>{{empresa.ciudad}}, {{empresa.pais}}</label>
+								</div>
+							</div>
+							<div>
+								<div>
+									<h4>Sector</h4>
+									<label>{{empresa.sector}}</label>
+								</div>
+								<div>
+									<h4>Fundaci&oacute;n</h4>
+									<label>{{empresa.ano_fundacion}}</label>
+								</div>
+								<div>
+									<h4>Sitio web</h4>
+									<a href="{{empresa.website}}">{{empresa.website}}</a>
+								</div>
+							</div>
 							<div class="clear"></div>
 						</div>
 					</section>
-					<section>
-						<input type="checkbox" id="declaro" /><label for="declaro">Declaro que trabajo o trabaj&eacute; en la empresa ADOBE</label>
-						<a class="btn-save" id="enviar-evaluacion">Enviar Evaluaci&oacute;n</a>
-					</section>
-					<section>
-						<h4 class="link">Tranquilo ;)</h4>
-						<p>La evaluación a la empresa es totalmente anónima; sin embargo, estamos comprometidos en proteger a nuestra comunidad de evaluaciones inadecuadas.</p>
-						<p>Por favor, lee las <a class="link">Directrices de la Comunidad</a> para obtener más información sobre los criterios de revisión.</p>
-					</section>
-				</div>
-				<a class="close">Cerrar</a>
-			</div>
-		</div>
-<div class="popup aviso" id="resultado-evaluacion">
-			<div class="popup-box box">
-				<div class="content">
-					<section class="header">
-						<h4 class="link">¡ENHORABUENA!</h4>
-					</section>
-					<section class="mensaje">
-						<p>La evaluaci&oacute;n se ha registrado satisfactoriamente y se proceder&aacute; con su verificaci&oacute;n para ser publicada. Muchas gracias por colaborar con la comunidad broderjobs.</p>
-					</section>
-				</div>
-				<a class="close">Cerrar</a>
-			</div>
-		</div>
-<div class="popup" id="editar-empresa">
-			<div class="popup-box box">
-				<div class="content">
-					<section>
-						<h3 class="title"><i class="business"></i>Sobre la empresa</h3>
-						<div class="detalle col-3-7">
-							<div>
-								<label>Nombre comercial *</label>
-								<p><input class="full" type="text" placeholder="Adobe" /></p>
-								<div class="clear"></div>
-							</div>
-							<div class="full less-margin">
-								<label>Qui&eacute;nes somos *</label>
-								<div class="clear"></div>
-							</div>
-							<div class="full">
-								<textarea></textarea>
-							</div>
-							<div>
-								<label>T&iacute;tulo de vacante *</label>
-								<p>
-									<input type="text" placeholder="RUC de su empresa" />
-									<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
-								</p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Tel&eacute;fono *</label>
-								<p>
-									<input type="text" placeholder="Ej. +51 987346718" />
-									<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
-								</p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Sector</label>
-								<p><input class="full" type="text" placeholder="Ej. Desarrollo Software" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>N&uacute;mero de funcionarios</label>
-								<p><input class="full" type="text" placeholder="Ej. M&aacute;s de 10,000" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Facturaci&oacute;n anual</label>
-								<p><input class="full" type="text" placeholder="Ej. M&aacute;s de 2.000.000 USD" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Fundaci&oacute;n</label>
-								<p><input class="full" type="text" placeholder="Ej. 1892" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Sede global</label>
-								<p><input class="full" type="text" placeholder="Ej. Lima, Per&uacute;" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Website</label>
-								<p><input class="full" type="text" placeholder="Ej. http://www.nombre.com" /></p>
-								<div class="clear"></div>
-							</div>
+					<section class="ubicacion">
+						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
+						<div>
+							<p>{{empresa.direccion_map}}</p>
+							<p id = "empresa-id_latitud">{{empresa.latitud}}</p>
+							<p id = "empresa-id_longitud">{{empresa.longitud}}</p>
+							<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
 						</div>
-						<a class="btn-save" onclick="window.history.back();">GUARDAR</a>
 					</section>
-				</div>
-				<a class="close">Cerrar</a>
-			</div>
-		</div>
-<div class="popup" id="editar-ubicacion">
-			<div class="popup-box box">
-				<div class="content">
-					<section>
-						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
-						<div class="detalle col-3-7">
-							<div>
-								<label>Direcci&oacute;n</label>
-								<p><input class="full" type="text" placeholder="Escriba la direcci&oacute;n de su empresa." /></p>
-								<div class="clear"></div>
+					<section class="oportunidades">
+						<h3 class="title"><i class="oportunity"></i>Oportunidades</h3>
+						<ul class="list">
+							{% for oportunidad in oportunidades %}
+								<li>
+									<div class="oportunidad-box">
+										<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+										<div class="descripcion">
+											<div class="datos">
+												<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+												<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+												<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
+											</div>
+											<div class="compatibilidad">
+												<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
+												<label class="resultado">Compatible</label>
+											</div>
+											<div class="ver-oportunidad">
+												<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+												<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+						<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
+					</section>
+					<section class="redes">
+						<h3 class="title"><i class="network"></i>Redes sociales<a class="editar link" href="#editar-redes">Editar</a></h3>
+						<div>
+							<div class="facebook">
+								<h4>FACEBOOK</h4>
 							</div>
-							<div class="full">
-								<div class="mapa">
-									<img src="/static/img/google-map.jpg" />
-								</div>
+							<div class="twitter">
+								<h4>TWITTER</h4>
 							</div>
+							<div class="clear"></div>
 						</div>
-						<a class="btn-save" onclick="window.history.back();">GUARDAR</a>
 					</section>
 				</div>
-				<a class="close">Cerrar</a>
 			</div>
 		</div>
-<div class="popup" id="editar-redes">
-			<div class="popup-box box">
-				<div class="content">
-					<section>
-						<h3 class="title"><i class="network"></i>Redes sociales</h3>
-						<div class="detalle col-3-7">
-							<div>
-								<label>Facebook</label>
-								<p><input class="full" type="text" placeholder="http://www.facebok.com/nombre" /></p>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<label>Twitter</label>
-								<p><input class="full" type="text" placeholder="http://www.twitter.com/nombre" /></p>
-								<div class="clear"></div>
-							</div>
-						</div>
-						<a class="btn-save" onclick="window.history.back();">GUARDAR</a>
-					</section>
-				</div>
-				<a class="close">Cerrar</a>
-			</div>
-		</div>
-		-->
+		<div class="clear"></div>
+	</div>
+</section>
 <div id="form-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
-                    </div>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
             <div id="form-modal-body" class="modal-body">
-                        <p>One fine body&hellip;</p>
+				<p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
 				<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
