@@ -18,122 +18,150 @@
 	</head>
 	<body>
 		<div class="home estudiantes">
-			<div class="container">
-				<header>
-					<img class="logo" src="{%static 'img/logo.png' %}" alt="Broder jobs" />
-					<ul>
-						<li><a class="btn-action" href="{% url 'empresa' %}">Para Empresas</a></li>
+			<nav class="navbar navbar-fixed-top sb-slide" role="navigation">
+				<div class="sb-toggle-left navbar-left visible-xs">
+					<div class="navicon-line"></div>
+					<div class="navicon-line"></div>
+					<div class="navicon-line"></div>
+				</div>
+				<img class="logo" src="{%static 'img/logo.png' %}" alt="Broder jobs" />
+				<ul class = "hidden-xs">
+					<li><a class="btn-action" href="{% url 'empresa' %}">Para Empresas</a></li>
 						<li><a class="link-header" href="#" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
 						<li><a class="link-header" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
-					</ul>
-					<div class="clear"></div>
-				</header>
-				<div class="mensaje-central active" id="mensaje-central">
-					<h1>Ama lo que haces</h1>
-					<h3>Encuentra pr&aacute;cticas y primeros empleos en las mejores empresas del pa&iacute;s</h3>
+				</ul>
+				<div class="clear"></div>
+			</nav>
+			<div id = "sb-site" class="container">
+				<div class = "flex">
+					<div class="flex-div mensaje-central active" id="mensaje-central">
+						<h1>Ama lo que haces</h1>
+						<h3>Encuentra pr&aacute;cticas y primeros empleos en las mejores empresas del pa&iacute;s</h3>
+					</div>
+					<div class="flex-div login" id="login">
+						<form action="" method="post">{%csrf_token%}
+							<div class="content">
+								<label class="saludo">HOLA BRODER</label>
+								<a  href="{% url 'social:begin' 'facebook' %}" class="ingresa-facebook">INGRESA CON FACEBOOK</a>
+								<div class="division">
+									<div class="line"></div>
+									<label>o</label>
+									<div class="line"></div>
+									<div class="clear"></div>
+								</div>
+								<label class="ingresa-email">Ingresa con tu e-mail:</label>
+								<div class="datos">
+									{{ login_form.email }}
+									{{ login_form.password }}
+								</div>
+								<div class="opciones">
+									<input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
+									<a>¿Olvidaste tu contrase&ntilde;a?</a>
+								</div>
+								{%if message %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message}}</div>
+								{% endif%}
+								<input type="submit" name="_login" value="INGRESAR" class="Ingresar" text="Ingresar" />
+								<div class="division">
+									<div class="full line"></div>
+									<div class="clear"></div>
+								</div>
+								<a class="registrate" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
+								<a class="close" onclick="desactivar('login'); activar('mensaje-central');">x</a>
+							</div>
+						</form>
+					</div>
+					<div class="flex-div login active" id="registro">
+						<form method="POST">{% csrf_token %}
+							<div class="content">
+								<label class="saludo">HOLA BRODER</label>
+								<a class="ingresa-facebook">REG&Iacute;STRATE CON FACEBOOK</a>
+								<label class="indicacion">Es m&aacute;s f&aacute;cil y r&aacute;pido</label>
+								<div class="division">
+									<div class="line"></div>
+									<label>o</label>
+									<div class="line"></div>
+									<div class="clear"></div>
+								</div>
+								<a class="registrate" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
+								<div class="registrate-email" id="registro-email">
+								<div class="datos registro">
+									{{ registro_form.first_name }}
+									{{ registro_form.last_name }}
+									{{ registro_form.email }}
+									{{ registro_form.password1 }}
+									{{ registro_form.password2 }}
+								<label class="indicacion">Fecha de Nacimiento</label>
+										{{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
+								</div><br>
+								<div class="opciones">
+									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+								</div>
+								{%if message %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message}}
+								</div>
+								{% endif%}
+								{%if registro_form.errors %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{ registro_form.first_name.errors }}
+									{{ registro_form.last_name.errors }}
+									{{ registro_form.email.errors }}
+									{{ registro_form.password1.errors }}
+									{{ registro_form.password2.errors }}
+								</div>
+								{% endif%}
+								<input type="submit" name="_registro" value="REGISTRARME" class="Ingresar"/>
+								<a class="close" href="#" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+							</div>
+								 </div>
+						</form>
+					</div>
+					<footer class= "hidden-xs">
+						<div class = "row">
+							<div class = "col-sm-4">
+								<ul class="links">
+									<li class="link"><a>Cont&aacute;ctanos</a></li>
+									<li class="link"><a href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones</a></li>
+									<li class="link"><a>Blog</a></li>
+								</ul>
+							</div>
+							<div class = "col-sm-4">
+								<ul class="social text-center">
+									<li class="social"><a class="facebook">Facebook</a></li>
+									<li class="social"><a class="twitter">Twitter</a></li>
+								</ul>
+							</div>
+							<div class = "col-sm-4">
+								<ul class = "copy text-center">
+									<li class="copy">Broder jobs&copy; 2015</li>
+								</ul>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</footer>
 				</div>
-				<div class="login" id="login">
-                    <form action="" method="post">{%csrf_token%}
-                        <div class="content">
-                            <label class="saludo">HOLA BRODER</label>
-                            <a  href="{% url 'social:begin' 'facebook' %}" class="ingresa-facebook">INGRESA CON FACEBOOK</a>
-                            <div class="division">
-                                <div class="line"></div>
-                                <label>o</label>
-                                <div class="line"></div>
-                                <div class="clear"></div>
-                            </div>
-                            <label class="ingresa-email">Ingresa con tu e-mail:</label>
-                            <div class="datos">
-                                {{ login_form.email }}
-                                {{ login_form.password }}
-                            </div>
-                            <div class="opciones">
-                                <input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
-                                <a>¿Olvidaste tu contrase&ntilde;a?</a>
-                            </div>
-                            {%if message %}
-                            <div class="alert alert-warning alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                {{message}}</div>
-                            {% endif%}
-                            <input type="submit" name="_login" value="INGRESAR" class="Ingresar" text="Ingresar" />
-                            <div class="division">
-                                <div class="full line"></div>
-                                <div class="clear"></div>
-                            </div>
-                            <a class="registrate" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
-						    <a class="close" onclick="desactivar('login'); activar('mensaje-central');">x</a>
-                        </div>
-                    </form>
-				</div>
-                <div class="login active" id="registro">
-                    <form method="POST">{% csrf_token %}
-			            <div class="content">
-                            <label class="saludo">HOLA BRODER</label>
-                            <a class="ingresa-facebook">REG&Iacute;STRATE CON FACEBOOK</a>
-                            <label class="indicacion">Es m&aacute;s f&aacute;cil y r&aacute;pido</label>
-                            <div class="division">
-                                <div class="line"></div>
-                                <label>o</label>
-                                <div class="line"></div>
-                                <div class="clear"></div>
-                            </div>
-                            <a class="registrate" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
-                            <div class="registrate-email" id="registro-email">
-                            <div class="datos registro">
-                                {{ registro_form.first_name }}
-                                {{ registro_form.last_name }}
-                                {{ registro_form.email }}
-                                {{ registro_form.password1 }}
-                                {{ registro_form.password2 }}
-                            <label class="indicacion">Fecha de Nacimiento</label>
-                                    {{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
-                            </div><br>
-                            <div class="opciones">
-                                <input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
-                            </div>
-                            {%if message %}
-                            <div class="alert alert-warning alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                {{message}}
-                            </div>
-                            {% endif%}
-                            {%if registro_form.errors %}
-                            <div class="alert alert-warning alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                {{ registro_form.first_name.errors }}
-                                {{ registro_form.last_name.errors }}
-                                {{ registro_form.email.errors }}
-                                {{ registro_form.password1.errors }}
-                                {{ registro_form.password2.errors }}
-                            </div>
-                            {% endif%}
-					        <input type="submit" name="_registro" value="REGISTRARME" class="Ingresar"/>
-                            <a class="close" href="#" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
-			            </div>
-                    </form>
-                </div>
-				<footer>
-					<ul class="links">
-						<li class="link"><a>Cont&aacute;ctanos</a></li>
-						<li class="link"><a href="../terminos_y_condiciones.html">T&eacute;rminos y condiciones</a></li>
-						<li class="link"><a>Blog</a></li>
-					</ul>
-					<ul class="social">
-						<li class="social"><a class="facebook">Facebook</a></li>
-						<li class="social"><a class="twitter">Twitter</a></li>
-					</ul>
-					<ul class="copy">
-						<li class="copy">Broder jobs&copy; 2015</li>
-					</ul>
-					<div class="clear"></div>
-				</footer>
 			</div>
 		</div>
-
+		<div class="sb-slidebar sb-left visible-xs">
+			<nav>
+				<ul class="sb-menu">
+					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
+					<li class="sb-close"><a href="{%url 'empresa'%}">Para Empresas</a></li>
+					<li class="sb-close"><a href="{%url 'estudiante-login'%}">Iniciar sesión</a></li>
+					<li class="sb-close"><a href="{%url 'estudiante-registro'%}">Regístrate</a></li>
+				</ul>
+			</nav>
+		</div>
 
 		<script>
+			$(function() {
+				$.slidebars();
+			});
 			function activar(id) {
 				$('#' + id).addClass('active');
 			}
