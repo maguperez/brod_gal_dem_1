@@ -1,10 +1,10 @@
-
 {% extends 'estudiante/base.html' %}
 {% load staticfiles %}
 {%block css%}
 {%endblock%}
 {% block content %}
 <script type="text/javascript" src="{% static 'js/rater.min.js' %}"></script>
+<link rel ="stylesheet" href = "{% static 'css/font-awesome.css' %}"/>
 <section class="empresa">
     <div class="centered">
         <div class="panel left">
@@ -23,7 +23,7 @@
 								<h4 class="link">EVALUACI&Oacute;N DE LA EMPRESA</h4>
 							</section>
 							<section class="rating">
-								<div id = "rating" class ="link" style="font-size:40px; margin:auto"></div>
+								<!--<div id = "rating" class ="link fa" style="font-size:30px; margin:auto"></div>-->
 								<div>
 									<ol>
 										<li><i class="rating-big full"></i></li>
@@ -253,21 +253,22 @@
 			window.history.back();
 			$('body').removeClass('static');
 		});
-		$("#rating").rate();
+		//$("#rating").rate();
 
 //or for example
-var options = {
-    max_value: 6,
-    step_size: 0.5,
-	symbols: {
-		utf8_star: {
-			base: '\u2606',
-			hover: '\u2605',
-			selected: '\u2605',
+	var options = {
+		max_value: 6,
+		step_size: 0.25,
+		symbols: {
+			fontawesome: {
+				base: "&#xf006;",
+				hover: "&#xf005;",
+				selected: "&#xf005;"
+			},
 		},
-	}
+		selected_symbol_type : 'fontawesome'
 }
-$("#rating").rate(options);
+	/*$("#rating").rate(options);*/
 	});
 </script>
 {%endblock js%}
