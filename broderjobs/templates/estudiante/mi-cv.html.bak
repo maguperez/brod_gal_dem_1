@@ -1,0 +1,396 @@
+{% extends 'estudiante/base.html' %}
+{%block css%}
+
+{%endblock%}
+{% block content %}
+<<<<<<< HEAD
+<section class="cv">	{%include 'estudiante/mi-cv-resumen.html'%}
+	<div class="centered">
+=======
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
+
+
+<link rel="stylesheet" href="{% static 'css/select2.css' %}">
+
+<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
+<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+
+<section class="cv">
+
+			<div class="centered">
+>>>>>>> 83649b1fa0103fe4c564c8ce275f1ef0240f5ed2
+				<div class="panel left principal">
+					<div class="box"><button id="foto-button" class="link editar">Editar</button>
+
+						<header>
+							<img class="imagen" src="{{estudiante.set_foto}}" />
+							<div class="detalle">
+								<h3>{{estudiante | upper}}</h3>
+								<label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
+								<label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
+								<label>{{persona.telefono}} / {{usuario.email}}</label>
+							</div>
+							<div class="clear"></div>
+							<button id="info-personal-button" class="link btn-action editar">Editar</button>
+						</header>
+						<div class="content">
+							<section>
+								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
+								<div class="detalle">
+									<p>{{resumen.descripcion}}</p>
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="time"></i>Disponibilidad<button id="disponibilidad-button" class="link editar">Editar</button></h3>
+								<div class="detalle col-3-7">
+									<div>
+										<label>Acepto propuestas de</label>
+										<p>
+											{% for tipo_puesto in estudiante.tipo_puesto.all %}
+											<span class="tag">{{ tipo_puesto.descripcion }}</span>
+											{% endfor %}
+										</p>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<label>Carga horaria</label>
+										<p>
+											<span class="tag">{{ estudiante.carga_horaria }}</span>
+										</p>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="language"></i>Idiomas<button id="idioma-button" class="link editar">Editar</button></h3>
+								<div class="detalle">
+									<p>
+										{% for idioma in estudiante.idioma.all %}
+                    					<span class="tag">{{ idioma.descripcion }}</span>
+										{% endfor %}
+									</p>
+									<div class="clear"></div>
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="knowledge"></i>Conocimientos<button id="conocimiento-button" class="link editar">Editar</button></h3>
+								<div class="detalle">
+									<p>
+										{% for conocimiento in estudiante.conocimiento.all %}
+                    					<span class="tag">{{ conocimiento.descripcion }}</span>
+										{% endfor %}
+									</p>
+									<div class="clear"></div>
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas<button id="actividad-extra-crear-button" class="link editar">Agregar</button></h3>
+								<div class="detalle">
+									{% for actividad in actividades_extra %}
+											<div class="detalle">
+												<p>{{actividad.descripcion | lower}}</p>
+												<div class="clear"></div>
+												<label>{{actividad.organizacion | lower}}</label>
+												<div class="clear"></div>
+												<button id="actividad-{{actividad.pk}}-editar" class="actividad-extra-botton link editar" >Editar</button>
+
+												<button id="actividad-{{actividad.pk}}-eliminar" class="actividad-extra-botton link editar">Eliminar</button>
+
+
+											</div>
+									{% endfor %}
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="work"></i>Experiencia Profesional<button id="experiencia-crear-button" class="link editar">Agregar</button></h3>
+								<div class="detalle timeline">
+									{% for experiencia in experiencias_profesionales %}
+										<div class="experiencia" id="{{experiencia.id}}">
+											<p class="fecha">{{experiencia.fecha_desde}} - {{experiencia.fecha_hasta}}</p>
+											<label class="tipo">{{experiencia.puesto}}</label>
+											<label class="nombre">{{experiencia.empresa}}</label>
+											<pr>{{experiencia.descripcion}}</pr>
+											<button id="experiencia-{{experiencia.pk}}-editar" class="experiencia-botton link editar" >Editar</button>
+
+											<button id="experiencia-{{experiencia.pk}}-eliminar" class="experiencia-botton link editar">Eliminar</button>
+										</div>
+									{% endfor %}
+								</div>
+							</section>
+							<section>
+								<h3 class="title"><i class="volunteer"></i>Voluntariado<button id="voluntariado-crear-button" class="link editar">Agregar</button></h3>
+								<div class="detalle timeline">
+
+									{% for voluntariado in voluntariados %}
+									{{voluntariado}}
+										<div>
+											<p class="fecha">{{voluntariado.fecha_desde}} - {{voluntariado.fecha_hasta}}</p>
+											<label class="tipo">{{voluntariado.cargo}}</label>
+											<label class="nombre">{{voluntariado.organizacion}}</label>
+											<p>{{voluntariado.descripcion}}</p>
+										
+											<button id="voluntario-{{voluntariado.pk}}-editar" class="voluntariado-botton link editar" accion="editar">Editar</button>
+											<button id="voluntario-{{voluntariado.pk}}-eliminar" class="voluntariado-botton link editar" accion="eliminat">Eliminar</button>
+										</div>
+									{% endfor %}
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="panel right">
+					<div class="box">
+						<div class="content wizard">
+							<h4>Completa tu CV</h4>
+							{% if estudiante %}
+								<div><i class="done active"></i>Informaci&oacute;n acad&eacute;mica</div>
+							{% else %}
+								<div><i class="done "></i>Informaci&oacute;n acad&eacute;mica</div>
+							{% endif %}
+							{% if resumen.descripcion %}
+								<div><i class="done active "></i>Resumen</div>
+							{% else %}
+								<div><i class="done"></i>Resumen</div>
+							{% endif %}
+							{% if estudiante.tipo_puesto.all %}
+								<div><i class="done active "></i>Disponibilidad</div>
+							{% else %}
+								<div><i class="done"></i>Disponibilidad</div>
+							{% endif %}
+							{% if estudiante.idioma.all %}
+								<div><i class="done active "></i>Idiomas</div>
+							{% else %}
+								<div><i class="done"></i>Idiomas</div>
+							{% endif %}
+							{% if estudiante.conocimiento.all %}
+								<div><i class="done active "></i>Conocimientos</div>
+							{% else %}
+								<div><i class="done"></i>Conocimientos</div>
+							{% endif %}
+							{% if actividades_extra %}
+								<div><i class="done active "></i>Actividades extraacademica </div>
+							{% else %}
+								<div><i class="done"></i>Actividades extraacad&eacute;micas</div>
+							{% endif %}
+							{% if experiencias_profesionales %}
+								<div><i class="done active "></i>Experiencia profesional</div>
+							{% else %}
+								<div><i class="done"></i>Experiencia profesional</div>
+							{% endif %}
+							{% if voluntariados %}
+								<div><i class="done active "></i>Voluntariado</div>
+							{% else %}
+								<div><i class="done"></i>Voluntariado</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+
+
+</section>
+
+<div id="form-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2 class="modal-title">Modal title</h2>
+                    </div>
+            <div id="form-modal-body" class="modal-body">
+                        <p>One fine body&hellip;</p>
+			</div>
+            <div class="modal-footer">
+				<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<style>
+	#info-personal-button {
+		text-transform: uppercase;
+		border: 1px solid #f50 !Important;
+	}
+</style>
+{% endblock content%}
+{% block js %}
+ <script>
+	 var formAjaxSubmit = function(form, modal) {
+		 var valid = $(form).validate().valid();
+		 if (valid) {
+			 $(form).submit(function (e) {
+				 e.preventDefault();
+				 $.ajax({
+					 type: $(this).attr('method'),
+					 url: $(this).attr('action'),
+					 data: $(this).serialize(),
+					 success: function (xhr, ajaxOptions, thrownError) {
+						 if ($(xhr).find('.has-error').length > 0) {
+							 $(modal).find('.modal-body').html(xhr);
+							 formAjaxSubmit(form, modal);
+						 } else {
+							 $(modal).modal('toggle');
+							 window.location.reload();
+						 }
+					 },
+					 error: function (xhr, ajaxOptions, thrownError) {}
+				 });
+			 });
+		 }
+	 }
+	 var formAjaxSubmitImagen = function(form, modal) {
+		 $(form).submit(function (e) {
+         	e.preventDefault();
+            $.ajax({
+            	type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+				dataType:  'json',
+                success: function (xhr, ajaxOptions, thrownError) {
+                	if ( $(xhr).find('.has-error').length > 0 ) {
+                    	$(modal).find('.modal-body').html(xhr);
+                        formAjaxSubmitImagen(form, modal);
+
+
+					} else {
+                    	$(modal).modal('toggle');
+						window.location.reload();
+					}
+				},
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+			});
+		 });
+	 }
+
+     $('#comment-button').click(function() {
+     	$('#form-modal-body').load('resumen/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#foto-button').click(function() {
+     	$('#form-modal-body').load('foto/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#info-personal-button').click(function() {
+     	$('#form-modal-body').load('info-personal/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#disponibilidad-button').click(function() {
+     	$('#form-modal-body').load('disponibilidad/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#idioma-button').click(function() {
+     	$('#form-modal-body').load('idioma/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('#conocimiento-button').click(function() {
+     	$('#form-modal-body').load('conocimiento/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.experiencia-botton').click(function() {
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('experiencia/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('experiencia-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+	 });
+	 $('#experiencia-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('experiencia-crear/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.voluntariado-botton').click(function() {
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('voluntariado-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+	 });
+	 $('#voluntariado-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('voluntariado-crear/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $('.actividad-extra-botton').click(function() {
+		 var aInfo = $(this).attr("id").split("-");
+		 var id=  aInfo[1];
+		 var accion= aInfo[2];
+		 if (accion == 'editar') {
+			 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+		 if (accion == 'eliminar') {
+			 $('#form-modal-body').load('actividad-extra-eliminar/' + id + '/', function () {
+				 $('#form-modal').modal('toggle');
+				 formAjaxSubmit('#form-modal-body form', '#form-modal');
+			 });
+		 }
+	 });
+	 $('#actividad-extra-crear-button').click(function() {
+		 var id = $(this).find("button").attr("id");
+     	$('#form-modal-body').load('actividad-extra-crear/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		});
+	 });
+	 $("#form-modal .btn-submit").on("click", function(){
+		 $(this).parents("#form-modal").find("form").submit();
+	 });
+ </script>
+{% endblock %}

@@ -145,6 +145,7 @@
 {% endblock content%}
 {% block js %}
 <script>
+	$("#link-procesos").addClass("active");
     $('#menu').click(function() {
 		if ($('#ctx-menu-header').hasClass('active'))
 			$('#ctx-menu-header').removeClass('active');
