@@ -105,8 +105,6 @@ def homepage(request):
                                         password=request.POST['registro-password1'])
                 login(request, new_user)
                 return redirect('registro-cv')
-            else:
-                message = "porfavor verifique los campos"
     else:
         login_form = LoginForm(prefix='login')
         registro_form = RegisterForm(prefix='registro')
@@ -124,6 +122,24 @@ def homepage_empresa(request):
     if request.method == "POST":
         login_form = LoginForm(request.POST, prefix='login')
         registro_form = RegisterForm(prefix='registro')
+        if '_login' in request.POST:
+            if login_form.is_valid():
+                email = request.POST["login-email"]
+                password = request.POST["login-password"]
+                user = authenticate(username=email, password=password)
+                if user is not None:
+                    persona = Persona()
+                    try:
+                        persona = Persona.objects.get(usuario_id=user.id, tipo_persona="R")
+                    except persona.DoesNotExist:
+                        persona = None
+                    if persona is not None:
+                        if user.is_active:
+                            login(request, user)
+                            return redirect('empresa-oportunidad-listar')
+                        else:
+                            message = "tu usuario esta inactivo"
+                message = "Email o contraseña incorrecta"
         if '_registro' in request.POST:
             if registro_form.is_valid():
                 print("registro")
@@ -142,8 +158,6 @@ def homepage_empresa(request):
                 login(request, new_user)
                 mensaje = "Se ha registrado satisfactoriamente"
                 return redirect('empresa-oportunidad-listar')
-            else:
-                message = "porfavor verifique los campos"
     else:
         login_form = LoginForm(prefix='login')
         registro_form = RegisterForm(prefix='registro')
