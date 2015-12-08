@@ -371,7 +371,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-box .datos {width: 38%; margin-top: 10px; line-height: 30px; font-size: 0.95em;}
 .oportunidad-box .datos i {margin-top: 8px;}
 .oportunidad-box .datos label {margin-left: 5px; margin-bottom: 0px !Important;}
-.oportunidad-box .compatibilidad {width: 16%; margin-top: 10px;}
+.oportunidad-box .compatibilidad {/*width: 16%;*/ margin-top: 10px;}
 .oportunidad-box .compatibilidad .grafico {width: 65px; margin: 0 auto;}
 .oportunidad-box .compatibilidad .resultado {margin-top: 5px; text-align: center; font-size: 0.85em; display: block;}
 .oportunidad-box .ver-oportunidad {height: 60px; margin: 20px 0 0 12%; padding-left: 40px; text-align: center; border-left: 1px solid #ddd;}
@@ -889,3 +889,17 @@ ul.copy { margin-top: 8px; margin-right: 50px; }
 .empresas .list h3.link,
 .empresas .list .descripcion{ margin: 0px !Important; }
 .empresas .list .box:hover {text-decoration: none; }
+
+.circular-bar .circular-bar-chart {
+	position: relative;
+}
+.circular-bar label {
+	display: block;
+	font-weight: 100;
+	line-height: 20px;
+	position: absolute;
+	top: 35%;
+	width: 80%;
+	left: 10%;
+	text-align: center;
+}
