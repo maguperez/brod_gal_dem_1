@@ -49,7 +49,7 @@ class Ciudad(models.Model):
 		return unicode(self.descripcion) or u''
 
 class Universidad(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -59,7 +59,7 @@ class Universidad(models.Model):
 		return unicode(self.descripcion) or u''
 
 class Carrera(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -69,7 +69,7 @@ class Carrera(models.Model):
 		return unicode(self.descripcion) or u''
 
 class TipoPuesto(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -79,7 +79,7 @@ class TipoPuesto(models.Model):
 		return unicode(self.descripcion) or u''
 
 class CargaHoraria(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -89,7 +89,7 @@ class CargaHoraria(models.Model):
 		return unicode(self.descripcion) or u''
 
 class Idioma(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -99,7 +99,7 @@ class Idioma(models.Model):
 		return unicode(self.descripcion) or u''
 
 class Conocimiento(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -109,7 +109,7 @@ class Conocimiento(models.Model):
 		return unicode(self.descripcion) or u''
 
 class TipoRemuneracion(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -119,7 +119,17 @@ class TipoRemuneracion(models.Model):
 		return unicode(self.descripcion) or u''
 
 class Beneficio(models.Model):
-    descripcion = models.CharField(max_length="50")
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+		return unicode(self.descripcion) or u''
+
+class PeriodoGraduacion(models.Model):
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)

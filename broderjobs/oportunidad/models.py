@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
-    Conocimiento, TipoRemuneracion, Beneficio
+    Conocimiento, TipoRemuneracion, Beneficio, PeriodoGraduacion
 from empresa.models import Empresa
 from estudiante.models import Estudiante
 from django.contrib.auth.models import User
@@ -11,11 +11,15 @@ items_registro = utilitarios.estado_registro()
 
 class Oportunidad(models.Model):
     items_estado = utilitarios.estado_oportunidad()
+    periodo= []
+    for e in PeriodoGraduacion.objects.all():
+        periodo.append((e.id, e.descripcion))
 
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
     titulo = models.CharField(max_length="100", default=None, null=True, blank=True )
     carga_horaria = models.ForeignKey(CargaHoraria, default=None, null=True, blank=True, verbose_name="Jornada Laboral" )
     pais = models.ForeignKey(Pais, null=True, blank=True )
+    ciudad = models.ForeignKey(Ciudad, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, null=True, blank=True )
     remuneracion = models.ForeignKey(TipoRemuneracion, default=None, null=True, blank=True, verbose_name="Remuneracion")
     remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
@@ -37,6 +41,8 @@ class Oportunidad(models.Model):
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
     fecha_publicacion = models.DateField(default=None,null=True, blank=True)
     fecha_cese = models.DateField(default=None,null=True, blank=True )
+    graduacion_desde = models.CharField(choices=periodo, max_length=1, default=None, null=True, blank=True)
+    graduacion_hasta = models.CharField(choices=periodo, max_length=1, default=None, null=True, blank=True)
 
     usuario = models.ForeignKey(User, default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
@@ -46,6 +52,7 @@ class Oportunidad(models.Model):
 
     def __unicode__(self):
 		return unicode(self.titulo) or u''
+
 
 class Postulacion(models.Model):
     items_estado = utilitarios.estado_postulacion()
