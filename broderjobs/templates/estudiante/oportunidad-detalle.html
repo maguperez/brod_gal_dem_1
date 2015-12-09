@@ -13,15 +13,8 @@
 						<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
 					</div>
 					<div class="postulacion">
-						
-						<a class="btn-action" id="postular" alt="{% if postulacion.estado == 'A'%} cancelar postulación
-							{%else %}realizar postulación {%endif%}">
-							{% if postulacion.estado == 'A'%}
-								CANCELAR
-							{%else %}
-								POSTULAR
-							{%endif%}
-						</a>
+						<a id="postular" class="{% if postulacion.estado == 'A'%} btn-action-invertido
+							{%else %}btn-action{%endif%}">{% if postulacion.estado == 'A'%}CANCELAR{%else %}POSTULAR{%endif%}</a>
 						<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 					</div>
 					<div class="clear"></div>
@@ -112,13 +105,23 @@
 </section>
 <div class="popup aviso" id="resultado-postulacion">
 	<div class="popup-box box">
-		<div class="content">
+		<div class="content" id="popup-confirm">
 			<section class="header">
 				<h4 class="link">CONFIRMACI&Oacute;N</h4>
 			</section>
+			{% if postulacion.estado == 'A'%}
+				<section class="mensaje">
+					<p>¿Estas seguro que deseas cancelar está postulaci&oacute;n ?!</p>
+					<a id= "cancelar-postulacion" class="btn-save" >ACEPTAR</a>
+					<a class="btn-save" onclick="window.history.back();">CANCELAR</a>
+				</section>
+			{%else %}
 			<section class="mensaje">
 				<p>Tu postulaci&oacute;n ha sido registrada con &eacute;xito, ahora s&oacute;lo queda esperar por el contacto de la empresa. ¡Buena suerte!</p>
 			</section>
+			{%endif%}
+
+
 		</div>
 		<a class="close">Cerrar</a>
 	</div>
@@ -128,17 +131,23 @@
 {% block js %}
 <script>
 	$("#link-oportunidad").addClass("active");
+
 	$('#postular').click(function(e) {
-		fnPostular();
+		fnCargarPopup();
+		window.location = '#resultado-postulacion';
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+		if ($.trim($("#postular").text()) == 'POSTULAR'){
+			fnPostular();
+		}
 	});
 	$('.popup .close').click(function(e) {
 		window.history.back();
 		$('body').removeClass('static');
 	});
 	$('a').click(function(event) {
-		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-        if ($(id).hasClass('popup'))
-			$('body').addClass('static');
+
     });
 	function fnPostular(){
 		var id = {{oportunidad.id}};
@@ -147,13 +156,43 @@
 			url: '{%url "estudiante-oportunidad-postular" %}',
 			type: 'get',
 			success: function(data){
-				window.location = '#resultado-postulacion';
 				$("#postular").text(data[0]);
+				if(data[0] == "CANCELAR") {
+					$("#postular").removeClass("btn-action");
+					$("#postular").addClass("btn-action-invertido");
+				}
+				else{
+					$("#postular").removeClass("btn-action-invertido");
+					$("#postular").addClass("btn-action");
+				}
 			}
 
 		});
+	}
 
-        document.ready
+	function fnCargarPopup(){
+
+		html = '<section class="header">';
+		html += '<h4 class="link">CONFIRMACI&Oacute;N</h4>';
+		html += '</section>';
+		html += '<section class="mensaje">';
+		if($.trim($("#postular").text()) =='CANCELAR') {
+			html += '<p>¿Estas seguro que deseas cancelar está postulaci&oacute;n ?!</p>';
+			html += '<a id="cancelar-postulacion" class="btn-save" onclick="fnCancelarPostulacion();" >ACEPTAR</a>';
+			html += '<a class="btn-save" onclick="window.history.back();">CANCELAR</a>';
+
+		}
+		else if ($.trim($("#postular").text()) == 'POSTULAR') {
+			html += '<p>Tu postulaci&oacute;n ha sido registrada con &eacute;xito, ahora s&oacute;lo queda esperar ' +
+					'por el contacto de la empresa. ¡Buena suerte!</p>';
+			}
+		html += '</section>';
+		$('#popup-confirm').html(html);
+	}
+	function fnCancelarPostulacion() {
+		window.history.back();
+		$('body').removeClass('static');
+		fnPostular();
 	}
 
 </script>

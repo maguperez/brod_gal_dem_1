@@ -159,7 +159,9 @@ i.alcance.bajo {background-position: 0 0;}
 /*BUTTONS*/
 a {transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -webkit-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -moz-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear; -o-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear;}
 .btn-action {border: 1px solid #f50; color: #f50; font-size: 12px; text-align: center; display: block;}
-.btn-action:hover {color: #fff; background-color: #f50 !important;}
+.btn-action:hover{color: #fff; background-color: #f50 !important;}
+.btn-action-invertido{border: 1px solid #f50; color: #fff; background-color: #f50; font-size: 12px; text-align: center; display: block;}
+.btn-action-invertido:hover {color: #f50;  background-color: #fff !important; }
 .btn-save {width: 80px; height: 30px; line-height: 30px; color: #fff; font-size: 0.85em; text-align: center; background: #5d9cf9; display: block;}
 .btn-save:hover {background: #8cbcf4;}
 .btn-option {height: 30px; line-height: 30px; padding: 0 10px; font-size: 1em; border-radius: 1px; border: 1px solid #ddd; background: #fff; display: inline-block; transition: box-shadow 0.1s linear; -webkit-transition: box-shadow 0.1s linear; -moz-transition: box-shadow 0.1s linear; -o-transition: box-shadow 0.1s linear;}
@@ -395,7 +397,8 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .indicacion {margin-top: 5px; font-size: 0.85em; display: block;}
 .oportunidad-detalle header .descripcion {float: left;}
 .oportunidad-detalle header > .btn-action { background-color: white; width: 85px; height: 30px; line-height: 30px; margin-left: 10px; float: right;}
-.oportunidad-detalle .oportunidad-resumen .postulacion .btn-action {width: 110px; height: 35px; line-height: 35px; position: inherit; float: none;}
+.oportunidad-detalle .oportunidad-resumen .postulacion .btn-action,
+.oportunidad-detalle .oportunidad-resumen .postulacion .btn-action-invertido {width: 110px; height: 35px; line-height: 35px; position: inherit; float: none;}
 .oportunidad-detalle .oportunidad-resumen .postulacion .cierre {margin-top: 5px; text-align: center; font-size: 0.75em; display: block;}
 .oportunidad-detalle .box.alcance .content {padding: 20px;}
 .oportunidad-detalle .box.alcance section {padding: 0;}
