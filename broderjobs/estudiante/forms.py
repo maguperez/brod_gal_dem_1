@@ -190,15 +190,11 @@ class IdiomaForm(forms.ModelForm):
         helper.render_unmentioned_fields = True # render all fields
         return helper
 
-class ConocimientoForm(forms.ModelForm):
-    # item_conocimiento = []
-    # for c in Conocimiento.objects.all():
-    #     item_conocimiento.append((c.id, c.descripcion))
-    #
-    # conocimiento = forms.MultipleChoiceField(choices= item_conocimiento, required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
-    class Meta:
-        model = Estudiante
-        fields = ('conocimiento', 'persona')
+class ConocimientoForm(forms.Form):
+
+
+    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+
 
     @property
     def helper(self):
