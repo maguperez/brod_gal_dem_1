@@ -1,0 +1,54 @@
+{% extends 'estudiante/base.html' %}
+{% load staticfiles %}
+{%block css%}
+{%endblock%}
+{% block content %}
+
+<section class="empresa">
+			<div class="centered">
+				<div class="panel left">
+					<div class="box">
+						<header>
+							<img src="{{empresa.set_logo}}" />
+						</header>
+						<div class="content">
+							<h3 class="link">{{empresa.nombre}}</h3>
+							<label class="descripcion">{{empresa.sector | upper}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="panel right principal">
+					<ul class="list">
+						{% for oportunidad in oportunidades %}
+                        <li>
+                            <div class="oportunidad-box">
+                                <a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+								<div class="descripcion">
+								    <div class="datos">
+									    <div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+									    <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+									    <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
+									</div>
+                                    <div class="compatibilidad">
+									    <div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
+										    <label class="resultado">Compatible</label>
+                                        </div>
+										<div class="ver-oportunidad">
+										<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
+															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+														</div>
+														<div class="clear"></div>
+													</div>
+												<div class="clear"></div>
+										</div>
+						</li>
+						{%endfor%}
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+
+{% endblock content %}
+{% block js %}
+{%endblock%}

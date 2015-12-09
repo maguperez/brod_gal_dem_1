@@ -14,7 +14,8 @@
 					</div>
 					<div class="postulacion">
 						
-						<a class="btn-action" id="postular">
+						<a class="btn-action" id="postular" alt="{% if postulacion.estado == 'A'%} cancelar postulación
+							{%else %}realizar postulación {%endif%}">
 							{% if postulacion.estado == 'A'%}
 								CANCELAR
 							{%else %}

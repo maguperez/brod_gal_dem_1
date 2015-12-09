@@ -114,8 +114,8 @@
 									{% for oportunidad in oportunidades %}
 									<li>
 										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
-													<div class="descripcion">e
+													<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+													<div class="descripcion">
 														<div class="datos">
 															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
 															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
@@ -126,7 +126,7 @@
 															<label class="resultado">Compatible</label>
 														</div>
 														<div class="ver-oportunidad">
-															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+															<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
 															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 														</div>
 														<div class="clear"></div>
@@ -136,7 +136,7 @@
 									</li>
 									{% endfor %}
 								</ul>
-								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
+								<a class="link ver-mas" href="{%url 'estudiante-oportunidades-empresa' empresa.id%}">Ver m&aacute;s oportunidades</a>
 							</section>
 					<section class="ubicacion">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
