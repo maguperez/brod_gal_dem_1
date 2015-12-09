@@ -535,12 +535,22 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
     template_name = 'estudiante/oportunidad-detalle.html'
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
+        user = self.request.user
+        usuario = User.objects.get(pk = user.id)
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
 
         oportunidad =  get_object_or_404(Oportunidad, pk=id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        postulacion = Postulacion()
+        try:
+            postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
+        except Postulacion.DoesNotExist:
+            postulacion = None
         context = super(OportunidadDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
+        context['postulacion'] = postulacion
         return context
 
 class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
@@ -551,7 +561,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
             Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains=busqueda) |
             Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains=busqueda),
-            estado = 'A'
+            estado_oportunidad = 'A'
         ).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
@@ -585,12 +595,20 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         data =[]
         p, created = Postulacion.objects.get_or_create(oportunidad_id = id, estudiante_id = estudiante.id)
         if created is True:
-            p.fecha = date.today()
+            p.fecha_creacion = date.today()
+            p.estado = 'A'
             p.save()
-            data.append(('resp', 'Y'))
+            data.append(('CANCELAR'))
         else:
-            data.append(('resp', 'N'))
-
+            estado = p.estado_postulacion
+            if estado == 'A':
+                p.estado_postulacion = 'I'
+                data.append(('POSTULAR'))
+            else:
+                p.estado_postulacion = 'A'
+                data.append(('CANCELAR'))
+            p.fecha_creacion = date.today()
+            p.save()
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
 
@@ -601,7 +619,7 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id = user.id)
         estudiante =  get_object_or_404(Estudiante, persona_id = persona.id)
-        p = Postulacion.objects.filter(estudiante_id = estudiante.id)
+        p = Postulacion.objects.filter(estudiante_id = estudiante.id, estado = 'A').order_by('fecha_creacion')
 
         postulaciones =[]
         for i in range(0, len(p)):
@@ -609,6 +627,11 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
             empresa = Empresa.objects.get(id=oportunidad.empresa.id)
             ciudad = empresa.ciudad
             pais = empresa.pais
+            estado = 'Postulado'
+            if oportunidad.estado == 'E':
+                estado = 'En Evaluacion'
+            if oportunidad.estado == 'F':
+                estado = 'Finalizado'
             e = {
                 "id": p[i].id,
                 "id_oportunidad": oportunidad.id,
@@ -618,7 +641,7 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
                 "ubicacion": str(ciudad) + ', ' +str(pais),
                 "fecha_cese": str(oportunidad.fecha_cese),
                 "remuneracion": str(oportunidad.remuneracion),
-                "estado": str(oportunidad.estado),
+                "estado": estado,
             }
             postulaciones.append(e)
         # data = serializers.serialize('json', a_empresas,

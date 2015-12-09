@@ -38,7 +38,7 @@
 					html += '<li><div class="box oportunidad-box"><div class="content">';
 					html += '<a href="'+url+'"><img class="imagen" src="'+ data[i].logo + '"/></a>';
 					html += '<div class="detalle">';
-					html += '<a class="titulo" href=""><h2 class="link">'+data[i].titulo+'</h2></a>'
+					html += '<a class="titulo" href="'+url+'"><h2 class="link">'+data[i].titulo+'</h2></a>'
 					html += '<div class="descripcion"><div class="datos">';
                     html += '<div class="empresa"><i class="empresa"></i><label>'+data[i].empresa+'</label></div>';
                     html += '<div class="ubicacion"><i class="ubicacion"></i><label>'+data[i].ubicacion+'</label></div>';
@@ -49,7 +49,7 @@
 				}
 				$('#datos').html(html);
 				$('.circular-bar-chart').easyPieChart({
-					animate: 1000,
+					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
 					barColor: "#5d9cf9",

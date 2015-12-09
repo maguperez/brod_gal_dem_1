@@ -13,7 +13,14 @@
 						<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
 					</div>
 					<div class="postulacion">
-						<a class="btn-action" id="postular">POSTULAR</a>
+						
+						<a class="btn-action" id="postular">
+							{% if postulacion.estado_postulacion == 'A'%}
+								CANCELAR
+							{%else %}
+								POSTULAR
+							{%endif%}
+						</a>
 						<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 					</div>
 					<div class="clear"></div>
@@ -140,6 +147,7 @@
 			type: 'get',
 			success: function(data){
 				window.location = '#resultado-postulacion';
+				$("#postular").text(data[0]);
 			}
 
 		});

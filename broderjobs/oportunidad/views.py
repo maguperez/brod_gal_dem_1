@@ -60,6 +60,7 @@ class OportunidadCrearView(FormView):
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
+        oportunidad.estado = 'A'
         print(beneficio)
         oportunidad.beneficio = beneficio
         if '_guardar' in self.request.POST:
@@ -82,7 +83,7 @@ class OportunidadEditarView(UpdateView):
         return oportunidad
 
     def form_valid(self, form):
-        estado =  form.cleaned_data['estado']
+        estado =  form.cleaned_data['estado_oportunidad']
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -100,7 +101,8 @@ class OportunidadEditarView(UpdateView):
         id = self.kwargs["id"]
         oportunidad = Oportunidad.objects.get(id = id)
 
-        oportunidad.estado = estado
+        oportunidad.estado_oportunidad = estado
+        oportunidad.estado = 'A'
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
         oportunidad.pais = pais
