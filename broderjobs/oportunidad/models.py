@@ -53,7 +53,6 @@ class Oportunidad(models.Model):
     def __unicode__(self):
 		return unicode(self.titulo) or u''
 
-
 class Postulacion(models.Model):
     items_estado = utilitarios.estado_postulacion()
 

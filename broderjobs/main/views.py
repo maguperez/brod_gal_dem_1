@@ -112,7 +112,6 @@ def homepage1(request):
     return render_to_response('main/home-estudiante.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
                                   context_instance=RequestContext(request))
 
-
 def homepage(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/estudiante.html',

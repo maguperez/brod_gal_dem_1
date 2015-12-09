@@ -597,15 +597,18 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         if created is True:
             p.fecha_creacion = date.today()
             p.estado = 'A'
+            p.estado_postulacion = 'P'
             p.save()
             data.append(('CANCELAR'))
         else:
-            estado = p.estado_postulacion
+            estado = p.estado
             if estado == 'A':
-                p.estado_postulacion = 'I'
+                p.estado = 'I'
+                p.estado_postulacion = ''
                 data.append(('POSTULAR'))
             else:
-                p.estado_postulacion = 'A'
+                p.estado = 'A'
+                p.estado_postulacion = 'P'
                 data.append(('CANCELAR'))
             p.fecha_creacion = date.today()
             p.save()
@@ -627,11 +630,12 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
             empresa = Empresa.objects.get(id=oportunidad.empresa.id)
             ciudad = empresa.ciudad
             pais = empresa.pais
-            estado = 'Postulado'
-            if oportunidad.estado == 'E':
-                estado = 'En Evaluacion'
-            if oportunidad.estado == 'F':
-                estado = 'Finalizado'
+            estado_postulacion = 'Postulado'
+            if p[i].estado_postulacion == 'E':
+                estado_postulacion = 'En Evaluacion'
+            if p[i].estado_postulacion == 'F':
+                estado_postulacion = 'Finalizado'
+            remuneracion = oportunidad.remuneracion
             e = {
                 "id": p[i].id,
                 "id_oportunidad": oportunidad.id,
@@ -640,8 +644,8 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
                 "logo": empresa.set_logo,
                 "ubicacion": str(ciudad) + ', ' +str(pais),
                 "fecha_cese": str(oportunidad.fecha_cese),
-                "remuneracion": str(oportunidad.remuneracion),
-                "estado": estado,
+                "remuneracion": remuneracion,
+                "estado_postulacion": estado_postulacion,
             }
             postulaciones.append(e)
         # data = serializers.serialize('json', a_empresas,
@@ -663,7 +667,7 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         except mensajes.DoesNotExist:
             mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
-        context['postulacion'] = oportunidad
+        context['postulacion'] = postulacion
         context['oportunidad'] = oportunidad
         context['empresa'] = empresa
         context['mensajes'] = mensajes
