@@ -95,7 +95,7 @@ class OportunidadListarView(TemplateView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
         context = super(OportunidadListarView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades

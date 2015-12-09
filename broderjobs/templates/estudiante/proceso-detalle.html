@@ -11,13 +11,23 @@
 							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
 							<div class="detalle">
 								<h1>{{oportunidad.titulo}}</h1>
-								<a href=""><h4 class="link">{{empresa.nombre |upper}}</h4></a>
+								<a href=""><h4 class="link">{{empresa.nombre |upper}}</h4></a>postulacion.estado_postulacion
 								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
-								<label>Remuneraci&oacute;n: S/ {{oportunidad.remuneracion_min}} - {{oportunidad.remuneracion_max}} </label>
+								<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}} </label>
 							</div>
 							<div class="estado">
 								<label>Estado del proceso:</label>
-								<label>{{postulacion.estado_postulacion}}</label>
+								<label>
+									{%if postulacion.estado_postulacion == 'P'%}
+									Postulado
+									{%endif%}
+									{%if postulacion.estado_postulacion == 'E'%}
+									En Evaluacion
+									{%endif%}
+									{%if postulacion.estado_postulacion == 'F'%}
+									Finalizado
+									{%endif%}
+								</label>
 							</div>
 							<div class="clear"></div>
 						</section>
@@ -30,15 +40,11 @@
 								<div class="estado active" id="content-estado">
 									<div class="grafico">
 										<div class="step postulacion active">
-                                            {%if oportunidad.estado_oportunidad != 'F' %}
 											<i class="done active"></i>
-                                            {% else %}
-                                            <i class="done "></i>
-                                            {%endif%}
 											<label class="titulo">Postulaci&oacute;n</label>
 											<label class="fecha">El 26.04.15</label>
 										</div>
-										<div class="dots active">
+										<div class="dots {%if postulacion.estado_postulacion != 'P' %} active {%endif%}" >
 											<i class="dot"></i>
 											<i class="dot"></i>
 											<i class="dot"></i>
@@ -56,16 +62,12 @@
 											<i class="dot"></i>
 											<i class="dot"></i>
 										</div>
-										<div class="step evaluacion active">
-                                            {%if oportunidad.estado_oportunidad != 'P' %}
-											<i class="done active"></i>
-                                            {% else %}
-                                            <i class="done "></i>
-                                            {%endif%}
+										<div class="step evaluacion {%if postulacion.estado_postulacion != 'P' %} active {%endif%}">
+											<i class="done {%if postulacion.estado_postulacion != 'P' %} active {%endif%}"></i>
 											<label class="titulo">En evaluaci&oacute;n</label>
 											<label class="fecha"></label>
 										</div>
-										<div class="dots">
+										<div class="dots {%if postulacion.estado_postulacion == 'F' %} active {%endif%}"">
 											<i class="dot"></i>
 											<i class="dot"></i>
 											<i class="dot"></i>
@@ -83,12 +85,8 @@
 											<i class="dot"></i>
 											<i class="dot"></i>
 										</div>
-										<div class="step finalizado">
-                                            {%if oportunidad.estado_oportunidad == 'F' %}
-											<i class="done active"></i>
-                                            {% else %}
-											<i class="done"></i>
-                                            {%endif%}
+										<div class="step finalizado {%if postulacion.estado_postulacion == 'F' %} active {%endif%}">
+											<i class="done {%if postulacion.estado_postulacion == 'F' %} active {%endif%}"></i>
 											<label class="titulo">Finalizado</label>
 											<label class="fecha"></label>
 										</div>
@@ -145,6 +143,7 @@
 {% endblock content%}
 {% block js %}
 <script>
+	$("#link-procesos").addClass("active");
     $('#menu').click(function() {
 		if ($('#ctx-menu-header').hasClass('active'))
 			$('#ctx-menu-header').removeClass('active');

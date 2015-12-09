@@ -1,0 +1,306 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Broder jobs</title>
+		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/slidebars.min.css' %}">
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/slidebars.min.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/additional-methods.min.js' %}"></script>
+	</head>
+	<body>
+		<div class="home empresas">
+			<div class="container">
+				<nav class="navbar navbar-fixed-top sb-slide" role="navigation">
+					<div class="sb-toggle-left navbar-left visible-xs">
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+					</div>
+					<img class="logo" src="{%static 'img/logo.png' %}" alt="Broder jobs" />
+					<ul class = "hidden-xs">
+						<li><a class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
+						<li><a class="link-header" onclick="desactivar('mensaje-central'); desactivar('registro'); activar('login');">Iniciar sesi&oacute;n</a></li>
+						<li><a class="link-header" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">Reg&iacute;strate</a></li>
+					</ul>
+					<div class="clear"></div>
+				</nav>
+                <div id = "sb-site" class="container">
+					<div class = "flex">
+                        <div class="flex-div mensaje-central active" id="mensaje-central">
+                            <h1>Anuncia gratis</h1>
+                            <h3>Publica tus oportunidades de forma clara y atractiva para los j&oacute;venes profesionales</h3>
+                        </div>
+                        <div class="flex-div login" id="login">
+                            <form action="" method="post">{%csrf_token%}
+                                <div class="content">
+                                    <label class="ingresa-email">Iniciar Sesi&oacute;n</label>
+                                    <div class="datos">
+                                        {{ login_form.email }}
+                                        {{ login_form.password }}
+                                    </div>
+                                    <div class="opciones">
+                                        <input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
+                                        <a>¿Olvidaste tu contrase&ntilde;a?</a>
+                                    </div>
+                                    <div class="division">
+                                        <div class="full line"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    {%if message %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        {{message}}</div>
+                                    {% endif%}
+                                    <input type="submit" name="_login" value="INGRESAR" class="Ingresar"/>
+                                    <a class="registrate" onclick="desactivar('mensaje-central'); desactivar('login'); activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
+                                    <a class="close" onclick="desactivar('login'); activar('mensaje-central');">x</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="flex-div login" id="registro">
+					<form action="" method="post">{%csrf_token%}
+			            <div class="content">
+                            <label class="saludo"></label>
+                            <a class="registrate">Reg&iacute;strate con tu e-mail</a>
+                            <div class="datos registro">
+                                {{registro_form.first_name}}
+                                {{registro_form.last_name}}
+                                {{registro_form.email}}
+                                {{registro_form.empresa}}
+                                {{registro_form.telefono}}
+                                {{registro_form.password1}}
+                                {{registro_form.password2}}
+                            </div><br>
+                            <div class="opciones">
+                                <input type="checkbox" id="acepto" name = "tyc"/><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+                            </div>
+                            {%if message %}
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{message}}
+                            </div>
+                            {% endif%}
+                            {%if registro_form.errors %}
+
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{ formset.management_form }}
+                                {{ formset.errors }}
+                                {{ formset.non_field_errors }}
+                                {{ formset.non_form_errors }}
+                                {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                            <strong>{{ error|escape }}</strong>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                        <strong>{{ error|escape }}</strong>
+                                {% endfor %}
+                            {% endif %}
+
+                            </div>
+                            {% endif%}
+                            <input type="submit" name="_registro" value="REGISTRARME"  class="Ingresar"/>
+                            <a class="close" onclick="desactivar('registro'); activar('mensaje-central');">x</a>
+		                </div>
+	                </form>
+				</div>
+                        <footer class= "hidden-xs">
+							<div class = "row">
+								<div class = "col-sm-4">
+									<ul class="links">
+										<li class="link"><a>Cont&aacute;ctanos</a></li>
+										<li class="link"><a href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones</a></li>
+										<li class="link"><a>Blog</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class="social text-center">
+										<li class="social"><a class="facebook">Facebook</a></li>
+										<li class="social"><a class="twitter">Twitter</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class = "copy text-center">
+										<li class="copy">Broder jobs&copy; 2015</li>
+									</ul>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</footer>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="sb-slidebar sb-left">
+			<nav>
+				<ul class="sb-menu">
+					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
+					<li class="sb-close"><a href="{%url 'estudiante'%}">Para Estudiantes</a></li>
+					<li class="sb-close"><a href="{%url 'empresa-login'%}">Iniciar sesión</a></li>
+					<li class="sb-close"><a href="{%url 'empresa-registro'%}">Regístrate</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		
+		<script>
+            $(function() {
+				$.slidebars();
+			});
+			function activar(id) {
+				$('#' + id).addClass('active');
+			}
+			function desactivar(id) {
+				$('#' + id).removeClass('active');
+			}
+			$('.link-header').click(function(event) {
+				$('.link-header').removeClass('active');
+				$(event.target).addClass('active');
+				$('.mensaje-central').addClass('invisible');
+			});
+			$('.container').click(function(e) {
+				if ( $(e.target).closest('.login').length === 0 && $(e.target).closest('.link-header').length === 0 ) {
+					desactivar('login');
+					desactivar('registro');
+					activar('mensaje-central');
+					$('.mensaje-central').removeClass('invisible');
+				}
+			});
+			$(document).keydown(function(e) {
+				if (e.keyCode == 27) {
+					desactivar('login');
+					desactivar('registro');
+					activar('mensaje-central');
+					$('.mensaje-central').removeClass('invisible');
+				}
+			});
+			$('.close').click(function() {
+				$('.link-header').removeClass('active');
+				$('.mensaje-central').removeClass('invisible');
+			});
+
+            $(function(){
+                $("#registro form").validate({
+                    errorPlacement: function (error, element) {
+        				$(element).tooltip('destroy');
+        				$(element).tooltip({
+        					animation: true,
+        					placement: "left",
+        					title: $(error).text(),
+        					trigger: "manual"
+        				} );
+        				$(element).tooltip('show');
+                    },
+                    success: function (label, element) {
+        				$(element).tooltip('hide');
+                    },
+                    rules: {
+        				first_name: {
+        					required: true,
+        				},
+        				last_name: {
+        					required: true,
+        				},
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password1: {
+                            required: true,
+        					min: 6
+                        },
+        				password2: {
+                            required: true,
+        					equalTo: "#id_password1",
+        					min: 6
+                        },
+        				groups: {
+        					date: "dia mes ano"
+        				},
+        				tyc: {
+        					required: true
+        				}
+                    },
+                    messages: {
+        				first_name: {
+        					required: "Este campo es obligatorio",
+        				},
+        				last_name: {
+        					required: "Este campo es obligatorio",
+        				},
+                        email: {
+                            required: "Este campo es obligatorio",
+                            email: "Introduzca un correo valido"
+                        },
+                        password1: {
+                            required: "Este campo es obligatorio",
+        					min: "La contraseña debe tener al menos seis (6) caracteres"
+                        },
+        				password2: {
+                            required: "Este campo es obligatorio",
+        					equalTo: "Las contraseñas deben ser iguales",
+        					min: "La contraseña debe tener al menos seis (6) caracteres"
+                        },
+        				tyc: {
+        					required: "Debe aceptar los términos y condiciones",
+        				}
+                    }
+                });
+		$("#link-registro").addClass("active");
+    });
+
+		</script>
+    <script>
+    $(function(){
+        $("#login form").validate({
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+                $(element).tooltip({
+                    animation: true,
+                    placement: "left",
+                    title: $(error).text(),
+                    trigger: "manual"
+                } );
+                $(element).tooltip('show');
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    min: 6
+                }
+            },
+            messages: {
+                email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+                password: {
+                    required: "Este campo es obligatorio",
+                    min: "La contraseña debe tener al menos seis (6) caracteres"
+                }
+            }
+        });
+        $("#link-sesion").addClass("active");
+    });
+</script>
+	</body>
+</html>

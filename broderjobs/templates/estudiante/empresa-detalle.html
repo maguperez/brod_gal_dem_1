@@ -1,9 +1,10 @@
-
 {% extends 'estudiante/base.html' %}
 {% load staticfiles %}
 {%block css%}
 {%endblock%}
 {% block content %}
+<script type="text/javascript" src="{% static 'js/rater.min.js' %}"></script>
+<link rel ="stylesheet" href = "{% static 'css/font-awesome.css' %}"/>
 <section class="empresa">
     <div class="centered">
         <div class="panel left">
@@ -23,13 +24,11 @@
 							</section>
 							<section class="rating">
 								<div>
-									<ol>
-										<li><i class="rating-big full"></i></li>
-										<li><i class="rating-big full"></i></li>
-										<li><i class="rating-big full"></i></li>
-										<li><i class="rating-big full"></i></li>
-										<li><i class="rating-big"></i></li>
-									</ol>
+										<span class="rating-big full"></span>
+										<span class="rating-big full"></span>
+										<span class="rating-big full"></span>
+										<span class="rating-big full"></span>
+										<span class="rating-big"></span>
 									<div class="clear"></div>
 								</div>
 								<label class="puntaje">4.90</label>
@@ -115,8 +114,8 @@
 									{% for oportunidad in oportunidades %}
 									<li>
 										<div class="oportunidad-box">
-													<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
-													<div class="descripcion">e
+													<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+													<div class="descripcion">
 														<div class="datos">
 															<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
 															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
@@ -127,7 +126,7 @@
 															<label class="resultado">Compatible</label>
 														</div>
 														<div class="ver-oportunidad">
-															<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+															<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
 															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 														</div>
 														<div class="clear"></div>
@@ -137,7 +136,7 @@
 									</li>
 									{% endfor %}
 								</ul>
-								<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
+								<a class="link ver-mas" href="{%url 'estudiante-oportunidades-empresa' empresa.id%}">Ver m&aacute;s oportunidades</a>
 							</section>
 					<section class="ubicacion">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
@@ -176,40 +175,23 @@
 						<div class="calificacion">
 							<img class="imagen" src="../img/empresas/empresa-1.jpg" alt="ADOBE" />
 							<ul class="criterios">
-								<li>
 									<label>L&iacute;nea de carrera</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
+									<div id = "rating-linea_carrera" style = "display:inline-block"></div>
 									<div class="clear"></div>
 								</li>
 								<li>
 									<label>Flexibilidad de horarios</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
+									<div id = "rating-flexibilidad_horario" style = "display:inline-block"></div>
 									<div class="clear"></div>
 								</li>
 								<li>
 									<label>Ambiente de trabajo</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
+									<div id = "rating-ambiente_trabajo" style = "display:inline-block"></div>
 									<div class="clear"></div>
 								</li>
 								<li>
 									<label>Salario y Beneficios</label>
-									<ol><li><a>1</a></li></ol>
-									<ol><li><a>2</a></li></ol>
-									<ol><li><a>3</a></li></ol>
-									<ol><li><a>4</a></li></ol>
-									<ol><li><a>5</a></li></ol>
+									<div id = "rating-salario_beneficios" style = "display:inline-block"></div>
 									<div class="clear"></div>
 								</li>
 							</ul>
@@ -251,6 +233,30 @@
 			window.history.back();
 			$('body').removeClass('static');
 		});
+		//$("#rating").rate();
+
+	//or for example
+		var options = {
+			max_value: 5,
+			step_size: 0.5,
+			symbols: {
+				images: {
+					base: '<span class="rating-small"></span>',
+					hover: '<span class="rating-small full"></span>',
+					selected: '<span class="rating-small full"></span>',
+				}
+				/*fontawesome: {
+					base: "&#xf006;",
+					hover: "&#xf005;",
+					selected: "&#xf005;"
+				},*/
+			},
+			selected_symbol_type : 'images'
+	}
+		$("#rating-linea_carrera").rate(options);
+		$("#rating-flexibilidad_horario").rate(options);
+		$("#rating-ambiente_trabajo").rate(options);
+		$("#rating-salario_beneficios").rate(options);
 	});
 </script>
 {%endblock js%}

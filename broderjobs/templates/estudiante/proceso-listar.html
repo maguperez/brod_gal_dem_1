@@ -24,7 +24,7 @@
 									<div class="dato"><i class="ubicacion"></i><label>{{postulacion.ubicacion}}}</label></div>
 									<div class="dato"><i class="remuneracion"></i><label>{{postulacion.remuneracion}}</label></div>
 								</td>
-								<td>{{postulacion.estado}}</td>
+								<td>{{postulacion.estado_postulacion}}</td>
 							</tr>
 							{%endfor%}
 						</tbody>
@@ -39,6 +39,7 @@
 {% block js %}
 <script>
 	$(function(){
+		$("#link-procesos").addClass("active");
 		$("#procesos tr").click(function() {
 			id = $(this).attr("id");
 			var url = "{%url 'estudiante-proceso-detalle' 1 %}";

@@ -10,7 +10,7 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista">
-					{% paginate 3 oportunidades %}
+					{% paginate 6 oportunidades %}
 						{% for oportunidad in oportunidades.all%}
 					<li class="oportunidad-estadistica">
 						<div class="box header">
@@ -33,13 +33,13 @@
 								</div>
 							</div>
 							<div class="estado">
-								{%if oportunidad.estado == 'P' %}
+								{%if oportunidad.estado_oportunidad == 'P' %}
 									<label>pendiente</label>
 								{%endif%}
-								{%if oportunidad.estado == 'A' %}
+								{%if oportunidad.estado_oportunidad == 'A' %}
 									<label>abierta</label>
 								{%endif%}
-								{%if oportunidad.estado == 'C' %}
+								{%if oportunidad.estado_oportunidad == 'C' %}
 									<label>cerrada</label>
 								{%endif%}
 								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
@@ -87,6 +87,7 @@
 						<div class="clear"></div>
 					</li>
 						{% endfor %}
+						{% show_pages %}
 				</ul>
 			</div>
 		</section>
@@ -95,7 +96,9 @@
 {% block js%}
 
 <script>
-
+$(function() {
+	$("#link-oportunidades").addClass("active");
+})
 </script>
 
 {% endblock %}

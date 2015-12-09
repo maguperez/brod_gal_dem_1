@@ -18,6 +18,7 @@ from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesiona
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector
 from oportunidad.models import Oportunidad, Postulacion
+from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utilitarios
 from main.utilitarios import LoginRequiredMixin
 
@@ -94,7 +95,7 @@ class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:2]
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_fecha_publicacion")[:2]
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -116,7 +117,7 @@ class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
         context['oportunidades'] = oportunidades
         return context
 
-class EmpresaBusquedaView(TemplateView):
+class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
         empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
@@ -137,6 +138,17 @@ class EmpresaBusquedaView(TemplateView):
         #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
         data = json.dumps(a_empresas)
         return HttpResponse(data, content_type='application/json')
+
+class OportunidadesEmpresaView(TemplateView):
+    template_name = 'estudiante/oportunidades-empresa.html'
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+        empresa = get_object_or_404(Empresa, pk=id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:2]
+        context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        context['oportunidades'] = oportunidades
+        return context
 
 class MiCVView(LoginRequiredMixin, FormView):
 
@@ -239,7 +251,6 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     form_class =forms.InfoPersonalForm
     template_name = 'estudiante/mi-cv-info-personal.html'
     success_url = reverse_lazy('mi-cv')
-
     def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
@@ -549,12 +560,22 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
     template_name = 'estudiante/oportunidad-detalle.html'
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
+        user = self.request.user
+        usuario = User.objects.get(pk = user.id)
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
 
         oportunidad =  get_object_or_404(Oportunidad, pk=id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        postulacion = Postulacion()
+        try:
+            postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
+        except Postulacion.DoesNotExist:
+            postulacion = None
         context = super(OportunidadDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
+        context['postulacion'] = postulacion
         return context
 
 class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
@@ -565,7 +586,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
             Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains=busqueda) |
             Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains=busqueda),
-            estado = 'A'
+            estado_oportunidad = 'A'
         ).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
@@ -599,12 +620,23 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         data =[]
         p, created = Postulacion.objects.get_or_create(oportunidad_id = id, estudiante_id = estudiante.id)
         if created is True:
-            p.fecha = date.today()
+            p.fecha_creacion = date.today()
+            p.estado = 'A'
+            p.estado_postulacion = 'P'
             p.save()
-            data.append(('resp', 'Y'))
+            data.append(('CANCELAR'))
         else:
-            data.append(('resp', 'N'))
-
+            estado = p.estado
+            if estado == 'A':
+                p.estado = 'I'
+                p.estado_postulacion = ''
+                data.append(('POSTULAR'))
+            else:
+                p.estado = 'A'
+                p.estado_postulacion = 'P'
+                data.append(('CANCELAR'))
+            p.fecha_creacion = date.today()
+            p.save()
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
 
@@ -615,14 +647,20 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id = user.id)
         estudiante =  get_object_or_404(Estudiante, persona_id = persona.id)
-        p = Postulacion.objects.filter(estudiante_id = estudiante.id)
+        p = Postulacion.objects.filter(estudiante_id = estudiante.id, estado = 'A').order_by('fecha_creacion')
 
         postulaciones =[]
         for i in range(0, len(p)):
-            oportunidad = Oportunidad.objects.get(id = p[i].oportunidad.id)
+            oportunidad = get_object_or_404(Oportunidad, id = p[i].oportunidad.id)
             empresa = Empresa.objects.get(id=oportunidad.empresa.id)
             ciudad = empresa.ciudad
             pais = empresa.pais
+            estado_postulacion = 'Postulado'
+            if p[i].estado_postulacion == 'E':
+                estado_postulacion = 'En Evaluacion'
+            if p[i].estado_postulacion == 'F':
+                estado_postulacion = 'Finalizado'
+            remuneracion = oportunidad.remuneracion
             e = {
                 "id": p[i].id,
                 "id_oportunidad": oportunidad.id,
@@ -631,8 +669,8 @@ class ProcesoListaView(LoginRequiredMixin, TemplateView):
                 "logo": empresa.set_logo,
                 "ubicacion": str(ciudad) + ', ' +str(pais),
                 "fecha_cese": str(oportunidad.fecha_cese),
-                "remuneracion": str(oportunidad.remuneracion),
-                "estado": str(oportunidad.estado),
+                "remuneracion": remuneracion,
+                "estado_postulacion": estado_postulacion,
             }
             postulaciones.append(e)
         # data = serializers.serialize('json', a_empresas,
@@ -649,10 +687,15 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         postulacion =  get_object_or_404(Postulacion, pk=id)
         oportunidad =  get_object_or_404(Oportunidad, pk = postulacion.oportunidad.id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        try:
+            mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user, mensaje__postulacion_id = postulacion.id)
+        except mensajes.DoesNotExist:
+            mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
-        context['postulacion'] = oportunidad
+        context['postulacion'] = postulacion
         context['oportunidad'] = oportunidad
         context['empresa'] = empresa
+        context['mensajes'] = mensajes
         return context
 
 

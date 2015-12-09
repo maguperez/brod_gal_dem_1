@@ -126,9 +126,11 @@ i.work {background: transparent url('../img/icons/work.png') 0 0 no-repeat;}
 i.network {background: transparent url('../img/icons/network.png') 0 0 no-repeat;}
 
 /*ICONS RATING*/
-i.rating {width: 17px; height: 20px; float: left; background: transparent url('../img/icons/rating.png') 0 0 no-repeat;}
-i.rating-big {width: 24px; height: 29px; float: left; margin: 0 8px; background: transparent url('../img/icons/rating_big.png') 0 0 no-repeat;}
-i.rating-big.full {background-position: 0 -29px;}
+span.rating {width: 17px; height: 20px; float: left; background: transparent url('../img/icons/rating.png') 0 0 no-repeat;}
+span.rating-big {width: 24px; height: 29px; /*float: left; */ margin: 0 5px; display:inline-block; background: transparent url('../img/icons/rating_big.png') 0 0 no-repeat;}
+span.rating-big.full {background-position: 0 -29px;}
+span.rating-small {width: 15px; height: 18px; /*float: left; */ margin: 0 5px; display:inline-block; background: transparent url('../img/icons/rating_big.png') 0 0 no-repeat; background-size: cover;}
+span.rating-small.full {background-position: 0 -18px;}
 
 /*ICONS SOCIAL*/
 i.facebook, i.twitter {width: 20px; height: 20px; display: inline-block;}
@@ -256,10 +258,11 @@ a:hover { text-decoration: none !Important }
 .home .navbar ul a.btn-action {margin-right: 20px; border: 1px solid rgba(255,255,255,0.5);}
 .home .navbar ul a.btn-action:hover {border: 1px solid #f50;}
 .home .navbar ul a.link-header:hover, .home nav ul a.link-header.active {color: #f50;}
-.home .mensaje-central {width: 100%; position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
+.home .mensaje-central {width: 100%; }
+.home .flex .flex-div { position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
 .home .mensaje-central h1 {color: #fff; font-size: 4em;}
 .home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em;}
-.home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; margin: 80px !Important;}
+.home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
 .home .login .content {position: relative; min-width: 270px}
 .home .login.active {opacity: 1; pointer-events: all; z-index: 1050}
 .home .login .saludo {margin-bottom: 10px; text-align: center; color: #fff; font-family: 'Roboto Condensed'; display: block;}
@@ -294,7 +297,7 @@ a:hover { text-decoration: none !Important }
     .navbar-right { float: right !important; }
 }
 @media (max-width: 768px){
-	.home nav ul { position: static; display: none; }
+	.home nav ul { position: static; /*display: none;*/ }
 	.home nav li { margin-bottom: 1px; }
 	.home nav ul li, .home nav li a { width: 100%; }
    /* .navbar { margin: 0px !important;  background-color: rgb(51,51,51) !important;}*/
@@ -369,7 +372,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-box .datos {width: 38%; margin-top: 10px; line-height: 30px; font-size: 0.95em;}
 .oportunidad-box .datos i {margin-top: 8px;}
 .oportunidad-box .datos label {margin-left: 5px; margin-bottom: 0px !Important;}
-.oportunidad-box .compatibilidad {width: 16%; margin-top: 10px;}
+.oportunidad-box .compatibilidad {/*width: 16%;*/ margin-top: 10px;}
 .oportunidad-box .compatibilidad .grafico {width: 65px; margin: 0 auto;}
 .oportunidad-box .compatibilidad .resultado {margin-top: 5px; text-align: center; font-size: 0.85em; display: block;}
 .oportunidad-box .ver-oportunidad {height: 60px; margin: 20px 0 0 12%; padding-left: 40px; text-align: center; border-left: 1px solid #ddd;}
@@ -887,3 +890,17 @@ ul.copy { margin-top: 8px; margin-right: 50px; }
 .empresas .list h3.link,
 .empresas .list .descripcion{ margin: 0px !Important; }
 .empresas .list .box:hover {text-decoration: none; }
+
+.circular-bar .circular-bar-chart {
+	position: relative;
+}
+.circular-bar label {
+	display: block;
+	font-weight: 100;
+	line-height: 20px;
+	position: absolute;
+	top: 35%;
+	width: 80%;
+	left: 10%;
+	text-align: center;
+}

@@ -65,6 +65,8 @@ urlpatterns = [
 
 	url(r'^oportunidad-postular/$', views.OportunidadPostularView.as_view(), name="estudiante-oportunidad-postular"),
 
+	url(r'^oportunidades-empresa/(?P<id>\d+)/$', views.OportunidadesEmpresaView.as_view(), name='estudiante-oportunidades-empresa'),
+
 	url(r'^proceso-lista/$', views.ProcesoListaView.as_view(), name="estudiante-proceso-lista"),
 
 	url(r'^proceso-detalle/(?P<id>\d+)/$', views.ProcesoDetalleView.as_view(), name="estudiante-proceso-detalle"),
