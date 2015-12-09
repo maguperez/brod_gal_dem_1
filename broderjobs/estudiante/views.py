@@ -96,7 +96,7 @@ class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_fecha_publicacion")[:2]
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
