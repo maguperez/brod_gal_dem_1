@@ -143,6 +143,7 @@ class MiCVView(LoginRequiredMixin, FormView):
 
     form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv.html'
+    success_url = reverse_lazy('mi-cv')
 
     def get_context_data(self, **kwargs):
         user = self.request.user
