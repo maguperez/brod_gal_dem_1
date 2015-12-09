@@ -1,4 +1,5 @@
 import json
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
@@ -572,8 +573,8 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
         oportunidades = Oportunidad.objects.filter(
             Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
-            Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains=busqueda) |
-            Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains=busqueda),
+            Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
+            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda),
             estado_oportunidad = 'A'
         ).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
