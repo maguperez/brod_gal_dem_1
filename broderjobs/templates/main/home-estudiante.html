@@ -196,106 +196,142 @@
 		</script>
         <script>
 	    $(function(){
-            $("form").validate({
+            $("#registro form").validate({
             errorPlacement: function (error, element) {
-				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
-					$(element).is("[name=ano]")){
-					$("#id_dia").tooltip('destroy');
-					$("#id_dia").tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
-					$("#id_dia").tooltip('show');
-				}
-				else {
-					$(element).tooltip('destroy');
-					$(element).tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
-					$(element).tooltip('show');
-				}
-            },
-            success: function (label, element) {
-				if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
-					$(element).is("[name=ano]")){
-					$("#id_dia").tooltip('hide');
-				}
-				else {
-					$(element).tooltip('hide');
-				}
+					if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
+						$(element).is("[name=ano]")){
+						$("#id_dia").tooltip('destroy');
+						$("#id_dia").tooltip({
+							animation: true,
+							placement: "left",
+							title: $(error).text(),
+							trigger: "manual"
+						} );
+						$("#id_dia").tooltip('show');
+					}
+					else {
+						$(element).tooltip('destroy');
+						$(element).tooltip({
+							animation: true,
+							placement: "left",
+							title: $(error).text(),
+							trigger: "manual"
+						} );
+						$(element).tooltip('show');
+					}
+	            },
+	            success: function (label, element) {
+					if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
+						$(element).is("[name=ano]")){
+						$("#id_dia").tooltip('hide');
+					}
+					else {
+						$(element).tooltip('hide');
+					}
 
-            },
-            rules: {
-				first_name: {
-					required: true,
-				},
-				last_name: {
-					required: true,
-				},
-                email: {
-                    required: true,
-                    email: true
-                },
-                password1: {
-                    required: true
-                },
-				password2: {
-                    required: true,
-					equalTo: "#id_password1"
-                },
-				dia: {
-					required: true,
-				},
-				mes: {
-					required: true,
-				},
-				ano: {
-					required: true,
-				},
-				groups: {
-					date: "dia mes ano"
-				},
-				tyc: {
-					required: true
-				}
-            },
-            messages: {
-				first_name: {
-					required: "Este campo es obligatorio",
-				},
-				last_name: {
-					required: "Este campo es obligatorio",
-				},
-                email: {
-                    required: "Este campo es obligatorio",
-                    email: "Introduzca un correo valido"
-                },
-                password1: {
-                    required: "Este campo es obligatorio"
-                },
-				password2: {
-                    required: "Este campo es obligatorio",
-					equalTo: "Las contraseñas deben ser iguales"
-                },
-				dia: {
-					required: "La fecha de nacimiento es obligatoria",
-				},
-				mes: {
-					required: "La fecha de nacimiento es obligatoria",
-				},
-				ano: {
-					required: "La fecha de nacimiento es obligatoria",
-				},
-				tyc: {
-					required: "Debe aceptar los términos y condiciones",
-				}
-            }
-        });
+	            },
+	            rules: {
+					first_name: {
+						required: true,
+					},
+					last_name: {
+						required: true,
+					},
+	                email: {
+	                    required: true,
+	                    email: true
+	                },
+	                password1: {
+	                    required: true
+	                },
+					password2: {
+	                    required: true,
+						equalTo: "#id_password1"
+	                },
+					dia: {
+						required: true,
+					},
+					mes: {
+						required: true,
+					},
+					ano: {
+						required: true,
+					},
+					groups: {
+						date: "dia mes ano"
+					},
+					tyc: {
+						required: true
+					}
+	            },
+	            messages: {
+					first_name: {
+						required: "Este campo es obligatorio",
+					},
+					last_name: {
+						required: "Este campo es obligatorio",
+					},
+	                email: {
+	                    required: "Este campo es obligatorio",
+	                    email: "Introduzca un correo valido"
+	                },
+	                password1: {
+	                    required: "Este campo es obligatorio"
+	                },
+					password2: {
+	                    required: "Este campo es obligatorio",
+						equalTo: "Las contraseñas deben ser iguales"
+	                },
+					dia: {
+						required: "La fecha de nacimiento es obligatoria",
+					},
+					mes: {
+						required: "La fecha de nacimiento es obligatoria",
+					},
+					ano: {
+						required: "La fecha de nacimiento es obligatoria",
+					},
+					tyc: {
+						required: "Debe aceptar los términos y condiciones",
+					}
+	            }
+	        });
+			$("#login form").validate({
+	            errorPlacement: function (error, element) {
+
+	                $(element).tooltip('destroy');
+	                $(element).tooltip({
+	                    animation: true,
+	                    placement: "left",
+	                    title: $(error).text(),
+	                    trigger: "manual"
+	                } );
+	                $(element).tooltip('show');
+	            },
+	            success: function (label, element) {
+	                $(element).tooltip('hide');
+	            },
+	            rules: {
+	                email: {
+	                    required: true,
+	                    email: true
+	                },
+	                password: {
+	                    required: true,
+	//                    min: 6
+	                }
+	            },
+	            messages: {
+	                email: {
+	                    required: "Este campo es obligatorio",
+	                    email: "Introduzca un correo válido"
+	                },
+	                password: {
+	                    required: "Este campo es obligatorio",
+	//                    min: "La contraseña debe tener al menos seis (6) caracteres"
+	                }
+	            }
+	        });
             $("#link-registro").addClass("active");
 		    $(".cumpleanos").css("margin-right", "3px")
         });
