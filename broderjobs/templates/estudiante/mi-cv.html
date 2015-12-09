@@ -3,6 +3,33 @@
 
 {%endblock%}
 {% block content %}
+
+{% load staticfiles %}
+
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
+<!--<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">-->
+<!--<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">-->
+
+<!--<link rel="stylesheet" href="{% static 'css/prettify.css' %}">-->
+
+<!--<link rel="stylesheet" href="{% static 'css/select2.css' %}">-->
+
+<!--&lt;!&ndash;<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>&ndash;&gt;-->
+<!--<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>-->
+
+<!--<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>-->
+
+<!--<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
+<style>
+	.select2-search__field {
+		width : 140px !important;
+	}
+</style>
+
 <section class="cv">
 
 			<div class="centered">
@@ -188,7 +215,7 @@
                         <p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
-				<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
+
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
@@ -213,6 +240,7 @@
 					 url: $(this).attr('action'),
 					 data: $(this).serialize(),
 					 success: function (xhr, ajaxOptions, thrownError) {
+
 						 if ($(xhr).find('.has-error').length > 0) {
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
@@ -284,7 +312,17 @@
 	 $('#conocimiento-button').click(function() {
      	$('#form-modal-body').load('conocimiento/', function () {
         	$('#form-modal').modal('toggle');
+
+			$("#id_conocimiento").select2({
+						placeholder: "Seleccione por favor"//,
+//						width: 'resolve'
+						//allowClear: true
+					});
+
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
+
+
+
 		});
 	 });
 	 $('.experiencia-botton').click(function() {
@@ -362,5 +400,19 @@
 	 $("#form-modal .btn-submit").on("click", function(){
 		 $(this).parents("#form-modal").find("form").submit();
 	 });
+
+	 $.fn.modal.Constructor.prototype.enforceFocus = function () {
+      var that = this;
+      $(document).on('focusin.modal', function (e) {
+         if ($(e.target).hasClass('select2-input')) {
+            return true;
+         }
+
+         if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
+            that.$element.focus();
+         }
+      });
+   };
+
  </script>
 {% endblock %}

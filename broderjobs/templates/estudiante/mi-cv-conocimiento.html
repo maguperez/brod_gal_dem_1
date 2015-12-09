@@ -1,27 +1,26 @@
 
-
 <div style="margin:0 50px">
 
 	<form class="form-horizontal" action="{% url 'mi-cv-conocimiento' %}" method="post">
 				{%csrf_token%}
 				<div id="div_id_conocimiento" class="form-group">
-					<label for="id_conocimiento" class="control-label ">
+					<label class="control-label ">
 						Conocimiento
 					</label>
-					<div class="controls ">
-						<select multiple="multiple" class="selectmultiple form-control valid" id="id_conocimiento" name="conocimiento" aria-invalid="false">
-							<option value="1">SQl Server</option>
-							<option value="2">Consultoria</option>
-							<option value="3">C#</option>
-							<option value="4">HTML</option>
-							<option value="5">CSS</option>
-						</select>
-					</div>
+
+					<select multiple="" class="full" id="id_conocimiento" name="conocimiento" tabindex="-1" aria-hidden="true" style="width: 82%">
+						{% for x,y in form.fields.conocimiento.choices %}
+						<option value="{{ x }}" >{{ y }}</option>
+						{% endfor %}
+					</select>
+
 				</div>
+		<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
 	</form>
 </div>
 <script>
 	$(function(){
 		$("#form-modal .modal-title").html('<i class="knowledge"></i> &nbsp;Conocimientos');
+
 	});
 </script>
