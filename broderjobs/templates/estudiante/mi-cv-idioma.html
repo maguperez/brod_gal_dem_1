@@ -1,29 +1,21 @@
-{% load crispy_forms_tags %}
 
 <div style="margin:0 50px">
 
 	<form class="form-horizontal" action="{% url 'mi-cv-idioma' %}" method="post">
-		{% crispy form %}
-		<!--<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
-		< class="detalle col-3-7">
-			<div>
-				<label>Acepto propuestas de</label>
-				<p>
-					<input type="checkbox" id="practicas" name="propuestas" /><label for="practicas" class="radiobutton">Pr&aacute;cticas</label>
-					<input type="checkbox" id="trainee" name="propuestas" /><label for="trainee" class="radiobutton">Trainee</label>
-					<input type="checkbox" id="empleo" name="propuestas" /><label for="empleo" class="radiobutton">Empleo</label>
-				</p>
-				<div class="clear"></div>
-			</div>
-			<div>
-				<label>Carga horaria</label>
-				<p>
-					<input type="radio" id="part-time" name="carga" /><label for="part-time" class="radiobutton">Part time</label>
-					<input type="radio" id="full-time" name="carga" /><label for="full-time" class="radiobutton">Full time</label>
-				</p>
-			<div class="clear"></div>
-		</div>
-		<input type="submit" class="btn btn-submit col-md-offset-2">-->
+		{%csrf_token%}
+				<div id="div_id_idioma" class="form-group">
+					<label class="control-label ">
+						Idioma
+					</label>
+
+					<select multiple="" class="full" id="id_idioma" name="idioma" tabindex="-1" aria-hidden="true" style="width: 82%">
+						{% for x,y in form.fields.idioma.choices %}
+						<option value="{{ x }}" >{{ y }}</option>
+						{% endfor %}
+					</select>
+
+				</div>
+		<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
 	</form>
 </div>
 

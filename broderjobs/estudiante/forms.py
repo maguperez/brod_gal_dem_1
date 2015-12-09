@@ -176,12 +176,9 @@ class DisponibilidadForm(forms.ModelForm):
         helper.render_unmentioned_fields = True # render all fields
         return helper
 
-class IdiomaForm(forms.ModelForm):
+class IdiomaForm(forms.Form):
 
-    # idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
-    class Meta:
-        model = Estudiante
-        fields = ('idioma', 'persona')
+    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
 
     @property
     def helper(self):

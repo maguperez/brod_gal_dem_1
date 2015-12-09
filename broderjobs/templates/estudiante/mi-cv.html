@@ -3,30 +3,31 @@
 
 {%endblock%}
 {% block content %}
-
 {% load staticfiles %}
 
-<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
-<!--<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">-->
-<!--<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-<!--<link rel="stylesheet" href="{% static 'css/prettify.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
 
-<!--<link rel="stylesheet" href="{% static 'css/select2.css' %}">-->
 
-<!--&lt;!&ndash;<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>&ndash;&gt;-->
-<!--<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>-->
+<link rel="stylesheet" href="{% static 'css/select2.css' %}">
 
-<!--<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
+<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
 
-<!--<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
+<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+
 <style>
-	.select2-search__field {
-		width : 140px !important;
+	.select2-search__field{
+		width: 142px !important;
 	}
 </style>
 
@@ -240,7 +241,6 @@
 					 url: $(this).attr('action'),
 					 data: $(this).serialize(),
 					 success: function (xhr, ajaxOptions, thrownError) {
-
 						 if ($(xhr).find('.has-error').length > 0) {
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
@@ -306,6 +306,13 @@
 	 $('#idioma-button').click(function() {
      	$('#form-modal-body').load('idioma/', function () {
         	$('#form-modal').modal('toggle');
+
+			$("#id_idioma").select2({
+						placeholder: "Seleccione por favor"//,
+//						width: 'resolve'
+						//allowClear: true
+					});
+
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
@@ -320,9 +327,6 @@
 					});
 
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-
-
-
 		});
 	 });
 	 $('.experiencia-botton').click(function() {

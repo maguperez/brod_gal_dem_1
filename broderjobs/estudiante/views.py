@@ -344,7 +344,7 @@ class DisponibilidadView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMi
         estudiante.save()
         return super(DisponibilidadView, self).form_valid(form)
 
-class IdiomaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, UpdateView):
+class IdiomaView(LoginRequiredMixin, FormView):
     template_name = 'estudiante/mi-cv-idioma.html'
     form_class = forms.IdiomaForm
     success_url = reverse_lazy('mi-cv')
@@ -354,6 +354,14 @@ class IdiomaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, Upd
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id =persona.id)
         return estudiante
+
+    def form_valid(self, form):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        estudiante.idioma = form.cleaned_data['idioma']
+        estudiante.save()
+        return super(IdiomaView, self).form_valid(form)
 
 class ConocimientoView(LoginRequiredMixin, FormView):
     template_name = 'estudiante/mi-cv-conocimiento.html'
