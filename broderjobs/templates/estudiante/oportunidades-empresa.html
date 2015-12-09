@@ -21,26 +21,30 @@
 					<ul class="list">
 						{% for oportunidad in oportunidades %}
                         <li>
-                            <div class="oportunidad-box">
-                                <a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
-								<div class="descripcion">
-								    <div class="datos">
-									    <div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
-									    <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
-									    <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
-									</div>
-                                    <div class="compatibilidad">
-									    <div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-										    <label class="resultado">Compatible</label>
+							<div class="box oportunidad-box">
+								<div class="content">
+									<div class="detalle full">
+										<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+                                        <div class="descripcion">
+                                            <div class="datos">
+                                                <div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+                                                <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+                                                <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
+                                            </div>
+                                            <div class="compatibilidad">
+                                                <div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
+                                                    <label class="resultado">Compatible</label>
+                                                </div>
+                                                <div class="ver-oportunidad">
+                                                <a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
+                                                <label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+                                            </div>
+                                            <div class="clear"></div>
                                         </div>
-										<div class="ver-oportunidad">
-										<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
-															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
-														</div>
-														<div class="clear"></div>
-													</div>
-												<div class="clear"></div>
-										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
 						</li>
 						{%endfor%}
 					</ul>

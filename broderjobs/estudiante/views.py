@@ -105,18 +105,6 @@ class EmpresaListaView(LoginRequiredMixin, TemplateView):
 
     template_name = 'estudiante/empresa-lista.html'
 
-class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
-
-    template_name = 'estudiante/empresa-detalle.html'
-    def get_context_data(self, **kwargs):
-        id = kwargs.get('id', None)
-        empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:2]
-        context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
-        context['empresa'] = empresa
-        context['oportunidades'] = oportunidades
-        return context
-
 class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
@@ -144,7 +132,7 @@ class OportunidadesEmpresaView(TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:2]
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")
         context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
