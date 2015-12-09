@@ -3,7 +3,6 @@
 
 {%endblock%}
 {% block content %}
-
 {% load staticfiles %}
 
 <!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
@@ -12,9 +11,10 @@
 
 <!--<link rel="stylesheet" href="{% static 'css/prettify.css' %}">-->
 
+
 <!--<link rel="stylesheet" href="{% static 'css/select2.css' %}">-->
 
-<!--&lt;!&ndash;<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;NO VAAAAAA<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>NO VAAAAAA&ndash;&gt;-->
 <!--<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>-->
 <!--<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>-->
 <!--<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>-->
@@ -24,9 +24,10 @@
 <!--<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>-->
 <!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
 <!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
+
 <style>
-	.select2-search__field {
-		width : 140px !important;
+	.select2-search__field{
+		width: 142px !important;
 	}
 </style>
 
@@ -99,7 +100,7 @@
 								</div>
 							</section>
 							<section>
-								<h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas<button id="actividad-extra-crear-button" class="link editar">Agregar</button></h3>
+								<h3 class="title"><i class="clip"></i>Actividades extra-acad&eacute;micas<button id="actividad-extra-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle">
 									{% for actividad in actividades_extra %}
 											<div class="detalle">
@@ -209,13 +210,13 @@
 		<div class="modal-content">
 			<div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h3 class="modal-title"><strong>Modal title</strong></h3>
                     </div>
             <div id="form-modal-body" class="modal-body">
                         <p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
-
+				<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
@@ -240,7 +241,6 @@
 					 url: $(this).attr('action'),
 					 data: $(this).serialize(),
 					 success: function (xhr, ajaxOptions, thrownError) {
-
 						 if ($(xhr).find('.has-error').length > 0) {
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
@@ -306,6 +306,13 @@
 	 $('#idioma-button').click(function() {
      	$('#form-modal-body').load('idioma/', function () {
         	$('#form-modal').modal('toggle');
+
+			$("#id_idioma").select2({
+						placeholder: "Seleccione por favor"//,
+//						width: 'resolve'
+						//allowClear: true
+					});
+
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
@@ -320,9 +327,6 @@
 					});
 
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-
-
-
 		});
 	 });
 	 $('.experiencia-botton').click(function() {
