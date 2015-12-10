@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.db.models import Q
@@ -163,3 +163,24 @@ def oportunidades(request):
     oportunidades = paginator.page(1)
     data = serializers.serialize("json", oportunidades)
     return HttpResponse(data, content_type='application/json')
+
+
+# displays the index page
+def oportunidades_listar( request ):
+    return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
+
+# search view
+def oportunidad_busqueda(request):
+    if request.is_ajax():
+        busqueda = request.GET.get('b')
+        print(busqueda)
+        if busqueda is not None:
+            user = request.user
+            persona = get_object_or_404(Persona, usuario_id=user.id)
+            representante = get_object_or_404(Representante, persona_id =persona.id)
+            empresa = get_object_or_404(Empresa, id=representante.empresa.id)
+            oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")
+
+            print(oportunidades)
+            return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa' : empresa},
+                                       context_instance = RequestContext(request))

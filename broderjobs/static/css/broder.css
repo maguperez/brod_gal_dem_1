@@ -1,4 +1,4 @@
-html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0;}
+html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
 body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13px; color: #a5a5a5;}
 ::-webkit-input-placeholder {color: #ccc}
 :-moz-placeholder {color: #ccc}
@@ -248,7 +248,7 @@ a.delete:hover {background-position: 0 -9px;}
 /*HOME*/
 .home {width: 100%; height: 100%; position: relative;}
 .home.estudiantes {display: table; }
-.home.estudiantes .container {background: transparent url('../img/estudiantes.jpg') 50% 50% no-repeat; background-size: cover;}
+.home.estudiantes .container {background: transparent url('../img/home-estudiante.jpg') 50% 0% no-repeat; background-size: cover;}
 .home.empresas .container{background: transparent url('../img/empresas.jpg') 50% 50% no-repeat; background-size: cover;}
 .home .container {width: 100%; height: 100%; padding: 0px !important}
 .home .navbar {width: 100%; padding: 20px 0;}
@@ -262,8 +262,8 @@ a:hover { text-decoration: none !Important }
 .home .navbar ul a.link-header:hover, .home nav ul a.link-header.active {color: #f50;}
 .home .mensaje-central {width: 100%; }
 .home .flex .flex-div { position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
-.home .mensaje-central h1 {color: #fff; font-size: 4em;}
-.home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em;}
+.home .mensaje-central h1 {color: #fff; font-size: 4em; text-align: center;}
+.home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em; text-align: center;}
 .home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
 .home .login .content {position: relative; min-width: 270px}
 .home .login.active {opacity: 1; pointer-events: all; z-index: 1050}
@@ -400,6 +400,8 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .oportunidad-resumen .postulacion .btn-action,
 .oportunidad-detalle .oportunidad-resumen .postulacion .btn-action-invertido {width: 110px; height: 35px; line-height: 35px; position: inherit; float: none;}
 .oportunidad-detalle .oportunidad-resumen .postulacion .cierre {margin-top: 5px; text-align: center; font-size: 0.75em; display: block;}
+.botones-popup{padding: 0 0 30px 0;}
+.botones-popup a{ display: inline-block; float: right; margin: 10px !important;}
 .oportunidad-detalle .box.alcance .content {padding: 20px;}
 .oportunidad-detalle .box.alcance section {padding: 0;}
 .oportunidad-detalle .box.alcance .grafico {padding-bottom: 20px;}

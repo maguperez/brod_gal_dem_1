@@ -38,6 +38,7 @@
 					<div class="box"><button id="foto-button" class="link editar">Editar</button>
 
 						<header>
+
 							<img class="imagen" src="{{estudiante.set_foto}}" />
 							<div class="detalle">
 								<h3>{{estudiante | upper}}</h3>
@@ -222,6 +223,26 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="popup aviso" id="imagen-perfil">
+	<div class="popup-box box">
+		<div class="content" id="popup-confirm">
+			<section class="header">
+				<h4 class="link">SELECCIONE UNA IMAGEN</h4>
+			</section>
+
+			<section class="mensaje">
+					<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+					{{form.as_p}}
+					<div class="botones-popup">
+						<input type="submit" class="btn-save" value="ACEPTAR" id="enviar-imagen">
+					</div>
+					</form>
+				</section>
+		</div>
+		<a class="close">Cerrar</a>
+	</div>
+</div>
+
 <style>
 	#info-personal-button {
 		text-transform: uppercase;
@@ -231,6 +252,9 @@
 {% endblock content%}
 {% block js %}
  <script>
+	 $(function(){
+
+   });
 	 var formAjaxSubmit = function(form, modal) {
 		 var valid = $(form).validate().valid();
 		 if (valid) {
@@ -285,12 +309,27 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
-	 $('#foto-button').click(function() {
-     	$('#form-modal-body').load('foto/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
+//	 $('#foto-button').click(function() {
+//     	$('#form-modal-body').load('foto/', function () {
+//        	$('#form-modal').modal('toggle');
+//			formAjaxSubmit('#form-modal-body form', '#form-modal');
+//		});
+//	 });
+	 $('#foto-button').click(function(e) {
+		window.location = '#imagen-perfil';
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($("#imagen-perfil").hasClass('popup'))
+			$('body').addClass('static');
+	});
+	$('#enviar-imagen').click(function(e) {
+		console.log("entra");
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	 $('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
 	 $('#info-personal-button').click(function() {
      	$('#form-modal-body').load('info-personal/', function () {
         	$('#form-modal').modal('toggle');

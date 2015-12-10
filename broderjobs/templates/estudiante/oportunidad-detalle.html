@@ -112,8 +112,10 @@
 			{% if postulacion.estado == 'A'%}
 				<section class="mensaje">
 					<p>¿Estas seguro que deseas cancelar está postulaci&oacute;n ?!</p>
-					<a id= "cancelar-postulacion" class="btn-save" >ACEPTAR</a>
-					<a class="btn-save" onclick="window.history.back();">CANCELAR</a>
+					<div class="botones-popup">
+						<a class="btn-save" onclick="window.history.back();">CANCELAR</a>
+						<a id= "cancelar-postulacion" class="btn-save" >ACEPTAR</a>
+					</div>
 				</section>
 			{%else %}
 			<section class="mensaje">
@@ -178,8 +180,10 @@
 		html += '<section class="mensaje">';
 		if($.trim($("#postular").text()) =='CANCELAR') {
 			html += '<p>¿Estas seguro que deseas cancelar está postulaci&oacute;n ?!</p>';
-			html += '<a id="cancelar-postulacion" class="btn-save" onclick="fnCancelarPostulacion();" >ACEPTAR</a>';
+			html += '<div class="botones-popup">';
 			html += '<a class="btn-save" onclick="window.history.back();">CANCELAR</a>';
+			html += '<a id="cancelar-postulacion" class="btn-save" onclick="fnCancelarPostulacion();" >ACEPTAR</a>';
+			html += '</div>';
 
 		}
 		else if ($.trim($("#postular").text()) == 'POSTULAR') {

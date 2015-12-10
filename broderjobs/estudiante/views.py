@@ -1,4 +1,5 @@
 import json
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
@@ -95,7 +96,7 @@ class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_fecha_publicacion")[:2]
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -142,6 +143,7 @@ class MiCVView(LoginRequiredMixin, FormView):
 
     form_class = forms.FotoForm
     template_name = 'estudiante/mi-cv.html'
+    success_url = reverse_lazy('mi-cv')
 
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -580,8 +582,8 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
         oportunidades = Oportunidad.objects.filter(
             Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
-            Q(tipo_puesto__descripcion__icontains=busqueda) | Q(carga_horaria__descripcion__icontains=busqueda) |
-            Q(carrera__descripcion__icontains=busqueda) | Q(conocimiento__descripcion__icontains=busqueda),
+            Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
+            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda),
             estado_oportunidad = 'A'
         ).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]

@@ -1,105 +1,30 @@
 {% extends 'empresa/base.html' %}
-
 {% block content %}
-<section id='stories row'>
-      <h2>Other News</h2>
-      <div id='newsStories-cont'></div>
-      <div id='loading-image'></div>
-    </section>
+<section class="oportunidades-empresa">
+			<div class="centered">
+				<select class="filtro" id="filtro">
+					<option value="A">Oportunidades Abiertas</option>
+					<option value="C">Oportunidades Cerradas</option>
+					<option value="P">Oportunidades Pendientes</option>
+				</select>
+				<div class="clear"></div>
+				<ul class="list" id ="oportunidad-lista">
 
-{% endblock %}
+				</ul>
+			</div>
+</section>
+{% endblock%}
 {% block js %}
-
-<script>
-
-   (function(){
-  // adds one story to dom (data object, element to append to)
-  var addStory = function(obj,el) {
-    var article = $('<article class="news-article"></article>');
-    article.css({'left':'100%'}); // set display to none so it can be faded in
-    // Article header
-    $('<h3/>', {text: obj.titulo}).appendTo(article);
-    // append a dummy loading gif to article.
-    var dummyImg = $('<img/>', {addClass: 'img-responsive dummy-img'}).appendTo(article);
-    // real image
-    var img = $('<img/>', {
-      src: obj.url,
-      alt: obj.titulo,
-      addClass: 'img-responsive news-img'
+<script type="text/javascript">
+$( document ).ready( function() {
+    $( '#filtro' ).change( function() {
+       fnFiltrarOportunidades();
     });
-    img.css('display','none');
-    // Article content
-    $('<p/>', {text: obj.resumen}).appendTo(article);
-    article.appendTo(el); //Add to the dom
-    article.animate({"left":"0"}, "fast");
-    //when real image has loaded replace dummyImg wirh real one
-    img.on('load', function(){
-      dummyImg.replaceWith(img);
-      img.fadeIn(1000);
-    });
-  };
-
-  //https://dannyvankooten.com/delay-scroll-handlers-javascript/
-  var content = true;
-  var timer;
-  if (content) {
-    $(window).scroll(function() {
-      if(timer) {
-        window.clearTimeout(timer);
-      }
-      timer = window.setTimeout(function() {
-        if(($(window).scrollTop() + $(window).height() > $(document).height()) - 300 && content) {
-          loadItems();
-        }
-      }, 200);
-    });
-  }
-  // Scroll globals
-  var pageNum = 0; // The latest page loaded
-  var hasNextPage = true; // Indicates whether to expect another page after this one
-  var loadItems = function() {
-    // If the next page doesn't exist, just quit now
-    if (hasNextPage === false) {
-      return false;
-    }
-    // Update the page number
-    pageNum = pageNum + 1;
-    // Configure the url we're about to hit
-    $.ajax({
-      type: "GET",
-      url: '/oportunidades',
-      data: {callback: pageNum},
-      dataType: 'json',
-      success: function(data) {
-        // Update global next page variable
-        hasNextPage = true;//.hasNext;
-        for (var i in data) {
-          addStory(data[i].fields, '#newsStories-cont');
-        }
-      },
-      error: function() {
-        // When I get a 400 back, fail safely
-        hasNextPage = false;
-        content = false;
-        var article = $('<article id="end-of-content">No more news</article>');
-        article.appendTo('#newsStories-cont');
-        $('#loading-image').hide();
-      },
-    });
-  };
-  loadItems(); // loads first five stories on page load
-  //binds ajax start/stop events to a loading gif
-  $('#loading-image').bind('ajaxStart', function(){
-    $(this).show();
-  }).bind('ajaxStop', function(){
-    $(this).hide();
-  });
-}());
-
-
-
+    fnFiltrarOportunidades();
+});
+ function fnFiltrarOportunidades(){
+   b = $( '#filtro' ).val();
+   $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
+ }
 </script>
-
-
-
-{% endblock %}
+{%endblock%}
