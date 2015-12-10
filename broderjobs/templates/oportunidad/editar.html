@@ -1,11 +1,11 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
 {% load staticfiles %}
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
-<link rel="stylesheet" href="{% static 'css/slider.css' %}">
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>-->
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
+<!--<link rel="stylesheet" href="{% static 'css/slider.css' %}">-->
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <form action="" method="post">{%csrf_token%}
 	<section class="oportunidad-detalle">
@@ -240,6 +240,12 @@
 </style>
 <script>
 	$(function(){
+
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+
+		InicializarSelect2(elementosParaSelect2);
+
+
 		$("#link-oportunidades").addClass("active");
 		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
 		$("#id_fecha_cese").datepicker({
@@ -299,6 +305,18 @@
             }
         },
     };
+
+	function InicializarSelect2(ids){
+
+		ids.forEach(function(id){
+			$("#"+id).select2({
+				placeholder: "Seleccione por favor",
+				allowClear: true
+			});
+		});
+	}
+
+
 </script>
 
 {% endblock%}
