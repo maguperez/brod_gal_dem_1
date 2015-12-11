@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
 
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">
+		<!--<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">-->
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/docs.css' %}">
 		<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
@@ -19,9 +19,10 @@
 
 		<!--<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>-->
 		<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+		<!--<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>-->
 		<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/bootstrap3-typeahead.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
 
 		<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
@@ -165,175 +166,7 @@
 	$('documento').ready(function(){
 
 		//var ids = ["id_grado_estudio"];
-
-
-		$("#id_universidades").autocomplete({
-			//source: ids
-			source : function(r,res){
-				//res(ids);
-
-				$.ajax({
-					data : {'busqueda': r.term},
-					url: '{%url "universidad-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-//					document.getElementById('id_universidades_hidden').value = ui.item.value;
-//					document.getElementById(this.id).value = ui.item.label;
-					GuardarValorHidden('id_universidades_hidden',this.id,ui);
-				}
-		});
-
-		$("#id_carreras").autocomplete({
-			//source: ids
-			source : function(r,res){
-				//res(ids);
-
-				$.ajax({
-					data : {'busqueda': r.term},
-					url: '{%url "carrera-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-//					document.getElementById('id_universidades_hidden').value = ui.item.value;
-//					document.getElementById(this.id).value = ui.item.label;
-					GuardarValorHidden('id_carreras_hidden',this.id, ui);
-				}
-		});
-
-		$("#id_ciudades").autocomplete({
-			//source: ids
-			source : function(r,res){
-				//res(ids);
-				var valor = document.getElementById('id_paises_hidden').value;
-
-				$.ajax({
-					data : {'busqueda': r.term,'pais': valor},
-					url: '{%url "ciudad-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-
-					GuardarValorHidden('id_ciudades_hidden',this.id,ui);
-				}
-		});
-
-		$("#id_paises").autocomplete({
-			//source: ids
-			source : function(r,res){
-				//res(ids);
-
-				$.ajax({
-					data : {'busqueda': r.term},
-					url: '{%url "pais-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-
-					GuardarValorHidden('id_paises_hidden',this.id,ui);
-				}
-		});
-
+		InicializarTypeaheadElementos()
 		//InicializarPlugin(ids);
 	});
 
@@ -350,6 +183,105 @@
 				allowClear: true
 			});
 		});
+	}
+
+	function InicializarTypeahead(idElemento, idHidden, ruta){
+		$("#"+idElemento).typeahead({
+			source: function(buscar,cargarResultado){
+				console.log(buscar);
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: ruta,
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			},
+			minLength: 3
+		});
+
+		$("#"+idElemento).change(function() {
+			var current = $("#"+idElemento).typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#"+idElemento).val()) {
+					$("#"+idHidden).val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+	}
+
+	function InicializarTypeaheadElementos(){
+
+		InicializarTypeahead('id_paises', 'id_paises_hidden', '{%url "pais-busqueda" %}');
+		InicializarTypeahead('id_universidades', 'id_universidades_hidden', '{%url "universidad-busqueda" %}');
+		InicializarTypeahead('id_carreras', 'id_carreras_hidden', '{%url "carrera-busqueda" %}');
+
+		$("#id_ciudades").typeahead({
+			source: function(buscar,cargarResultado){
+				var valor = document.getElementById('id_paises_hidden').value;
+				$.ajax({
+					data : {'busqueda': buscar,'pais': valor},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_ciudades").change(function() {
+			var current = $("#id_ciudades").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_ciudades").val()) {
+					$('#id_ciudades_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+
 	}
 
 </script>
