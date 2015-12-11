@@ -5,7 +5,7 @@
 	<div class="centered">
 		<div class="panel left">
 			<div class="box">
-				<header class="pos-relative">
+				<header class="pos-relative" id="box-logo">
 					<!--<button id="logo-button" class="editar btn-edit">Editar</button>-->
 					<img class="imagen" src="{{empresa.set_logo}}" />
 					<div class="botones-imagen" style="visibility:hidden;">
@@ -213,10 +213,10 @@
 			 });
 		 }
 	 }
-	 $("#pos-relative" ).mouseover(function() {
+	 $("#box-logo" ).mouseover(function() {
 		$(".botones-imagen").css("visibility", "visible");
 	 });
-	 $("#pos-relative" ).mouseout(function() {
+	 $("#box-logo" ).mouseout(function() {
 		$(".botones-imagen").css("visibility", "hidden");
 	 });
 	 $("#editar-imagen").click(function(e) {

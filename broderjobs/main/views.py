@@ -67,12 +67,12 @@ def empresa_login(request):
     return render_to_response('main/empresa-login.html',{'message': message,'form': form},
                                   context_instance=RequestContext(request))
 
-def homepage1(request):
+def homepage(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 
-def homepage(request):
+def homepage1(request):
     message = None
     if request.method == "POST":
         login_form = LoginForm(request.POST, prefix='login')
@@ -81,6 +81,7 @@ def homepage(request):
             if login_form.is_valid():
                 user = authenticate(username=request.POST["login-email"], password= request.POST["login-password"])
                 if user is not None:
+                    persona = Persona()
                     try:
                         persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
                     except persona.DoesNotExist:
