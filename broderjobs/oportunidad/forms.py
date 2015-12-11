@@ -7,9 +7,15 @@ from main import utilitarios
 
 class OportunidadForm(forms.ModelForm):
 
+    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
+    paises_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
         model = Oportunidad
-        fields = ('titulo', 'carga_horaria', 'pais', 'ciudad', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
+        fields = ('titulo', 'carga_horaria', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
                   'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
@@ -31,8 +37,7 @@ class OportunidadForm(forms.ModelForm):
         self.fields['carga_horaria'].empty_label = None
         self.fields['tipo_puesto'].empty_label = None
         self.fields['remuneracion'].empty_label = None
-        self.fields['pais'].empty_label = "Pais"
-        self.fields['ciudad'].empty_label = "Ciudad"
+
         self.fields['grado_estudio'].empty_label = "Seleccione"
 
 class OportunidadCrearForm(OportunidadForm):

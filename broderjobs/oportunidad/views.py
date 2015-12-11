@@ -4,6 +4,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
+from django.core import serializers
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
@@ -71,7 +74,7 @@ class OportunidadCrearView(FormView):
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
-class OportunidadEditarView(UpdateView):
+class OportunidadEditarView(FormView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/editar.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')
