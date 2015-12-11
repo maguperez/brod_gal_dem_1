@@ -163,27 +163,19 @@ class MiCVView(LoginRequiredMixin, FormView):
         return context
 
     def form_valid(self, form):
-        foto = self.request.FILES['foto']
+        try:
+            foto = self.request.FILES['foto']
+        except:
+            foto = None
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
-        estudiante.foto = self.request.FILES['foto']
+        if foto is not None:
+            estudiante.foto = foto
+        else:
+            estudiante.foto.delete()
         estudiante.save()
         return super(MiCVView, self).form_valid(form)
-    #
-    # # def post(self, request, *args, **kwargs):
-    # #     form_class = self.get_form_class()
-    # #     form = self.get_form(form_class)
-    #     # foto = self.request.FILES['foto']
-    #     # user = self.request.user
-    #     # persona = Persona.objects.get(usuario_id=user.id)
-    #     # estudiante = Estudiante.objects.get(persona_id=persona.id)
-    #     # estudiante.foto = self.request.FILES['foto']
-    #     # estudiante.save()
-    #     if form.is_valid():
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(form, **kwargs)
 
 class AjaxTemplateMixin(object):
     def dispatch(self, request, *args, **kwargs):
@@ -365,16 +357,11 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         return estudiante
 
     def form_valid(self, form):
-        print(form)
-        print('hola')
-        print(self)
         con = form.cleaned_data['conocimiento']
-
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         estudiante.conocimiento = form.cleaned_data['conocimiento']
-        print(estudiante.conocimiento)
         estudiante.save()
         return super(ConocimientoView, self).form_valid(form)
 

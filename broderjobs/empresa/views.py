@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response, redirect, get_object_or_404
+from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.db.models import Q
@@ -24,8 +24,10 @@ import json
 def oportunidad_listar(request):
     return render(request, 'empresa/oportunidades-listar.html')
 
-class MiEmpresaView(TemplateView):
+class MiEmpresaView(FormView):
+    form_class = forms.LogoForm
     template_name = 'empresa/mi-empresa.html'
+    success_url = reverse_lazy('mi-empresa')
 
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -37,6 +39,22 @@ class MiEmpresaView(TemplateView):
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         return context
+
+    def form_valid(self, form):
+        try:
+            logo = self.request.FILES['logo']
+        except:
+            logo= None
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id=persona.id)
+        empresa = Empresa.objects.get(representante = representante.id)
+        if logo is not None:
+            empresa.logo = logo
+        else:
+            empresa.logo.delete()
+        empresa.save()
+        return super(MiEmpresaView, self).form_valid(form)
 
 class AjaxTemplateMixin(object):
     def dispatch(self, request, *args, **kwargs):
@@ -125,10 +143,8 @@ class OportunidadBusquedaView(TemplateView):
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
 
-
 from django.http import HttpResponse
 from django.core.paginator import InvalidPage, Paginator
-
 
 def oportunidades(request):
     oportunidades = Oportunidad.objects.all().order_by('fecha_publicacion')
@@ -164,7 +180,6 @@ def oportunidades(request):
     data = serializers.serialize("json", oportunidades)
     return HttpResponse(data, content_type='application/json')
 
-
 # displays the index page
 def oportunidades_listar( request ):
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
@@ -173,14 +188,13 @@ def oportunidades_listar( request ):
 def oportunidad_busqueda(request):
     if request.is_ajax():
         busqueda = request.GET.get('b')
-        print(busqueda)
+        user = request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
-            user = request.user
-            persona = get_object_or_404(Persona, usuario_id=user.id)
-            representante = get_object_or_404(Representante, persona_id =persona.id)
-            empresa = get_object_or_404(Empresa, id=representante.empresa.id)
-            oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")
-
-            print(oportunidades)
-            return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa' : empresa},
-                                       context_instance = RequestContext(request))
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("fecha_publicacion")
+        else:
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
+        return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
+                                  context_instance = RequestContext(request))

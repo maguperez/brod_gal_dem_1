@@ -1,6 +1,6 @@
 # coding=utf-8
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 from empresa.models import Empresa
@@ -9,7 +9,7 @@ import datetime
 
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'ContraseÃ±a', 'type':'password'}))
 
 
 class UniqueUserEmailField(forms.EmailField):
@@ -32,7 +32,7 @@ class RegisterForm(UserCreationForm):
     anos = []
     for y in range(1950, (datetime.datetime.now().year - 10)):
         anos.append((y, y))
-    items_anos = [('','Año')] + anos
+    items_anos = [('','AÃ±o')] + anos
 
     meses = []
     for y in range(1,12):
@@ -55,8 +55,8 @@ class RegisterForm(UserCreationForm):
     email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
     last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
-    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
-    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contraseña', 'type':'password'}))
+    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'ContraseÃ±a', 'type':'password'}))
+    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar ContraseÃ±a', 'type':'password'}))
     fecha_nacimiento = forms.DateField(required=False)
     ano = forms.ChoiceField(choices=items_anos, required = False, widget=forms.Select(attrs={'class': 'cumpleanos', }))
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
@@ -117,3 +117,10 @@ class RegisterForm(UserCreationForm):
             if commit:
                 user.save()
         return user
+
+class EditarUsuarioForm( UserChangeForm ):
+    def __init__( self, *args, **kwargs ):
+        super( EditarUsuarioForm, self ).__init__( *args, **kwargs )
+        # if self.instance and self.instance.pk:
+        #     # Since the pk is set this is not a new instance
+        #     self.fields['username'] = self.instance.username

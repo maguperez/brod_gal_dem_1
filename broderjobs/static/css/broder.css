@@ -185,7 +185,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .detalle {margin-left: 37px;}
 .box .content section .detalle  > div:not(:last-child) {margin-bottom: 30px;}
 .box .content section .detalle  > div.less-margin {margin-bottom: 20px;}
-/*.box .content section .detalle > div > label {font-size: 1em; font-weight: bold; color: #848484; float: left;}*/
+.box .content section .detalle > div > label {font-size: 1em; font-weight: bold; color: #848484; float: left;}
 .box .content section .detalle > div > p {float: left;}
 .box .content section .detalle.col-2-8 label {width: 20%;}
 .box .content section .detalle.col-2-8 p {width: 80%;}
@@ -512,8 +512,10 @@ header.menu .centered { height: 47px; }
 .cv .right {width: 29%;}
 .cv header {padding-top: 40px; padding-bottom: 40px; position: relative;}
 .cv header .editar {width: 80px; height: 30px; line-height: 30px; position: absolute; top: 30px; right: 25px;}
+.cv .box-imagen:hover {opacity: 0.7;}
+.cv .botones-imagen{float:left; margin-left: -20px;}
 .cv header .imagen, .cv header .detalle {float: left;}
-.cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
+.cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
 .cv header .detalle {margin: 20px 0 0 60px;}
 .cv header .detalle h3 {color: #848484; font-weight: bold;}
 .cv header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
