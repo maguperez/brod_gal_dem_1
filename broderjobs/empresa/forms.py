@@ -20,17 +20,8 @@ class InfoGeneralForm(forms.ModelForm):
         helper.render_unmentioned_fields = True # render all fields
         return helper
 
-class LogoForm(forms.ModelForm):
-    class Meta:
-        model = Empresa
-        fields = ('logo', 'nombre')
-
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
+class LogoForm(forms.Form):
+     logo = forms.ImageField(required=False, error_messages = {'invalid':'Porfavor seleccione una Imagen valida'}, widget=forms.FileInput)
 
 class UbicacionForm(forms.ModelForm):
     class Meta:

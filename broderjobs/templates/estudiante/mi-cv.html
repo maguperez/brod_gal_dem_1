@@ -1,9 +1,10 @@
 {% extends 'estudiante/base.html' %}
+{% load staticfiles %}
 {%block css%}
 
 {%endblock%}
 {% block content %}
-{% load staticfiles %}
+
 
 <!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
 <!--<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">-->
@@ -35,17 +36,29 @@
 
 			<div class="centered">
 				<div class="panel left principal">
-					<div class="box"><button id="foto-button" class="link editar">Editar</button>
-
+					<div class="box">
 						<header>
+							<div class="box-imagen" >
+								<img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
+								<div class="botones-imagen" style="visibility:hidden;">
+								<a id="editar-imagen"><i class="fa fa-pencil"></i></a>
+								<a id="remover-imagen"><i class="fa fa-times"></i></a>
+								</div>
+							</div>
 
-							<img class="imagen" src="{{estudiante.set_foto}}" />
 							<div class="detalle">
 								<h3>{{estudiante | upper}}</h3>
 								<label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
 								<label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
 								<label>{{persona.telefono}} / {{usuario.email}}</label>
 							</div>
+							{% if form.errors %}
+								{% for field in form %}
+									{% for error in field.errors %}
+										<strong>{{ error|escape }}</strong>
+									{% endfor %}
+								{% endfor %}
+							{%endif%}
 							<div class="clear"></div>
 							<button id="info-personal-button" class="link btn-action editar">Editar</button>
 						</header>
@@ -104,11 +117,13 @@
 								<h3 class="title"><i class="clip"></i>Actividades extra-acad&eacute;micas<button id="actividad-extra-crear-button" class="link editar">Agregar</button></h3>
 								<div class="detalle">
 									{% for actividad in actividades_extra %}
-											<div class="detalle">
+											<div>
 												<p>{{actividad.descripcion | lower}}</p>
 												<div class="clear"></div>
 												<label>{{actividad.organizacion | lower}}</label>
-												<div class="clear"></div>
+
+
+
 												<button id="actividad-{{actividad.pk}}-editar" class="actividad-extra-botton link editar" >Editar</button>
 
 												<button id="actividad-{{actividad.pk}}-eliminar" class="actividad-extra-botton link editar">Eliminar</button>
@@ -223,26 +238,13 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div class="popup aviso" id="imagen-perfil">
-	<div class="popup-box box">
-		<div class="content" id="popup-confirm">
-			<section class="header">
-				<h4 class="link">SELECCIONE UNA IMAGEN</h4>
-			</section>
 
-			<section class="mensaje">
-					<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
-					{{form.as_p}}
-					<div class="botones-popup">
-						<input type="submit" class="btn-save" value="ACEPTAR" id="enviar-imagen">
-					</div>
-					</form>
-				</section>
-		</div>
-		<a class="close">Cerrar</a>
-	</div>
+<div style="display: none">
+	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" id="cambiar_imagen">
+	</form>
 </div>
-
 <style>
 	#info-personal-button {
 		text-transform: uppercase;
@@ -251,10 +253,9 @@
 </style>
 {% endblock content%}
 {% block js %}
- <script>
-	 $(function(){
 
-   });
+ <script>
+
 	 var formAjaxSubmit = function(form, modal) {
 		 var valid = $(form).validate().valid();
 		 if (valid) {
@@ -278,30 +279,22 @@
 			 });
 		 }
 	 }
-	 var formAjaxSubmitImagen = function(form, modal) {
-		 $(form).submit(function (e) {
-         	e.preventDefault();
-            $.ajax({
-            	type: $(this).attr('method'),
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-				dataType:  'json',
-                success: function (xhr, ajaxOptions, thrownError) {
-                	if ( $(xhr).find('.has-error').length > 0 ) {
-                    	$(modal).find('.modal-body').html(xhr);
-                        formAjaxSubmitImagen(form, modal);
+	 $(".box-imagen" ).mouseover(function() {
+		$(".botones-imagen").css("visibility", "visible");
+	 });
+	 $(".box-imagen" ).mouseout(function() {
+		$(".botones-imagen").css("visibility", "hidden");
+	 });
+	 $("#editar-imagen").click(function(e) {
+	  $("#id_foto").click();
+	 });
+	$("#remover-imagen").click(function(e) {
 
-
-					} else {
-                    	$(modal).modal('toggle');
-						window.location.reload();
-					}
-				},
-                error: function (xhr, ajaxOptions, thrownError) {
-                }
-			});
-		 });
-	 }
+	    $("#cambiar_imagen").click();
+	 });
+	 $("#id_foto").change(function(){
+        $("#cambiar_imagen").click();
+	 });
 
      $('#comment-button').click(function() {
      	$('#form-modal-body').load('resumen/', function () {
@@ -309,23 +302,6 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
-//	 $('#foto-button').click(function() {
-//     	$('#form-modal-body').load('foto/', function () {
-//        	$('#form-modal').modal('toggle');
-//			formAjaxSubmit('#form-modal-body form', '#form-modal');
-//		});
-//	 });
-	 $('#foto-button').click(function(e) {
-		window.location = '#imagen-perfil';
-		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-        if ($("#imagen-perfil").hasClass('popup'))
-			$('body').addClass('static');
-	});
-	$('#enviar-imagen').click(function(e) {
-		console.log("entra");
-		window.history.back();
-		$('body').removeClass('static');
-	});
 	 $('.popup .close').click(function(e) {
 		window.history.back();
 		$('body').removeClass('static');
@@ -456,6 +432,7 @@
          }
       });
    };
+
 
  </script>
 {% endblock %}

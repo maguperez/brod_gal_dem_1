@@ -2,8 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout
-from django.forms.models import ModelChoiceField
+from django.forms import RadioSelect, Select, CheckboxSelectMultiple
 from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria,Idioma, Conocimiento, Puesto
 import datetime
@@ -18,7 +17,7 @@ class RegistroCVForm(forms.ModelForm):
     carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
+    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
     paises_hidden = forms.CharField(widget=forms.HiddenInput())
 
     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
@@ -28,34 +27,16 @@ class RegistroCVForm(forms.ModelForm):
             model = Estudiante
             fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
                      'ano_graduacion', 'tipo_puesto', 'carga_horaria')
+            widgets = {
+                'grado_estudio': Select(attrs={'class': 'full'}),
+                'tipo_puesto': CheckboxSelectMultiple(),
+                'carga_horaria': RadioSelect(),
+            }
 
     def __init__(self, *args, **kwargs):
         super(RegistroCVForm, self).__init__(*args, **kwargs)
-
-        #Carga items a Grado de Estudio
-        grado_estudios = []
-        grado_estudios.append(('', 'Seleccione'))
-        for grado_estudio in GradoEstudio.objects.all():
-            grado_estudios.append((grado_estudio.id, grado_estudio.descripcion))
-        self.fields['grado_estudio'].widget = forms.Select(attrs={'class': 'full'})
-        self.fields['grado_estudio'].choices = grado_estudios
-
-        #Carga items a Carrera
-        # carreras = []
-        # carreras.append(('', ''))
-        # for carrera in Carrera.objects.all():
-        #     carreras.append((carrera.id, carrera.descripcion))
-        # self.fields['carrera'].widget =forms.Select(attrs={'class': 'full'})
-        # self.fields['carrera'].choices = carreras
-
-
-        # #Carga items a Universidad
-        # universidades = []
-        # universidades.append(('', ''))
-        # for universidad in Universidad.objects.all():
-        #     universidades.append((universidad.id, universidad.descripcion))
-        # self.fields['universidad'].widget =forms.Select(attrs={'class': 'full'})
-        # self.fields['universidad'].choices = universidades
+        self.fields['grado_estudio'].empty_label = 'Seleccione'
+        self.fields['carga_horaria'].empty_label = None
 
         #Carga items Semestre
         items_semestre = utilitarios.semestre_rango()
@@ -65,7 +46,7 @@ class RegistroCVForm(forms.ModelForm):
         self.fields['semestre_inicio_estudio'].choices = items_semestre
         self.fields['semestre_graduacion'].choices = items_semestre
 
-        #Carga items a años
+        #Carga items a aÃ±os
 
         items_anos = utilitarios.anos_rango()
         self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
@@ -74,40 +55,9 @@ class RegistroCVForm(forms.ModelForm):
         self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
         self.fields['ano_graduacion'].choices = items_anos
 
-        #Carga items a Psis
-        # paises = []
-        # paises.append(('', ''))
-        # for pais in Pais.objects.all():
-        #     paises.append((pais.id, pais.descripcion))
-        # self.fields['pais'].widget =forms.Select(attrs={'class': 'full'})
-        # self.fields['pais'].choices = paises
-
-        #Carga items a ciudad
-        # ciudades = []
-        # ciudades.append(('', ''))
-        # for ciudad in Ciudad.objects.all():
-        #     ciudades.append((ciudad.id, ciudad.descripcion))
-        # self.fields['ciudad'].widget =forms.Select(attrs={'class': 'full'})
-        # self.fields['ciudad'].choices = ciudades
-
-        #Carga Tipo de
-        self.fields["tipo_puesto"].widget = forms.widgets.CheckboxSelectMultiple()
-        self.fields["tipo_puesto"].help_text = ""
-        self.fields["tipo_puesto"].queryset = TipoPuesto.objects.all()
-
-        #Carga Horaria
-        cargas = []
-        for carga in CargaHoraria.objects.all():
-            cargas.append((carga.id, carga.descripcion))
-        self.fields["carga_horaria"].widget = forms.widgets.RadioSelect()
-        self.fields["carga_horaria"].choices =cargas
-
 class FotoForm(forms.Form):
 
-   foto = forms.ImageField(label= "Seleccione la Imagen que desea cargar")
-   #  class Meta:
-   #      model = Estudiante
-   #      fields = ('foto', 'persona')
+   foto = forms.ImageField(required=False, error_messages = {'invalid':'Porfavor seleccione una Imagen valida'}, widget=forms.FileInput)
 
 class UniqueUserEmailField(forms.EmailField):
     def validate(self, value):

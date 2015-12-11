@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Persona
+from . import forms
 from empresa.models import Representante, Empresa
 from django.core.context_processors import csrf
 
@@ -67,6 +68,11 @@ def empresa_login(request):
                                   context_instance=RequestContext(request))
 
 def homepage1(request):
+    # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
+    return render_to_response('main/estudiante.html',
+                              context_instance=RequestContext(request))
+
+def homepage(request):
     message = None
     if request.method == "POST":
         login_form = LoginForm(request.POST, prefix='login')
@@ -111,11 +117,6 @@ def homepage1(request):
 
     return render_to_response('main/home-estudiante.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
                                   context_instance=RequestContext(request))
-
-def homepage(request):
-    # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
-    return render_to_response('main/estudiante.html',
-                              context_instance=RequestContext(request))
 
 def homepage_empresa(request):
     message = None
@@ -171,7 +172,6 @@ def estudiante(request):
 def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
-
 def estudiante_registro(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -220,7 +220,6 @@ def empresa_registro(request):
     return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})
 
 class ConfiguracionView(TemplateView):
-
     template_name = 'main/configuracion.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -232,9 +231,19 @@ class ConfiguracionView(TemplateView):
         context['persona'] = persona
         return context
 
-class EditarCuentaView(TemplateView):
 
-    template_name = 'main/editar-cuenta.html'
+def editar_usuario(request):
+
+    if request.method == 'POST':
+        form = forms.EditarUsuarioForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        form = forms.EditarUsuarioForm(instance=request.user)
+    return render_to_response('main/editar-cuenta.html',{'form': form},
+                              context_instance=RequestContext(request))
+
+
 
 
 

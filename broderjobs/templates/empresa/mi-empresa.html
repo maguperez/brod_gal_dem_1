@@ -6,8 +6,12 @@
 		<div class="panel left">
 			<div class="box">
 				<header class="pos-relative">
-					<button id="logo-button" class="editar btn-edit">Editar</button>
+					<!--<button id="logo-button" class="editar btn-edit">Editar</button>-->
 					<img class="imagen" src="{{empresa.set_logo}}" />
+					<div class="botones-imagen" style="visibility:hidden;">
+						<a id="editar-imagen"><i class="fa fa-pencil"></i></a>
+						<a id="remover-imagen"><i class="fa fa-times"></i></a>
+					</div>
 				</header>
 				<div class="content">
 					<h3 class="link">{{empresa.nombre | upper}}</h3>
@@ -137,6 +141,12 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div>
+	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" id="cambiar_imagen">
+	</form>
+</div>
 {% endblock %}
 
 {% block js %}
@@ -203,6 +213,21 @@
 			 });
 		 }
 	 }
+	 $("#pos-relative" ).mouseover(function() {
+		$(".botones-imagen").css("visibility", "visible");
+	 });
+	 $("#pos-relative" ).mouseout(function() {
+		$(".botones-imagen").css("visibility", "hidden");
+	 });
+	 $("#editar-imagen").click(function(e) {
+	  $("#id_logo").click();
+	 });
+	$("#remover-imagen").click(function(e) {
+	    $("#cambiar_imagen").click();
+	 });
+	 $("#id_logo").change(function(){
+        $("#cambiar_imagen").click();
+	 });
      $('#info-general-button').click(function() {
      	$('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
