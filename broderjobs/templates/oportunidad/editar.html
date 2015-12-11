@@ -1,11 +1,11 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
 {% load staticfiles %}
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
-<link rel="stylesheet" href="{% static 'css/slider.css' %}">
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>-->
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
+<!--<link rel="stylesheet" href="{% static 'css/slider.css' %}">-->
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <form action="" method="post">{%csrf_token%}
 	<section class="oportunidad-detalle">
@@ -36,6 +36,7 @@
 										<label class = "col-sm-3">T&iacute;tulo de vacante</label>
 										<div class = "col-sm-9">
 											{{form.titulo}}
+											<!--<input type="text" class="typeahead">-->
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -52,10 +53,12 @@
 									<div class ="form-group">
 										<label class = "col-sm-3">Localizaci&oacute;n</label>
 										<div class = "col-sm-4">
-											{{form.pais}}
+											{{form.paises}}
+											{{form.paises_hidden}}
 										</div>
 										<div class = "col-sm-4">
-											{{form.ciudad}}
+											{{form.ciudades}}
+											{{form.ciudades_hidden}}
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -240,6 +243,16 @@
 </style>
 <script>
 	$(function(){
+
+		$('.typeahead').typeahead({
+			source: ["item1","item2","item3"]
+		});
+
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+
+		InicializarSelect2(elementosParaSelect2);
+		InicializarTypeahead();
+
 		$("#link-oportunidades").addClass("active");
 		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
 		$("#id_fecha_cese").datepicker({
@@ -299,6 +312,109 @@
             }
         },
     };
+
+	function InicializarSelect2(ids){
+
+		ids.forEach(function(id){
+			$("#"+id).select2({
+				placeholder: "Seleccione por favor",
+				allowClear: true
+			});
+		});
+	}
+
+	function InicializarTypeahead(){
+//		var a = [{id: "someId1", name: "Display name 1"},{id: "someId2", name: "Display name 2"}];
+		$("#id_paises").typeahead({
+			source: function(buscar,cargarResultado){
+				console.log(buscar);
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: '{%url "pais-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_paises").change(function() {
+			var current = $("#id_paises").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_paises").val()) {
+					$('#id_paises_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		})
+
+		$("#id_ciudades").typeahead({
+			source: function(buscar,cargarResultado){
+				var valor = document.getElementById('id_paises_hidden').value;
+				$.ajax({
+					data : {'busqueda': buscar,'pais': valor},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_ciudades").change(function() {
+			var current = $("#id_ciudades").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_ciudades").val()) {
+					$('#id_ciudades_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		})
+	}
+
+
 </script>
 
 {% endblock%}
