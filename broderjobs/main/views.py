@@ -67,12 +67,12 @@ def empresa_login(request):
     return render_to_response('main/empresa-login.html',{'message': message,'form': form},
                                   context_instance=RequestContext(request))
 
-def homepage(request):
+def homepage1(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 
-def homepage1(request):
+def homepage(request):
     message = None
     if request.method == "POST":
         login_form = LoginForm(request.POST, prefix='login')
@@ -173,6 +173,7 @@ def estudiante(request):
 def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
+
 def estudiante_registro(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
