@@ -192,80 +192,53 @@
 
             $(function(){
                 $("#registro form").validate({
-                    errorPlacement: function (error, element) {
-        				$(element).tooltip('destroy');
-        				$(element).tooltip({
-        					animation: true,
-        					placement: "left",
-        					title: $(error).text(),
-        					trigger: "manual"
-        				} );
-        				$(element).tooltip('show');
-                    },
-                    success: function (label, element) {
-        				$(element).tooltip('hide');
-                    },
-                    rules: {
-        				first_name: {
-        					required: true,
-        				},
-        				last_name: {
-        					required: true,
-        				},
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password1: {
-                            required: true,
-        					min: 6
-                        },
-        				password2: {
-                            required: true,
-        					equalTo: "#id_password1",
-        					min: 6
-                        },
-        				groups: {
-        					date: "dia mes ano"
-        				},
-        				tyc: {
-        					required: true
-        				}
-                    },
-                    messages: {
-        				first_name: {
-        					required: "Este campo es obligatorio",
-        				},
-        				last_name: {
-        					required: "Este campo es obligatorio",
-        				},
-                        email: {
-                            required: "Este campo es obligatorio",
-                            email: "Introduzca un correo valido"
-                        },
-                        password1: {
-                            required: "Este campo es obligatorio",
-        					min: "La contraseña debe tener al menos seis (6) caracteres"
-                        },
-        				password2: {
-                            required: "Este campo es obligatorio",
-        					equalTo: "Las contraseñas deben ser iguales",
-        					min: "La contraseña debe tener al menos seis (6) caracteres"
-                        },
-        				tyc: {
-        					required: "Debe aceptar los términos y condiciones",
-        				}
-                    }
-                });
-		$("#link-registro").addClass("active");
-    });
+            	errorPlacement: function (error, element) {
+					$(element).tooltip('destroy');
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$(element).tooltip('show');
 
-		</script>
-    <script>
-    $(function(){
+	            },
+	            success: function (label, element) {
+					$(element).tooltip('hide');
+	            },
+	            rules: {
+					"registro-first_name": { required: true },
+					"registro-last_name": { required: true },
+	                "registro-email": { required: true, email: true },
+	                "registro-password1": { required: true },
+					"registro-password2": { required: true, equalTo: "#id_password1" },
+                    "registro-empresa": { required: true },
+                    "registro-telefono": { required: true },
+                    "registro-password1": { required: true },
+					groups: {
+						date: "registro-dia registro-mes registro-ano"
+					},
+					tyc: {
+						required: true
+					}
+	            },
+	            messages: {
+					"registro-first_name": { required: "Este campo es obligatorio" },
+					"registro-last_name": { required: "Este campo es obligatorio" },
+	                "registro-email": { required: "Este campo es obligatorio",
+	                    				email: "Introduzca un correo valido" },
+	                "registro-password1": { required: "Este campo es obligatorio" },
+					"registro-password2": { required: "Este campo es obligatorio",
+											equalTo: "Las contraseñas deben ser iguales" },
+                    "registro-empresa": { required: "Este campo es obligatorio" },
+                    "registro-telefono": { required: "Este campo es obligatorio" },
+                    tyc: { required: "Debe aceptar los términos y condiciones" }
+	            }
+	        });
+		$("#link-registro").addClass("active");
+
         $("#login form").validate({
             errorPlacement: function (error, element) {
-
                 $(element).tooltip('destroy');
                 $(element).tooltip({
                     animation: true,
@@ -279,24 +252,14 @@
                 $(element).tooltip('hide');
             },
             rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    min: 6
-                }
+                "login-email": { required: true, email: true },
+                "login-password": { required: true, /*min: 6*/ }
             },
             messages: {
-                email: {
-                    required: "Este campo es obligatorio",
-                    email: "Introduzca un correo válido"
-                },
-                password: {
-                    required: "Este campo es obligatorio",
-                    min: "La contraseña debe tener al menos seis (6) caracteres"
-                }
+                "login-email": { 	required: "Este campo es obligatorio",
+                    				email: "Introduzca un correo válido" },
+                "login-password": { required: "Este campo es obligatorio",
+									/*min: "La contraseña debe tener al menos seis (6) caracteres" */}
             }
         });
         $("#link-sesion").addClass("active");

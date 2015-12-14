@@ -73,7 +73,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="flex-div login active" id="registro">
+					<div class="flex-div login" id="registro">
 						<form method="POST">{% csrf_token %}
 							<div class="content">
 								<label class="saludo">HOLA BRODER</label>
@@ -197,17 +197,17 @@
         <script>
 	    $(function(){
             $("#registro form").validate({
-            errorPlacement: function (error, element) {
-					if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
-						$(element).is("[name=ano]")){
-						$("#id_dia").tooltip('destroy');
-						$("#id_dia").tooltip({
+            	errorPlacement: function (error, element) {
+					if ($(element).is("[name=registro-dia]") || $(element).is("[name=registro-mes]") ||
+						$(element).is("[name=registro-ano]")){
+						$("#id_registro-dia").tooltip('destroy');
+						$("#id_registro-dia").tooltip({
 							animation: true,
 							placement: "left",
 							title: $(error).text(),
 							trigger: "manual"
-						} );
-						$("#id_dia").tooltip('show');
+						});
+						$("#id_registro-dia").tooltip('show');
 					}
 					else {
 						$(element).tooltip('destroy');
@@ -221,9 +221,9 @@
 					}
 	            },
 	            success: function (label, element) {
-					if ($(element).is("[name=dia]") || $(element).is("[name=mes]") ||
-						$(element).is("[name=ano]")){
-						$("#id_dia").tooltip('hide');
+					if ($(element).is("[name=registro-dia]") || $(element).is("[name=registro-mes]") ||
+						$(element).is("[name=registro-ano]")){
+						$("#id_registro-dia").tooltip('hide');
 					}
 					else {
 						$(element).tooltip('hide');
@@ -231,69 +231,33 @@
 
 	            },
 	            rules: {
-					first_name: {
-						required: true,
-					},
-					last_name: {
-						required: true,
-					},
-	                email: {
-	                    required: true,
-	                    email: true
-	                },
-	                password1: {
-	                    required: true
-	                },
-					password2: {
-	                    required: true,
-						equalTo: "#id_password1"
-	                },
-					dia: {
-						required: true,
-					},
-					mes: {
-						required: true,
-					},
-					ano: {
-						required: true,
-					},
+					"registro-first_name": { required: true },
+					"registro-last_name": { required: true },
+	                "registro-email": { required: true, email: true },
+	                "registro-password1": { required: true },
+					"registro-password2": { required: true, equalTo: "#id_password1" },
+					"registro-dia": { required: true },
+					"registro-mes": { required: true },
+					"registro-ano": { required: true },
 					groups: {
-						date: "dia mes ano"
+						date: "registro-dia registro-mes registro-ano"
 					},
 					tyc: {
 						required: true
 					}
 	            },
 	            messages: {
-					first_name: {
-						required: "Este campo es obligatorio",
-					},
-					last_name: {
-						required: "Este campo es obligatorio",
-					},
-	                email: {
-	                    required: "Este campo es obligatorio",
-	                    email: "Introduzca un correo valido"
-	                },
-	                password1: {
-	                    required: "Este campo es obligatorio"
-	                },
-					password2: {
-	                    required: "Este campo es obligatorio",
-						equalTo: "Las contraseñas deben ser iguales"
-	                },
-					dia: {
-						required: "La fecha de nacimiento es obligatoria",
-					},
-					mes: {
-						required: "La fecha de nacimiento es obligatoria",
-					},
-					ano: {
-						required: "La fecha de nacimiento es obligatoria",
-					},
-					tyc: {
-						required: "Debe aceptar los términos y condiciones",
-					}
+					"registro-first_name": { required: "Este campo es obligatorio" },
+					"registro-last_name": { required: "Este campo es obligatorio" },
+	                "registro-email": { required: "Este campo es obligatorio",
+	                    				email: "Introduzca un correo valido" },
+	                "registro-password1": { required: "Este campo es obligatorio" },
+					"registro-password2": { required: "Este campo es obligatorio",
+											equalTo: "Las contraseñas deben ser iguales" },
+					"registro-dia": { required: "La fecha de nacimiento es obligatoria"	},
+					"registro-mes": { required: "La fecha de nacimiento es obligatoria" },
+					"registro-ano": { required: "La fecha de nacimiento es obligatoria" },
+					tyc: { required: "Debe aceptar los términos y condiciones" }
 	            }
 	        });
 			$("#login form").validate({
@@ -312,24 +276,14 @@
 	                $(element).tooltip('hide');
 	            },
 	            rules: {
-	                email: {
-	                    required: true,
-	                    email: true
-	                },
-	                password: {
-	                    required: true,
-	//                    min: 6
-	                }
+	                "login-email": { required: true, email: true },
+	                "login-password": { required: true, /*min: 6*/ }
 	            },
 	            messages: {
-	                email: {
-	                    required: "Este campo es obligatorio",
-	                    email: "Introduzca un correo válido"
-	                },
-	                password: {
-	                    required: "Este campo es obligatorio",
-	//                    min: "La contraseña debe tener al menos seis (6) caracteres"
-	                }
+	                "login-email": { 	required: "Este campo es obligatorio",
+	                    				email: "Introduzca un correo válido" },
+	                "login-password": { required: "Este campo es obligatorio",
+										/*min: "La contraseña debe tener al menos seis (6) caracteres" */}
 	            }
 	        });
             $("#link-registro").addClass("active");
