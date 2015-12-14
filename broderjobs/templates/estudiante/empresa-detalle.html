@@ -31,7 +31,7 @@
 										<span class="rating-big"></span>
 									<div class="clear"></div>
 								</div>
-								<label class="puntaje">4.90</label>
+								<label class="puntaje">{{ranking.ranking_general}}</label>
 								<a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
 							</section>
 						</div>
@@ -86,22 +86,22 @@
 								<h3 class="title"><i class="like"></i>Evaluaci&oacute;n<span class="comment">(por colaboradores o ex-colaboradores)</span></h3>
 								<div class="criterios">
 									<div class="criterio">
-										<label class="calificacion">2.5</label>
+										<label class="calificacion">{{ranking.linea_carrera}}</label>
 										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
 										<label class="nombre">Línea de carrera</label>
 									</div>
 									<div class="criterio">
-										<label class="calificacion">2.5</label>
+										<label class="calificacion">{{ranking.flexibilidad_horarios}}</label>
 										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
 										<label class="nombre">Flexibilidad de horarios</label>
 									</div>
 									<div class="criterio">
-										<label class="calificacion">2.5</label>
+										<label class="calificacion">{{ranking.ambiente_trabajo}}</label>
 										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
 										<label class="nombre">Ambiente de trabajo</label>
 									</div>
 									<div class="criterio">
-										<label class="calificacion">2.5</label>
+										<label class="calificacion">{{ranking.salarios}}</label>
 										<div class="grafico"><img src="../img/mano-evaluacion.jpg" /></div>
 										<label class="nombre">Salario y Beneficios</label>
 									</div>
@@ -170,10 +170,10 @@
 				<div class="content">
 					<section>
 						<h3>Eval&uacute;a de manera an&oacute;nima</h3>
-						<label class="link empresa">ADOBE</label>
-						<label class="descripcion">DESARROLLO DE SOFTWARE</label>
+						<label class="link empresa">{{empresa.nombre |upper}}</label>
+						<label class="descripcion">{{empresa.sector | upper}}</label>
 						<div class="calificacion">
-							<img class="imagen" src="../img/empresas/empresa-1.jpg" alt="ADOBE" />
+							<img class="imagen" src="{{empresa.set_logo}}" alt="ADOBE" />
 							<ul class="criterios">
 									<label>L&iacute;nea de carrera</label>
 									<div id = "rating-linea_carrera" style = "display:inline-block"></div>
@@ -209,6 +209,12 @@
 					</section>
 				</div>
 				<a class="close">Cerrar</a>
+				<div style="display:none">
+				<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" id="evaluar">
+				</form>
+			</div>
 			</div>
 </div>
 <div class="popup aviso" id="resultado-evaluacion">
@@ -224,23 +230,21 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
-<div style="display: none">
-	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
-	{{form.as_p}}
-	<input type="submit" id="evaluar">
-	</form>
-</div>
+
 
 {% endblock content %}
 {% block js %}
 <script>
 	$(function(){
 		$("#link-empresa").addClass("active");
+
 		$('.popup .close').click(function(e) {
-			window.history.back();
+			var url =window.location.href;
+			var newUrl = url.split('#')[0];
+			window.location.href = newUrl;
 			$('body').removeClass('static');
 		});
-		//$("#rating").rate();
+
 
 	//or for example
 		var options = {
@@ -264,6 +268,14 @@
 		$("#rating-flexibilidad_horario").rate(options);
 		$("#rating-ambiente_trabajo").rate(options);
 		$("#rating-salario_beneficios").rate(options);
+	});
+
+	$("#enviar-evaluacion").click(function(e) {
+		$("#id_linea_carrera").val($("#rating-linea_carrera").attr("data-rate-value") > 0 ? $("#rating-linea_carrera").attr("data-rate-value") :  0 );
+		$("#id_flexibilidad_horarios").val($("#rating-flexibilidad_horario").attr("data-rate-value") > 0 ? $("#rating-flexibilidad_horario").attr("data-rate-value") : 0);
+		$("#id_ambiente_trabajo").val($("#rating-ambiente_trabajo").attr("data-rate-value") > 0 ? $("#rating-ambiente_trabajo").attr("data-rate-value") : 0);
+		$("#id_salarios").val($("#rating-salario_beneficios").attr("data-rate-value") > 0 ? $("#rating-salario_beneficios").attr("data-rate-value") : 0);
+		$("#evaluar").click();
 	});
 </script>
 {%endblock js%}

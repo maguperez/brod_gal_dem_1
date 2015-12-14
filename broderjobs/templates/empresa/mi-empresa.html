@@ -1,4 +1,5 @@
 {% extends 'empresa/base.html' %}
+{% load staticfiles %}
 {% block content %}
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="empresa">
@@ -82,19 +83,15 @@
 							{% for oportunidad in oportunidades %}
 								<li>
 									<div class="oportunidad-box">
-										<a class="titulo" href="oportunidad.html"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+										<a class="titulo" href="{%url 'oportunidad-editar' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
 										<div class="descripcion">
 											<div class="datos">
 												<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
 												<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
 												<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
 											</div>
-											<div class="compatibilidad">
-												<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-												<label class="resultado">Compatible</label>
-											</div>
 											<div class="ver-oportunidad">
-												<a class="btn-action" href="oportunidad.html">VER OPORTUNIDAD</a>
+												<a class="btn-action" href="{%url 'oportunidad-editar' oportunidad.id%}">VER OPORTUNIDAD</a>
 												<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
 											</div>
 											<div class="clear"></div>
@@ -104,7 +101,7 @@
 								</li>
 							{% endfor %}
 						</ul>
-						<a class="link ver-mas" href="oportunidades_empresa.html">Ver m&aacute;s oportunidades</a>
+						<a class="link ver-mas" href="{%url 'empresa-oportunidad-listar'%}">Ver m&aacute;s oportunidades</a>
 					</section>
 					<section class="redes">
 						<h3 class="title"><i class="network"></i>Redes sociales<a class="editar link" href="#editar-redes">Editar</a></h3>
