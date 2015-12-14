@@ -68,7 +68,7 @@
 							<div class="box">
 								<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
 								<div class="grafico grafico-inscripciones">
-									<img src="/static/img/estadisticas-inscripciones.jpg" />
+									<div id = "chart-id" class="ct-chart " data-info = "[[5, 9, 7, 8, 5, 3, 5, 4]]"></div>
 								</div>
 							</div>
 						</div>
@@ -80,6 +80,10 @@
     </li>
 {% endif %}
 
+{% load staticfiles %}
+<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'js/chartist.min.js' %}"></script>
+<link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script>
 	$(function(){
 		$(".sparklines").each(function(){
@@ -91,5 +95,19 @@
 				barWidth: 10,
 				barColor: '#5d9cf9'});
 		});
+		$(".ct-chart").each(function(){
+			var data = $(this).data("info");
+			new Chartist.Line("#"+$(this).attr("id"), {
+				labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Sábado", "Domingo"],
+				colors:["#333", "#222", "#111", "#000"],
+				series: data
+			}, {
+				low: 0,
+				showArea: true
+			});
+		})
 	})
 </script>
+<style>
+	.ct-chart { margin-left: -40px; margin-top: -20px;}
+</style>
