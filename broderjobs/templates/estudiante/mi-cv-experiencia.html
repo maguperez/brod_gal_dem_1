@@ -51,93 +51,62 @@
 			});
 		});
 
-		$("#id_puestos").autocomplete({
-			//source: ids
-			appendTo: "#form-modal",
-			source : function(r,res){
-				//res(ids);
-
-				$.ajax({
-					data : {'busqueda': r.term},
-					url: '{%url "puesto-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-					GuardarValorHidden('id_puestos_hidden',this.id,ui);
-				}
-		});
-
-		$("#id_empresas").autocomplete({
-			//source: ids
-			appendTo: "#form-modal",
-			source : function(r,res){
-				//res(ids);
-
-				$.ajax({
-					data : {'busqueda': r.term},
-					url: '{%url "empresa-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.value = obj.pk;
-									obje.label = obj.fields.nombre;
-
-									arreglo.push(obje);
-								});
-
-								res(arreglo);
-							}
-						}
-					}
-
-				});
-
-				 document.ready
-			},
-			select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
-					event.preventDefault();
-					// manually update the textbox and hidden field
-					$(this).val(ui.item.value);
-					GuardarValorHidden('id_empresas_hidden',this.id,ui);
-				}
-		});
+		InicializarTypeaheadElementos();
 
 	});
 
-	function GuardarValorHidden(idHidden, idElemento, ui){
-		document.getElementById(idHidden).value = ui.item.value;
-		document.getElementById(idElemento).value = ui.item.label;
+	function InicializarTypeahead(idElemento, idHidden, ruta, campoID, campoNombre){
+		$("#"+idElemento).typeahead({
+			source: function(buscar,cargarResultado){
+				console.log(buscar);
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: ruta,
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+//									obje.id = obj.pk;
+									obje.id = obj[campoID];
+//									obje.name = obj.fields.descripcion;
+									obje.name = obj.fields[campoNombre];
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			},
+			minLength: 3
+		});
+
+		$("#"+idElemento).change(function() {
+			var current = $("#"+idElemento).typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#"+idElemento).val()) {
+					$("#"+idHidden).val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+	}
+
+	function InicializarTypeaheadElementos(){
+		InicializarTypeahead('id_empresas', 'id_empresas_hidden', '{%url "empresa-busqueda" %}','pk', 'nombre');
+		InicializarTypeahead('id_puestos', 'id_puestos_hidden', '{%url "puesto-busqueda" %}', 'pk', 'descripcion');
 	}
 
 

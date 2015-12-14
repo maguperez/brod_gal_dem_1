@@ -21,12 +21,15 @@ $( document ).ready( function() {
         b = $( '#filtro' ).val();
         $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
     });
+	$("#link-oportunidades").addClass("active");
 	fnBuscar();
 
 });
 function fnBuscar(){
 	 b = "A";
 	 $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
+
+
 }
 </script>
 {%endblock%}
