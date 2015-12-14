@@ -377,7 +377,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-box .compatibilidad {/*width: 16%;*/ margin-top: 10px;}
 .oportunidad-box .compatibilidad .grafico {width: 65px; margin: 0 auto;}
 .oportunidad-box .compatibilidad .resultado {margin-top: 5px; text-align: center; font-size: 0.85em; display: block;}
-.oportunidad-box .ver-oportunidad {height: 60px; margin: 20px 0 0 12%; padding-left: 40px; text-align: center; border-left: 1px solid #ddd;}
+.oportunidad-box .ver-oportunidad {height: 60px; padding-left: 40px; text-align: center; border-left: 1px solid #ddd; margin-left: 10px;  margin-top: 15px;}
 .oportunidad-box .ver-oportunidad .btn-action {width: 135px; height: 30px; line-height: 30px; margin-top: 10px;}
 .oportunidad-box .ver-oportunidad .cierre {margin-top: 5px; font-size: 0.75em; display: block;}
 .oportunidad-resumen .imagen, .oportunidad-resumen .detalle {float: left;}

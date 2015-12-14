@@ -14,11 +14,23 @@
 {% block js %}
 {% load staticfiles %}
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
+<link rel = "stylesheet" href ="{% static 'css/animate.css' %}"/>
 <script>
    $(function(){
 	   fnBusqueda();
 	   $("#link-oportunidad").addClass("active");
-
+		$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
+			$(this).find(".consolidado").addClass("fadeOut")
+			$(this).find(".consolidado").removeClass("fadeIn");
+			$(this).find(".desglose").addClass("fadeIn");
+			$(this).find(".desglose").removeClass("fadeOut");
+		});
+	   $("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
+			$(this).find(".consolidado").addClass("fadeIn");
+			$(this).find(".consolidado").removeClass("fadeOut");
+			$(this).find(".desglose").addClass("fadeOut")
+			$(this).find(".desglose").removeClass("fadeIn");
+		});
    });
 
 	$('#busqueda').keyup(fnBusqueda);
@@ -43,12 +55,24 @@
                     html += '<div class="empresa"><i class="empresa"></i><label>'+data[i].empresa+'</label></div>';
                     html += '<div class="ubicacion"><i class="ubicacion"></i><label>'+data[i].ubicacion+'</label></div>';
 					html +=	'<div class="remuneracion"><i class="remuneracion"></i><label>'+data[i].remuneracion+'</label></div></div>';
-					html += '<div class="compatibilidad"><div class="circular-bar"><div class="circular-bar-chart" data-percent="73"><label><span class="percent">73</span>%</label></div></div><label class="resultado">Compatible</label></div>';
+					html += '<div class="compatibilidad">' +
+							'<div class = "animated consolidado"><div class="circular-bar "><div class="circular-bar-chart" data-percent="73"><label><span class="percent">73</span>%</label></div></div><label class="resultado">Compatible</label></div>' +
+							'<div class = "animated fadeOut desglose">' +
+							'<div class = "cultural"><div class="circular-bar"><div class="circular-bar-chart" data-percent="63"><label><span class="percent">53</span>%</label></div></div><label class="resultado">Cultural</label></div>' +
+							'<div class = "academico"><div class="circular-bar"><div class="circular-bar-chart" data-percent="49"><label><span class="percent">49</span>%</label></div></div><label class="resultado">Académico</label></div></div></div>';
 					html += '<div class="ver-oportunidad"><a class="btn-action" href="'+url+'">VER OPORTUNIDAD</a>';
 					html += '<label class="cierre">CIERRA '+ data[i].fecha_cese + '</label></div><div class="clear"></div></div></div><div class="clear"></div></div></div></li>';
 				}
 				$('#datos').html(html);
-				$('.circular-bar-chart').easyPieChart({
+				$('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#5d9cf9",
+					size: 65,
+				});
+				$('.cultural .circular-bar-chart,' +
+						'.academico .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
@@ -63,5 +87,17 @@
 	}
 
 </script>
-
+<style>
+	.compatibilidad { text-align: center; }
+	.compatibilidad > div,
+	.compatibilidad .desglose > div{
+		display: inline-block !Important; }
+	.compatibilidad .consolidado {
+		margin-left: 42px;
+		position: absolute;
+	}
+	.compatibilidad .academico {
+		margin-left: 5px;
+	}
+</style>
 {% endblock js %}
