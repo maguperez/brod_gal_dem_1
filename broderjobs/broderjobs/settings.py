@@ -101,6 +101,11 @@ DATABASES = {
         'PASSWORD': 'br753des',
         'HOST': '191.168.19.11',
         'PORT': '5434',
+        # 'NAME': 'BroderJobs',
+        # 'USER': 'sa',
+        # 'PASSWORD': 'abc#123',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
     }
 }
 

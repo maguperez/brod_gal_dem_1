@@ -95,7 +95,6 @@ class Empresa(models.Model):
     website = models.CharField(max_length="50", default=None, null=True, blank=True )
     logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
     imagen_slider = models.ManyToManyField(ImagenSilder, default=None, blank=True, verbose_name="Imagenes")
-    ranking_general = models.CharField(max_length="10", default=None, null=True, blank=True )
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
@@ -122,6 +121,37 @@ class Representante(models.Model):
     persona = models.OneToOneField(Persona)
     empresa = models.ForeignKey(Empresa)
 
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode('%s' % (self.persona)) or u''
+
+class EvaluacionEmpresa(models.Model):
+
+    empresa = models.ForeignKey(Empresa)
+    usuario = models.ForeignKey(User)
+    linea_carrera = models.FloatField(default=None, null=True, blank=True )
+    flexibilidad_horarios = models.FloatField(default=None, null=True, blank=True )
+    ambiente_trabajo = models.FloatField(default=None, null=True, blank=True )
+    salarios = models.FloatField(default=None, null=True, blank=True )
+    ranking = models.FloatField(default=None, null=True, blank=True )
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode('%s' % (self.persona)) or u''
+
+class RankingEmpresa(models.Model):
+
+    empresa = models.ForeignKey(Empresa)
+    linea_carrera = models.FloatField(default=None, null=True, blank=True )
+    flexibilidad_horarios = models.FloatField(default=None, null=True, blank=True )
+    ambiente_trabajo = models.FloatField(default=None, null=True, blank=True )
+    salarios = models.FloatField(default=None, null=True, blank=True )
+    ranking_general = models.FloatField(default=None, null=True, blank=True )
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)

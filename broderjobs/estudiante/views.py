@@ -90,17 +90,34 @@ def registro_cv(request):
 def oportunidad_listar(request):
     return render(request, 'estudiante/oportunidad-listar.html')
 
-class EmpresaDetalleView(LoginRequiredMixin, TemplateView):
+class EmpresaDetalleView(LoginRequiredMixin, FormView):
 
+    form_class = forms.EvaluacionForm
     template_name = 'estudiante/empresa-detalle.html'
+    success_url = reverse_lazy('estudiante-empresa-')
+
     def get_context_data(self, **kwargs):
-        id = kwargs.get('id', None)
+        id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         return context
+
+    def form_valid(self, form):
+        linea =  form.cleaned_data['linea_carrera']
+        flexibilidad =  form.cleaned_data['flexibilidad_horarios']
+        ambiente =  form.cleaned_data['ambiente_trabajo']
+        salario =  form.cleaned_data['salarios']
+        ranking = (linea + flexibilidad + ambiente + salario)/4
+        print(ranking)
+        id = self.kwargs['id']
+
+        print(id)
+
+        return super(EmpresaDetalleView, self).form_valid(form)
+
 
 class EmpresaListaView(LoginRequiredMixin, TemplateView):
 

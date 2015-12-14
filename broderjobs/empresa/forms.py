@@ -2,7 +2,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
-from models import Empresa, Representante, Sector
+from models import Empresa, Representante, Sector, EvaluacionEmpresa
 
 class InfoGeneralForm(forms.ModelForm):
     class Meta:
@@ -27,3 +27,4 @@ class UbicacionForm(forms.ModelForm):
     class Meta:
         model = Empresa
         fields = ('longitud', 'latitud', 'direccion_map')
+

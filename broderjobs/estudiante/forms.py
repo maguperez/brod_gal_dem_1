@@ -3,10 +3,9 @@ from django import forms
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from django.forms import RadioSelect, Select, CheckboxSelectMultiple
-from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra
-from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, Estudiante, TipoPuesto, CargaHoraria,Idioma, Conocimiento, Puesto
-import datetime
-
+from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra, Estudiante
+from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, CargaHoraria,Idioma, Conocimiento
+from empresa.models import EvaluacionEmpresa, Puesto, Empresa
 from main import utilitarios
 
 class RegistroCVForm(forms.ModelForm):
@@ -200,6 +199,12 @@ class ActividadesExtraForm(forms.ModelForm):
         helper.form_tag = False # don't render form DOM element
         helper.render_unmentioned_fields = True # render all fields
         return helper
+
+class EvaluacionForm(forms.ModelForm):
+    class Meta:
+        model = EvaluacionEmpresa
+        fields = ('linea_carrera', 'flexibilidad_horarios', 'ambiente_trabajo', 'salarios')
+        
 
 
 

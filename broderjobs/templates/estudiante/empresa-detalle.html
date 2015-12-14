@@ -166,7 +166,7 @@
     </div>
 </section>
 <div class="popup evaluacion-empresa" id="evaluacion">
-			<div class="box popup-box">
+	<div class="box popup-box">
 				<div class="content">
 					<section>
 						<h3>Eval&uacute;a de manera an&oacute;nima</h3>
@@ -210,8 +210,8 @@
 				</div>
 				<a class="close">Cerrar</a>
 			</div>
-		</div>
-		<div class="popup aviso" id="resultado-evaluacion">
+</div>
+<div class="popup aviso" id="resultado-evaluacion">
 			<div class="popup-box box">
 				<div class="content">
 					<section class="header">
@@ -224,6 +224,13 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
+<div style="display: none">
+	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" id="evaluar">
+	</form>
+</div>
+
 {% endblock content %}
 {% block js %}
 <script>
