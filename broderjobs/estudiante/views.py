@@ -305,10 +305,10 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)
         grado_estudio = form.cleaned_data['grado_estudio']
-        universidad = form.cleaned_data['universidad']
-        carrera = form.cleaned_data['carrera']
-        pais =  form.cleaned_data['pais']
-        ciudad = form.cleaned_data['ciudad']
+        id_universidad = form.cleaned_data['universidades_hidden']
+        id_carrera = form.cleaned_data['carreras_hidden']
+        id_pais = form.cleaned_data['paises_hidden']
+        id_ciudad = form.cleaned_data['ciudades_hidden']
         ano_inicio = form.cleaned_data['ano_inicio_estudio']
         semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
         ano_graduacion = form.cleaned_data['ano_graduacion']
@@ -316,10 +316,24 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
 
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         estudiante.grado_estudio = grado_estudio
-        estudiante.universidad = universidad
-        estudiante.carrera = carrera
-        estudiante.pais = pais
-        estudiante.ciudad = ciudad
+
+        universidad = Universidad.objects.get(id= id_universidad )
+        if universidad is not None:
+            estudiante.universidad = universidad
+        carrera = Carrera.objects.get(id = id_carrera)
+        if carrera is not None:
+            estudiante.carrera = carrera
+        pais = Pais.objects.get(id= id_pais)
+        if pais is not None:
+            estudiante.pais = pais
+        ciudad = Ciudad.objects.get(id = id_ciudad)
+        if ciudad is not None:
+            estudiante.ciudad = ciudad
+
+        # estudiante.universidad = universidad
+        # estudiante.carrera = carrera
+        # estudiante.pais = pais
+        # estudiante.ciudad = ciudad
         estudiante.ano_inicio_estudio = ano_inicio
         estudiante.semestre_inicio_estudio = semestre_inicio
         estudiante.ano_graduacion = ano_graduacion
@@ -466,18 +480,28 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
     template_name = 'estudiante/mi-cv-experiencia.html'
     success_url = reverse_lazy('mi-cv')
 
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
     def form_valid(self, form):
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         experiencia = ExperienciaProfesional()
-        puesto = form.cleaned_data['puesto']
-        empresa = form.cleaned_data['empresa']
+        puesto_id = form.cleaned_data['puestos_hidden']
+        empresa_id = form.cleaned_data['empresas_hidden']
+
         fecha_desde = form.cleaned_data['fecha_desde']
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
+        puesto = Puesto.objects.get(id=puesto_id)
+        empresa = Empresa.objects.get(id=empresa_id)
         experiencia.puesto = puesto
         experiencia.empresa = empresa
         if fecha_desde is not None:
@@ -580,9 +604,6 @@ class EstudianteEmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
         empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
-        print('--------------------------------------')
-        print(busqueda)
-        print(empresas)
         data = serializers.serialize('json', empresas,
                                      fields=('id','nombre'))
         return HttpResponse(data, content_type='application/json')
