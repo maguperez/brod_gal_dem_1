@@ -1,3 +1,4 @@
+# coding=utf-8
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
 from oportunidad.models import Oportunidad, Postulacion
@@ -23,10 +24,12 @@ def actualizar_ranking_empresa(empresa_id):
 
 def obtener_ultimas_postulaciones(oportunidad_id):
     inicio = datetime.now() - timedelta(days=7)
-    print(inicio)
     postulados = []
+    dias = []
     for y in range(0 , 6):
         fecha = datetime.now() - timedelta(days=y)
+        # print(fecha.strftime('%a'))
         postulados.append((Postulacion.objects.filter(oportunidad_id = oportunidad_id, fecha_creacion = fecha).count()))
     return postulados
+
 

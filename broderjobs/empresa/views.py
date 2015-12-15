@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
@@ -13,7 +14,8 @@ from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
-from oportunidad.models import Oportunidad
+from oportunidad.models import Oportunidad, Postulacion
+from estudiante.models import Estudiante
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from empresa import utils
@@ -195,16 +197,29 @@ def oportunidad_busqueda(request):
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("fecha_publicacion")
-            # postulaciones = []
-            # for i in range(0, len(oportunidades)):
-            #     postulaciones.append(utils.obtener_ultimas_postulaciones(oportunidades[i].id))
         else:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
-        return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa}, context_instance = RequestContext(request))
+        return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
+                                  context_instance = RequestContext(request))
 
 class OportunidadPostulacionesView(TemplateView):
     def get(self, request, *args, **kwargs):
         id = request.GET['id']
-        data = utils.obtener_ultimas_postulaciones(id)
+        p = utils.obtener_ultimas_postulaciones(id)
+        c = Postulacion.objects.filter(oportunidad_id = id).count()
+        data = []
+        data.append((c, p))
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
+
+class OportunidadEstudiantes(TemplateView):
+    def get(self, request, *args, **kwargs):
+        id = request.GET['id']
+        estudiante = []
+        for p in Postulacion.objects.filter(oportunidad_id=id).order_by("fecha_creacion")[:6]:
+            estudiante.append((p.estudiante.set_foto))
+
+        # data = serializers.serialize('json', oportunidad,
+        #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
+        data = json.dumps(estudiante)
+        return HttpResponse(data, content_type='application/json')

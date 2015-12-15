@@ -47,11 +47,11 @@
 									<div class="clear"></div>
 								</div>
 								<div class="estadistica">
-									<div class="cifra">
-										<label>101</label>
+									<div class="cifra" >
+										<label id="cifra-{{oportunidad.id}}"></label>
 										<label>Inscripciones</label>
 									</div>
-									<div class="grafico usuarios">
+									<div class="grafico usuarios fotos-post" id="foto-post-{{oportunidad.id}}">
 										<img src="/static/img/profile/profile.png" />
 										<img src="/static/img/profile/profile.png" />
 										<img src="/static/img/profile/profile.png" />
@@ -104,21 +104,33 @@
 				url: '{%url "empresa-oportunidad-postulaciones" %}',
 				type: 'get',
 				success: function (data) {
-					console.log(id);
+					$("#cifra-"+id).html(data[0][0]);
 					new Chartist.Line("#chart-id-"+id, {
-						labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Sábado", "Domingo"],
+						labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Sabado", "Domingo"],
 						colors:["#333", "#222", "#111", "#000"],
-						series: [data]
+						series: [data[0][1]]
 					}, {
 						low: 0,
 						showArea: true
 					});
 				}
 			});
-
-				//var data = $(this).data("info");
-
-
+		});
+		$(".fotos-post").each(function(){
+			var ele = $(this).attr("id").split("-");
+			var id = ele[2];
+			$.ajax({
+				data: {'id': id},
+				url: '{%url "empresa-oportunidad-estudiantes" %}',
+				type: 'get',
+				success: function (data) {
+					var html = "";
+					for(var i = 0; i <data.length ; i++) {
+						html += '<img src="'+ data[i] + '"/>';
+					}
+					$("#foto-post-"+id).html(html);
+				}
+			});
 		});
 	})
 </script>
