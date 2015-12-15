@@ -144,12 +144,6 @@
 {% block js %}
 <script>
 	$("#link-procesos").addClass("active");
-    $('#menu').click(function() {
-		if ($('#ctx-menu-header').hasClass('active'))
-			$('#ctx-menu-header').removeClass('active');
-		else
-			$('#ctx-menu-header').addClass('active')
-	});
 	$('.popup').click(function(e) {
 		if ( $(e.target).closest('.popup-box').length === 0 ) {
 			window.history.back();

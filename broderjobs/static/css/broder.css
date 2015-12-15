@@ -185,7 +185,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .detalle {margin-left: 37px;}
 .box .content section .detalle  > div:not(:last-child) {margin-bottom: 30px;}
 .box .content section .detalle  > div.less-margin {margin-bottom: 20px;}
-.box .content section .detalle > div > label {font-size: 1em; font-weight: bold; color: #848484; float: left;}
+.box .content section .detalle > div > label {font-size: 14px; font-weight: bold; color: #848484; float: left;}
 .box .content section .detalle > div > p {float: left;}
 .box .content section .detalle.col-2-8 label {width: 20%;}
 .box .content section .detalle.col-2-8 p {width: 80%;}
@@ -394,7 +394,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .breadcrumb {margin-bottom: 30px;}
 .oportunidad-detalle header {position: relative;}
 .oportunidad-detalle header h3 {color: #848484; font-weight: bold;}
-.oportunidad-detalle .indicacion {margin-top: 5px; font-size: 0.85em; display: block;}
+.oportunidad-detalle .indicacion {margin-top: 5px; font-size: 12.24; display: block;}
 .oportunidad-detalle header .descripcion {float: left;}
 .oportunidad-detalle header > .btn-action { background-color: white; width: 85px; height: 30px; line-height: 30px; margin-left: 10px; float: right;}
 .oportunidad-detalle .oportunidad-resumen .postulacion .btn-action,
@@ -405,10 +405,10 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .box.alcance .content {padding: 20px;}
 .oportunidad-detalle .box.alcance section {padding: 0;}
 .oportunidad-detalle .box.alcance .grafico {padding-bottom: 20px;}
-.oportunidad-detalle .box.alcance .grafico > label {margin-top: 15px; font-size: 1em; text-align: center; display: block;}
-.oportunidad-detalle .box.alcance .grafico .cifra {font-size: 1.25em; font-weight: bold;}
+.oportunidad-detalle .box.alcance .grafico > label {margin-top: 15px; font-size: 14px; text-align: center; display: block;}
+.oportunidad-detalle .box.alcance .grafico .cifra {font-size: 18px; font-weight: bold;}
 .oportunidad-detalle .box.alcance .caracteristicas {padding-top: 20px;}
-.oportunidad-detalle .box.alcance .grafico h4 {font-size: 1em; font-weight: bold; color: #848484; text-align: center; display: block;}
+.oportunidad-detalle .box.alcance .grafico h4 {font-size: 14px; font-weight: bold; color: #848484; text-align: center; display: block;}
 .oportunidad-detalle .box.alcance .grafico-alcance {margin-top: 15px;}
 .oportunidad-detalle .box.alcance .grafico-alcance div {border-radius: 50%;}
 .oportunidad-detalle .box.alcance .grafico-alcance label {color: #fff; line-height: 52px;}
