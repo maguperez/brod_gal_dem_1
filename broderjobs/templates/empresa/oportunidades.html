@@ -97,18 +97,18 @@
 				barColor: '#5d9cf9'});
 		});
 		$(".ct-chart").each(function(){
-			op = $(this).attr("id").split("-");
-			id = op[2];
-			var d = [];
-			$.ajax({
-				data: {'id': id},
-				url: '{%url "empresa-oportunidad-postulaciones" %}',
-				type: 'get',
-				success: function (data) {
-					console.log(data);
-				}
-			});
-
+//			op = $(this).attr("id").split("-");
+//			id = op[2];
+//			var d = [];
+//			$.ajax({
+//				data: {'id': id},
+//				url: '{%url "empresa-oportunidad-postulaciones" %}',
+//				type: 'get',
+//				success: function (data) {
+//					console.log($(this).data("info"));
+//				}
+//			});
+//
 				var data = $(this).data("info");
 
 				new Chartist.Line("#"+$(this).attr("id"), {
