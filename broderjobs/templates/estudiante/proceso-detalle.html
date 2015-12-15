@@ -1,4 +1,5 @@
 {% extends 'estudiante/base.html' %}
+{% load staticfiles %}
 {%block css%}
 
 {%endblock%}
@@ -37,8 +38,30 @@
 								<a id="menu-mensajes">Mensajes</a>
 							</div>
 							<div class="detail">
+
 								<div class="estado active" id="content-estado">
-									<div class="grafico">
+									<div id = "wizard">
+										<div class="wizard-progress wizard-progress-lg">
+											<div class="steps-progress">
+												<div class="progress-indicator" style="width: 0%;"></div>
+											</div>
+											<ul class="wizard-steps">
+												<li class="active">
+													<a href="#tab1" data-toggle="tab"><span class = "fa fa-check"></span>Postulacion</a>
+												</li>
+												<li>
+													<a href="#tab2" data-toggle="tab"><span class = "fa fa-check"></span>Evaluacion</a>
+												</li>
+												<li>
+													<a href="#tab3" data-toggle="tab"><span class = "fa fa-check"></span>Finalizado</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+
+									<!--<div class="grafico">
 										<div class="step postulacion active">
 											<i class="done active"></i>
 											<label class="titulo">Postulaci&oacute;n</label>
@@ -67,7 +90,7 @@
 											<label class="titulo">En evaluaci&oacute;n</label>
 											<label class="fecha"></label>
 										</div>
-										<div class="dots {%if postulacion.estado_postulacion == 'F' %} active {%endif%}"">
+										<div class="dots {%if postulacion.estado_postulacion == 'F' %} active {%endif%}">
 											<i class="dot"></i>
 											<i class="dot"></i>
 											<i class="dot"></i>
@@ -89,9 +112,8 @@
 											<i class="done {%if postulacion.estado_postulacion == 'F' %} active {%endif%}"></i>
 											<label class="titulo">Finalizado</label>
 											<label class="fecha"></label>
-										</div>
+										</div>-->
 										<div class="clear"></div>
-									</div>
 									<p>Tu postulaci&oacute;n ha sido registrada satisfactoriamente y te encuentras en la etapa de {{postulacion.estado_postulacion}}, te notificaremos cuando el proceso haya finalizado.</p>
 								</div>
 								<div class="mensajes" id="content-mensajes">
@@ -117,7 +139,6 @@
 										</tbody>
 									</table>
 								</div>
-							</div>
 							<div class="clear"></div>
 						</section>
 					</div>
@@ -142,6 +163,7 @@
 
 {% endblock content%}
 {% block js %}
+<script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
 <script>
 	$("#link-procesos").addClass("active");
 	$('.popup').click(function(e) {
@@ -174,5 +196,30 @@
         if ($(id).hasClass('popup'))
 			$('body').addClass('static');
     });
+	$('.wizard-progress').bootstrapWizard({
+		tabClass: 'wizard-steps',
+		firstSelector: null,
+		lastSelector: null,
+		onTabClick: function( tab, navigation, index, newindex ) {
+			if ( newindex > index + 1 ) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		onTabChange: function( tab, navigation, index, newindex ) {
+			var $total = navigation.find('li').size() - 1;
+			//$wizardfinish[ newindex != $total ? 'addClass' : 'removeClass' ]( 'hidden' );
+			$('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
+		},
+		onTabShow: function( tab, navigation, index ) {
+			var $total = navigation.find('li').length - 1;
+			var $current = index;
+			var $percent = Math.floor(( $current / $total ) * 100);
+			$('#wizard').find('.progress-indicator').css({ 'width': $percent + '%' });
+			tab.prevAll().addClass('completed');
+			tab.nextAll().removeClass('completed');
+		}
+	});
 </script>
 {% endblock%}
