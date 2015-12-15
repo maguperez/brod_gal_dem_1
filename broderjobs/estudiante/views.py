@@ -141,7 +141,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         id = self.kwargs['id']
         if id != None:
             #return reverse_lazy('estudiante-empresa-lista')
-            return "/estudiante/empresa-detalle/"+id+"/#resultado-evaluacion"
+            return "/broderjobs/estudiante/empresa-detalle/"+id+"/#resultado-evaluacion"
         else:
             return reverse_lazy('estudiante-empresa-lista')
 

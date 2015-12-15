@@ -205,6 +205,6 @@ def oportunidad_busqueda(request):
 class OportunidadPostulacionesView(TemplateView):
     def get(self, request, *args, **kwargs):
         id = request.GET['id']
-        data = utils.obtener_ultimas_postulaciones(oportunidades[i].id)
+        data = utils.obtener_ultimas_postulaciones(id)
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
