@@ -140,7 +140,11 @@
 										<div class="experiencia" id="{{experiencia.id}}">
 											<p class="fecha">{{experiencia.fecha_desde}} - {{experiencia.fecha_hasta}}</p>
 											<label class="tipo">{{experiencia.puesto}}</label>
+											{%if experiencia.empresa != None %}
 											<label class="nombre">{{experiencia.empresa}}</label>
+											{%else%}
+											<label class="nombre">{{experiencia.empresa_referencial}}</label>
+											{%endif%}
 											<pr>{{experiencia.descripcion}}</pr>
 											<button id="experiencia-{{experiencia.pk}}-editar" class="experiencia-botton link editar" >Editar</button>
 

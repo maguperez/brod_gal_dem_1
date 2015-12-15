@@ -493,6 +493,8 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         experiencia = ExperienciaProfesional()
+        puesto_descripcion = form.cleaned_data['puestos']
+        empresa_descripcion = form.cleaned_data['empresas']
         puesto_id = form.cleaned_data['puestos_hidden']
         empresa_id = form.cleaned_data['empresas_hidden']
 
@@ -501,9 +503,13 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
         puesto = Puesto.objects.get(id=puesto_id)
-        empresa = Empresa.objects.get(id=empresa_id)
+        print(empresa_id)
+        if empresa_id != "0":
+            empresa = Empresa.objects.get(id=empresa_id)
+            experiencia.empresa = empresa
+        else:
+            experiencia.empresa_referencial = empresa_descripcion
         experiencia.puesto = puesto
-        experiencia.empresa = empresa
         if fecha_desde is not None:
             experiencia.fecha_desde = fecha_desde
         if fecha_hasta is not None:
