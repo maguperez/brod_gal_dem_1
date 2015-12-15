@@ -431,18 +431,28 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
     template_name = 'estudiante/mi-cv-experiencia.html'
     success_url = reverse_lazy('mi-cv')
 
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
     def form_valid(self, form):
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         experiencia = ExperienciaProfesional()
-        puesto = form.cleaned_data['puesto']
-        empresa = form.cleaned_data['empresa']
+        puesto_id = form.cleaned_data['puestos_hidden']
+        empresa_id = form.cleaned_data['empresas_hidden']
+
         fecha_desde = form.cleaned_data['fecha_desde']
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
+        puesto = Puesto.objects.get(id=puesto_id)
+        empresa = Empresa.objects.get(id=empresa_id)
         experiencia.puesto = puesto
         experiencia.empresa = empresa
         if fecha_desde is not None:
@@ -545,9 +555,6 @@ class EstudianteEmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
         empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
-        print('--------------------------------------')
-        print(busqueda)
-        print(empresas)
         data = serializers.serialize('json', empresas,
                                      fields=('id','nombre'))
         return HttpResponse(data, content_type='application/json')
