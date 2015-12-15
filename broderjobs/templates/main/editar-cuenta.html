@@ -9,35 +9,41 @@
 			    <div class="content">
                     <section class="pos-relative">
                        <form action="" method="post">{%csrf_token%}
-                            <!--<h3 class="title"><i class="info"></i>Mi cuenta</h3>
+                            <h3 class="title"><i class="info"></i>Mi cuenta</h3>
                             <a class="btn-action" href="configuracion.html">GUARDAR</a>
-                            <input type="submit" name="form" value="Finalizar Registro"  class="finalizar-registro"/>
+                            <input type="submit" value="GUARDAR" class="btn-action">
                             <div class="detalle col-3-7">
-                                <div>
-                                    <label>Nombre y Apellidos</label>
-                                    <p><input class="half" type="text" placeholder="Escriba su nombre completo" />
+                                <!--<div>-->
+                                    <!--<label>Nombre y Apellidos</label>-->
+                                    <!--<p><input class="half" type="text" placeholder="Escriba su nombre completo" />-->
 
-                                    </p>
-                                    <div class="clear"></div>
-                                </div>
+                                    <!--</p>-->
+                                    <!--<div class="clear"></div>-->
+                                <!--</div>-->
                                 <div>
                                     <label>Contrase&ntilde;a actual</label>
-                                    <p><input class="half" type="text" placeholder="Escriba su contrase&ntilde;a actual" />
-
+                                    <p><!--<input class="half" type="text" placeholder="Escriba su contrase&ntilde;a actual" />-->
+                                        {{form.old_password}}
                                     </p>
                                     <div class="clear"></div>
                                 </div>
                                 <div>
                                     <label>Contrase&ntilde;a nueva</label>
-                                    <p><input class="half" type="text" placeholder="Escriba su nueva contrase&ntilde;a" /></p>
+                                    <p>{{form.new_password1}}
+                                        <!--<input class="half" type="text" placeholder="Escriba su nueva contrase&ntilde;a" />-->
+                                    </p>
                                     <div class="clear"></div>
                                 </div>
                                 <div>
                                     <label>Confirmar contrase&ntilde;a</label>
-                                    <p><input class="half" type="text" placeholder="Escriba otra vez su nueva contrase&ntilde;a" /></p>
+                                    <p>
+                                        {{form.new_password2}}
+                                        <!--<input class="half" type="text" placeholder="Escriba otra vez su nueva contrase&ntilde;a" />-->
+                                    </p>
                                     <div class="clear"></div>
                                 </div>
-                            </div>-->{{form.as_p}}<input type="submit" value="Update &rarr;">
+                            </div>
+                           <!--{{form.as_p}}<input type="submit" value="Update &rarr;">-->
                         </form>
 
                     </section>

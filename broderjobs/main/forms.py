@@ -1,6 +1,6 @@
 # coding=utf-8
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
 from empresa.models import Empresa
@@ -25,7 +25,6 @@ class UniqueUserEmailField(forms.EmailField):
             raise forms.ValidationError("Email ya esta registrado")
         except User.DoesNotExist:
             pass
-
 
 class RegisterForm(UserCreationForm):
 
@@ -118,9 +117,8 @@ class RegisterForm(UserCreationForm):
                 user.save()
         return user
 
-class EditarUsuarioForm( UserChangeForm ):
-    def __init__( self, *args, **kwargs ):
-        super( EditarUsuarioForm, self ).__init__( *args, **kwargs )
-        # if self.instance and self.instance.pk:
-        #     # Since the pk is set this is not a new instance
-        #     self.fields['username'] = self.instance.username
+class EditarUsuarioForm( PasswordChangeForm ):
+
+    new_password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba su nueva Contraseña', 'type':'password', 'class':'half'}))
+    new_password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba otra vez su nueva contraseña', 'type':'password', 'class':'half'}))
+    old_password = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba su contraseña actual', 'type':'password', 'class':'half'}))

@@ -27,6 +27,10 @@ urlpatterns =[
 
 	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="configuracion"),
 
-	url(r'^editar-cuenta/$', 'main.views.editar_usuario', name="editar-cuenta"),
+	url(r'^editar-cuenta/$', 'main.views.editar_cuenta', name="editar-cuenta"),
+
+	# url(r'^editar-cuenta-representante/$', 'main.views.editar_cuenta_representante', name="editar-cuenta-representante"),
+
+	# url(r'^editar-cuenta/$', views.EditarUsuarioEstudianteView.as_view(), name="editar-cuenta"),
 
 ]

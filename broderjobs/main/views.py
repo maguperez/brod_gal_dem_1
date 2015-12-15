@@ -6,10 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from  django.utils.dateparse import parse_date
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from .models import Persona
 from . import forms
 from empresa.models import Representante, Empresa
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.core.context_processors import csrf
 
 
@@ -71,7 +72,6 @@ def homepage1(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
-
 def homepage(request):
     message = None
     if request.method == "POST":
@@ -234,16 +234,32 @@ class ConfiguracionView(TemplateView):
         return context
 
 
-def editar_usuario(request):
+# def editar_usuario(request):
+#
+#     if request.method == 'POST':
+#         form = forms.EditarUsuarioForm(request.POST, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#     else:
+#         form = forms.EditarUsuarioForm(instance=request.user)
+#     return render_to_response('main/editar-cuenta.html',{'form': form},
+#                               context_instance=RequestContext(request))
 
-    if request.method == 'POST':
-        form = forms.EditarUsuarioForm(request.POST, instance=request.user)
+def editar_cuenta(request, template_name='main/editar-cuenta.html',
+                    post_change_redirect=None):
+    if post_change_redirect is None:
+        post_change_redirect = reverse_lazy('homepage')
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(post_change_redirect)
     else:
-        form = forms.EditarUsuarioForm(instance=request.user)
-    return render_to_response('main/editar-cuenta.html',{'form': form},
-                              context_instance=RequestContext(request))
+        form = forms.EditarUsuarioForm(request.user)
+
+    return render_to_response(template_name, {
+        'form': form,
+    }, context_instance=RequestContext(request))
 
 
 
