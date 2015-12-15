@@ -15,8 +15,6 @@
 </section>
 {% endblock%}
 {% block js %}
-{% load staticfiles %}
-<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 <script type="text/javascript">
 $( document ).ready( function() {
     $( '#filtro' ).change( function() {
@@ -30,8 +28,6 @@ $( document ).ready( function() {
 function fnBuscar(){
 	 b = "A";
 	 $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
-
-
 }
 </script>
 {%endblock%}

@@ -16,6 +16,7 @@ from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto,
 from oportunidad.models import Oportunidad
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
+from empresa import utils
 
 import json
 
@@ -34,7 +35,7 @@ class MiEmpresaView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -194,7 +195,16 @@ def oportunidad_busqueda(request):
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("fecha_publicacion")
+            # postulaciones = []
+            # for i in range(0, len(oportunidades)):
+            #     postulaciones.append(utils.obtener_ultimas_postulaciones(oportunidades[i].id))
         else:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
-        return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
-                                  context_instance = RequestContext(request))
+        return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa}, context_instance = RequestContext(request))
+
+class OportunidadPostulacionesView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        id = request.GET['id']
+        data = utils.obtener_ultimas_postulaciones(id)
+        data_json = json.dumps(data)
+        return HttpResponse(data_json, content_type='application/json')

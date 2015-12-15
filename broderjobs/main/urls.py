@@ -7,13 +7,13 @@ urlpatterns =[
 
 	url(r'^$' , 'main.views.homepage', name='homepage'),
 
-	# url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
+	url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
 
-	url(r'^estudiante/$' , 'main.views.estudiante', name='estudiante'),
+	# url(r'^estudiante/$' , 'main.views.estudiante', name='estudiante'),
 
-	# url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),
+	url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),
 
-	url(r'^empresa/$' , 'main.views.empresa', name='empresa'),
+	# url(r'^empresa/$' , 'main.views.empresa', name='empresa'),
     #
 	url(r'^estudiante-login/$' , 'main.views.login_estudiante', name='estudiante-login'),
 

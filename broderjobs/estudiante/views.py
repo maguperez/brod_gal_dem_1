@@ -17,11 +17,12 @@ from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from datetime import date
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
-from empresa.models import Puesto, Empresa, Sector
+from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
 from oportunidad.models import Oportunidad, Postulacion
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utilitarios
 from main.utilitarios import LoginRequiredMixin
+from empresa import utils
 
 @login_required(login_url='/estudiante-registro/')
 def registro_cv(request):
@@ -94,15 +95,28 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
 
     form_class = forms.EvaluacionForm
     template_name = 'estudiante/empresa-detalle.html'
-    success_url = reverse_lazy('estudiante-empresa-')
+    #success_url = reverse_lazy('estudiante-empresa-detalle')
 
     def get_context_data(self, **kwargs):
         id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
+        ranking = RankingEmpresa()
+        try:
+            print("salarios")
+            ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
+            print(ranking.salarios)
+
+        except Estudiante.DoesNotExist:
+            ranking.ranking_general = 0
+            ranking.linea_carrera = 0
+            ranking.flexibilidad_horarios = 0
+            ranking.ambiente_trabajo = 0
+            ranking.salarios = 0
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
+        context['ranking'] = ranking
         return context
 
     def form_valid(self, form):
@@ -111,13 +125,25 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         ambiente =  form.cleaned_data['ambiente_trabajo']
         salario =  form.cleaned_data['salarios']
         ranking = (linea + flexibilidad + ambiente + salario)/4
-        print(ranking)
         id = self.kwargs['id']
 
-        print(id)
-
+        e, created = EvaluacionEmpresa.objects.get_or_create(empresa_id = id, usuario_id = self.request.user.id )
+        e.linea_carrera = linea
+        e.flexibilidad_horarios = flexibilidad
+        e.ambiente_trabajo = ambiente
+        e.salarios = salario
+        e.ranking = ranking
+        e.save()
+        utils.actualizar_ranking_empresa(id)
         return super(EmpresaDetalleView, self).form_valid(form)
 
+    def get_success_url(self, **kwargs):
+        id = self.kwargs['id']
+        if id != None:
+            #return reverse_lazy('estudiante-empresa-lista')
+            return "/broderjobs/estudiante/empresa-detalle/"+id+"/#resultado-evaluacion"
+        else:
+            return reverse_lazy('estudiante-empresa-lista')
 
 class EmpresaListaView(LoginRequiredMixin, TemplateView):
 
@@ -129,6 +155,15 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
         empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
         a_empresas =[]
         for i in range(0, len(empresas)):
+            ranking = RankingEmpresa()
+            try:
+                ranking = RankingEmpresa.objects.get(empresa=empresas[i].id)
+            except RankingEmpresa.DoesNotExist:
+                ranking = None
+            if ranking is not None:
+                ranking_general = str(ranking.ranking_general)
+            else:
+                ranking_general = "0.0"
             sector = empresas[i].nombre
             if empresas[i].sector is not None:
                 sector = Sector.objects.get(id=empresas[i].sector.id).descripcion
@@ -137,7 +172,7 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
                 "nombre": empresas[i].nombre,
                 "logo": empresas[i].set_logo,
                 "sector": sector,
-                "ranking_general": empresas[i].ranking_general,
+                "ranking_general": ranking_general,
             }
             a_empresas.append(e)
         # data = serializers.serialize('json', a_empresas,

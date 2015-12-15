@@ -74,7 +74,7 @@ class OportunidadCrearView(FormView):
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
-class OportunidadEditarView(FormView):
+class OportunidadEditarView(UpdateView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/editar.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')

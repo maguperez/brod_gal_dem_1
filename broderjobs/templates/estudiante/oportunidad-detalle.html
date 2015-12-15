@@ -1,5 +1,6 @@
 {% extends 'estudiante/base.html' %}
 {% block content %}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="oportunidad-detalle">
 	<div class="centered">
 		<div class="panel left principal">
@@ -90,11 +91,24 @@
 					<section class="ubicacion">
 						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
 						<div class="detalle">
-							<p>Calle Varham 203, Camacho, La Molina</p>
-							<div class="clear"></div>
-							<div class="mapa">
-								<img src="../img/google-map.jpg" />
-							</div>
+							<div class ="form-group">
+										<label class = "col-sm-3">Direcci&oacute;n</label>
+										<div class = "col-sm-9">
+											{{form.direccion_map}}
+										</div>
+										<br>
+									</div>
+									<div class ="form-group">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-3">
+											{{form.latitud}}
+										</div>
+										<div class = "col-sm-3">
+											{{form.longitud}}
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div id = "map"></div>
 						</div>
 					</section>
 				</div>
@@ -198,6 +212,51 @@
 		$('body').removeClass('static');
 		fnPostular();
 	}
+	$(function(){
+		Detalle.inicializar_mapa();
+	})
+	var Detalle = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(44.5403, -78.5463),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Detalle.map = new google.maps.Map(mapCanvas, mapOptions);
+            google.maps.event.addListener(Detalle.map, 'click', function(event) {
+                Detalle.marcar_mapa(event.latLng);
+            });
+            if ($("#id_latitud").val() != ""){
+                var latitud = $("#id_latitud").val();
+                var longitud = $("#id_longitud").val();
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Detalle.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function(coordenadas){
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Detalle.map
+            });
+            Detalle.marca = marker;
+
+            Detalle.map.setCenter(coordenadas);
+            $("#id_latitud").val(coordenadas.lat());
+            $("#id_longitud").val(coordenadas.lng());
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").val(response[0]["formatted_address"]);
+            });
+        },
+
+    };
 
 </script>
 
