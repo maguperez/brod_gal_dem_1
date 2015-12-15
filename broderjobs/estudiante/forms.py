@@ -72,8 +72,8 @@ class UniqueUserEmailField(forms.EmailField):
 class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
-        fields = ('grado_estudio', 'universidad', 'carrera', 'semestre_inicio_estudio', 'ano_inicio_estudio',
-                  'semestre_graduacion', 'ano_graduacion', 'ciudad', 'pais')
+        fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio',
+                  'semestre_graduacion', 'ano_graduacion')
     @property
     def helper(self):
         helper = FormHelper()
@@ -85,6 +85,18 @@ class InfoPersonalForm(EstudianteForm):
     email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     fecha_nacimiento = forms.DateField(required=False, input_formats=['%Y-%m-%d'])
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
+
+    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
+    universidades_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
+    carreras_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
+    paises_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
 
     @property
     def helper(self):
