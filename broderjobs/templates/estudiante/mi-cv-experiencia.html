@@ -26,7 +26,7 @@
 		</div>
 		<div class = "form-group">
 			<label class = "control-label">Describe tus actividades</label>
-			<textarea id = "txt-descripcion" name="descripcion"></textarea>
+			<textarea id = "txt-descripcion" name="descripcion_txt"></textarea>
 				{{form.descripcion}}
 		</div>
 	</form>
@@ -95,11 +95,10 @@
 				if (current.name == $("#"+idElemento).val()) {
 					$("#"+idHidden).val(current.id);
 				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
+					$("#"+idHidden).val('');
 				}
 			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
+				$("#"+idHidden).val('');
 			}
 		});
 	}

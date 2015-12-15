@@ -417,6 +417,20 @@
 		});
 	 });
 	 $("#form-modal .btn-submit").on("click", function(){
+
+		 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+		 if(formularioPrueba.id == 'cv-experiencia' || formularioPrueba.id == 'cv-voluntariado'){
+			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
+			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
+
+			 var fechaDesdeCompleta = moment(fechaDesde).format('YYYY-MM-DD');
+			 var fechaHastaCompleta = moment(fechaHasta).format('YYYY-MM-DD');
+
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
+		 }
+
+		 console.log($(this).parents("#form-modal").find("form")[0]);
 		 $(this).parents("#form-modal").find("form").submit();
 	 });
 

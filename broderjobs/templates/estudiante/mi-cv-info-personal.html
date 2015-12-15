@@ -12,13 +12,15 @@
 			<div class ="form-group">
 				<label class = "col-sm-3">Universidad</label>
 				<div class = "col-sm-9">
-					{{form.universidad}}
+					{{form.universidades}}
+					{{form.universidades_hidden}}
 				</div>
 			</div>
 			<div class ="form-group">
 				<label class = "col-sm-3">Carrera</label>
 				<div class = "col-sm-9">
-					{{form.carrera}}
+					{{form.carreras}}
+					{{form.carreras_hidden}}
 				</div>
 			</div>
 			<div class ="form-group">
@@ -52,10 +54,12 @@
 			<div class ="form-group">
 				<label class = "col-sm-3">Ubicacion actual</label>
 				<div class = "col-sm-4">
-					{{form.pais}}
+					{{form.paises}}
+					{{form.paises_hidden}}
 				</div>
 				<div class = "col-sm-4">
-					{{form.ciudad}}
+					{{form.ciudades}}
+					{{form.ciudades_hidden}}
 				</div>
 			</div>
 			<div class ="form-group">
@@ -75,5 +79,109 @@
 			language: 'es',
 			format: "dd-mm-yyyy",
 		})
+
+		InicializarTypeaheadElementos();
 	});
+
+	function InicializarTypeahead(idElemento, idHidden, ruta){
+		$("#"+idElemento).typeahead({
+			source: function(buscar,cargarResultado){
+				console.log(buscar);
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: ruta,
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			},
+			minLength: 3
+		});
+
+		$("#"+idElemento).change(function() {
+			var current = $("#"+idElemento).typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#"+idElemento).val()) {
+					$("#"+idHidden).val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+	}
+
+	function InicializarTypeaheadElementos(){
+
+		InicializarTypeahead('id_paises', 'id_paises_hidden', '{%url "pais-busqueda" %}');
+		InicializarTypeahead('id_universidades', 'id_universidades_hidden', '{%url "universidad-busqueda" %}');
+		InicializarTypeahead('id_carreras', 'id_carreras_hidden', '{%url "carrera-busqueda" %}');
+
+		$("#id_ciudades").typeahead({
+			source: function(buscar,cargarResultado){
+				var valor = document.getElementById('id_paises_hidden').value;
+				$.ajax({
+					data : {'busqueda': buscar,'pais': valor},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_ciudades").change(function() {
+			var current = $("#id_ciudades").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_ciudades").val()) {
+					$('#id_ciudades_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+
+	}
+
+
+
 </script>
