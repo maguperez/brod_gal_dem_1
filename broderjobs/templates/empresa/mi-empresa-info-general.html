@@ -1,55 +1,71 @@
 <div style="margin:0 50px">
-	<form id = "empresa-info_general" class="" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
+	<form id = "empresa-info_general" class="form-horizontal" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
 		<div class = "form-group">
-			<label class = "control-label">Nombre comercial *</label>
+			<label class = "control-label bold col-sm-3">Nombre comercial *</label>
+			<div class = "col-sm-9">
 				{{ form.nombre }}
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Quienes somos *</label>
-			<textarea id = "txt-quienes_somos" name="quienes_somos_clone"></textarea>
-				{{ form.quienes_somos }}
-		</div>
-
-		<div class = "form-group">
-			<label class = "control-label">RUC *</label>
-				{{ form.RUC }}
-			<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Teléfono *</label>
-				{{ form.RUC }}
-			<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Sector</label>
-			{{ form.sector }}
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Número de funcionarios</label>
-			{{ form.numero_funcionarios }}
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Facturación anual</label>
-			{{ form.facturacion_anual }}
-		</div>
-		<div class = "form-group">
-			<label class = "control-label">Fundación</label>
-			{{ form.ano_fundacion }}
-		</div>
-		<div class = "form-group">
-			<label class = "control-label col-sm-12">Sede Global</label>
-			<div class = "row">
-				<div class = "col-sm-6">
-					{{ form.pais }}
-				</div>
-				<div class = "col-sm-6">
-					{{ form.ciudad }}
-				</div>
 			</div>
 		</div>
 		<div class = "form-group">
-			<label class = "control-label">Website</label>
-			{{ form.website }}
+			<label class = "control-label bold col-sm-3">Quienes somos *</label>
+			<div class = "col-sm-12">
+				<textarea id = "txt-quienes_somos" name="quienes_somos_clone"></textarea>
+					{{ form.quienes_somos }}
+			</div>
+		</div>
+
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">RUC *</label>
+			<div class = "col-sm-9">
+				{{ form.RUC }}
+				<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Teléfono *</label>
+			<div class = "col-sm-9">
+				{{ form.RUC }}
+				<label class="descripcion">Este campo es privado y no es visible para los candidatos.</label>
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Sector</label>
+			<div class = "col-sm-9">
+				{{ form.sector }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Número de funcionarios</label>
+			<div class = "col-sm-9">
+				{{ form.numero_funcionarios }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Facturación anual</label>
+			<div class = "col-sm-9">
+				{{ form.facturacion_anual }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Fundación</label>
+			<div class = "col-sm-9">
+				{{ form.ano_fundacion }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Sede Global</label>
+			<div class = "col-sm-4">
+				{{ form.pais }}
+			</div>
+			<div class = "col-sm-5">
+				{{ form.ciudad }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Website</label>
+			<div class = "col-sm-9">
+				{{ form.website }}
+			</div>
 		</div>
 
 		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
@@ -69,7 +85,6 @@
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
-					debugger;
 				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
 					$("#id_pais").tooltip('destroy');
 					$("#id_pais").tooltip({
