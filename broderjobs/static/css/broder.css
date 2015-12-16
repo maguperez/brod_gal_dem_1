@@ -262,27 +262,27 @@ a.delete:hover {background-position: 0 -9px;}
 a:hover { text-decoration: none !Important }
 .home .navbar ul a.btn-action {margin-right: 20px; border: 1px solid rgba(255,255,255,0.5);}
 .home .navbar ul a.btn-action:hover {border: 1px solid #f50;}
-.home .navbar ul a.link-header:hover, .home nav ul a.link-header.active {color: #f50;}
+.home .navbar ul a.link-header:hover, .home nav ul a.link-header.active {color: #f50; text-decoration: none}
 .home .mensaje-central {width: 100%; }
-.home .flex .flex-div { position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
+.home .flex .flex-div { opacity: 0; position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}
 .home .mensaje-central h1 {color: #fff; font-size: 4em; text-align: center;}
 .home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em; text-align: center;}
-.home .login { margin-top: -20px; padding: 24px; opacity: 0; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
+.home .login { margin-top: -20px; padding: 24px; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
 .home .login .content {position: relative; min-width: 270px}
-.home .login.active {opacity: 1; pointer-events: all; z-index: 1050}
+.home .flex-div.active {opacity: 1; pointer-events: all; z-index: 1050}
 .home .login .saludo {margin-bottom: 10px; text-align: center; color: #fff; font-family: 'Roboto Condensed'; display: block;}
 .home .login .ingresa-facebook {width: 268px; height: 37px; line-height: 37px; color: #fff; font-family: 'Roboto Condensed'; text-align: center; text-indent: -30px; font-size: 1.15em; background: transparent url('../img/buttons/ingresa_facebook.png') 0 0 no-repeat; display: block;}
-.home .login .ingresa-email {text-align: center; color: #fff; display: block;}
+.home .login .ingresa-email {text-align: center; color: #fff; display: block; font-weight: normal !important;}
 .home .login .datos {width: 180px; margin: 10px auto;}
 .home .login .datos.registro {margin-top: 20px;}
 .home .login .datos.registro .cumpleanos {width: 31.5%; height: 22px; padding-right: 0px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #aaa; font-size: 0.8em;}
 .home .login .datos input{width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #333; font-size: 0.8em;}
 .home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #ccc; font-size: 0.8em;}
 .home .login .opciones {margin-top: -5px; text-align: center;}
-.home .login .opciones a, .home .login .opciones label{font-size: 11px; color: #fff;}
+.home .login .opciones a, .home .login .opciones label{font-size: 10px; color: #fff; font-weight: normal !important;}
 .home .login .opciones input{margin: 0 5px -1px 0;}
 .home .login .ingresar, .home .login .registrarme {width: 100px; height: 25px; line-height: 25px; margin: 20px auto; text-align: center; color: #fff; font-family: 'Roboto Condensed'; font-size: 0.9em; background: #f50; padding-right:0 px; border: none; cursor: pointer; display: inherit;}
-.home .login .registrate {margin: -10px 0; display: block; text-align: center; color: #fff; font-size: 11px;}
+.home .login .registrate {margin: -10px 0; display: block; text-align: center; color: #fff; font-size: 10px;}
 .home .login .registrate-email {max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -moz-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -o-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;}
 .home .login .registrate-email:target {max-height: 500px; opacity: 1;}
 .home .login .registrate-email .terminos-condiciones {font-size: 1em;}
