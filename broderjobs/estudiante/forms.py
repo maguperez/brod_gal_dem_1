@@ -83,7 +83,8 @@ class EstudianteForm(forms.ModelForm):
 
 class InfoPersonalForm(EstudianteForm):
     email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    fecha_nacimiento = forms.DateField(required=False, input_formats=['%Y-%m-%d'])
+    fecha_nacimiento = forms.DateField(required=False, input_formats=['%d-%m-%Y'])
+
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
 
     universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))

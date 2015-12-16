@@ -1,9 +1,9 @@
 {% extends 'empresa/base.html' %}
 {% block content %}
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
 <form action="" method="post">{%csrf_token%}
 	{%for item in form%}
 	{{item.error}}
@@ -47,10 +47,12 @@
 									<div class ="form-group">
 										<label class = "col-sm-3 control-label">Localizaci&oacute;n</label>
 										<div class = "col-sm-4">
-											{{form.pais}}
+											{{form.paises}}
+											{{form.paises_hidden}}
 										</div>
 										<div class = "col-sm-4">
-											{{form.ciudad}}
+											{{form.ciudades}}
+											{{form.ciudades_hidden}}
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -288,7 +290,100 @@
 			format: "dd-mm-yyyy",
 		});
 		$("#slider-periodo").slider({});
+
+		InicializarTypeahead();
 	});
+
+	function InicializarTypeahead(){
+//		var a = [{id: "someId1", name: "Display name 1"},{id: "someId2", name: "Display name 2"}];
+		$("#id_paises").typeahead({
+			source: function(buscar,cargarResultado){
+				console.log(buscar);
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: '{%url "pais-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_paises").change(function() {
+			var current = $("#id_paises").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_paises").val()) {
+					$('#id_paises_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		})
+
+		$("#id_ciudades").typeahead({
+			source: function(buscar,cargarResultado){
+				var valor = document.getElementById('id_paises_hidden').value;
+				$.ajax({
+					data : {'busqueda': buscar,'pais': valor},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.descripcion;
+
+									arreglo.push(obje);
+								});
+
+								cargarResultado(arreglo);
+							}
+						}
+					}
+
+				});
+			}
+		});
+
+		$("#id_ciudades").change(function() {
+			var current = $("#id_ciudades").typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#id_ciudades").val()) {
+					$('#id_ciudades_hidden').val(current.id);
+				} else {
+					// This means it is only a partial match, you can either add a new item
+					// or take the active if you don't want new items
+				}
+			} else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		})
+	}
 
 </script>
 {% endblock%}
