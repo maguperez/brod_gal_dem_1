@@ -233,18 +233,6 @@ class ConfiguracionView(TemplateView):
         context['persona'] = persona
         return context
 
-
-# def editar_usuario(request):
-#
-#     if request.method == 'POST':
-#         form = forms.EditarUsuarioForm(request.POST, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#     else:
-#         form = forms.EditarUsuarioForm(instance=request.user)
-#     return render_to_response('main/editar-cuenta.html',{'form': form},
-#                               context_instance=RequestContext(request))
-
 def editar_cuenta(request, template_name='main/editar-cuenta.html',
                     post_change_redirect=None):
     if post_change_redirect is None:

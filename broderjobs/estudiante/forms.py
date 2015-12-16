@@ -83,7 +83,8 @@ class EstudianteForm(forms.ModelForm):
 
 class InfoPersonalForm(EstudianteForm):
     email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    fecha_nacimiento = forms.DateField(required=False, input_formats=['%Y-%m-%d'])
+    fecha_nacimiento = forms.DateField(required=False, input_formats=['%d/%m/%Y'])
+
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
 
     universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
@@ -98,12 +99,7 @@ class InfoPersonalForm(EstudianteForm):
     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
     ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
+
 
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
