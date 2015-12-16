@@ -494,8 +494,13 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
         puestos = experiencia.puesto
         puestos_hidden = experiencia.puesto.id
-        empresas = experiencia.empresa
-        empresas_hidden = experiencia.empresa.id
+
+        if experiencia.empresa is None:
+            empresas = experiencia.empresa_referencial
+            empresas_hidden = None
+        else:
+            empresas = experiencia.empresa
+            empresas_hidden = experiencia.empresa.id
         descripcion = experiencia.descripcion
         fecha_desde = experiencia.fecha_desde
         fecha_hasta = experiencia.fecha_hasta
