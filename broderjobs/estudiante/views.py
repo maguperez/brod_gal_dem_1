@@ -538,8 +538,6 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         experiencia.save()
         return super(ExperienciaView, self).form_valid(form)
 
-
-
 class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm
     template_name = 'estudiante/mi-cv-experiencia.html'
