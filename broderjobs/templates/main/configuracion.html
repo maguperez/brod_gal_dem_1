@@ -1,4 +1,4 @@
-{% extends 'estudiante/base.html' %}
+{% extends  tipo|yesno:"empresa/base.html,estudiante/base.html" %}
 {%block css%}
 {%endblock%}
 {% block content %}

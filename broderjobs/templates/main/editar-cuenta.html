@@ -1,7 +1,9 @@
-{% extends 'estudiante/base.html' %}
+{% extends  tipo|yesno:"empresa/base.html,estudiante/base.html" %}
 {%block css%}
 {%endblock%}
 {% block content %}
+
+
 <section class="usuarios">
     <div class="centered">
         <div class="panel left principal">
@@ -12,6 +14,9 @@
                             <h3 class="title"><i class="info"></i>Mi cuenta</h3>
                             <a class="btn-action" href="configuracion.html">GUARDAR</a>
                             <input type="submit" value="GUARDAR" class="btn-action">
+                           {%if message%}
+                                <p>{{message}}</p>
+                           {%endif%}
                             <div class="detalle col-3-7">
                                 <!--<div>-->
                                     <!--<label>Nombre y Apellidos</label>-->

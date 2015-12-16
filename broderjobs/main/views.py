@@ -225,16 +225,25 @@ class ConfiguracionView(TemplateView):
     template_name = 'main/configuracion.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
-        usuario = User.objects.get(pk=user.id)
-        persona = Persona.objects.get(usuario_id=usuario.id)
-
+        persona = Persona.objects.get(usuario_id=user)
+        if persona.tipo_persona == 'R':
+            tipo = True
+        else:
+            tipo = False
         context = super(ConfiguracionView, self).get_context_data(**kwargs)
         context['usuario'] = user
         context['persona'] = persona
+        context['tipo'] = tipo
         return context
 
 def editar_cuenta(request, template_name='main/editar-cuenta.html',
                     post_change_redirect=None):
+    message = None
+    persona = Persona.objects.get(usuario = request.user)
+    if persona.tipo_persona == 'R':
+        tipo = True
+    else:
+        tipo = False
     if post_change_redirect is None:
         post_change_redirect = reverse_lazy('homepage')
     if request.method == "POST":
@@ -242,11 +251,14 @@ def editar_cuenta(request, template_name='main/editar-cuenta.html',
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(post_change_redirect)
+        else:
+            message = 'Constraseña invalida'
+            form = forms.EditarUsuarioForm(request.user)
     else:
         form = forms.EditarUsuarioForm(request.user)
 
     return render_to_response(template_name, {
-        'form': form,
+        'form': form ,'message': message, 'tipo': tipo ,
     }, context_instance=RequestContext(request))
 
 
