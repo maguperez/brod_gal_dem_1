@@ -138,7 +138,7 @@
 								<div class="detalle timeline">
 									{% for experiencia in experiencias_profesionales %}
 										<div class="experiencia" id="{{experiencia.id}}">
-											<p class="fecha">{{experiencia.fecha_desde|date:"M y"}} - {{experiencia.fecha_hasta|date:"M y"}}</p>
+											<p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
 											<label class="tipo">{{experiencia.puesto}}</label>
 											{%if experiencia.empresa != None %}
 											<label class="nombre">{{experiencia.empresa}}</label>
@@ -160,7 +160,7 @@
 									{% for voluntariado in voluntariados %}
 									{{voluntariado}}
 										<div>
-											<p class="fecha">{{voluntariado.fecha_desde|date:"M y"}} - {{voluntariado.fecha_hasta|date:"M y"}}</p>
+											<p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {{voluntariado.fecha_hasta|date:"M Y"}}</p>
 											<label class="tipo">{{voluntariado.cargo}}</label>
 											<label class="nombre">{{voluntariado.organizacion}}</label>
 											<p>{{voluntariado.descripcion}}</p>
