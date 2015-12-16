@@ -4,7 +4,7 @@
 						<div class="box header">
 							<img class="imagen" src="{{empresa.set_logo}}" />
 							<div class="descripcion">
-								<a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+								<a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
 							</div>
 							<div class="opciones" onclick="opciones({{oportunidad.id}})">

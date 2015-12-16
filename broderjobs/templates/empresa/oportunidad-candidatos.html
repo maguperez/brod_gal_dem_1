@@ -1,0 +1,339 @@
+{% extends 'empresa/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section class="oportunidad-empresa">
+	<div class="centered">
+		<div>
+					<ol class="breadcrumb">
+						<li>Programador de redes internas</li>
+					</ol>
+					<ol class="proceso">
+						<li class="active">Postulaci&oacute;n</li>
+						<li>Entrevista Grupal</li>
+						<li>Entrevista Personal</li>
+						<li>Contrataci&oacute;n</li>
+					</ol>
+					<div class="clear"></div>
+				</div>
+		<div class="box header">
+			<img class="imagen" src="{{empresa.set_logo}}" />
+			<div class="descripcion">
+				<a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+				<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+				<div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a></div>
+			</div>
+			<div class="opciones" onclick="opciones();">
+				<i class="menu"></i>
+				<div class="contextual-menu" id="menu-oportunidad">
+					<div class="wrapper">
+						<div class="pin"></div>
+							<ul>
+								<li><a href="{%url 'oportunidad-editar' oportunidad.id%}"><span>Editar</span><div class="clear"></div></a></li>
+								<li><a href="{%url 'oportunidad' oportunidad.id%}"><span>Visualizar</span><div class="clear"></div></a></li>
+								<li><a href="#"><span>Archivar</span><div class="clear"></div></a></li>
+							<ul>
+						</div>
+				</div>
+			</div>
+			<div class="estado">
+				{%if oportunidad.estado_oportunidad == 'P' %}
+					<label>oportunidad pendiente</label>
+				{%endif%}
+				{%if oportunidad.estado_oportunidad == 'A' %}
+					<label>oportunidad abierta</label>
+				{%endif%}
+				{%if oportunidad.estado_oportunidad == 'C' %}
+					<label>oportunidad cerrada</label>
+				{%endif%}
+				<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="box candidatos">
+			<div class="content">
+				<section>
+					<h2>Administrar Candidatos</h2>
+					<div class="estadistica">
+						<label class="cifra">{{postulaciones}}</label>
+						<label class="nombre">Inscripciones</label>
+					</div>
+					<div class="estadistica">
+						<label class="cifra">792</label>
+						<label class="nombre">Visualizaciones</label>
+					</div>
+					<div class="clear"></div>
+				</section>
+				<section>
+					<div class="opciones">
+						<input type="checkbox" id="marcar-todos" /><label for="marcar-todos">Marcar todos</label>
+						<a class="btn-option"><i class="delete"></i>Eliminar</a>
+						<a class="btn-option"><i class="next"></i>Siguiente fase</a>
+						<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
+					</div>
+					<!--<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th class="align-left">Candidatos (21)<a><i class="sort"></i></a></th>
+										<th>Universidad<a><i class="sort"></i></a></th>
+										<th>Carrera<a><i class="sort"></i></a></th>
+										<th>Graduaci&oacute;n<a><i class="sort"></i></a></th>
+										<th>Inscripci&oacute;n<a><i class="sort"></i></a></th>
+										<th>Compatibilidad<a><i class="sort"></i></a></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr class="active">
+										<td>
+											<input type="checkbox" />
+											<div class="opciones">
+												<a class="btn-option"><i class="delete"></i>Eliminar</a>
+												<a class="btn-option"><i class="next"></i>Siguiente fase</a>
+												<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
+												<a class="btn-option" href="#ver-cv"><i class="curriculum"></i>Ver CV</a>
+											</div>
+										</td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
+										<td>PUCP</td>
+										<td>Ingenier&iacute;a Industrial</td>
+										<td>2do Semestre 2016</td>
+										<td>03/04/15</td>
+										<td>60%</td>
+										<td><i class="menu"></i></td>
+									</tr>
+								</tbody>
+							</table>-->
+				</section>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="popup candidato" id="ver-cv">
+			<div class="popup-box box">
+				<header>
+					<img class="imagen" src="../img/profile/profile.png" />
+					<div class="detalle">
+						<h3>DIEGO ALONSO CHAVEZ NU&Ntilde;EZ</h3>
+						<label>UPC - M&Uacute;SICA (2011 - 2016)</label>
+						<label>26 a&ntilde;os - Lima, Per&uacute;</label>
+						<label>+51 987 346 718 / diegocha7@gmail.com</label>
+					</div>
+					<div class="clear"></div>
+					<a class="descargar btn-action">DESCARGAR PDF</a>
+				</header>
+				<div class="content">
+					<section>
+						<h3 class="title"><i class="profile"></i>Resumen</h3>
+						<div class="detalle">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas interdum imperdiet nunc, sit amet dapibus ipsum semper eget. Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida.</p>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="time"></i>Disponibilidad</h3>
+						<div class="detalle col-3-7">
+							<div>
+								<label>Acepto propuestas de</label>
+								<p><span class="tag">Practicante</span><span class="tag">Empleado</span></p>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<label>Carga horaria</label>
+								<p>Full time</p>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="language"></i>Idiomas</h3>
+						<div class="detalle">
+							<p>
+								<span class="tag">Ingl&eacute;s avanzado</span>
+								<span class="tag">Franc&eacute;s b&aacute;sico</span>
+							</p>
+							<div class="clear"></div>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="knowledge"></i>Conocimientos</h3>
+						<div class="detalle">
+							<p>
+								<span class="tag">JavaScript</span>
+								<span class="tag">Marketing digital</span>
+							</p>
+							<div class="clear"></div>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas</h3>
+						<div class="detalle">
+							<div>
+								<p>Dibujo Manga</p>
+								<div class="clear"></div>
+								<label>Centro Cultural Peruano Japon&eacute;s</label>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<p>Teatro contempor&aacute;neo</p>
+								<div class="clear"></div>
+								<label>Iguana Producciones</label>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="work"></i>Experiencia Profesional</h3>
+						<div class="detalle timeline">
+							<div>
+								<p class="fecha">Enero 2014 - Enero 2015</p>
+								<label class="tipo">EMPLEO</label>
+								<label class="nombre">Odebretch</label>
+								<p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
+							</div>
+							<div>
+								<p class="fecha">Enero 2014 - Enero 2015</p>
+								<label class="tipo">EMPLEO</label>
+								<label class="nombre">Odebretch</label>
+								<p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h3 class="title"><i class="volunteer"></i>Voluntariado</h3>
+						<div class="detalle timeline">
+							<div>
+								<p class="fecha">Enero 2014 - Enero 2015</p>
+								<label class="tipo">EMPLEO</label>
+								<label class="nombre">Odebretch</label>
+								<p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
+							</div>
+						</div>
+					</section>
+				</div>
+				<a class="close">Cerrar</a>
+			</div>
+		</div>
+<div class="popup mensaje-edit" id="mensaje">
+    <div class="popup-box">
+        <div class="content">
+            <section class="header">
+						<h3>Mensaje</h3>
+						<a class="btn-action" onclick="window.history.back();">ENVIAR</a>
+						<div class="clear"></div>
+					</section>
+            <section>
+                <div class="destinatarios">
+                    <label>Para:</label>
+                    <ul>
+					    <li>
+						    <img class="imagen" src="../img/profile/profile.png" />
+						    <label class="nombre">Diego Ch&aacute;vez</label>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+				<textarea placeholder="Redacte su mensaje"></textarea>
+				<div class="sin-respuesta">
+							<input type="checkbox" id="sin-respuesta"/>
+							<label for="sin-respuesta">Sin respuesta </label><a>(<span class="orange">?</span>)</a>
+						</div>
+            </section>
+        </div>
+		<a class="close">Cerrar</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+	$('#menu').click(function() {
+		if ($('#ctx-menu-header').hasClass('active'))
+			$('#ctx-menu-header').removeClass('active');
+		else
+			$('#ctx-menu-header').addClass('active')
+	});
+	$('.popup').click(function(e) {
+		if ( $(e.target).closest('.popup-box').length === 0 ) {
+			window.history.back();
+			$('body').removeClass('static');
+		}
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+	function opciones() {
+		if ($('#menu-oportunidad').hasClass('active'))
+			$('#menu-oportunidad').removeClass('active');
+		else
+			$('#menu-oportunidad').addClass('active')
+	}
+</script>
+{%endblock%}

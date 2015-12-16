@@ -894,7 +894,8 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .cv > .centered,
 .oportunidad-detalle > .centered,
 .usuarios > .centered,
-.misprocesos > .centered
+.misprocesos > .centered,
+.oportunidad-empresa > .centered
 { padding-top: 150px}
 label.descripcion { font-weight: normal; }
 ul.links, ul.social { margin-bottom: 0px !Important;}

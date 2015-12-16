@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Oportunidad
+from .models import Oportunidad, Postulacion
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
 
@@ -20,7 +20,6 @@ from empresa.models import Representante, Empresa
 class OportunidadCrearView(FormView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/crear.html'
-    print("entro perfil")
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
     def form_valid(self, form):
@@ -125,3 +124,18 @@ class OportunidadEditarView(UpdateView):
         oportunidad.beneficio = beneficio
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
+
+
+class OportunidadView(TemplateView):
+    login_required = True
+    template_name = 'oportunidad/ver.html'
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+        oportunidad =  get_object_or_404(Oportunidad, pk=id)
+        empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+        postulaciones = Postulacion.objects.filter(oportunidad_id = id).count()
+        context = super(OportunidadView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        context['oportunidad'] = oportunidad
+        context['postulaciones'] = postulaciones
+        return context
