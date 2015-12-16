@@ -9,7 +9,7 @@ import datetime
 
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'ContraseÃ±a', 'type':'password'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
 
 
 class UniqueUserEmailField(forms.EmailField):
@@ -54,8 +54,8 @@ class RegisterForm(UserCreationForm):
     email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
     last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
-    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'ContraseÃ±a', 'type':'password'}))
-    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar ContraseÃ±a', 'type':'password'}))
+    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
+    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contraseña', 'type':'password'}))
     fecha_nacimiento = forms.DateField(required=False)
     ano = forms.ChoiceField(choices=items_anos, required = False, widget=forms.Select(attrs={'class': 'cumpleanos', }))
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos'}))
