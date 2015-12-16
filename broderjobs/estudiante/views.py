@@ -300,6 +300,15 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
             'telefono': persona.telefono,
             'fecha_nacimiento': persona.fecha_nacimiento}
 
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        print(form.errors)
+        if self.request.is_ajax():
+
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
     def form_valid(self, form):
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
@@ -342,6 +351,8 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         fecha = form.cleaned_data['fecha_nacimiento']
         usuario.email = form.cleaned_data['email']
         persona.telefono = form.cleaned_data['telefono']
+        print("fecha")
+        print(fecha)
         if fecha is not None:
             persona.fecha_nacimiento= fecha
         usuario.save()

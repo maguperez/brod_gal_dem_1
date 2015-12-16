@@ -42,7 +42,10 @@ p {text-align: justify; line-height: 20px;}
        url('../fonts/Roboto-Light.svg#Roboto-Light') format('svg');
 }
 
-
+/**GENERAL DE AUTOCOMPLETE*/
+.typeahead .active a{
+    color: #3276b1 !important;
+}
 
 /*CONTROLES*/
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
