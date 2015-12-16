@@ -135,7 +135,6 @@ class IdiomaForm(forms.Form):
 
     idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
 
-
 class ConocimientoForm(forms.Form):
 
     conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
