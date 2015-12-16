@@ -3,6 +3,7 @@
 {%block css%}
 {%endblock%}
 {% block content %}
+
 <script type="text/javascript" src="{% static 'js/rater.min.js' %}"></script>
 <link rel ="stylesheet" href = "{% static 'css/font-awesome.css' %}"/>
 <section class="empresa">
@@ -23,15 +24,10 @@
 								<h4 class="link">EVALUACI&Oacute;N DE LA EMPRESA</h4>
 							</section>
 							<section class="rating">
-								<div>
-										<span class="rating-big full"></span>
-										<span class="rating-big full"></span>
-										<span class="rating-big full"></span>
-										<span class="rating-big full"></span>
-										<span class="rating-big"></span>
-									<div class="clear"></div>
-								</div>
+								<div id = "rating-general" style = "margin:auto"></div>
+								<div class = "clear"></div>
 								<label class="puntaje">{{ranking.ranking_general | floatformat:2 }}</label>
+								<input type = "hidden" id = "rating-rank" value = "{{ranking.ranking_general}}">
 								<a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
 							</section>
 						</div>
@@ -138,14 +134,14 @@
 								</ul>
 								<a class="link ver-mas" href="{%url 'estudiante-oportunidades-empresa' empresa.id%}">Ver m&aacute;s oportunidades</a>
 							</section>
-					<section class="ubicacion">
+							<section class="ubicacion">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
-								<div>
-									<p>Calle Varham 203, Camacho, La Molina</p>
-									<div class="mapa">
-										<img src="../img/google-map.jpg" />
+								<div style="margin:0 50px">
+										{{form.direccion_map}}
+										{{form.longitud}}
+										{{form.latitud}}
 									</div>
-								</div>
+									<div id = "map" style = "height: 350px; width: 100%"></div>
 							</section>
 					<section class="redes">
 								<h3 class="title"><i class="network"></i>Redes sociales</h3>
@@ -175,6 +171,7 @@
 						<div class="calificacion">
 							<img class="imagen" src="{{empresa.set_logo}}" alt="ADOBE" />
 							<ul class="criterios">
+								<li>
 									<label>L&iacute;nea de carrera</label>
 									<div id = "rating-linea_carrera" style = "display:inline-block"></div>
 									<div class="clear"></div>
@@ -235,6 +232,7 @@
 {% endblock content %}
 {% block js %}
 <script>
+	var animationInterval = 0;
 	$(function(){
 		$("#link-empresa").addClass("active");
 
@@ -244,30 +242,46 @@
 			window.location.href = newUrl;
 			$('body').removeClass('static');
 		});
-
+		Ubicacion.inicializar_mapa();
 
 	//or for example
 		var options = {
 			max_value: 5,
-			step_size: 0.5,
+			step_size: 0.25,
 			symbols: {
 				images: {
 					base: '<span class="rating-small"></span>',
 					hover: '<span class="rating-small full"></span>',
 					selected: '<span class="rating-small full"></span>',
 				}
-				/*fontawesome: {
-					base: "&#xf006;",
-					hover: "&#xf005;",
-					selected: "&#xf005;"
-				},*/
 			},
 			selected_symbol_type : 'images'
-	}
+		}
 		$("#rating-linea_carrera").rate(options);
 		$("#rating-flexibilidad_horario").rate(options);
 		$("#rating-ambiente_trabajo").rate(options);
 		$("#rating-salario_beneficios").rate(options);
+		var general_options = {};
+		$.extend(general_options, options, {
+			symbols: {
+				images: {
+					base: '<span class="rating-big"></span>',
+					hover: '<span class="rating-big full"></span>',
+					selected: '<span class="rating-big full"></span>',
+				}
+			},
+			step_size: 0.05
+		});
+		$("#rating-general").rate(general_options);
+		animationInterval = setInterval(function(){
+			if ($("#rating-general").rate("getValue") < parseFloat($("#rating-rank").val().replace(",",".")))
+				$("#rating-general").rate("increment")
+			else {
+				clearInterval(animationInterval);
+				$("#rating-general").rate("destroy");
+				$("#rating-general").rate($.extend(general_options, {readonly: true}));
+			}
+		},5);
 	});
 
 	$("#enviar-evaluacion").click(function(e) {
@@ -277,5 +291,47 @@
 		$("#id_salarios").val($("#rating-salario_beneficios").attr("data-rate-value") > 0 ? $("#rating-salario_beneficios").attr("data-rate-value") : 0);
 		$("#evaluar").click();
 	});
+	var Ubicacion = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function() {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(44.5403, -78.5463),
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);
+            google.maps.event.addListener(Ubicacion.map, 'click', function(event) {
+                Ubicacion.marcar_mapa(event.latLng);
+            });
+            if ($("#id_latitud").val() != ""){
+                var latitud = $("#id_latitud").val();
+                var longitud = $("#id_longitud").val();
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Ubicacion.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function(coordenadas){
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Ubicacion.map
+            });
+            Ubicacion.marca = marker;
+
+            Ubicacion.map.setCenter(coordenadas);
+            $("#id_latitud").val(coordenadas.lat());
+            $("#id_longitud").val(coordenadas.lng());
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").val(response[0]["formatted_address"]);
+            });
+        }
+    };
 </script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 {%endblock js%}
