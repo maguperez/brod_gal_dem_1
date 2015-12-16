@@ -42,14 +42,31 @@
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
 		$("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Experiencia profesional');
-		$('.input-daterange input').each(function() {
-			$(this).datepicker({
+
+		$('.input-daterange').datepicker({
 				language: 'es',
 				format: "mm-yyyy",
 				startView: "months",
 				minViewMode: "months"
 			});
-		});
+
+//		$('.input-daterange input').each(function() {
+//			$(this).datepicker({
+//				language: 'es',
+//				format: "mm-yyyy",
+//				startView: "months",
+//				minViewMode: "months"
+//			});
+//		});
+
+//		$('.input-daterange input').each(function() {
+//			$(this).datepicker({
+//				language: 'es',
+//				format: "mm-yyyy",
+//				startView: "months",
+//				minViewMode: "months"
+//			});
+//		});
 
 		InicializarTypeaheadElementos();
 
