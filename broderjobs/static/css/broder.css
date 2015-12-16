@@ -603,7 +603,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-empresa .candidatos tr.active .opciones {display: block;}
 
 /*USUARIOS*/
-.usuarios .btn-action {width: 85px; height: 30px; line-height: 30px; position: absolute; top: 0; right: 0; display: block;}
+.usuarios .btn-action {width: 85px; height: 30px; line-height: 30px; position: absolute; top: 0; right: 0; display: block; background-color: transparent}
 
 /*POPUP CANDIDATO*/
 .popup.candidato header {padding-top: 30px; padding-bottom: 30px; position: relative;}

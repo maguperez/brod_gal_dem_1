@@ -2,6 +2,9 @@
 {%block css%}
 {%endblock%}
 {% block content %}
+{% load staticfiles %}
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'js/additional-methods.min.js' %}"></script>
 <section class="usuarios">
     <div class="centered">
         <div class="panel left principal">
@@ -10,7 +13,6 @@
                     <section class="pos-relative">
                        <form action="" method="post">{%csrf_token%}
                             <h3 class="title"><i class="info"></i>Mi cuenta</h3>
-                            <a class="btn-action" href="configuracion.html">GUARDAR</a>
                             <input type="submit" value="GUARDAR" class="btn-action">
                             <div class="detalle col-3-7">
                                 <!--<div>-->
@@ -55,4 +57,37 @@
 </section>
 {% endblock content%}
 {% block js %}
+<script>
+    $(function(){
+       $("#form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+                $(element).tooltip({
+                    animation: true,
+                    placement: "right",
+                    title: $(error).text(),
+                    trigger: "manual"
+                } );
+                $(element).tooltip('show');
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                "old_password": { required: true, email: true },
+                "new_password1": { required: true, minlength: 6 },
+                "new_password2": { required: true, minlength: 6, equalTo: "#id_new_password1" },
+            },
+            messages: {
+                "old_password": { 	required: "Este campo es obligatorio",
+                    				email: "Introduzca un correo válido" },
+                "new_password1": {  required: "Este campo es obligatorio",
+									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
+                "new_password2": {  required: "Este campo es obligatorio",
+                                    minlength: "La contraseña debe tener al menos seis (6) caracteres",
+									equalTo: "Las contraseñas deben ser iguales" },
+            }
+        });
+    });
+</script>
 {% endblock %}
