@@ -1,10 +1,15 @@
-{% extends 'estudiante/base.html' %}
+{% extends  tipo|yesno:"empresa/base.html,estudiante/base.html" %}
 {%block css%}
 {%endblock%}
 {% block content %}
+<<<<<<< HEAD
 {% load staticfiles %}
 <script src="{% static 'js/jquery.validate.min.js' %}"></script>
 <script src="{% static 'js/additional-methods.min.js' %}"></script>
+=======
+
+
+>>>>>>> c4a4b14261cae14c67affa773def47f117e4d4f6
 <section class="usuarios">
     <div class="centered">
         <div class="panel left principal">
@@ -14,6 +19,9 @@
                        <form action="" method="post">{%csrf_token%}
                             <h3 class="title"><i class="info"></i>Mi cuenta</h3>
                             <input type="submit" value="GUARDAR" class="btn-action">
+                           {%if message%}
+                                <p>{{message}}</p>
+                           {%endif%}
                             <div class="detalle col-3-7">
                                 <!--<div>-->
                                     <!--<label>Nombre y Apellidos</label>-->

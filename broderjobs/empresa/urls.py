@@ -27,4 +27,6 @@ urlpatterns = [
 
     url(r'^oportunidad-estudiantes/$', views.OportunidadEstudiantes.as_view(), name="empresa-oportunidad-estudiantes"),
 
+    url(r'^oportunidad-candidatos/(?P<id>\d+)/$', views.OportunidadCandidatos.as_view(), name="empresa-oportunidad-candidatos"),
+
 ]

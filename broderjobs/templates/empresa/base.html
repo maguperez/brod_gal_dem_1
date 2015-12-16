@@ -90,11 +90,26 @@
 		else
 			$('#ctx-menu-header').addClass('active')
 	});
-	function opciones(id) {
-		if ($('#menu-' + id).hasClass('active'))
-			$('#menu-' + id).removeClass('active');
+	$('.popup').click(function(e) {
+		if ( $(e.target).closest('.popup-box').length === 0 ) {
+			window.history.back();
+			$('body').removeClass('static');
+		}
+	});
+	$('.popup .close').click(function(e) {
+		window.history.back();
+		$('body').removeClass('static');
+	});
+	$('a').click(function(event) {
+		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+        if ($(id).hasClass('popup'))
+			$('body').addClass('static');
+    });
+	function opciones() {
+		if ($('#menu-oportunidad').hasClass('active'))
+			$('#menu-oportunidad').removeClass('active');
 		else
-			$('#menu-' + id).addClass('active')
+			$('#menu-oportunidad').addClass('active')
 	}
 </script>
 {% block js %}

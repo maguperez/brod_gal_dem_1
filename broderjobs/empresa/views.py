@@ -19,6 +19,7 @@ from estudiante.models import Estudiante
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from empresa import utils
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 
 import json
 
@@ -223,3 +224,71 @@ class OportunidadEstudiantes(TemplateView):
         #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
         data = json.dumps(estudiante)
         return HttpResponse(data, content_type='application/json')
+
+class OportunidadCandidatos(TemplateView):
+    template_name = 'empresa/oportunidad-candidatos.html'
+
+    def get_context_data(self, **kwargs):
+        id = kwargs.get('id', None)
+        oportunidad =  get_object_or_404(Oportunidad, pk = id)
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        context = super(OportunidadCandidatos, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        context['oportunidad'] = oportunidad
+        return context
+
+
+from django.http import HttpResponse
+from django.db.models import Q, CharField
+
+import json
+from cStringIO import StringIO
+
+# def datatables_view(request):
+#     objects = MyModel.objects.all()
+#     list_display = ['field1', 'field2', ...]
+#     list_filter = [f.name for f in MyModel._meta.fields if isinstance(f, CharField)] #a simple way to bring all CharFields, can be defined in specifics
+#
+#     # count total items:
+#     iTotalRecords = objects.count()
+#
+#     #filter on list_filter using __contains
+#     search = request.GET['sSearch']
+#     queries = [Q(**{f+'__contains' : search}) for f in list_filter]
+#     qs = reduce(lambda x, y: x|y, queries)
+#     objects = objects.filter(qs)
+#
+#     #sorting
+#     order = dict( enumerate(list_display) )
+#     dirs = {'asc': '', 'desc': '-'}
+#     ordering = dirs[request.GET['sSortDir_0']] + order[int(request.GET['iSortCol_0'])]
+#     objects = objects.order_by(order_by)
+#
+#     # count items after filtering:
+#     iTotalDisplayRecords = objects.count()
+#
+#
+#     # finally, slice according to length sent by dataTables:
+#     start = int(request.GET['iDisplayStart'])
+#     length = int(request.GET['iDisplayLength'])
+#     objects = objects[ start : (start+length)]
+#
+#     # extract information
+#     data = [map(lambda field: getattr(obj, field), list_display) for obj in objects]
+#
+#     #define response
+#     response = {
+#         'aaData': data,
+#         'iTotalRecords': iTotalRecords,
+#         'iTotalDisplayRecords': iTotalDisplayRecords,
+#         'sEcho': request.GET['sEcho']
+#     }
+#
+#     #serialize to json
+#     s = StringIO()
+#     json.dump(response, s)
+#     s.seek(0)
+#     return HttpResponse(s.read())

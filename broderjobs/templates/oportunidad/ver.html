@@ -1,0 +1,158 @@
+{% extends 'empresa/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="oportunidad-detalle">
+			<div class="centered">
+				<div>
+					<ol class="breadcrumb">
+						<li class="active">{{oportunidad.titulo}}</li>
+						<li>Visualizar oportunidad</li>
+					</ol>
+					<div class="clear"></div>
+				</div>
+				<div class="panel left principal">
+					<div class="box">
+						<header class="oportunidad-resumen">
+							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
+							<div class="detalle">
+								<h1>{{oportunidad.titulo}}s</h1>
+								<a><h4>{{empresa.nombre | upper}}</h4></a>
+								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
+								<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
+							</div>
+							<div class="postulacion">
+								<a class="btn-action" href="{%url 'oportunidad-editar' oportunidad.id%}">EDITAR</a>
+								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+							</div>
+							<div class="clear"></div>
+						</header>
+						<div class="content">
+							<section class="informacion">
+						<h3 class="title"><i class="info"></i>{{oportunidad.titulo}}</h3>
+						<div class="detalle">
+							<div class = "row">
+								<label class = "col-sm-3">Tipo de vacante</label>
+								<div class = "col-sm-9">{{oportunidad.tipo_puesto}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class = "row">
+								<label class = "col-sm-3">Jornada de trabajo</label>
+								<div class = "col-sm-9">{{oportunidad.carga_horaria}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class = "row">
+								<label class = "col-sm-3">Resumen</label>
+								<div class = "col-sm-9"> {{oportunidad.resumen}}</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+							<section class="perfil">
+						<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
+						<div class="detalle">
+							<div class = "row">
+								<label class = "col-sm-3">Carrera</label>
+								<div class = "col-sm-9">
+									{% for carrera in oportunidad.carrera.all%}
+									<span class="tag">{{carrera}}</span>
+									{%endfor%}
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class = "row">
+								<label class = "col-sm-3">Conocimientos</label>
+								<div class = "col-sm-9">
+									{% for conocimiento in oportunidad.conocimiento.all%}
+									<span class="tag">{{conocimiento}}</span>
+									{%endfor%}
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class = "row">
+								<label class = "col-sm-3">Idiomas</label>
+								<div class = "col-sm-9">
+									{% for idioma in oportunidad.idioma.all%}
+									<span class="tag">{{idioma}}</span>
+									{%endfor%}
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class = "row">
+								<label class = "col-sm-3">Graduaci&oacute;n / Graduaci&oacute;n estimada</label>
+								<div class = "col-sm-9">2do Semestre 2015 - 2do Semestre 2016</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</section>
+							<section class="beneficios">
+						<h3 class="title"><i class="like"></i>Beneficios</h3>
+						<div class="detalle">
+							<p>
+								{% for beneficio in oportunidad.beneficio.all%}
+								<span class="tag">{{beneficio}}</span>
+								{%endfor%}
+							<div class="clear"></div>
+						</div>
+					</section>
+							<section class="ubicacion">
+						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
+						<div class="detalle">
+							<div class ="form-group">
+										<label class = "col-sm-3">Direcci&oacute;n</label>
+										<div class = "col-sm-9">
+											{{form.direccion_map}}
+										</div>
+										<br>
+									</div>
+									<div class ="form-group">
+										<label class = "col-sm-3"></label>
+										<div class = "col-sm-3">
+											{{form.latitud}}
+										</div>
+										<div class = "col-sm-3">
+											{{form.longitud}}
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div id = "map"></div>
+						</div>
+					</section>
+						</div>
+					</div>
+				</div>
+				<div class="panel right">
+					<div class="box alcance">
+						<div class="content">
+							<section class="grafico">
+								<h4>Alcance de Candidatos</h4>
+								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>
+								<div class="grafico-alcance">
+									<div class="alto inactive">
+										<div class="adecuado inactive">
+											<div class="bajo active">
+												<label>Bajo</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section class="caracteristicas">
+								<label><span class="bold">Carrera: </span>{% for i in oportunidad.carrera.all%} {{i}} {%endfor%}</label>
+								<label><span class="bold">Idiomas: </span>{% for i in oportunidad.idioma.all%} {{i}} {%endfor%}</label>
+								<label><span class="bold">Conocimientos: </span>{% for i in oportunidad.conocimiento.all%} {{i}} {%endfor%}</label>
+								<label><span class="bold">Jornada: </span>{{oportunidad.carga_horaria}}</label>
+								<label><span class="bold">Ubicaci&oacute;n: </span>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+
+{% endblock %}
+{%block js%}
+<script>
+
+</script>
+{%endblock%}
