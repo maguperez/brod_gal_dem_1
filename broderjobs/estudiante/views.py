@@ -408,11 +408,12 @@ class IdiomaView(LoginRequiredMixin, FormView):
     form_class = forms.IdiomaForm
     success_url = reverse_lazy('mi-cv')
 
-    def get_object(self, queryset=None):
+    def get_initial(self):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id =persona.id)
-        return estudiante
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+
+        return {'idioma': estudiante.idioma.all()}
 
     def form_valid(self, form):
         user = self.request.user
@@ -426,6 +427,13 @@ class ConocimientoView(LoginRequiredMixin, FormView):
     template_name = 'estudiante/mi-cv-conocimiento.html'
     form_class = forms.ConocimientoForm
     success_url = reverse_lazy('mi-cv')
+
+    def get_initial(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+
+        return {'conocimiento': estudiante.conocimiento.all()}
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -476,15 +484,61 @@ class ActividadExtraEliminarView(LoginRequiredMixin, SuccessMessageMixin, AjaxTe
    model = ActividadesExtra
    success_url = reverse_lazy('mi-cv')
 
-class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     template_name = 'estudiante/mi-cv-experiencia.html'
     form_class = forms.ExperienciaForm
     success_url = reverse_lazy('mi-cv')
 
-    def get_object(self, queryset=None):
+    def get_initial(self):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
-        return experiencia
+        puestos = experiencia.puesto
+        puestos_hidden = experiencia.puesto.id
+        empresas = experiencia.empresa
+        empresas_hidden = experiencia.empresa.id
+        descripcion = experiencia.descripcion
+        fecha_desde = experiencia.fecha_desde
+        fecha_hasta = experiencia.fecha_hasta
+        return {'puestos': puestos, 'puestos_hidden': puestos_hidden,
+                'empresas': empresas, 'empresas_hidden': empresas_hidden,
+                'fecha_desde': fecha_desde, 'fecha_hasta': fecha_hasta,
+                'descripcion': descripcion}
+
+    def form_valid(self, form):
+        id = self.kwargs["id"]
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+        experiencia = ExperienciaProfesional.objects.get(id = id )
+        puesto_descripcion = form.cleaned_data['puestos']
+        empresa_descripcion = form.cleaned_data['empresas']
+        puesto_id = form.cleaned_data['puestos_hidden']
+        empresa_id = form.cleaned_data['empresas_hidden']
+
+        fecha_desde = form.cleaned_data['fecha_desde']
+        fecha_hasta = form.cleaned_data['fecha_hasta']
+        descripcion = form.cleaned_data['descripcion']
+        experiencia.estudiante = estudiante
+        puesto = Puesto.objects.get(id=puesto_id)
+        if empresa_id != "0":
+            empresa = Empresa.objects.get(id=empresa_id)
+            experiencia.empresa = empresa
+        else:
+            experiencia.empresa = None
+            experiencia.empresa_referencial = empresa_descripcion
+        experiencia.puesto = puesto
+        if fecha_desde is not None:
+            experiencia.fecha_desde = fecha_desde
+        if fecha_hasta is not None:
+            experiencia.fecha_hasta = fecha_hasta
+            experiencia.trabajo_actual = 'N'
+        else:
+            experiencia.trabajo_actual = 'S'
+        experiencia.descripcion = descripcion
+        experiencia.save()
+        return super(ExperienciaView, self).form_valid(form)
+
+
 
 class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm

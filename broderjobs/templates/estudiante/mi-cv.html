@@ -331,6 +331,8 @@
 //						width: 'resolve'
 						//allowClear: true
 					});
+//			$("#id_idioma").val(['1','2']).trigger("change");
+
 
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
@@ -427,8 +429,13 @@
 			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
 			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
 
-			 var fechaDesdeCompleta = moment(fechaDesde).format('YYYY-MM-DD');
-			 var fechaHastaCompleta = moment(fechaHasta).format('YYYY-MM-DD');
+			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
+			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+
+			 console.log(fechaDesde);
+			 console.log(fechaHasta);
+			 console.log(fechaDesdeCompleta);
+			 console.log(fechaHastaCompleta);
 
 			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
 			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
