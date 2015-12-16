@@ -388,7 +388,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-resumen .imagen {width: 130px; height: 130px;}
 .oportunidad-resumen .detalle {width: 350px; margin-left: 60px !important;}
 .oportunidad-resumen .detalle h1, .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label {display: block;}
-.oportunidad-resumen .detalle h1 {margin: 12px 0 5px 0; color: #848484;}
+.oportunidad-resumen .detalle h1 { font-size: 26px; margin: 12px 0 5px 0; color: #848484;}
 .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label,
 .oportunidad-resumen .detalle a h4{line-height: 25px !important; font-size: 14px;}
 
@@ -490,17 +490,16 @@ header.menu .centered { height: 47px; }
 .proceso-detalle .oportunidad-resumen {padding: 0 10px;}
 .proceso-detalle .oportunidad-resumen .detalle {width: 480px;}
 .proceso-detalle .oportunidad-resumen .estado {padding-top: 50px;}
-.proceso-detalle .oportunidad-resumen .estado label {display: block; margin-bottom: 7px; font-size: 1em;}
+.proceso-detalle .oportunidad-resumen .estado label {display: block; margin-bottom: 7px; font-size: 14px;}
 .proceso-detalle .oportunidad-resumen .estado label:nth-child(2) {font-weight: bold; color: #848484;}
-.proceso-detalle .menu {width: 170px; float: left;}
-.proceso-detalle .menu a {padding: 6px 10px; margin-bottom: 12px; border-bottom: 1px solid #ddd; font-size: 1em; display: block;}
+.proceso-detalle .menu {width: 170px; display:inline-block; vertical-align: top}
+.proceso-detalle .menu a {padding: 6px 10px; margin-bottom: 12px; border-bottom: 1px solid #ddd; font-size: 14px; display: block;}
 .proceso-detalle .menu a:hover, .proceso .menu a.active {color: #5d9cf9;}
-.proceso-detalle .contenido .detail {width: 680px; margin-left: 30px !important; float: left;}
+.proceso-detalle .contenido .detail {width: 680px; margin-left: 30px !important; display: inline-block; }
 .proceso-detalle .contenido .detail > div {max-height: 0; opacity: 0; overflow: auto; transition: opacity 0.3s linear;}
 .proceso-detalle .contenido .detail > div.active {max-height: none; opacity: 1;}
 .proceso-detalle .contenido .detail p {float: none !important;}
-.proceso-detalle .grafico {height: 70px; margin-bottom: 40px; padding: 25px 55px; text-align: center; background: #f9f9f9;}
-.proceso-detalle .grafico div {float: left;}
+.proceso-detalle .grafico {margin-bottom: 40px; padding: 25px 55px; text-align: center; background: #f9f9f9;}
 .proceso-detalle .grafico .step {width: 100px;}
 .proceso-detalle .grafico i, .proceso .grafico label {display: block;}
 .proceso-detalle .grafico i {margin: 10px auto;}
@@ -509,7 +508,7 @@ header.menu .centered { height: 47px; }
 .proceso-detalle .grafico .dots {margin: 16px -30px;}
 .proceso-detalle .grafico .dots .dot {width: 4px; height: 4px; margin: 0 4px; float: left; border-radius: 50%; background: #ddd;}
 .proceso-detalle .grafico .dots.active .dot {background: #5d9cf9;}
-.proceso-detalle .mensajes {border-top: 1px solid #ddd;}
+.proceso-detalle .mensajes {/*border-top: 1px solid #ddd;*/}
 .proceso-detalle .mensajes .unread td {font-weight: bold; color: #848484;}
 
 /*MI CV*/
@@ -990,8 +989,7 @@ html.dark .wizard-progress .wizard-steps li a {
 	display: block;
 	padding: 25px 8px 0;
 	font-size: 11px;
-	color: #33333F;
-	font-weight: bold;
+	color: #a5a5a5;
 	line-height: 1;
 	text-align: center;
 	text-decoration: none;

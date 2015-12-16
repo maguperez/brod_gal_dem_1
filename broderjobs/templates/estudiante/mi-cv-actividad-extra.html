@@ -22,5 +22,10 @@
 		$("#txt-descripcion").on("input", function(){
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
+
+		if($("#id_descripcion").val()){
+			$("#txt-descripcion").val($("#id_descripcion").val());
+		}
+
 	});
 </script>

@@ -41,11 +41,41 @@
 		$("#txt-descripcion").on("input", function(){
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
+
+		if($("#id_descripcion").val()){
+			$("#txt-descripcion").val($("#id_descripcion").val());
+		}
+
+
 		$("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Experiencia profesional');
+
+		var fechaDesde = {};
+
+		if($('#id_fecha_desde').val()){
+			fechaDesde = moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY');
+		}
+		else{
+			fechaDesde = '';
+		}
+
+		var fechaHasta = {};
+
+		if($('#id_fecha_hasta').val()){
+			fechaHasta = moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY');
+		}
+		else{
+			fechaHasta = '';
+		}
+
+		$('#id_fecha_desde').val(fechaDesde);
+		$('#id_fecha_hasta').val(fechaHasta);
+
+//		$('#id_fecha_desde').val(moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY'));
+//		$('#id_fecha_hasta').val(moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY'));
 
 		$('.input-daterange').datepicker({
 				language: 'es',
-				format: "mm-yyyy",
+				format: "mm/yyyy",
 				startView: "months",
 				minViewMode: "months"
 			});

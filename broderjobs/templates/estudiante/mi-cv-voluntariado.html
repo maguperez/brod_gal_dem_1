@@ -40,13 +40,37 @@
 		$("#txt-descripcion").on("input", function(){
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
-		$('.input-daterange input').each(function() {
-			$(this).datepicker({
+
+		if($("#id_descripcion").val()){
+			$("#txt-descripcion").val($("#id_descripcion").val());
+		}
+
+		var fechaDesde = {};
+
+		if($('#id_fecha_desde').val()){
+			fechaDesde = moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY');
+		}
+		else{
+			fechaDesde = '';
+		}
+
+		var fechaHasta = {};
+
+		if($('#id_fecha_hasta').val()){
+			fechaHasta = moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY');
+		}
+		else{
+			fechaHasta = '';
+		}
+
+		$('#id_fecha_desde').val(fechaDesde);
+		$('#id_fecha_hasta').val(fechaHasta);
+
+		$('.input-daterange').datepicker({
 				language: 'es',
-				format: "mm-yyyy",
+				format: "mm/yyyy",
 				startView: "months",
 				minViewMode: "months"
 			});
-		});
 	});
 </script>

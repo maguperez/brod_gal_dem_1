@@ -14,22 +14,25 @@
 {% block js %}
 {% load staticfiles %}
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
-<link rel = "stylesheet" href ="{% static 'css/animate.css' %}"/>
 <script>
    $(function(){
 	   fnBusqueda();
 	   $("#link-oportunidad").addClass("active");
 		$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
-			$(this).find(".consolidado").addClass("fadeOut")
+			$(this).find(".consolidado").css("opacity",0);
+		  	$(this).find(".desglose").css("opacity",1);
+			/*$(this).find(".consolidado").addClass("fadeOut")
 			$(this).find(".consolidado").removeClass("fadeIn");
 			$(this).find(".desglose").addClass("fadeIn");
-			$(this).find(".desglose").removeClass("fadeOut");
+			$(this).find(".desglose").removeClass("fadeOut");*/
 		});
 	   $("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
-			$(this).find(".consolidado").addClass("fadeIn");
+		   	$(this).find(".consolidado").css("opacity",1);
+		  	$(this).find(".desglose").css("opacity",0);
+			/*$(this).find(".consolidado").addClass("fadeIn");
 			$(this).find(".consolidado").removeClass("fadeOut");
 			$(this).find(".desglose").addClass("fadeOut")
-			$(this).find(".desglose").removeClass("fadeIn");
+			$(this).find(".desglose").removeClass("fadeIn");*/
 		});
    });
 
@@ -56,8 +59,8 @@
                     html += '<div class="ubicacion"><i class="ubicacion"></i><label>'+data[i].ubicacion+'</label></div>';
 					html +=	'<div class="remuneracion"><i class="remuneracion"></i><label>'+data[i].remuneracion+'</label></div></div>';
 					html += '<div class="compatibilidad">' +
-							'<div class = "animated short consolidado"><div class="circular-bar "><div class="circular-bar-chart" data-percent="73"><label><span class="percent">73</span>%</label></div></div><label class="resultado">Compatible</label></div>' +
-							'<div class = "animated short desglose" style = "opacity: 0">' +
+							'<div class = "consolidado"><div class="circular-bar "><div class="circular-bar-chart" data-percent="73"><label><span class="percent">73</span>%</label></div></div><label class="resultado">Compatible</label></div>' +
+							'<div class = "desglose" style = "opacity: 0">' +
 							'<div class = "cultural"><div class="circular-bar"><div class="circular-bar-chart" data-percent="63"><label><span class="percent">53</span>%</label></div></div><label class="resultado">Cultural</label></div>' +
 							'<div class = "academico"><div class="circular-bar"><div class="circular-bar-chart" data-percent="49"><label><span class="percent">49</span>%</label></div></div><label class="resultado">Académico</label></div></div></div>';
 					html += '<div class="ver-oportunidad"><a class="btn-action" href="'+url+'">VER OPORTUNIDAD</a>';

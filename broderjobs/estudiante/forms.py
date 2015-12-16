@@ -99,8 +99,6 @@ class InfoPersonalForm(EstudianteForm):
     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
     ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
 
-
-
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
 
@@ -137,25 +135,9 @@ class IdiomaForm(forms.Form):
 
     idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
-
 class ConocimientoForm(forms.Form):
 
-
     conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
-
-
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
 
 class ExperienciaForm(forms.ModelForm):
     fecha_desde = forms.DateField(widget=forms.DateInput())
@@ -185,6 +167,8 @@ class ExperienciaForm(forms.ModelForm):
 class VoluntariadoForm(forms.ModelForm):
     fecha_desde = forms.DateField(required=False, widget=forms.DateInput())
     fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+    cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Cargo', 'class': 'full'}))
+    organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización', 'class': 'full'}))
     class Meta:
         model = Voluntariado
         fields = ('cargo', 'organizacion', 'fecha_desde','fecha_hasta', 'descripcion')
