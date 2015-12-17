@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple
 from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
     TipoRemuneracion, Carrera
-from main import utilitarios
+
 
 class OportunidadForm(forms.ModelForm):
 

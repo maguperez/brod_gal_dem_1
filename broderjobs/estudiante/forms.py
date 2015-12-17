@@ -6,7 +6,7 @@ from django.forms import RadioSelect, Select, CheckboxSelectMultiple
 from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra, Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, CargaHoraria,Idioma, Conocimiento
 from empresa.models import EvaluacionEmpresa, Puesto, Empresa
-from main import utilitarios
+from main import utils
 
 class RegistroCVForm(forms.ModelForm):
 
@@ -38,7 +38,7 @@ class RegistroCVForm(forms.ModelForm):
         self.fields['carga_horaria'].empty_label = None
 
         #Carga items Semestre
-        items_semestre = utilitarios.semestre_rango()
+        items_semestre = utils.semestre_rango()
         self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
         self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
 
@@ -47,7 +47,7 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items a aÃ±os
 
-        items_anos = utilitarios.anos_rango()
+        items_anos = utils.anos_rango()
         self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
         self.fields['ano_inicio_estudio'].choices = items_anos
 

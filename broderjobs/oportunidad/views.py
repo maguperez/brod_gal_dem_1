@@ -4,7 +4,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from django.db.models import Q
 from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -12,8 +11,13 @@ from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Oportunidad, Postulacion
+from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
+from django.db.models import Q, CharField
+from oportunidad  import utils
+import json
+from cStringIO import StringIO
 
 
 # Create your views here.
@@ -137,3 +141,53 @@ class OportunidadView(TemplateView):
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         return context
+
+def datatable_candidatos(request):
+    id = request.GET['id']
+    objects = Postulacion.objects.filter(pk = id)
+
+    list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
+    list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]
+    #a simple way to bring all CharFields, can be defined in specifics
+    list_filter = [f.name for f in Estudiante._meta.fields]
+
+    # count total items:
+    iTotalRecords = objects.count()
+
+    # # #filter on list_filter using __contains
+    # search = request.GET['sSearch']
+    # queries = [Q(**{f+'__contains' : search}) for f in list_filter]
+    # qs = reduce(lambda x, y: x|y, queries)
+    # objects = objects.filter(qs)
+
+    # #sorting
+    # order = dict( enumerate(list_display) )
+    # dirs = {'asc': '', 'desc': '-'}
+    # ordering = dirs[request.GET['sSortDir_0']] + order[int(request.GET['iSortCol_0'])]
+    # objects = objects.order_by(ordering)
+    #
+    # count items after filtering:
+    iTotalDisplayRecords = objects.count()
+
+
+    # finally, slice according to length sent by dataTables:
+    start = int(request.GET['iDisplayStart'])
+    length = int(request.GET['iDisplayLength'])
+    objects = objects[ start : (start+length)]
+
+    # extract information
+    # data = [map(lambda field: getattr(obj, field), list_display) for obj in objects]
+    data1 = utils.obtener_candidatos(objects)
+    #define response
+    response = {
+        'aaData': data1,
+        'iTotalRecords': iTotalRecords,
+        'iTotalDisplayRecords': iTotalDisplayRecords,
+        'sEcho': request.GET['sEcho']
+    }
+
+    #serialize to json
+    s = StringIO()
+    json.dump(response, s)
+    s.seek(0)
+    return HttpResponse(s.read())
