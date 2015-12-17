@@ -229,6 +229,9 @@
 .tipo_puesto>div>label{
     width: 32%
 }
+	.oportunidad-detalle label {
+		font-size: 14.3px;
+	}
 </style>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
@@ -271,7 +274,7 @@
             geocoder.geocode({
                 location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
                 }, function (response, status) {
-                    if (response != null && response.status != "ZERO_RESULTS")
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
                         $("#id_direccion_map").val(response[0]["formatted_address"]);
             });
         },
