@@ -1,9 +1,10 @@
 {% extends 'estudiante/base.html' %}
 {% load staticfiles %}
 {%block css%}
+
 {%endblock%}
 {% block content %}
-
+<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/rater.min.js' %}"></script>
 <link rel ="stylesheet" href = "{% static 'css/font-awesome.css' %}"/>
 <section class="empresa">
@@ -117,10 +118,35 @@
 															<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
 															<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
 														</div>
-														<div class="compatibilidad">
-															<div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-															<label class="resultado">Compatible</label>
-														</div>
+															<div class="compatibilidad">
+																<div class = "consolidado">
+																	<div class="circular-bar ">
+																		<div class="circular-bar-chart" data-percent="73">
+																			<label><span class="percent">73</span>%</label>
+																		</div>
+																	</div>
+																	<label class="resultado">Compatible</label>
+																</div>
+																<div class = "desglose" style = "opacity: 0">
+																	<div class = "cultural">
+																		<div class="circular-bar">
+																			<div class="circular-bar-chart" data-percent="63">
+																				<label><span class="percent">53</span>%</label>
+																			</div>
+																		</div>
+																		<label class="resultado">Cultural</label>
+																	</div>
+																	<div class = "academico">
+																		<div class="circular-bar">
+																			<div class="circular-bar-chart" data-percent="49">
+																				<label><span class="percent">49</span>%</label>
+																			</div>
+																		</div>
+																		<label class="resultado">Académico</label>
+																	</div>
+																</div>
+															</div>
+
 														<div class="ver-oportunidad">
 															<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
 															<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
@@ -227,13 +253,40 @@
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
-
+<style>
+	.compatibilidad { text-align: center; float:left; }
+	.compatibilidad > div,
+	.compatibilidad .desglose > div{
+		display: inline-block !Important; }
+	.compatibilidad .consolidado {
+		margin-left: 42px;
+		position: absolute;
+	}
+	.compatibilidad .academico {
+		margin-left: 5px;
+	}
+</style>
 
 {% endblock content %}
 {% block js %}
 <script>
 	var animationInterval = 0;
 	$(function(){
+		$("#declaro").tooltip({
+			animation: true,
+	        placement: "left",
+			title: "Debe declarar que trabaja o trabajó en esta empresa",
+	        trigger: "manual"
+		} );
+		$("#evaluar").on("click", function(e){
+			if(!$("#declaro").is(":checked")){
+				$("#declaro").tooltip("show");
+				e.preventDefault();
+			}
+			else {
+				$("#declaro").tooltip("hide");
+			}
+		});
 		$("#link-empresa").addClass("active");
 
 		$('.popup .close').click(function(e) {
@@ -243,7 +296,35 @@
 			$('body').removeClass('static');
 		});
 		Ubicacion.inicializar_mapa();
-
+		$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
+			$(this).find(".consolidado").css("opacity",0);
+		  	$(this).find(".desglose").css("opacity",1);
+		});
+	   	$("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
+		   	$(this).find(".consolidado").css("opacity",1);
+		  	$(this).find(".desglose").css("opacity",0);
+		});
+		$('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#1dcfac",
+					size: 65,
+				});
+				$('.cultural .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#c0392b",
+					size: 65,
+				});
+				$('.academico .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#5d9cf9",
+					size: 65,
+				});
 	//or for example
 		var options = {
 			max_value: 5,
@@ -261,6 +342,8 @@
 		$("#rating-flexibilidad_horario").rate(options);
 		$("#rating-ambiente_trabajo").rate(options);
 		$("#rating-salario_beneficios").rate(options);
+
+		//$("#rating-linea_carrera").rate("setValue", 3)
 		var general_options = {};
 		$.extend(general_options, options, {
 			symbols: {
@@ -327,7 +410,7 @@
             geocoder.geocode({
                 location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
                 }, function (response, status) {
-                    if (response != null && response.status != "ZERO_RESULTS")
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
                         $("#id_direccion_map").val(response[0]["formatted_address"]);
             });
         }

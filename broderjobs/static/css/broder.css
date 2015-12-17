@@ -1,5 +1,5 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
-body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13px; color: #a5a5a5;}
+body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #a5a5a5;}
 ::-webkit-input-placeholder {color: #ccc}
 :-moz-placeholder {color: #ccc}
 ::-moz-placeholder {color: #ccc}
@@ -202,7 +202,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .detalle .mapa img {width: 100%;}
 .box .content section input.full {width: 100%;}
 .box .content section input.half {width: 70%;}
-.box .content section input[type="radio"] + label {margin-right: 30px; font-size: 1.1em;}
+.box .content section input[type="radio"] + label {margin-right: 30px; font-size: 14.2px !Important;}
 .box .content section .double > div:nth-child(-n+2) {width: 50%; float: left;}
 .box .content section .detalle.timeline {position: relative;}
 .box .content section .detalle.timeline p, .box .content section .detalle.timeline label {float: none; display: block;}
@@ -436,7 +436,7 @@ header.menu .centered { height: 47px; }
 .empresa .left .box header .botones-imagen{ position: absolute; top: 10px;  right: 10px;  background: #fff; border-radius: 4px;  padding: 3px 4px; opacity: 0.8;}
 .empresas .list .box header img, .empresa .left .box header img {width: 100%;}
 .empresas .list .box .content, .empresa .left .box .content {padding: 10px 15px;}
-.empresas .list .box .descripcion, .empresa .left .box .descripcion {margin: 4px 0 6px 0; font-size: 12px; display: block;}
+.empresas .list .box .descripcion, .empresa .left .box .descripcion {margin: 4px 0 6px 0; font-size: 12px; display: block; text-transform: uppercase}
 .empresas .list .box .rating label{line-height: 25px; margin: 3px 0 0 7px; font-size: 1.4em; font-weight: bold;}
 
 /*EMPRESA*/
@@ -1182,7 +1182,7 @@ html.dark .wizard-progress .wizard-steps li.active a span {
   border-color: #5d9cf9;
 }
 
-a {
+a:not(.btn-save):not(.btn-action-invertido) {
   background-color: transparent!important;
 }
 a:active,
