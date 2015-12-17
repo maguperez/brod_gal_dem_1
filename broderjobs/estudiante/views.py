@@ -22,7 +22,7 @@ from oportunidad.models import Oportunidad, Postulacion
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
 from main.utils import LoginRequiredMixin
-from empresa import utils
+from empresa.utils import actualizar_ranking_empresa
 
 @login_required(login_url='/estudiante-registro/')
 def registro_cv(request):
@@ -134,7 +134,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         e.salarios = salario
         e.ranking = ranking
         e.save()
-        utils.actualizar_ranking_empresa(id)
+        actualizar_ranking_empresa(id)
         return super(EmpresaDetalleView, self).form_valid(form)
 
     def get_success_url(self, **kwargs):
