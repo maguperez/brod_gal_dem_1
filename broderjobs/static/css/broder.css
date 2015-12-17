@@ -874,7 +874,7 @@ img.img-me {
 }
 /*ERROR LABEL*/
 .error + .tooltip .tooltip-inner { background-color: #f50 !Important; }
-.error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; }
+.error + .tooltip .tooltip-arrow { border-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
 .home #registro #acepto { vertical-align: top; }
 
