@@ -68,6 +68,7 @@ class ActividadesExtra(models.Model):
 class ExperienciaProfesional(models.Model):
     estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     puesto = models.ForeignKey(Puesto, default=None, null=True, blank=True)
+    puesto_referencial = models.CharField(max_length="50", default=None, null=True)
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
     empresa_referencial = models.CharField(max_length="50", default=None, null=True)
     fecha_desde = models.DateField(default=None, null=True, blank=True)
