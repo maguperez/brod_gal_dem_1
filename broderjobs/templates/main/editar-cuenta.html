@@ -2,14 +2,13 @@
 {%block css%}
 {%endblock%}
 {% block content %}
-<<<<<<< HEAD
 {% load staticfiles %}
 <script src="{% static 'js/jquery.validate.min.js' %}"></script>
 <script src="{% static 'js/additional-methods.min.js' %}"></script>
-=======
 
 
->>>>>>> c4a4b14261cae14c67affa773def47f117e4d4f6
+
+
 <section class="usuarios">
     <div class="centered">
         <div class="panel left principal">
@@ -67,7 +66,11 @@
 {% block js %}
 <script>
     $(function(){
-       $("#form").validate({
+        /*$("input[type=submit]").on("click", function(e){
+            e.preventDefault();
+            debugger;
+        });*/
+        $("form").validate({
             errorPlacement: function (error, element) {
                 $(element).tooltip('destroy');
                 $(element).tooltip({
@@ -82,13 +85,13 @@
                 $(element).tooltip('hide');
             },
             rules: {
-                "old_password": { required: true, email: true },
+                "old_password": { required: true, minlength: 6 },
                 "new_password1": { required: true, minlength: 6 },
                 "new_password2": { required: true, minlength: 6, equalTo: "#id_new_password1" },
             },
             messages: {
                 "old_password": { 	required: "Este campo es obligatorio",
-                    				email: "Introduzca un correo válido" },
+									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
                 "new_password1": {  required: "Este campo es obligatorio",
 									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
                 "new_password2": {  required: "Este campo es obligatorio",

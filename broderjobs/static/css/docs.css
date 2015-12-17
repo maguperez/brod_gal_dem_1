@@ -31,7 +31,7 @@
  * Update the basics of our documents to prep for docs content.
  */
 
-body {
+body:not(.no-header) {
   position: relative; /* For scrollyspy */
   padding-top: 50px; /* Account for fixed navbar */
 }

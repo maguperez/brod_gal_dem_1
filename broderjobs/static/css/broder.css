@@ -521,13 +521,13 @@ header.menu .centered { height: 47px; }
 .cv header .imagen, .cv header .detalle {float: left;}
 .cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
 .cv header .detalle {margin: 20px 0 0 60px;}
-.cv header .detalle h3 {color: #848484; font-weight: bold;}
-.cv header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
+.cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
+.cv header .detalle label {margin-top: 10px; display: block; font-size: 14px;}
 .cv .timeline .fecha {font-size: 0.8em !important;}
 .cv .timeline .tipo {margin-top: 12px; font-size: 0.95em !important;}
 .cv .timeline .nombre {margin-bottom: 15px; font-weight: normal !important; font-size: 0.9em !important;}
 .cv .wizard {padding: 24px;}
-.cv .wizard h4 {margin-bottom: 5px; font-size: 1em; color: #848484; font-weight: bold;}
+.cv .wizard h4 {margin-bottom: 5px; font-size: 14px; color: #848484; font-weight: bold;}
 .cv .wizard i {margin: 16px 10px -3px 0; display: inline-block;}
 
 /*POPUPS CV*/
@@ -874,7 +874,7 @@ img.img-me {
 }
 /*ERROR LABEL*/
 .error + .tooltip .tooltip-inner { background-color: #f50 !Important; }
-.error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; }
+.error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
 .home #registro #acepto { vertical-align: top; }
 
@@ -1188,4 +1188,8 @@ a {
 a:active,
 a:hover {
   outline: 0;
+}
+.modal-title {
+    font-weight:  bold;
+    color: #848484;
 }
