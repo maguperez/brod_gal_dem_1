@@ -133,9 +133,7 @@ class OportunidadView(TemplateView):
         id = kwargs.get('id', None)
         oportunidad =  get_object_or_404(Oportunidad, pk=id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
-        postulaciones = Postulacion.objects.filter(oportunidad_id = id).count()
         context = super(OportunidadView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
-        context['postulaciones'] = postulaciones
         return context

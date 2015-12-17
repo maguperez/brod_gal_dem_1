@@ -1,5 +1,9 @@
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
+{%block css%}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+{%endblock%}
+
 {% block content %}
 
 <section class="oportunidad-empresa">
@@ -71,7 +75,7 @@
 						<a class="btn-option"><i class="next"></i>Siguiente fase</a>
 						<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
 					</div>
-					<!--<table>
+					<table id="tb_candidatos" class="table table-striped table-bordered">
 								<thead>
 									<tr>
 										<th></th>
@@ -95,15 +99,15 @@
 										<td>60%</td>
 										<td><i class="menu"></i></td>
 									</tr>
-									<tr class="active">
+									<tr>
 										<td>
 											<input type="checkbox" />
-											<div class="opciones">
-												<a class="btn-option"><i class="delete"></i>Eliminar</a>
-												<a class="btn-option"><i class="next"></i>Siguiente fase</a>
-												<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
-												<a class="btn-option" href="#ver-cv"><i class="curriculum"></i>Ver CV</a>
-											</div>
+											<!--<div class="opciones">-->
+												<!--<a class="btn-option"><i class="delete"></i>Eliminar</a>-->
+												<!--<a class="btn-option"><i class="next"></i>Siguiente fase</a>-->
+												<!--<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>-->
+												<!--<a class="btn-option" href="#ver-cv"><i class="curriculum"></i>Ver CV</a>-->
+											<!--</div>-->
 										</td>
 										<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>
 										<td>PUCP</td>
@@ -164,7 +168,7 @@
 										<td><i class="menu"></i></td>
 									</tr>
 								</tbody>
-							</table>-->
+							</table>
 				</section>
 			</div>
 		</div>
@@ -307,28 +311,13 @@
 {% endblock %}
 
 {% block js %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
 <script>
-	$('#menu').click(function() {
-		if ($('#ctx-menu-header').hasClass('active'))
-			$('#ctx-menu-header').removeClass('active');
-		else
-			$('#ctx-menu-header').addClass('active')
-	});
-	$('.popup').click(function(e) {
-		if ( $(e.target).closest('.popup-box').length === 0 ) {
-			window.history.back();
-			$('body').removeClass('static');
-		}
-	});
-	$('.popup .close').click(function(e) {
-		window.history.back();
-		$('body').removeClass('static');
-	});
-	$('a').click(function(event) {
-		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-        if ($(id).hasClass('popup'))
-			$('body').addClass('static');
-    });
+	$(document).ready(function() {
+    	$('#tb_candidatos').DataTable();
+	} );
+
 	function opciones() {
 		if ($('#menu-oportunidad').hasClass('active'))
 			$('#menu-oportunidad').removeClass('active');

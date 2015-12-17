@@ -235,9 +235,11 @@ class OportunidadCandidatos(TemplateView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
+        postulaciones = Postulacion.objects.filter(oportunidad_id = id).count()
         context = super(OportunidadCandidatos, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
+        context['postulaciones'] = postulaciones
         return context
 
 
@@ -246,11 +248,12 @@ from django.db.models import Q, CharField
 
 import json
 from cStringIO import StringIO
-
+#
 # def datatables_view(request):
-#     objects = MyModel.objects.all()
+#     objects = .objects.all()
 #     list_display = ['field1', 'field2', ...]
-#     list_filter = [f.name for f in MyModel._meta.fields if isinstance(f, CharField)] #a simple way to bring all CharFields, can be defined in specifics
+#     list_filter = [f.name for f in MyModel._meta.fields if isinstance(f, CharField)]
+#     #a simple way to bring all CharFields, can be defined in specifics
 #
 #     # count total items:
 #     iTotalRecords = objects.count()

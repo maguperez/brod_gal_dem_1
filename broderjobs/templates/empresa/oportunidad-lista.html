@@ -8,26 +8,26 @@
 					<option value="P">Oportunidades Pendientes</option>
 				</select>
 				<div class="clear"></div>
-				<ul class="list" id ="oportunidad-lista">
-
-				</ul>
+				<ul class="list" id ="oportunidad-lista"></ul>
 			</div>
 </section>
 {% endblock%}
 {% block js %}
 <script type="text/javascript">
-$( document ).ready( function() {
-    $( '#filtro' ).change( function() {
-        b = $( '#filtro' ).val();
-        $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
-    });
-	$("#link-oportunidades").addClass("active");
-	fnBuscar();
+	$( document ).ready( function() {
+		$( '#filtro' ).change( function() {
+			b = $( '#filtro' ).val();
+			$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
+		});
+		$("#link-oportunidades").addClass("active");
+		$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=A');
+	});
 
-});
-function fnBuscar(){
-	 b = "A";
-	 $( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
-}
+	function opciones(id) {
+		if ($('#menu-' + id).hasClass('active'))
+			$('#menu-' + id).removeClass('active');
+		else
+			$('#menu-' + id).addClass('active')
+	}
 </script>
 {%endblock%}
