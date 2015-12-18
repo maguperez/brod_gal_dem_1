@@ -295,10 +295,27 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         user = self.request.user
         usuario = User.objects.get(pk = user.id)
         persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        universidad = estudiante.universidad
+        universidad_hidden = universidad.id
+        carrera = estudiante.carrera
+        carrera_hidden = carrera.id
+        pais = estudiante.pais
+        pais_hidden = pais.id
+        ciudad = estudiante.ciudad
+        ciudad_hidden = ciudad.id
         return {
             'email': usuario.email,
             'telefono': persona.telefono,
-            'fecha_nacimiento': persona.fecha_nacimiento}
+            'fecha_nacimiento': persona.fecha_nacimiento,
+            'universidades': universidad,
+            'universidades_hidden': universidad_hidden,
+            'carreras': carrera,
+            'carreras_hidden': carrera_hidden,
+            'paises': pais,
+            'paises_hidden': pais_hidden,
+            'ciudades': ciudad,
+            'ciudades_hidden': ciudad_hidden}
 
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
@@ -832,5 +849,3 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         context['empresa'] = empresa
         context['mensajes'] = mensajes
         return context
-
-
