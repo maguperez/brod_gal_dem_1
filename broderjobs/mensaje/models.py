@@ -2,12 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from oportunidad.models import Postulacion
 
-from main import utilitarios
+from main import utils
 
 
-items_registro = utilitarios.estado_registro()
+items_registro = utils.estado_registro()
 class Mensaje(models.Model):
-    items_estado = utilitarios.estado_mensaje()
+    items_estado = utils.estado_mensaje()
 
     postulacion = models.ForeignKey(Postulacion,default=None, null=True, blank=True )
     usuario_remitente = models.ForeignKey(User,default=None, null=True, blank=True )
@@ -24,7 +24,7 @@ class Mensaje(models.Model):
         return self.asunto
 
 class Mensaje_Destinatario(models.Model):
-    items_estado = utilitarios.estado_mensaje()
+    items_estado = utils.estado_mensaje()
 
     mensaje = models.ForeignKey(Mensaje, default=None, null=True, blank=True, max_length=1000)
     usuario_destinatario = models.ForeignKey(User,default=None, null=True, blank=True)

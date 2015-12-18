@@ -18,21 +18,13 @@
    $(function(){
 	   fnBusqueda();
 	   $("#link-oportunidad").addClass("active");
-		$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
+	   	$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
 			$(this).find(".consolidado").css("opacity",0);
 		  	$(this).find(".desglose").css("opacity",1);
-			/*$(this).find(".consolidado").addClass("fadeOut")
-			$(this).find(".consolidado").removeClass("fadeIn");
-			$(this).find(".desglose").addClass("fadeIn");
-			$(this).find(".desglose").removeClass("fadeOut");*/
 		});
-	   $("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
+	   	$("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
 		   	$(this).find(".consolidado").css("opacity",1);
 		  	$(this).find(".desglose").css("opacity",0);
-			/*$(this).find(".consolidado").addClass("fadeIn");
-			$(this).find(".consolidado").removeClass("fadeOut");
-			$(this).find(".desglose").addClass("fadeOut")
-			$(this).find(".desglose").removeClass("fadeIn");*/
 		});
    });
 

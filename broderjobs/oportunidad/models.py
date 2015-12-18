@@ -6,11 +6,11 @@ from empresa.models import Empresa
 from estudiante.models import Estudiante
 from django.contrib.auth.models import User
 
-from main import utilitarios
-items_registro = utilitarios.estado_registro()
+from main import utils
+items_registro = utils.estado_registro()
 
 class Oportunidad(models.Model):
-    items_estado = utilitarios.estado_oportunidad()
+    items_estado = utils.estado_oportunidad()
     periodo= []
     for e in PeriodoGraduacion.objects.all():
         periodo.append((e.id, e.descripcion))
@@ -54,7 +54,7 @@ class Oportunidad(models.Model):
 		return unicode(self.titulo) or u''
 
 class Postulacion(models.Model):
-    items_estado = utilitarios.estado_postulacion()
+    items_estado = utils.estado_postulacion()
 
     oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)

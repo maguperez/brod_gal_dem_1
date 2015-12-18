@@ -261,6 +261,10 @@ def editar_cuenta(request, template_name='main/editar-cuenta.html',
         'form': form ,'message': message, 'tipo': tipo ,
     }, context_instance=RequestContext(request))
 
+def terminos_condiciones(request):
+    return render_to_response('main/terminos-condiciones.html',
+                              context_instance=RequestContext(request))
+
 
 
 

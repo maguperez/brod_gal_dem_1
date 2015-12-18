@@ -42,7 +42,7 @@
 									</div>
 									<div class ="form-group jornada_trabajo">
 										<label class = "col-sm-3">Jornada de trabajo</label>
-										<div class = "col-sm-9">
+										<div class = "col-sm-8">
 											{% for carga in form.carga_horaria %}
 												 {{ carga.errors }}
 												 {{ carga }}
@@ -64,7 +64,7 @@
 									</div>
 									<div class ="form-group remuneracion">
 										<label class = "col-sm-3">Remuneraci&oacute;n</label>
-										<div class = "col-sm-9">
+										<div class = "col-sm-8">
 											{% for r in form.remuneracion %}
 											 	{{ r.errors }}
 											 	{{ r }}
@@ -96,7 +96,7 @@
 								<div class="detalle form-horizontal">
 									<div class ="form-group tipo_puesto">
 										<label class = "col-sm-3">Tipo de vacante *</label>
-										<div class = "col-sm-9">
+										<div class = "col-sm-8">
 											{% for puesto in form.tipo_puesto %}
 											 	{{ puesto.errors }}
 											 	{{ puesto }}
@@ -231,14 +231,18 @@
 		</section>
 </form>
 <style>
-	.jornada_trabajo label,
-	.remuneracion label,
-	.tipo_puesto label{
-		width: 25%;
+	.jornada_trabajo label:nth-of-type(n+2),
+	.remuneracion label:nth-of-type(n+2),
+	.tipo_puesto label:nth-of-type(n+2){
+		margin-left: 10px;
+		display: inline-block;
 	}
 	#map {
 		width: 100%;
 		height: 350px;
+	}
+	.oportunidad-detalle label {
+		font-size: 14.3px;
 	}
 </style>
 <script>
@@ -297,7 +301,7 @@
             geocoder.geocode({
                 location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
                 }, function (response, status) {
-                    if (response != null && response.status != "ZERO_RESULTS")
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
                         $("#id_direccion_map").val(response[0]["formatted_address"]);
             });
         },

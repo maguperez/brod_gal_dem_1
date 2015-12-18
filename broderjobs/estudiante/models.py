@@ -4,13 +4,13 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
 from empresa.models import Empresa, Puesto
-from main import utilitarios
+from main import utils
 
-items_registro = utilitarios.estado_registro()
+items_registro = utils.estado_registro()
 
 class Estudiante(models.Model):
-    items_semestre = utilitarios.semestre_rango()
-    items_anos = utilitarios.anos_rango()
+    items_semestre = utils.semestre_rango()
+    items_anos = utils.anos_rango()
 
     persona = models.OneToOneField(Persona)
     grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True )
@@ -68,9 +68,7 @@ class ActividadesExtra(models.Model):
 class ExperienciaProfesional(models.Model):
     estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     puesto = models.ForeignKey(Puesto, default=None, null=True, blank=True)
-    puesto_referencial = models.CharField(max_length="50", default=None, null=True)
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
-    empresa_referencial = models.CharField(max_length="50", default=None, null=True)
     fecha_desde = models.DateField(default=None, null=True, blank=True)
     fecha_hasta = models.DateField(default=None, null=True, blank=True)
     trabajo_actual = models.CharField(max_length=1, default='N',)

@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
     Conocimiento
-from main import utilitarios
+from main import utils
 
-items_registro = utilitarios.estado_registro()
+items_registro = utils.estado_registro()
 
 class ImagenSilder(models.Model):
     titulo = models.CharField(max_length="50", default=None, null=True, blank=True)

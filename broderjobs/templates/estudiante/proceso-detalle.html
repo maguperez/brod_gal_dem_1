@@ -46,13 +46,13 @@
 												<div class="progress-indicator" style="width: 0%;"></div>
 											</div>
 											<ul class="wizard-steps">
-												<li class="active">
+												<li class = {%if postulacion.estado_postulacion == 'P'%}"active on"{%endif%}>
 													<a href="#tab1" data-toggle="tab"><span class = "fa fa-check"></span>Postulacion</a>
 												</li>
-												<li>
+												<li class = {%if postulacion.estado_postulacion == 'E'%}"active on"{%endif%}>
 													<a href="#tab2" data-toggle="tab"><span class = "fa fa-check"></span>Evaluacion</a>
 												</li>
-												<li>
+												<li class = {%if postulacion.estado_postulacion == 'F'%}"active on"{%endif%}>
 													<a href="#tab3" data-toggle="tab"><span class = "fa fa-check"></span>Finalizado</a>
 												</li>
 											</ul>
@@ -145,27 +145,29 @@
     });
 	$('.wizard-progress').bootstrapWizard({
 		tabClass: 'wizard-steps',
-		firstSelector: null,
-		lastSelector: null,
 		onTabClick: function( tab, navigation, index, newindex ) {
-			if ( newindex > index + 1 ) {
-				return false;
-			} else {
-				return true;
-			}
+			debugger;
 		},
 		onTabChange: function( tab, navigation, index, newindex ) {
-			var $total = navigation.find('li').size() - 1;
+			debugger;
+			//var $total = navigation.find('li').size() - 1;
 			//$wizardfinish[ newindex != $total ? 'addClass' : 'removeClass' ]( 'hidden' );
-			$('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
+			//$('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
 		},
 		onTabShow: function( tab, navigation, index ) {
+
+			$(".wizard-progress li.on + li").removeClass("active");
+			$(".wizard-progress li.on").addClass("active");
+			if (tab.is(":not(.on")){
+				return false;
+			}
 			var $total = navigation.find('li').length - 1;
 			var $current = index;
 			var $percent = Math.floor(( $current / $total ) * 100);
 			$('#wizard').find('.progress-indicator').css({ 'width': $percent + '%' });
 			tab.prevAll().addClass('completed');
 			tab.nextAll().removeClass('completed');
+			return false;
 		}
 	});
 </script>

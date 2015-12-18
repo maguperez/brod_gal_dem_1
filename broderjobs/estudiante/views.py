@@ -20,9 +20,9 @@ from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciuda
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
 from oportunidad.models import Oportunidad, Postulacion
 from mensaje.models import Mensaje, Mensaje_Destinatario
-from main import utilitarios
-from main.utilitarios import LoginRequiredMixin
-from empresa import utils
+from main import utils
+from main.utils import LoginRequiredMixin
+from empresa.utils import actualizar_ranking_empresa
 
 @login_required(login_url='/estudiante-registro/')
 def registro_cv(request):
@@ -134,7 +134,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         e.salarios = salario
         e.ranking = ranking
         e.save()
-        utils.actualizar_ranking_empresa(id)
+        actualizar_ranking_empresa(id)
         return super(EmpresaDetalleView, self).form_valid(form)
 
     def get_success_url(self, **kwargs):
@@ -203,7 +203,7 @@ class MiCVView(LoginRequiredMixin, FormView):
         estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
         context = super(MiCVView, self).get_context_data(**kwargs)
         if persona.fecha_nacimiento is not None:
-            edad = utilitarios.calular_edad(persona.fecha_nacimiento)
+            edad = utils.calular_edad(persona.fecha_nacimiento)
             context['edad'] = edad
         context['usuario'] = user
         context['persona'] = persona

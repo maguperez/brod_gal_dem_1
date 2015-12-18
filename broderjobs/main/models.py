@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from main import utilitarios
-items_registro = utilitarios.estado_registro()
+from main import utils
+items_registro = utils.estado_registro()
 
 class Persona(models.Model):
     usuario = models.OneToOneField(User)
