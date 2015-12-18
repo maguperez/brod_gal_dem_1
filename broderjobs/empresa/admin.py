@@ -13,8 +13,6 @@ admin.site.register(models.FacturacionAnual)
 
 admin.site.register(models.NumeroFuncionarios)
 
-admin.site.register(models.ImagenSilder)
-
 admin.site.register(models.EvaluacionEmpresa)
 
 admin.site.register(models.RankingEmpresa)
