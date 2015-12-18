@@ -144,7 +144,8 @@ class OportunidadView(TemplateView):
 
 def datatable_candidatos(request):
     id = request.GET['id']
-    objects = Postulacion.objects.filter(pk = id)
+    objects = Postulacion.objects.filter(oportunidad_id = id)
+    print(objects)
 
     list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
     list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]
@@ -176,8 +177,9 @@ def datatable_candidatos(request):
     objects = objects[ start : (start+length)]
 
     # extract information
-    # data = [map(lambda field: getattr(obj, field), list_display) for obj in objects]
     data1 = utils.obtener_candidatos(objects)
+    # data = [map(lambda field: getattr(obj, field), list_display) for obj in objects]
+
     #define response
     response = {
         'aaData': data1,

@@ -3,7 +3,9 @@
 {%block css%}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.1.0/css/select.dataTables.min.css">
-
+<style>
+    .ocultar{display: none;}
+</style>
 {%endblock%}
 
 {% block content %}
@@ -80,14 +82,15 @@
 					<table id="tb_candidatos" class="table table-striped table-bordered">
 						<thead>
 							<tr>
-							    <!--<th></th>-->
+							    <th></th>
+                                <th></th>
 								<th class="align-left">Candidatos</th>
 								<th>Universidad<a></a></th>
 								<th>Carrera</th>
 								<th>Graduaci&oacute;n</th>
 								<th>Inscripci&oacute;n</th>
-								<!--<th>Compatibilidad</th>-->
-								<!--<th></th>-->
+								<th>Compatibilidad</th>
+								<th></th>
                             </tr>
                         </thead>
 								<!--<tbody>-->
@@ -317,61 +320,70 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.1.0/js/dataTables.select.min.js"></script>
 <script>
-//	$(document).ready(function() {
-//    	$('#tb_candidatos').DataTable( {
-//        columnDefs: [ {
-//            orderable: false,
-//            className: 'select-checkbox',
-//            targets:   0
-//        } ],
-//        select: {
-//            style:    'os',
-//            selector: 'td:first-child'
-//        },
-//        order: [[ 1, 'asc' ]]
-//    } );
-//	} );
-
 	$(document).ready(function() {
-        exampleTable = $('#tb_candidatos').dataTable( {
-    //        "aaSorting": [[ 2, "asc" ]],
-    //        "aoColumns": [
-    //            { "mData":"universidad"},
-    //            { "mData":"universidad"},
-    //            { "mData":"supplier", "sWidth":"150px",
-    //              "mRender": function (supplier, type, full)  {
-    //                             return '<a href="'+supplier.slug+'">' + supplier.name + '</a>';
-    //                         },
-    //            },
-    //            { "sType": 'numeric', "sClass": "right", "mData":"price", "sWidth":"70px" },
-    //        ],
+        var table = $('#tb_candidatos').dataTable( {
+            'columnDefs': [
+                {
+                    'targets': 0,
+                    'searchable':false,
+                    'orderable':false,
+                    'className': 'dt-body-center',
+                    'render': function (data, type, full, meta) {
+                        return '<input type="checkbox">';
+                    }
+                },
+                {
+                    'targets': 1,
+                    'className': 'ocultar',
+                },
+                {
+                    'targets': 8,
+                    'searchable':false,
+                    'orderable':false,
+                    'className': 'dt-expandir',
+                    'render': function (data, type, full, meta) {
+                        return '<i class="menu"></i>';
+                    }
+                },
+            ],
             "bFilter": false,
             "bServerSide": true,
             "bLengthChange": false,
             "fnServerParams": function (aoData) {
-                aoData.push({ "name": "id", "value": '17' });
+                aoData.push({ "name": "id", "value": '{{oportunidad.id}}' });
             },
             "sAjaxSource": "{% url 'candidatos' %}",
-    //        "bStateSave" : true, // optional
-    //                fnStateSave :function(settings,data){
-    //                        localStorage.setItem("exampleState", JSON.stringify(data));
-    //                },
-    //                fnStateLoad: function(settings) {
-    //                        return JSON.parse(localStorage.getItem("exampleState"));
-    //                },
-    //        fnInitComplete: function() { // use this if you don't hardcode column widths
-    //            this.fnAdjustColumnSizing();
-    //        }
+            columns: [
+                        { data: "checkbox" },
+                        { data: "id" },
+                        { data: "nombre" },
+                        { data: "universidad" },
+                        { data: "carrera" },
+                        { data: "graduacion" },
+                        { data: "fecha_postulacion" },
+                        { data: "compatibilidad" },
+                        { data: "botones" },
+                    ],
         });
-//    $('#example').click(function() { // only if you don't hardcode column widths
-//        exampleTable.fnAdjustColumnSizing();
+
+        $('#tb_candidatos tbody').on('click', 'td.dt-expandir', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        } );
+
     });
 
-	function opciones() {
-		if ($('#menu-oportunidad').hasClass('active'))
-			$('#menu-oportunidad').removeClass('active');
-		else
-			$('#menu-oportunidad').addClass('active')
-	}
+
 </script>
 {%endblock%}
