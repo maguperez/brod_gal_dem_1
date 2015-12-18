@@ -19,7 +19,6 @@ def obtener_candidatos (objects):
         records = {"checkbox":"", "id":id, "nombre":nombre,"universidad":universidad,"carrera":carrera,
                     "graduacion":graduacion, "fecha_postulacion": fecha_postulacion, "compatibilidad": compatibilidad,
                    "botones":""}
-        print records
         data_records.append(records)
 
     return data_records
