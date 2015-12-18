@@ -1182,9 +1182,6 @@ html.dark .wizard-progress .wizard-steps li.active a span {
   border-color: #5d9cf9;
 }
 
-a:not(.btn-save):not(.btn-action-invertido) {
-  background-color: transparent;
-}
 a:active,
 a:hover {
   outline: 0;

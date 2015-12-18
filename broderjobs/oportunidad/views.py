@@ -172,8 +172,8 @@ def datatable_candidatos(request):
 
 
     # finally, slice according to length sent by dataTables:
-    start = int(request.GET['iDisplayStart'])
-    length = int(request.GET['iDisplayLength'])
+    start = int(request.GET['start'])
+    length = int(request.GET['length'])
     objects = objects[ start : (start+length)]
 
     # extract information
@@ -185,7 +185,7 @@ def datatable_candidatos(request):
         'aaData': data1,
         'iTotalRecords': iTotalRecords,
         'iTotalDisplayRecords': iTotalDisplayRecords,
-        'sEcho': request.GET['sEcho']
+        'draw': request.GET['draw']
     }
 
     #serialize to json
