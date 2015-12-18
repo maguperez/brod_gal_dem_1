@@ -372,6 +372,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.min.js"></script>
 
 <script>
+    var selected;
     $(document).ready(function () {
         var table = $('#tb_candidatos').dataTable({
             responsive: {
@@ -393,7 +394,7 @@
                     targets: 0,
                     className: 'dt-body-center',
                     render: function (data, type, full, meta) {
-                        return '<input type="checkbox">';
+                        return '<input class = "checking" type="checkbox" '+ (selected[full.id] != null ? "checked" : "")+'>';
                     }
                 },
                 {
@@ -420,9 +421,10 @@
             serverSide: true,
             processing: true,
             lengthChange: false,
-           /* serverParams: function (aoData) {
-                aoData.push({"name": "id", "value": '{{oportunidad.id}}'});
-            }, */
+            stateSave: true,
+            stateSaveCallback: function(settings, data){
+                debugger;
+            },
             ajax: {
                 type: "GET",
                 url: "{% url 'candidatos' %}",
@@ -431,7 +433,6 @@
                     d.id = "{{oportunidad.id}}";
                 }
             },
-            //ajax: "{% url 'candidatos' %}",
             columns: [
                 {data: "checkbox"},
                 {data: "id"},
@@ -444,6 +445,13 @@
                 {data: "botones"},
                 {data: "botones"},
             ],
+        });
+        $("#tb_candidatos").on("change",".checking", function() {
+            selected = new Array();
+            var data = table.api().row($(this).parents('tr')).data();
+            if ($(this).is(":checked"))
+                selected[data.id] = data;
+            else if (selected[data.id] != null) selected[data.id] = null;
         });
 
     });
