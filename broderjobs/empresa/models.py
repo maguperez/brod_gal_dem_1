@@ -6,25 +6,9 @@ from main import utils
 
 items_registro = utils.estado_registro()
 
-class ImagenSilder(models.Model):
-    titulo = models.CharField(max_length="50", default=None, null=True, blank=True)
-    url = models.CharField(max_length="1000", default=None, null=True, blank=True)
-    imagen = models.ImageField('imagen', upload_to='img/%Y/%m/%d', null=True, blank=True)
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
-    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-    usuario_modificacion = models.ForeignKey(User, default=None, null=True, blank=True)
 
-    def __unicode__(self):
-        return self.titulo
 
-    @property
-    def set_imagen(self):
-        if self.imagen:
-            return self.imagen.url
-        # else:
-        #     return "/static/img/profile/profile_default.png"
 
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
@@ -94,12 +78,9 @@ class Empresa(models.Model):
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
     website = models.CharField(max_length="50", default=None, null=True, blank=True )
     logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
-    imagen_slider = models.ManyToManyField(ImagenSilder, default=None, blank=True, verbose_name="Imagenes")
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
-
-
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
@@ -158,5 +139,38 @@ class RankingEmpresa(models.Model):
 
     def __unicode__(self):
         return unicode('%s' % (self.empresa)) or u''
+
+class Empresa_Imagenes(models.Model):
+
+    empresa = models.ManyToManyField(Empresa, default=None, blank=True, verbose_name="Imagenes")
+    imagen = models.ImageField(upload_to='img/%Y/%m/%d')
+    slug = models.SlugField(max_length=50, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    usuario_modificacion = models.ForeignKey(User, default=None, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.file.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('upload-new', )
+
+    def save(self, *args, **kwargs):
+        self.slug = self.file.name
+        super(Empresa_Imagenes, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """delete -- Remove to leave file."""
+        self.file.delete(False)
+        super(Empresa_Imagenes, self).delete(*args, **kwargs)
+
+    @property
+    def set_imagen(self):
+        if self.imagen:
+            return self.imagen.url
+        else:
+            return "/static/img/profile/profile_default.png"
 
 
