@@ -1,6 +1,11 @@
 <form method="post" action="{{ request.build_absolute_uri }}">{% csrf_token %}
-    <p>Esta seguro que desea eliminar la actividad extraacademica en: </p>
+    <p>Esta seguro que desea eliminar la actividad extra-acad&eacute;mica en: </p>
 	<p> {{ object.organizacion }} como {{ object.descripcion }} </p>
     <!--<p><input type="submit" value="Aceptar" /></p>-->
 </form>
 </form>
+<script>
+    $(function(){
+        $("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Actividades extra-acad\u00E9micas');
+	});
+</script>
