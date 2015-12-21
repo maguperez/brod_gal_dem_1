@@ -5,7 +5,7 @@
 							<img class="imagen" src="{{empresa.set_logo}}" />
 							<div class="descripcion">
 								<a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
-								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+								<div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{empresa.nombre}}</label></div>
 							</div>
 							<div class="opciones" onclick="opciones({{oportunidad.id}})">
 								<i class="menu"></i>
@@ -66,7 +66,7 @@
 						</div>
 						<div class="inscripciones">
 							<div class="box">
-								<label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
+								<label class="titulo"><strong>Inscripciones en los &uacute;ltimos 7 d&iacute;as</strong></label>
 								<div class="grafico grafico-inscripciones">
 									<div id = "chart-id-{{oportunidad.id}}" data-id="{{oportunidad.id}}" class="ct-chart " data-info = "[[5, 9, 7, 8, 5, 3, 5, 4]]"></div>
 									{{postulaciones}}
