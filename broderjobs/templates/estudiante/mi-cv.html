@@ -240,6 +240,7 @@
  <script>
 
 	 var formAjaxSubmit = function(form, modal) {
+		 console.log($(form));
 		 var valid = $(form).validate().valid();
 		 if (valid) {
 			 $(form).submit(function (e) {
