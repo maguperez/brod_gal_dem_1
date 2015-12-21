@@ -5,27 +5,6 @@
 {%endblock%}
 {% block content %}
 
-
-<!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
-<!--<link rel="stylesheet" href="{% static 'css/custom-theme/jquery-ui-1.10.3.custom.css' %}">-->
-<!--<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">-->
-
-<!--<link rel="stylesheet" href="{% static 'css/prettify.css' %}">-->
-
-
-<!--<link rel="stylesheet" href="{% static 'css/select2.css' %}">-->
-
-<!--&lt;!&ndash;NO VAAAAAA<script type="text/javascript" src="{% static 'js/jquery-1.8.2.min.js' %}"></script>NO VAAAAAA&ndash;&gt;-->
-<!--<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>-->
-
-<!--<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>-->
-
-<!--<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
-<!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
-
 <style>
 	.select2-search__field{
 		width: 142px !important;
@@ -432,16 +411,10 @@
 			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
 			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
 
-			 console.log(fechaDesde);
-			 console.log(fechaHasta);
-			 console.log(fechaDesdeCompleta);
-			 console.log(fechaHastaCompleta);
-
 			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
 			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
 		 }
 
-		 console.log($(this).parents("#form-modal").find("form")[0]);
 		 $(this).parents("#form-modal").find("form").submit();
 	 });
 

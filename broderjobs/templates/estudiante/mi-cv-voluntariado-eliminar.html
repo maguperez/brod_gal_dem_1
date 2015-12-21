@@ -1,5 +1,5 @@
-<form method="post" action="{{ request.build_absolute_uri }}">{% csrf_token %}
+<form method="post"  action="{{ request.build_absolute_uri }}">{% csrf_token %}
     <p>Esta seguro que desea eliminar el Voluntariado en: </p>
 	<p> {{ object.organizacion }} como {{ object.cargo }} </p>
-    <p><input type="submit" value="Aceptar" /></p>
+    <!--<p><input type="submit" value="Aceptar" /></p>-->
 </form>
