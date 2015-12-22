@@ -31,8 +31,11 @@ urlpatterns =[
 
 	url(r'^terminos-condiciones/$', 'main.views.terminos_condiciones', name="terminos-condiciones"),
 
+	url(r'^404/$', 'main.views.error404', name="404"),
+
 	# url(r'^editar-cuenta-representante/$', 'main.views.editar_cuenta_representante', name="editar-cuenta-representante"),
 
 	# url(r'^editar-cuenta/$', views.EditarUsuarioEstudianteView.as_view(), name="editar-cuenta"),
 
 ]
+handler404 = 'views.my_404_view'

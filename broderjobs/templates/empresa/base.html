@@ -39,7 +39,7 @@
 	<div class = "header-container">
 		<header class="principal">
 			<div class="centered">
-				<a href="oportunidades.html"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
+				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
@@ -98,11 +98,11 @@
 		window.history.back();
 		$('body').removeClass('static');
 	});
-	$('a').click(function(event) {
-		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-        if ($(id).hasClass('popup'))
-			$('body').addClass('static');
-    });
+//	$('a').click(function(event) {
+//		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+//        if ($(id).hasClass('popup'))
+//			$('body').addClass('static');
+//    });
 	function opciones() {
 		if ($('#menu-oportunidad').hasClass('active'))
 			$('#menu-oportunidad').removeClass('active');

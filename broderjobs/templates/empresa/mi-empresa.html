@@ -29,12 +29,6 @@
 					<div class="slider"id="fade">
 						<div class="owl-carousel">
 
-						{% for imagen in empresa.imagen_slider.all%}
-
-							<!--<div class="item">
-								<img src="{{imagen.set_imagen}}"  />
-                            </div>-->
-						{% endfor%}
 							<div class="item-video">
                                 <a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>
                             </div>
@@ -43,7 +37,7 @@
                             </div>
                         </div>
 					</div>
-					<a class="btn-edit">Editar</a>
+					<a class="btn-edit" id="btn-edit">Editar</a>
 				</header>
 				<div class="content">
 					<section class="about">
@@ -260,8 +254,8 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
-	 $('#logo-button').click(function() {
-     	$('#form-modal-body').load('logo/', function () {
+	 $('#btn-edit').click(function() {
+     	$('#form-modal-body').load('imagenes/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});

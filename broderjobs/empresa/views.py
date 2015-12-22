@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Puesto, Empresa, Representante, Sector
+from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
 from estudiante.models import Estudiante
@@ -20,6 +20,12 @@ from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from empresa import utils
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
+import json
+
+from django.http import HttpResponse
+from django.views.generic import CreateView, DeleteView, ListView
+from .response import JSONResponse, response_mimetype
+from .serialize import serialize
 
 import json
 
@@ -295,3 +301,75 @@ from cStringIO import StringIO
 #     json.dump(response, s)
 #     s.seek(0)
 #     return HttpResponse(s.read())
+
+class PictureCreateView(CreateView):
+    model = Picture
+    fields = "__all__"
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        context = super(PictureCreateView, self).get_context_data(**kwargs)
+        context['empresa'] = empresa
+        return context
+
+    def get_initial(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        return {
+            'empresa':empresa,
+        }
+
+    def form_valid(self, form):
+        persona = Persona.objects.get(usuario_id= self.request.user)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+
+        self.object = form.save()
+        self.empresa = empresa
+        print(self.object)
+        files = [serialize(self.object)]
+        data = {'files': files}
+        response = JSONResponse(data, mimetype=response_mimetype(self.request))
+        response['Content-Disposition'] = 'inline; filename=files.json'
+        return response
+
+    def form_invalid(self, form):
+        data = json.dumps(form.errors)
+        return HttpResponse(content=data, status=400, content_type='application/json')
+
+class PictureDeleteView(DeleteView):
+    model = Picture
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        response = JSONResponse(True, mimetype=response_mimetype(request))
+        response['Content-Disposition'] = 'inline; filename=files.json'
+        return response
+
+class PictureListView(ListView):
+    model = Picture
+    print "modelo"
+
+    # def get_object(self, queryset=None):
+    #     user = self.request.user
+    #     persona = Persona.objects.get(usuario_id=user.id)
+    #     representante = Representante.objects.get(persona_id =persona.id)
+    #     empresa = Empresa.objects.get(id=representante.empresa.id)
+    #     picture = Picture.objects
+    #     return voluntariado
+
+    def render_to_response(self, context, **response_kwargs):
+        print("listar")
+        print self
+        print self.get_queryset()
+        files = [ serialize(p) for p in self.get_queryset() ]
+        data = {'files': files}
+        response = JSONResponse(data, mimetype=response_mimetype(self.request))
+        response['Content-Disposition'] = 'inline; filename=files.json'
+        return response

@@ -14,6 +14,12 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.core.context_processors import csrf
 
 
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
 def login_estudiante(request):
     message = None
     if request.method == "POST":
@@ -144,7 +150,6 @@ def homepage_empresa(request):
                 message = "Email o contraseña incorrecta"
         if '_registro' in request.POST:
             if registro_form.is_valid():
-                print("registro")
                 user = registro_form.save()
                 persona = Persona()
                 persona.usuario = user
@@ -263,6 +268,10 @@ def editar_cuenta(request, template_name='main/editar-cuenta.html',
 
 def terminos_condiciones(request):
     return render_to_response('main/terminos-condiciones.html',
+                              context_instance=RequestContext(request))
+
+def error404 (request):
+    return render_to_response('main/404.html',
                               context_instance=RequestContext(request))
 
 

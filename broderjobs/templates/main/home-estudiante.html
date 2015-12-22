@@ -99,7 +99,7 @@
 										{{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
 								</div><br>
 								<div class="opciones">
-									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="../static/terminos_y_condiciones.html">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 								</div>
 								{%if message %}
 								<div class="alert alert-warning alert-dismissible" role="alert">
