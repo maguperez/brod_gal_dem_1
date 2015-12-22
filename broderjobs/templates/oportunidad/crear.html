@@ -295,7 +295,23 @@
 		$("#slider-periodo").slider({});
 
 		InicializarTypeahead();
+
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+
+		InicializarSelect2(elementosParaSelect2);
+
+
 	});
+
+	function InicializarSelect2(ids){
+
+		ids.forEach(function(id){
+			$("#"+id).select2({
+				placeholder: "Seleccione por favor",
+				allowClear: true
+			});
+		});
+	}
 
 	function InicializarTypeahead(){
 //		var a = [{id: "someId1", name: "Display name 1"},{id: "someId2", name: "Display name 2"}];
@@ -386,6 +402,64 @@
 				// Nothing is active so it is a new value (or maybe empty value)
 			}
 		})
+
+		$("form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+
+				console.log(element[0].id);
+
+				if(element[0].id == 'id_carrera1' || element[0].id == 'id_tipo_puesto1'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                resumen: {
+                    required: true
+                },
+				carrera: {
+					required: true
+				},
+				tipo_puesto:{
+                    required: true
+                }
+
+            },
+            messages: {
+                resumen: {
+                    required: "Este campo es obligatorio"
+                },
+				carrera: {
+                    required: "Este campo es obligatorio"
+                },
+				tipo_puesto:{
+                    required: "Este campo es obligatorio"
+                }
+
+            }
+        });
+
 	}
 
 </script>
