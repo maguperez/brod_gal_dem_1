@@ -94,17 +94,17 @@
 							<div class ="form-group">
 										<label class = "col-sm-3">Direcci&oacute;n</label>
 										<div class = "col-sm-9">
-											{{form.direccion_map}}
+											{{oportunidad.direccion_map}}
 										</div>
 										<br>
 									</div>
 									<div class ="form-group">
 										<label class = "col-sm-3"></label>
 										<div class = "col-sm-3">
-											{{form.latitud}}
+											{{oportunidad.latitud}}
 										</div>
 										<div class = "col-sm-3">
-											{{form.longitud}}
+											{{oportunidad.longitud}}
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -254,10 +254,8 @@
                     if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
                         $("#id_direccion_map").val(response[0]["formatted_address"]);
             });
-        },
-
+        }
     };
-
 </script>
 
 {%endblock%}
