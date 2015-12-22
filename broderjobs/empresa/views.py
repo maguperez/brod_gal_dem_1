@@ -308,15 +308,6 @@ class PictureCreateView(CreateView):
     model = Picture
     fields = "__all__"
 
-    def get_context_data(self, **kwargs):
-        user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
-        empresa = Empresa.objects.get(id=representante.empresa.id)
-        context = super(PictureCreateView, self).get_context_data(**kwargs)
-        context['empresa'] = empresa
-        return context
-
     def get_initial(self):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
@@ -330,10 +321,9 @@ class PictureCreateView(CreateView):
         persona = Persona.objects.get(usuario_id= self.request.user)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-
+        form.instance.empresa = empresa
         self.object = form.save()
         self.empresa = empresa
-        print(self.object)
         files = [serialize(self.object)]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
@@ -356,20 +346,16 @@ class PictureDeleteView(DeleteView):
 
 class PictureListView(ListView):
     model = Picture
-    print "modelo"
 
-    # def get_object(self, queryset=None):
-    #     user = self.request.user
-    #     persona = Persona.objects.get(usuario_id=user.id)
-    #     representante = Representante.objects.get(persona_id =persona.id)
-    #     empresa = Empresa.objects.get(id=representante.empresa.id)
-    #     picture = Picture.objects
-    #     return voluntariado
+    def get_queryset(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        pictures = Picture.objects.filter(empresa_id = empresa.id)
+        return pictures
 
     def render_to_response(self, context, **response_kwargs):
-        print("listar")
-        print self
-        print self.get_queryset()
         files = [ serialize(p) for p in self.get_queryset() ]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
