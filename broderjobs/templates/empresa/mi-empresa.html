@@ -40,7 +40,8 @@
 							{%endfor%}
                         </div>
 					</div>
-					<a class="btn-edit" id="btn-edit">Editar</a>
+					<!--<a class="btn-edit" id="btn-edit">Editar</a>-->
+					<a href="{%url 'upload-new'%}" class="btn-edit" data-toggle="modal" data-target="#imagenes"></a>
 				</header>
 				<div class="content">
 					<section class="about">
@@ -150,12 +151,29 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div>
+<div style="display: none">
 	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
 	{{form.as_p}}
 	<input type="submit" id="cambiar_imagen">
 	</form>
 </div>
+
+<!-- Modal HTML -->
+<div id="imagenes" class="modal fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h2 class="modal-title bold">Imagenes</h2>
+	</div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Content will be loaded here from "remote.php" file -->
+		</div>
+	</div>
+</div>
+
+
+
+
 <style>
 	.owl-carousel {
         height:369px;
