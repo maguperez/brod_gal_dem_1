@@ -321,7 +321,7 @@ class PictureCreateView(CreateView):
         persona = Persona.objects.get(usuario_id= self.request.user)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-
+        form.instance.empresa = empresa
         self.object = form.save()
         self.empresa = empresa
         files = [serialize(self.object)]
