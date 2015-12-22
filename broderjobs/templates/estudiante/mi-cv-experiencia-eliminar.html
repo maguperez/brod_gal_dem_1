@@ -1,6 +1,11 @@
 <form method="post" action="{{ request.build_absolute_uri }}">{% csrf_token %}
     <p>Esta seguro que desea eliminar la experiencia en: </p>
 	<p> {{ object.empresa }} como {{ object.puesto }} </p>
-    <p><input type="submit" value="Aceptar" /></p>
+    <!--<p><input type="submit" value="Aceptar" /></p>-->
 </form>
 </form>
+<script>
+    $(function(){
+        $("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Eliminar Experiencia profesional');
+	});
+</script>

@@ -18,13 +18,22 @@
    $(function(){
 	   fnBusqueda();
 	   $("#link-oportunidad").addClass("active");
-	   	$("body").on("mouseenter", ".oportunidad-box .descripcion", function(){
+	   	$("body").on("mouseenter", ".compatibilidad", function(){
 			$(this).find(".consolidado").css("opacity",0);
 		  	$(this).find(".desglose").css("opacity",1);
+			var data = 0;
+			data = $(this).find(".cultural .circular-bar-chart").data("percent");
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+
+			data = $(this).find(".academico .circular-bar-chart").data("percent");
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
 		});
-	   	$("body").on("mouseleave", ".oportunidad-box .descripcion", function(){
+	   	$("body").on("mouseleave", ".compatibilidad", function(){
 		   	$(this).find(".consolidado").css("opacity",1);
 		  	$(this).find(".desglose").css("opacity",0);
+			$('.chart').data('easyPieChart').update(40);
 		});
    });
 
@@ -88,17 +97,5 @@
 	}
 
 </script>
-<style>
-	.compatibilidad { text-align: center; }
-	.compatibilidad > div,
-	.compatibilidad .desglose > div{
-		display: inline-block !Important; }
-	.compatibilidad .consolidado {
-		margin-left: 42px;
-		position: absolute;
-	}
-	.compatibilidad .academico {
-		margin-left: 5px;
-	}
-</style>
+
 {% endblock js %}

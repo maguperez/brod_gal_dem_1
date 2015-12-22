@@ -1,10 +1,12 @@
 {% extends 'estudiante/base.html' %}
 {% load staticfiles %}
 {%block css%}
+
 {%endblock%}
 {% block content %}
 
-<section class="empresa">
+		<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
+		<section class="empresa">
 			<div class="centered">
 				<div class="panel left">
 					<div class="box">
@@ -31,11 +33,35 @@
                                                 <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
                                                 <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
                                             </div>
-                                            <div class="compatibilidad">
-                                                <div class="grafico"><img src="/static/img/compatibilidad.jpg" /></div>
-                                                    <label class="resultado">Compatible</label>
-                                                </div>
-                                                <div class="ver-oportunidad">
+                                           	<div class="compatibilidad">
+												<div class="consolidado">
+													<div class="circular-bar ">
+														<div class="circular-bar-chart" data-percent="73">
+															<label><span class="percent">73</span>%</label>
+														</div>
+													</div>
+													<label class="resultado">Compatible</label>
+												</div>
+												<div class="desglose" style="opacity: 0">
+													<div class="cultural">
+														<div class="circular-bar">
+															<div class="circular-bar-chart" data-percent="63">
+																<label><span class="percent">53</span>%</label>
+															</div>
+														</div>
+														<label class="resultado">Cultural</label>
+													</div>
+													<div class="academico">
+														<div class="circular-bar">
+															<div class="circular-bar-chart" data-percent="49">
+																<label><span class="percent">49</span>%</label>
+															</div>
+														</div>
+														<label class="resultado">Académico</label>
+													</div>
+												</div>
+											</div>
+											<div class="ver-oportunidad">
                                                 <a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
                                                 <label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
                                             </div>
@@ -55,4 +81,45 @@
 
 {% endblock content %}
 {% block js %}
+<script>
+	$(function(){
+		$("body").on("mouseenter", ".compatibilidad", function () {
+            $(this).find(".consolidado").css("opacity",0);
+		  	$(this).find(".desglose").css("opacity",1);
+			var data = 0;
+			data = $(this).find(".cultural .circular-bar-chart").data("percent");
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+
+			data = $(this).find(".academico .circular-bar-chart").data("percent");
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
+        });
+        $("body").on("mouseleave", ".compatibilidad", function () {
+            $(this).find(".consolidado").css("opacity", 1);
+            $(this).find(".desglose").css("opacity", 0);
+        });
+        $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+            animate: 2000,
+            scaleLength: 0,
+            lineWidth: 5,
+            barColor: "#1dcfac",
+            size: 65,
+        });
+        $('.cultural .circular-bar-chart').easyPieChart({
+            animate: 2000,
+            scaleLength: 0,
+            lineWidth: 5,
+            barColor: "#c0392b",
+            size: 65,
+        });
+        $('.academico .circular-bar-chart').easyPieChart({
+            animate: 2000,
+            scaleLength: 0,
+            lineWidth: 5,
+            barColor: "#5d9cf9",
+            size: 65,
+        });
+	});
+</script>
 {%endblock%}

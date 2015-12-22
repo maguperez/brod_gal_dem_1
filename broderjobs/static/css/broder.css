@@ -1190,3 +1190,18 @@ a:hover {
     font-weight:  bold;
     color: #848484;
 }
+.compatibilidad {
+    text-align: center;
+    float: left;
+}
+.compatibilidad > div,
+.compatibilidad .desglose > div {
+    display: inline-block !Important;
+}
+.compatibilidad .consolidado {
+    margin-left: 42px;
+    position: absolute;
+}
+.compatibilidad .academico {
+    margin-left: 5px;
+}
