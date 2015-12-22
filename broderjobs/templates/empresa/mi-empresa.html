@@ -32,9 +32,12 @@
 							<div class="item-video">
                                 <a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>
                             </div>
+							{%for i in imagenes.all%}
                             <div class="item">
-                                <img src="{%static 'img/oficina-11.png' %}"/>
+                                <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
+								<img src="{{i.set_imagen}}"/>
                             </div>
+							{%endfor%}
                         </div>
 					</div>
 					<a class="btn-edit" id="btn-edit">Editar</a>

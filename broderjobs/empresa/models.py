@@ -200,5 +200,12 @@ class Picture(models.Model):
         self.file.delete(False)
         super(Picture, self).delete(*args, **kwargs)
 
+    @property
+    def set_imagen(self):
+        if self.file:
+            return self.file.url
+        else:
+            return "/static/img/profile/profile_default.png"
+
 
 
