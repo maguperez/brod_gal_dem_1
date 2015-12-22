@@ -271,7 +271,7 @@ def terminos_condiciones(request):
                               context_instance=RequestContext(request))
 
 def error404 (request):
-    return render_to_response('main/404.html',
+    return render_to_response('404.html',
                               context_instance=RequestContext(request))
 
 
