@@ -207,9 +207,9 @@
                         <h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
 
                         <div style="margin:0 50px">
-                            {{form.direccion_map}}
-                            {{form.longitud}}
-                            {{form.latitud}}
+                            <div id = "id_direccion_map">{{empresa.direccion_map}}</div>
+                            <div id = "id_longitud">{{empresa.longitud}}</div>
+                            <div id = "id_latitud">{{empresa.latitud}}</div>
                         </div>
                         <div id="map" style="height: 350px; width: 100%"></div>
                     </section>
@@ -464,9 +464,9 @@
             google.maps.event.addListener(Ubicacion.map, 'click', function (event) {
                 Ubicacion.marcar_mapa(event.latLng);
             });
-            if ($("#id_latitud").val() != "") {
-                var latitud = $("#id_latitud").val();
-                var longitud = $("#id_longitud").val();
+            if ($("#id_latitud").html().replace(",",".") != "") {
+                var latitud = $("#id_latitud").html().replace(",",".");
+                var longitud = $("#id_longitud").html().replace(",",".");
                 var punto = new google.maps.LatLng(latitud, longitud);
                 Ubicacion.marcar_mapa(punto);
             }
@@ -479,16 +479,6 @@
             Ubicacion.marca = marker;
 
             Ubicacion.map.setCenter(coordenadas);
-            $("#id_latitud").val(coordenadas.lat());
-            $("#id_longitud").val(coordenadas.lng());
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                location: new google.maps.LatLng(coordenadas.lat(), coordenadas.lng())
-            }, function (response, status) {
-                if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
-                    $("#id_direccion_map").val(response[0]["formatted_address"]);
-            });
         }
     };
 </script>
