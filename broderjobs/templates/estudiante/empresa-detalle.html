@@ -464,7 +464,7 @@
             google.maps.event.addListener(Ubicacion.map, 'click', function (event) {
                 Ubicacion.marcar_mapa(event.latLng);
             });
-            if ($("#id_latitud").html().replace(",",".") != "") {
+            if ($("#id_latitud").html().replace(",",".") != "" && $("#id_latitud").html() != "None") {
                 var latitud = $("#id_latitud").html().replace(",",".");
                 var longitud = $("#id_longitud").html().replace(",",".");
                 var punto = new google.maps.LatLng(latitud, longitud);

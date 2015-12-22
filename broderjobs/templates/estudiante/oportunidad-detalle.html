@@ -99,13 +99,9 @@
 										<br>
 									</div>
 									<div class ="form-group">
-										<label class = "col-sm-3"></label>
-										<div class = "col-sm-3">
-											{{oportunidad.latitud}}
-										</div>
-										<div class = "col-sm-3">
-											{{oportunidad.longitud}}
-										</div>
+										<div id = "id_direccion_map">{{oportunidad.direccion_map}}</div>
+                            			<div id = "id_longitud">{{oportunidad.longitud}}</div>
+                           				 <div id = "id_latitud">{{oportunidad.latitud}}</div>
 										<div class="clear"></div>
 									</div>
 									<div id = "map" style = "height: 350px; width: 100%"></div>
@@ -212,9 +208,6 @@
 		$('body').removeClass('static');
 		fnPostular();
 	}
-	$(function(){
-		Detalle.inicializar_mapa();
-	})
 	var Detalle = {
         map: null,
         marca: null,
@@ -226,15 +219,17 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             Detalle.map = new google.maps.Map(mapCanvas, mapOptions);
-            google.maps.event.addListener(Detalle.map, 'click', function(event) {
+            google.maps.event.addListener(Detalle.map, 'click', function (event) {
                 Detalle.marcar_mapa(event.latLng);
             });
-            if ($("#id_latitud").val() != ""){
-                var latitud = $("#id_latitud").val();
-                var longitud = $("#id_longitud").val();
+            if ($("#id_latitud").html().replace(",",".") != "" && $("#id_latitud").html() != "None") {
+                var latitud = $("#id_latitud").html().replace(",",".");
+                var longitud = $("#id_longitud").html().replace(",",".");
                 var punto = new google.maps.LatLng(latitud, longitud);
                 Detalle.marcar_mapa(punto);
             }
+
+			google.maps.event.trigger(Detalle.map, "resize");
         },
         marcar_mapa: function(coordenadas){
             var marker = new google.maps.Marker({
@@ -244,18 +239,12 @@
             Detalle.marca = marker;
 
             Detalle.map.setCenter(coordenadas);
-            $("#id_latitud").val(coordenadas.lat());
-            $("#id_longitud").val(coordenadas.lng());
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
-                }, function (response, status) {
-                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
-                        $("#id_direccion_map").val(response[0]["formatted_address"]);
-            });
         }
     };
+
+	$(function(){
+		Detalle.inicializar_mapa();
+	})
 </script>
 
 {%endblock%}
