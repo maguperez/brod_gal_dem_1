@@ -17,3 +17,5 @@ admin.site.register(models.EvaluacionEmpresa)
 
 admin.site.register(models.RankingEmpresa)
 
+admin.site.register(models.Picture)
+

@@ -103,9 +103,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
         ranking = RankingEmpresa()
         try:
-            print("salarios")
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
-            print(ranking.salarios)
 
         except Estudiante.DoesNotExist:
             ranking.ranking_general = 0
@@ -257,7 +255,6 @@ class FotoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
         form = self.get_form(form_class)
 
         if request.is_ajax():
-            print("entro al post")
             foto = self.request.FILES['foto']
             user = self.request.user
             persona = Persona.objects.get(usuario_id=user.id)
@@ -271,9 +268,7 @@ class FotoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
             return self.form_invalid(form, **kwargs)
 
     def form_valid(self, form):
-        print("entro foto")
         foto = self.request.FILES['foto']
-        print(foto)
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
@@ -319,7 +314,6 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
 
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
-        print(form.errors)
         if self.request.is_ajax():
 
             return JsonResponse(form.errors, status=400)
@@ -368,8 +362,6 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         fecha = form.cleaned_data['fecha_nacimiento']
         usuario.email = form.cleaned_data['email']
         persona.telefono = form.cleaned_data['telefono']
-        print("fecha")
-        print(fecha)
         if fecha is not None:
             persona.fecha_nacimiento= fecha
         usuario.save()
@@ -588,7 +580,6 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
         puesto = Puesto.objects.get(id=puesto_id)
-        print(empresa_id)
         if empresa_id != "0":
             empresa = Empresa.objects.get(id=empresa_id)
             experiencia.empresa = empresa
@@ -685,7 +676,6 @@ class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
         pais = request.GET['pais']
-        print(pais)
         ciudades = Ciudad.objects.filter(descripcion__icontains=busqueda, pais_id=pais )
         data = serializers.serialize('json', ciudades,
                                      fields=('id','descripcion'))

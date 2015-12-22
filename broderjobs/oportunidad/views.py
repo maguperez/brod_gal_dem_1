@@ -67,7 +67,6 @@ class OportunidadCrearView(FormView):
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         oportunidad.estado = 'A'
-        print(beneficio)
         oportunidad.beneficio = beneficio
         if '_guardar' in self.request.POST:
             oportunidad.estado = 'P'
@@ -145,7 +144,6 @@ class OportunidadView(TemplateView):
 def datatable_candidatos(request):
     id = request.GET['id']
     objects = Postulacion.objects.filter(oportunidad_id = id)
-    print(objects)
 
     list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
     list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]

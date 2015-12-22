@@ -98,11 +98,11 @@
 		window.history.back();
 		$('body').removeClass('static');
 	});
-	$('a').click(function(event) {
-		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-        if ($(id).hasClass('popup'))
-			$('body').addClass('static');
-    });
+//	$('a').click(function(event) {
+//		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
+//        if ($(id).hasClass('popup'))
+//			$('body').addClass('static');
+//    });
 	function opciones() {
 		if ($('#menu-oportunidad').hasClass('active'))
 			$('#menu-oportunidad').removeClass('active');

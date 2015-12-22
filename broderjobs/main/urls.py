@@ -36,3 +36,4 @@ urlpatterns =[
 	# url(r'^editar-cuenta/$', views.EditarUsuarioEstudianteView.as_view(), name="editar-cuenta"),
 
 ]
+handler404 = 'views.my_404_view'

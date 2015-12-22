@@ -29,4 +29,9 @@ urlpatterns = [
 
     url(r'^oportunidad-candidatos/(?P<id>\d+)/$', views.OportunidadCandidatos.as_view(), name="empresa-oportunidad-candidatos"),
 
+
+    url(r'^mi-empresa/delete/(?P<pk>\d+)$', views.PictureDeleteView.as_view(), name='upload-delete'),
+    url(r'^mi-empresa/imagenes/$', views.PictureCreateView.as_view(), name='upload-new'),
+    url(r'^mi-empresa/view/$', views.PictureListView.as_view(), name='upload-view'),
+
 ]

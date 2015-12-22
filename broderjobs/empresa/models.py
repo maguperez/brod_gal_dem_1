@@ -142,8 +142,8 @@ class RankingEmpresa(models.Model):
 
 class Empresa_Imagenes(models.Model):
 
-    empresa = models.ManyToManyField(Empresa, default=None, blank=True, verbose_name="Imagenes")
-    imagen = models.ImageField(upload_to='img/%Y/%m/%d')
+    empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
+    file = models.ImageField(upload_to='img/%Y/%m/%d', default=None, null=True, blank=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
@@ -166,11 +166,39 @@ class Empresa_Imagenes(models.Model):
         self.file.delete(False)
         super(Empresa_Imagenes, self).delete(*args, **kwargs)
 
-    @property
-    def set_imagen(self):
-        if self.imagen:
-            return self.imagen.url
-        else:
-            return "/static/img/profile/profile_default.png"
+    # @property
+    # def set_imagen(self):
+    #     if self.imagen:
+    #         return self.imagen.url
+    #     else:
+    #         return "/static/img/profile/profile_default.png"
+
+class Picture(models.Model):
+    """This is a small demo using just two fields. The slug field is really not
+    necessary, but makes the code simpler. ImageField depends on PIL or
+    pillow (where Pillow is easily installable in a virtualenv. If you have
+    problems installing pillow, use a more generic FileField instead.
+
+    """
+    file = models.ImageField(upload_to="pictures")
+    slug = models.SlugField(max_length=50, blank=True)
+    empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.file.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('upload-new', )
+
+    def save(self, *args, **kwargs):
+        self.slug = self.file.name
+        super(Picture, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """delete -- Remove to leave file."""
+        self.file.delete(False)
+        super(Picture, self).delete(*args, **kwargs)
+
 
 
