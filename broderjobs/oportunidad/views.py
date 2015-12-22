@@ -31,11 +31,12 @@ class OportunidadCrearView(FormView):
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante =get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
-
+        print(form)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
-        pais = form.cleaned_data['pais']
-        ciudad = form.cleaned_data['ciudad']
+        id_pais = form.cleaned_data['paises_hidden']
+        id_ciudad = form.cleaned_data['ciudades_hidden']
+
         remuneracion = form.cleaned_data['remuneracion']
         fecha_cese = form.cleaned_data['fecha_cese']
         resumen = form.cleaned_data['resumen']
@@ -52,8 +53,16 @@ class OportunidadCrearView(FormView):
         oportunidad.empresa = empresa
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
-        oportunidad.pais = pais
-        oportunidad.ciudad = ciudad
+
+        pais = Pais.objects.get(id= id_pais)
+        if pais is not None:
+            oportunidad.pais = pais
+        ciudad = Ciudad.objects.get(id = id_ciudad)
+        if ciudad is not None:
+            oportunidad.ciudad = ciudad
+
+        # oportunidad.pais = pais
+        # oportunidad.ciudad = ciudad
         oportunidad.remuneracion = remuneracion
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
