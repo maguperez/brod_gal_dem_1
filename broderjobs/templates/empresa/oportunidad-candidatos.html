@@ -394,7 +394,8 @@
                     targets: 0,
                     className: 'dt-body-center',
                     render: function (data, type, full, meta) {
-                        return '<input class = "checking" type="checkbox" '+ (selected[full.id] != null ? "checked" : "")+'>';
+                        return '<input class = "checking" type="checkbox" '+
+                                (selected != null && selected[full.id] != null ? "checked" : "")+'>';
                     }
                 },
                 {
