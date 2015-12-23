@@ -15,7 +15,7 @@ from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
-from estudiante.models import Estudiante
+from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from empresa import utils
@@ -192,11 +192,9 @@ def oportunidades(request):
     data = serializers.serialize("json", oportunidades)
     return HttpResponse(data, content_type='application/json')
 
-# displays the index page
 def oportunidades_listar( request ):
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
 
-# search view
 def oportunidad_busqueda(request):
     if request.is_ajax():
         busqueda = request.GET.get('b')
@@ -248,6 +246,23 @@ class OportunidadCandidatos(TemplateView):
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         context['postulaciones'] = postulaciones
+        return context
+
+class OportunidadCandidatosCV(TemplateView):
+    template_name = 'empresa/oportunidad-candidatos-cv.html'
+
+    def get_context_data(self, **kwargs):
+        id_oportunidad = kwargs.get('id', None)
+        id_estudiante = kwargs.get('e', None)
+        oportunidad =  get_object_or_404(Oportunidad, pk = id_oportunidad)
+        estudiante = get_object_or_404(Estudiante, pk = id_estudiante)
+        context = super(OportunidadCandidatosCV, self).get_context_data(**kwargs)
+        context['oportunidad'] = oportunidad
+        context['estudiante'] = estudiante
+        context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
+        context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
+        context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
+        context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         return context
 
 
