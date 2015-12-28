@@ -235,8 +235,9 @@
 							 formAjaxSubmit(form, modal);
 						 } else {
 							 $(modal).modal('toggle');
-                             window.location.reload();
+
 						 }
+						 window.location.reload();
 
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) { }
@@ -260,16 +261,18 @@
         $("#cambiar_imagen").click();
 	 });
      $('#info-general-button').click(function() {
-     	$('#form-modal-body').load('info-general/', function () {
+//		 $('#modal-aceptar').css("display", "inline");
+		 $('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
+		 });
 	 });
 	 $('#btn-edit').click(function() {
-     	$('#form-modal-body').load('imagenes/', function () {
+//		 $('#modal-aceptar').css("display", "none");
+		 $('#form-modal-body').load('imagenes/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
+		 });
 	 });
 	 $('#ubicacion-button').click(function() {
      	$('#form-modal-body').load('ubicacion/', function () {

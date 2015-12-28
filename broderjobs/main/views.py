@@ -81,7 +81,22 @@ def homepage1(request):
 def homepage(request):
     message = None
     if request.user.is_authenticated():
-        return redirect('estudiante-oportunidad-listar')
+        persona = Persona()
+        try:
+            persona = Persona.objects.get(usuario_id=request.user.id)
+        except persona.DoesNotExist:
+            persona = None
+        if persona is not None:
+            if persona.tipo_persona == 'E':
+                return redirect('estudiante-oportunidad-listar')
+            if persona.tipo_persona == 'R':
+                return redirect('empresa-oportunidad-listar')
+        else:
+            login_form = LoginForm(prefix='login')
+            registro_form = RegisterForm(prefix='registro')
+
+        return render_to_response('main/home-estudiante.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
+                                      context_instance=RequestContext(request))
     else:
         if request.method == "POST":
             login_form = LoginForm(request.POST, prefix='login')
