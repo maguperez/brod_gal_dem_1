@@ -82,13 +82,15 @@ input[type="checkbox"]:disabled + label {opacity: 0.3;}
 /*TABLAS*/
 table.bj-table {width: 100%; border-spacing: 0; border-collapse: collapse;}
 table.bj-table thead {text-align: center;}
-table.bj-table th {padding: 12px 10px; color: #848484; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center;}
+table.bj-table th {padding: 12px 10px !important; color: #848484; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center; border-left: none !Important; border-right:none !Important; font-size: 14px !Important}
 table.bj-table th i {margin-left: 5px; margin-bottom: 2px;}
-table.bj-table td {text-align: center;}
+table.bj-table td { border-left: none !Important; border-right:none !Important; }
+table.bj-table td:not(.child) { text-align: center; }
+table.bj-table tr.child:hover td { background-color: transparent !Important }
 table.bj-table.dark thead {border: 1px solid #848484;}
 table.bj-table.dark th {padding: 10px 12px; color: #fff; background: #848484; border: none; text-align: left;}
 table.bj-table.dark tbody {border: 1px solid #ddd;}
-table.bj-table td {padding: 10px 12px; cursor: pointer;}
+table.bj-table td {padding: 10px 12px !Important; cursor: pointer; font-size: 14px !Important;}
 table.bj-table tr:nth-child(2n+1) td {background: #f9f9f9;}
 table.bj-table tr:nth-child(2n+1):hover:not(.active) td {background: #eee;}
 table.bj-table tr:nth-child(2n) td {background: #fff;}
@@ -494,7 +496,7 @@ header.menu .centered { height: 47px; }
 .proceso-detalle .oportunidad-resumen .estado label:nth-child(2) {font-weight: bold; color: #848484;}
 .proceso-detalle .menu {width: 170px; display:inline-block; vertical-align: top}
 .proceso-detalle .menu a {padding: 6px 10px; margin-bottom: 12px; border-bottom: 1px solid #ddd; font-size: 14px; display: block;}
-.proceso-detalle .menu a:hover, .proceso .menu a.active {color: #5d9cf9;}
+.proceso-detalle .menu a:hover, .proceso .menu a.active, .proceso-detalle .menu a.active {color: #5d9cf9 !important;}
 .proceso-detalle .contenido .detail {width: 680px; margin-left: 30px !important; display: inline-block; }
 .proceso-detalle .contenido .detail > div {max-height: 0; opacity: 0; overflow: auto; transition: opacity 0.3s linear;}
 .proceso-detalle .contenido .detail > div.active {max-height: none; opacity: 1;}
@@ -544,6 +546,8 @@ header.menu .centered { height: 47px; }
 
 /*OPORTUNIDADES EMPRESA*/
 .oportunidades-empresa select.filtro {width: 205px; padding-right: 30px; line-height: 25px; float: right; font-size: 1em; background-color: #fff; border: 1px solid #ddd;}
+.oportunidad-empresa .breadcrumb {background-color: transparent; padding: 0px; font-size: 14px}
+.oportunidad-empresa .proceso { font-size: 14px}
 .oportunidades-empresa .oportunidad-estadistica {margin: 25px 0 40px 0;}
 .oportunidades-empresa .oportunidad-estadistica .header {padding: 15px; position: relative;}
 .oportunidades-empresa .oportunidad-estadistica .imagen {width: 75px; float: left;}
@@ -590,8 +594,8 @@ header.menu .centered { height: 47px; }
 .oportunidad-empresa .candidatos h2 {margin-top: 8px; float: left; font-size: 1.25em; font-weight: bold; color: #848484;}
 .oportunidad-empresa .candidatos .estadistica {float: right; margin: -12px 0 -15px 25px;}
 .oportunidad-empresa .candidatos .estadistica label {text-align: center; display: block;}
-.oportunidad-empresa .candidatos .estadistica .cifra {font-size: 2.4em; font-weight: bold;}
-.oportunidad-empresa .candidatos .estadistica .nombre {margin-top: 3px;}
+.oportunidad-empresa .candidatos .estadistica .cifra {font-size: 34px; font-weight: bold;}
+.oportunidad-empresa .candidatos .estadistica .nombre {margin-top: 3px; font-size: 13px}
 .oportunidad-empresa .candidatos .opciones {margin: -20px 0 8px 0;}
 .oportunidad-empresa .candidatos .btn-option {margin-left: 5px;}
 .oportunidad-empresa .candidatos td {height: 47px;}
@@ -628,7 +632,7 @@ header.menu .centered { height: 47px; }
 .popup.mensaje-edit .sin-respuesta {margin: 10px 0 0 10px;}
 
 /*BREADCRUMB*/
-.breadcrumb {float: left; margin-right: 15px;}
+.breadcrumb {float: left; margin-right: 15px; }
 .breadcrumb li {float: left;}
 .breadcrumb li:nth-child(1):before {content: ' '; width: 8px; height: 12px; margin: 0 12px -1px 0; background: transparent url('../img/icons/arrow_right.png') 0 0 no-repeat; display: inline-block;}
 .breadcrumb li:nth-child(1).active:before {background-position: 0 -12px;}

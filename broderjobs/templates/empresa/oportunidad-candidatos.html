@@ -36,7 +36,7 @@
             <div class="descripcion">
                 <a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 
-                <div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+                <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{empresa.nombre}}</label></div>
                 <div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                         <a class="btn-option" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
                         <a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
                     </div>
-                    <table id="tb_candidatos" class="table table-striped table-bordered responsive">
+                    <table id="tb_candidatos" class="table table-striped table-bordered responsive bj-table">
                         <thead>
                         <tr>
                             <th></th>
@@ -436,7 +436,7 @@
 
     $('#siguiente-fase').click(function (event) {
     var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
-                return { Id :  $(this).data("info"), nombre: }
+                return { Id :  $(this).data("info"), nombre: ''}
     });
     console.log(ids)
 });

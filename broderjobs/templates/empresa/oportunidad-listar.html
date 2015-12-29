@@ -12,6 +12,7 @@
 				<ul class="list" id ="oportunidad-lista">
 					{% paginate 6 oportunidades %}
 						{% for oportunidad in oportunidades.all%}
+
 					<li class="oportunidad-estadistica">
 						<div class="box header">
 							<img class="imagen" src="{{empresa.set_logo}}" />

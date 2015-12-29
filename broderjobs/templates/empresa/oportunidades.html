@@ -1,5 +1,27 @@
+{% load staticfiles %}
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<script>
+	panel = new MixpanelExport({
+		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
+		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
+	});
+</script>
 {% if oportunidades|length %}
 		{% for oportunidad in oportunidades.all%}
+<script>
+	panel.retention({
+		from_date: "2015-12-01",
+		to_date: "2015-12-31",
+		expire: 8798798765,
+		retention_type: "compounded",
+		event: "Visita Oportunidad",
+		//born_event: "Visita Oportunidad",
+		where: 'properties["OportunidadID"] == "{{oportunidad.id}}"'
+	}).then(function(data) {
+		console.log()
+		console.log(data);
+	});
+</script>
 					<li class="oportunidad-estadistica">
 						<div class="box header">
 							<img class="imagen" src="{{empresa.set_logo}}" />
@@ -75,9 +97,10 @@
     </li>
 {% endif %}
 
-{% load staticfiles %}
+
 <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 <script src="{% static 'js/chartist.min.js' %}"></script>
+
 <link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script>
 	$(function(){
