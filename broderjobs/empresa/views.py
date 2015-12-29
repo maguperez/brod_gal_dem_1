@@ -203,7 +203,7 @@ def oportunidad_busqueda(request):
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
-            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("fecha_publicacion")
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")
         else:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
         return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},

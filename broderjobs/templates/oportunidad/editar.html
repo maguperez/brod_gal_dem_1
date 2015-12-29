@@ -28,50 +28,68 @@
                             <input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />
 							<div class="clear"></div>
 						</header>
+						{% if form.errors %}
+							{% for field in form %}
+								{% for error in field.errors %}
+									<div class="alert alert-error" style="border: 1px solid #8c8c8c">
+										<strong> {{field.label}}: </strong>
+										<strong>{{ error|escape }}</strong>
+									</div>
+								{% endfor %}
+							{% endfor %}
+							{% for error in form.non_field_errors %}
+								<div class="alert alert-error">
+									<strong>{{ error|escape }}</strong>
+								</div>
+							{% endfor %}
+						{% endif %}
 						<div class="content">
+
 							<section class="perfil">
-								<h3 class="title"><i class="work"></i>Perfil de la oportunidad</h3>
-								<div class="detalle form-horizontal">
+								<h2 class="title bold"><i class="work"></i>Perfil de la oportunidad</h2>
+								<div class="detalle ">
+
 									<div class ="form-group">
-										<label class = "col-sm-3">T&iacute;tulo de vacante</label>
+										<label class = "col-sm-3 control-label">T&iacute;tulo de vacante</label>
 										<div class = "col-sm-9">
 											{{form.titulo}}
-											<!--<input type="text" class="typeahead">-->
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group jornada_trabajo">
-										<label class = "col-sm-3">Jornada de trabajo</label>
-										<div class = "col-sm-8">
+									<div class ="form-group carga_horaria">
+										<label class = "col-sm-3 control-label">Jornada de trabajo</label>
+										<div class = "col-sm-9">
 											{% for carga in form.carga_horaria %}
-												 {{ carga.errors }}
-												 {{ carga }}
+											 	{{ carga.errors }}
+											 	{{ carga }}
 											{% endfor %}
 										</div>
 										<div class="clear"></div>
 									</div>
 									<div class ="form-group">
-										<label class = "col-sm-3">Localizaci&oacute;n</label>
+										<label class = "col-sm-3 control-label">Localizaci&oacute;n</label>
 										<div class = "col-sm-4">
-											{{form.paises}}
-											{{form.paises_hidden}}
+											{{form.pais}}
+											<!--{{form.paises}}-->
+											<!--{{form.paises_hidden}}-->
 										</div>
 										<div class = "col-sm-4">
-											{{form.ciudades}}
-											{{form.ciudades_hidden}}
+											<select class="full" id="id_ciudad"></select>
+											{{form.ciudad_hidden}}
+											<!--{{form.ciudades}}-->
+											<!--{{form.ciudades_hidden}}-->
 										</div>
 										<div class="clear"></div>
 									</div>
 									<div class ="form-group remuneracion">
-										<label class = "col-sm-3">Remuneraci&oacute;n</label>
-										<div class = "col-sm-8">
+										<label class = "col-sm-3 control-label">Remuneraci&oacute;n</label>
+										<div class = "col-sm-9">
 											{% for r in form.remuneracion %}
 											 	{{ r.errors }}
 											 	{{ r }}
 											{% endfor %}
 										</div>
-										<div class="clear"></div>
-									</div>
+									</div><br><br>
 									<div class ="form-group">
 										<label class = "col-sm-3"></label>
 										<div class = "col-sm-4">
@@ -92,11 +110,11 @@
 								</div>
 							</section>
 							<section class="informacion">
-								<h3 class="title"><i class="info"></i>Informaci&oacute;n b&aacute;sica</h3>
-								<div class="detalle form-horizontal">
+								<h2 class="title bold"><i class="info"></i>Informaci&oacute;n b&aacute;sica</h2>
+								<div class="detalle">
 									<div class ="form-group tipo_puesto">
-										<label class = "col-sm-3">Tipo de vacante *</label>
-										<div class = "col-sm-8">
+										<label class = "col-sm-3 control-label">Tipo de vacante *</label>
+										<div class = "col-sm-9">
 											{% for puesto in form.tipo_puesto %}
 											 	{{ puesto.errors }}
 											 	{{ puesto }}
@@ -104,59 +122,60 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group tipo_puesto">
-										<label class = "col-sm-3">Resumen *</label>
-										<div class = "col-sm-9">
-											{{form.resumen}}
-										</div>
-										<div class="clear"></div>
+									<div class="full less-margin">
+										<label>Resumen *</label>
+									</div>
+									<div class="full">
+										{{form.resumen}}
 									</div>
 								</div>
 							</section>
 							<section class="perfil">
-								<h3 class="title"><i class="profile"></i>Perfil del candidato</h3>
+								<h2 class="title bold"><i class="profile"></i>Perfil del candidato</h2>
 								<div class="detalle">
-									<div class ="form-group">
-										<label class = "col-sm-3">Grado de estudio *</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Grado de estudio *</label>
 										<div class = "col-sm-9">
 											{{form.grado_estudio}}
 											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group">
-										<label class = "col-sm-3">Periodo de graduaci&oacute;n</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Periodo de graduaci&oacute;n</label>
 										<div class = "col-sm-9">
-											Estudiantes de 7° hasta graduados hace un a&ntilde;o
-											<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
+											<p class="align-left">
+												Estudiantes de 7° hasta graduados hace un a&ntilde;o
+												<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="[3,7]"/>
+											</p>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group">
-										<label class = "col-sm-3">Universidades de preferencia</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Universidades de preferencia</label>
 										<div class = "col-sm-9">
 											{{form.universidad}}
 											<label class="descripcion">Complete este campo s&oacute;lo si tiene una preferencia por los candidatos de alguna universidad. Introduzca las siglas de la universidad y seleccione de la lista.</label>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group">
-										<label class = "col-sm-3">Carrera *</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Carrera *</label>
 										<div class = "col-sm-9">
 											{{form.carrera}}
 											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las carreras compatibles con el área donde el profesional actuará.</label>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group">
-										<label class = "col-sm-3">Idiomas</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Idiomas</label>
 										<div class = "col-sm-9">
 											{{form.idioma}}
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class ="form-group">
-										<label class = "col-sm-3">Conocimientos</label>
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Conocimientos</label>
 										<div class = "col-sm-9">
 											{{form.conocimiento}}
 										</div>
@@ -166,25 +185,26 @@
 							</section>
 							<section class="beneficios">
 								<h3 class="title"><i class="like"></i>Beneficios</h3>
-								<div class ="form-group">
-									<label class = "col-sm-3">Beneficios</label>
-									<div class = "col-sm-9">
-										{{form.beneficio}}
+								<div class="detalle">
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Beneficios</label>
+										<div class = "col-sm-9">
+											{{form.beneficio}}
+										</div>
+										<div class="clear"></div>
 									</div>
-									<div class="clear"></div>
 								</div>
 							</section>
-							<section class="Editar">
+							<section class="Oportunidad">
 								<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
-								<div class="detalle">
-									<div class ="form-group">
-										<label class = "col-sm-3">Direcci&oacute;n</label>
+								<div class="detalle ">
+									<div class ="form-group ">
+										<label class = "col-sm-3 control-label">Direcci&oacute;n</label>
 										<div class = "col-sm-9">
 											{{form.direccion_map}}
 										</div>
-										<br>
-									</div>
-									<div class ="form-group">
+									</div><br><br>
+									<div class ="form-group ">
 										<label class = "col-sm-3"></label>
 										<div class = "col-sm-3">
 											{{form.latitud}}
@@ -194,7 +214,7 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div id = "map"></div>
+									<div id="map" style = "height: 350px; width: 100%"></div>
 								</div>
 							</section>
 						</div>
@@ -230,6 +250,23 @@
 			</div>
 		</section>
 </form>
+
+<div id="form-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"><strong>AVISO!!!</strong></h3>
+                    </div>
+            <div id="form-modal-body" class="modal-body">
+				<p>Al archivar la Oportunidad pasará a estado Cerrada, y todas las postulaciones relacionadas seran canceladas.</p>
+			</div>
+            <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <style>
 	.jornada_trabajo label:nth-of-type(n+2),
 	.remuneracion label:nth-of-type(n+2),
@@ -247,7 +284,10 @@
 </style>
 <script>
 	$(function(){
-
+		if(window.location.href.indexOf("archivar") >= 0){
+			$("#id_estado_oportunidad").val("C").trigger("change");
+			 $('#form-modal').modal('toggle');
+		}
 		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
 
 		InicializarSelect2(elementosParaSelect2);
@@ -257,11 +297,56 @@
 		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
 		$("#id_fecha_cese").datepicker({
 			language: 'es',
-			format: "dd-mm-yyyy",
+			format: "dd/mm/yyyy",
 		});
 		$("#slider-periodo").slider({});
 		Editar.inicializar_mapa();
-	})
+		$("#id_pais").select2({
+  			placeholder: "Pais",
+  			allowClear: true
+		});
+		$("#id_ciudad").select2({
+  			placeholder: "Ciudad",
+  			allowClear: true
+		});
+		$("#id_pais").change(function() {
+			if($("#id_pais").val() > 0 ){
+				$.ajax({
+					data: {'pais': $("#id_pais").val()},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+//								var options = '<option value="">Ciudad</option>';
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_ciudad").html(options);
+								// $("#id_ciudad option:first").attr('selected', 'selected');
+								$("#id_ciudad").select2("val", "");
+								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+					}
+				});
+			}
+			else{
+				var options = '';
+				$("#id_ciudad").html(options);
+				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").attr('disabled', false);
+			}
+		});
+		$("#id_ciudad").change(function() {
+			$('#id_ciudad_hidden').val($(this).val());
+		});
+		IniciarCiudades();
+
+
+	});
+
 	var Editar = {
         map: null,
         marca: null,
@@ -324,94 +409,115 @@
 	}
 
 	function InicializarTypeahead(){
-//		var a = [{id: "someId1", name: "Display name 1"},{id: "someId2", name: "Display name 2"}];
-		$("#id_paises").typeahead({
-			source: function(buscar,cargarResultado){
-				console.log(buscar);
-				$.ajax({
-					data : {'busqueda': buscar},
-					url: '{%url "pais-busqueda" %}',
-					type: 'get',
-					success: function(data){
 
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
+		$("form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
 
-									arreglo.push(obje);
-								});
+				console.log(element[0].id);
 
-								cargarResultado(arreglo);
-							}
-						}
-					}
+				if(element[0].id == 'id_carrera1' || element[0].id == 'id_tipo_puesto1'){
 
-				});
-			}
-		});
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
 
-		$("#id_paises").change(function() {
-			var current = $("#id_paises").typeahead("getActive");
-			if (current) {
-				// Some item from your model is active!
-				if (current.name == $("#id_paises").val()) {
-					$('#id_paises_hidden').val(current.id);
-				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
 				}
-			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
-			}
-		})
-
-		$("#id_ciudades").typeahead({
-			source: function(buscar,cargarResultado){
-				var valor = document.getElementById('id_paises_hidden').value;
-				$.ajax({
-					data : {'busqueda': buscar,'pais': valor},
-					url: '{%url "ciudad-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								cargarResultado(arreglo);
-							}
-						}
-					}
-
-				});
-			}
-		});
-
-		$("#id_ciudades").change(function() {
-			var current = $("#id_ciudades").typeahead("getActive");
-			if (current) {
-				// Some item from your model is active!
-				if (current.name == $("#id_ciudades").val()) {
-					$('#id_ciudades_hidden').val(current.id);
-				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
 				}
-			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				titulo: {
+                    required: true
+                },
+                resumen: {
+                    required: true
+                },
+				carrera: {
+					required: true
+				},
+				tipo_puesto:{
+                    required: true
+                },
+				grado_estudio:{
+                    required: true
+                },
+				pais:{
+                    required: true
+                },
+				id_ciudad:{
+                    required: true
+                },
+				fecha_cese:{
+                    required: true
+                }
+
+            },
+            messages: {
+                titulo: {
+                    required: "Este campo es obligatorio"
+                },
+				resumen: {
+                    required: "Este campo es obligatorio"
+                },
+				carrera: {
+                    required: "Este campo es obligatorio"
+                },
+				tipo_puesto:{
+                    required: "Este campo es obligatorio"
+                },
+				grado_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				pais:{
+                    required: "Este campo es obligatorio"
+                },
+				id_ciudad:{
+                    required: "Este campo es obligatorio"
+                },
+				fecha_cese:{
+                    required: "Este campo es obligatorio"
+                }
+
+            }
+        });
+	}
+
+	function IniciarCiudades() {
+		$.ajax({
+			data: {'pais': $("#id_pais").val()},
+			url: '{%url "ciudad-busqueda" %}',
+			type: 'get',
+			success: function (data) {
+				if (data) {
+					if (data.length > 0) {
+						var options = '';
+						for (var i = 0; i < data.length; i++) {
+							options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+						}
+						$("#id_ciudad").html(options);
+						$("#id_ciudad").val($("#id_ciudad_hidden").val()).trigger("change");
+						$("#id_ciudad").attr('disabled', false);
+					}
+				}
 			}
-		})
+
+		});
 	}
 
 

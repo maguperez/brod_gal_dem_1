@@ -31,11 +31,10 @@ class OportunidadCrearView(FormView):
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante =get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
-        print(form)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
-        id_pais = form.cleaned_data['paises_hidden']
-        id_ciudad = form.cleaned_data['ciudades_hidden']
+        pais = form.cleaned_data['pais']
+        id_ciudad = form.cleaned_data['ciudad_hidden']
 
         remuneracion = form.cleaned_data['remuneracion']
         fecha_cese = form.cleaned_data['fecha_cese']
@@ -53,46 +52,56 @@ class OportunidadCrearView(FormView):
         oportunidad.empresa = empresa
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
-
-        pais = Pais.objects.get(id= id_pais)
-        if pais is not None:
-            oportunidad.pais = pais
-        ciudad = Ciudad.objects.get(id = id_ciudad)
-        if ciudad is not None:
-            oportunidad.ciudad = ciudad
-
-        # oportunidad.pais = pais
-        # oportunidad.ciudad = ciudad
+        oportunidad.pais = pais
+        print("ciudad")
+        print(id_ciudad)
+        if id_ciudad is not None and id_ciudad != '':
+            try:
+                ciudad = Ciudad.objects.get(id = id_ciudad)
+            except Ciudad.DoesNotExist:
+                ciudad = None
+            if ciudad is not None:
+                oportunidad.ciudad = ciudad
         oportunidad.remuneracion = remuneracion
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
         oportunidad.resumen = resumen
+        oportunidad.estado = 'A'
         oportunidad.save()
 
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
-        oportunidad.estado = 'A'
+
         oportunidad.beneficio = beneficio
         if '_guardar' in self.request.POST:
-            oportunidad.estado = 'P'
+            oportunidad.estado_oportunidad = 'P'
         elif '_anunciar' in self.request.POST:
-            oportunidad.estado = 'A'
+            oportunidad.estado_oportunidad = 'A'
 
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        response = super(OportunidadCrearView, self).form_invalid(form)
+        return response
 
 class OportunidadEditarView(UpdateView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/editar.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
+    def get_initial(self):
+        id = self.kwargs["id"]
+        oportunidad =get_object_or_404(Oportunidad, id = id)
+        return {'pais': oportunidad.pais, 'ciudad_hidden': oportunidad.ciudad.id}
+
     def get_object(self, queryset=None):
         id = self.kwargs["id"]
-        oportunidad = Oportunidad.objects.get(pk = id)
+        oportunidad =get_object_or_404(Oportunidad, id = id)
 
         return oportunidad
 
@@ -101,26 +110,36 @@ class OportunidadEditarView(UpdateView):
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
-        ciudad = form.cleaned_data['ciudad']
+        id_ciudad = form.cleaned_data['ciudad_hidden']
+
         remuneracion = form.cleaned_data['remuneracion']
         fecha_cese = form.cleaned_data['fecha_cese']
+        resumen = form.cleaned_data['resumen']
         beneficio = form.cleaned_data['beneficio']
         tipo_puesto = form.cleaned_data['tipo_puesto']
-        resumen = form.cleaned_data['resumen']
+
         grado_estudio = form.cleaned_data['grado_estudio']
         universidad = form.cleaned_data['universidad']
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
         id = self.kwargs["id"]
-        oportunidad = Oportunidad.objects.get(id = id)
+        oportunidad =get_object_or_404(Oportunidad, id = id)
 
         oportunidad.estado_oportunidad = estado
         oportunidad.estado = 'A'
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
         oportunidad.pais = pais
-        oportunidad.ciudad = ciudad
+        if id_ciudad is not None and id_ciudad != '':
+            try:
+                ciudad = Ciudad.objects.get(id = id_ciudad)
+            except Ciudad.DoesNotExist:
+                ciudad = None
+            if ciudad is not None:
+                oportunidad.ciudad = ciudad
+        else:
+            oportunidad.ciudad = None
         oportunidad.remuneracion = remuneracion
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
@@ -136,7 +155,6 @@ class OportunidadEditarView(UpdateView):
         oportunidad.beneficio = beneficio
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
-
 
 class OportunidadView(TemplateView):
     login_required = True
@@ -195,6 +213,20 @@ def datatable_candidatos(request):
         'draw': request.GET['draw']
     }
 
+    #serialize to json
+    s = StringIO()
+    json.dump(response, s)
+    s.seek(0)
+    return HttpResponse(s.read())
+
+def siguiente_fase( request ):
+    id = request.GET['id']
+    fase = request.GET['fase']
+    #define response
+    response = {
+        'aaData': ''
+
+    }
     #serialize to json
     s = StringIO()
     json.dump(response, s)

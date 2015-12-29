@@ -5,12 +5,23 @@
 <!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>-->
 <!--<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>-->
 <form action="" method="post">{%csrf_token%}
-	{%for item in form%}
-	{{item.error}}
-	{%endfor%}
-
 	<section class="oportunidad-detalle">
-			<div class="centered">
+		<div class="centered">
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="alert alert-error" style="border: 1px solid #8c8c8c">
+							<strong> {{field.label}}: </strong>
+							<strong>{{ error|escape }}</strong>
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+					<div class="alert alert-error">
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %}
 				<div class="panel left principal">
 					<div class="box">
 						<header>
@@ -23,6 +34,7 @@
 							<div class="clear"></div>
 						</header>
 						<div class="content">
+
 							<section class="perfil">
 								<h2 class="title bold"><i class="work"></i>Perfil de la oportunidad</h2>
 								<div class="detalle ">
@@ -47,12 +59,15 @@
 									<div class ="form-group">
 										<label class = "col-sm-3 control-label">Localizaci&oacute;n</label>
 										<div class = "col-sm-4">
-											{{form.paises}}
-											{{form.paises_hidden}}
+											{{form.pais}}
+											<!--{{form.paises}}-->
+											<!--{{form.paises_hidden}}-->
 										</div>
 										<div class = "col-sm-4">
-											{{form.ciudades}}
-											{{form.ciudades_hidden}}
+											<select class="full" id="id_ciudad"></select>
+											{{form.ciudad_hidden}}
+											<!--{{form.ciudades}}-->
+											<!--{{form.ciudades_hidden}}-->
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -121,7 +136,7 @@
 										<div class = "col-sm-9">
 											<p class="align-left">
 												Estudiantes de 7° hasta graduados hace un a&ntilde;o
-												<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/>
+												<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="[3,7]"/>
 											</p>
 										</div>
 										<div class="clear"></div>
@@ -290,21 +305,59 @@
 		Oportunidad.inicializar_mapa();
 		$("#id_fecha_cese").datepicker({
 			language: 'es',
-			format: "dd-mm-yyyy",
-		});
+			format: "dd/mm/yyyy",
+		})
 		$("#slider-periodo").slider({});
 
-		InicializarTypeahead();
+		$("#id_pais").select2({
+  			placeholder: "Pais",
+  			allowClear: true
+		});
+		$("#id_ciudad").select2({
+  			placeholder: "Ciudad",
+  			allowClear: true
+		});
 
 		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
-
 		InicializarSelect2(elementosParaSelect2);
 
+		$("#id_pais").change(function() {
+			if($("#id_pais").val() > 0 ){
+				$.ajax({
+					data: {'pais': $("#id_pais").val()},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+//								var options = '<option value="">Ciudad</option>';
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_ciudad").html(options);
+								// $("#id_ciudad option:first").attr('selected', 'selected');
+								$("#id_ciudad").select2("val", "");
+								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+					}
+				});
+			}
+			else{
+				var options = '';
+				$("#id_ciudad").html(options);
+				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").attr('disabled', false);
+			}
+		});
+		$("#id_ciudad").change(function() {
+			$('#id_ciudad_hidden').val($(this).val());
+		});
 
 	});
 
 	function InicializarSelect2(ids){
-
 		ids.forEach(function(id){
 			$("#"+id).select2({
 				placeholder: "Seleccione por favor",
@@ -314,94 +367,6 @@
 	}
 
 	function InicializarTypeahead(){
-//		var a = [{id: "someId1", name: "Display name 1"},{id: "someId2", name: "Display name 2"}];
-		$("#id_paises").typeahead({
-			source: function(buscar,cargarResultado){
-				console.log(buscar);
-				$.ajax({
-					data : {'busqueda': buscar},
-					url: '{%url "pais-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								cargarResultado(arreglo);
-							}
-						}
-					}
-
-				});
-			}
-		});
-
-		$("#id_paises").change(function() {
-			var current = $("#id_paises").typeahead("getActive");
-			if (current) {
-				// Some item from your model is active!
-				if (current.name == $("#id_paises").val()) {
-					$('#id_paises_hidden').val(current.id);
-				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
-				}
-			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
-			}
-		})
-
-		$("#id_ciudades").typeahead({
-			source: function(buscar,cargarResultado){
-				var valor = document.getElementById('id_paises_hidden').value;
-				$.ajax({
-					data : {'busqueda': buscar,'pais': valor},
-					url: '{%url "ciudad-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								cargarResultado(arreglo);
-							}
-						}
-					}
-
-				});
-			}
-		});
-
-		$("#id_ciudades").change(function() {
-			var current = $("#id_ciudades").typeahead("getActive");
-			if (current) {
-				// Some item from your model is active!
-				if (current.name == $("#id_ciudades").val()) {
-					$('#id_ciudades_hidden').val(current.id);
-				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
-				}
-			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
-			}
-		})
 
 		$("form").validate({
             errorPlacement: function (error, element) {
@@ -435,6 +400,9 @@
                 $(element).tooltip('hide');
             },
             rules: {
+				titulo: {
+                    required: true
+                },
                 resumen: {
                     required: true
                 },
@@ -443,11 +411,26 @@
 				},
 				tipo_puesto:{
                     required: true
+                },
+				grado_estudio:{
+                    required: true
+                },
+				pais:{
+                    required: true
+                },
+				id_ciudad:{
+                    required: true
+                },
+				fecha_cese:{
+                    required: true
                 }
 
             },
             messages: {
-                resumen: {
+                titulo: {
+                    required: "Este campo es obligatorio"
+                },
+				resumen: {
                     required: "Este campo es obligatorio"
                 },
 				carrera: {
@@ -455,11 +438,22 @@
                 },
 				tipo_puesto:{
                     required: "Este campo es obligatorio"
+                },
+				grado_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				pais:{
+                    required: "Este campo es obligatorio"
+                },
+				id_ciudad:{
+                    required: "Este campo es obligatorio"
+                },
+				fecha_cese:{
+                    required: "Este campo es obligatorio"
                 }
 
             }
         });
-
 	}
 
 </script>

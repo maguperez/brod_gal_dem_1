@@ -159,7 +159,7 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
             except RankingEmpresa.DoesNotExist:
                 ranking = None
             if ranking is not None:
-                ranking_general = str(ranking.ranking_general)
+                ranking_general = str(round(float(ranking.ranking_general), 1))
             else:
                 ranking_general = "0.0"
             sector = empresas[i].nombre
@@ -661,23 +661,6 @@ class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
         busqueda = request.GET['busqueda']
         carreras = Carrera.objects.filter(Q(descripcion__icontains=busqueda))
         data = serializers.serialize('json', carreras,
-                                     fields=('id','descripcion'))
-        return HttpResponse(data, content_type='application/json')
-
-class PaisBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
-        paises = Pais.objects.filter(Q(descripcion__icontains=busqueda))
-        data = serializers.serialize('json', paises,
-                                     fields=('id','descripcion'))
-        return HttpResponse(data, content_type='application/json')
-
-class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
-        pais = request.GET['pais']
-        ciudades = Ciudad.objects.filter(descripcion__icontains=busqueda, pais_id=pais )
-        data = serializers.serialize('json', ciudades,
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 

@@ -20,7 +20,7 @@ class RegistroCVForm(forms.ModelForm):
     paises_hidden = forms.CharField(widget=forms.HiddenInput())
 
     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+    ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
             model = Estudiante

@@ -7,11 +7,14 @@ from  django.utils.dateparse import parse_date
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
-from .models import Persona
+from .models import Persona, Ciudad, Pais
 from . import forms
 from empresa.models import Representante, Empresa
+from main.utils import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.core.context_processors import csrf
+from django.core import serializers
 
 
 def handler404(request):
@@ -19,60 +22,6 @@ def handler404(request):
                                   context_instance=RequestContext(request))
     response.status_code = 404
     return response
-
-def login_estudiante(request):
-    message = None
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = request.POST["email"]
-            password = request.POST["password"]
-            user = authenticate(username=email, password=password)
-            if user is not None:
-                try:
-                    persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
-                except persona.DoesNotExist:
-                    persona = None
-                if persona is not None:
-                    if user.is_active:
-                        login(request, user)
-                        return redirect('estudiante-oportunidad-listar')
-                    else:
-                        message = "Tu usuario esta inactivo"
-
-            message = "Email o contraseña incorrecta"
-    else:
-        form = LoginForm()
-
-    return render_to_response('main/estudiante-login.html',{'message': message,'form': form},
-                                  context_instance=RequestContext(request))
-
-def empresa_login(request):
-    message = None
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = request.POST["email"]
-            password = request.POST["password"]
-            user = authenticate(username=email, password=password)
-            if user is not None:
-                persona = Persona()
-                try:
-                    persona = Persona.objects.get(usuario_id=user.id, tipo_persona="R")
-                except persona.DoesNotExist:
-                    persona = None
-                if persona is not None:
-                    if user.is_active:
-                        login(request, user)
-                        return redirect('empresa-oportunidad-listar')
-                    else:
-                        message = "tu usuario esta inactivo"
-            message = "Email o contraseña incorrecta"
-    else:
-        form = LoginForm()
-
-    return render_to_response('main/empresa-login.html',{'message': message,'form': form},
-                                  context_instance=RequestContext(request))
 
 def homepage1(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
@@ -200,53 +149,6 @@ def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
 
-def estudiante_registro(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            persona = Persona()
-            persona.usuario = user
-            persona.fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
-            dia = form.cleaned_data['dia']
-            mes  = form.cleaned_data['mes']
-            ano  = form.cleaned_data['ano']
-            fecha = parse_date(ano + '-' + mes + '-' + dia)
-            persona.fecha_nacimiento = fecha
-            persona.tipo_persona = "E"
-            persona.save()
-            new_user = authenticate(username=request.POST['email'],
-                                    password=request.POST['password1'])
-            login(request, new_user)
-            return redirect('registro-cv')
-    else:
-        form = RegisterForm()
-    return render(request, 'main/estudiante-registro.html', {'form': form})
-
-def empresa_registro(request):
-    mensaje = None
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            persona = Persona()
-            persona.usuario = user
-            persona.tipo_persona = "R"
-            persona.telefono = form.cleaned_data['telefono']
-            empresa = form.cleaned_data['empresa']
-            persona.save()
-            representante = Representante()
-            representante.persona = persona
-            representante.empresa = empresa
-            representante.save()
-            new_user = authenticate(username=request.POST['email'], password=request.POST['password1'])
-            login(request, new_user)
-            mensaje = "Se ha registrado satisfactoriamente"
-            return redirect('empresa-oportunidad-listar')
-    else:
-        form = RegisterForm()
-    return render(request, 'main/empresa-registro.html', {'form': form, 'mensaje': mensaje})
-
 class ConfiguracionView(TemplateView):
     template_name = 'main/configuracion.html'
     def get_context_data(self, **kwargs):
@@ -295,6 +197,21 @@ def error404 (request):
     return render_to_response('404.html',
                               context_instance=RequestContext(request))
 
+class PaisBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        paises = Pais.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', paises,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        pais = request.GET['pais']
+        ciudades = Ciudad.objects.filter(pais_id=pais )
+        data = serializers.serialize('json', ciudades,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
 
 
 
