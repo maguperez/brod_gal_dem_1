@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {%block css%}
 <style>
+    /* A pen by John Mothershed
+    http://codepen.io/wiseguy12851/pen/mJZNqN */
 .criterio {
   display: -webkit-box;
   display: -webkit-flex;
@@ -40,10 +42,7 @@
   height: 100px;
 }
 .green .progress {
-  border: 5px solid #53fc53;
-}
-.green .progress {
-  box-shadow: 0 0 10px #029502;
+  border: 5px solid #27ae60;
 }
 .green .progress,
 .red .progress,
@@ -96,7 +95,7 @@
   top: 25%;
 }
 .green .progress .inner .water {
-  background: rgba(83,252,83,0.5);
+  background: #40d47e;
 }
 .green .progress .inner .water,
 .red .progress .inner .water,
@@ -109,9 +108,6 @@
 .orange .progress .inner .water {
   -webkit-animation-duration: 10s;
   animation-duration: 10s;
-}
-.green .progress .inner .water {
-  box-shadow: 0 0 10px #03bc03;
 }
 .green .progress .inner .glare,
 .red .progress .inner .glare,
@@ -140,6 +136,9 @@
 .green .progress .inner .percent,
 .red .progress .inner .percent,
 .orange .progress .inner .percent {
+
+  z-index:50;
+  color: white;
   position: absolute;
   top: 0;
   left: 0;
@@ -154,12 +153,6 @@
   line-height: 90px;
   font-size: 20px;
 }
-.green .progress .inner .percent {
-  color: #03c603;
-}
-.green .progress .inner .percent {
-  text-shadow: 0 0 10px #029502;
-}
 .green .progress .inner .percent,
 .red .progress .inner .percent,
 .orange .progress .inner .percent {
@@ -170,49 +163,25 @@
   margin-top: 15px;
 }
 .red .progress {
-  border: 5px solid #ed3b3b;
-}
-.red .progress {
-  box-shadow: 0 0 10px #7a0b0b;
+  border: 5px solid #c0392b;
 }
 .red .progress .inner .water {
   top: 75%;
 }
 .red .progress .inner .water {
-  background: rgba(237,59,59,0.5);
-}
-.red .progress .inner .water {
-  box-shadow: 0 0 10px #9b0e0e;
-}
-.red .progress .inner .percent {
-  color: #a30f0f;
-}
-.red .progress .inner .percent {
-  text-shadow: 0 0 10px #7a0b0b;
+  background: #e74c3c;
 }
 .orange {
   margin-top: 15px;
 }
 .orange .progress {
-  border: 5px solid #f07c3e;
-}
-.orange .progress {
-  box-shadow: 0 0 10px #7e320a;
+  border: 5px solid #d35400;
 }
 .orange .progress .inner .water {
   top: 50%;
 }
 .orange .progress .inner .water {
-  background: rgba(240,124,62,0.5);
-}
-.orange .progress .inner .water {
-  box-shadow: 0 0 10px #a0400c;
-}
-.orange .progress .inner .percent {
-  color: #a8430d;
-}
-.orange .progress .inner .percent {
-  text-shadow: 0 0 10px #7e320a;
+  background: #e67e22;
 }
 #copyright {
   margin-top: 25px;
@@ -755,7 +724,6 @@
       && val <= 100
       && val >= 0)
     {
-      console.log(val);
 
       var valOrig = val;
       val = 100 - val;
