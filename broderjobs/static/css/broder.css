@@ -877,8 +877,10 @@ img.img-me {
 	color: #C7C7C7;
 }
 /*ERROR LABEL*/
-.error + .tooltip .tooltip-inner { background-color: #f50 !Important; }
-.error + .tooltip .tooltip-arrow { border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
+.error + .tooltip .tooltip-inner,
+.evaluacion-empresa .tooltip .tooltip-inner{ background-color: #f50 !Important; }
+.error + .tooltip .tooltip-arrow,
+.evaluacion-empresa .tooltip .tooltip-arrow{ border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
 .home #registro #acepto { vertical-align: top; }
 

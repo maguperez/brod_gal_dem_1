@@ -149,8 +149,8 @@
 				<ul class="sb-menu">
 					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
 					<li class="sb-close"><a href="{%url 'estudiante'%}">Para Estudiantes</a></li>
-					<li class="sb-close"><a href="{%url 'empresa-login'%}">Iniciar sesión</a></li>
-					<li class="sb-close"><a href="{%url 'empresa-registro'%}">Regístrate</a></li>
+					<li class="sb-close"><a class="link-header" data-link="login">Iniciar sesi&oacute;n</a></li>
+					<li class="sb-close"><a class="link-header" data-link="registro">Reg&iacute;strate</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -162,6 +162,11 @@
 					activar(sessionStorage.getItem("main"));
 				}
 				$.slidebars();
+				$("select").on("change", function(){
+					$(this).val() != "" ?
+						$(this).css("color", "black"):
+						$(this).css("color", "#ccc");
+				});
 			});
 			function activar(id) {
 				sessionStorage.setItem("main", id);
