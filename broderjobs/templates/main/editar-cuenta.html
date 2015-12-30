@@ -70,6 +70,7 @@
             e.preventDefault();
             debugger;
         });*/
+        $("input:not([type=submit])").addClass("form-control");
         $("form").validate({
             errorPlacement: function (error, element) {
                 $(element).tooltip('destroy');

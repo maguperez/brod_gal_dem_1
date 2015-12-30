@@ -4,6 +4,7 @@
 		<title>Broder jobs</title>
 		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
         <meta charset="UTF-8">
+		<link rel="shortcut icon" href="{% static 'img/favico2.ico' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <meta name="HandheldFriendly" content="true">
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
@@ -154,8 +155,8 @@
 				<ul class="sb-menu">
 					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
 					<li class="sb-close"><a href="{%url 'empresa'%}">Para Empresas</a></li>
-					<li class="sb-close"><a href="{%url 'estudiante-login'%}">Iniciar sesión</a></li>
-					<li class="sb-close"><a href="{%url 'estudiante-registro'%}">Regístrate</a></li>
+					<li class="sb-close"><a class="link-header" data-link="login">Iniciar sesi&oacute;n</a></li>
+					<li class="sb-close"><a class="link-header" data-link="registro">Reg&iacute;strate</a></li>
 				</ul>
 			</nav>
 		</div>

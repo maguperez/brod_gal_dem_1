@@ -61,9 +61,9 @@ $(function () {
         $('#fileupload').addClass('fileupload-processing');
         $.ajax({
             // Uncomment the following to send cross-domain cookies:
-            xhrFields: {withCredentials: true},
-            url: $('#fileupload').fileupload('option', 'url'),
-            //url: '/empresa/view/',
+            //xhrFields: {withCredentials: true},
+            //url: $('#fileupload').fileupload('option', 'url'),
+            url: 'imagenes/view/',
             dataType: 'json',
             context: $('#fileupload')[0]
         }).always(function () {

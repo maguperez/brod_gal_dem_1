@@ -15,15 +15,15 @@ urlpatterns =[
 
 	# url(r'^empresa/$' , 'main.views.empresa', name='empresa'),
     #
-	url(r'^estudiante-login/$' , 'main.views.login_estudiante', name='estudiante-login'),
-
-	url(r'^empresa-login/$' , 'main.views.empresa_login', name='empresa-login'),
+	# url(r'^estudiante-login/$' , 'main.views.login_estudiante', name='estudiante-login'),
+    #
+	# url(r'^empresa-login/$' , 'main.views.empresa_login', name='empresa-login'),
 
 	url(r'^salir/$' , 'django.contrib.auth.views.logout_then_login', name='salir'),
 
-	url(r'^estudiante-registro/$','main.views.estudiante_registro' , name = 'estudiante-registro'),
+	# url(r'^estudiante-registro/$','main.views.estudiante_registro' , name = 'estudiante-registro'),
 
-	url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
+	# url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
 
 	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="configuracion"),
 
@@ -37,5 +37,8 @@ urlpatterns =[
 
 	# url(r'^editar-cuenta/$', views.EditarUsuarioEstudianteView.as_view(), name="editar-cuenta"),
 
+	url(r'^pais-busqueda/$', views.PaisBusquedaView.as_view(), name="pais-busqueda"),
+
+	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
+
 ]
-handler404 = 'views.my_404_view'

@@ -15,7 +15,7 @@ from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
-from estudiante.models import Estudiante
+from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from empresa import utils
@@ -45,9 +45,11 @@ class MiEmpresaView(FormView):
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
+        imagenes = Picture.objects.filter(empresa_id = empresa.id)
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
+        context['imagenes'] = imagenes
         return context
 
     def form_valid(self, form):
@@ -190,11 +192,9 @@ def oportunidades(request):
     data = serializers.serialize("json", oportunidades)
     return HttpResponse(data, content_type='application/json')
 
-# displays the index page
 def oportunidades_listar( request ):
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
 
-# search view
 def oportunidad_busqueda(request):
     if request.is_ajax():
         busqueda = request.GET.get('b')
@@ -203,7 +203,7 @@ def oportunidad_busqueda(request):
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
-            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("fecha_publicacion")
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")
         else:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
         return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
@@ -246,6 +246,23 @@ class OportunidadCandidatos(TemplateView):
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         context['postulaciones'] = postulaciones
+        return context
+
+class OportunidadCandidatosCV(TemplateView):
+    template_name = 'empresa/oportunidad-candidatos-cv.html'
+
+    def get_context_data(self, **kwargs):
+        id_oportunidad = kwargs.get('id', None)
+        id_estudiante = kwargs.get('e', None)
+        oportunidad =  get_object_or_404(Oportunidad, pk = id_oportunidad)
+        estudiante = get_object_or_404(Estudiante, pk = id_estudiante)
+        context = super(OportunidadCandidatosCV, self).get_context_data(**kwargs)
+        context['oportunidad'] = oportunidad
+        context['estudiante'] = estudiante
+        context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
+        context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
+        context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
+        context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         return context
 
 
@@ -306,15 +323,6 @@ class PictureCreateView(CreateView):
     model = Picture
     fields = "__all__"
 
-    def get_context_data(self, **kwargs):
-        user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
-        empresa = Empresa.objects.get(id=representante.empresa.id)
-        context = super(PictureCreateView, self).get_context_data(**kwargs)
-        context['empresa'] = empresa
-        return context
-
     def get_initial(self):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
@@ -328,10 +336,9 @@ class PictureCreateView(CreateView):
         persona = Persona.objects.get(usuario_id= self.request.user)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-
+        form.instance.empresa = empresa
         self.object = form.save()
         self.empresa = empresa
-        print(self.object)
         files = [serialize(self.object)]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
@@ -354,20 +361,16 @@ class PictureDeleteView(DeleteView):
 
 class PictureListView(ListView):
     model = Picture
-    print "modelo"
 
-    # def get_object(self, queryset=None):
-    #     user = self.request.user
-    #     persona = Persona.objects.get(usuario_id=user.id)
-    #     representante = Representante.objects.get(persona_id =persona.id)
-    #     empresa = Empresa.objects.get(id=representante.empresa.id)
-    #     picture = Picture.objects
-    #     return voluntariado
+    def get_queryset(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        pictures = Picture.objects.filter(empresa_id = empresa.id)
+        return pictures
 
     def render_to_response(self, context, **response_kwargs):
-        print("listar")
-        print self
-        print self.get_queryset()
         files = [ serialize(p) for p in self.get_queryset() ]
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))

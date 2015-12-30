@@ -7,9 +7,6 @@ from main import utils
 items_registro = utils.estado_registro()
 
 
-
-
-
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
@@ -199,6 +196,13 @@ class Picture(models.Model):
         """delete -- Remove to leave file."""
         self.file.delete(False)
         super(Picture, self).delete(*args, **kwargs)
+
+    @property
+    def set_imagen(self):
+        if self.file:
+            return self.file.url
+        else:
+            return "/static/img/profile/profile_default.png"
 
 
 

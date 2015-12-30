@@ -49,10 +49,6 @@ urlpatterns = [
 
 	url(r'^carrera-busqueda/$', views.CarreraBusquedaView.as_view(), name="carrera-busqueda"),
 
-	url(r'^pais-busqueda/$', views.PaisBusquedaView.as_view(), name="pais-busqueda"),
-
-	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
-
 	url(r'^estudiante-empresa-busqueda/$', views.EstudianteEmpresaBusquedaView.as_view(), name="empresa-busqueda"),
 
 	url(r'^estudiante-puesto-busqueda/$', views.EstudiantePuestoBusquedaView.as_view(), name="puesto-busqueda"),

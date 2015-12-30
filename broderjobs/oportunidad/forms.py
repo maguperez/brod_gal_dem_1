@@ -2,16 +2,18 @@
 from django import forms
 from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple
 from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
-    TipoRemuneracion, Carrera
+    TipoRemuneracion, Carrera, Pais
 
 
 class OportunidadForm(forms.ModelForm):
 
-    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
-    paises_hidden = forms.CharField(widget=forms.HiddenInput())
-
-    ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
+    # paises_hidden = forms.CharField(widget=forms.HiddenInput())
+    #
+    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
+    # ciudad = forms.ChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'}))
 
     class Meta:
         model = Oportunidad
@@ -19,7 +21,7 @@ class OportunidadForm(forms.ModelForm):
                   'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
-            'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacacnte', 'class': 'full'}),
+            'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacante', 'class': 'full'}),
             'carga_horaria': RadioSelect(),
             'tipo_puesto': RadioSelect(),
             'remuneracion': RadioSelect(),
@@ -30,6 +32,9 @@ class OportunidadForm(forms.ModelForm):
             'direccion_map': TextInput(attrs={'placeholder': 'Direccion', 'class': 'full'}),
             'longitud': TextInput(attrs={'placeholder': 'longitud'}),
             'latitud': TextInput(attrs={'placeholder': 'latitud'}),
+            'carrera': SelectMultiple(attrs={'class': 'full'}),
+            'idioma': SelectMultiple(attrs={'class': 'full'}),
+            'conocimiento': SelectMultiple(attrs={'class': 'full'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -39,6 +44,7 @@ class OportunidadForm(forms.ModelForm):
         self.fields['remuneracion'].empty_label = None
 
         self.fields['grado_estudio'].empty_label = "Seleccione"
+        self.fields['pais'].empty_label = "Pais"
 
 class OportunidadCrearForm(OportunidadForm):
 

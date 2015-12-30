@@ -31,7 +31,7 @@ class RegisterForm(UserCreationForm):
     anos = []
     for y in range(1950, (datetime.datetime.now().year - 10)):
         anos.append((y, y))
-    items_anos = [('','AÃ±o')] + anos
+    items_anos = [('','Año')] + anos
 
     meses = []
     for y in range(1,12):
@@ -116,6 +116,59 @@ class RegisterForm(UserCreationForm):
             if commit:
                 user.save()
         return user
+
+class RegistroRepresentanteForm(UserCreationForm):
+
+    username = forms.CharField(required = False, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'username'}))
+    email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
+    last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
+    password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
+    password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Confirmar Contraseña', 'type':'password'}))
+    telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
+    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False)
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = ['email', 'first_name', 'last_name',
+                                'password1', 'password2']
+
+
+    def __generate_username(self, email):
+        # TODO: Something more efficient?
+        highest_user_id = User.objects.all().order_by('-id')[0].id
+        leading_part_of_email = email.split('@',1)[0]
+        truncated_part_of_email = leading_part_of_email[:3] \
+                                  + leading_part_of_email[-3:]
+        derived_username = truncated_part_of_email + str(highest_user_id+1)
+        return derived_username
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super(UserCreationForm, self).clean(*args, **kwargs)
+        if cleaned_data.has_key('email'):
+            cleaned_data['username'] = self.__generate_username(
+                                                        cleaned_data['email'])
+        return cleaned_data
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        try:
+            User._default_manager.get(email=email)
+        except User.DoesNotExist:
+            return email
+        raise forms.ValidationError('duplicate_email')
+
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit)
+        if user:
+            user.email = self.cleaned_data['email']
+            user.first_name = self.cleaned_data['first_name']
+            user.last_name = self.cleaned_data['last_name']
+            user.set_password(self.cleaned_data['password1'])
+            if commit:
+                user.save()
+        return user
+
 
 class EditarUsuarioForm( PasswordChangeForm ):
 

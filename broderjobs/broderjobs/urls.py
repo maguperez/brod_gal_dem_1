@@ -20,3 +20,4 @@ urlpatterns = [
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'views.my_404_view'

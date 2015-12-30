@@ -36,13 +36,12 @@
             <div class="descripcion">
                 <a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 
-                <div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+                <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{empresa.nombre}}</label></div>
                 <div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a>
                 </div>
             </div>
             <div class="opciones" onclick="opciones();">
                 <i class="menu"></i>
-
                 <div class="contextual-menu" id="menu-oportunidad">
                     <div class="wrapper">
                         <div class="pin"></div>
@@ -96,10 +95,10 @@
                     <div class="opciones">
                         <input type="checkbox" id="marcar-todos"/><label for="marcar-todos">Marcar todos</label>
                         <a class="btn-option"><i class="delete"></i>Eliminar</a>
-                        <a class="btn-option"><i class="next"></i>Siguiente fase</a>
+                        <a class="btn-option" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
                         <a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
                     </div>
-                    <table id="tb_candidatos" class="table table-striped table-bordered responsive">
+                    <table id="tb_candidatos" class="table table-striped table-bordered responsive bj-table">
                         <thead>
                         <tr>
                             <th></th>
@@ -114,86 +113,7 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <!--<tbody>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>universidad de oriente</td>-->
-                        <!--<td>Ingenier&iacute;a en computacion</td>-->
-                        <!--<td>2do Semestre 2015</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td>-->
 
-                        <!--&lt;!&ndash;<div class="opciones">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="btn-option"><i class="delete"></i>Eliminar</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="btn-option"><i class="next"></i>Siguiente fase</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="btn-option" href="#ver-cv"><i class="curriculum"></i>Ver CV</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--</td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td class="align-left"><img class="imagen" src="../img/profile/profile.png" />Diego Ch&aacute;vez</td>-->
-                        <!--<td>PUCP</td>-->
-                        <!--<td>Ingenier&iacute;a Industrial</td>-->
-                        <!--<td>2do Semestre 2016</td>-->
-                        <!--<td>03/04/15</td>-->
-                        <!--<td>60%</td>-->
-                        <!--<td><i class="menu"></i></td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
                     </table>
                 </section>
             </div>
@@ -363,6 +283,24 @@
     </div>
 </div>
 
+<div id="form-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h2 class="modal-title bold">Modal title</h2>
+			</div>
+            <div id="form-modal-body" class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+            <!--<div class="modal-footer">-->
+				<!--<input type="submit" class="btn btn-primary btn-submit" value ="Guardar" id="modal-aceptar">-->
+				<!--<button type="button" class="btn btn-default" data-dismiss="modal" id="modal-cerrar">Cerrar</button>-->
+			<!--</div>-->
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}
 
 {% block js %}
@@ -372,89 +310,155 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.min.js"></script>
 
 <script>
+    var iniciado = false;
     var selected;
+    var JSCandidatos = function () {
+            this.inicializar = function(){
+                $("#tb_candidatos").on("click", ".cargar-cv", function () {
+                    id = $(this).parent().data("id");
+     	            $('#form-modal-body').load('cv/'+id, function () {
+        	            $('#form-modal').modal('toggle');
+                        formAjaxSubmit('#form-modal-body form', '#form-modal');
+		            });
+                });
+            };
+            this.obtener = function(){
+               return $('#tb_candidatos').dataTable({
+                    responsive: {
+                        details: {
+                            type: 'control',
+                            target: 8
+                        }
+                    },
+                    language: {
+                        url: "{%static 'js/dataTable-i18n/es-ES.json' %}"
+                    },
+                    columnDefs: [
+                        {sortable: false, targets: [0, 8, 9]},
+                        {searchable: false, targets: [0, 8, 9]},
+                        {class: "all", targets: [0, 2, 4, 5, 6, 7, 8]},
+                        {class: "none", targets: [9]},
+                        {class: "never", targets: [1]},
+                        {
+                            targets: 0,
+                            className: 'dt-body-center',
+                            render: function (data, type, full, meta) {
+                                return '<input class = "checking" type="checkbox"' + "data-info='"+ full.id +"'"+
+                                        (selected != null && selected[full.id] != null ? "checked" : "") + '>';
+                            }
+                        },
+                        {
+                            targets: 8,
+                            className: 'dt-expandir',
+                            render: function (data, type, full, meta) {
+                                return '<i class="menu"></i>';
+                            }
+                        },
+                        {
+                            targets: 9,
+
+                            render: function (data, type, full, meta) {
+                                return '<div class="" data-id="' + full["id"] + '">' +
+                                        '<a class="btn-option"><i class="delete"></i>Eliminar</a>' +
+                                        '<a class="btn-option"><i class="next"></i>Siguiente fase</a>' +
+                                        '<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>' +
+                                        '<a class="btn-option cargar-cv"><i class="curriculum"></i>Ver CV</a>' +
+                                        '</div>';
+                            }
+                        },
+                    ],
+                    filter: false,
+                    serverSide: true,
+                    processing: true,
+                    lengthChange: false,
+                    stateSave: true,
+                    stateSaveCallback: function (settings, data) {
+//                debugger;
+                    },
+                    ajax: {
+                        type: "GET",
+                        url: "{% url 'candidatos' %}",
+                        data: function (d) {
+                            d.id = "{{oportunidad.id}}";
+                        },
+                        success:
+                            function (msg) {
+                                //var json = $.parseJSON(msg);
+                                fnCallback(msg);
+                                $(".tEvaluacion").show();
+                            }
+                    },
+                    columns: [
+                        {data: "checkbox", class:"check-row"},
+                        {data: "id"},
+                        {data: "nombre"},
+                        {data: "universidad"},
+                        {data: "carrera"},
+                        {data: "graduacion"},
+                        {data: "fecha_postulacion"},
+                        {data: "compatibilidad"},
+                        {data: "botones"},
+                        {data: "botones"},
+                    ],
+                });
+            }
+        }
+    var CandidatosTable = new JSCandidatos();
+    var formAjaxSubmit = function(form, modal) {
+	    $(form).submit(function (e) {
+		    e.preventDefault();
+            $.ajax({
+			    type: $(this).attr('method'),
+				url: $(this).attr('action'),
+				data: $(this).serialize(),
+				    success: function (xhr, ajaxOptions, thrownError) {
+					    if ($(xhr).find('.has-error').length > 0) {
+						    $(modal).find('.modal-body').html(xhr);
+							 formAjaxSubmit(form, modal);
+                        } else {
+						    $(modal).modal('toggle');
+                             window.location.reload();
+						 }
+					},
+                    error: function (xhr, ajaxOptions, thrownError) { }
+                });
+            });
+	    }
+
     $(document).ready(function () {
-        var table = $('#tb_candidatos').dataTable({
-            responsive: {
-                details: {
-                    type: 'control',
-                    target: 8
-                }
-            },
-            language: {
-                url : "{%static 'js/dataTable-i18n/es-ES.json' %}"
-            },
-            columnDefs: [
-                { sortable: false, targets: [0,8,9] },
-                { searchable: false, targets: [0,8,9] },
-                { class: "all", targets: [0, 2, 4, 5, 6, 7, 8] },
-                { class: "none", targets: [9] },
-                { class: "never", targets: [1] },
-                {
-                    targets: 0,
-                    className: 'dt-body-center',
-                    render: function (data, type, full, meta) {
-                        return '<input class = "checking" type="checkbox" '+ (selected[full.id] != null ? "checked" : "")+'>';
-                    }
-                },
-                {
-                    targets: 8,
-                    className: 'dt-expandir',
-                    render: function (data, type, full, meta) {
-                        return '<i class="menu"></i>';
-                    }
-                },
-                {
-                    targets: 9,
+      var table = CandidatosTable.obtener();
+       if (!iniciado) {
+           iniciado = true;
+           CandidatosTable.inicializar();
+       }
+       $("#tb_candidatos").on("change",".checking", function() {
+           selected = new Array();
+           var data = table.api().row($(this).parents('tr')).data();
+           if ($(this).is(":checked"))
+               selected[data.id] = data;
+               else if (selected[data.id] != null) selected[data.id] = null;
+       });
+   });
 
-                    render: function (data, type, full, meta) {
-                        return '<div class="">'+
-                                    '<a class="btn-option"><i class="delete"></i>Eliminar</a>'+
-									'<a class="btn-option"><i class="next"></i>Siguiente fase</a>'+
-									'<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>'+
-									'<a class="btn-option" href="#ver-cv"><i class="curriculum"></i>Ver CV</a>'+
-                                '</div>';
-                    }
-                },
-            ],
-            filter: false,
-            serverSide: true,
-            processing: true,
-            lengthChange: false,
-            stateSave: true,
-            stateSaveCallback: function(settings, data){
-                debugger;
-            },
-            ajax: {
-                type: "GET",
-                url: "{% url 'candidatos' %}",
-                data: function ( d ) {
-
-                    d.id = "{{oportunidad.id}}";
-                }
-            },
-            columns: [
-                {data: "checkbox"},
-                {data: "id"},
-                {data: "nombre"},
-                {data: "universidad"},
-                {data: "carrera"},
-                {data: "graduacion"},
-                {data: "fecha_postulacion"},
-                {data: "compatibilidad"},
-                {data: "botones"},
-                {data: "botones"},
-            ],
-        });
-        $("#tb_candidatos").on("change",".checking", function() {
-            selected = new Array();
-            var data = table.api().row($(this).parents('tr')).data();
-            if ($(this).is(":checked"))
-                selected[data.id] = data;
-            else if (selected[data.id] != null) selected[data.id] = null;
-        });
-
+    $('#siguiente-fase').click(function (event) {
+        var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
+                return { Id :  $(this).data("info")}
+        $.ajax({
+				data: {'ids': ids},
+				url: '{%url "sig-fase" %}',
+				type: 'get',
+				success: function (data) {
+                    CandidatosTable.obtener();
+				}
+			});
     });
+
+});
+
+
+
+
+
 
 
 </script>

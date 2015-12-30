@@ -29,15 +29,19 @@
 					<div class="slider"id="fade">
 						<div class="owl-carousel">
 
-							<div class="item-video">
-                                <a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>
-                            </div>
+							<!--<div class="item-video">-->
+                                <!--<a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>-->
+                            <!--</div>-->
+							{%for i in imagenes.all%}
                             <div class="item">
-                                <img src="{%static 'img/oficina-11.png' %}"/>
+                                <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
+								<img src="{{i.set_imagen}}"/>
                             </div>
+							{%endfor%}
                         </div>
 					</div>
 					<a class="btn-edit" id="btn-edit">Editar</a>
+					<!--<a href="{%url 'upload-new'%}" class="btn-edit" data-toggle="modal" data-target="#imagenes"></a>-->
 				</header>
 				<div class="content">
 					<section class="about">
@@ -141,18 +145,22 @@
 				<p>One fine body&hellip;</p>
 			</div>
             <div class="modal-footer">
-				<input type="submit" class="btn btn-primary btn-submit" value = "Guardar">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<input type="submit" class="btn btn-primary btn-submit" value ="Guardar" id="modal-aceptar">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="modal-cerrar">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div>
+<div style="display: none">
 	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
 	{{form.as_p}}
 	<input type="submit" id="cambiar_imagen">
 	</form>
 </div>
+
+
+
+
 <style>
 	.owl-carousel {
         height:369px;
@@ -162,6 +170,8 @@
 {% endblock %}
 
 {% block js %}
+
+
  <script>
 	 $(function(){
 		 Empresa.inicializar_mapa();
@@ -211,8 +221,8 @@
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {
-		 var valid = $(form).validate().valid();
-		 if (valid){
+		// var valid = $(form).validate().valid();
+		 //if (valid){
 			 $(form).submit(function (e) {
 				 e.preventDefault();
 				 $.ajax({
@@ -227,11 +237,13 @@
 							 $(modal).modal('toggle');
 							 window.location.reload();
 						 }
+
+
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) { }
 				 });
 			 });
-		 }
+		 //}
 	 }
 	 $("#box-logo" ).mouseover(function() {
 		$(".botones-imagen").css("visibility", "visible");
@@ -242,23 +254,25 @@
 	 $("#editar-imagen").click(function(e) {
 	  $("#id_logo").click();
 	 });
-	$("#remover-imagen").click(function(e) {
+	 $("#remover-imagen").click(function(e) {
 	    $("#cambiar_imagen").click();
 	 });
 	 $("#id_logo").change(function(){
         $("#cambiar_imagen").click();
 	 });
      $('#info-general-button').click(function() {
-     	$('#form-modal-body').load('info-general/', function () {
+		 $('#modal-aceptar').css("display", "inline");
+		 $('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
+		 });
 	 });
 	 $('#btn-edit').click(function() {
-     	$('#form-modal-body').load('imagenes/', function () {
+		 $('#modal-aceptar').css("display", "none");
+		 $('#form-modal-body').load('imagenes/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
+		 });
 	 });
 	 $('#ubicacion-button').click(function() {
      	$('#form-modal-body').load('ubicacion/', function () {

@@ -1,0 +1,105 @@
+ <header>
+     <img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
+     <div class="detalle">
+         <h3>{{estudiante | upper}}</h3>
+         <label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
+         <label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
+         <label>{{persona.telefono}} / {{usuario.email}}</label>
+     </div>
+     <div class="clear"></div>
+     <a class="descargar btn-action">DESCARGAR PDF</a>
+ </header>
+ <div class="content">
+     <section>
+         <h3 class="title"><i class="profile"></i>Resumen</h3>
+
+         <div class="detalle">
+            <p>{{resumen.descripcion}}</p>
+         </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="time"></i>Disponibilidad</h3>
+         <div class="detalle col-3-7">
+            <div>
+                <label>Acepto propuestas de</label>
+				<p>
+				    {% for tipo_puesto in estudiante.tipo_puesto.all %}
+					<span class="tag">{{ tipo_puesto.descripcion }}</span>
+					{% endfor %}
+                </p>
+				<div class="clear"></div>
+            </div>
+             <div>
+                 <label>Carga horaria</label>
+                 <p>
+				    <span class="tag">{{ estudiante.carga_horaria }}</span>
+                 </p>
+                 <div class="clear"></div>
+             </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="language"></i>Idiomas</h3>
+         <div class="detalle">
+            <p>
+                {% for idioma in estudiante.idioma.all %}
+                <span class="tag">{{ idioma.descripcion }}</span>
+				{% endfor %}
+            </p>
+             <div class="clear"></div>
+         </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="knowledge"></i>Conocimientos</h3>
+         <div class="detalle">
+             <p>
+                 {% for conocimiento in estudiante.conocimiento.all %}
+                 <span class="tag">{{ conocimiento.descripcion }}</span>
+                 {% endfor %}
+             </p>
+             <div class="clear"></div>
+         </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas</h3>
+         <div class="detalle">
+             {% for actividad in actividades_extra %}
+			<div>
+			    <p>{{actividad.descripcion | lower}}</p>
+			    <div class="clear"></div>
+			    <label>{{actividad.organizacion | lower}}</label>
+			    </div>
+			{% endfor %}
+         </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="work"></i>Experiencia Profesional</h3>
+         <div class="detalle timeline">
+             {% for experiencia in experiencias_profesionales %}
+             <div class="experiencia" id="{{experiencia.id}}">
+                 <p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
+                 <label class="tipo">{{experiencia.puesto}}</label>
+                 {%if experiencia.empresa != None %}
+                 <label class="nombre">{{experiencia.empresa}}</label>
+				{%else%}
+				<label class="nombre">{{experiencia.empresa_referencial}}</label>
+				{%endif%}
+				<pr>{{experiencia.descripcion}}</pr>
+				</div>
+			{% endfor %}
+         </div>
+     </section>
+     <section>
+         <h3 class="title"><i class="volunteer"></i>Voluntariado</h3>
+         <div class="detalle timeline">
+             {% for voluntariado in voluntariados %}
+             {{voluntariado}}
+			<div>
+			    <p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {{voluntariado.fecha_hasta|date:"M Y"}}</p>
+				<label class="tipo">{{voluntariado.cargo}}</label>
+				<label class="nombre">{{voluntariado.organizacion}}</label>
+				<p>{{voluntariado.descripcion}}</p>
+				</div>
+			{% endfor %}
+			</div>
+     </section>
+ </div>

@@ -1,7 +1,240 @@
 {% extends 'estudiante/base.html' %}
 {% load staticfiles %}
 {%block css%}
+<style>
+    /* A pen by John Mothershed
+    http://codepen.io/wiseguy12851/pen/mJZNqN */
+.criterio {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.green {
+  margin-top: 15px;
+}
+.green .progress,
+.red .progress,
+.orange .progress {
+  position: relative;
+  border-radius: 50%;
+}
+.green .progress,
+.red .progress,
+.orange .progress {
+  width: 100px;
+  height: 100px;
+}
+.green .progress {
+  border: 5px solid #27ae60;
+}
+.green .progress,
+.red .progress,
+.orange .progress {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.green .progress .inner,
+.red .progress .inner,
+.orange .progress .inner {
+  position: absolute;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 50%;
+}
+.green .progress .inner,
+.red .progress .inner,
+.orange .progress .inner {
+  width: 90px;
+  height: 90px;
+}
+.green .progress .inner,
+.red .progress .inner,
+.orange .progress .inner {
+  border: none;
+}
+.green .progress .inner,
+.red .progress .inner,
+.orange .progress .inner {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.green .progress .inner .water,
+.red .progress .inner .water,
+.orange .progress .inner .water {
+  position: absolute;
+  z-index: 1;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  border-radius: 40%;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: spin;
+  animation-name: spin;
+}
+.green .progress .inner .water {
+  top: 25%;
+}
+.green .progress .inner .water {
+  background: #40d47e;
+}
+.green .progress .inner .water,
+.red .progress .inner .water,
+.orange .progress .inner .water {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.green .progress .inner .water,
+.red .progress .inner .water,
+.orange .progress .inner .water {
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
+}
+.green .progress .inner .glare,
+.red .progress .inner .glare,
+.orange .progress .inner .glare {
+  position: absolute;
+  top: -120%;
+  left: -120%;
+  z-index: 5;
+  width: 200%;
+  height: 200%;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-radius: 50%;
+}
+.green .progress .inner .glare,
+.red .progress .inner .glare,
+.orange .progress .inner .glare {
+  background-color: rgba(255,255,255,0.15);
+}
+.green .progress .inner .glare,
+.red .progress .inner .glare,
+.orange .progress .inner .glare {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.green .progress .inner .percent,
+.red .progress .inner .percent,
+.orange .progress .inner .percent {
 
+  z-index:3;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  text-align: center;
+}
+.green .progress .inner .percent,
+.red .progress .inner .percent,
+.orange .progress .inner .percent {
+  line-height: 90px;
+  font-size: 20px;
+}
+.green .progress .inner .percent,
+.red .progress .inner .percent,
+.orange .progress .inner .percent {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.red {
+  margin-top: 15px;
+}
+.red .progress {
+  border: 5px solid #c0392b;
+}
+.red .progress .inner .water {
+  top: 75%;
+}
+.red .progress .inner .water {
+  background: #e74c3c;
+}
+.orange {
+  margin-top: 15px;
+}
+.orange .progress {
+  border: 5px solid #d35400;
+}
+.orange .progress .inner .water {
+  top: 50%;
+}
+.orange .progress .inner .water {
+  background: #e67e22;
+}
+#copyright {
+  margin-top: 25px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #b3b3b3;
+  text-align: center;
+}
+#copyright div {
+  margin-bottom: 10px;
+}
+#copyright a,
+#copyright a:link {
+  color: #808080;
+  text-decoration: none;
+  border-bottom: 1px solid #808080;
+  padding-bottom: 2px;
+}
+#copyright a:active {
+  color: #b3b3b3;
+}
+#copyright a:hover {
+  color: #b3b3b3;
+  border-bottom: 1px solid #b3b3b3;
+  padding-bottom: 4px;
+}
+.instructions {
+  display: inline-block;
+  margin: 5px 0;
+  font-size: 16px;
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+</style>
 {%endblock%}
 {% block content %}
 <script src="{% static 'js/owl.carousel.js' %}"></script>
@@ -30,7 +263,7 @@
                     <section class="rating">
                         <div id="rating-general" style="margin:auto"></div>
                         <div class="clear"></div>
-                        <label class="puntaje">{{ranking.ranking_general | floatformat:2 }}</label>
+                        <label class="puntaje">{{ranking.ranking_general | floatformat:1 }}</label>
                         <input type="hidden" id="rating-rank" value="{{ranking.ranking_general}}">
                         <a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
                     </section>
@@ -114,27 +347,54 @@
 
                         <div class="criterios">
                             <div class="criterio">
-                                <label class="calificacion">{{ranking.linea_carrera}}</label>
-
-                                <div class="grafico"><img src="{%static 'img/mano-evaluacion.jpg' %}"/></div>
+                                <div id = "ranking_linea_carrera" class="green ">
+                                    <div class="progress">
+                                      <div class="inner">
+                                        <div class="percent">{{ranking.linea_carrera | floatformat:1 }}</div>
+                                        <div class="water"></div>
+                                        <div class="glare"></div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 <label class="nombre">Línea de carrera</label>
                             </div>
                             <div class="criterio">
-                                <label class="calificacion">{{ranking.flexibilidad_horarios}}</label>
-
-                                <div class="grafico"><img src="{% static 'img/mano-evaluacion.jpg' %}"/></div>
+                                <div id = "ranking_flexibilidad_horarios" class="green ">
+                                    <div class="progress">
+                                      <div class="inner">
+                                        <div class="percent">{{ranking.flexibilidad_horarios | floatformat:1 }}</div>
+                                        <div class="water"></div>
+                                        <div class="glare"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <label class="calificacion"></label>
                                 <label class="nombre">Flexibilidad de horarios</label>
                             </div>
                             <div class="criterio">
-                                <label class="calificacion">{{ranking.ambiente_trabajo}}</label>
-
-                                <div class="grafico"><img src="{%static 'img/mano-evaluacion.jpg' %}"/></div>
+                                <div id = "ranking_ambiente_trabajo" class="green ">
+                                    <div class="progress">
+                                      <div class="inner">
+                                        <div class="percent">{{ranking.ambiente_trabajo | floatformat:1}}</div>
+                                        <div class="water"></div>
+                                        <div class="glare"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <label class="calificacion"></label>
                                 <label class="nombre">Ambiente de trabajo</label>
                             </div>
                             <div class="criterio">
-                                <label class="calificacion">{{ranking.salarios}}</label>
-
-                                <div class="grafico"><img src="{%static 'img/mano-evaluacion.jpg' %}"/></div>
+                                <div id = "ranking_salarios" class="green ">
+                                    <div class="progress">
+                                      <div class="inner">
+                                        <div class="percent">{{ranking.salarios | floatformat:1}}</div>
+                                        <div class="water"></div>
+                                        <div class="glare"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <label class="calificacion"></label>
                                 <label class="nombre">Salario y Beneficios</label>
                             </div>
                             <div class="clear"></div>
@@ -207,9 +467,9 @@
                         <h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
 
                         <div style="margin:0 50px">
-                            {{form.direccion_map}}
-                            {{form.longitud}}
-                            {{form.latitud}}
+                            <div id = "id_direccion_map">{{empresa.direccion_map}}</div>
+                            <div id = "id_longitud">{{empresa.longitud}}</div>
+                            <div id = "id_latitud">{{empresa.latitud}}</div>
                         </div>
                         <div id="map" style="height: 350px; width: 100%"></div>
                     </section>
@@ -333,6 +593,10 @@
 <script>
     var animationInterval = 0;
     $(function () {
+        fnCalculoRanking($("#ranking_linea_carrera"));
+        fnCalculoRanking($("#ranking_flexibilidad_horarios"));
+        fnCalculoRanking($("#ranking_ambiente_trabajo"));
+        fnCalculoRanking($("#ranking_salarios"));
         $('.carousel').owlCarousel({
             autoPlay: true,
             items: 1,
@@ -450,6 +714,39 @@
         $("#id_salarios").val($("#rating-salario_beneficios").attr("data-rate-value") > 0 ? $("#rating-salario_beneficios").attr("data-rate-value") : 0);
         $("#evaluar").click();
     });
+    function fnCalculoRanking(item){
+        var colorInc = 100/3;
+        var val = parseFloat($(item).find(".percent").html().replace(",","."));
+        val = (val*100)/5
+
+    if(val != ""
+      && !isNaN(val)
+      && val <= 100
+      && val >= 0)
+    {
+
+      var valOrig = val;
+      val = 100 - val;
+
+      $(item).find(".progress").parent().removeClass();
+      $(item).find(".progress .water").css("top", val + "%");
+
+      if(valOrig < colorInc * 1)
+        $(item).find(".progress").parent().addClass("red");
+      else if(valOrig < colorInc * 2)
+        $(item).find(".progress").parent().addClass("orange");
+      else
+        $(item).find(".progress").parent().addClass("green");
+    }
+    else
+    {
+      $(item).find(".progress").parent().removeClass();
+      $(item).find(".progress").parent().addClass("green");
+      $(item).find(".progress .water").css("top", 100 - 20 + "%");
+      $(item).find(".progress .percent").text(20 + "%");
+
+    }
+    }
     var Ubicacion = {
         map: null,
         marca: null,
@@ -464,9 +761,9 @@
             google.maps.event.addListener(Ubicacion.map, 'click', function (event) {
                 Ubicacion.marcar_mapa(event.latLng);
             });
-            if ($("#id_latitud").val() != "") {
-                var latitud = $("#id_latitud").val();
-                var longitud = $("#id_longitud").val();
+            if ($("#id_latitud").html().replace(",",".") != "" && $("#id_latitud").html() != "None") {
+                var latitud = $("#id_latitud").html().replace(",",".");
+                var longitud = $("#id_longitud").html().replace(",",".");
                 var punto = new google.maps.LatLng(latitud, longitud);
                 Ubicacion.marcar_mapa(punto);
             }
@@ -479,16 +776,6 @@
             Ubicacion.marca = marker;
 
             Ubicacion.map.setCenter(coordenadas);
-            $("#id_latitud").val(coordenadas.lat());
-            $("#id_longitud").val(coordenadas.lng());
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                location: new google.maps.LatLng(coordenadas.lat(), coordenadas.lng())
-            }, function (response, status) {
-                if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
-                    $("#id_direccion_map").val(response[0]["formatted_address"]);
-            });
         }
     };
 </script>
