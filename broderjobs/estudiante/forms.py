@@ -20,7 +20,7 @@ class RegistroCVForm(forms.ModelForm):
     paises_hidden = forms.CharField(widget=forms.HiddenInput())
 
     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-    ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+    ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
             model = Estudiante
@@ -74,12 +74,6 @@ class EstudianteForm(forms.ModelForm):
         model = Estudiante
         fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio',
                   'semestre_graduacion', 'ano_graduacion')
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
 
 class InfoPersonalForm(EstudianteForm):
     email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
@@ -102,14 +96,6 @@ class InfoPersonalForm(EstudianteForm):
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        helper.label_class = 'col-md-2'
-        helper.field_class = 'col-md-10'
-        return helper
 
 class DisponibilidadForm(forms.ModelForm):
     class Meta:
@@ -124,12 +110,6 @@ class DisponibilidadForm(forms.ModelForm):
         self.fields['carga_horaria'].empty_label = None
         self.fields['tipo_puesto'].empty_label = None
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
 
 class IdiomaForm(forms.Form):
 

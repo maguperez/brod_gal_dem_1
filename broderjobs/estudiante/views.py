@@ -159,7 +159,7 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
             except RankingEmpresa.DoesNotExist:
                 ranking = None
             if ranking is not None:
-                ranking_general = str(ranking.ranking_general)
+                ranking_general = str(round(float(ranking.ranking_general), 1))
             else:
                 ranking_general = "0.0"
             sector = empresas[i].nombre
@@ -276,15 +276,10 @@ class FotoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
         estudiante.save()
         return super(FotoView, self).form_valid(form)
 
-class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+class InfoPersonalView(LoginRequiredMixin, FormView):
     form_class =forms.InfoPersonalForm
     template_name = 'estudiante/mi-cv-info-personal.html'
     success_url = reverse_lazy('mi-cv')
-    def get_object(self, queryset=None):
-        user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        estudiante = Estudiante.objects.get(persona_id =persona.id)
-        return estudiante
 
     def get_initial(self):
         user = self.request.user
@@ -310,7 +305,12 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
             'paises': pais,
             'paises_hidden': pais_hidden,
             'ciudades': ciudad,
-            'ciudades_hidden': ciudad_hidden}
+            'ciudades_hidden': ciudad_hidden,
+            'grado_estudio': estudiante.grado_estudio,
+            'ano_graduacion': estudiante.ano_graduacion,
+            'semestre_graduacion': estudiante.semestre_graduacion,
+            'semestre_inicio_estudio': estudiante.semestre_inicio_estudio,
+            'ano_inicio_estudio': estudiante.ano_inicio_estudio}
 
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
@@ -336,7 +336,8 @@ class InfoPersonalView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
 
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         estudiante.grado_estudio = grado_estudio
-
+        print("estupido django")
+        print(id_universidad)
         universidad = Universidad.objects.get(id= id_universidad )
         if universidad is not None:
             estudiante.universidad = universidad
@@ -661,23 +662,6 @@ class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
         busqueda = request.GET['busqueda']
         carreras = Carrera.objects.filter(Q(descripcion__icontains=busqueda))
         data = serializers.serialize('json', carreras,
-                                     fields=('id','descripcion'))
-        return HttpResponse(data, content_type='application/json')
-
-class PaisBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
-        paises = Pais.objects.filter(Q(descripcion__icontains=busqueda))
-        data = serializers.serialize('json', paises,
-                                     fields=('id','descripcion'))
-        return HttpResponse(data, content_type='application/json')
-
-class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
-        pais = request.GET['pais']
-        ciudades = Ciudad.objects.filter(descripcion__icontains=busqueda, pais_id=pais )
-        data = serializers.serialize('json', ciudades,
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 
