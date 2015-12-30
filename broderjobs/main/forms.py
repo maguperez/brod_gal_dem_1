@@ -31,7 +31,7 @@ class RegisterForm(UserCreationForm):
     anos = []
     for y in range(1950, (datetime.datetime.now().year - 10)):
         anos.append((y, y))
-    items_anos = [('','AÃ±o')] + anos
+    items_anos = [('','Año')] + anos
 
     meses = []
     for y in range(1,12):
