@@ -5,3 +5,5 @@ from . import models
 admin.site.register(models.Oportunidad)
 
 admin.site.register(models.Postulacion)
+
+admin.site.register(models.ProcesoFase)

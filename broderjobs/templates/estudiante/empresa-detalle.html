@@ -263,7 +263,7 @@
                     <section class="rating">
                         <div id="rating-general" style="margin:auto"></div>
                         <div class="clear"></div>
-                        <label class="puntaje">{{ranking.ranking_general | floatformat:2 }}</label>
+                        <label class="puntaje">{{ranking.ranking_general | floatformat:1 }}</label>
                         <input type="hidden" id="rating-rank" value="{{ranking.ranking_general}}">
                         <a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
                     </section>
@@ -350,7 +350,7 @@
                                 <div id = "ranking_linea_carrera" class="green ">
                                     <div class="progress">
                                       <div class="inner">
-                                        <div class="percent">{{ranking.linea_carrera}}</div>
+                                        <div class="percent">{{ranking.linea_carrera | floatformat:1 }}</div>
                                         <div class="water"></div>
                                         <div class="glare"></div>
                                       </div>
@@ -362,7 +362,7 @@
                                 <div id = "ranking_flexibilidad_horarios" class="green ">
                                     <div class="progress">
                                       <div class="inner">
-                                        <div class="percent">{{ranking.flexibilidad_horarios}}</div>
+                                        <div class="percent">{{ranking.flexibilidad_horarios | floatformat:1 }}</div>
                                         <div class="water"></div>
                                         <div class="glare"></div>
                                       </div>
@@ -375,7 +375,7 @@
                                 <div id = "ranking_ambiente_trabajo" class="green ">
                                     <div class="progress">
                                       <div class="inner">
-                                        <div class="percent">{{ranking.ambiente_trabajo}}</div>
+                                        <div class="percent">{{ranking.ambiente_trabajo | floatformat:1}}</div>
                                         <div class="water"></div>
                                         <div class="glare"></div>
                                       </div>
@@ -388,7 +388,7 @@
                                 <div id = "ranking_salarios" class="green ">
                                     <div class="progress">
                                       <div class="inner">
-                                        <div class="percent">{{ranking.salarios}}</div>
+                                        <div class="percent">{{ranking.salarios | floatformat:1}}</div>
                                         <div class="water"></div>
                                         <div class="glare"></div>
                                       </div>

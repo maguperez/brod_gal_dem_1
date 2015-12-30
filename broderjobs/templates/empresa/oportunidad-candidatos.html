@@ -380,7 +380,13 @@
                         url: "{% url 'candidatos' %}",
                         data: function (d) {
                             d.id = "{{oportunidad.id}}";
-                        }
+                        },
+                        success:
+                            function (msg) {
+                                //var json = $.parseJSON(msg);
+                                fnCallback(msg);
+                                $(".tEvaluacion").show();
+                            }
                     },
                     columns: [
                         {data: "checkbox", class:"check-row"},
@@ -435,10 +441,18 @@
    });
 
     $('#siguiente-fase').click(function (event) {
-    var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
-                return { Id :  $(this).data("info"), nombre: ''}
+        var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
+                return { Id :  $(this).data("info")}
+        $.ajax({
+				data: {'ids': ids},
+				url: '{%url "sig-fase" %}',
+				type: 'get',
+				success: function (data) {
+                    CandidatosTable.obtener();
+				}
+			});
     });
-    console.log(ids)
+
 });
 
 

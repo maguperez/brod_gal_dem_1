@@ -7,9 +7,6 @@ from main import utils
 items_registro = utils.estado_registro()
 
 
-
-
-
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
     fecha_creacion = models.DateField(default=None, null=True, blank=True)

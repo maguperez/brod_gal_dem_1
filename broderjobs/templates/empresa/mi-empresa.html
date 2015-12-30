@@ -29,9 +29,9 @@
 					<div class="slider"id="fade">
 						<div class="owl-carousel">
 
-							<div class="item-video">
-                                <a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>
-                            </div>
+							<!--<div class="item-video">-->
+                                <!--<a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>-->
+                            <!--</div>-->
 							{%for i in imagenes.all%}
                             <div class="item">
                                 <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
@@ -235,9 +235,9 @@
 							 formAjaxSubmit(form, modal);
 						 } else {
 							 $(modal).modal('toggle');
-
+							 window.location.reload();
 						 }
-						 window.location.reload();
+
 
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) { }
@@ -261,14 +261,14 @@
         $("#cambiar_imagen").click();
 	 });
      $('#info-general-button').click(function() {
-//		 $('#modal-aceptar').css("display", "inline");
+		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		 });
 	 });
 	 $('#btn-edit').click(function() {
-//		 $('#modal-aceptar').css("display", "none");
+		 $('#modal-aceptar').css("display", "none");
 		 $('#form-modal-body').load('imagenes/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
