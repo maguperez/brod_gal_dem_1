@@ -45,7 +45,7 @@
 			<img class="logo" src="{% static "img/logo_orange.png" %}" alt="broderjobs"/>
 			<div class="box">
 				<div class="content">
-					<form action="" method="post">{%csrf_token%}
+					<form action="" method="post" autocomplete="off">{%csrf_token%}
 						{%if form.errors %}
 							{{ form.grado_estudio.errors }}
 							{{ form.universodad.errors }}
@@ -170,11 +170,36 @@
 </script>
 
 <script>
+
+	var flagSeleccionarUniversidad = true;
+
 	$('documento').ready(function(){
+
+		$.validator.addMethod('universidadExistente',function(value, element, param){
+			return flagSeleccionarUniversidad;
+		},'Debe seleccionar una universidad existente');
 
 		//var ids = ["id_grado_estudio"];
 		InicializarTypeaheadElementos();
 		//InicializarPlugin(ids);
+		$('#id_universidades').blur(function(){
+			var strInput = $('#id_universidades').val();
+			var objSeleccionado = $('#id_universidades').typeahead('getActive');
+
+			if(objSeleccionado){
+				if(objSeleccionado.name != strInput){
+					flagSeleccionarUniversidad = false;
+				}
+				else{
+					flagSeleccionarUniversidad = true;
+				}
+			}
+			else if(strInput.length > 0){
+				flagSeleccionarUniversidad = false;
+			}
+
+
+		});
 	});
 
 	function GuardarValorHidden(idHidden, idElemento, ui){
@@ -338,7 +363,8 @@
                     required: true
                 },
 				universidades: {
-                    required: true
+                    required: true,
+					universidadExistente: true
                 },
 				carreras: {
 					required: true
