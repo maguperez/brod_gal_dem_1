@@ -103,16 +103,31 @@
 
 <link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script>
-	$(function(){
-		$(".sparklines").each(function(){
+	$(function() {
+		$(".sparklines").each(function () {
 			var data = $(this).data("info");
 			$(this).sparkline(data, {
 				type: 'bar',
 				height: '50px',
-    			barSpacing: 7,
+				barSpacing: 7,
 				barWidth: 10,
-				barColor: '#5d9cf9'});
+				barColor: '#5d9cf9'
+			});
 		});
+		var array = new Array();
+		for (var i = 7; i >0 ; i--) {
+			var date = new Date();
+			var last = new Date(date.getTime() - (i * 24 * 60 * 60 * 1000));
+			switch(last.getDay()){
+				case 0: array.push("Lunes"); break;
+				case 1: array.push("Martes"); break;
+				case 2: array.push("Miércoles"); break;
+				case 3: array.push("Jueves"); break;
+				case 4: array.push("Viernes"); break;
+				case 5: array.push("Sábado"); break;
+				case 6: array.push("Domingo"); break;
+			}
+		}
 		$(".ct-chart").each(function(){
 			var id = $(this).data("id");
 			var d = [];
@@ -123,7 +138,7 @@
 				success: function (data) {
 					$("#cifra-"+id).html(data[0][0]);
 					new Chartist.Line("#chart-id-"+id, {
-						labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Sabado", "Domingo"],
+						labels: array,
 						colors:["#333", "#222", "#111", "#000"],
 						series: [data[0][1]]
 					}, {

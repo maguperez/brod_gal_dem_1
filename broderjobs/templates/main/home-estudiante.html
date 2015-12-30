@@ -289,6 +289,11 @@
 										minlength: "La contraseña debe tener al menos seis (6) caracteres" }
 	            }
 	        });
+			$("select").on("change", function(){
+				$(this).val() != "" ?
+					$(this).css("color", "black"):
+					$(this).css("color", "#ccc");
+			});
             $("#link-registro").addClass("active");
 		    $(".cumpleanos").css("margin-right", "3px")
         });

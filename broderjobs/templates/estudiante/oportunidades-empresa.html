@@ -83,6 +83,7 @@
 {% block js %}
 <script>
 	$(function(){
+		$("#link-empresa").addClass("active");
 		$("body").on("mouseenter", ".compatibilidad", function () {
             $(this).find(".consolidado").css("opacity",0);
 		  	$(this).find(".desglose").css("opacity",1);

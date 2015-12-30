@@ -468,8 +468,11 @@
 
                         <div style="margin:0 50px">
                             <div id = "id_direccion_map">{{empresa.direccion_map}}</div>
-                            <div id = "id_longitud">{{empresa.longitud}}</div>
-                            <div id = "id_latitud">{{empresa.latitud}}</div>
+                            <i class = "fa fa-map-marker"></i>
+                            <label><b>Latitud:</b></label>
+                            <span id = "id_longitud">{{empresa.longitud}}</span> -
+                            <label><b>Longitud:</b></label>
+                            <span id = "id_latitud">{{empresa.latitud}}</span><br><br>
                         </div>
                         <div id="map" style="height: 350px; width: 100%"></div>
                     </section>
@@ -758,9 +761,6 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);
-            google.maps.event.addListener(Ubicacion.map, 'click', function (event) {
-                Ubicacion.marcar_mapa(event.latLng);
-            });
             if ($("#id_latitud").html().replace(",",".") != "" && $("#id_latitud").html() != "None") {
                 var latitud = $("#id_latitud").html().replace(",",".");
                 var longitud = $("#id_longitud").html().replace(",",".");
