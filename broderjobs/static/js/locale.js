@@ -22,8 +22,8 @@ window.locale = {
             "emptyResult": "Empty file upload result"
         },
         "error": "Error",
-        "start": "Start",
-        "cancel": "Cancel",
-        "destroy": "Delete"
+        "start": "Comenzar",
+        "cancel": "Cancelar",
+        "destroy": "Borrar"
     }
 };

@@ -71,7 +71,11 @@
     <ol class="indicator"></ol>
 </div>
 {% upload_js %}
-
+<script>
+    $(function(){
+        $("#form-modal .modal-title").html('Selección de imágenes y videos');
+    })
+</script>
 <script src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
 <script src="{% static 'js/tmpl.min.js' %}"></script>
 <script src="{% static 'js/load-image.min.js' %}"></script>
