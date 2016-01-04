@@ -370,7 +370,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         estudiante.save()
         return super(InfoPersonalView, self).form_valid(form)
 
-class ResumenView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, FormView):
+class ResumenView(LoginRequiredMixin, FormView):
     template_name = 'estudiante/mi-cv-resumen.html'
     form_class = forms.ResumenForm
     success_url = reverse_lazy('mi-cv')

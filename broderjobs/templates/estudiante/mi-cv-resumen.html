@@ -1,7 +1,7 @@
 
 {% load crispy_forms_tags %}
 
-<div class="row">
+<div>
 	<form class="form-horizontal" action="{% url 'mi-cv-resumen' %}" method="post">
 		  {% crispy form %}
 	</form>
@@ -9,5 +9,7 @@
 <script>
 	$(function(){
 		$("#form-modal .modal-title").html('<i class="profile"></i> &nbsp;Resumen');
+		$("#div_id_resumen").removeClass('form-group');
+
 	});
 </script>
