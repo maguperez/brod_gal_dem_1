@@ -207,6 +207,21 @@
 
 		});
 
+		$('#id_carreras').blur(function(){
+			var strInput = $('#id_carreras').val();
+			var objSeleccionado = $('#id_carreras').typeahead('getActive');
+
+			if(objSeleccionado){
+				if(objSeleccionado.name != strInput){
+					$('#id_carreras_hidden').val('0');
+				}
+			}
+			else if(strInput.length > 0){
+				$('#id_carreras_hidden').val('0');
+			}
+		});
+
+
 		$("#id_pais").select2({
   			placeholder: "Pais",
   			allowClear: true
