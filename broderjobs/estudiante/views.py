@@ -35,8 +35,13 @@ def registro_cv(request):
             grado_estudio = form.cleaned_data['grado_estudio']
             id_universidad = form.cleaned_data['universidades_hidden']
             id_carrera = form.cleaned_data['carreras_hidden']
-            id_pais = form.cleaned_data['paises_hidden']
-            id_ciudad = form.cleaned_data['ciudades_hidden']
+
+            pais = form.cleaned_data['pais']
+
+            # id_pais = form.cleaned_data['paises_hidden']
+
+            # id_ciudad = form.cleaned_data['ciudades_hidden']
+            id_ciudad = form.cleaned_data['ciudad_hidden']
             tipo_puesto = form.cleaned_data['tipo_puesto']
             ano_inicio = form.cleaned_data['ano_inicio_estudio']
             semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
@@ -51,19 +56,32 @@ def registro_cv(request):
             if estudiante is None:
                 estudiante = Estudiante()
                 estudiante.persona = persona
+
             estudiante.grado_estudio = grado_estudio
             universidad = Universidad.objects.get(id= id_universidad )
             if universidad is not None:
                 estudiante.universidad = universidad
+
             carrera = Carrera.objects.get(id = id_carrera)
             if carrera is not None:
                 estudiante.carrera = carrera
-            pais = Pais.objects.get(id= id_pais)
-            if pais is not None:
-                estudiante.pais = pais
-            ciudad = Ciudad.objects.get(id = id_ciudad)
-            if ciudad is not None:
-                estudiante.ciudad = ciudad
+
+            estudiante.pais = pais
+            # pais = Pais.objects.get(id= id_pais)
+            # if pais is not None:
+            #     estudiante.pais = pais
+
+            if id_ciudad is not None and id_ciudad != '':
+                try:
+                    ciudad = Ciudad.objects.get(id = id_ciudad)
+                except Ciudad.DoesNotExist:
+                    ciudad = None
+                if ciudad is not None:
+                    estudiante.ciudad = ciudad
+
+            # ciudad = Ciudad.objects.get(id = id_ciudad)
+            # if ciudad is not None:
+            #     estudiante.ciudad = ciudad
             estudiante.ano_inicio_estudio = ano_inicio
             estudiante.semestre_inicio_estudio = semestre_inicio
             estudiante.ano_graduacion = ano_graduacion
@@ -318,7 +336,8 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
             return JsonResponse(form.errors, status=400)
         else:
-            return response
+            return ''
+            # return response
 
     def form_valid(self, form):
         user = self.request.user
@@ -336,8 +355,6 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         estudiante.grado_estudio = grado_estudio
-        print("estupido django")
-        print(id_universidad)
         universidad = Universidad.objects.get(id= id_universidad )
         if universidad is not None:
             estudiante.universidad = universidad
@@ -563,7 +580,8 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         if self.request.is_ajax():
             return JsonResponse(form.errors, status=400)
         else:
-            return response
+            # return response
+            return ''
 
     def form_valid(self, form):
         user = self.request.user

@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/', views.OportunidadView.as_view(), name='oportunidad'),
     # url(r'^postular/(?P<id>\d+)/', views.PostularView.as_view(), name='oportunidad-postular'),
     url(r'^candidatos/$', 'oportunidad.views.datatable_candidatos', name="candidatos"),
-    url(r'^sig-fase/$', 'oportunidad.views.siguiente_fase', name="sig-fase"),
+    url(r'^sig-fase/$', 'oportunidad.views.siguiente_fase', name="siguiente-fase"),
 ]

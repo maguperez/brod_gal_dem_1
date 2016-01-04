@@ -16,6 +16,7 @@ class Estudiante(models.Model):
     grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True )
     universidad = models.ForeignKey(Universidad,default=None, null=True, blank=True )
     carrera = models.ForeignKey(Carrera, default=None, null=True, blank=True )
+    carrera_referencial = models.CharField(max_length="100", default=None, null=True, blank=True)
     semestre_inicio_estudio = models.CharField(choices=items_semestre,max_length=2, default=None, null=True, blank=True)
     ano_inicio_estudio = models.CharField(choices=items_anos, max_length=4, default=None, null=True,  blank=True, )
     semestre_graduacion = models.CharField(choices=items_semestre, max_length=2, default=None, null=True, blank=True, )
