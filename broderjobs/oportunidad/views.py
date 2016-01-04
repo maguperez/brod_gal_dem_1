@@ -53,8 +53,6 @@ class OportunidadCrearView(FormView):
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
         oportunidad.pais = pais
-        print("ciudad")
-        print(id_ciudad)
         if id_ciudad is not None and id_ciudad != '':
             try:
                 ciudad = Ciudad.objects.get(id = id_ciudad)
@@ -220,12 +218,14 @@ def datatable_candidatos(request):
     return HttpResponse(s.read())
 
 def siguiente_fase( request ):
-    id = request.GET['id']
-    fase = request.GET['fase']
+    ids = request.GET['ids']
+
+    # postulaciones = Postulacion.objects.filter()
+
+
     #define response
     response = {
         'aaData': ''
-
     }
     #serialize to json
     s = StringIO()

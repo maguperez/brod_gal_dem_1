@@ -336,8 +336,6 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         estudiante.grado_estudio = grado_estudio
-        print("estupido django")
-        print(id_universidad)
         universidad = Universidad.objects.get(id= id_universidad )
         if universidad is not None:
             estudiante.universidad = universidad

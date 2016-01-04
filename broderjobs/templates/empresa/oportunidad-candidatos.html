@@ -36,7 +36,7 @@
             <div class="descripcion">
                 <a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 
-                <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{empresa.nombre}}</label></div>
+                <div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
                 <div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                         <a class="btn-option" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
                         <a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
                     </div>
-                    <table id="tb_candidatos" class="table table-striped table-bordered responsive bj-table">
+                    <table id="tb_candidatos" class="table table-striped table-bordered responsive" data-info="P">
                         <thead>
                         <tr>
                             <th></th>
@@ -120,137 +120,7 @@
         </div>
     </div>
 </section>
-<div class="popup candidato" id="ver-cv">
-    <div class="popup-box box">
-        <header>
-            <img class="imagen" src="../img/profile/profile.png"/>
 
-            <div class="detalle">
-                <h3>DIEGO ALONSO CHAVEZ NU&Ntilde;EZ</h3>
-                <label>UPC - M&Uacute;SICA (2011 - 2016)</label>
-                <label>26 a&ntilde;os - Lima, Per&uacute;</label>
-                <label>+51 987 346 718 / diegocha7@gmail.com</label>
-            </div>
-            <div class="clear"></div>
-            <a class="descargar btn-action">DESCARGAR PDF</a>
-        </header>
-        <div class="content">
-            <section>
-                <h3 class="title"><i class="profile"></i>Resumen</h3>
-
-                <div class="detalle">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas interdum imperdiet nunc, sit
-                        amet dapibus ipsum semper eget. Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem
-                        ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris
-                        hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida.</p>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="time"></i>Disponibilidad</h3>
-
-                <div class="detalle col-3-7">
-                    <div>
-                        <label>Acepto propuestas de</label>
-
-                        <p><span class="tag">Practicante</span><span class="tag">Empleado</span></p>
-
-                        <div class="clear"></div>
-                    </div>
-                    <div>
-                        <label>Carga horaria</label>
-
-                        <p>Full time</p>
-
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="language"></i>Idiomas</h3>
-
-                <div class="detalle">
-                    <p>
-                        <span class="tag">Ingl&eacute;s avanzado</span>
-                        <span class="tag">Franc&eacute;s b&aacute;sico</span>
-                    </p>
-
-                    <div class="clear"></div>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="knowledge"></i>Conocimientos</h3>
-
-                <div class="detalle">
-                    <p>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Marketing digital</span>
-                    </p>
-
-                    <div class="clear"></div>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas</h3>
-
-                <div class="detalle">
-                    <div>
-                        <p>Dibujo Manga</p>
-
-                        <div class="clear"></div>
-                        <label>Centro Cultural Peruano Japon&eacute;s</label>
-
-                        <div class="clear"></div>
-                    </div>
-                    <div>
-                        <p>Teatro contempor&aacute;neo</p>
-
-                        <div class="clear"></div>
-                        <label>Iguana Producciones</label>
-
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="work"></i>Experiencia Profesional</h3>
-
-                <div class="detalle timeline">
-                    <div>
-                        <p class="fecha">Enero 2014 - Enero 2015</p>
-                        <label class="tipo">EMPLEO</label>
-                        <label class="nombre">Odebretch</label>
-
-                        <p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna
-                            placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
-                    </div>
-                    <div>
-                        <p class="fecha">Enero 2014 - Enero 2015</p>
-                        <label class="tipo">EMPLEO</label>
-                        <label class="nombre">Odebretch</label>
-
-                        <p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna
-                            placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h3 class="title"><i class="volunteer"></i>Voluntariado</h3>
-
-                <div class="detalle timeline">
-                    <div>
-                        <p class="fecha">Enero 2014 - Enero 2015</p>
-                        <label class="tipo">EMPLEO</label>
-                        <label class="nombre">Odebretch</label>
-
-                        <p>Maecenas sed consequat dui. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna
-                            placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <a class="close">Cerrar</a>
-    </div>
-</div>
 <div class="popup mensaje-edit" id="mensaje">
     <div class="popup-box">
         <div class="content">
@@ -330,6 +200,8 @@
                             target: 8
                         }
                     },
+                    destroy: true,
+                    searching: false,
                     language: {
                         url: "{%static 'js/dataTable-i18n/es-ES.json' %}"
                     },
@@ -375,18 +247,25 @@
                     stateSaveCallback: function (settings, data) {
 //                debugger;
                     },
-                    ajax: {
+//                    ajax: {
+//                        type: "GET",
+//                        url: "{% url 'candidatos' %}",
+//                        data: function (d) {
+//                            d.id = "{{oportunidad.id}}";
+//                        },
+//                        success:
+//                            function (msg) {
+//                                //var json = $.parseJSON(msg);
+//                                fnCallback(msg);
+//                                $(".tEvaluacion").show();
+//                            }
+//                    },
+                     ajax: {
                         type: "GET",
                         url: "{% url 'candidatos' %}",
                         data: function (d) {
                             d.id = "{{oportunidad.id}}";
-                        },
-                        success:
-                            function (msg) {
-                                //var json = $.parseJSON(msg);
-                                fnCallback(msg);
-                                $(".tEvaluacion").show();
-                            }
+                        }
                     },
                     columns: [
                         {data: "checkbox", class:"check-row"},
@@ -438,22 +317,38 @@
                selected[data.id] = data;
                else if (selected[data.id] != null) selected[data.id] = null;
        });
+        $('#siguiente-fase').click(function (event) {
+//        var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
+//                    return { Id :  $(this).data("info")}
+//                });
+            ids = new Array();
+            $("input:checked", table.fnGetNodes()).each(function(index, value){
+                console.log($(this).data("info"));
+                ids[index] = $(this).data("info");
+            });
+
+        CambioFase(ids);
+
+    });
    });
 
-    $('#siguiente-fase').click(function (event) {
-        var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
-                return { Id :  $(this).data("info")}
-        $.ajax({
-				data: {'ids': ids},
-				url: '{%url "sig-fase" %}',
-				type: 'get',
-				success: function (data) {
-                    CandidatosTable.obtener();
-				}
-			});
-    });
 
-});
+
+
+    function CambioFase(ids){
+        //var json = JSON2.stringify(ids );
+        $.ajax({
+           // data: {'ids': ids},
+            url: '{%url "siguiente-fase" %}',
+            type: 'GET',
+            data: {'ids': JSON.stringify(ids)},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                CandidatosTable.obtener();
+            }
+        });
+    }
 
 
 
