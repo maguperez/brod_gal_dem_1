@@ -558,12 +558,19 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
     def get_initial(self):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
-        puestos = experiencia.puesto
-        puestos_hidden = experiencia.puesto.id
+        # puestos = experiencia.puesto
+        # puestos_hidden = experiencia.puesto.id
+
+        if experiencia.puesto is None:
+            puestos = experiencia.puesto_referencial
+            puestos_hidden = '0'
+        else:
+            puestos = experiencia.puesto
+            puestos_hidden = experiencia.puesto.id
 
         if experiencia.empresa is None:
             empresas = experiencia.empresa_referencial
-            empresas_hidden = None
+            empresas_hidden = '0'
         else:
             empresas = experiencia.empresa
             empresas_hidden = experiencia.empresa.id
@@ -590,14 +597,21 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
-        puesto = Puesto.objects.get(id=puesto_id)
+
+        if puesto_id != "0":
+            puesto = Puesto.objects.get(id=puesto_id)
+            experiencia.puesto = puesto
+        else:
+            experiencia.puesto = None
+            experiencia.puesto_referencial = puesto_descripcion
+
         if empresa_id != "0":
             empresa = Empresa.objects.get(id=empresa_id)
             experiencia.empresa = empresa
         else:
             experiencia.empresa = None
             experiencia.empresa_referencial = empresa_descripcion
-        experiencia.puesto = puesto
+
         if fecha_desde is not None:
             experiencia.fecha_desde = fecha_desde
         if fecha_hasta is not None:
@@ -608,6 +622,10 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         experiencia.descripcion = descripcion
         experiencia.save()
         return super(ExperienciaView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        return JsonResponse(form.errors, status=400)
 
 class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm
@@ -637,13 +655,20 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
-        puesto = Puesto.objects.get(id=puesto_id)
+
+        if puesto_id != "0":
+            puesto = Puesto.objects.get(id=puesto_id)
+            experiencia.puesto = puesto
+        else:
+            experiencia.puesto = None
+            experiencia.puesto_referencial = puesto_descripcion
+
         if empresa_id != "0":
             empresa = Empresa.objects.get(id=empresa_id)
             experiencia.empresa = empresa
         else:
             experiencia.empresa_referencial = empresa_descripcion
-        experiencia.puesto = puesto
+
         if fecha_desde is not None:
             experiencia.fecha_desde = fecha_desde
         if fecha_hasta is not None:
