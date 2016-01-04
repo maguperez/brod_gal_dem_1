@@ -355,6 +355,8 @@
 			$('#id_ciudad_hidden').val($(this).val());
 		});
 
+		InicializarValidaciones();
+
 	});
 
 	function InicializarSelect2(ids){
@@ -366,7 +368,7 @@
 		});
 	}
 
-	function InicializarTypeahead(){
+	function InicializarValidaciones(){
 
 		$("form").validate({
             errorPlacement: function (error, element) {
