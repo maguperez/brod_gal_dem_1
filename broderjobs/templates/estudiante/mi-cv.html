@@ -20,7 +20,8 @@
 							<div class="box-imagen" >
 								<img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
 								<div class="botones-imagen" style="visibility:hidden;">
-								<a id="editar-imagen"><i class="fa fa-pencil"></i></a>
+								<a id="editar-imagen" data-toggle="tooltip" data-placement="top"
+								   title="Se recomienda que las dimensiones de la imagen sean mayores a 130x130 píxeles"><i class="fa fa-pencil"></i></a>
 								<a id="remover-imagen"><i class="fa fa-times"></i></a>
 								</div>
 							</div>
@@ -257,6 +258,7 @@
 			 });
 		 }
 	 }
+	 $('[data-toggle="tooltip"]').tooltip();
 	 $(".box-imagen" ).mouseover(function() {
 		$(".botones-imagen").css("visibility", "visible");
 	 });

@@ -112,7 +112,6 @@
 			}).then(function(data) {
 				var array = new Array();
 				for (var i = 6; i >= 0 ; i--) {
-					debugger;
 					var last = moment().subtract(i, 'days');
 					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
 				}
