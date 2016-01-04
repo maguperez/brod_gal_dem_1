@@ -1,27 +1,8 @@
 {% load staticfiles %}
-<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
-<script>
-	panel = new MixpanelExport({
-		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
-		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
-	});
-</script>
+
 {% if oportunidades|length %}
 		{% for oportunidad in oportunidades.all%}
-<script>
-	panel.retention({
-		from_date: "2015-12-01",
-		to_date: "2015-12-31",
-		expire: 8798798765,
-		retention_type: "compounded",
-		event: "Visita Oportunidad",
-		//born_event: "Visita Oportunidad",
-		where: 'properties["OportunidadID"] == "{{oportunidad.id}}"'
-	}).then(function(data) {
-		console.log()
-		console.log(data);
-	});
-</script>
+
 					<li class="oportunidad-estadistica">
 						<div class="box header">
 							<img class="imagen" src="{{empresa.set_logo}}" />
@@ -64,7 +45,7 @@
 										<label>Visualizaciones</label>
 									</div>
 									<div class="grafico grafico-barras">
-										<span class = "sparklines" data-info = "[5,6,7,2,0,0,0,4]"/>
+										<span class = "sparklines" data-id = "{{oportunidad.id}}"/>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -100,33 +81,54 @@
 
 <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 <script src="{% static 'js/chartist.min.js' %}"></script>
-
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
 <link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script>
+	moment.locale('es');
+	panel = new MixpanelExport({
+		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
+		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
+	});
+
 	$(function() {
+
+		var date = moment().format("YYYY-MM-DD");
+		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
+
 		$(".sparklines").each(function () {
+			var id = $(this).data("id");
 			var data = $(this).data("info");
-			$(this).sparkline(data, {
-				type: 'bar',
-				height: '50px',
-				barSpacing: 7,
-				barWidth: 10,
-				barColor: '#5d9cf9'
+			var obj = $(this)
+			panel.retention({
+				from_date: last,
+				to_date: date,
+				expire: 8798798765,
+				retention_type: "compounded",
+				event: "Visita Oportunidad",
+				//born_event: "Visita Oportunidad",
+				where: 'properties["OportunidadID"] == "'+ id +'"'
+			}).then(function(data) {
+				var array = new Array();
+				for (var i = 6; i >= 0 ; i--) {
+					debugger;
+					var last = moment().subtract(i, 'days');
+					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
+				}
+				$(obj).sparkline(array, {
+					type: 'bar',
+					height: '50px',
+					barSpacing: 7,
+					barWidth: 10,
+					barColor: '#5d9cf9'
+				});
 			});
 		});
 		var array = new Array();
-		for (var i = 7; i >0 ; i--) {
-			var date = new Date();
-			var last = new Date(date.getTime() - (i * 24 * 60 * 60 * 1000));
-			switch(last.getDay()){
-				case 0: array.push("Lunes"); break;
-				case 1: array.push("Martes"); break;
-				case 2: array.push("Miércoles"); break;
-				case 3: array.push("Jueves"); break;
-				case 4: array.push("Viernes"); break;
-				case 5: array.push("Sábado"); break;
-				case 6: array.push("Domingo"); break;
-			}
+		for (var i = 6; i >= 0 ; i--) {
+			var last = moment().subtract(i, 'days');
+			array.push(last.format('dddd'));
 		}
 		$(".ct-chart").each(function(){
 			var id = $(this).data("id");
