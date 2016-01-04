@@ -16,11 +16,15 @@ class RegistroCVForm(forms.ModelForm):
     carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
-    paises_hidden = forms.CharField(widget=forms.HiddenInput())
+    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
+    # paises_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-    ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
+    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    # ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
+
+    ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
             model = Estudiante
