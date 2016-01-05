@@ -79,19 +79,73 @@ class AjaxTemplateMixin(object):
                 self.template_name = self.ajax_template_name
             return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
 
-class InfoGeneralView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+class InfoGeneralView(FormView):
 
         form_class = forms.InfoGeneralForm
         template_name = 'empresa/mi-empresa-info-general.html'
         success_url = reverse_lazy('mi-empresa')
 
-        #get object
-        def get_object(self, queryset=None):
+        def get_initial(self):
+
             user = self.request.user
             persona = Persona.objects.get(usuario_id=user.id)
             representante = Representante.objects.get(persona_id =persona.id)
             empresa = Empresa.objects.get(id=representante.empresa.id)
-            return empresa
+            return {
+                'nombre': empresa.nombre,
+                'quienes_somos': empresa.quienes_somos,
+                'RUC': empresa.RUC,
+                'sector': empresa.sector,
+                'numero_funcionarios': empresa.numero_funcionarios,
+                'facturacion_anual': empresa.facturacion_anual,
+                'ano_fundacion': empresa.ano_fundacion,
+                'website': empresa.website,
+                'pais': empresa.pais, 'ciudad_hidden': empresa.ciudad.id}
+
+        def form_invalid(self, form):
+            return form.errors
+
+        def form_valid(self, form):
+            quienes_somos =  form.cleaned_data['quienes_somos']
+            RUC = form.cleaned_data['RUC']
+            sector = form.cleaned_data['sector']
+            pais = form.cleaned_data['pais']
+            id_ciudad = form.cleaned_data['ciudad_hidden']
+
+            numero_funcionarios = form.cleaned_data['numero_funcionarios']
+            facturacion_anual = form.cleaned_data['facturacion_anual']
+
+            ano_fundacion = form.cleaned_data['ano_fundacion']
+            website = form.cleaned_data['website']
+
+            user = self.request.user
+            persona = Persona.objects.get(usuario_id=user.id)
+            representante = Representante.objects.get(persona_id =persona.id)
+            empresa = Empresa.objects.get(id=representante.empresa.id)
+
+            empresa.quienes_somos = quienes_somos
+            empresa.RUC = RUC
+            empresa.sector = sector
+            empresa.numero_funcionarios = numero_funcionarios
+            empresa.facturacion_anual = facturacion_anual
+            empresa.ano_fundacion = ano_fundacion
+            empresa.website =website
+            empresa.pais = pais
+
+            if id_ciudad is not None and id_ciudad != '':
+                try:
+                    ciudad = Ciudad.objects.get(id = id_ciudad)
+                except Ciudad.DoesNotExist:
+                    ciudad = None
+                if ciudad is not None:
+                    empresa.ciudad = ciudad
+            else:
+                empresa.ciudad = None
+            empresa.ciudad = ciudad
+            empresa.save()
+
+            return super(InfoGeneralView, self).form_valid(form)
+
 
 class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.LogoForm

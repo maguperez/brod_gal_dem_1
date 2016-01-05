@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Oportunidad, Postulacion
+from .models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
@@ -168,7 +168,8 @@ class OportunidadView(TemplateView):
 
 def datatable_candidatos(request):
     id = request.GET['id']
-    objects = Postulacion.objects.filter(oportunidad_id = id)
+    f = request.GET['f']
+    objects = Postulacion.objects.filter(oportunidad_id = id, fase_id = f)
 
     list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
     list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]
@@ -219,8 +220,14 @@ def datatable_candidatos(request):
 
 def siguiente_fase( request ):
     ids = request.GET['ids']
-
-    # postulaciones = Postulacion.objects.filter()
+    f = request.GET['f']
+    o = request.GET['o']
+    id_fase = int(f) + 1
+    print(id_fase)
+    print(f)
+    fase = ProcesoFase.objects.get(pk = id_fase)
+    postulaciones = Postulacion.objects.filter(pk__in=[8,14]).update(fase = fase)
+    oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase)
 
 
     #define response
