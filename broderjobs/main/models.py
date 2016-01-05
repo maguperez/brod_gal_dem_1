@@ -50,13 +50,15 @@ class Ciudad(models.Model):
 
 class Universidad(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    nemonico = models.CharField(max_length="50", default=None, null=True, blank=True)
+    pais = models.ForeignKey(Pais, default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-		return unicode(self.descripcion) or u''
+		return unicode(self.descripcion + ' (' +self.nemonico +')') or u''
 
 class Carrera(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
