@@ -79,6 +79,8 @@
 		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
 		$("#id_quienes_somos").hide();
 
+		$('#id_pais'+',#id_ciudad').select2();
+
 		$("#txt-quienes_somos").on("input", function(){
 			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
 		});
