@@ -1,5 +1,5 @@
 <div style="margin:0 50px">
-	<form action="{% url 'mi-cv-info-personal' %}" method="post">
+	<form action="{% url 'mi-cv-info-personal' %}" method="post" autocomplete="off">
 		{%csrf_token%}
 		<div class="form-horizontal">
 			<h3><i class="academic"></i> &nbsp;Información académica</h3><br>
