@@ -20,13 +20,13 @@
     <div class="centered">
         <div>
             <ol class="breadcrumb">
-                <li>{{oportunidad.titulo}} {{oportunidad.fase}}</li>
+                <li>{{oportunidad.titulo}}</li>
             </ol>
             <ol class="proceso">
-                <li data-info="1" class="active">Postulaci&oacute;n</li>
-                <li data-info="2">Entrevista Grupal</li>
-                <li data-info="3">Entrevista Personal</li>
-                <li data-info="4">Contrataci&oacute;n</li>
+                <li data-info="1" {%if oportunidad.fase.id == 1%} class="active" {%endif%}>Postulaci&oacute;n</li>
+                <li data-info="2" {%if oportunidad.fase.id == 2%} class="active" {%endif%}>Entrevista Grupal</li>
+                <li data-info="3" {%if oportunidad.fase.id == 3%} class="active" {%endif%}>Entrevista Personal</li>
+                <li data-info="4" {%if oportunidad.fase.id == 4%} class="active" {%endif%}>Contrataci&oacute;n</li>
             </ol>
             <div class="clear"></div>
         </div>
@@ -94,7 +94,7 @@
                 <section>
                     <div class="opciones">
                         <input type="checkbox" id="marcar-todos"/><label for="marcar-todos">Marcar todos</label>
-                        <a class="btn-option"><i class="delete"></i>Eliminar</a>
+                        <a class="btn-option" id="eliminar"><i class="delete"></i>Eliminar</a>
                         <a class="btn-option" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
                         <a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>
                     </div>
@@ -103,12 +103,14 @@
                         <tr>
                             <th></th>
                             <th></th>
+                            <th></th>
                             <th class="align-left">Candidatos</th>
                             <th>Universidad<a></a></th>
                             <th>Carrera</th>
                             <th>Graduaci&oacute;n</th>
                             <th>Inscripci&oacute;n</th>
                             <th>Compatibilidad</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -196,13 +198,33 @@
                         formAjaxSubmit('#form-modal-body form', '#form-modal');
 		            });
                 });
+                $("#tb_candidatos").on("click", ".eliminar", function () {
+                    id = new Array();
+                    id[0] = $(this).parent().data("id");
+                    $("#fase-activa").val($("#fase").val());
+                    $("#fase").val(0);
+                    fnCambioFase(id);
+                });
+                $("#tb_candidatos").on("click", ".activar", function () {
+                    id = new Array();
+                    id[0] = $(this).parent().data("id");
+                    $("#fase-activa").val($("#fase").val());
+                    $("#fase").val(-1);
+                    fnCambioFase(id);
+                });
+                $("#tb_candidatos").on("click", ".siguiente_fase", function () {
+                    id = new Array();
+                    id[0] = $(this).parent().data("id");
+                    $("#fase").val(parseInt($(".proceso .active").data("info")) + 1);
+                    fnCambioFase(id);
+                });
             };
             this.obtener = function(){
                return $('#tb_candidatos').dataTable({
                     responsive: {
                         details: {
                             type: 'control',
-                            target: 8
+                            target: 9
                         }
                     },
                     destroy: true,
@@ -211,36 +233,44 @@
                         url: "{%static 'js/dataTable-i18n/es-ES.json' %}"
                     },
                     columnDefs: [
-                        {sortable: false, targets: [0, 8, 9]},
-                        {searchable: false, targets: [0, 8, 9]},
-                        {class: "all", targets: [0, 2, 4, 5, 6, 7, 8]},
-                        {class: "none", targets: [9]},
-                        {class: "never", targets: [1]},
+                        {sortable: false, targets: [0, 9, 8]},
+                        {searchable: false, targets: [0, 9, 8]},
+                        {class: "all", targets: [0, 3, 5, 6, 7, 8, 9]},
+                        {class: "none", targets: [10]},
+                        {class: "never", targets: [1,2,11]},
                         {
                             targets: 0,
                             className: 'dt-body-center',
                             render: function (data, type, full, meta) {
-                                return '<input class = "checking" type="checkbox"' + "data-info='"+ full.id +"'"+
-                                        (selected != null && selected[full.id] != null ? "checked" : "") + '>';
+                                if(full.estado == 'A') {
+                                    return '<input class = "checking" type="checkbox"' + "data-info='" + full.id + "'" +
+                                            (selected != null && selected[full.id] != null ? "checked" : "") + '>';
+                                } else return '';
                             }
                         },
                         {
-                            targets: 8,
+                            targets: 9,
                             className: 'dt-expandir',
                             render: function (data, type, full, meta) {
                                 return '<i class="menu"></i>';
                             }
                         },
                         {
-                            targets: 9,
+                            targets: 10,
 
                             render: function (data, type, full, meta) {
-                                return '<div class="" data-id="' + full["id"] + '">' +
-                                        '<a class="btn-option"><i class="delete"></i>Eliminar</a>' +
-                                        '<a class="btn-option"><i class="next"></i>Siguiente fase</a>' +
-                                        '<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>' +
+                                var html =  '<div class="" data-id="' + full["id"] + '">';
+                                if(full.estado == 'A'){
+                                    html += '<a class="btn-option eliminar"><i class="delete"></i>Eliminar</a>' +
+                                            '<a class="btn-option siguiente_fase"><i class="next"></i>Siguiente fase</a>';
+                                }
+                                else{
+                                    html += '<a class="btn-option fa fa-check activar"><i class="activar"></i>Activar</a>';
+                                }
+                                html += '<a class="btn-option" href="#mensaje"><i class="message"></i>Mensaje</a>' +
                                         '<a class="btn-option cargar-cv"><i class="curriculum"></i>Ver CV</a>' +
                                         '</div>';
+                                return html;
                             }
                         },
                     ],
@@ -252,19 +282,6 @@
                     stateSaveCallback: function (settings, data) {
 //                debugger;
                     },
-//                    ajax: {
-//                        type: "GET",
-//                        url: "{% url 'candidatos' %}",
-//                        data: function (d) {
-//                            d.id = "{{oportunidad.id}}";
-//                        },
-//                        success:
-//                            function (msg) {
-//                                //var json = $.parseJSON(msg);
-//                                fnCallback(msg);
-//                                $(".tEvaluacion").show();
-//                            }
-//                    },
                      ajax: {
                         type: "GET",
                         url: "{% url 'candidatos' %}",
@@ -276,6 +293,7 @@
                     columns: [
                         {data: "checkbox", class:"check-row"},
                         {data: "id"},
+                        {data: "id_estudiante"},
                         {data: "nombre"},
                         {data: "universidad"},
                         {data: "carrera"},
@@ -284,6 +302,7 @@
                         {data: "compatibilidad"},
                         {data: "botones"},
                         {data: "botones"},
+                        {data: "estado"},
                     ],
                 });
             }
@@ -311,45 +330,71 @@
 	    }
 
     $(document).ready(function () {
-      var table = CandidatosTable.obtener();
-       if (!iniciado) {
+        var table = CandidatosTable.obtener();
+        if (!iniciado) {
            iniciado = true;
            CandidatosTable.inicializar();
-       }
-       $("#tb_candidatos").on("change",".checking", function() {
+        }
+        $("#tb_candidatos").on("change",".checking", function() {
            selected = new Array();
            var data = table.api().row($(this).parents('tr')).data();
            if ($(this).is(":checked"))
                selected[data.id] = data;
                else if (selected[data.id] != null) selected[data.id] = null;
        });
+
         $('#siguiente-fase').click(function (event) {
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("info");
             });
-            $("#fase").val( parseInt($("#fase").val()) + 1);
-            CambioFase(ids);
+            $("#fase").val( parseInt($(".proceso .active").data("info")) + 1);
+            fnCambioFase(ids);
+        });
+
+        $('#eliminar').click(function (event) {
+            ids = new Array();
+            $("input:checked", table.fnGetNodes()).each(function(index, value){
+                ids[index] = $(this).data("info");
+            });
+            $("#fase-activa").val($("#fase").val());
+            $("#fase").val(0);
+            fnCambioFase(ids);
 
         });
 
-        $("#proceso li").each(function()){
-
-
-        }
+        $('.proceso li').click(function (event) {
+//             $('.proceso li').each(function(){
+//               if ($(this).hasClass('active'))
+//			        $(this).removeClass('active');
+//             });
+             element_ant = $('.proceso .active');
+             $(element_ant).removeClass('active');
+             $(this).addClass('active');
+             $("#fase").val($(this).data("info"));
+             CandidatosTable.obtener();
+        });
 
    });
 
-    function CambioFase(ids){
-        //var json = JSON2.stringify(ids );
+    function fnCambioFase(ids){
         $.ajax({
-           // data: {'ids': ids},
             url: '{%url "siguiente-fase" %}',
             type: 'GET',
             data: {'ids': JSON.stringify(ids), 'f': $("#fase").val(), 'o': '{{oportunidad.id}}'},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
+                var fase = $("#fase").val();
+                if (fase > 0){
+                    element_ant = $('.proceso .active');
+			        $(element_ant).removeClass('active');
+                    element_actual =  $(".proceso").find("[data-info='"+fase+"']");
+                    $(element_actual).addClass('active');
+                }
+                else{
+                    $("#fase").val($("#fase-activa").val());
+                }
                 CandidatosTable.obtener();
             }
         });
