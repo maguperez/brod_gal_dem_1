@@ -9,7 +9,7 @@ def obtener_candidatos (objects):
     data_records=[]
     for p in objects:
         estudiante = Estudiante.objects.get(pk = p.estudiante.id)
-        id = str(estudiante.id)
+        id = str(p.id)
         nombre = str(estudiante.persona)
         universidad = str(estudiante.universidad)
         carrera = str(estudiante.carrera)

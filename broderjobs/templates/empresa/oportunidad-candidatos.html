@@ -20,13 +20,13 @@
     <div class="centered">
         <div>
             <ol class="breadcrumb">
-                <li>Programador de redes internas</li>
+                <li>{{oportunidad.titulo}} {{oportunidad.fase}}</li>
             </ol>
             <ol class="proceso">
-                <li class="active">Postulaci&oacute;n</li>
-                <li>Entrevista Grupal</li>
-                <li>Entrevista Personal</li>
-                <li>Contrataci&oacute;n</li>
+                <li data-info="1" class="active">Postulaci&oacute;n</li>
+                <li data-info="2">Entrevista Grupal</li>
+                <li data-info="3">Entrevista Personal</li>
+                <li data-info="4">Contrataci&oacute;n</li>
             </ol>
             <div class="clear"></div>
         </div>
@@ -170,7 +170,12 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<input type="hidden" id="fase" value="{{oportunidad.fase.id}}">
+<input type="hidden" id="fase-activa" value="{{oportunidad.fase.id}}">
+<input type="hidden" id="f-postulados" value="1">
+<input type="hidden" id="f-grupal" value="2">
+<input type="hidden" id="f-personal" value="3">
+<input type="hidden" id="f-contratacion" value="4">
 {% endblock %}
 
 {% block js %}
@@ -265,6 +270,7 @@
                         url: "{% url 'candidatos' %}",
                         data: function (d) {
                             d.id = "{{oportunidad.id}}";
+                            d.f = $("#fase").val();
                         }
                     },
                     columns: [
@@ -318,22 +324,21 @@
                else if (selected[data.id] != null) selected[data.id] = null;
        });
         $('#siguiente-fase').click(function (event) {
-//        var ids = $('#tb_candidatos').find('.check-row :checkbox:checked').map(function(i, v){
-//                    return { Id :  $(this).data("info")}
-//                });
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
-                console.log($(this).data("info"));
                 ids[index] = $(this).data("info");
             });
+            $("#fase").val( parseInt($("#fase").val()) + 1);
+            CambioFase(ids);
 
-        CambioFase(ids);
+        });
 
-    });
+        $("#proceso li").each(function()){
+
+
+        }
+
    });
-
-
-
 
     function CambioFase(ids){
         //var json = JSON2.stringify(ids );
@@ -341,7 +346,7 @@
            // data: {'ids': ids},
             url: '{%url "siguiente-fase" %}',
             type: 'GET',
-            data: {'ids': JSON.stringify(ids)},
+            data: {'ids': JSON.stringify(ids), 'f': $("#fase").val(), 'o': '{{oportunidad.id}}'},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
