@@ -12,9 +12,9 @@
 				<header class="pos-relative" id="box-logo">
 					<!--<button id="logo-button" class="editar btn-edit">Editar</button>-->
 					<img class="imagen" src="{{empresa.set_logo}}" />
-					<div class="botones-imagen" style="visibility:hidden;" data-toggle="tooltip" data-placement="top"
-						 title="Se recomienda que las dimensiones de la imagen sean mayores a 230x230 píxeles">
-						<a id="editar-imagen"><i class="fa fa-pencil"></i></a>
+					<div class="botones-imagen" style="visibility:hidden;">
+						<a id="editar-imagen"  data-toggle="tooltip" data-placement="top"
+						 title="Se recomienda que las dimensiones de la imagen sean mayores a 230x230 píxeles"><i class="fa fa-pencil"></i></a>
 						<a id="remover-imagen"><i class="fa fa-times"></i></a>
 					</div>
 				</header>
@@ -43,7 +43,8 @@
 					</div>
 					<!--<a class="btn-edit" id="btn-edit">Editar</a>-->
 					<div class ="boton-imagen edit" id="btn-edit">
-						<a class ><i class = "fa fa-pencil"></i></a>
+						<a class data-toggle="tooltip" data-placement="top"
+						 title="Se recomienda que las dimensiones de la imagen sean mayores a 725x370 píxeles"><i class="fa fa-pencil"></i></a>
 					</div>
 					<!--<a href="{%url 'upload-new'%}" class="btn-edit" data-toggle="modal" data-target="#imagenes"></a>-->
 				</header>

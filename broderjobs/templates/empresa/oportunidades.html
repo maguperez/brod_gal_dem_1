@@ -41,7 +41,7 @@
 							<div class="box">
 								<div class="estadistica">
 									<div class="cifra">
-										<label>792</label>
+										<label id = "visualizaciones-{{oportunidad.id}}">792</label>
 										<label>Visualizaciones</label>
 									</div>
 									<div class="grafico grafico-barras">
@@ -111,11 +111,13 @@
 				where: 'properties["OportunidadID"] == "'+ id +'"'
 			}).then(function(data) {
 				var array = new Array();
+				var total = 0;
 				for (var i = 6; i >= 0 ; i--) {
-					debugger;
 					var last = moment().subtract(i, 'days');
 					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
+					total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
 				}
+				$("#visualizaciones-"+id).html(total);
 				$(obj).sparkline(array, {
 					type: 'bar',
 					height: '50px',

@@ -9,6 +9,11 @@
 	.select2-search__field{
 		width: 142px !important;
 	}
+
+	.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+				background-color: #BFDEF9;
+	}
+
 </style>
 
 <section class="cv">
@@ -20,7 +25,8 @@
 							<div class="box-imagen" >
 								<img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
 								<div class="botones-imagen" style="visibility:hidden;">
-								<a id="editar-imagen"><i class="fa fa-pencil"></i></a>
+								<a id="editar-imagen" data-toggle="tooltip" data-placement="top"
+								   title="Se recomienda que las dimensiones de la imagen sean mayores a 130x130 píxeles"><i class="fa fa-pencil"></i></a>
 								<a id="remover-imagen"><i class="fa fa-times"></i></a>
 								</div>
 							</div>
@@ -112,7 +118,11 @@
 									{% for experiencia in experiencias_profesionales %}
 										<div class="experiencia" id="{{experiencia.id}}">
 											<p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
+											{%if experiencia.puesto != None %}
 											<label class="tipo">{{experiencia.puesto}}</label>
+											{%else%}
+											<label class="nombre">{{experiencia.puesto_referencial}}</label>
+											{%endif%}
 											{%if experiencia.empresa != None %}
 											<label class="nombre">{{experiencia.empresa}}</label>
 											{%else%}
@@ -257,6 +267,7 @@
 			 });
 		 }
 	 }
+	 $('[data-toggle="tooltip"]').tooltip();
 	 $(".box-imagen" ).mouseover(function() {
 		$(".botones-imagen").css("visibility", "visible");
 	 });

@@ -16,7 +16,9 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="disponibilidad alert alert-warning hidden">
+		  <strong>Advertencia:</strong> Es probable que existan pocas oportunidades con esta combinación de propuestas / carga horaria
+		</div>
 		<!--<h3 class="title"><i class="academic"></i>Disponibilidad</h3>
 		< class="detalle col-3-7">
 			<div>
@@ -50,6 +52,23 @@
 </style>
 <script>
 	$(function(){
+
+		if (	!$("[name=tipo_puesto][value=3]").is(":checked") &&
+				$("[name=carga_horaria][value=2]").is(":checked")){
+				$(".disponibilidad.alert").removeClass("hidden");
+		}
+		else {
+			$(".disponibilidad.alert").addClass("hidden")
+		}
+		$("[name=tipo_puesto], [name=carga_horaria]").on("click", function(){
+			if (	!$("[name=tipo_puesto][value=3]").is(":checked")
+				&& 	$("[name=carga_horaria][value=2]").is(":checked")){
+				$(".disponibilidad.alert").removeClass("hidden")
+			}
+			else {
+				$(".disponibilidad.alert").addClass("hidden")
+			}
+		});
 		$("#form-modal .modal-title").html('<i class="time"></i> &nbsp;Disponibilidad');
 	});
 </script>

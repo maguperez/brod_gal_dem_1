@@ -29,12 +29,15 @@ def registro_cv(request):
 
     if request.method == 'POST':
         form = forms.RegistroCVForm(request.POST)
+
         if form.is_valid():
             user = request.user
             persona = get_object_or_404(Persona, usuario_id=user.id)
             grado_estudio = form.cleaned_data['grado_estudio']
             id_universidad = form.cleaned_data['universidades_hidden']
             id_carrera = form.cleaned_data['carreras_hidden']
+
+            carrera_form = form.cleaned_data['carreras']
 
             pais = form.cleaned_data['pais']
 
@@ -62,9 +65,15 @@ def registro_cv(request):
             if universidad is not None:
                 estudiante.universidad = universidad
 
-            carrera = Carrera.objects.get(id = id_carrera)
-            if carrera is not None:
-                estudiante.carrera = carrera
+            if id_carrera is not None and id_carrera != '0':
+                try:
+                    carrera = Carrera.objects.get(id = id_carrera)
+                except Carrera.DoesNotExist:
+                    carrera = None
+                if carrera is not None:
+                    estudiante.carrera = carrera
+            else:
+                estudiante.carrera_referencial = carrera_form
 
             estudiante.pais = pais
             # pais = Pais.objects.get(id= id_pais)
@@ -101,6 +110,12 @@ def registro_cv(request):
                 r.save()
 
             return redirect('estudiante-oportunidad-listar')
+
+        else:
+            print(form.errors)
+
+
+
     else:
         form = forms.RegistroCVForm()
     return render(request, 'estudiante/registro-cv.html', {'form': form})
@@ -306,8 +321,16 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         estudiante = Estudiante.objects.get(persona_id =persona.id)
         universidad = estudiante.universidad
         universidad_hidden = universidad.id
-        carrera = estudiante.carrera
-        carrera_hidden = carrera.id
+
+
+        if estudiante.carrera is not None:
+            carrera = estudiante.carrera
+            carrera_hidden = carrera.id
+        else:
+            carrera = estudiante.carrera_referencial
+            carrera_hidden = '0'
+
+
         pais = estudiante.pais
         pais_hidden = pais.id
         ciudad = estudiante.ciudad
@@ -345,7 +368,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         grado_estudio = form.cleaned_data['grado_estudio']
         id_universidad = form.cleaned_data['universidades_hidden']
-        id_carrera = form.cleaned_data['carreras_hidden']
+        # id_carrera = form.cleaned_data['carreras_hidden']
         id_pais = form.cleaned_data['paises_hidden']
         id_ciudad = form.cleaned_data['ciudades_hidden']
         ano_inicio = form.cleaned_data['ano_inicio_estudio']
@@ -358,9 +381,25 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         universidad = Universidad.objects.get(id= id_universidad )
         if universidad is not None:
             estudiante.universidad = universidad
-        carrera = Carrera.objects.get(id = id_carrera)
-        if carrera is not None:
-            estudiante.carrera = carrera
+
+        id_carrera = form.cleaned_data['carreras_hidden']
+
+        carrera_form = form.cleaned_data['carreras']
+
+        if id_carrera is not None and id_carrera != '0':
+            try:
+                carrera = Carrera.objects.get(id = id_carrera)
+            except Carrera.DoesNotExist:
+                carrera = None
+            if carrera is not None:
+                estudiante.carrera = carrera
+        else:
+            estudiante.carrera_referencial = carrera_form
+
+        # carrera = Carrera.objects.get(id = id_carrera)
+        # if carrera is not None:
+        #     estudiante.carrera = carrera
+
         pais = Pais.objects.get(id= id_pais)
         if pais is not None:
             estudiante.pais = pais
@@ -519,12 +558,19 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
     def get_initial(self):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
-        puestos = experiencia.puesto
-        puestos_hidden = experiencia.puesto.id
+        # puestos = experiencia.puesto
+        # puestos_hidden = experiencia.puesto.id
+
+        if experiencia.puesto is None:
+            puestos = experiencia.puesto_referencial
+            puestos_hidden = '0'
+        else:
+            puestos = experiencia.puesto
+            puestos_hidden = experiencia.puesto.id
 
         if experiencia.empresa is None:
             empresas = experiencia.empresa_referencial
-            empresas_hidden = None
+            empresas_hidden = '0'
         else:
             empresas = experiencia.empresa
             empresas_hidden = experiencia.empresa.id
@@ -551,14 +597,21 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
-        puesto = Puesto.objects.get(id=puesto_id)
+
+        if puesto_id != "0":
+            puesto = Puesto.objects.get(id=puesto_id)
+            experiencia.puesto = puesto
+        else:
+            experiencia.puesto = None
+            experiencia.puesto_referencial = puesto_descripcion
+
         if empresa_id != "0":
             empresa = Empresa.objects.get(id=empresa_id)
             experiencia.empresa = empresa
         else:
             experiencia.empresa = None
             experiencia.empresa_referencial = empresa_descripcion
-        experiencia.puesto = puesto
+
         if fecha_desde is not None:
             experiencia.fecha_desde = fecha_desde
         if fecha_hasta is not None:
@@ -569,6 +622,10 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         experiencia.descripcion = descripcion
         experiencia.save()
         return super(ExperienciaView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        return JsonResponse(form.errors, status=400)
 
 class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.ExperienciaForm
@@ -598,13 +655,20 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         fecha_hasta = form.cleaned_data['fecha_hasta']
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
-        puesto = Puesto.objects.get(id=puesto_id)
+
+        if puesto_id != "0":
+            puesto = Puesto.objects.get(id=puesto_id)
+            experiencia.puesto = puesto
+        else:
+            experiencia.puesto = None
+            experiencia.puesto_referencial = puesto_descripcion
+
         if empresa_id != "0":
             empresa = Empresa.objects.get(id=empresa_id)
             experiencia.empresa = empresa
         else:
             experiencia.empresa_referencial = empresa_descripcion
-        experiencia.puesto = puesto
+
         if fecha_desde is not None:
             experiencia.fecha_desde = fecha_desde
         if fecha_hasta is not None:
