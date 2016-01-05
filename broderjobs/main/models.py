@@ -58,7 +58,7 @@ class Universidad(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-		return unicode(self.descripcion + ' (' +self.nemonico +')') or u''
+		return unicode(self.descripcion) or u''
 
 class Carrera(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
