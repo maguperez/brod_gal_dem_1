@@ -915,6 +915,9 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .misprocesos > .centered,
 .oportunidad-empresa > .centered
 { padding-top: 150px}
+.mensaje > .centered {
+    padding-top: 130px !Important;
+}
 label.descripcion { font-weight: normal; }
 ul.links, ul.social { margin-bottom: 0px !Important;}
 ul.copy { margin-top: 8px; margin-right: 50px; }
