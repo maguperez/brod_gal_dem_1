@@ -58,7 +58,10 @@
 				{{ form.pais }}
 			</div>
 			<div class = "col-sm-5">
-				{{ form.ciudad }}
+				<select class="full" id="id_ciudad"></select>
+				{{form.ciudad_hidden}}
+				<!--{{ form.ciudad }}-->
+
 			</div>
 		</div>
 		<div class = "form-group">
@@ -79,7 +82,7 @@
 		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
 		$("#id_quienes_somos").hide();
 
-		$('#id_pais'+',#id_ciudad').select2();
+		InicializarSelect2();
 
 		$("#txt-quienes_somos").on("input", function(){
 			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
@@ -147,4 +150,75 @@
             }
         });
 	});
+
+	function InicializarSelect2(){
+		$("#id_pais").select2({
+  			placeholder: "Pais",
+  			allowClear: true
+		});
+		$("#id_ciudad").select2({
+  			placeholder: "Ciudad",
+  			allowClear: true
+		});
+
+		$("#id_pais").change(function() {
+			if($("#id_pais").val() > 0 ){
+				$.ajax({
+					data: {'pais': $("#id_pais").val()},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+//								var options = '<option value="">Ciudad</option>';
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_ciudad").html(options);
+								// $("#id_ciudad option:first").attr('selected', 'selected');
+								$("#id_ciudad").select2("val", "");
+								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+					}
+				});
+			}
+			else{
+				var options = '';
+				$("#id_ciudad").html(options);
+				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").attr('disabled', false);
+			}
+		});
+		$("#id_ciudad").change(function() {
+			$('#id_ciudad_hidden').val($(this).val());
+		});
+
+		IniciarCiudades();
+	}
+
+	function IniciarCiudades() {
+		$.ajax({
+			data: {'pais': $("#id_pais").val()},
+			url: '{%url "ciudad-busqueda" %}',
+			type: 'get',
+			success: function (data) {
+				if (data) {
+					if (data.length > 0) {
+						var options = '';
+						for (var i = 0; i < data.length; i++) {
+							options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+						}
+						$("#id_ciudad").html(options);
+						$("#id_ciudad").val($("#id_ciudad_hidden").val()).trigger("change");
+						$("#id_ciudad").attr('disabled', false);
+					}
+				}
+			}
+
+		});
+	}
+
+
 </script>
