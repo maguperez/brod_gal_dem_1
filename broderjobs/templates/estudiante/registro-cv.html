@@ -37,6 +37,13 @@
 			.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
 				background-color: #BFDEF9;
 			}
+
+			.select2-selection--single{
+				background-color: #f9f9f9 !important;
+				border-color: #ccc !important;
+			}
+
+
 		</style>
 
 	</head>
@@ -198,6 +205,8 @@
 				}
 				else{
 					flagSeleccionarUniversidad = true;
+					var validator = $("form").validate();
+					validator.element( "#id_universidades" );
 				}
 			}
 			else if(strInput.length > 0){
@@ -205,6 +214,7 @@
 			}
 
 
+//			$("span.help-block").hide();
 		});
 
 		$('#id_carreras').blur(function(){
@@ -287,7 +297,7 @@
 	function InicializarTypeahead(idElemento, idHidden, ruta){
 		$("#"+idElemento).typeahead({
 			source: function(buscar,cargarResultado){
-				console.log(buscar);
+
 				$.ajax({
 					data : {'busqueda': buscar},
 					url: ruta,
@@ -391,10 +401,10 @@
 
 
         $("form").validate({
+			onfocusout: true,
+			onkeyup:true,
             errorPlacement: function (error, element) {
                 $(element).tooltip('destroy');
-
-				console.log(element[0].id);
 
 				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
 
