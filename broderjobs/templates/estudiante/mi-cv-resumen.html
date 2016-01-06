@@ -1,15 +1,69 @@
 
-{% load crispy_forms_tags %}
-
+<!--<style>-->
+	<!--.modal-dialog{-->
+		<!--width: 70%;-->
+	<!--}-->
+<!--</style>-->
 <div>
 	<form class="form-horizontal" action="{% url 'mi-cv-resumen' %}" method="post">
-		  {% crispy form %}
+			{%csrf_token%}
+		  {{form.resumen}}
 	</form>
 </div>
 <script>
 	$(function(){
 		$("#form-modal .modal-title").html('<i class="profile"></i> &nbsp;Resumen');
-		$("#div_id_resumen").removeClass('form-group');
+//		$("#div_id_resumen").removeClass('form-group');form-control
+		$("#id_resumen").addClass('form-control');
+		InicializarValidaciones()
 
 	});
+
+	function InicializarValidaciones(){
+		$("form").validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+				debugger;
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				resumen: {
+					required: true,
+                    maxlength: 1000
+                }
+            },
+            messages: {
+				resumen: {
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+	}
 </script>
