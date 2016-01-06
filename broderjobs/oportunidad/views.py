@@ -20,6 +20,7 @@ import json
 from cStringIO import StringIO
 
 
+
 # Create your views here.
 class OportunidadCrearView(FormView):
     form_class = forms.OportunidadForm
@@ -169,8 +170,7 @@ class OportunidadView(TemplateView):
 def datatable_candidatos(request):
     id = request.GET['id']
     f = request.GET['f']
-    objects = Postulacion.objects.filter(oportunidad_id = id, fase_id = f)
-
+    objects = Postulacion.objects.filter(oportunidad_id = id, fase_id = int(f))
     list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
     list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]
     #a simple way to bring all CharFields, can be defined in specifics
@@ -219,20 +219,32 @@ def datatable_candidatos(request):
     return HttpResponse(s.read())
 
 def siguiente_fase( request ):
-    ids = request.GET['ids']
+    ids = json.loads(request.GET['ids'])
     f = request.GET['f']
     o = request.GET['o']
-    id_fase = int(f) + 1
-    print(id_fase)
-    print(f)
-    fase = ProcesoFase.objects.get(pk = id_fase)
-    postulaciones = Postulacion.objects.filter(pk__in=[8,14]).update(fase = fase)
-    oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase)
+    id_fase = int(f)
 
+    #actualiza a la siguiente fase
+    if id_fase > 0:
+        if id_fase < 4:
+            estado_postulacion = 'E'
+        else:
+            estado_postulacion = 'F'
+        fase = ProcesoFase.objects.get(pk = id_fase)
+        postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase, estado_postulacion = estado_postulacion)
+        oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase)
 
+    #inactiva o activa a los seleccionados
+    else:
+        if id_fase == 0:
+            estado_postulacion = 'F'
+            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado = 'I', estado_postulacion = estado_postulacion)
+        if id_fase == -1:
+            estado_postulacion = 'P'
+            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado = 'A', estado_postulacion = estado_postulacion)
     #define response
     response = {
-        'aaData': ''
+        'resp': 's'
     }
     #serialize to json
     s = StringIO()

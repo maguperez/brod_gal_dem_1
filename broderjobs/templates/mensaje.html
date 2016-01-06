@@ -36,6 +36,7 @@
         .page-mailbox .col-lg-8{ padding-left:  0;padding-right:  0}
         .page-mailbox .panel{ margin-bottom:  0}
         #messages-list, #message-detail {overflow: hidden}
+        #messages-list { border: none; }
         .message-action-btn i {font-size: 20px;line-height: 40px;}
         .icon-rounded { text-align: center; border-radius: 50%; width: 40px;height:40px;border:1px solid #BDBDBD;color:#bdbdbd;display: inline-block}
         .icon-rounded:hover {border:1px solid #121212;color:#121212;cursor: pointer}
@@ -102,6 +103,7 @@
                         }
                     });
                 });
+                $("[data-rel=tooltip]").tooltip();
             });
         })
     </script>
@@ -133,7 +135,7 @@
 					<a class="mensajes">Mensajes</a>
 				</div>
 				<div class="actions">
-					<a href="/oportunidad/crear/">ENVIAR MENSAJE</a>
+					<a href="/oportunidad/crear/">REDACTAR MENSAJE</a>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -168,9 +170,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -188,9 +187,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -210,9 +206,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -230,9 +223,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -252,9 +242,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -272,9 +259,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -294,9 +278,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -314,9 +295,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -336,9 +314,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -356,9 +331,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -378,9 +350,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -399,9 +368,6 @@
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
                                         </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
-                                        </div>
                                     </div>
                                     <div class="message-item-right">
                                         <div class="media">
@@ -419,9 +385,6 @@
                                     <div class="pull-left text-center">
                                         <div class="pos-rel message-checkbox">
                                             <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                        <div>
-                                            <strong><i class="fa fa-paperclip"></i> 2</strong>
                                         </div>
                                     </div>
                                     <div class="message-item-right">
@@ -444,7 +407,7 @@
                     <div id="message-detail" class="panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
                         <div class="panel-heading messages message-result">
                             <div class="message-action-btn clearfix p-t-20">
-                                <div class="pull-left">
+                                <!--<div class="pull-left">
                                     <div id="go-back" data-rel="tooltip" title="" class="icon-rounded m-r-10 email-go-back" data-original-title="Go back"><i class="fa fa-hand-o-left"></i>
                                     </div>
                                     <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply"><i class="fa fa-reply"></i>
@@ -457,14 +420,16 @@
                                     </div>
                                     <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Move to trash"><i class="fa fa-trash-o"></i>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="pull-right">
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Prev"><i class="fa fa-angle-double-left"></i>
+                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply" data-placement="bottom"><i class="fa fa-reply"></i>
                                     </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Next"><i class="fa fa-angle-double-right"></i>
+                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Move to trash" data-placement="bottom"><i class="fa fa-trash-o"></i>
+                                    </div>
+                                    <!--<div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Next"><i class="fa fa-angle-double-right"></i>
                                     </div>
                                     <div data-rel="tooltip" title="" class="icon-rounded gear m-r-10" data-original-title="Parameters"><i class="fa fa-gear"></i>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <h2 class="p-t-20 w-500">Re: Check Dropbox</h2>
