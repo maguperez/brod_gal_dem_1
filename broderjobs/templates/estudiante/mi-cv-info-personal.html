@@ -81,7 +81,116 @@
 		})
 
 		InicializarTypeaheadElementos();
+
+		InicializarValidaciones();
 	});
+
+	function InicializarValidaciones(){
+		$("form").validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				grado_estudio: {
+                    required: true
+                },
+				universidades: {
+                    required: true
+                },
+				carreras: {
+                    required: true
+                },
+				semestre_inicio_estudio:{
+                    required: true
+                },
+				ano_inicio_estudio:{
+                    required: true
+                },
+				semestre_graduacion:{
+                    required: true
+                },
+				ano_graduacion:{
+                    required: true
+                },
+				email: {
+                    required: true,
+                    email: true
+                },
+				telefono: {
+                    digits: true
+                },
+				paises:{
+                    required: true
+                },
+				ciudades:{
+                    required: true
+                }
+            },
+            messages: {
+				grado_estudio: {
+                    required: "Este campo es obligatorio"
+                },
+				universidades: {
+                    required: "Este campo es obligatorio"
+                },
+				carreras: {
+                    required: "Este campo es obligatorio"
+                },
+				semestre_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				semestre_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+				telefono: {
+                    digits: "Este campo solo contiene digitos"
+                },
+				paises:{
+                    required: "Este campo es obligatorio"
+                },
+				ciudades:{
+                    required: "Este campo es obligatorio"
+                }
+            }
+        });
+	}
 
 	function InicializarTypeahead(idElemento, idHidden, ruta){
 		$("#"+idElemento).typeahead({
