@@ -95,6 +95,7 @@
 		$("#id_fecha_nacimiento").datepicker({
 			language: 'es',
 			format: "dd/mm/yyyy",
+			endDate:"0d"
 		})
 
 		InicializarTypeaheadElementos();
@@ -259,7 +260,10 @@
                 },
 				ciudad:{
                     required: true
-                }
+                },
+				fecha_nacimiento:{
+					required: true
+				}
             },
             messages: {
 				grado_estudio: {
@@ -295,7 +299,10 @@
                 },
 				ciudad:{
                     required: "Este campo es obligatorio"
-                }
+                },
+				fecha_nacimiento:{
+					required: "Este campo es obligatorio"
+				}
             }
         });
 	}
