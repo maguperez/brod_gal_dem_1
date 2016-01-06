@@ -2,9 +2,476 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.css">
+    <link rel="stylesheet" href="../static/css/select2.css">
+    <link rel="stylesheet" href="../static/css/summernote.css">
+    <link rel="stylesheet" href="../static/css/broder.css">
+    <style>
+        .mensaje > .centered { max-height: 500px; padding-bottom: 30px; }
+        #main-content.page-mailbox h2,
+        #main-content.page-mailbox h3,
+        #main-content.page-mailbox h4,
+        #main-content.page-mailbox h5{
+            font-family: 'Roboto Condensed'; margin-bottom: 10px; }
+        #main-content.page-mailbox .panel-heading h2 {
+            font-size: 30px;  margin-top: 20px !Important; padding-top: 20px; }
+        .p-20 { padding: 20px; }
+        #main-content.page-mailbox a,
+        #main-content.page-mailbox p,
+        #main-content.page-mailbox h2,
+        #main-content.page-mailbox h3,
+        #main-content.page-mailbox h4,
+        #main-content.page-mailbox h5,
+        #main-content.page-mailbox span,
+        #main-content.page-mailbox label,
+        #main-content.page-mailbox small{ color: #505050; }
+        #main-content.page-mailbox h3 { font-size: 24px; }
+        #main-content.page-mailbox h4 { font-size: 18px; }
+        #main-content.page-mailbox h5 { font-size: 14px; }
+        #main-content.page-mailbox { padding: 0 15px 0 0;}
+        #main-content.page-mailbox .msearch { background-color: transparent !Important; border: none;}
+        #main-content.page-mailbox .msearch:focus { box-shadow: none !Important;}
+        .page-mailbox .col-md-4{ padding-right:  0;}
+        .page-mailbox .col-lg-8{ padding-left:  0;padding-right:  0}
+        .page-mailbox .panel{ margin-bottom:  0}
+        #messages-list, #message-detail {overflow: hidden}
+        #messages-list { border: none; }
+        .message-action-btn i {font-size: 20px;line-height: 40px;}
+        .icon-rounded { text-align: center; border-radius: 50%; width: 40px;height:40px;border:1px solid #BDBDBD;color:#bdbdbd;display: inline-block}
+        .icon-rounded:hover {border:1px solid #121212;color:#121212;cursor: pointer}
+        .icon-rounded.heart:hover{border:1px solid #D9534F;color:#D9534F}
+        .icon-rounded.heart-red  {border:1px solid #D9534F;color:#D9534F}
+        .icon-rounded.gear:hover{border:1px solid #3F97C9;color:#3F97C9}
+        .panel-body.messages { padding: 0;}
+        .border-bottom {border-bottom: 1px solid #EFEFEF !important;}
+        #main-content .messages a.btn {color:#B3B3B3;}
+        .message-item{border:none;border-bottom: 1px solid #ECEBEB !important; margin:0;padding:10px 15px;display: block}
+        .message-item h5{margin-top:0;}
+        .message-item p{margin-bottom:0;height: 20px;overflow: hidden;}
+        .message-item .message-checkbox{height:30px;}
+        .message-active {color:#fff;background-color:#f50; }
+        #main-content.page-mailbox .message-active small,
+        #main-content.page-mailbox .message-active h5,
+        #main-content.page-mailbox .message-active h4,
+        #main-content.page-mailbox .message-active p { color: white; }
+        a.message-item.message-active:hover{color:#fff;background-color:#008fc0;}
+        a.message-item:hover{text-decoration:none;background-color:#eaeaea;}
+        .messages .message-item img{border-radius: 3px;}
+        .message-item-right{padding-left:33px;}
+        .withScroll {height: auto;overflow: auto;overflow:hidden;}
+        .messages .mCustomScrollBox {overflow: hidden !important;}
+        .message-result .message-item{padding-left:0;}
+        .message-result .message-item-right{padding-left:0;}
+        .message-title{margin-top:0;}
+        .message-body{padding:0 20px 20px 20px;}
+        .message-attache .media {float:left; padding-right:30px;margin-top: 0;padding-bottom:30px;}
+        .message-attache {border-top: 1px solid #ECEBEB !important;padding-top:10px;}
+        .message-between {height: 8px;background-color: #E7E7E7;}
+        .footer-message { padding-top:20px;}
+        .send-message .form-control {height:34px;}
+        @media (min-width: 992px){
+          .email-go-back {display: none;}
+        }
+        @media (max-width: 991px){
+          .email-hidden-sm {display: none;}
+          .email-go-back {display: inline-block;}
+        }
+        .select2.select2-container {
+            position: relative;
+            z-index: 2;
+            float: left;
+            width: 100%;
+            margin-bottom: 0;
+                display: table-cell;
+            padding: 10px 16px;
+            line-height: 1.3333333;
+            border-radius: 6px;
+        }
+        .select2-search__field { margin-top: 10px !Important; }
+        .select2-selection { border: none !important; }
+        .select2-selection__choice { border-radius: 0px !Important; }
+        .select2-dropdown { border: none !Important;}
+        .select2-results__options { background-color: rgba(0,0,0,0.03); }
+        .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #f50; }
+        .note-editor { border: none !Important; }
+        .note-toolbar { border: none; background-color: transparent !important;}
+    </style>
+    <script src = "../static/js/jquery.min.js"></script>
+    <script src = "../static/js/bootstrap.min.js"></script>
+    <script src = "../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src = "../static/js/select2.js"></script>
+    <script src = "../static/js/summernote.js"></script>
+    <script src = "../static/js/summernote-i18n/summernote-es-ES.js"></script>
+    <script>
+        $(function(){
+            $(window).load(function(){
+                $('.withScroll').each(function () {
+                    $(this).mCustomScrollbar("destroy");
+                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
+                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
+                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
+                    $(this).mCustomScrollbar({
+                        scrollButtons: {
+                            enable: false
+                        },
+                        //autoHideScrollbar: true,
+                        scrollInertia: 150,
+                        theme: "dark-2",
+                        set_height: scroll_height,
+                        advanced: {
+                            updateOnContentResize: true
+                        }
+                    });
+                });
+                $("[data-rel=tooltip]").tooltip();
+                $(".candidatos").select2({
+                    placeholder: "Candidatos"
+                });
+                $("#summernote").summernote({
+                    height: 325,
+                    lang: 'es-ES'
+                });
+            });
+        })
+    </script>
 </head>
 <body>
+    <div class="header-container">
+		<header class="principal">
+            <div class="centered">
+				<a href="/empresa/"><img class="logo" src="/static/img/logo.png" alt="Broder jobs"></a>
+				<div class="user">
+					<div class="menu" id="menu">
+						<i class="arrow-down white"></i>
+						<div class="v-line"></div>
+						<div class="clear"></div>
+						<div class="contextual-menu" id="ctx-menu-header">
+							<div class="wrapper">
+								<div class="pin"></div>
+								<ul>
+									<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
+									<li><a href="/configuracion/"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
+									<li><a href="/salir/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
+								<ul>
+							</ul></ul></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="options">
+					<a class="mensajes">Mensajes</a>
+				</div>
+				<div class="actions">
+					<a href="/oportunidad/crear/">REDACTAR MENSAJE</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		<header class="menu">
+			<div class="centered">
+				<a id="link-oportunidades" class="active">Buzón de mensajes</a>
+				<div class="clear"></div>
+			</div>
+		</header>
+    </div>
+    <section class = "mensaje">
+        <div id="main-content" class="page-mailbox centered">
+            <div class="row" data-equal-height="true">
+                <div class="col-md-4 list-messages">
+                    <div class="panel panel-default">
+                        <div class="panel-body messages">
+                            <div class="input-group input-group-lg border-bottom" style = "width: 100%">
+                                <select class="form-control msearch bd-0 bd-white">
+                                    <option>Seleccione oportunidad</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-lg border-bottom">
+                                <span class="input-group-btn">
+                                    <a href="" class="btn"><i class="fa fa-search"></i></a>
+                                </span>
+                                <input type="text" class="form-control  msearch bd-0 bd-white" placeholder="Buscar">
+                            </div>
+                            <div id="messages-list" class="panel panel-default withScroll" data-height="window" data-padding="255" style="height: 518px;">
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar3_big.png" alt="avatar 3" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media message-active">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5><strong>Jerry Smith</strong></h5>
+                                                <h4>Re: Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar5_big.png" alt="avatar 5" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar10_big.png" alt="avatar 10" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
+                                                <h4 class="c-dark">Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar7_big.png" alt="avatar 7" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar9_big.png" alt="avatar 9" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
+                                                <h4 class="c-dark">Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar8_big.png" alt="avatar 8" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar11_big.png" alt="avatar 11" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
+                                                <h4 class="c-dark">Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar12_big.png" alt="avatar 12" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar13_big.png" alt="avatar 13" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
+                                                <h4 class="c-dark">Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar1_big.png" alt="avatar 1" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar5_big.png" alt="avatar 5" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
+                                                <h4 class="c-dark">Reset your account password</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="message-item media">
+                                    <div class="pull-left text-center">
+                                        <div class="pos-rel message-checkbox">
+                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+                                        </div>
+                                    </div>
+                                    <div class="message-item-right">
+                                        <div class="media">
+                                            <img src="assets/img/avatars/avatar10_big.png" alt="avatar 10" width="50" class="pull-left">
+                                            <div class="media-body">
+                                                <small class="pull-right">23 Sept</small>
+                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
+                                                <h4 class="c-dark">Check Dropbox</h4>
+                                            </div>
+                                        </div>
+                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 email-hidden-sm detail-message">
+                    <div id="message-detail" class="panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
+                        <div class="panel-heading messages message-result">
+                            <div class="message-action-btn clearfix p-t-20">
+                                <div class = "pull-left">
+                                        <select class="form-control bd-0 bd-white" style="width: 300px">
+                                            <option>Seleccione oportunidad</option>
+                                        </select>
+                                </div>
+                                <div class="pull-right">
+                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Send" data-placement="bottom"><i class="fa fa-send"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
 
+                            <div class="input-group input-group-lg border-bottom">
+                                <span class="input-group-btn">
+                                    <a href="" class="btn" disabled>Para:</a>
+                                </span>
+                                <select class="form-control candidatos bd-0 bd-white" multiple>
+                                    <option>louise.lista@andinas.com</option>
+                                    <option>gabriela.soto@andinas.com</option>
+                                    <option>manuel.perez@andinas.com</option>
+                                    <option>jonathan.quijada@andinas.com</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-body messages message-result">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div id = "summernote"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

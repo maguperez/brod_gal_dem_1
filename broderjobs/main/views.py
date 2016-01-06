@@ -99,7 +99,7 @@ def homepage_empresa(request):
     else:
         if request.method == "POST":
             login_form = LoginForm(request.POST, prefix='login')
-            registro_form = RegisterForm(prefix='registro')
+            registro_form = RegisterForm(request.POST, prefix='registro')
             if '_login' in request.POST:
                 if login_form.is_valid():
                     email = request.POST["login-email"]
