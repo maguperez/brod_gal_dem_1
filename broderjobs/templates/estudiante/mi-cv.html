@@ -14,6 +14,10 @@
 				background-color: #BFDEF9;
 	}
 
+	.custom-class {
+        width: 70%;
+    }
+
 </style>
 
 <section class="cv">
@@ -244,7 +248,7 @@
  <script>
 
 	 var formAjaxSubmit = function(form, modal) {
-
+		debugger;
 		 var valid = $(form).validate().valid();
 		 if (valid) {
 			 $(form).submit(function (e) {
@@ -254,12 +258,17 @@
 					 url: $(this).attr('action'),
 					 data: $(this).serialize(),
 					 success: function (xhr, ajaxOptions, thrownError) {
+						 debugger;
 						 if ($(xhr).find('.has-error').length > 0) {
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
 						 } else {
-							 $(modal).modal('toggle');
-							 window.location.reload();
+							 var validez = $(form).validate().valid();
+
+							 if(validez){
+								 $(modal).modal('toggle');
+								 window.location.reload();
+							 }
 						 }
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) {}
@@ -409,24 +418,20 @@
 	 });
 	 $("#form-modal .btn-submit").on("click", function() {
 
-		 var valid = $('#form-modal-body form').validate().valid();
+		 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+		 if (formularioPrueba.id == 'cv-experiencia' || formularioPrueba.id == 'cv-voluntariado') {
+			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
+			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
 
-		 if (valid) {
+			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
+			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
 
-			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
-			 if (formularioPrueba.id == 'cv-experiencia' || formularioPrueba.id == 'cv-voluntariado') {
-				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
-				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
+		 }
 
-				 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
-				 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+		 $(this).parents("#form-modal").find("form").submit();
 
-				 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
-				 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
-			 }
-
-			 $(this).parents("#form-modal").find("form").submit();
-	 	}
 	 });
 
 	 $.fn.modal.Constructor.prototype.enforceFocus = function () {
