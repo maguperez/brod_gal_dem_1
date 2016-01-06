@@ -224,15 +224,15 @@ a.delete:hover {background-position: 0 -9px;}
 .tag-input input[type="text"] {width: 300px; margin: 0 0 0 10px; padding: 0; outline: none; font-size: 1em; background: none;}
 
 /*CONTEXTUAL MENUS*/
-.contextual-menu {width: 150px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
-.contextual-menu.active {/*opacity: 1;*/ pointer-events: all;}
-.contextual-menu .wrapper {padding: 3px 0;}
-.contextual-menu .pin {width: 10px; height: 9px; position: absolute; top: -9px; right: -1px; background: transparent url('../img/assets/contextual_menu.png') 0 0 no-repeat;}
-.contextual-menu a {/*height: 15px;*/ padding: 13px !Important; display: block; color: rgb(165,165,165) !Important}
-.contextual-menu a i, .contextual-menu a span {float: left;}
-.contextual-menu a i {margin-top: -2px;}
-.contextual-menu a .v-line { margin: 0 10px; height: 15px; }
-.contextual-menu a:hover {color: #f50 !Important; background-color: transparent !important;}
+.contextual-menu {width: 150px; position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none; border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
+.contextual-menu.active {opacity: 1; pointer-events: all;}
+.contextual-menu .wrapper, .contextual .wrapper {padding: 3px 0;}
+.contextual-menu .pin, .contextual .pin {width: 10px; height: 9px; position: absolute; top: -9px; right: -1px; background: transparent url('../img/assets/contextual_menu.png') 0 0 no-repeat;}
+.contextual-menu a, .contextual a {/*height: 15px;*/ padding: 13px !Important; display: block; color: rgb(165,165,165) !Important}
+.contextual-menu a i, .contextual-menu a span, .contextual a i, .contextual a span {float: left;}
+.contextual-menu a i, .contextual a i {margin-top: -2px;}
+.contextual-menu a .v-line, .contextual a .v-line { margin: 0 10px; height: 15px; }
+.contextual-menu a:hover, .contextual a:hover {color: #f50 !Important; background-color: transparent !important;}
 
 /*PANELES*/
 .panel.left {width: 25%; margin-right: 1%; float: left;}
@@ -348,7 +348,7 @@ a:hover { text-decoration: none !Important }
 /*HEADER*/
 header.principal {width: 100%; padding: 10px 0; background: #f50;}
 header.principal .logo {margin-top: 4px;}
-header.principal .user, header.principal .options, header.principal .actions {float: right;}
+header.principal .user, header.principal .options, header.principal .actions {float: left;}
 header.principal .user .menu {height: 10px; margin: 14px 0; position: relative; float: right; cursor: pointer;}
 header.principal .user .menu .arrow-down, header.principal .user .menu > .v-line, header.principal .user .menu .name {float: right;}
 header.principal .user .menu .arrow-down {margin-top: 2px;}
@@ -1237,7 +1237,7 @@ a:hover {
 .notification-danger {background-color: #ED5466;}
 .header-menu #notifications-header .dropdown-menu {top:42px; right: 0;left: auto;min-width: 170px !important;max-width: 290px !important;width: 280px;margin:0;padding: 0}
 .header-menu #user-header .dropdown-menu {top:42px; right: 0;left: auto;}
-
+.header-menu #user-header .dropdown-toggle { line-height: 36px; }
 .header-menu #notifications-header .dropdown-menu li ul li a { font-size: 15px !important; }
 .header-menu #notifications-header .dropdown-menu li ul li a:hover { color: #f50; }
 .header-menu #notifications-header .fa { padding-right: 10px !important; }
@@ -1270,7 +1270,7 @@ a:hover {
 #user-header .portrait {width: 36px; height: 36px; /*float: right; margin: 0 10px 0 25px; */border: 1px solid #fff; border-radius: 50%;}
 .notify #notifications-header .dropdown-toggle {background: transparent url('../img/icons/procesos.png') 0 0 no-repeat; margin-top: 10px; height: 18px;}
 .withScroll {height: auto;overflow: auto;overflow:hidden;}
-.notify.nav .open>a, .notify.nav .open>a:focus, .notify.nav .open>a:hover { background-color: transparent !important;}
+.notify.nav .open>a, .notify.nav .open>a:focus, .notify.nav .open>a:hover, .notify.nav { background-color: transparent !important;}
 .notify .badge { border-radius: 50%; margin-top: -10px;}
 .header-menu #user-header .dropdown-menu:after {
     border-bottom: 6px solid #eaeaea;
@@ -1292,3 +1292,4 @@ a:hover {
     position: absolute;
     top: -6px;
 }
+.dropdown-menu.contextual { width: 150px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
