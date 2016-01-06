@@ -55,7 +55,7 @@
 			fechaDesde = moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY');
 		}
 		else{
-			fechaDesde = '';
+			fechaDesde = moment().format('MM/YYYY');
 		}
 
 		var fechaHasta = {};
@@ -64,7 +64,7 @@
 			fechaHasta = moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY');
 		}
 		else{
-			fechaHasta = '';
+			fechaHasta = moment().format('MM/YYYY');
 		}
 
 		$('#id_fecha_desde').val(fechaDesde);
@@ -74,12 +74,75 @@
 				language: 'es',
 				format: "mm/yyyy",
 				startView: "months",
-				minViewMode: "months"
+				minViewMode: "months",
+				startDate:"01/1950"
 			});
 
 		InicializarTypeaheadElementos();
 
+		InicializarValidaciones();
 	});
+
+	function InicializarValidaciones(){
+		$("form").validate({
+//			onfocusout: true,
+//			onkeyup:true,
+            errorPlacement: function (error, element) {
+				debugger;
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_empresas'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				puestos: {
+					required: true
+                },
+				empresas:{
+                    required: true
+                },
+				descripcion_txt:{
+					required: true,
+					maxlength: 1000
+				}
+
+            },
+            messages: {
+				puestos: {
+					required: "Este campo es obligatorio"
+                },
+				empresas:{
+                    required: "Este campo es obligatorio"
+                },
+				descripcion_txt:{
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+	}
 
 	function InicializarTypeahead(idElemento, idHidden, ruta, campoID, campoNombre){
 		$("#"+idElemento).typeahead({

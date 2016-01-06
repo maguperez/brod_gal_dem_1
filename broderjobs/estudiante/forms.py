@@ -131,10 +131,10 @@ class ExperienciaForm(forms.ModelForm):
     fecha_desde = forms.DateField(widget=forms.DateInput())
     fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
 
-    puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puestos', 'class': 'full'}))
+    puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puesto', 'class': 'full'}))
     puestos_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    empresas = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Empresas', 'class': 'full'}))
+    empresas = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Empresa', 'class': 'full'}))
     empresas_hidden = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
@@ -155,8 +155,8 @@ class ExperienciaForm(forms.ModelForm):
 class VoluntariadoForm(forms.ModelForm):
     fecha_desde = forms.DateField(required=False, widget=forms.DateInput())
     fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
-    cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Cargo', 'class': 'full'}))
-    organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización', 'class': 'full'}))
+    cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Función', 'class': 'full'}))
+    organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización/Evento', 'class': 'full'}))
     class Meta:
         model = Voluntariado
         fields = ('cargo', 'organizacion', 'fecha_desde','fecha_hasta', 'descripcion')
