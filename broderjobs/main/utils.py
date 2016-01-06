@@ -47,7 +47,7 @@ def anos_nacimiento():
 
 def estado_oportunidad():
     anos = []
-    anos.append(('P', 'Pendiente'))
+    anos.append(('P', 'Archivado'))
     anos.append(('A', 'Abierto'))
     anos.append(('C', 'Cerrado'))
     return anos
