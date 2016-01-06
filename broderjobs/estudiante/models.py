@@ -56,7 +56,7 @@ class Resumen(models.Model):
 
 class ActividadesExtra(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
-    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
     organizacion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
@@ -75,7 +75,7 @@ class ExperienciaProfesional(models.Model):
     fecha_desde = models.DateField(default=None, null=True, blank=True)
     fecha_hasta = models.DateField(default=None, null=True, blank=True)
     trabajo_actual = models.CharField(max_length=1, default='N',)
-    descripcion = models.CharField(max_length="100", default=None, null=True)
+    descripcion = models.CharField(max_length="1000", default=None, null=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -91,7 +91,7 @@ class Voluntariado(models.Model):
     fecha_desde = models.DateField(null=True)
     fecha_hasta = models.DateField(default=None, null=True, blank=True)
     voluntariado_actual = models.CharField(max_length=1, default='N')
-    descripcion = models.CharField(max_length="100", default=None, null=True, blank=True)
+    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)

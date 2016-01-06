@@ -26,9 +26,14 @@
 							</div>
                             <div class = "col-sm-3"><label>Estado:  </label>{{form.estado_oportunidad}}</div>
                             <!--<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />-->
-							<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action"/>
-							<input type="submit" name="_archivar" value="ARCHIVAR" id="anunciat" class="btn-action"/>
-							<div class="clear"></div>
+							{% if oportunidad.estado_oportunidad != 'P' %}
+								<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action"/>
+								<input type="submit" name="_archivar" value="ARCHIVAR" id="anunciat" class="btn-action"/>
+							{%else%}
+								<input type="submit" name="_abrir" value="ABRIR" id="abrir" class="btn-action"/>
+							{%endif%}
+								<div class="clear"></div>
+
 						</header>
 						{% if form.errors %}
 							{% for field in form %}

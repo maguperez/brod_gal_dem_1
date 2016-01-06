@@ -33,12 +33,11 @@ class OportunidadCrearView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        print("quiso")
-        print(empresa)
-        return {'empresa': empresa}
+        return {'longitud': empresa.longitud, 'latitud': empresa.latitud}
 
     def form_valid(self, form):
-        user = self.request.user
+        user_id = self.request.user
+        user = get_object_or_404(User, pk = user_id.id)
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante =get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
@@ -80,22 +79,21 @@ class OportunidadCrearView(FormView):
         oportunidad.resumen = resumen
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
+        if '_guardar' in self.request.POST:
+            oportunidad.estado_oportunidad = constants.estado_abierto
+        elif '_anunciar' in self.request.POST:
+            oportunidad.estado_oportunidad = constants.estado_archivado
+        oportunidad.usuario_creacion = str(user.username)
+        oportunidad.usuario_modificacion = str(user.username)
+        oportunidad.fecha_creacion = datetime.now()
+        oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
 
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
-
         oportunidad.beneficio = beneficio
-        if '_guardar' in self.request.POST:
-            oportunidad.estado_oportunidad = constants.estado_archivado
-        elif '_anunciar' in self.request.POST:
-            oportunidad.estado_oportunidad = constants.estado_abierto
-        oportunidad.usuario_creacion = user
-        oportunidad.usuario_modificacion = user
-        oportunidad.fecha_creacion = datetime.now
-        oportunidad.fecha_modificacion = datetime.now
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
@@ -111,16 +109,27 @@ class OportunidadEditarView(UpdateView):
     def get_initial(self):
         id = self.kwargs["id"]
         oportunidad =get_object_or_404(Oportunidad, id = id)
-        return {'pais': oportunidad.pais, 'ciudad_hidden': oportunidad.ciudad.id}
+        if oportunidad.ciudad is not None:
+            ciudad_id = oportunidad.ciudad.id
+        else:
+            ciudad_id = '0'
+        return {'pais': oportunidad.pais, 'ciudad_hidden': ciudad_id}
+
+    def get_context_data(self, **kwargs):
+        id = self.kwargs["id"]
+        oportunidad =get_object_or_404(Oportunidad, id = id)
+        context = super(OportunidadEditarView, self).get_context_data(**kwargs)
+        context['oportunidad'] = oportunidad
+        print(oportunidad)
+        return context
 
     def get_object(self, queryset=None):
         id = self.kwargs["id"]
         oportunidad =get_object_or_404(Oportunidad, id = id)
-
         return oportunidad
 
     def form_valid(self, form):
-        user = self.request.user
+        user = get_object_or_404(User, pk = self.request.user.id)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -162,24 +171,26 @@ class OportunidadEditarView(UpdateView):
         estado_anterior = oportunidad.estado_oportunidad
 
         if '_guardar' in self.request.POST:
-            if fecha_cese is not None and fecha_cese > datetime.today():
-                estado_nuevo = constants.estado_abierto
-            else:
+            if fecha_cese is not None and date.today() < oportunidad.fecha_cese:
                 estado_nuevo = constants.estado_cerrado
+            else:
+                estado_nuevo = constants.estado_abierto
+
         elif '_archivar' in self.request.POST:
             estado_nuevo = constants.estado_archivado
 
-        if estado_anterior == constants.estado_archivado and estado_nuevo == constants.estado_abierto:
+        elif '_abrir' in self.request.POST:
+            estado_nuevo = constants.estado_abierto
             oportunidad.pk = None
-            oportunidad.id = None
-        else:
-            if estado_anterior == constants.estado_abierto and estado_nuevo == constants.estado_archivado:
-                p = Postulacion.objects.filter(oportunidad_id = oportunidad.id).update(estado_postulacion = constants.postulacion_finalizado,
-                                                                                       fecha_modificacion = datetime.now)
+
+        if estado_anterior == constants.estado_abierto and estado_nuevo == constants.estado_archivado:
+            p = Postulacion.objects.filter(oportunidad_id = oportunidad.id).update(estado_postulacion = constants.postulacion_finalizado,
+                                                                                   fecha_modificacion = datetime.now)
         oportunidad.estado_oportunidad = estado_nuevo
-        oportunidad.usuario_modificacion = user
-        oportunidad.fecha_modificacion = datetime.now
+        oportunidad.usuario_modificacion = user.username
+        oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
+
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
