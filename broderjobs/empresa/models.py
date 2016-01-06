@@ -78,10 +78,12 @@ class Empresa(models.Model):
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-    usuario_modificacion = models.ForeignKey(User, default=None, null=True, blank=True)
 
 
     def __unicode__(self):
@@ -99,7 +101,9 @@ class Representante(models.Model):
     persona = models.OneToOneField(Persona)
     empresa = models.ForeignKey(Empresa)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
@@ -115,7 +119,10 @@ class EvaluacionEmpresa(models.Model):
     ambiente_trabajo = models.FloatField(default=None, null=True, blank=True )
     salarios = models.FloatField(default=None, null=True, blank=True )
     ranking = models.FloatField(default=None, null=True, blank=True )
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
@@ -130,7 +137,10 @@ class RankingEmpresa(models.Model):
     ambiente_trabajo = models.FloatField(default=None, null=True, blank=True )
     salarios = models.FloatField(default=None, null=True, blank=True )
     ranking_general = models.FloatField(default=None, null=True, blank=True )
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
@@ -143,9 +153,11 @@ class Empresa_Imagenes(models.Model):
     file = models.ImageField(upload_to='img/%Y/%m/%d', default=None, null=True, blank=True)
     slug = models.SlugField(max_length=50, blank=True)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-    usuario_modificacion = models.ForeignKey(User, default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.file.name

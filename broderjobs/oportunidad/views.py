@@ -10,12 +10,13 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
+from broderjobs import constants
 from .models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
 from django.db.models import Q, CharField
-from oportunidad  import utils
+from datetime import date, datetime
 import json
 from cStringIO import StringIO
 
@@ -27,11 +28,21 @@ class OportunidadCrearView(FormView):
     template_name = 'oportunidad/crear.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')
 
+    def get_initial(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        print("quiso")
+        print(empresa)
+        return {'empresa': empresa}
+
     def form_valid(self, form):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante =get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
+        fase = fase =  get_object_or_404(ProcesoFase, pk = 1)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -67,7 +78,8 @@ class OportunidadCrearView(FormView):
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
         oportunidad.resumen = resumen
-        oportunidad.estado = 'A'
+        oportunidad.estado = constants.estado_activo
+        oportunidad.fase = fase
         oportunidad.save()
 
         oportunidad.universidad = universidad
@@ -77,10 +89,13 @@ class OportunidadCrearView(FormView):
 
         oportunidad.beneficio = beneficio
         if '_guardar' in self.request.POST:
-            oportunidad.estado_oportunidad = 'P'
+            oportunidad.estado_oportunidad = constants.estado_archivado
         elif '_anunciar' in self.request.POST:
-            oportunidad.estado_oportunidad = 'A'
-
+            oportunidad.estado_oportunidad = constants.estado_abierto
+        oportunidad.usuario_creacion = user
+        oportunidad.usuario_modificacion = user
+        oportunidad.fecha_creacion = datetime.now
+        oportunidad.fecha_modificacion = datetime.now
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
@@ -105,7 +120,7 @@ class OportunidadEditarView(UpdateView):
         return oportunidad
 
     def form_valid(self, form):
-        estado =  form.cleaned_data['estado_oportunidad']
+        user = self.request.user
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -123,10 +138,8 @@ class OportunidadEditarView(UpdateView):
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
         id = self.kwargs["id"]
-        oportunidad =get_object_or_404(Oportunidad, id = id)
+        oportunidad = get_object_or_404(Oportunidad, id = id)
 
-        oportunidad.estado_oportunidad = estado
-        oportunidad.estado = 'A'
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
         oportunidad.pais = pais
@@ -145,8 +158,28 @@ class OportunidadEditarView(UpdateView):
         oportunidad.resumen = resumen
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
-        oportunidad.save()
+        oportunidad.estado = constants.estado_activo
+        estado_anterior = oportunidad.estado_oportunidad
 
+        if '_guardar' in self.request.POST:
+            if fecha_cese is not None and fecha_cese > datetime.today():
+                estado_nuevo = constants.estado_abierto
+            else:
+                estado_nuevo = constants.estado_cerrado
+        elif '_archivar' in self.request.POST:
+            estado_nuevo = constants.estado_archivado
+
+        if estado_anterior == constants.estado_archivado and estado_nuevo == constants.estado_abierto:
+            oportunidad.pk = None
+            oportunidad.id = None
+        else:
+            if estado_anterior == constants.estado_abierto and estado_nuevo == constants.estado_archivado:
+                p = Postulacion.objects.filter(oportunidad_id = oportunidad.id).update(estado_postulacion = constants.postulacion_finalizado,
+                                                                                       fecha_modificacion = datetime.now)
+        oportunidad.estado_oportunidad = estado_nuevo
+        oportunidad.usuario_modificacion = user
+        oportunidad.fecha_modificacion = datetime.now
+        oportunidad.save()
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma

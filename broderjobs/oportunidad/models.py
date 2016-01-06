@@ -14,8 +14,9 @@ class ProcesoFase(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     orden = models.IntegerField(default=None, null=True, blank=True )
 
-    usuario = models.ForeignKey(User, default=None, null=True, blank=True)
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
@@ -58,8 +59,9 @@ class Oportunidad(models.Model):
     graduacion_hasta = models.CharField(choices=periodo, max_length=1, default=None, null=True, blank=True)
     fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
-    usuario = models.ForeignKey(User, default=None, null=True, blank=True)
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
@@ -73,11 +75,13 @@ class Postulacion(models.Model):
     oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     estado_postulacion =  models.CharField(choices=items_estado, max_length=1, default='A', null=True, blank=True)
+    fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-    fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
     def __unicode__(self):
 		return unicode(self.estudiante) or u''

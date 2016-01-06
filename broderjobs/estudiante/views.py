@@ -18,7 +18,7 @@ from datetime import date
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
-from oportunidad.models import Oportunidad, Postulacion
+from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
 from main.utils import LoginRequiredMixin
@@ -831,6 +831,8 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
             p.fecha_creacion = date.today()
             p.estado = 'A'
             p.estado_postulacion = 'P'
+            fase =  get_object_or_404(ProcesoFase, pk = 1)
+            p.fase = fase
             p.save()
             data.append(('CANCELAR'))
         else:
@@ -838,10 +840,13 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
             if estado == 'A':
                 p.estado = 'I'
                 p.estado_postulacion = ''
+                p.fase = None
                 data.append(('POSTULAR'))
             else:
                 p.estado = 'A'
                 p.estado_postulacion = 'P'
+                fase =  get_object_or_404(ProcesoFase, id = 1)
+                p.fase = fase
                 data.append(('CANCELAR'))
             p.fecha_creacion = date.today()
             p.save()
