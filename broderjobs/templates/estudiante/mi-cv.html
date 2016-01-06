@@ -248,7 +248,7 @@
  <script>
 
 	 var formAjaxSubmit = function(form, modal) {
-		debugger;
+
 		 var valid = $(form).validate().valid();
 		 if (valid) {
 			 $(form).submit(function (e) {
@@ -258,7 +258,7 @@
 					 url: $(this).attr('action'),
 					 data: $(this).serialize(),
 					 success: function (xhr, ajaxOptions, thrownError) {
-						 debugger;
+
 						 if ($(xhr).find('.has-error').length > 0) {
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
