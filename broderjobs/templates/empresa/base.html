@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
 		<link rel="stylesheet" href="{% static 'css/prettify.css' %}">
 		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.css' %}">
         {%block css%}
         {%endblock%}
 
@@ -35,13 +36,14 @@
 		<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 	</head>
 	<body>
 	<div class = "header-container">
 		<header class="principal">
 			<div class="centered">
 				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
-				<div class="user">
+				<!--<div class="user">
 					<div class="menu" id="menu">
 						<i class="arrow-down white"></i>
 						<div class="v-line"></div>
@@ -58,14 +60,42 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-				</div>
-				<div class="options">
+				</div>-->
+				<ul class="nav navbar-nav notify pull-right header-menu">
+
+					<div class="actions">
+						<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
+					</div>
+					<div class="options">
+						<a class="mensajes">Mensajes</a>
+					</div>
+                    <!-- BEGIN USER DROPDOWN -->
+                    <li class="dropdown" id="user-header">
+                        <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
+
+							{% if user.is_authenticated %}
+							<!--	<span class="username name" style="text-transform: uppercase">{{user.first_name|capfirst}}</span>-->
+							{% endif %}
+							<div class="v-line"></div>
+                            <i class="fa fa-angle-down p-r-10"></i>
+                        </a>
+                        <ul class="dropdown-menu contextual">
+							<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
+							<li><a href="{%url 'configuracion'%}"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
+							<li><a href="{%url 'salir' %}"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
+                        </ul>
+
+                    </li>
+					<!--<div class="options">
+						<a class="mensajes">Mensajes</a>
+					</div>-->
+                    <!-- END USER DROPDOWN -->
+                </ul>
+				<!--<div class="options">
 					<a class="mensajes">Mensajes</a>
 				</div>
-				<div class="actions">
-					<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
-				</div>
-				<div class="clear"></div>
+
+				<div class="clear"></div>-->
 			</div>
 		</header>
 		<header class="menu">
