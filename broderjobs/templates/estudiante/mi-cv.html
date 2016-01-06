@@ -244,7 +244,7 @@
  <script>
 
 	 var formAjaxSubmit = function(form, modal) {
-		 console.log($(form));
+
 		 var valid = $(form).validate().valid();
 		 if (valid) {
 			 $(form).submit(function (e) {
@@ -407,21 +407,26 @@
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});
 	 });
-	 $("#form-modal .btn-submit").on("click", function(){
+	 $("#form-modal .btn-submit").on("click", function() {
 
-		 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
-		 if(formularioPrueba.id == 'cv-experiencia' || formularioPrueba.id == 'cv-voluntariado'){
-			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
-			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
+		 var valid = $('#form-modal-body form').validate().valid();
 
-			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
-			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+		 if (valid) {
 
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
-		 }
+			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+			 if (formularioPrueba.id == 'cv-experiencia' || formularioPrueba.id == 'cv-voluntariado') {
+				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
+				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
 
-		 $(this).parents("#form-modal").find("form").submit();
+				 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
+				 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
+			 }
+
+			 $(this).parents("#form-modal").find("form").submit();
+	 	}
 	 });
 
 	 $.fn.modal.Constructor.prototype.enforceFocus = function () {
