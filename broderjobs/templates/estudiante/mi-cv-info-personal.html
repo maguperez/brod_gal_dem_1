@@ -1,3 +1,18 @@
+<style>
+
+	#id_pais{
+		width: 155px !important;
+	}
+
+	#id_ciudad{
+		width: 175px !important;
+	}
+
+	.select2-selection--single{
+		background-color: #f9f9f9 !important;
+		border-color: #ccc !important;
+	}
+</style>
 <div style="margin:0 50px">
 	<form action="{% url 'mi-cv-info-personal' %}" method="post" autocomplete="off">
 		{%csrf_token%}
@@ -54,12 +69,11 @@
 			<div class ="form-group">
 				<label class = "col-sm-3">Ubicacion actual</label>
 				<div class = "col-sm-4">
-					{{form.paises}}
-					{{form.paises_hidden}}
+					{{form.pais}}
 				</div>
 				<div class = "col-sm-4">
-					{{form.ciudades}}
-					{{form.ciudades_hidden}}
+					<select class="full" id="id_ciudad" name="ciudad"></select>
+					{{form.ciudad_hidden}}
 				</div>
 			</div>
 			<div class ="form-group">
@@ -72,6 +86,9 @@
 	</form>
 </div>
 <script>
+
+	var flagSeleccionarUniversidad = true;
+
 	$(function(){
 		$("form input, form select, form textarea").addClass("form-control");
 		$(".modal-title").html('&nbsp;Información');
@@ -82,8 +99,98 @@
 
 		InicializarTypeaheadElementos();
 
+		$.validator.addMethod('universidadExistente',function(value, element, param){
+			return flagSeleccionarUniversidad;
+		},'Debe seleccionar una universidad existente');
+
+
+		$('#id_universidades').blur(function(){
+			var strInput = $('#id_universidades').val();
+			var objSeleccionado = $('#id_universidades').typeahead('getActive');
+
+			if(objSeleccionado){
+				if(objSeleccionado.name != strInput){
+					flagSeleccionarUniversidad = false;
+				}
+				else{
+					flagSeleccionarUniversidad = true;
+					var validator = $("form").validate();
+					validator.element( "#id_universidades" );
+				}
+			}
+			else if(strInput.length > 0){
+				flagSeleccionarUniversidad = false;
+			}
+		});
+
+		$("#id_pais").select2({
+  			placeholder: "Pais",
+  			allowClear: true
+		});
+		$("#id_ciudad").select2({
+  			placeholder: "Ciudad",
+  			allowClear: true
+		});
+
+		$("#id_pais").change(function() {
+			if($("#id_pais").val() > 0 ){
+				$.ajax({
+					data: {'pais': $("#id_pais").val()},
+					url: '{%url "ciudad-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+//								var options = '<option value="">Ciudad</option>';
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_ciudad").html(options);
+								// $("#id_ciudad option:first").attr('selected', 'selected');
+								$("#id_ciudad").select2("val", "");
+								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+					}
+				});
+			}
+			else{
+				var options = '';
+				$("#id_ciudad").html(options);
+				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").attr('disabled', false);
+			}
+		});
+		$("#id_ciudad").change(function() {
+			$('#id_ciudad_hidden').val($(this).val());
+		});
+
+		IniciarCiudades();
 		InicializarValidaciones();
 	});
+
+	function IniciarCiudades() {
+		$.ajax({
+			data: {'pais': $("#id_pais").val()},
+			url: '{%url "ciudad-busqueda" %}',
+			type: 'get',
+			success: function (data) {
+				if (data) {
+					if (data.length > 0) {
+						var options = '';
+						for (var i = 0; i < data.length; i++) {
+							options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+						}
+						$("#id_ciudad").html(options);
+						$("#id_ciudad").val($("#id_ciudad_hidden").val()).trigger("change");
+						$("#id_ciudad").attr('disabled', false);
+					}
+				}
+			}
+
+		});
+	}
 
 	function InicializarValidaciones(){
 		$("form").validate({
@@ -92,7 +199,7 @@
             errorPlacement: function (error, element) {
                 $(element).tooltip('destroy');
 
-				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
 
 					$(element).tooltip({
 						animation: true,
@@ -122,7 +229,8 @@
                     required: true
                 },
 				universidades: {
-                    required: true
+                    required: true,
+					universidadExistente: true
                 },
 				carreras: {
                     required: true
@@ -146,10 +254,10 @@
 				telefono: {
                     digits: true
                 },
-				paises:{
+				pais:{
                     required: true
                 },
-				ciudades:{
+				ciudad:{
                     required: true
                 }
             },
@@ -182,10 +290,10 @@
 				telefono: {
                     digits: "Este campo solo contiene digitos"
                 },
-				paises:{
+				pais:{
                     required: "Este campo es obligatorio"
                 },
-				ciudades:{
+				ciudad:{
                     required: "Este campo es obligatorio"
                 }
             }
@@ -241,53 +349,53 @@
 
 	function InicializarTypeaheadElementos(){
 
-		InicializarTypeahead('id_paises', 'id_paises_hidden', '{%url "pais-busqueda" %}');
+//		InicializarTypeahead('id_paises', 'id_paises_hidden', '{%url "pais-busqueda" %}');
 		InicializarTypeahead('id_universidades', 'id_universidades_hidden', '{%url "universidad-busqueda" %}');
 		InicializarTypeahead('id_carreras', 'id_carreras_hidden', '{%url "carrera-busqueda" %}');
 
-		$("#id_ciudades").typeahead({
-			source: function(buscar,cargarResultado){
-				var valor = document.getElementById('id_paises_hidden').value;
-				$.ajax({
-					data : {'busqueda': buscar,'pais': valor},
-					url: '{%url "ciudad-busqueda" %}',
-					type: 'get',
-					success: function(data){
-
-						if(data){
-							if(data.length > 0) {
-								var arreglo = [];
-								data.forEach(function(obj){
-									var obje = {};
-									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
-
-									arreglo.push(obje);
-								});
-
-								cargarResultado(arreglo);
-							}
-						}
-					}
-
-				});
-			}
-		});
-
-		$("#id_ciudades").change(function() {
-			var current = $("#id_ciudades").typeahead("getActive");
-			if (current) {
-				// Some item from your model is active!
-				if (current.name == $("#id_ciudades").val()) {
-					$('#id_ciudades_hidden').val(current.id);
-				} else {
-					// This means it is only a partial match, you can either add a new item
-					// or take the active if you don't want new items
-				}
-			} else {
-				// Nothing is active so it is a new value (or maybe empty value)
-			}
-		});
+//		$("#id_ciudades").typeahead({
+//			source: function(buscar,cargarResultado){
+//				var valor = document.getElementById('id_paises_hidden').value;
+//				$.ajax({
+//					data : {'busqueda': buscar,'pais': valor},
+//					url: '{%url "ciudad-busqueda" %}',
+//					type: 'get',
+//					success: function(data){
+//
+//						if(data){
+//							if(data.length > 0) {
+//								var arreglo = [];
+//								data.forEach(function(obj){
+//									var obje = {};
+//									obje.id = obj.pk;
+//									obje.name = obj.fields.descripcion;
+//
+//									arreglo.push(obje);
+//								});
+//
+//								cargarResultado(arreglo);
+//							}
+//						}
+//					}
+//
+//				});
+//			}
+//		});
+//
+//		$("#id_ciudades").change(function() {
+//			var current = $("#id_ciudades").typeahead("getActive");
+//			if (current) {
+//				// Some item from your model is active!
+//				if (current.name == $("#id_ciudades").val()) {
+//					$('#id_ciudades_hidden').val(current.id);
+//				} else {
+//					// This means it is only a partial match, you can either add a new item
+//					// or take the active if you don't want new items
+//				}
+//			} else {
+//				// Nothing is active so it is a new value (or maybe empty value)
+//			}
+//		});
 
 	}
 

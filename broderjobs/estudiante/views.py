@@ -332,7 +332,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
 
         pais = estudiante.pais
-        pais_hidden = pais.id
+        # pais_hidden = pais.id
         ciudad = estudiante.ciudad
         ciudad_hidden = ciudad.id
         return {
@@ -343,10 +343,8 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
             'universidades_hidden': universidad_hidden,
             'carreras': carrera,
             'carreras_hidden': carrera_hidden,
-            'paises': pais,
-            'paises_hidden': pais_hidden,
-            'ciudades': ciudad,
-            'ciudades_hidden': ciudad_hidden,
+            'pais': pais,
+            'ciudad_hidden': ciudad_hidden,
             'grado_estudio': estudiante.grado_estudio,
             'ano_graduacion': estudiante.ano_graduacion,
             'semestre_graduacion': estudiante.semestre_graduacion,
@@ -369,8 +367,8 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         grado_estudio = form.cleaned_data['grado_estudio']
         id_universidad = form.cleaned_data['universidades_hidden']
         # id_carrera = form.cleaned_data['carreras_hidden']
-        id_pais = form.cleaned_data['paises_hidden']
-        id_ciudad = form.cleaned_data['ciudades_hidden']
+        # id_pais = form.cleaned_data['paises_hidden']
+        # id_ciudad = form.cleaned_data['ciudades_hidden']
         ano_inicio = form.cleaned_data['ano_inicio_estudio']
         semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
         ano_graduacion = form.cleaned_data['ano_graduacion']
@@ -400,17 +398,19 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         # if carrera is not None:
         #     estudiante.carrera = carrera
 
-        pais = Pais.objects.get(id= id_pais)
-        if pais is not None:
-            estudiante.pais = pais
-        ciudad = Ciudad.objects.get(id = id_ciudad)
-        if ciudad is not None:
-            estudiante.ciudad = ciudad
+        pais = form.cleaned_data['pais']
+        id_ciudad = form.cleaned_data['ciudad_hidden']
 
-        # estudiante.universidad = universidad
-        # estudiante.carrera = carrera
-        # estudiante.pais = pais
-        # estudiante.ciudad = ciudad
+        estudiante.pais = pais
+
+        if id_ciudad is not None and id_ciudad != '':
+            try:
+                ciudad = Ciudad.objects.get(id = id_ciudad)
+            except Ciudad.DoesNotExist:
+                ciudad = None
+            if ciudad is not None:
+                estudiante.ciudad = ciudad
+
         estudiante.ano_inicio_estudio = ano_inicio
         estudiante.semestre_inicio_estudio = semestre_inicio
         estudiante.ano_graduacion = ano_graduacion
