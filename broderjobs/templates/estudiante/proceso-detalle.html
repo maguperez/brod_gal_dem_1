@@ -46,10 +46,10 @@
 												<div class="progress-indicator" style="width: 0%;"></div>
 											</div>
 											<ul class="wizard-steps">
-												<li class = {%if postulacion.estado_postulacion == 'P'%}"active on"{%endif%}>
+												<li class = {%if postulacion.estado_postulacion == 'E'%}"active on"{%endif%}>
 													<a href="#tab1" data-toggle="tab"><span class = "fa fa-check"></span>Postulacion</a>
 												</li>
-												<li class = {%if postulacion.estado_postulacion == 'E'%}"active on"{%endif%}>
+												<li class = {%if postulacion.estado_postulacion == 'P'%}"active on"{%endif%}>
 													<a href="#tab2" data-toggle="tab"><span class = "fa fa-check"></span>Evaluacion</a>
 												</li>
 												<li class = {%if postulacion.estado_postulacion == 'F'%}"active on"{%endif%}>
@@ -60,7 +60,16 @@
 									</div>
 
 										<div class="clear"></div>
-									<p>Tu postulaci&oacute;n ha sido registrada satisfactoriamente y te encuentras en la etapa de {{postulacion.estado_postulacion}}, te notificaremos cuando el proceso haya finalizado.</p>
+									<p>Tu postulaci&oacute;n ha sido registrada satisfactoriamente y te encuentras en la etapa de
+										{%if postulacion.estado_postulacion == 'P'%}
+											Postulado,
+											{%endif%}
+											{%if postulacion.estado_postulacion == 'E'%}
+											En Evaluacion,
+											{%endif%}
+											{%if postulacion.estado_postulacion == 'F'%}
+											Finalizado,
+											{%endif%} te notificaremos cuando el proceso haya finalizado.</p>
 								</div>
 								<div class="mensajes" id="content-mensajes">
 									<table class = "bj-table">
@@ -143,6 +152,7 @@
         if ($(id).hasClass('popup'))
 			$('body').addClass('static');
     });
+	window.onload = function(){
 	$('.wizard-progress').bootstrapWizard({
 		tabClass: 'wizard-steps',
 		onTabClick: function( tab, navigation, index, newindex ) {
@@ -169,6 +179,7 @@
 			tab.nextAll().removeClass('completed');
 			return false;
 		}
-	});
+		}, 5000);
+	};
 </script>
 {% endblock%}
