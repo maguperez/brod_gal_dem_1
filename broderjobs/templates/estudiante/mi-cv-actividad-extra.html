@@ -27,5 +27,61 @@
 			$("#txt-descripcion").val($("#id_descripcion").val());
 		}
 
+		InicializarValidaciones();
 	});
+
+	function InicializarValidaciones(){
+		$("form").validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+				debugger;
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				organizacion: {
+					required: true,
+                    maxlength: 50
+                },
+				descripcion:{
+                    maxlength: 1000
+                }
+            },
+            messages: {
+				organizacion: {
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 50 caracteres"
+                },
+				descripcion:{
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+	}
+
 </script>
