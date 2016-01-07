@@ -1,6 +1,6 @@
 # coding=utf-8
 from django import forms
-from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple
+from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple, Select
 from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
     TipoRemuneracion, Carrera, Pais
 
@@ -35,6 +35,7 @@ class OportunidadForm(forms.ModelForm):
             'carrera': SelectMultiple(attrs={'class': 'full'}),
             'idioma': SelectMultiple(attrs={'class': 'full'}),
             'conocimiento': SelectMultiple(attrs={'class': 'full'}),
+            'estado_oportunidad': Select(attrs={'disabled':'disabled'})
         }
 
     def __init__(self, *args, **kwargs):
