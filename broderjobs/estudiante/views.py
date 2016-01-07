@@ -133,7 +133,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")[:2]
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado = 'A').order_by("fecha_publicacion")[:2]
         ranking = RankingEmpresa()
         try:
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
@@ -216,7 +216,7 @@ class OportunidadesEmpresaView(TemplateView):
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado_oportunidad = 'A').order_by("fecha_publicacion")
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado = 'A').order_by("fecha_publicacion")
         context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -756,7 +756,6 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
         return JsonResponse(form.errors, status=400)
 
-
 class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm
     template_name = 'estudiante/mi-cv-voluntariado.html'
@@ -860,9 +859,8 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
             Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
             Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
-            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda),
-            estado_oportunidad = 'A'
-        ).order_by('fecha_publicacion').distinct()
+            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda ) |
+            Q(estado = 'A')).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
             empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)

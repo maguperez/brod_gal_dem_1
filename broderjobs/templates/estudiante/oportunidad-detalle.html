@@ -30,9 +30,15 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 						<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
 					</div>
 					<div class="postulacion">
+						{% if oportunidad.estado_oportunidad == 'A'%}
 						<a id="postular" class="{% if postulacion.estado == 'A'%} btn-action-invertido
 							{%else %}btn-action{%endif%}">{% if postulacion.estado == 'A'%}CANCELAR{%else %}POSTULAR{%endif%}</a>
-						<label class="cierre">CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y" }}</label>
+						<label class="cierre">CIERRO EL {{oportunidad.fecha_cese | date:"j.m.Y" }}</label>
+						{%else%}
+
+						<label class="cierre">CIERRO EL {{oportunidad.fecha_cese | date:"j.m.Y" }}</label>
+						{%endif%}
+
 					</div>
 					<div class="clear"></div>
 				</header>
