@@ -98,14 +98,14 @@
 		</section>
 		<div class="popup mensaje" id="popup-mensaje">
 			<div class="popup-box">
-				<div class="content">
+				<div class="content" id="contenido-mensaje">
 					<section class="header">
 						<h4 class="link" id="mensaje-empresa"></h4>
-						<label class="info" id="mensaje-fecha-recibido">Recibido el JUEVES 15/03/2015 a las 21:09 horas</label>
+						<label class="info" id="mensaje-fecha-recibido"></label>
 					</section>
 					<section class="mensaje">
-						<label class="asunto" id="mensaje-asunto">¡ENHORABUENA!</label>
-						<p id="mensaje-contenido">Maecenas vel odio auctor, sodales enim nec, venenatis dolor. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida a. Cras molestie varius lacinia. Phasellus sit amet arcu efficitur, ultricies mauris aliquet, dapibus lorem. Nulla consequat risus sed pharetra congue.</p>
+						<label class="asunto" id="mensaje-asunto"></label>
+						<p id="mensaje-contenido"></p>
 					</section>
 				</div>
 				<a class="close">Cerrar</a>
@@ -140,6 +140,7 @@
 		$('#menu-mensajes').addClass('active');
 	});
 	$('#content-mensajes tr').click(function() {
+		fnMostrarMensaje($(this).data("id"));
 		window.location = '#popup-mensaje';
 	});
 	$('a').click(function(event) {
@@ -176,5 +177,22 @@
 		}
 		}, 5000);
 	};
+
+
+	function fnMostrarMensaje(id){
+        $.ajax({
+            url: "{%url 'mensaje-ver' %}",
+            type: 'GET',
+            data: {'id': id },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+				$("#mensaje-asunto").html(data["asunto"]);
+            	$("#mensaje-contenido").html(data["contenido"]);
+
+			}
+        });
+    }
+
 </script>
 {% endblock%}

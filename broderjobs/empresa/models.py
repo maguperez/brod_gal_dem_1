@@ -194,7 +194,7 @@ class Picture(models.Model):
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
 
     def __unicode__(self):
-        return self.file.name
+        return self.slug
 
     @models.permalink
     def get_absolute_url(self):

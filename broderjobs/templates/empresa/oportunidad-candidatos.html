@@ -202,22 +202,29 @@
                 $("#tb_candidatos").on("click", ".eliminar", function () {
                     id = new Array();
                     id[0] = $(this).parent().data("id");
+                    id_estudiante = new Array();
+                    id_estudiante[0] = $(this).parent().data("info");
                     $("#fase-activa").val($("#fase").val());
                     $("#fase").val(0);
-                    fnCambioFase(id);
+                    fnCambioFase(id, id_estudiante);
                 });
                 $("#tb_candidatos").on("click", ".activar", function () {
                     id = new Array();
                     id[0] = $(this).parent().data("id");
+                    id_estudiante = new Array();
+                    id_estudiante[0] = $(this).parent().data("info");
                     $("#fase-activa").val($("#fase").val());
                     $("#fase").val(-1);
-                    fnCambioFase(id);
+                    fnCambioFase(id, id_estudiante);
                 });
                 $("#tb_candidatos").on("click", ".siguiente_fase", function () {
                     id = new Array();
                     id[0] = $(this).parent().data("id");
+                    id_estudiante = new Array();
+                    id_estudiante[0] = $(this).parent().data("info");
+                    $("#fase-activa").val($("#fase").val());
                     $("#fase").val(parseInt($(".proceso .active").data("info")) + 1);
-                    fnCambioFase(id);
+                    fnCambioFase(id, id_estudiante);
                 });
             };
             this.obtener = function(){
@@ -244,7 +251,8 @@
                             className: 'dt-body-center',
                             render: function (data, type, full, meta) {
                                 if(full.estado_fase == 'A') {
-                                    return '<input class = "checking" type="checkbox"' + "data-info='" + full.id + "'" +
+                                    return '<input class = "checking" type="checkbox"' +"data-info='" + full.id_estudiante +
+                                            "' data-id='" + full.id + "'" +
                                             (selected != null && selected[full.id] != null ? "checked" : "") + '>';
                                 } else return '';
                             }
@@ -348,20 +356,30 @@
         $('#siguiente-fase').click(function (event) {
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
-                ids[index] = $(this).data("info");
+                ids[index] = $(this).data("id");
             });
+
+            ids_estudiante = new Array();
+            $("input:checked", table.fnGetNodes()).each(function(index, value){
+                ids_estudiante[index] = $(this).data("info");
+            });
+
             $("#fase").val( parseInt($(".proceso .active").data("info")) + 1);
-            fnCambioFase(ids);
+            fnCambioFase(ids, ids_estudiante);
         });
 
         $('#eliminar').click(function (event) {
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
-                ids[index] = $(this).data("info");
+                ids[index] = $(this).data("id");
+            });
+            ids_estudiante = new Array();
+            $("input:checked", table.fnGetNodes()).each(function(index, value){
+                ids_estudiante[index] = $(this).data("info");
             });
             $("#fase-activa").val($("#fase").val());
             $("#fase").val(0);
-            fnCambioFase(ids);
+            fnCambioFase(ids, ids_estudiante);
 
         });
 
@@ -379,11 +397,11 @@
 
    });
 
-    function fnCambioFase(ids){
+    function fnCambioFase(ids, ids_estudiante){
         $.ajax({
             url: '{%url "siguiente-fase" %}',
             type: 'GET',
-            data: {'ids': JSON.stringify(ids), 'f': $("#fase").val(), 'o': '{{oportunidad.id}}'},
+            data: {'ids': JSON.stringify(ids), 'ids_estudiante': JSON.stringify(ids_estudiante), 'f': $("#fase").val(), 'o': '{{oportunidad.id}}'},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {

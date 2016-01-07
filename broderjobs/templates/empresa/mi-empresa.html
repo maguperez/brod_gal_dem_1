@@ -6,24 +6,19 @@
 <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
 <link rel="stylesheet" href="{% static 'css/owl.theme.css' %}"/>
 <style>
-
 	#id_pais{
 		width: 155px !important;
 	}
-
 	#id_ciudad{
 		width: 175px !important;
 	}
-
 	.select2-selection--single{
 		background-color: #f9f9f9 !important;
 		border-color: #ccc !important;
 	}
-
 	/*.select2-selection--single .select2-selection__arrow{*/
 		/*right: -46px  !important;*/ #ccc
 	/*}*/
-
 </style>
 <section class="empresa empresa-detalle">
 	<div class="centered">
@@ -53,19 +48,26 @@
 							<!--<div class="item-video">-->
                                 <!--<a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>-->
                             <!--</div>-->
-							{%if imagenes.all > 0%}
-								{%for i in imagenes.all%}
-                            <div class="item">
+							<!--<div class="item">-->
                                 <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
-								<img src="{{i.set_imagen}}"/>
-                            </div>
-							{%endfor%}
+
+                            <!--</div>-->
+							{%if imagenes.all%}
+								{%for i in imagenes.all%}
+								<div class="item">
+									<!--<img src="{%static 'img/oficina-11.png' %}"/>-->
+									<img src="{{i.set_imagen}}"/>
+								</div>
+								{%endfor%}
 							{%else%}
 								<div class="item">
-                                	<img src="{%static 'img/oficina-11.png' %}"/>
+                                	<img src="{%static 'img/imagen-default.png' %}"/>
                             	</div>
-							{%endif%}
+								<div class="item">
+                                	<img src="{%static 'img/imagen-default.png' %}"/>
+                            	</div>
 
+							{%endif%}
                         </div>
 					</div>
 					<!--<a class="btn-edit" id="btn-edit">Editar</a>-->
@@ -207,7 +209,6 @@
  <script>
 	 $(function(){
 		 Empresa.inicializar_mapa();
-
 		 $("#link-mi_empresa").addClass("active")
 		 $('[data-toggle="tooltip"]').tooltip();
 	 })
@@ -229,7 +230,6 @@
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 			Empresa.map = new google.maps.Map(mapCanvas, mapOptions);
-
 			if ($("#empresa-id_latitud").html() != "") {
 				var latitud = $("#empresa-id_latitud").html().replace(",",".");
 				var longitud = $("#empresa-id_longitud").html().replace(",",".");
@@ -250,7 +250,6 @@
             });
             Empresa.marca = marker;
             Empresa.map.setCenter(coordenadas);
-
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {
@@ -270,8 +269,6 @@
 							 $(modal).modal('toggle');
 							 window.location.reload();
 						 }
-
-
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) { }
 				 });
