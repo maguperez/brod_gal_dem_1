@@ -7,5 +7,6 @@ urlpatterns =[
 
     url(r'^crear/' , 'mensaje.views.mensaje_crear', name='mensaje_crear'),
 
+    url(r'^ver/', 'mensaje.views.mensaje_ver', name='mensaje-ver'),
 
 ]

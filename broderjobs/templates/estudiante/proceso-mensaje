@@ -1,0 +1,10 @@
+<div class="content">
+    <section class="header">
+	    <h4 class="link" id="mensaje-empresa"></h4>
+		    <label class="info" id="mensaje-fecha-recibido">Recibido el JUEVES 15/03/2015 a las 21:09 horas</label>
+    </section>
+	<section class="mensaje">
+	    <label class="asunto" id="mensaje-asunto">¡ENHORABUENA!</label>
+		<p id="mensaje-contenido">Maecenas vel odio auctor, sodales enim nec, venenatis dolor. Nunc ullamcorper nisi quis lorem ultrices, in dictum urna placerat. Morbi porttitor purus in velit congue, in euismod mauris hendrerit. Aliquam erat volutpat. Nullam commodo vehicula tellus, ac dignissim eros gravida a. Cras molestie varius lacinia. Phasellus sit amet arcu efficitur, ultricies mauris aliquet, dapibus lorem. Nulla consequat risus sed pharetra congue.</p>
+    </section>
+</div>
