@@ -138,7 +138,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         try:
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
 
-        except Estudiante.DoesNotExist:
+        except RankingEmpresa.DoesNotExist:
             ranking.ranking_general = 0
             ranking.linea_carrera = 0
             ranking.flexibilidad_horarios = 0
