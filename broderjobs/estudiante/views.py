@@ -556,6 +556,14 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
     form_class = forms.ExperienciaForm
     success_url = reverse_lazy('mi-cv')
 
+    def get_context_data(self, **kwargs):
+        id = self.kwargs["id"]
+        experiencia = get_object_or_404(ExperienciaProfesional, id= id)
+        context = super(ExperienciaView, self).get_context_data(**kwargs)
+        context['experiencia_actual'] = experiencia.trabajo_actual
+
+        return context
+
     def get_initial(self):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
@@ -576,6 +584,11 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
             empresas = experiencia.empresa
             empresas_hidden = experiencia.empresa.id
         descripcion = experiencia.descripcion
+
+        experiencia_actual = experiencia.trabajo_actual
+
+
+
         fecha_desde = experiencia.fecha_desde
         fecha_hasta = experiencia.fecha_hasta
         return {'puestos': puestos, 'puestos_hidden': puestos_hidden,
@@ -595,11 +608,24 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         puesto_id = form.cleaned_data['puestos_hidden']
         empresa_id = form.cleaned_data['empresas_hidden']
 
+        try:
+            check = self.request.POST['experiencia_actual']
+        except Exception:
+            check = None
+
+        if check is not None and check == 'S':
+             experiencia_actual = 'S'
+        else:
+             experiencia_actual = 'N'
+
         dtDesde = form.cleaned_data['fecha_desde_hidden']
         fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
 
-        dtHasta = form.cleaned_data['fecha_hasta_hidden']
-        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        if experiencia_actual == 'N':
+            dtHasta = form.cleaned_data['fecha_hasta_hidden']
+            fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        else:
+            fecha_hasta = None
 
 
         descripcion = form.cleaned_data['descripcion']
@@ -619,13 +645,10 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
             experiencia.empresa = None
             experiencia.empresa_referencial = empresa_descripcion
 
-        if fecha_desde is not None:
-            experiencia.fecha_desde = fecha_desde
-        if fecha_hasta is not None:
-            experiencia.fecha_hasta = fecha_hasta
-            experiencia.trabajo_actual = 'N'
-        else:
-            experiencia.trabajo_actual = 'S'
+        experiencia.fecha_desde = fecha_desde
+        experiencia.fecha_hasta = fecha_hasta
+        experiencia.trabajo_actual = experiencia_actual
+
         experiencia.descripcion = descripcion
         experiencia.save()
         return super(ExperienciaView, self).form_valid(form)
@@ -658,11 +681,24 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         puesto_id = form.cleaned_data['puestos_hidden']
         empresa_id = form.cleaned_data['empresas_hidden']
 
+        try:
+            check = self.request.POST['experiencia_actual']
+        except Exception:
+            check = None
+
+        if check is not None and check == 'S':
+            experiencia_actual = 'S'
+        else:
+            experiencia_actual = 'N'
+
         dtDesde = form.cleaned_data['fecha_desde_hidden']
         fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
 
-        dtHasta = form.cleaned_data['fecha_hasta_hidden']
-        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        if experiencia_actual == 'N':
+             dtHasta = form.cleaned_data['fecha_hasta_hidden']
+             fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        else:
+            fecha_hasta = None
 
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
@@ -680,13 +716,11 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         else:
             experiencia.empresa_referencial = empresa_descripcion
 
-        if fecha_desde is not None:
-            experiencia.fecha_desde = fecha_desde
-        if fecha_hasta is not None:
-            experiencia.fecha_hasta = fecha_hasta
-            experiencia.trabajo_actual = 'N'
-        else:
-            experiencia.trabajo_actual = 'S'
+        experiencia.fecha_desde = fecha_desde
+        experiencia.fecha_hasta = fecha_hasta
+        experiencia.trabajo_actual = experiencia_actual
+
+
         experiencia.descripcion = descripcion
         experiencia.save()
         return super(ExperienciaCrearView, self).form_valid(form)
@@ -775,7 +809,6 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
         return JsonResponse(form.errors, status=400)
-
 
 class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm

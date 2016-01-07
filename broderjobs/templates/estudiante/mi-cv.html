@@ -121,7 +121,7 @@
 								<div class="detalle timeline">
 									{% for experiencia in experiencias_profesionales %}
 										<div class="experiencia" id="{{experiencia.id}}">
-											<p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
+											<p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {% if experiencia.fecha_hasta != None %} {{experiencia.fecha_hasta|date:"M Y"}} {%else%} Es mi trabajo actual {%endif%}</p>
 											{%if experiencia.puesto != None %}
 											<label class="tipo">{{experiencia.puesto}}</label>
 											{%else%}
