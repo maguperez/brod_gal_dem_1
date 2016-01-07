@@ -1,5 +1,5 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
-body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #a5a5a5;}
+body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 14px; color: #a5a5a5;}
 ::-webkit-input-placeholder {color: #ccc}
 :-moz-placeholder {color: #ccc}
 ::-moz-placeholder {color: #ccc}

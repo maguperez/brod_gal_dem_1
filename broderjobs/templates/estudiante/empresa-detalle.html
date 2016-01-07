@@ -499,7 +499,7 @@
                 <label class="descripcion">{{empresa.sector | upper}}</label>
 
                 <div class="calificacion">
-                    <img class="imagen" src="{{empresa.set_logo}}" alt="ADOBE"/>
+                    <img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre | upper}}"/>
                     <ul class="criterios">
                         <li>
                             <label>L&iacute;nea de carrera</label>
@@ -535,7 +535,7 @@
             </section>
             <section>
                 <input type="checkbox" id="declaro"/><label for="declaro">Declaro que trabajo o trabaj&eacute; en la
-                empresa ADOBE</label>
+                empresa {{empresa.nombre | upper}}</label>
                 <a class="btn-save" id="enviar-evaluacion">Enviar Evaluaci&oacute;n</a>
             </section>
             <section>
