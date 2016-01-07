@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.1.0/css/select.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.dataTables.min.css">
-
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
 <style>
     .menu { cursor: pointer }
     .ocultar {
@@ -36,7 +38,7 @@
             <div class="descripcion">
                 <a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 
-                <div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+                <div class="empresa"><i class="empresa"></i><label class="text-uppercase">{{empresa.nombre}}</label></div>
                 <div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a>
                 </div>
             </div>
@@ -86,7 +88,7 @@
                         <label class="nombre">Inscripciones</label>
                     </div>
                     <div class="estadistica">
-                        <label class="cifra">792</label>
+                        <label id = "visualizaciones" class="cifra">792</label>
                         <label class="nombre">Visualizaciones</label>
                     </div>
                     <div class="clear"></div>
@@ -190,8 +192,34 @@
 <script>
     var iniciado = false;
     var selected;
+    $(function(){
+        panel = new MixpanelExport({
+            api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
+            api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
+        });
+        var date = moment().format("YYYY-MM-DD");
+		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
+        panel.retention({
+            from_date: last,
+            to_date: date,
+            expire: 8798798765,
+            retention_type: "compounded",
+            event: "Visita Oportunidad",
+            //born_event: "Visita Oportunidad",
+            where: 'properties["OportunidadID"] == "{{oportunidad.id}}"'
+        }).then(function(data) {
+            var total = 0;
+            for (var i = 6; i >= 0 ; i--) {
+                var last = moment().subtract(i, 'days');
+                total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
+            }
+            $("#visualizaciones").html(total);
+        });
+
+    })
     var JSCandidatos = function () {
             this.inicializar = function(){
+
                 $("#tb_candidatos").on("click", ".cargar-cv", function () {
                     id = $(this).parent().data("info");
      	            $('#form-modal-body').load('cv/'+id, function () {
