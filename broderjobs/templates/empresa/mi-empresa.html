@@ -194,9 +194,11 @@
 
 
 <style>
-	.owl-carousel {
+    .owl-carousel {
         height:369px;
-		width:723Px;
+    }
+    .owl-controls{
+        height: 27px;
     }
 </style>
 {% endblock %}
@@ -211,13 +213,15 @@
 		 $("#link-mi_empresa").addClass("active")
 		 $('[data-toggle="tooltip"]').tooltip();
 	 })
-	 $('.owl-carousel').owlCarousel({
+	 if ($(".owl-carousel div").length > 1)
+	 	$('.owl-carousel').owlCarousel({
 			 autoPlay: true,
              items: 1,
              loop: true,
              margin: 10,
              pagination: true,
-		 });
+		 })
+	 else $('.owl-carousel').removeClass("owl-carousel");
 	 var Empresa = {
 		map: null,
 		marca: null,
