@@ -128,8 +128,10 @@ class ConocimientoForm(forms.Form):
     conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
 
 class ExperienciaForm(forms.ModelForm):
-    fecha_desde = forms.DateField(widget=forms.DateInput())
-    fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+    # fecha_desde = forms.DateField(widget=forms.DateInput())
+    fecha_desde_hidden = forms.CharField(widget=forms.HiddenInput())
+    fecha_hasta_hidden = forms.CharField(widget=forms.HiddenInput())
+    # fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
 
     puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puesto', 'class': 'full'}))
     puestos_hidden = forms.CharField(widget=forms.HiddenInput())
@@ -139,7 +141,7 @@ class ExperienciaForm(forms.ModelForm):
 
     class Meta:
         model = ExperienciaProfesional
-        fields = ('fecha_desde','fecha_hasta', 'descripcion')
+        fields = ('descripcion',)
         widget = {
             'descripcion': forms.widgets.Textarea
 

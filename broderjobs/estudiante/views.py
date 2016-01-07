@@ -14,7 +14,7 @@ from django.views.generic import TemplateView, FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView,CreateView, DeleteView
-from datetime import date
+from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
@@ -580,6 +580,7 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         return {'puestos': puestos, 'puestos_hidden': puestos_hidden,
                 'empresas': empresas, 'empresas_hidden': empresas_hidden,
                 'fecha_desde': fecha_desde, 'fecha_hasta': fecha_hasta,
+                'fecha_desde_hidden': fecha_desde, 'fecha_hasta_hidden': fecha_hasta,
                 'descripcion': descripcion}
 
     def form_valid(self, form):
@@ -593,8 +594,13 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
         puesto_id = form.cleaned_data['puestos_hidden']
         empresa_id = form.cleaned_data['empresas_hidden']
 
-        fecha_desde = form.cleaned_data['fecha_desde']
-        fecha_hasta = form.cleaned_data['fecha_hasta']
+        dtDesde = form.cleaned_data['fecha_desde_hidden']
+        fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
+
+        dtHasta = form.cleaned_data['fecha_hasta_hidden']
+        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+
+
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
 
@@ -651,8 +657,12 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         puesto_id = form.cleaned_data['puestos_hidden']
         empresa_id = form.cleaned_data['empresas_hidden']
 
-        fecha_desde = form.cleaned_data['fecha_desde']
-        fecha_hasta = form.cleaned_data['fecha_hasta']
+        dtDesde = form.cleaned_data['fecha_desde_hidden']
+        fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
+
+        dtHasta = form.cleaned_data['fecha_hasta_hidden']
+        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+
         descripcion = form.cleaned_data['descripcion']
         experiencia.estudiante = estudiante
 
