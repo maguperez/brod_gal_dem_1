@@ -76,6 +76,7 @@ class Postulacion(models.Model):
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     estado_postulacion =  models.CharField(choices=items_estado, max_length=1, default='A', null=True, blank=True)
     fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
+    estado_fase =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)

@@ -20,7 +20,7 @@ def obtener_candidatos (objects):
         compatibilidad = "60%"
         records = {"checkbox":"", "id":id, "id_estudiante": estudiante.id, "nombre":nombre,"universidad":universidad,"carrera":carrera,
                     "graduacion":graduacion, "fecha_postulacion": fecha_postulacion, "compatibilidad": compatibilidad,
-                   "botones":"", "estado": p.estado}
+                   "botones":"", "estado": p.estado, "estado_fase": p.estado_fase}
         data_records.append(records)
 
     return data_records

@@ -312,10 +312,10 @@ def siguiente_fase( request ):
     else:
         if id_fase == 0:
             estado_postulacion = 'F'
-            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado = 'I', estado_postulacion = estado_postulacion)
+            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = 'I', estado_postulacion = estado_postulacion)
         if id_fase == -1:
             estado_postulacion = 'P'
-            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado = 'A', estado_postulacion = estado_postulacion)
+            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = 'A', estado_postulacion = estado_postulacion)
     #define response
     response = {
         'resp': 's'
