@@ -230,7 +230,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
         inicializar_mapa: function() {
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
-                center: new google.maps.LatLng(44.5403, -78.5463),
+                center: new google.maps.LatLng(-12.0570208,-77.0372896),
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -253,8 +253,14 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
                 map: Detalle.map
             });
             Detalle.marca = marker;
-
             Detalle.map.setCenter(coordenadas);
+			var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").html(response[0]["formatted_address"]);
+            });
         }
     };
 

@@ -1,14 +1,15 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="../static/css/font-awesome.css">
-    <link rel="stylesheet" href="../static/css/select2.css">
-    <link rel="stylesheet" href="../static/css/summernote.css">
-    <link rel="stylesheet" href="../static/css/broder.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/summernote.css' %}">
+    <link rel="stylesheet" href="{% static 'css/broder.css' %}">
     <style>
         .mensaje > .centered { max-height: 500px; padding-bottom: 30px; }
         #main-content.page-mailbox h2,
@@ -99,12 +100,12 @@
         .note-editor { border: none !Important; }
         .note-toolbar { border: none; background-color: transparent !important;}
     </style>
-    <script src = "../static/js/jquery.min.js"></script>
-    <script src = "../static/js/bootstrap.min.js"></script>
-    <script src = "../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src = "../static/js/select2.js"></script>
-    <script src = "../static/js/summernote.js"></script>
-    <script src = "../static/js/summernote-i18n/summernote-es-ES.js"></script>
+    <script src = "{% static 'js/jquery.min.js' %}"></script>
+    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
+    <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src = "{% static 'js/select2.js' %}"></script>
+    <script src = "{% static 'js/summernote.js' %}"></script>
+    <script src = "{% static 'js/summernote-i18n/summernote-es-ES.js' %}"></script>
     <script>
         $(function(){
             $(window).load(function(){
@@ -146,7 +147,7 @@
                 <ul class="nav navbar-nav notify pull-right header-menu">
 
 					<div class="actions">
-						<a href="{% url 'oportunidad_crear'%}">REDACTAR MENSAJE</a>
+						<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
 					</div>
 					<div class="options">
 						<a class="mensajes" href="{%url 'buzon_entrada'%}">Mensajes</a>
