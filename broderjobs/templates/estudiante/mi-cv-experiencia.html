@@ -16,10 +16,14 @@
 			<div class ="form-group">
 				<label class = "col-sm-3">Desde / Hasta</label>
 				<div class = "col-sm-6">
+					{{form.fecha_desde_hidden}}
+					{{form.fecha_hasta_hidden}}
 					<div class="input-group input-daterange">
-						{{form.fecha_desde}}
+						<!--{{form.fecha_desde}}-->
+						<input id="id_fecha_desde" name="fecha_desde" type="text" class="form-control">
 						<span class="input-group-addon">a</span>
-						{{form.fecha_hasta}}
+						<input id="id_fecha_hasta" name="fecha_desde" type="text" class="form-control">
+						<!--{{form.fecha_hasta}}-->
 					</div>
 				</div>
 			</div>
@@ -54,14 +58,20 @@
 		if($('#id_fecha_desde').val()){
 			fechaDesde = moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY');
 		}
+		else if($('#id_fecha_desde_hidden').val()){2016-08-01
+			fechaDesde = moment($('#id_fecha_desde_hidden').val(),'YYYY-MM-DD').format('MM/YYYY');
+		}
 		else{
 			fechaDesde = moment().format('MM/YYYY');
 		}
 
 		var fechaHasta = {};
-
+	debugger;
 		if($('#id_fecha_hasta').val()){
 			fechaHasta = moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY');
+		}
+		else if($('#id_fecha_hasta_hidden').val()){
+			fechaHasta = moment($('#id_fecha_hasta_hidden').val(),'YYYY-MM-DD').format('MM/YYYY');
 		}
 		else{
 			fechaHasta = moment().format('MM/YYYY');
