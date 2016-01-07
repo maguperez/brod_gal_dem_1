@@ -147,7 +147,7 @@
 									{% for voluntariado in voluntariados %}
 									{{voluntariado}}
 										<div>
-											<p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {{voluntariado.fecha_hasta|date:"M Y"}}</p>
+											<p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {% if voluntariado.fecha_hasta != None %} {{voluntariado.fecha_hasta|date:"M Y"}} {%else%} Contin&uacute;o Realiz&aacute;ndolo {%endif%}</p>
 											<label class="tipo">{{voluntariado.cargo}}</label>
 											<label class="nombre">{{voluntariado.organizacion}}</label>
 											<p>{{voluntariado.descripcion}}</p>

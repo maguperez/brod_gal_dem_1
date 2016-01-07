@@ -1,4 +1,5 @@
 import json
+import json
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
@@ -700,6 +701,14 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     template_name = 'estudiante/mi-cv-voluntariado.html'
     success_url = reverse_lazy('mi-cv')
 
+    def get_context_data(self, **kwargs):
+        id = self.kwargs["id"]
+        voluntariado = get_object_or_404(Voluntariado, id= id)
+        context = super(VoluntariadoView, self).get_context_data(**kwargs)
+        context['voluntariado_actual'] = voluntariado.voluntariado_actual
+
+        return context
+
     def get_initial(self):
         id = self.kwargs["id"]
         voluntariado = get_object_or_404(Voluntariado, id= id)
@@ -711,6 +720,8 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         descripcion = voluntariado.descripcion
         fecha_desde = voluntariado.fecha_desde
         fecha_hasta = voluntariado.fecha_hasta
+
+        voluntariado_actual = voluntariado.voluntariado_actual
 
         return {'cargo': cargo, 'organizacion': organizacion,
                 'fecha_desde': fecha_desde, 'fecha_hasta': fecha_hasta,
@@ -729,11 +740,24 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         organizacion = form.cleaned_data['organizacion']
         descripcion = form.cleaned_data['descripcion']
 
+        try:
+            check = self.request.POST['voluntariado_actual']
+        except Exception:
+            check = None
+
+        if check is not None and check == 'S':
+            voluntariado_actual = 'S'
+        else:
+            voluntariado_actual = 'N'
+
         dtDesde = form.cleaned_data['fecha_desde_hidden']
         fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
 
-        dtHasta = form.cleaned_data['fecha_hasta_hidden']
-        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        if voluntariado_actual == 'N':
+            dtHasta = form.cleaned_data['fecha_hasta_hidden']
+            fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        else:
+            fecha_hasta = None
 
         voluntariado.estudiante = estudiante
 
@@ -741,13 +765,9 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
         voluntariado.organizacion = organizacion
         voluntariado.descripcion = descripcion
 
-        if fecha_desde is not None:
-            voluntariado.fecha_desde = fecha_desde
-        if fecha_hasta is not None:
-            voluntariado.fecha_hasta = fecha_hasta
-            voluntariado.trabajo_actual = 'N'
-        else:
-            voluntariado.trabajo_actual = 'S'
+        voluntariado.fecha_desde = fecha_desde
+        voluntariado.fecha_hasta = fecha_hasta
+        voluntariado.voluntariado_actual = voluntariado_actual
 
         voluntariado.save()
         return super(VoluntariadoView, self).form_valid(form)
@@ -771,26 +791,49 @@ class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplat
         cargo = form.cleaned_data['cargo']
         organizacion = form.cleaned_data['organizacion']
 
+        try:
+            check = self.request.POST['voluntariado_actual']
+        except Exception:
+            check = None
+
+        if check is not None and check == 'S':
+            voluntariado_actual = 'S'
+        else:
+            voluntariado_actual = 'N'
+
         dtDesde = form.cleaned_data['fecha_desde_hidden']
         fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
 
-        dtHasta = form.cleaned_data['fecha_hasta_hidden']
-        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        if voluntariado_actual == 'N':
+            dtHasta = form.cleaned_data['fecha_hasta_hidden']
+            fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+        else:
+            fecha_hasta = None
 
         descripcion = form.cleaned_data['descripcion']
         voluntariado.estudiante = estudiante
         voluntariado.cargo = cargo
         voluntariado.organizacion = organizacion
-        if fecha_desde is not None:
-            voluntariado.fecha_desde = fecha_desde
-        if fecha_hasta is not None:
-            voluntariado.fecha_hasta = fecha_hasta
-            voluntariado.voluntariado_actual = 'N'
-        else:
-            voluntariado.voluntariado_actual = 'S'
+
+        voluntariado.fecha_desde = fecha_desde
+        voluntariado.fecha_hasta = fecha_hasta
+        voluntariado.voluntariado_actual = voluntariado_actual
+
+        # if fecha_desde is not None:
+        #     voluntariado.fecha_desde = fecha_desde
+        # if fecha_hasta is not None:
+        #     voluntariado.fecha_hasta = fecha_hasta
+        #     voluntariado.voluntariado_actual = 'N'
+        # else:
+        #     voluntariado.voluntariado_actual = 'S'
+
         voluntariado.descripcion = descripcion
         voluntariado.save()
         return super(VoluntariadoCrearView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        return JsonResponse(form.errors, status=400)
 
 class VoluntariadoEliminarView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, DeleteView):
 
