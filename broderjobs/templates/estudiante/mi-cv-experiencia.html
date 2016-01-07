@@ -1,3 +1,8 @@
+<style>
+ 	.modal-dialog{
+ 		width: 55%;
+ 	}
+</style>
 <div style="margin: 0 50px">
 	<form id = "cv-experiencia" action="{{ request.build_absolute_uri }}" method="post" autocomplete="off">{%csrf_token%}
 		<div class="form-horizontal">
@@ -15,16 +20,20 @@
 
 			<div class ="form-group">
 				<label class = "col-sm-3">Desde / Hasta</label>
-				<div class = "col-sm-6">
+				<div class = "col-sm-5">
 					{{form.fecha_desde_hidden}}
 					{{form.fecha_hasta_hidden}}
 					<div class="input-group input-daterange">
 						<!--{{form.fecha_desde}}-->
 						<input id="id_fecha_desde" name="fecha_desde" type="text" class="form-control">
 						<span class="input-group-addon">a</span>
-						<input id="id_fecha_hasta" name="fecha_desde" type="text" class="form-control">
+						<input id="id_fecha_hasta" name="fecha_hasta" type="text" class="form-control">
 						<!--{{form.fecha_hasta}}-->
 					</div>
+				</div>
+				<div class = "col-sm-4" style="padding-top:7px">
+					<input class="col-sm-2" id="id_experiencia_actual" name="experiencia_actual" type="checkbox" value="S">
+					<label class="col-sm-10" style="padding-left:0px"> Es mi trabajo actual</label>
 				</div>
 			</div>
 		</div>
@@ -37,8 +46,7 @@
 </div>
 <script>
 	$(function(){
-		$(".modal-dialog").css("width", "700px")
-		$("#cv-experiencia input").addClass("form-control");
+		$("#cv-experiencia input:not(:checkbox)").addClass("form-control");
 		$("#cv-experiencia select").addClass("form-control");
 		$("#cv-experiencia textarea").addClass("form-control");
 		$("#id_descripcion").hide();
@@ -50,6 +58,22 @@
 			$("#txt-descripcion").val($("#id_descripcion").val());
 		}
 
+		$("#id_experiencia_actual").change(function(e){
+ //			console.log($(this).is(":checked"));
+ 			var isChecked = $(this).is(":checked");
+
+ 			if(isChecked){
+ 				$("#id_fecha_hasta").prop( "disabled", true )
+ //				$("#id_fecha_hasta").val('');
+ 				$('#id_fecha_hasta').datepicker('setDate','');
+ 				$('#id_fecha_hasta').datepicker('update');
+ 			}
+ 			else{
+ 				$("#id_fecha_hasta").prop( "disabled", false )
+ 				$("#id_fecha_hasta").removeClass('valid');
+ 			}
+ 		});
+
 
 		$("#form-modal .modal-title").html('<i class="work"></i> &nbsp;Experiencia profesional');
 
@@ -58,7 +82,7 @@
 		if($('#id_fecha_desde').val()){
 			fechaDesde = moment($('#id_fecha_desde').val(),'DD/MM/YYYY').format('MM/YYYY');
 		}
-		else if($('#id_fecha_desde_hidden').val()){2016-08-01
+		else if($('#id_fecha_desde_hidden').val()){
 			fechaDesde = moment($('#id_fecha_desde_hidden').val(),'YYYY-MM-DD').format('MM/YYYY');
 		}
 		else{
@@ -66,7 +90,8 @@
 		}
 
 		var fechaHasta = {};
-	debugger;
+		var experiencia_actual = '{{experiencia_actual}}';
+
 		if($('#id_fecha_hasta').val()){
 			fechaHasta = moment($('#id_fecha_hasta').val(),'DD/MM/YYYY').format('MM/YYYY');
 		}
@@ -74,7 +99,14 @@
 			fechaHasta = moment($('#id_fecha_hasta_hidden').val(),'YYYY-MM-DD').format('MM/YYYY');
 		}
 		else{
-			fechaHasta = moment().format('MM/YYYY');
+			if(experiencia_actual == 'S'){
+ 				fechaHasta = '';
+ 				$("#id_experiencia_actual").prop( "checked", true );
+ 				$("#id_fecha_hasta").prop( "disabled", true );//
+ 			}
+ 			else{
+ 				fechaHasta = moment().format('MM/YYYY');
+ 			}
 		}
 
 		$('#id_fecha_desde').val(fechaDesde);
@@ -90,18 +122,46 @@
 
 		InicializarTypeaheadElementos();
 
+		$('.input-daterange').datepicker().on('changeDate', function(e) {
+
+ 			if(e.target.id=='id_fecha_hasta' && $("#id_experiencia_actual").is(":checked") && $('#id_fecha_hasta').val()){
+ //				$('#id_fecha_hasta').val('');
+ 				$('#id_fecha_hasta').datepicker('setDate','');
+ 				$('#id_fecha_hasta').datepicker('update');
+
+ 			}
+ 		});
+
 		InicializarValidaciones();
 	});
 
 	function InicializarValidaciones(){
+
+		$.validator.addMethod('validarFecha',function(value, element, param){
+
+ 			if(element.id == 'id_fecha_desde'){
+ 				if(!value){
+ 					return false;
+ 				}
+ 			}
+ 			else if(element.id == 'id_fecha_hasta'){
+ 				if(!$("#id_experiencia_actual").is(":checked") && !value){
+ 					return false;
+ 				}
+ 			}
+ 			return true;
+ 		},"Este campo es obligatorio");
+
+
+
 		$("form").validate({
 //			onfocusout: true,
 //			onkeyup:true,
             errorPlacement: function (error, element) {
-				debugger;
+
                 $(element).tooltip('destroy');
 
-				if(element[0].id == 'id_empresas'){
+				if(element[0].id == 'id_empresas' || element[0].id == 'id_fecha_hasta'){
 
 					$(element).tooltip({
 						animation: true,
@@ -136,8 +196,13 @@
 				descripcion_txt:{
 					required: true,
 					maxlength: 1000
+				},
+ 				fecha_desde:{
+ 					validarFecha:true
+ 				},
+ 				fecha_hasta: {
+					validarFecha: true
 				}
-
             },
             messages: {
 				puestos: {
