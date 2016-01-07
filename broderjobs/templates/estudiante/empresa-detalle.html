@@ -138,7 +138,7 @@
 .orange .progress .inner .percent {
 
   z-index:3;
-  color: white;
+  color: #2c3e50;
   position: absolute;
   top: 0;
   left: 0;
@@ -411,8 +411,7 @@
 
                                     <div class="descripcion">
                                         <div class="datos">
-                                            <div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa |
-                                                upper}}</label></div>
+                                            <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{oportunidad.empresa}}</label></div>
                                             <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}},
                                                 {{oportunidad.pais}}</label></div>
                                             <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label>
@@ -509,28 +508,28 @@
                         <li>
                             <label>L&iacute;nea de carrera</label>
 
-                            <div id="rating-linea_carrera" style="display:inline-block"></div>
-                            <input type="hidden" class="rating-hidden" value="{{ranking.flexibilidad_horarios}}">
+                            <div id="rating-linea_carrera" class = "rating-edit" style="display:inline-block"></div>
+                            <input type="hidden" class="rating-hidden" value="{{ranking.linea_carrera}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Flexibilidad de horarios</label>
 
-                            <div id="rating-flexibilidad_horario" style="display:inline-block"></div>
+                            <div id="rating-flexibilidad_horario" class = "rating-edit" style="display:inline-block"></div>
                             <input type="hidden" class="rating-hidden" value="{{ranking.flexibilidad_horarios}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Ambiente de trabajo</label>
 
-                            <div id="rating-ambiente_trabajo" style="display:inline-block"></div>
+                            <div id="rating-ambiente_trabajo" class = "rating-edit" style="display:inline-block"></div>
                             <input type="hidden" class="rating-hidden" value="{{ranking.ambiente_trabajo}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Salario y Beneficios</label>
 
-                            <div id="rating-salario_beneficios" style="display:inline-block"></div>
+                            <div id="rating-salario_beneficios" class = "rating-edit" style="display:inline-block"></div>
                             <input type="hidden" class="rating-hidden" value="{{ranking.salarios}}">
                             <div class="clear"></div>
                         </li>
@@ -600,10 +599,6 @@
 <script>
     var animationInterval = 0;
     $(function () {
-        fnCalculoRanking($("#ranking_linea_carrera"));
-        fnCalculoRanking($("#ranking_flexibilidad_horarios"));
-        fnCalculoRanking($("#ranking_ambiente_trabajo"));
-        fnCalculoRanking($("#ranking_salarios"));
         $('.carousel').owlCarousel({
             autoPlay: true,
             items: 1,
@@ -685,10 +680,16 @@
             },
             selected_symbol_type: 'images'
         }
-        $("#rating-linea_carrera").rate(options);
+        $(".rating-edit").each(function(){
+            $(this).rate(options);
+            while($(this).rate("getValue") < parseFloat($(this).parent().find(".rating-hidden").val().replace(",", "."))){
+                $(this).rate("increment");
+            }
+        });
+        /*$("#rating-linea_carrera").rate(options);
         $("#rating-flexibilidad_horario").rate(options);
         $("#rating-ambiente_trabajo").rate(options);
-        $("#rating-salario_beneficios").rate(options);
+        $("#rating-salario_beneficios").rate(options);*/
 
         //$("#rating-linea_carrera").rate("setValue", 3)
         var general_options = {};
@@ -712,6 +713,11 @@
                 $("#rating-general").rate($.extend(general_options, {readonly: true}));
             }
         }, 5);
+        fnCalculoRanking($("#ranking_linea_carrera"));
+        fnCalculoRanking($("#ranking_flexibilidad_horarios"));
+        fnCalculoRanking($("#ranking_ambiente_trabajo"));
+        fnCalculoRanking($("#ranking_salarios"));
+
     });
 
     $("#enviar-evaluacion").click(function (e) {
@@ -726,33 +732,36 @@
         var val = parseFloat($(item).find(".percent").html().replace(",","."));
         val = (val*100)/5
 
-    if(val != ""
-      && !isNaN(val)
-      && val <= 100
-      && val >= 0)
-    {
+        if(val != ""
+          && !isNaN(val)
+          && val <= 100
+          && val >= 0)
+        {
 
-      var valOrig = val;
-      val = 100 - val;
+          var valOrig = val;
+          val = 100 - val;
 
-      $(item).find(".progress").parent().removeClass();
-      $(item).find(".progress .water").css("top", val + "%");
+          $(item).find(".progress").parent().removeClass();
+          $(item).find(".progress .water").css("top", val + "%");
 
-      if(valOrig < colorInc * 1)
-        $(item).find(".progress").parent().addClass("red");
-      else if(valOrig < colorInc * 2)
-        $(item).find(".progress").parent().addClass("orange");
-      else
-        $(item).find(".progress").parent().addClass("green");
-    }
-    else
-    {
-      $(item).find(".progress").parent().removeClass();
-      $(item).find(".progress").parent().addClass("green");
-      $(item).find(".progress .water").css("top", 100 - 20 + "%");
-      $(item).find(".progress .percent").text(20 + "%");
+          if(valOrig < colorInc * 1)
+            $(item).find(".progress").parent().addClass("red");
+          else if(valOrig < colorInc * 2)
+            $(item).find(".progress").parent().addClass("orange");
+          else
+            $(item).find(".progress").parent().addClass("green");
+        }
+        else
+        {
+          $(item).find(".progress").parent().removeClass();
+            if (val == 100)
+                $(item).find(".progress").parent().addClass("green");
+            else if (val == 0)
+                $(item).find(".progress").parent().addClass("red");
+          $(item).find(".progress .water").css("top", 100 - val + "%");
+          $(item).find(".progress .percent").text(val + "%");
 
-    }
+        }
     }
     var Ubicacion = {
         map: null,
@@ -760,7 +769,7 @@
         inicializar_mapa: function () {
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
-                center: new google.maps.LatLng(44.5403, -78.5463),
+                center: new google.maps.LatLng(-12.0570208,-77.0372896),
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -780,6 +789,13 @@
             Ubicacion.marca = marker;
 
             Ubicacion.map.setCenter(coordenadas);
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
+                        $("#id_direccion_map").html(response[0]["formatted_address"]);
+            });
         }
     };
 </script>

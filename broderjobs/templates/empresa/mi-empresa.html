@@ -116,7 +116,7 @@
 					<section class="ubicacion">
 						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
 						<div>
-							<p>{{empresa.direccion_map}}</p>
+							<p id = "empresa-id_direccion_map">{{empresa.direccion_map}}</p>
 							<p id = "empresa-id_latitud">{{empresa.latitud}}</p>
 							<p id = "empresa-id_longitud">{{empresa.longitud}}</p>
 							<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
@@ -224,7 +224,7 @@
 		inicializar_mapa: function () {
 			var mapCanvas = document.getElementById('empresa-map');
 			var mapOptions = {
-				center: new google.maps.LatLng(44.5403, -78.5463),
+				center: new google.maps.LatLng(-12.0570208,-77.0372896),
 				zoom: 8,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
@@ -250,7 +250,13 @@
             });
             Empresa.marca = marker;
             Empresa.map.setCenter(coordenadas);
-
+			var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
+                        $("#empresa-id_direccion_map").html(response[0]["formatted_address"]);
+            });
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {
