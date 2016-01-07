@@ -1,5 +1,6 @@
 from .models import Estudiante
 from main.models import Persona
+from mensaje.models import Mensaje_Destinatario
 
 
 def estudiante_foto(request):
@@ -15,3 +16,8 @@ def estudiante_foto(request):
                 estudiante = Estudiante.objects.get(persona_id = persona.id)
                 estudiante_foto = estudiante.set_foto
     return {'estudiante_foto': estudiante_foto}
+
+def mensajes_actuales(request):
+    cantidad_mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id).count()
+    mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id)
+    return {'cantidad_mensajes': cantidad_mensajes, 'mensajes': mensajes}

@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<title>Broder jobs</title>
+		<title>BroderJobs</title>
 		<link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
 		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
         <meta charset="UTF-8">
@@ -80,7 +80,7 @@
                     <li class="dropdown" id="notifications-header">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
 
-                            <span class="badge badge-danger badge-header">6</span>
+                            <span class="badge badge-danger badge-header">{{cantidad_mensajes}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header clearfix">
@@ -95,55 +95,71 @@
                                             <span class="dropdown-time">Just now</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-heart c-red"></i>
-                                            John added you to his favs
-                                            <span class="dropdown-time">15 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-file-text"></i>
-                                            New document available
-                                            <span class="dropdown-time">22 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-picture-o"></i>
-                                            New picture added
-                                            <span class="dropdown-time">40 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
-                                            Meeting in 1 hour
-                                            <span class="dropdown-time">1 hour</span>
-                                        </a>
-                                    </li>
+                                    {%for m in mensajes %}
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-bell p-r-10 f-18"></i>
-                                            Server 5 overloaded
-                                            <span class="dropdown-time">2 hours</span>
+                                            {{m.asunto}}
+                                            <span class="dropdown-time">Just now</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment p-r-10 f-18 c-gray"></i>
-                                            Bill comment your post
-                                            <span class="dropdown-time">3 hours</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-                                            New picture added
-                                            <span class="dropdown-time">2 days</span>
-                                        </a>
-                                    </li>
+                                    {%endfor%}
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-star c-orange"></i>-->
+                                            <!--Steve have rated your photo-->
+                                            <!--<span class="dropdown-time">Just now</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-heart c-red"></i>-->
+                                            <!--John added you to his favs-->
+                                            <!--<span class="dropdown-time">15 mins</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-file-text"></i>-->
+                                            <!--New document available-->
+                                            <!--<span class="dropdown-time">22 mins</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-picture-o"></i>-->
+                                            <!--New picture added-->
+                                            <!--<span class="dropdown-time">40 mins</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-bell p-r-10 f-18 c-orange"></i>-->
+                                            <!--Meeting in 1 hour-->
+                                            <!--<span class="dropdown-time">1 hour</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-bell p-r-10 f-18"></i>-->
+                                            <!--Server 5 overloaded-->
+                                            <!--<span class="dropdown-time">2 hours</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-comment p-r-10 f-18 c-gray"></i>-->
+                                            <!--Bill comment your post-->
+                                            <!--<span class="dropdown-time">3 hours</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="#">-->
+                                            <!--<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>-->
+                                            <!--New picture added-->
+                                            <!--<span class="dropdown-time">2 days</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
 								</ul>
                             </li>
                             <li class="dropdown-footer clearfix">

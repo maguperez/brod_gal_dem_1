@@ -1011,8 +1011,9 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         oportunidad =  get_object_or_404(Oportunidad, pk = postulacion.oportunidad.id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
         try:
-            mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user, mensaje__postulacion_id = postulacion.id)
-        except mensajes.DoesNotExist:
+            mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user,
+                                                           mensaje__oportunidad_id = oportunidad.id)
+        except Mensaje_Destinatario.DoesNotExist:
             mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
         context['postulacion'] = postulacion

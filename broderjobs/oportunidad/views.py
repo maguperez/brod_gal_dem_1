@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
@@ -15,6 +16,7 @@ from .models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
+from mensaje.models import Mensaje, Mensaje_Destinatario
 from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
@@ -294,10 +296,15 @@ def datatable_candidatos(request):
 
 def siguiente_fase( request ):
     ids = json.loads(request.GET['ids'])
+    ids_estudiante = json.loads(request.GET['ids_estudiante'])
     f = request.GET['f']
     o = request.GET['o']
     id_fase = int(f)
 
+    oportunidad =  get_object_or_404(Oportunidad, pk=o)
+    print
+    user = request.user
+    user = User.objects.get(id = user.id)
     #actualiza a la siguiente fase
     if id_fase > 0:
         if id_fase < 4:
@@ -305,17 +312,51 @@ def siguiente_fase( request ):
         else:
             estado_postulacion = 'F'
         fase = ProcesoFase.objects.get(pk = id_fase)
-        postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase, estado_postulacion = estado_postulacion)
-        oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase)
+        res_postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase, estado_postulacion = estado_postulacion)
+        res_oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase)
+
+        #Mensajes (unificar despues)
+        mensaje = Mensaje()
+        mensaje.oportunidad = oportunidad
+        mensaje.usuario_remitente = user
+        if id_fase == 2:
+            mensaje.asunto = "¡Felicidades pasaste a la siguiente Fase (EG)!"
+            mensaje.contenido = 'Te hemos seleccionado para el siguiente paso de este proceso, muy pronto nos estaremos comunicando contio. Gracias'
+        elif id_fase == 3:
+            mensaje.asunto = "¡Felicidades pasaste a la siguiente Fase (EP)!"
+            mensaje.contenido = 'Te hemos seleccionado para el siguiente paso de este proceso, muy pronto nos estaremos comunicando contio. Gracias'
+        elif id_fase == 4:
+            mensaje.asunto = "¡Felicidades fuiste seleccionado"
+            mensaje.contenido = 'Te hemos seleccionado para ocupar el puesto de esta postulación, muy pronto nos estaremos comunicando contio. Gracias'
+
+        mensaje.permite_respuesta = False
+        mensaje.fecha_creacion = datetime.now()
+        mensaje.save()
+
+        for id in ids_estudiante:
+            print
+            estudiante = Estudiante.objects.get(id = id)
+            mensaje_destinatarios = Mensaje_Destinatario()
+            mensaje_destinatarios.mensaje = mensaje
+            mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
+            mensaje_destinatarios.fecha_creacion = datetime.now()
+            mensaje_destinatarios.save()
+
 
     #inactiva o activa a los seleccionados
     else:
         if id_fase == 0:
             estado_postulacion = 'F'
-            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = 'I', estado_postulacion = estado_postulacion)
+            estado_fase = constants.estado_inactivo
         if id_fase == -1:
             estado_postulacion = 'P'
-            postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = 'A', estado_postulacion = estado_postulacion)
+            if oportunidad.fase.id >= 2 and oportunidad.fase.id <= 3:
+                estado_postulacion = 'E'
+            elif oportunidad.fase.id == 4:
+                estado_postulacion = 'F'
+            estado_fase = constants.estado_activo
+        res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
+                                                                          estado_postulacion = estado_postulacion)
     #define response
     response = {
         'resp': 's'
