@@ -32,7 +32,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 					<div class="postulacion">
 						<a id="postular" class="{% if postulacion.estado == 'A'%} btn-action-invertido
 							{%else %}btn-action{%endif%}">{% if postulacion.estado == 'A'%}CANCELAR{%else %}POSTULAR{%endif%}</a>
-						<label class="cierre">CIERRA EL {{oportunidad.fecha_cese }}</label>
+						<label class="cierre">CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y" }}</label>
 					</div>
 					<div class="clear"></div>
 				</header>

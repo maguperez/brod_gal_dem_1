@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
-from . import forms
+from . import forms, utils
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.core import serializers
@@ -58,6 +58,8 @@ class OportunidadCrearView(FormView):
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
+        longitud = form.cleaned_data['longitud']
+        latitud = form.cleaned_data['latitud']
 
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
@@ -80,9 +82,12 @@ class OportunidadCrearView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
         if '_guardar' in self.request.POST:
-            oportunidad.estado_oportunidad = constants.estado_abierto
-        elif '_anunciar' in self.request.POST:
             oportunidad.estado_oportunidad = constants.estado_archivado
+        elif '_anunciar' in self.request.POST:
+            oportunidad.estado_oportunidad = constants.estado_abierto
+            oportunidad.fecha_publicacion = datetime.now()
+        oportunidad.longitud = longitud
+        oportunidad.latitud = latitud
         oportunidad.usuario_creacion = str(user.username)
         oportunidad.usuario_modificacion = str(user.username)
         oportunidad.fecha_creacion = datetime.now()
@@ -101,7 +106,7 @@ class OportunidadCrearView(FormView):
         response = super(OportunidadCrearView, self).form_invalid(form)
         return response
 
-class OportunidadEditarView(UpdateView):
+class OportunidadEditarView(FormView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/editar.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')
@@ -113,14 +118,33 @@ class OportunidadEditarView(UpdateView):
             ciudad_id = oportunidad.ciudad.id
         else:
             ciudad_id = '0'
-        return {'pais': oportunidad.pais, 'ciudad_hidden': ciudad_id}
+        return {'titulo': oportunidad.titulo,
+                'carga_horaria': oportunidad.carga_horaria,
+                'remuneracion': oportunidad.remuneracion,
+                'remuneracion_min' : oportunidad.remuneracion_min,
+                'remuneracion_max' : oportunidad.remuneracion_max,
+                'fecha_cese': oportunidad.fecha_cese,
+                'beneficio': oportunidad.beneficio,
+                'resumen': oportunidad.resumen,
+                'carga_horaria': oportunidad.carga_horaria,
+                'tipo_puesto': oportunidad.tipo_puesto,
+                'estado': oportunidad.estado,
+                'estado_oportunidad': oportunidad.estado_oportunidad,
+                'grado_estudio': oportunidad.grado_estudio,
+                'universidad': oportunidad.universidad.all(),
+                'carrera': oportunidad.carrera.all(),
+                'idioma': oportunidad.idioma.all(),
+                'conocimiento': oportunidad.conocimiento.all(),
+                'beneficio': oportunidad.beneficio.all(),
+                'longitud': oportunidad.longitud,
+                'latitud': oportunidad.latitud,
+                'pais': oportunidad.pais, 'ciudad_hidden': ciudad_id}
 
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
         oportunidad =get_object_or_404(Oportunidad, id = id)
         context = super(OportunidadEditarView, self).get_context_data(**kwargs)
         context['oportunidad'] = oportunidad
-        print(oportunidad)
         return context
 
     def get_object(self, queryset=None):
@@ -130,6 +154,7 @@ class OportunidadEditarView(UpdateView):
 
     def form_valid(self, form):
         user = get_object_or_404(User, pk = self.request.user.id)
+        fase_postulacion = fase =  get_object_or_404(ProcesoFase, pk = 1)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -171,10 +196,11 @@ class OportunidadEditarView(UpdateView):
         estado_anterior = oportunidad.estado_oportunidad
 
         if '_guardar' in self.request.POST:
-            if fecha_cese is not None and date.today() < oportunidad.fecha_cese:
+            if date.today() > oportunidad.fecha_cese:
                 estado_nuevo = constants.estado_cerrado
             else:
                 estado_nuevo = constants.estado_abierto
+                oportunidad.fecha_publicacion = datetime.now()
 
         elif '_archivar' in self.request.POST:
             estado_nuevo = constants.estado_archivado
@@ -182,11 +208,14 @@ class OportunidadEditarView(UpdateView):
         elif '_abrir' in self.request.POST:
             estado_nuevo = constants.estado_abierto
             oportunidad.pk = None
+            oportunidad.fase = fase_postulacion
+            oportunidad.fecha_publicacion = datetime.now()
 
         if estado_anterior == constants.estado_abierto and estado_nuevo == constants.estado_archivado:
             p = Postulacion.objects.filter(oportunidad_id = oportunidad.id).update(estado_postulacion = constants.postulacion_finalizado,
-                                                                                   fecha_modificacion = datetime.now)
+                                                                                   fecha_modificacion = datetime.now())
         oportunidad.estado_oportunidad = estado_nuevo
+        oportunidad.estado = constants.estado_activo
         oportunidad.usuario_modificacion = user.username
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
@@ -196,6 +225,7 @@ class OportunidadEditarView(UpdateView):
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         oportunidad.beneficio = beneficio
+        oportunidad.estado_oportunidad = estado_nuevo
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
 

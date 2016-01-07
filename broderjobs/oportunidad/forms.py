@@ -18,7 +18,7 @@ class OportunidadForm(forms.ModelForm):
     class Meta:
         model = Oportunidad
         fields = ('titulo', 'carga_horaria', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
-                  'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'remuneracion', 'estado', 'estado_oportunidad',
+                  'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacante', 'class': 'full'}),

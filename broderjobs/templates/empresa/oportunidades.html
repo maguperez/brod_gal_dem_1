@@ -25,7 +25,7 @@
 							</div>
 							<div class="estado">
 								{%if oportunidad.estado_oportunidad == 'P' %}
-									<label>pendiente</label>
+									<label>archivada</label>
 								{%endif%}
 								{%if oportunidad.estado_oportunidad == 'A' %}
 									<label>abierta</label>
@@ -33,7 +33,7 @@
 								{%if oportunidad.estado_oportunidad == 'C' %}
 									<label>cerrada</label>
 								{%endif%}
-								<label>CIERRA EL {{oportunidad.fecha_cese}}</label>
+								<label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
 							</div>
 							<div class="clear"></div>
 						</div>

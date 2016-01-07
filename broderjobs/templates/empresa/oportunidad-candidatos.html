@@ -192,7 +192,7 @@
     var JSCandidatos = function () {
             this.inicializar = function(){
                 $("#tb_candidatos").on("click", ".cargar-cv", function () {
-                    id = $(this).parent().data("id");
+                    id = $(this).parent().data("info");
      	            $('#form-modal-body').load('cv/'+id, function () {
         	            $('#form-modal').modal('toggle');
                         formAjaxSubmit('#form-modal-body form', '#form-modal');
@@ -259,7 +259,7 @@
                             targets: 10,
 
                             render: function (data, type, full, meta) {
-                                var html =  '<div class="" data-id="' + full["id"] + '">';
+                                var html =  '<div class="" data-id="' + full["id"] + '" data-info="' + full["id_estudiante"] + '">';
                                 if(full.estado == 'A'){
                                     html += '<a class="btn-option eliminar"><i class="delete"></i>Eliminar</a>' +
                                             '<a class="btn-option siguiente_fase"><i class="next"></i>Siguiente fase</a>';
