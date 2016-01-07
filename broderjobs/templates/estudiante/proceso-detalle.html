@@ -46,13 +46,13 @@
 												<div class="progress-indicator" style="width: 0%;"></div>
 											</div>
 											<ul class="wizard-steps">
-												<li class = {%if postulacion.estado_postulacion == 'E'%}"active on"{%endif%}>
+												<li class = "{%if postulacion.estado_postulacion == 'P' %}active on{%endif%}">
 													<a href="#tab1" data-toggle="tab"><span class = "fa fa-check"></span>Postulacion</a>
 												</li>
-												<li class = {%if postulacion.estado_postulacion == 'P'%}"active on"{%endif%}>
+												<li class ="{%if postulacion.estado_postulacion == 'E'%}active on{%endif%}">
 													<a href="#tab2" data-toggle="tab"><span class = "fa fa-check"></span>Evaluacion</a>
 												</li>
-												<li class = {%if postulacion.estado_postulacion == 'F'%}"active on"{%endif%}>
+												<li class ="{%if postulacion.estado_postulacion == 'F'%}active on{%endif%}">
 													<a href="#tab3" data-toggle="tab"><span class = "fa fa-check"></span>Finalizado</a>
 												</li>
 											</ul>
