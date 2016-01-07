@@ -155,13 +155,15 @@ class ExperienciaForm(forms.ModelForm):
         return helper
 
 class VoluntariadoForm(forms.ModelForm):
-    fecha_desde = forms.DateField(required=False, widget=forms.DateInput())
-    fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
+    # fecha_desde = forms.DateField(widget=forms.DateInput())
+    fecha_desde_hidden = forms.CharField(widget=forms.HiddenInput())
+    fecha_hasta_hidden = forms.CharField(widget=forms.HiddenInput())
+    # fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
     cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Función', 'class': 'full'}))
     organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización/Evento', 'class': 'full'}))
     class Meta:
         model = Voluntariado
-        fields = ('cargo', 'organizacion', 'fecha_desde','fecha_hasta', 'descripcion')
+        fields = ('cargo', 'organizacion', 'descripcion')
 
     @property
     def helper(self):

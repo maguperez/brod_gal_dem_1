@@ -437,8 +437,8 @@
 			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
 			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
 
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde'].value = fechaDesdeCompleta;
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta'].value = fechaHastaCompleta;
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde_hidden'].value = fechaDesdeCompleta;
+			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta_hidden'].value = fechaHastaCompleta;
 		 }
 
 		 $(this).parents("#form-modal").find("form").submit();

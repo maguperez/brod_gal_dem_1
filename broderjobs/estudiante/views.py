@@ -695,15 +695,67 @@ class ExperienciaEliminarView(LoginRequiredMixin, SuccessMessageMixin, AjaxTempl
     model = ExperienciaProfesional
     success_url = reverse_lazy('mi-cv')
 
-class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
+class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm
     template_name = 'estudiante/mi-cv-voluntariado.html'
     success_url = reverse_lazy('mi-cv')
 
-    def get_object(self, queryset=None):
+    def get_initial(self):
         id = self.kwargs["id"]
-        voluntariado = Voluntariado.objects.get(id =id)
-        return voluntariado
+        voluntariado = get_object_or_404(Voluntariado, id= id)
+
+    # voluntariado_actual = models.CharField(max_length=1, default='N')
+
+        cargo = voluntariado.cargo
+        organizacion = voluntariado.organizacion
+        descripcion = voluntariado.descripcion
+        fecha_desde = voluntariado.fecha_desde
+        fecha_hasta = voluntariado.fecha_hasta
+
+        return {'cargo': cargo, 'organizacion': organizacion,
+                'fecha_desde': fecha_desde, 'fecha_hasta': fecha_hasta,
+                'fecha_desde_hidden': fecha_desde, 'fecha_hasta_hidden': fecha_hasta,
+                'descripcion': descripcion}
+
+    def form_valid(self, form):
+        id = self.kwargs["id"]
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id=persona.id)
+
+        voluntariado = Voluntariado.objects.get(id = id )
+
+        cargo = form.cleaned_data['cargo']
+        organizacion = form.cleaned_data['organizacion']
+        descripcion = form.cleaned_data['descripcion']
+
+        dtDesde = form.cleaned_data['fecha_desde_hidden']
+        fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
+
+        dtHasta = form.cleaned_data['fecha_hasta_hidden']
+        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+
+        voluntariado.estudiante = estudiante
+
+        voluntariado.cargo = cargo
+        voluntariado.organizacion = organizacion
+        voluntariado.descripcion = descripcion
+
+        if fecha_desde is not None:
+            voluntariado.fecha_desde = fecha_desde
+        if fecha_hasta is not None:
+            voluntariado.fecha_hasta = fecha_hasta
+            voluntariado.trabajo_actual = 'N'
+        else:
+            voluntariado.trabajo_actual = 'S'
+
+        voluntariado.save()
+        return super(VoluntariadoView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        # response = super(AjaxableResponseMixin, self).form_invalid(form)
+        return JsonResponse(form.errors, status=400)
+
 
 class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin,FormView):
     form_class = forms.VoluntariadoForm
@@ -718,8 +770,13 @@ class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplat
         voluntariado = Voluntariado()
         cargo = form.cleaned_data['cargo']
         organizacion = form.cleaned_data['organizacion']
-        fecha_desde = form.cleaned_data['fecha_desde']
-        fecha_hasta = form.cleaned_data['fecha_hasta']
+
+        dtDesde = form.cleaned_data['fecha_desde_hidden']
+        fecha_desde = datetime.strptime(dtDesde, '%d/%m/%Y')
+
+        dtHasta = form.cleaned_data['fecha_hasta_hidden']
+        fecha_hasta = datetime.strptime(dtHasta, '%d/%m/%Y')
+
         descripcion = form.cleaned_data['descripcion']
         voluntariado.estudiante = estudiante
         voluntariado.cargo = cargo
