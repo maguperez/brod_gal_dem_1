@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from oportunidad.models import Postulacion
+from oportunidad.models import Postulacion, Oportunidad
 
 from main import utils
 
@@ -9,10 +9,10 @@ items_registro = utils.estado_registro()
 class Mensaje(models.Model):
     items_estado = utils.estado_mensaje()
 
-    postulacion = models.ForeignKey(Postulacion,default=None, null=True, blank=True )
+    oportunidad = models.ForeignKey(Oportunidad,default=None, null=True, blank=True )
     usuario_remitente = models.ForeignKey(User,default=None, null=True, blank=True )
     asunto = models.CharField(default=None, null=True, blank=True, max_length=100)
-    contenido = models.CharField(default=None, null=True, blank=True, max_length=1000)
+    contenido = models.TextField(default=None, null=True, blank=True)
     permite_respuesta = models.BooleanField(default=False, blank=True)
     es_respuesta = models.IntegerField(default=None, null=True, blank=True)
 
@@ -21,7 +21,7 @@ class Mensaje(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return self.asunto
+        return unicode('%s' % (self.asunto)) or u''
 
 class Mensaje_Destinatario(models.Model):
     items_estado = utils.estado_mensaje()
@@ -36,4 +36,4 @@ class Mensaje_Destinatario(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return self.usuario_destinatario
+        return unicode('%s' % (self.usuario_destinatario)) or u''

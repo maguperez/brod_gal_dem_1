@@ -75,20 +75,15 @@
 									<table class = "bj-table">
 										<tbody>
 											<tr class="unread">
-												<td>G&M Administraci&oacute;n</td>
-												<td>¡Enhorabuena!</td>
-												<td>11:32 hrs</td>
-											</tr>
-											<tr class="unread">
-												<td>BRODER</td>
-												<td>Recomendaciones</td>
-												<td>27/04/2015</td>
+												<th>Empresa</th>
+												<th>Asunto</th>
+												<th>Fecha</th>
 											</tr>
                                             {%for m in mensajes.all%}
-											<tr>
-												<td>{{m.empresa}}</td>
-												<td>{{m.asunto}}!</td>
-												<td>{{m.fecha_creacion}}</td>
+											<tr  class="unread" data-id="{{m.id}}">
+												<td>{{m.mensaje.oportunidad.empresa}}</td>
+												<td>{{m.mensaje.asunto}}!</td>
+												<td>{{m.fecha_creacion | date:"j/m/Y" }}</td>
 											</tr>
 											{% endfor %}
 										</tbody>
