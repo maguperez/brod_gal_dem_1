@@ -13,6 +13,8 @@ urlpatterns = [
 
     url(r'^oportunidad/', include('oportunidad.urls')),
 
+    url(r'^mensaje/', include('mensaje.urls')),
+
     #ADMIN
     url(r'^admin/', include(admin.site.urls)),
 

@@ -23,14 +23,15 @@ def actualizar_ranking_empresa(empresa_id):
 
 
 def obtener_ultimas_postulaciones(oportunidad_id):
-    inicio = datetime.now() - timedelta(days=7)
+    fecha = datetime.now() - timedelta(days=7)
     postulados = []
     dias = []
-    for y in range(0 , 7):
-        fecha = datetime.now() - timedelta(days=y)
-        # print(fecha.strftime('%a'))
+    # for y in range(0 , 7):
+    #     fecha = datetime.now() - timedelta(days=y)
+    #     # print(fecha.strftime('%a'))
+    for i in range(7):
+        fecha += timedelta(days=1)
         postulados.append((Postulacion.objects.filter(oportunidad_id = oportunidad_id, fecha_creacion = fecha).count()))
-    postulados[::-1]
     return postulados
 
 

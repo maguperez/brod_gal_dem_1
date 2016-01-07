@@ -72,7 +72,7 @@
                 {%if oportunidad.estado_oportunidad == 'C' %}
                 <label>oportunidad cerrada</label>
                 {%endif%}
-                <label>CIERRA EL {{oportunidad.fecha_cese}}</label>
+                <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
             </div>
             <div class="clear"></div>
         </div>
@@ -110,6 +110,7 @@
                             <th>Graduaci&oacute;n</th>
                             <th>Inscripci&oacute;n</th>
                             <th>Compatibilidad</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -237,12 +238,12 @@
                         {searchable: false, targets: [0, 9, 8]},
                         {class: "all", targets: [0, 3, 5, 6, 7, 8, 9]},
                         {class: "none", targets: [10]},
-                        {class: "never", targets: [1,2,11]},
+                        {class: "never", targets: [1,2,11,12]},
                         {
                             targets: 0,
                             className: 'dt-body-center',
                             render: function (data, type, full, meta) {
-                                if(full.estado == 'A') {
+                                if(full.estado_fase == 'A') {
                                     return '<input class = "checking" type="checkbox"' + "data-info='" + full.id + "'" +
                                             (selected != null && selected[full.id] != null ? "checked" : "") + '>';
                                 } else return '';
@@ -260,7 +261,7 @@
 
                             render: function (data, type, full, meta) {
                                 var html =  '<div class="" data-id="' + full["id"] + '" data-info="' + full["id_estudiante"] + '">';
-                                if(full.estado == 'A'){
+                                if(full.estado_fase == 'A'){
                                     html += '<a class="btn-option eliminar"><i class="delete"></i>Eliminar</a>' +
                                             '<a class="btn-option siguiente_fase"><i class="next"></i>Siguiente fase</a>';
                                 }
@@ -303,6 +304,7 @@
                         {data: "botones"},
                         {data: "botones"},
                         {data: "estado"},
+                        {data: "estado_fase"},
                     ],
                 });
             }
