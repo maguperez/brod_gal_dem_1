@@ -39,7 +39,56 @@
                 <a href="{%url 'oportunidad' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
 
                 <div class="empresa"><i class="empresa"></i><label class="text-uppercase">{{empresa.nombre}}</label></div>
-                <div class="redes"><i class="social"></i><a><i class="facebook"></i></a><a><i class="twitter"></i></a>
+                <div class="redes"><i class="social"></i>
+                    <script>
+                        window.fbAsyncInit = function(){
+                        FB.init({
+                            appId: '1203258749688742', status: true, cookie: true, xfbml: true });
+                        };
+                        (function(d, debug){var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                            if(d.getElementById(id)) {return;}
+                            js = d.createElement('script'); js.id = id;
+                            js.async = true;js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+                            ref.parentNode.insertBefore(js, ref);}(document, /*debug*/ false));
+                        function postToFeed(title, desc, url, image){
+
+                            var obj = {method: 'feed',link: url, picture: '{{ request.get_host }}'+image,name: title,description: desc};
+                            function callback(response){}
+                            FB.ui(obj, callback);
+                        }
+                        $(function() {
+                            $('.fb-share').click(function () {
+                                elem = $(this);
+                                postToFeed(elem.data('title'), elem.data('desc'), elem.prop('href'), elem.data('image'));
+
+                                return false;
+                            });
+                            $('.tt-share').click(function () {
+                                 var width  = 575,
+                                    height = 400,
+                                    left   = ($(window).width()  - width)  / 2,
+                                    top    = ($(window).height() - height) / 2,
+                                    url    = this.href,
+                                    opts   = 'status=1' +
+                                             ',width='  + width  +
+                                             ',height=' + height +
+                                             ',top='    + top    +
+                                             ',left='   + left;
+
+                                window.open(url, 'twitter', opts);
+
+                                return false;
+                            });
+                        });
+                    </script>
+                    <!--{{ request.build_absolute_uri }}{{ object.get_absolute_url }}-->
+                    <a href="someurl.com/some-article"
+                       data-image="{{empresa.set_logo}}"
+                       data-title="{{oportunidad.titulo}}"
+                       data-desc="Oportunidad de empleo disponible en {{empresa.nombre}}" class="fb-share"><i class="facebook"></i></a>
+
+                    <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}&via=twitterdev&related=twitterapi%2Ctwitter&hashtags=example%2Cdemo&text= Oportunidad de empleo disponible en {{empresa.nombre}}"
+                        class = "tt-share"><i class="twitter"></i></a>
                 </div>
             </div>
             <div class="opciones" onclick="opciones();">
@@ -60,7 +109,7 @@
 
                                 <div class="clear"></div>
                             </a></li>
-                            <ul>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -160,7 +209,7 @@
 
 <div id="form-modal" class="modal fade">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content box">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h2 class="modal-title bold">Modal title</h2>

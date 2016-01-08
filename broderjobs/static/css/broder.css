@@ -191,6 +191,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .title i {margin-right: 10px;}
 .box .content section .title .comment {margin-left: 5px; font-size: 0.75em; font-weight: normal;}
 .box .content section .title .editar {margin-left: 20px; font-size: 0.65em;}
+
 .box .content section .detalle {margin-left: 37px;}
 .box .content section .detalle  > div:not(:last-child) {margin-bottom: 30px;}
 .box .content section .detalle  > div.less-margin {margin-bottom: 20px;}
@@ -215,6 +216,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .detalle.timeline:before {content: ""; width: 2px; height: 100%; position: absolute; top: 10px; left: -24px; background: #eee; box-shadow: 0 0 1px #eee;}
 .box .content section .detalle.timeline > div:not(.clear) {position: relative;}
 .box .content section .detalle.timeline > div:not(.clear):before {content: ""; width: 10px; height: 10px; position: absolute; top: 3px; left: -28px; border-radius: 50%; background: #eee;}
+
 
 /*TAGS*/
 .tag {padding: 7px; margin: -6px 6px 12px 0; float: left; background: #f9f9f9;}
@@ -303,6 +305,7 @@ a:hover { text-decoration: none !Important }
 .home footer ul.links {margin-top: 8px; text-indent: 30px;}
 
 @media (min-width:768px){
+    .modal-dialog { width: 745px; }
     .home footer ul.copy { text-align: right;}
     .home footer ul.links { text-align: left;}
     .navbar-right { float: right !important; }
@@ -616,15 +619,15 @@ header.menu .centered { height: 47px; }
 .usuarios .btn-action {width: 85px; height: 30px; line-height: 30px; position: absolute; top: 0; right: 0; display: block; background-color: transparent}
 
 /*POPUP CANDIDATO*/
-.popup.candidato header {padding-top: 30px; padding-bottom: 30px; position: relative;}
-.popup.candidato header .descargar {width: 130px; height: 30px; line-height: 30px; position: absolute; top: 45px; right: 35px;}
-.popup.candidato header .imagen, .popup.candidato header .detalle {float: left;}
-.popup.candidato header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
-.popup.candidato header .detalle {margin: 20px 0 0 60px;}
-.popup.candidato header .detalle h3 {color: #848484; font-weight: bold;}
-.popup.candidato header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
-.popup.candidato .detalle {margin-left: 37px !important;}
-.popup.candidato .content section:not(:last-child) {padding-bottom: 30px !important; border-bottom: 1px solid #ddd !important;}
+.modal .candidato header {padding-top: 30px; padding-bottom: 30px; position: relative;}
+.modal .candidato header .descargar {width: 130px; height: 30px; line-height: 30px; position: absolute; top: 45px; right: 35px;}
+.modal .candidato header .imagen, .popup.candidato header .detalle {float: left;}
+.modal .candidato header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
+.modal .candidato header .detalle {margin: 20px 0 0 60px;}
+.modal .candidato header .detalle h3 {color: #848484; font-weight: bold;}
+.modal .candidato header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
+.modal .candidato .detalle {margin-left: 37px !important;}
+.modal .candidato .content section:not(:last-child) {padding-bottom: 30px !important; border-bottom: 1px solid #ddd !important;}
 
 /*POPUP MENSAJE EDIT*/
 .popup.mensaje-edit .header {padding-bottom: 25px !important; border-bottom: 1px solid #ddd !important;}
