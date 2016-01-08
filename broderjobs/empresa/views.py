@@ -26,6 +26,7 @@ from django.http import HttpResponse
 from django.views.generic import CreateView, DeleteView, ListView
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
+from main.utils import LoginRequiredMixin
 
 import json
 
@@ -146,7 +147,6 @@ class InfoGeneralView(FormView):
 
             return super(InfoGeneralView, self).form_valid(form)
 
-
 class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.LogoForm
     template_name = 'empresa/mi-empresa-logo.html'
@@ -262,6 +262,39 @@ def oportunidad_busqueda(request):
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
         return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
                                   context_instance = RequestContext(request))
+
+
+class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET.get('b')
+        user = request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        if busqueda is not None:
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")
+        else:
+            oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
+        list_op =[]
+        for op in oportunidades:
+            e = {
+                "id": op.id,
+                # "titulo": op.titulo,
+                # "fecha_cese": str(op.fecha_cese),
+                # "empresa": str(op.empresa.nombre),
+                # "logo_empresa": op.empresa.set_logo
+            }
+            list_op.append(e)
+        data = json.dumps(list_op)
+        # data = serializers.serialize('json', oportunidades, fields=('id', 'titulo', 'fecha_cese'))
+        return HttpResponse(data, content_type='application/json')
+
+def oportunidad_cargar_lista(request):
+
+    id = request.GET.get('id')
+    oportunidad = get_object_or_404(Oportunidad, id = id)
+    return render_to_response('empresa/oportunidad-cargar-lista.html', {'oportunidad': oportunidad},
+                              context_instance = RequestContext(request))
 
 class OportunidadPostulacionesView(TemplateView):
     def get(self, request, *args, **kwargs):

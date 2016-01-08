@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends  tipo|yesno:"empresa/base.html,estudiante/base.html" %}
+{%block css%}
+{%endblock%}
+{% block content %}
+<section class="usuarios">
+    <div class="centered">
+        <div class="panel left principal">
+            <div class="box">
+                <div class="content">
+                    <section class="pos-relative">
+                        <h3 class="title"><i class="info"></i>Configuraci&oacute;n</h3>
+						<a class="btn-action" href="{% url 'editar-cuenta' %}">EDITAR</a>
+                        <table class = "bj-table">
+                            <thead>
+                                <tr>
+								    <th class="align-left">Nombre</th>
+									<th class="align-left">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuarios">
+                            {%for r in representantes%}
+                                <tr>
+								    <td class="align-left">{{r.persona.usuario.first_name | title}} {{r.persona.usuario.last_name | title}}</td>
+									<td class="align-left">{{r.persona.usuario.email}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</section>
 
-</body>
-</html>
+{% endblock content%}
+{% block js %}
+{% endblock %}

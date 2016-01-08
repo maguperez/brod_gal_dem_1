@@ -149,18 +149,22 @@ def empresa(request):
     return render_to_response('main/empresa.html',
                               context_instance=RequestContext(request))
 
-class ConfiguracionView(TemplateView):
-    template_name = 'main/configuracion.html'
+class UsuariosView(TemplateView):
+    template_name = 'main/usuarios.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user)
+        representante = Representante.objects.get(persona_id=persona.id)
+        usuarios = None
         if persona.tipo_persona == 'R':
             tipo = True
+            representantes = Representante.objects.filter(empresa_id = representante.empresa.id, estado = 'A')
         else:
             tipo = False
-        context = super(ConfiguracionView, self).get_context_data(**kwargs)
+        context = super(UsuariosView, self).get_context_data(**kwargs)
         context['usuario'] = user
-        context['persona'] = persona
+        context['usuarios'] = usuarios
+        context['representantes'] = representantes
         context['tipo'] = tipo
         return context
 

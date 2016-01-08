@@ -1,4 +1,6 @@
+
 {% extends 'empresa/base.html' %}
+{% load staticfiles %}
 {% block content %}
 <section class="oportunidades-empresa">
 			<div class="centered">
@@ -9,18 +11,26 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista"></ul>
+				<div class="cargando">CARGANDO....</div>
 			</div>
+
 </section>
+
+{% csrf_token %}
 {% endblock%}
 {% block js %}
 <script type="text/javascript">
 	$( document ).ready( function() {
+//		$( '#filtro' ).change( function() {
+//			b = $( '#filtro' ).val();
+//			$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
+//		});
+//		$("#link-oportunidades").addClass("active");
+//		$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=A');
 		$( '#filtro' ).change( function() {
-			b = $( '#filtro' ).val();
-			$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
+			fnCargarOportunidades();
 		});
-		$("#link-oportunidades").addClass("active");
-		$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=A');
+		fnCargarOportunidades();
 	});
 
 	function opciones(id) {
@@ -29,5 +39,34 @@
 		else
 			$('#menu-' + id).addClass('active')
 	}
+	function fnCargarOportunidades(){
+		$.ajax({
+				data: {'b': $( '#filtro' ).val() },
+				url: "{% url 'empresa-oportunidad-buscar' %}",
+				type: 'get',
+				success: function (data) {
+					 var par= '';
+					 $( '#oportunidad-lista' ).html('');
+					fnCargarOportunidad(data, 0);
+				}
+			});
+	}
+
+	function fnCargarOportunidad(arra, index) {
+		$(".cargando").html("CARGANDO...");
+		if (arra.length > index){
+			$.get("{% url 'empresa-oportunidad-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
+   				$('#oportunidad-lista').append(htmlexterno);
+				fnCargarOportunidad(arra, index+1);
+			});
+		}
+		else{
+			$(".cargando").html("");
+		}
+	}
+
 </script>
+
+
+
 {%endblock%}

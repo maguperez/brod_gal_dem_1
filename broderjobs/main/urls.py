@@ -25,7 +25,7 @@ urlpatterns =[
 
 	# url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
 
-	url(r'^configuracion/$', views.ConfiguracionView.as_view(), name="configuracion"),
+	url(r'^usuarios/$', views.UsuariosView.as_view(), name="usuarios"),
 
 	url(r'^editar-cuenta/$', 'main.views.editar_cuenta', name="editar-cuenta"),
 

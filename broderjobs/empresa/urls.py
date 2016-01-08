@@ -23,6 +23,10 @@ urlpatterns = [
 
     url(r'^oportunidad-busqueda/$', 'empresa.views.oportunidad_busqueda', name="empresa-oportunidad-busqueda"),
 
+     url(r'^oportunidad-cargar-lista/$', 'empresa.views.oportunidad_cargar_lista', name="empresa-oportunidad-cargar-lista"),
+
+    url(r'^oportunidad-buscar/$', views.OportunidadBuscarView.as_view(), name="empresa-oportunidad-buscar"),
+
     url(r'^oportunidad-postulaciones/$', views.OportunidadPostulacionesView.as_view(), name="empresa-oportunidad-postulaciones"),
 
     url(r'^oportunidad-estudiantes/$', views.OportunidadEstudiantes.as_view(), name="empresa-oportunidad-estudiantes"),

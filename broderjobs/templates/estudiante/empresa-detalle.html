@@ -282,19 +282,18 @@
 							<!--<div class="item-video">-->
                                 <!--<a class="owl-video" href="http://www.youtube.com/watch?v=0fhoIate4qI"></a>-->
                             <!--</div>-->
-							{%if imagenes.all > 0%}
-								{%for i in imagenes.all%}
+							{%if imagenes%}
+							{%for i in imagenes.all%}
                             <div class="item">
                                 <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
 								<img src="{{i.set_imagen}}"/>
                             </div>
 							{%endfor%}
 							{%else%}
-								<div class="item">
-                                	<img src="{%static 'img/oficina-11.png' %}"/>
-                            	</div>
+							 <div class="item">
+                                <img src="{%static 'img/imagen-default.png' %}"/>
+                            </div>
 							{%endif%}
-
                         </div>
                     </div>
                 </header>
@@ -708,15 +707,15 @@
         fnCalculoRanking($("#ranking_salarios"));
 
     });
-    if ($(".owl-carousel div").length > 1)
     $('.owl-carousel').owlCarousel({
 			 autoPlay: true,
-             items: 1,
+             items: {%if imagenes %} 1 {%else%} 2 {%endif%},
+		     singleItem: true,
              loop: true,
              margin: 10,
-             pagination: true,
-		 });
-    $('.owl-carousel').removeClass("owl-carousel");
+             pagination: true
+
+    });
 
     $("#enviar-evaluacion").click(function (e) {
         $("#id_linea_carrera").val($("#rating-linea_carrera").attr("data-rate-value") > 0 ? $("#rating-linea_carrera").attr("data-rate-value") : 0);

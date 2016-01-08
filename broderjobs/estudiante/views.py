@@ -936,8 +936,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
             Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
             Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
-            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda ) |
-            Q(estado = 'A')).order_by('fecha_publicacion').distinct()
+            Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).order_by('fecha_publicacion').distinct()
         a_oportunidades =[]
         for i in range(0, len(oportunidades)):
             empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
