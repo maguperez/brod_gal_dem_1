@@ -152,11 +152,11 @@
 				url: '{%url "empresa-oportunidad-estudiantes" %}',
 				type: 'get',
 				success: function (data) {
-					debugger;
 					var html = "";
 					for(var i = 0; i <data.length ; i++) {
 						html += '<img src="'+ data[i][0] +'" title="'+data[i][1]+'"/>';
 					}
+					$("img").tooltip();
 					$("#foto-post-"+id).html(html);
 				}
 			});

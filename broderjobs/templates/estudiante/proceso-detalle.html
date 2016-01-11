@@ -161,8 +161,8 @@
 			//$('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
 		},
 		onTabShow: function( tab, navigation, index ) {
-
-			$(".wizard-progress li.on + li").removeClass("active");
+			debugger;
+			$(".wizard-progress li").removeClass("active");
 			$(".wizard-progress li.on").addClass("active");
 			if (tab.is(":not(.on")){
 				return false;
