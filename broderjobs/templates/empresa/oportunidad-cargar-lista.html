@@ -68,7 +68,7 @@
 							</div>
 						</div>
 						<div class="clear"></div>
-	</li>
+</li>
 
 <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 <script src="{% static 'js/chartist.min.js' %}"></script>
@@ -151,9 +151,10 @@
 				url: '{%url "empresa-oportunidad-estudiantes" %}',
 				type: 'get',
 				success: function (data) {
+					debugger;
 					var html = "";
 					for(var i = 0; i <data.length ; i++) {
-						html += '<img src="'+ data[i] + '"/>';
+						html += '<img src="'+ data[i][0] +'" alt="'+data[i][1]+'"/>';
 					}
 					$("#foto-post-"+id).html(html);
 				}

@@ -994,6 +994,17 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
 
+def oportunidad_cargar_lista(request):
+
+    busqueda = request.GET.get('b')
+    oportunidades = Oportunidad.objects.filter(
+        Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
+        Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
+        Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
+        Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).order_by('fecha_publicacion').distinct()
+    return render_to_response('estudiante/oportunidad-cargar-lista.html', {'oportunidades': oportunidades},
+                              context_instance = RequestContext(request))
+
 class ProcesoListaView(LoginRequiredMixin, TemplateView):
     login_required = True
     template_name = 'estudiante/proceso-listar.html'
