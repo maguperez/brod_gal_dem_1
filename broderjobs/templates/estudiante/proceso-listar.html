@@ -15,18 +15,25 @@
 							</tr>
 						</thead>
 						<tbody>
-                        {%for postulacion in postulaciones%}
-							<tr id="{{postulacion.id}}">
-								<td class="align-left"><img class="imagen" src="{{postulacion.logo}}" /></td>
-								<td class="align-left">
-									<label>{{postulacion.titulo}}</label>
-									<div class="dato"><i class="empresa"></i><label>{{postulacion.empresa}}</label></div>
-									<div class="dato"><i class="ubicacion"></i><label>{{postulacion.ubicacion}}</label></div>
-									<div class="dato"><i class="remuneracion"></i><label>{{postulacion.remuneracion}}</label></div>
-								</td>
-								<td>{{postulacion.estado_postulacion}}</td>
-							</tr>
+						{%if postulaciones%}
+							{%for postulacion in postulaciones%}
+								<tr id="{{postulacion.id}}">
+									<td class="align-left"><img class="imagen" src="{{postulacion.logo}}" /></td>
+									<td class="align-left">
+										<label>{{postulacion.titulo}}</label>
+										<div class="dato"><i class="empresa"></i><label>{{postulacion.empresa}}</label></div>
+										<div class="dato"><i class="ubicacion"></i><label>{{postulacion.ubicacion}}</label></div>
+										<div class="dato"><i class="remuneracion"></i><label>{{postulacion.remuneracion}}</label></div>
+									</td>
+									<td>{{postulacion.estado_postulacion}}</td>
+								</tr>
 							{%endfor%}
+						{%else%}
+							<tr>
+								<td colspan="3" class = "text-center"> No hay procesos para mostrar</td>
+							</tr>
+
+						{%endif%}
 						</tbody>
 					</table>
 				</div>

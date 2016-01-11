@@ -85,6 +85,7 @@
 
 	$(function() {
 
+	$("#link-oportunidades").addClass("active");
 		var date = moment().format("YYYY-MM-DD");
 		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
 
@@ -151,6 +152,7 @@
 				url: '{%url "empresa-oportunidad-estudiantes" %}',
 				type: 'get',
 				success: function (data) {
+					console.log(data);
 					var html = "";
 					for(var i = 0; i <data.length ; i++) {
 						html += '<img src="'+ data[i] + '"/>';

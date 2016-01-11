@@ -37,7 +37,8 @@
 			<div id = "sb-site" class="container">
 				<div class = "flex">
 					<div class="flex-div mensaje-central active" id="mensaje-central">
-						<h1>Ama lo que haces</h1>
+						<br><br><br><br><br>
+						<h1 class="text-uppercase">Ama lo que haces</h1>
 						<h3>Encuentra pr&aacute;cticas y primeros empleos en las mejores empresas del pa&iacute;s</h3>
 					</div>
 					<div class="flex-div login" id="login">
@@ -78,7 +79,7 @@
 					<div class="flex-div login" id="registro">
 						<form method="POST">{% csrf_token %}
 							<div class="content">
-								<label class="saludo">HOLA BRODER</label>
+								<label class="saludo">HOLA</label>
 								<a class="ingresa-facebook">REG&Iacute;STRATE CON FACEBOOK</a>
 								<label class="indicacion">Es m&aacute;s f&aacute;cil y r&aacute;pido</label>
 								<div class="division">
@@ -100,7 +101,7 @@
 										{{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
 								</div><br>
 								<div class="opciones">
-									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 								</div>
 								{%if message %}
 								<div class="alert alert-warning alert-dismissible" role="alert">

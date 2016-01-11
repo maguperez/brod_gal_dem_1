@@ -72,7 +72,7 @@
 					<form action="" method="post">{%csrf_token%}
 			            <div class="content">
                             <label class="saludo"></label>
-                            <a class="registrate">Reg&iacute;strate con tu e-mail</a>
+                            <span class="registrate">Reg&iacute;strate con tu e-mail</span>
                             <div class="datos registro">
                                 {{registro_form.first_name}}
                                 {{registro_form.last_name}}
@@ -83,7 +83,7 @@
                                 {{registro_form.password2}}
                             </div><br>
                             <div class="opciones">
-                                <input type="checkbox" id="acepto" name = "tyc"/><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+                                <input type="checkbox" id="acepto" name = "tyc"/><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
                             </div>
                             {%if message %}
                             <div class="alert alert-warning alert-dismissible" role="alert">
