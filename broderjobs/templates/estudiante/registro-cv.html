@@ -263,8 +263,10 @@
 						}
 					}
 				});
+				LlamarValidacionElemento('id_pais');
 			}
 			else{
+				LlamarValidacionElemento('id_pais');
 				var options = '';
 				$("#id_ciudad").html(options);
 				$("#id_ciudad").select2("val", "");
@@ -273,11 +275,17 @@
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
+			LlamarValidacionElemento('id_ciudad');
 		});
 
 
 
 	});
+
+	function LlamarValidacionElemento(id){
+		var validator = $( "form" ).validate();
+		validator.element('#'+id);
+	}
 
 	function GuardarValorHidden(idHidden, idElemento, ui){
 		document.getElementById(idHidden).value = ui.item.value;
