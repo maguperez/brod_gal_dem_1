@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
-from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
@@ -18,17 +17,16 @@ from oportunidad.models import Oportunidad, Postulacion
 from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
+from django.db.models import Q, CharField
 from empresa import utils
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 import json
-
-from django.http import HttpResponse
+from cStringIO import StringIO
 from django.views.generic import CreateView, DeleteView, ListView
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
 from main.utils import LoginRequiredMixin
-
-import json
+from django.core.paginator import InvalidPage, Paginator
 
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
@@ -209,9 +207,6 @@ class OportunidadBusquedaView(TemplateView):
         #data = json.dumps(oportunidades)
         return HttpResponse(data, content_type='application/json')
 
-from django.http import HttpResponse
-from django.core.paginator import InvalidPage, Paginator
-
 def oportunidades(request):
     oportunidades = Oportunidad.objects.all().order_by('fecha_publicacion')
     a_oportunidades =[]
@@ -263,7 +258,6 @@ def oportunidad_busqueda(request):
         return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
                                   context_instance = RequestContext(request))
 
-
 class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET.get('b')
@@ -278,11 +272,7 @@ class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
         list_op =[]
         for op in oportunidades:
             e = {
-                "id": op.id,
-                # "titulo": op.titulo,
-                # "fecha_cese": str(op.fecha_cese),
-                # "empresa": str(op.empresa.nombre),
-                # "logo_empresa": op.empresa.set_logo
+                "id": op.id
             }
             list_op.append(e)
         data = json.dumps(list_op)
@@ -311,7 +301,7 @@ class OportunidadEstudiantes(TemplateView):
         id = request.GET['id']
         estudiante = []
         for p in Postulacion.objects.filter(oportunidad_id=id).order_by("fecha_creacion")[:6]:
-            estudiante.append((p.estudiante.set_foto))
+            estudiante.append((p.estudiante.set_foto, p.estudiante.persona.usuario.first_name + " " + p.estudiante.persona.usuario.last_name))
 
         # data = serializers.serialize('json', oportunidad,
         #                              fields=('id','nombre', 'sector', 'logo', 'ranking_general' ))
@@ -352,12 +342,6 @@ class OportunidadCandidatosCV(TemplateView):
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         return context
 
-
-from django.http import HttpResponse
-from django.db.models import Q, CharField
-
-import json
-from cStringIO import StringIO
 #
 # def datatables_view(request):
 #     objects = .objects.all()

@@ -24,7 +24,6 @@ class Mensaje(models.Model):
         return unicode('%s' % (self.asunto)) or u''
 
 class Mensaje_Destinatario(models.Model):
-    items_estado = utils.estado_mensaje()
 
     mensaje = models.ForeignKey(Mensaje, default=None, null=True, blank=True, max_length=1000)
     usuario_destinatario = models.ForeignKey(User,default=None, null=True, blank=True)
@@ -37,3 +36,18 @@ class Mensaje_Destinatario(models.Model):
 
     def __unicode__(self):
         return unicode('%s' % (self.usuario_destinatario)) or u''
+
+class Notificacion(models.Model):
+
+    usuario_destinatario = models.ForeignKey(User,default=None, null=True, blank=True)
+    oportunidad = models.ForeignKey(Oportunidad,default=None, null=True, blank=True )
+    asunto = models.CharField(default=None, null=True, blank=True, max_length=100)
+    fecha_leido = models.DateField(default=None, null=True, blank=True)
+    es_mensaje = models.BooleanField(default=False, blank=True)
+
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode('%s' % (self.asunto)) or u''

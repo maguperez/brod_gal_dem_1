@@ -216,5 +216,22 @@ class Picture(models.Model):
         else:
             return "/static/img/profile/profile_default.png"
 
+class EmpresaRedesSociales(models.Model):
+
+    empresa = models.ForeignKey(Empresa)
+    facebook = models.CharField(max_length="200", default=None, null=True, blank=True)
+    twitter = models.CharField(max_length="200", default=None, null=True, blank=True)
+    linkedin =  models.CharField(max_length="200", default=None, null=True, blank=True)
+
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode('%s' % (self.empresa)) or u''
+
 
 

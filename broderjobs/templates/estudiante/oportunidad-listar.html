@@ -4,7 +4,7 @@
 			<div class="centered">
 				<input id="busqueda" class="search" type="text" placeholder="Buscar por puesto, empresa, ciudad, etc." />
 				<div class="centered"></div>
-				<ul class="panel left principal" id="datos">
+				<ul class="panel left principal" id="oportunidad-lista">
 				</ul>
 				<div class="clear"></div>
 			</div>
@@ -13,31 +13,29 @@
 
 {% block js %}
 {% load staticfiles %}
-<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
+
 <script>
    $(function(){
-	   fnBusqueda();
-	   $("#link-oportunidad").addClass("active");
-	   	$("body").on("mouseenter", ".compatibilidad", function(){
-			$(this).find(".consolidado").css("opacity",0);
-		  	$(this).find(".desglose").css("opacity",1);
-			var data = 0;
-			data = $(this).find(".cultural .circular-bar-chart").data("percent");
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+	  // fnCargarOportunidades();
+	   //fnBusqueda();
+//	   $("#link-oportunidad").addClass("active");
+//	   	$("body").on("mouseenter", ".compatibilidad", function(){
+//			$(this).find(".consolidado").css("opacity",0);
+//		  	$(this).find(".desglose").css("opacity",1);
+//			var data = 0;
+//			data = $(this).find(".cultural .circular-bar-chart").data("percent");
+//			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
+//			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+//
+//			data = $(this).find(".academico .circular-bar-chart").data("percent");
+//			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
+//			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
+//		});
 
-			data = $(this).find(".academico .circular-bar-chart").data("percent");
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
-		});
-	   	$("body").on("mouseleave", ".compatibilidad", function(){
-		   	$(this).find(".consolidado").css("opacity",1);
-		  	$(this).find(".desglose").css("opacity",0);
-			$('.chart').data('easyPieChart').update(40);
-		});
+	fnCargarOportunidad();
    });
 
-	$('#busqueda').keyup(fnBusqueda);
+	//$('#busqueda').keyup(fnBusqueda);
 	function fnBusqueda(){
 		var busqueda = $('#busqueda').val();
 		$.ajax({
@@ -94,6 +92,18 @@
 		});
 
         document.ready
+	}
+
+   	$('#busqueda').keyup(function() {
+		if($('#busqueda').val().length > 3 || $('#busqueda').val().length == 0 )
+			fnCargarOportunidad();
+	});
+
+	function fnCargarOportunidad() {
+		$.get("{% url 'estudiante-oportunidad-cargar-lista' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
+			$('#oportunidad-lista').html(htmlexterno);
+		});
+		document.ready
 	}
 
 </script>
