@@ -1,9 +1,9 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
 body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #a5a5a5;}
-::-webkit-input-placeholder {color: #ccc}
-:-moz-placeholder {color: #ccc}
-::-moz-placeholder {color: #ccc}
-:-ms-input-placeholder {color: #ccc}
+::-webkit-input-placeholder {color: #a5a5a5}
+:-moz-placeholder {color: #a5a5a5}
+::-moz-placeholder {color: #a5a5a5}
+:-ms-input-placeholder {color: #a5a5a5}
 body.static {overflow: hidden;}
 body > section {margin-bottom: 50px;}
 h1 {font-size: 23px}
@@ -51,7 +51,7 @@ p {text-align: justify; line-height: 20px;}
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
 input[type="text"], input[type="password"], select {padding: 0 6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
 textarea { background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important; }
-select {padding-right: 50px; -webkit-appearance: none;  -webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
+select:not(.select-default) {padding-right: 50px; -webkit-appearance: none;  -webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: none !Important; -moz-outline: none; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat; border: none;}
 input[type="radio"] + label {font-size: 1em;}
 input[type="radio"]:hover {background-position: 0 -11px;}
@@ -59,6 +59,8 @@ input[type="radio"]:checked {background-position: 0 -22px;}
 input[type="radio"]:disabled {opacity: 0.3;}
 input[type="radio"]:disabled + label {opacity: 0.3;}
 input[type="checkbox"] {width: 11px; height: 11px; margin-right: 9px; -webkit-appearance: none; outline: none; -moz-outline: none; background: transparent url('../img/assets/checkbox.png') 0 0 no-repeat;}
+input[type="checkbox"].white {background: transparent url('../img/assets/checkbox-white.png') 0 0 no-repeat;}
+
 input[type="checkbox"] + label {font-size: 1em;}
 input[type="checkbox"]:hover {background-position: 0 -11px;}
 input[type="checkbox"]:checked {background-position: 0 -22px;}
@@ -407,6 +409,7 @@ header.menu .centered { height: 47px; }
 
 /*OPORTUNIDAD DETALLE*/
 .oportunidades-estudiante .search {width: 330px; margin-bottom: 20px; background: rgba(0, 0, 0, 0) url(../img/icons/search.png) 100% 50% no-repeat !important;}
+.oportunidades-estudiante .box.oportunidad-box:hover{ box-shadow: 0 0 10px #555; }
 .oportunidad-detalle .breadcrumb {margin-bottom: 30px;}
 .oportunidad-detalle header {position: relative;}
 .oportunidad-detalle header h3 {color: #848484; font-weight: bold;}
@@ -1254,7 +1257,7 @@ a:hover {
 .header-menu .dropdown-menu .dropdown-footer a{padding: 3px 5px;}
 .header-menu .dropdown-menu .dropdown-footer a:hover{background:none;}
 .notify.navbar-nav>li>.dropdown-menu { padding: 0px }
-.notify.navbar-nav>li>a { padding: 0px 10px !Important; color: white;}
+.notify.navbar-nav>li>a { padding: 0px 10px !Important; color: white; background-color: transparent !Important;}
 .notify.navbar-nav>li>a:hover { background-color: transparent !Important;}
 .header-menu  #notifications-header .dropdown-menu li ul li { padding: 12px 10px 6px 10px !Important; }
 .header-menu .dropdown-menu > li > a.pull-left, .header-menu .dropdown-menu > li > a.pull-right { clear: none; }
@@ -1299,3 +1302,9 @@ a:hover {
 }
 .dropdown-menu.contextual { width: 150px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
 #tb_candidatos { width: 100% !Important; }
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear { position: absolute; top: 0; right: 0; }
+.cargando h1 {
+    font-family: 'Roboto Light';
+    text-align: center;
+}

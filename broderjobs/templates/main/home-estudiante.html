@@ -98,10 +98,10 @@
 									{{ registro_form.password1 }}
 									{{ registro_form.password2 }}
 								<label class="indicacion">Fecha de Nacimiento</label>
-										{{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
+									{{registro_form.dia}}{{registro_form.mes}}{{registro_form.ano}}
 								</div><br>
 								<div class="opciones">
-									<input type="checkbox" id="acepto" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+									<input type="checkbox" id="acepto" class = "white" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 								</div>
 								{%if message %}
 								<div class="alert alert-warning alert-dismissible" role="alert">
@@ -297,6 +297,7 @@
 			});
             $("#link-registro").addClass("active");
 		    $(".cumpleanos").css("margin-right", "3px")
+			$(".cumpleanos").addClass("select-default");
         });
         </script>
 	</body>
