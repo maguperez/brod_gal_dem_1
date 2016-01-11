@@ -12,7 +12,7 @@
 							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
 							<div class="detalle">
 								<h1>{{oportunidad.titulo}}</h1>
-								<a href=""><h4 class="link">{{empresa.nombre |upper}}</h4></a>
+								<a href="{%url 'estudiante_empresa_detalle' empresa.id%}"><h4 class="link">{{empresa.nombre |upper}}</h4></a>
 								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
 								<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}} </label>
 							</div>

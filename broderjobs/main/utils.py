@@ -29,13 +29,13 @@ def semestre_rango():
 #carga el rango de semestre para el  select
 def dias_del_mes():
     dias = []
-    for y in range(1,31):
+    for y in range(1,32):
         dias.append((y, y))
     return [('','Dia')] + dias
 
 def meses_del_ano():
     meses = []
-    for y in range(1,12):
+    for y in range(1,13):
         meses.append((y, y))
     return [('','Mes')] + meses
 

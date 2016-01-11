@@ -14,7 +14,7 @@
 										<div class="pin"></div>
 										<ul>
 											<li><a href="{%url 'oportunidad-editar' request.GET.id%}"><span>Editar</span><div class="clear"></div></a></li>
-											<li><a href="candidatos_oportunidad.html"><span>Ver candidatos</span><div class="clear"></div></a></li>
+											<li><a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
 											<li><a href="{%url 'oportunidad-archivar' request.GET.id%}"><span>Archivar</span><div class="clear"></div></a></li>
 										<ul>
 									</div>
@@ -155,7 +155,7 @@
 					debugger;
 					var html = "";
 					for(var i = 0; i <data.length ; i++) {
-						html += '<img src="'+ data[i][0] +'" alt="'+data[i][1]+'"/>';
+						html += '<img src="'+ data[i][0] +'" title="'+data[i][1]+'"/>';
 					}
 					$("#foto-post-"+id).html(html);
 				}

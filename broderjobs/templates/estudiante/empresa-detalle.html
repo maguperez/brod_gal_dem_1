@@ -285,7 +285,6 @@
 							{%if imagenes%}
 							{%for i in imagenes.all%}
                             <div class="item">
-                                <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
 								<img src="{{i.set_imagen}}"/>
                             </div>
 							{%endfor%}
@@ -475,10 +474,10 @@
 
                         <div>
                             <div class="facebook">
-                                <h4>FACEBOOK</h4>
+                                <h4><a href="{{redes_sociales.facebook}}"> FACEBOOK</a></h4>
                             </div>
                             <div class="twitter">
-                                <h4>TWITTER</h4>
+                                <h4><a href="{{redes_sociales.twitter}}">TWITTER</a></h4>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -504,28 +503,28 @@
                             <label>L&iacute;nea de carrera</label>
 
                             <div id="rating-linea_carrera" class = "rating-edit" style="display:inline-block"></div>
-                            <input type="hidden" class="rating-hidden" value="{{ranking.linea_carrera}}">
+                            <input type="hidden" class="rating-hidden" value="{{mi_evaluacion.linea_carrera}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Flexibilidad de horarios</label>
 
                             <div id="rating-flexibilidad_horario" class = "rating-edit" style="display:inline-block"></div>
-                            <input type="hidden" class="rating-hidden" value="{{ranking.flexibilidad_horarios}}">
+                            <input type="hidden" class="rating-hidden" value="{{mi_evaluacion.flexibilidad_horarios}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Ambiente de trabajo</label>
 
                             <div id="rating-ambiente_trabajo" class = "rating-edit" style="display:inline-block"></div>
-                            <input type="hidden" class="rating-hidden" value="{{ranking.ambiente_trabajo}}">
+                            <input type="hidden" class="rating-hidden" value="{{mi_evaluacion.ambiente_trabajo}}">
                             <div class="clear"></div>
                         </li>
                         <li>
                             <label>Salario y Beneficios</label>
 
                             <div id="rating-salario_beneficios" class = "rating-edit" style="display:inline-block"></div>
-                            <input type="hidden" class="rating-hidden" value="{{ranking.salarios}}">
+                            <input type="hidden" class="rating-hidden" value="{{mi_evaluacion.salarios}}">
                             <div class="clear"></div>
                         </li>
                     </ul>

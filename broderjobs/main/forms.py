@@ -34,12 +34,12 @@ class RegisterForm(UserCreationForm):
     items_anos = [('','Año')] + anos
 
     meses = []
-    for y in range(1,12):
+    for y in range(1,13):
         meses.append((y, y))
     items_meses = [('','Mes')] + meses
 
     dias = []
-    for y in range(1,31):
+    for y in range(1,32):
         dias.append((y, y))
     items_dias =[('','Dia')] + dias
 

@@ -18,7 +18,7 @@ from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
-from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa
+from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
@@ -135,7 +135,10 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado = 'A').order_by("fecha_publicacion")[:2]
-        ranking = RankingEmpresa()
+        try:
+            redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
+        except EmpresaRedesSociales.DoesNotExist:
+            redes_sociales = EmpresaRedesSociales()
         try:
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
 
@@ -145,10 +148,20 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             ranking.flexibilidad_horarios = 0
             ranking.ambiente_trabajo = 0
             ranking.salarios = 0
+        mi_evaluacion = EvaluacionEmpresa()
+        try:
+            mi_evaluacion = EvaluacionEmpresa.objects.get(empresa_id = empresa.id, usuario_id = self.request.user.id)
+        except RankingEmpresa.DoesNotExist:
+            mi_evaluacion.linea_carrera = 0
+            mi_evaluacion.flexibilidad_horarios = 0
+            mi_evaluacion.ambiente_trabajo = 0
+            mi_evaluacion.salarios = 0
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         context['ranking'] = ranking
+        context['mi_evaluacion'] = mi_evaluacion
+        context['redes_sociales'] = redes_sociales
         return context
 
     def form_valid(self, form):

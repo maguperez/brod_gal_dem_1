@@ -14,7 +14,7 @@
 							<img src="{{empresa.set_logo}}" />
 						</header>
 						<div class="content">
-							<h3 class="link text-uppercase">{{empresa.nombre}}</h3>
+							<h3 class="link text-uppercase"><a href="{%url 'estudiante_empresa_detalle' empresa.id%}">{{empresa.nombre}}</a></h3>
 							<label class="descripcion">{{empresa.sector | upper}}</label>
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 										<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
                                         <div class="descripcion">
                                             <div class="datos">
-                                                <div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
+                                                <div class="empresa"><i class="empresa"></i><label><a href="{%url 'estudiante_empresa_detalle' empresa.id%}">{{oportunidad.empresa | upper}}</a></label></div>
                                                 <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
                                                 <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
                                             </div>
