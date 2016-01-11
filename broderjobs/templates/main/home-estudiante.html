@@ -42,7 +42,7 @@
 						<h3>Encuentra pr&aacute;cticas y primeros empleos en las mejores empresas del pa&iacute;s</h3>
 					</div>
 					<div class="flex-div login" id="login">
-						<form action="" method="post">{%csrf_token%}
+						<form action="" method="post" autocomplete="off">{%csrf_token%}
 							<div class="content">
 								<label class="saludo">HOLA BRODER</label>
 								<a  href="{% url 'social:begin' 'facebook' %}" class="ingresa-facebook">INGRESA CON FACEBOOK</a>
