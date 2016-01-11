@@ -1,5 +1,5 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
-body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 14px; color: #a5a5a5;}
+body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #a5a5a5;}
 ::-webkit-input-placeholder {color: #ccc}
 :-moz-placeholder {color: #ccc}
 ::-moz-placeholder {color: #ccc}
@@ -326,7 +326,9 @@ a:hover { text-decoration: none !Important }
 .home footer ul a {padding: 7px 20px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.05em; color: #fff;}
 .home footer ul a:hover {color: #f50;}
 .home footer .facebook {text-indent: -20000px; background: transparent url('../img/icons/facebook_white.png') 0 0 no-repeat; display: inline-block;}
+.home footer .facebook:hover {background: transparent url('../img/icons/facebook_color.png') 0 0 no-repeat;}
 .home footer .twitter {text-indent: -20000px; background: transparent url('../img/icons/twitter_white.png') 0 0 no-repeat; display: inline-block;}
+.home footer .twitter:hover {background: transparent url('../img/icons/twitter_color.png') 0 0 no-repeat;}
 
 /*REGISTRO*/
 .final-registro {width: 100%; min-height: 100%; margin: 0; padding: 4% 0; background: #f9f9f9;}
@@ -531,7 +533,7 @@ header.menu .centered { height: 47px; }
 .cv .botones-imagen{float:left; margin-left: -20px;}
 .cv header .imagen, .cv header .detalle {float: left;}
 .cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
-.cv header .detalle {margin: 20px 0 0 60px;}
+.cv header .detalle {margin: 20px 0 0 60px; max-width: 240px;}
 .cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
 .cv header .detalle label {margin-top: 10px; display: block; font-size: 14px;}
 .cv .timeline .fecha {font-size: 0.8em !important;}
@@ -1296,3 +1298,4 @@ a:hover {
     top: -6px;
 }
 .dropdown-menu.contextual { width: 150px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
+#tb_candidatos { width: 100% !Important; }
