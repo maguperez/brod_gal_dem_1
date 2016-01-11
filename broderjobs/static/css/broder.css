@@ -1308,3 +1308,5 @@ a:hover {
     font-family: 'Roboto Light';
     text-align: center;
 }
+
+body { overflow-x: auto !Important; min-width: 800px;}

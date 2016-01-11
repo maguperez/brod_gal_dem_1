@@ -160,6 +160,7 @@
 				url: '{%url "empresa-oportunidad-estudiantes" %}',
 				type: 'get',
 				success: function (data) {
+
 					var html = "";
 					for(var i = 0; i <data.length ; i++) {
 						html += '<img src="'+ data[i] + '"/>';
