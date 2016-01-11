@@ -10,10 +10,10 @@ from main import utils
 
 class RegistroCVForm(forms.ModelForm):
 
-    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
+    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Universidad', 'class': 'full'}))
     universidades_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
+    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Carrera', 'class': 'full'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
     # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
@@ -22,7 +22,7 @@ class RegistroCVForm(forms.ModelForm):
     # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
     # ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Seleccione País", required = False, widget=forms.Select(attrs={'class': 'full', }))
 
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
