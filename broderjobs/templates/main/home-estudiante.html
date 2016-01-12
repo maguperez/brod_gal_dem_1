@@ -172,7 +172,9 @@
 			function activar(id) {
 				sessionStorage.setItem("main", id);
 				$(".flex-div:not(#"+id+")").removeClass('active');
+				$(".flex-div:not(#"+id+")").hide();
 				$('#' + id).addClass('active');
+				$('#' + id).show();
 				$('.link-header').removeClass('active');
 				$("[data-link="+id+"]").addClass('active');
 			}
@@ -230,7 +232,6 @@
 					else {
 						$(element).tooltip('hide');
 					}
-
 	            },
 	            rules: {
 					"registro-first_name": { required: true },
@@ -266,7 +267,6 @@
 	        });
 			$("#login form").validate({
 	            errorPlacement: function (error, element) {
-
 	                $(element).tooltip('destroy');
 	                $(element).tooltip({
 	                    animation: true,
