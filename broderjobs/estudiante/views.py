@@ -256,7 +256,7 @@ class MiCVView(LoginRequiredMixin, FormView):
         context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
-        context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
+        context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
         return context
 
     def form_valid(self, form):
