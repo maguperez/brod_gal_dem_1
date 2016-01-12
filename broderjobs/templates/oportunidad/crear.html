@@ -357,7 +357,37 @@
 
 		InicializarValidaciones();
 
+		AgregarEventosRemuneracion();
+
 	});
+
+	function AgregarEventosRemuneracion(){
+		$('#id_remuneracion_0').click(function(){
+			$('#id_remuneracion_min').prop( "disabled", true );
+			$('#id_remuneracion_max').prop( "disabled", true );
+			$('#id_remuneracion_min').val('');
+			$('#id_remuneracion_max').val('');
+			$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
+			$('#id_remuneracion_min').hide();
+			$('#id_remuneracion_max').hide();
+		});
+
+		$('#id_remuneracion_1').click(function(){
+			$('#id_remuneracion_min').prop( "disabled", false );
+			$('#id_remuneracion_max').prop( "disabled", false );
+			$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
+			$('#id_remuneracion_max').show();
+			$('#id_remuneracion_min').show();
+		});
+
+		$('#id_remuneracion_2').click(function(){
+			$('#id_remuneracion_max').prop( "disabled", true );
+			$('#id_remuneracion_min').prop( "placeholder", 'Valor fijo' );
+			$('#id_remuneracion_max').hide();
+			$('#id_remuneracion_min').show();
+			$('#id_remuneracion_max').val('');
+		});
+	}
 
 	function InicializarSelect2(ids){
 		ids.forEach(function(id){

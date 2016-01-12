@@ -351,8 +351,54 @@
 		});
 		IniciarCiudades();
 
+		RevisarCheckedRemuneración();
+		AgregarEventosRemuneracion();
 
 	});
+
+	function RevisarCheckedRemuneración(){
+		var listaCheck = [{index:0,funcion:LogicaSinEspecificar},{index:1,funcion:LogicaIntervalo},{index:2,funcion:LogicaFijo}];
+
+		for (var i = 0, len = listaCheck.length; i < len; i++) {
+			var obj = listaCheck[i];
+		  if($('#id_remuneracion_'+obj.index).is(':checked')){
+			  obj.funcion();
+			  break;
+		  }
+		}
+	}
+
+	function LogicaSinEspecificar(){
+		$('#id_remuneracion_min').prop( "disabled", true );
+		$('#id_remuneracion_max').prop( "disabled", true );
+		$('#id_remuneracion_min').val('');
+		$('#id_remuneracion_max').val('');
+		$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
+		$('#id_remuneracion_min').hide();
+		$('#id_remuneracion_max').hide();
+	}
+
+	function LogicaIntervalo(){
+		$('#id_remuneracion_min').prop( "disabled", false );
+		$('#id_remuneracion_max').prop( "disabled", false );
+		$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
+		$('#id_remuneracion_max').show();
+		$('#id_remuneracion_min').show();
+	}
+
+	function LogicaFijo(){
+		$('#id_remuneracion_max').prop( "disabled", true );
+		$('#id_remuneracion_min').prop( "placeholder", 'Valor fijo' );
+		$('#id_remuneracion_max').hide();
+		$('#id_remuneracion_min').show();
+		$('#id_remuneracion_max').val('');
+	}
+
+	function AgregarEventosRemuneracion(){
+		$('#id_remuneracion_0').click(LogicaSinEspecificar);
+		$('#id_remuneracion_1').click(LogicaIntervalo);
+		$('#id_remuneracion_2').click(LogicaFijo);
+	}
 
 	var Editar = {
         map: null,
