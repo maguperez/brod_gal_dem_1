@@ -1309,3 +1309,65 @@ a:hover {
     font-family: 'Roboto Light';
     text-align: center;
 }
+/*Loading*/
+#page-wrapper{
+    padding: 80px;
+    width: 100%;
+    position: fixed;
+    top: 35%;
+    font-family: 'Roboto Light';
+    font-size: 19px;
+    z-index: 1000;
+    background: rgba(255,255,255,1);
+    background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 34%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(34%, rgba(255,255,255,0.1)), color-stop(100%, rgba(255,255,255,0)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 34%, rgba(255,255,255,0) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 34%, rgba(255,255,255,0) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 34%, rgba(255,255,255,0) 100%);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.1) 34%, rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
+}
+
+.loading{
+	text-align:center;
+	color:#d44e4e;
+}
+
+.loading:before,
+.loading:after{
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0.7em;
+	width: 10em;
+	border-bottom: 1px solid #d44e4e;
+
+    -moz-animation: loading 3s forwards linear;
+    -webkit-animation: loading 3s forwards linear;
+    animation: loading 3s forwards linear;
+
+    -moz-animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    animation-iteration-count:infinite;
+}
+
+
+
+/*Animation time*/
+@-webkit-keyframes loading {
+  0% {width: 0em; opacity:0.1}
+  70% {width: 8em; opacity:1.0}
+  100% {width: 10em; opacity:0.0}
+}
+
+
+@-moz-keyframes loading {
+  0% {width: 0em; opacity:0.1}
+  70% {width: 8em; opacity:1.0}
+  100% {width: 10em; opacity:0.0}
+}
+@keyframes loading {
+  0% {width: 0em; opacity:0.1}
+  70% {width: 8em; opacity:1.0}
+  100% {width: 10em; opacity:0.0}
+}

@@ -40,7 +40,11 @@
 		<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 
+    </head>
 	<body>
+    <div id="page-wrapper" class = "loading-wrapper">
+        <div class="loading">Cargando</div>
+    </div>
 	<div class = "header-container">
 		<header class="principal">
 			<div class="centered">
@@ -143,6 +147,9 @@
 				else
 					$('#ctx-menu-header').addClass('active')
 			});*/
+            window.onload = function(){
+                $(".loading-wrapper").hide();
+            }
            $('#notifications-header').click(function(){
                 $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
 			        $('#cantidad-notificaciones').html("0");
