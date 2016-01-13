@@ -1,7 +1,17 @@
 {% extends 'estudiante/base.html' %}
+{% load estudiante_filters %}
 {% load staticfiles %}
 {%block css%}
-
+<style>
+	.noleido{
+		background: #ECECEC !important;
+		font-weight: bold !important;
+	}
+	.leido{
+		background: #fff !important;
+		font-weight: normal !important;
+	}
+</style>
 {%endblock%}
 {% block content %}
 <section class="proceso-detalle" style="padding-top: 150px">
@@ -80,10 +90,13 @@
 												<th>Fecha</th>
 											</tr>
                                             {%for m in mensajes.all%}
-											<tr  class="unread" data-id="{{m.id}}">
-												<td>{{m.mensaje.oportunidad.empresa}}</td>
-												<td>{{m.mensaje.asunto}}!</td>
-												<td>{{m.fecha_creacion | date:"j/m/Y" }}</td>
+											<tr  class="unread" data-id="{{m.id}}" >
+												<td class="{%if m.leido%}leido{%else%}noleido{%endif%}">
+													{{m.mensaje.oportunidad.empresa}}</td>
+												<td class="{%if m.leido%}leido{%else%}noleido{%endif%}">
+													{{m.mensaje.asunto}}!</td>
+												<td class="{%if m.leido%} leido{%else%}noleido{%endif%}">
+												{{m.fecha_creacion }}</td>
 											</tr>
 											{% endfor %}
 										</tbody>
@@ -106,12 +119,39 @@
 					<section class="mensaje">
 						<label class="asunto" id="mensaje-asunto"></label>
 						<p id="mensaje-contenido"></p>
+						<a href="#mensaje-edit" class="btn-action" id="responder-mensaje">RESPONDER</a>
 					</section>
 				</div>
 				<a class="close">Cerrar</a>
 			</div>
 		</div>
-
+		<div class="popup mensaje-edit" id="mensaje-edit">
+    		<div class="popup-box">
+        		<div class="content">
+            <section class="header">
+                <h3>Mensaje</h3>
+                <a id="enviar-mensaje" class="btn-action">ENVIAR</a>
+                <div class="clear"></div>
+            </section>
+            <section>
+                <div class="destinatarios">
+                    <label>Para:</label>
+                    <ul><li></li></ul>
+                    <div class="clear"></div>
+                </div>
+                <textarea id="contenido-mensaje-enviar" placeholder="Redacte su mensaje"></textarea>
+                <!--<div class="sin-respuesta">-->
+                    <!--<input type="checkbox" id="sin-respuesta"/>-->
+                    <!--<label for="sin-respuesta">Sin respuesta </label><a>(<span class="orange">?</span>)</a>-->
+                <!--</div>-->
+            </section>
+        </div>
+        		<a class="close">Cerrar</a>
+    		</div>
+		</div>
+<input type="hidden" id="empresa_id">
+<input type="hidden" id="mensaje_id">
+{%csrf_token%}
 {% endblock content%}
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
@@ -142,6 +182,8 @@
 	$('#content-mensajes tr').click(function() {
 		fnMostrarMensaje($(this).data("id"));
 		window.location = '#popup-mensaje';
+		$(this).children("td").removeClass('noleido');
+		$(this).children("td").addClass('leido');
 	});
 	$('a').click(function(event) {
 		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
@@ -152,16 +194,16 @@
 	$('.wizard-progress').bootstrapWizard({
 		tabClass: 'wizard-steps',
 		onTabClick: function( tab, navigation, index, newindex ) {
-			debugger;
+			//debugger;
 		},
 		onTabChange: function( tab, navigation, index, newindex ) {
-			debugger;
+			//debugger;
 			//var $total = navigation.find('li').size() - 1;
 			//$wizardfinish[ newindex != $total ? 'addClass' : 'removeClass' ]( 'hidden' );
 			//$('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
 		},
 		onTabShow: function( tab, navigation, index ) {
-			debugger;
+			//debugger;
 			$(".wizard-progress li").removeClass("active");
 			$(".wizard-progress li.on").addClass("active");
 			if (tab.is(":not(.on")){
@@ -178,7 +220,6 @@
 		}, 5000);
 	};
 
-
 	function fnMostrarMensaje(id){
         $.ajax({
             url: "{%url 'mensaje-ver' %}",
@@ -187,12 +228,44 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
+				$("#mensaje-empresa").html(data["empresa"]);
+				$("#mensaje-fecha-recibido").html(data["fecha_creacion"]);
 				$("#mensaje-asunto").html(data["asunto"]);
             	$("#mensaje-contenido").html(data["contenido"]);
-
+				$("#empresa_id").val(data['empresa_id']);
+				$("#mensaje_id").val(data['mensaje_id']);
 			}
         });
     }
+	$('#responder-mensaje').click(function(e){
+		$('.destinatarios ul li').html($("#mensaje-empresa").html());
+	});
+
+	 $('#enviar-mensaje').click(function(){
+		 id = $("#empresa_id").val();
+		 var form = new FormData();
+		 form.append('id',$("#empresa_id").val());
+		 form.append('c',$('#contenido-mensaje-enviar').val());
+		 form.append('o','{{postulacion.oportunidad.id}}');
+		 form.append('p','{{postulacion.id}}');
+		 form.append('m', $('#mensaje_id').val());
+		 form.append('pr','N');
+		 form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
+		     $.ajax({
+                 type:"POST",
+                 url:"{%url 'mensaje-enviar' %}",
+                 data: form,
+                 processData: false,
+                 contentType: false,
+                 success: function(x){
+                     window.history.back();
+					 window.history.back();
+                 },
+                 error: function(x){
+                    console.log(x);
+                 }
+            });
+       });
 
 </script>
 {% endblock%}
