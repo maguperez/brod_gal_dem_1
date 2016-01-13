@@ -6,7 +6,7 @@ from models import Empresa, Representante, Sector, EvaluacionEmpresa, Pais
 
 class InfoGeneralForm(forms.ModelForm):
 
-    ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
+    ciudad_hidden = forms.CharField(widget=forms.HiddenInput(),required=False)
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
 
     class Meta:
