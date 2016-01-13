@@ -41,7 +41,7 @@ class MiEmpresaView(FormView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
@@ -94,6 +94,7 @@ class InfoGeneralView(FormView):
                 'nombre': empresa.nombre,
                 'quienes_somos': empresa.quienes_somos,
                 'RUC': empresa.RUC,
+                'telefono':empresa.telefono,
                 'sector': empresa.sector,
                 'numero_funcionarios': empresa.numero_funcionarios,
                 'facturacion_anual': empresa.facturacion_anual,
@@ -110,6 +111,7 @@ class InfoGeneralView(FormView):
             sector = form.cleaned_data['sector']
             pais = form.cleaned_data['pais']
             id_ciudad = form.cleaned_data['ciudad_hidden']
+            telefono = form.cleaned_data['telefono']
 
             numero_funcionarios = form.cleaned_data['numero_funcionarios']
             facturacion_anual = form.cleaned_data['facturacion_anual']
@@ -130,6 +132,7 @@ class InfoGeneralView(FormView):
             empresa.ano_fundacion = ano_fundacion
             empresa.website =website
             empresa.pais = pais
+            empresa.telefono = telefono
 
             if id_ciudad is not None and id_ciudad != '':
                 try:
@@ -263,7 +266,7 @@ class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
         busqueda = request.GET.get('b')
         user = request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")

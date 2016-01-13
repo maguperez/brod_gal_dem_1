@@ -16,6 +16,7 @@ class Mensaje(models.Model):
     permite_respuesta = models.BooleanField(default=False, blank=True)
     es_respuesta = models.IntegerField(default=None, null=True, blank=True)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
@@ -29,7 +30,9 @@ class Mensaje_Destinatario(models.Model):
     usuario_destinatario = models.ForeignKey(User,default=None, null=True, blank=True)
     leido = models.BooleanField(default=False, blank=True)
     fecha_leido = models.DateField(default=None, null=True, blank=True)
+    fecha_envio = models.DateTimeField(default=None, null=True, blank=True)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
@@ -41,10 +44,14 @@ class Notificacion(models.Model):
 
     usuario_destinatario = models.ForeignKey(User,default=None, null=True, blank=True)
     oportunidad = models.ForeignKey(Oportunidad,default=None, null=True, blank=True )
+    postulacion = models.ForeignKey(Postulacion,default=None, null=True, blank=True )
     asunto = models.CharField(default=None, null=True, blank=True, max_length=100)
+    fecha_envio = models.DateTimeField(default=None, null=True, blank=True)
+    leido = models.BooleanField(default=False, blank=True)
     fecha_leido = models.DateField(default=None, null=True, blank=True)
     es_mensaje = models.BooleanField(default=False, blank=True)
 
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)

@@ -66,6 +66,7 @@ class Empresa(models.Model):
     nombre =  models.CharField(max_length="100", default=None, null=True, blank=True )
     descripcion = models.CharField(max_length="200", default=None, null=True, blank=True )
     quienes_somos = models.CharField(max_length="1000", default=None, null=True, blank=True )
+    telefono = models.CharField(max_length="100", default=None, null=True, blank=True )
     RUC = models.CharField(max_length="20", default=None, null=True, blank=True )
     sector = models.ForeignKey(Sector, default=None, null=True, blank=True )
     numero_funcionarios = models.ForeignKey(NumeroFuncionarios, default=None, null=True, blank=True)

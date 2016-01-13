@@ -12,7 +12,7 @@ class InfoGeneralForm(forms.ModelForm):
     class Meta:
         model = Empresa
         fields = ('nombre', 'RUC', 'quienes_somos', 'sector', 'numero_funcionarios', 'facturacion_anual', 'ano_fundacion',
-                  'website')
+                  'website','telefono')
         widget = {
             'quienessomos': forms.widgets.Textarea(),
         }

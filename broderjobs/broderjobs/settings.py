@@ -83,7 +83,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
                 'estudiante.context_processors.estudiante_foto',
-                'estudiante.context_processors.mensajes_actuales',
+                'estudiante.context_processors.notificaciones',
             ],
         },
     },
