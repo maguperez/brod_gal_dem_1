@@ -262,8 +262,11 @@
 							 $(modal).find('.modal-body').html(xhr);
 							 formAjaxSubmit(form, modal);
 						 } else {
-							 $(modal).modal('toggle');
-							 window.location.reload();
+							 var validez = $(form).validate().valid();
+							 if(validez) {
+								 $(modal).modal('toggle');
+								 window.location.reload();
+							 }
 						 }
 					 },
 					 error: function (xhr, ajaxOptions, thrownError) { }
