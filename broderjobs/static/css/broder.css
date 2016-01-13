@@ -638,7 +638,7 @@ header.menu .centered { height: 47px; }
 /*POPUP MENSAJE EDIT*/
 .popup.mensaje-edit .header {padding-bottom: 25px !important; border-bottom: 1px solid #ddd !important;}
 .popup.mensaje-edit .header h3 {margin: 5px 0 0 10px; float: left; font-size: 1.25em; font-weight: bold; color: #848484;}
-.popup.mensaje-edit .header .btn-action {width: 85px; height: 30px; line-height: 30px; float: right;}
+.popup.mensaje-edit .header .btn-action,.popup.mensaje .btn-action {width: 85px; height: 30px; line-height: 30px; float: right;}
 .popup.mensaje-edit .destinatarios {margin: 15px 5px;}
 .popup.mensaje-edit .destinatarios > label {font-size: 1em; margin: 10px; float: left; color: #848484;}
 .popup.mensaje-edit li {float: left; margin-left: 10px;}

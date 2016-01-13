@@ -17,7 +17,7 @@ from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
 from mensaje.models import Mensaje, Mensaje_Destinatario
-from mensaje.utils import enviar_mensaje, enviar_notificacion_multiple
+from mensaje.utils import enviar_mensaje_multiple_estudiantes, enviar_notificacion_multiple_estudiantes
 from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
@@ -319,7 +319,7 @@ def siguiente_fase( request ):
                                                                                         usuario_modificacion = user.username)
         res_oportunidad = Oportunidad.objects.filter(pk = o).update(fase = fase, fecha_modificacion = datetime.now(),
                                                                     usuario_modificacion = user.username)
-        enviar_mensaje(oportunidad, user, ids_estudiante, fase.mensaje_asunto, fase.mensaje_contenido, False, False)
+        enviar_mensaje_multiple_estudiantes(oportunidad, user, ids_estudiante, fase.mensaje_asunto, fase.mensaje_contenido, False, False)
 
     #inactiva o activa a los seleccionados
     else:
@@ -339,7 +339,7 @@ def siguiente_fase( request ):
                                                                           estado_postulacion = estado_postulacion,
                                                                           fecha_modificacion = datetime.now(),
                                                                           usuario_modificacion = user.username)
-        enviar_notificacion_multiple(oportunidad, ids_estudiante, notificacion_asunto, False, User.username)
+        enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, notificacion_asunto, False, User.username)
     #define response
     response = {
         'resp': 's'
