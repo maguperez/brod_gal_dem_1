@@ -4,7 +4,7 @@ from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
 from datetime import date, datetime
 
-def enviar_mensaje(oportunidad, ususrio_remitente, ids_estudiantes, asunto, contenido, permite_respuesta, es_respuesta):
+def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estudiantes, asunto, contenido, permite_respuesta, es_respuesta):
     mensaje = Mensaje()
     mensaje.oportunidad = oportunidad
     mensaje.usuario_remitente = ususrio_remitente
@@ -25,15 +25,40 @@ def enviar_mensaje(oportunidad, ususrio_remitente, ids_estudiantes, asunto, cont
         mensaje_destinatarios.mensaje = mensaje
         mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
         mensaje_destinatarios.fecha_envio = datetime.now()
+        mensaje_destinatarios.fecha_creacion = datetime.now()
         mensaje_destinatarios.save()
-        enviar_notificacion(oportunidad, estudiante, asunto, True, ususrio_remitente.username)
+        enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
 
-def enviar_notificacion(oportunidad, estudiante, asunto, es_mensaje, usuario_creacion):
-    postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
+def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido, permite_respuesta, es_respuesta):
+    mensaje = Mensaje()
+    mensaje.oportunidad = oportunidad
+    mensaje.usuario_remitente = ususrio_remitente
+    mensaje.asunto = asunto
+    mensaje.contenido = contenido
+    mensaje.permite_respuesta = permite_respuesta
+    mensaje.es_respuesta = es_respuesta
+    mensaje.fecha_envio = datetime.now()
+    if es_respuesta is not None:
+        mensaje.es_respuesta = es_respuesta
+
+    mensaje.fecha_creacion = datetime.now()
+    mensaje.usuario_creacion = ususrio_remitente.username
+    mensaje.save()
+
+    #Mensaje Destinatarios
+    mensaje_destinatarios = Mensaje_Destinatario()
+    mensaje_destinatarios.mensaje = mensaje
+    mensaje_destinatarios.usuario_destinatario = usuario_destinatario
+    mensaje_destinatarios.fecha_envio = datetime.now()
+    mensaje_destinatarios.save()
+    enviar_notificacion(oportunidad, usuario_destinatario, asunto, True, ususrio_remitente.username)
+
+def enviar_notificacion(oportunidad, usuario_destinatario, asunto, es_mensaje, usuario_creacion):
+    #postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante__persona__usuario = usuario_destinatario.id)
     notificacion = Notificacion()
     notificacion.oportunidad = oportunidad
-    notificacion.postulacion = postulacion
-    notificacion.usuario_destinatario = estudiante.persona.usuario
+    # notificacion.postulacion = postulacion
+    notificacion.usuario_destinatario = usuario_destinatario
     notificacion.asunto = asunto
     notificacion.es_mensaje = es_mensaje
     notificacion.fecha_envio = datetime.now()
@@ -41,8 +66,7 @@ def enviar_notificacion(oportunidad, estudiante, asunto, es_mensaje, usuario_cre
     notificacion.usuario_creacion = usuario_creacion
     notificacion.save()
 
-def enviar_notificacion_multiple(oportunidad, ids_estudiantes, asunto, es_mensaje, usuario_creacion):
-
+def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunto, es_mensaje, usuario_creacion):
     for id in ids_estudiantes:
         estudiante = Estudiante.objects.get(id = id)
         postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)

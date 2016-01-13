@@ -1,5 +1,7 @@
 from django import template
 from datetime import date, timedelta
+from mensaje.models import Mensaje, Notificacion
+from oportunidad.models import Oportunidad
 
 register = template.Library()
 

@@ -9,7 +9,9 @@ urlpatterns =[
 
     url(r'^ver/', 'mensaje.views.mensaje_ver', name='mensaje-ver'),
 
-    url(r'^enviar/', 'mensaje.views.mensaje_enviar_estudiantes', name='mensaje-enviar'),
+    url(r'^enviar/', 'mensaje.views.mensaje_enviar_estudiantes', name='mensaje-enviar-estudiante'),
+
+    url(r'^enviar-empresa/', 'mensaje.views.mensaje_enviar', name='mensaje-enviar'),
 
     url(r'^notificacion-vistas/', 'mensaje.views.mensaje_notificacion_vista', name='mensaje-notificacion-vistas'),
 
