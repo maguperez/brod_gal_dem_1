@@ -100,10 +100,11 @@ class InfoGeneralView(FormView):
                 'facturacion_anual': empresa.facturacion_anual,
                 'ano_fundacion': empresa.ano_fundacion,
                 'website': empresa.website,
-                'pais': empresa.pais, 'ciudad_hidden': empresa.ciudad.id}
+                'pais': empresa.pais,
+                'ciudad_hidden': '' if empresa.ciudad is None else empresa.ciudad.id}
 
         def form_invalid(self, form):
-            return form.errors
+            return 'form.errors'
 
         def form_valid(self, form):
             quienes_somos =  form.cleaned_data['quienes_somos']
@@ -143,7 +144,7 @@ class InfoGeneralView(FormView):
                     empresa.ciudad = ciudad
             else:
                 empresa.ciudad = None
-            empresa.ciudad = ciudad
+            # empresa.ciudad = ciudad
             empresa.save()
 
             return super(InfoGeneralView, self).form_valid(form)
