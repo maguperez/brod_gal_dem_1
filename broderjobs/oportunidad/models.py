@@ -13,6 +13,8 @@ class ProcesoFase(models.Model):
 
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     orden = models.IntegerField(default=None, null=True, blank=True )
+    mensaje_contenido = models.TextField(default=None, null=True, blank=True,  )
+    mensaje_asunto = models.CharField(max_length="100", default=None, null=True, blank=True,  )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)

@@ -151,7 +151,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         mi_evaluacion = EvaluacionEmpresa()
         try:
             mi_evaluacion = EvaluacionEmpresa.objects.get(empresa_id = empresa.id, usuario_id = self.request.user.id)
-        except RankingEmpresa.DoesNotExist:
+        except EvaluacionEmpresa.DoesNotExist:
             mi_evaluacion.linea_carrera = 0
             mi_evaluacion.flexibilidad_horarios = 0
             mi_evaluacion.ambiente_trabajo = 0

@@ -41,7 +41,7 @@ class MiEmpresaView(FormView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
@@ -263,7 +263,7 @@ class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
         busqueda = request.GET.get('b')
         user = request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")

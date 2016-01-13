@@ -1,3 +1,4 @@
+{% load estudiante_filters %}
 {% load staticfiles %}
 <html>
 	<head>
@@ -48,88 +49,24 @@
 				<ul class="nav navbar-nav notify pull-right header-menu">
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
                     <li class="dropdown" id="notifications-header">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
-
-                            <span class="badge badge-danger badge-header">{{cantidad_mensajes}}</span>
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
+                            <span id="cantidad-notificaciones" class="badge badge-danger badge-header">{{cantidad_notificaciones}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header clearfix">
                                 <p class="pull-left">Notifications</p>
                             </li>
                             <li>
-                                <ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star c-orange"></i>
-                                            Steve have rated your photo
-                                            <span class="dropdown-time">Just now</span>
-                                        </a>
-                                    </li>
-                                    {%for m in mensajes %}
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-bell p-r-10 f-18"></i>
-                                            {{m.asunto}}
-                                            <span class="dropdown-time">Just now</span>
+                                <ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;" id="notificaciones">
+                                    {%for notificacion in notificaciones %}
+                                    <li {%if  not notificacion.leida%} style="background: #f5f5f5" {%endif%}>
+                                        <a href="{%url 'estudiante-proceso-detalle' notificacion.postulacion.id%}">
+                                            <i class="fa {%if notificacion.es_mensaje %}fa-envelope{%else%} fa-bell {%endif%} p-r-10 f-18"></i>
+                                            {{notificacion.asunto}}
+                                            <span class="dropdown-time">{{notificacion.fecha_creacion|get_due_date_string}}</span>
                                         </a>
                                     </li>
                                     {%endfor%}
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-star c-orange"></i>-->
-                                            <!--Steve have rated your photo-->
-                                            <!--<span class="dropdown-time">Just now</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-heart c-red"></i>-->
-                                            <!--John added you to his favs-->
-                                            <!--<span class="dropdown-time">15 mins</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-file-text"></i>-->
-                                            <!--New document available-->
-                                            <!--<span class="dropdown-time">22 mins</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-picture-o"></i>-->
-                                            <!--New picture added-->
-                                            <!--<span class="dropdown-time">40 mins</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-bell p-r-10 f-18 c-orange"></i>-->
-                                            <!--Meeting in 1 hour-->
-                                            <!--<span class="dropdown-time">1 hour</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-bell p-r-10 f-18"></i>-->
-                                            <!--Server 5 overloaded-->
-                                            <!--<span class="dropdown-time">2 hours</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-comment p-r-10 f-18 c-gray"></i>-->
-                                            <!--Bill comment your post-->
-                                            <!--<span class="dropdown-time">3 hours</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                        <!--<a href="#">-->
-                                            <!--<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>-->
-                                            <!--New picture added-->
-                                            <!--<span class="dropdown-time">2 days</span>-->
-                                        <!--</a>-->
-                                    <!--</li>-->
 								</ul>
                             </li>
                             <li class="dropdown-footer clearfix">
@@ -147,7 +84,6 @@
 							<!--<img class="portrait" src="{{estudiante_foto}}" alt="Perfil" />-->
                             <img src="{{estudiante_foto}}" alt="Perfil" width="30" class="p-r-5 portrait">
                             <!--<span class="username">Bob Nilson</span>-->
-
 							{% if user.is_authenticated %}
 								<span class="username name" style="text-transform: uppercase">{{user.first_name|capfirst}}</span>
 							{% endif %}
@@ -207,6 +143,11 @@
 				else
 					$('#ctx-menu-header').addClass('active')
 			});*/
+           $('#notifications-header').click(function(){
+                $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
+			        $('#cantidad-notificaciones').html("0");
+		        });
+           });
 		</script>
 
 {% block js %}

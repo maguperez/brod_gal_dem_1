@@ -1,3 +1,4 @@
+# coding=utf-8
 #Constnates de todo el sistema
 
 estado_activo = 'A'
@@ -13,3 +14,6 @@ postulacion_finalizado = 'F'
 
 estado_vacio = None
 
+
+proceso_finalizado_asunto = "El proceso a sido Finalizado"
+proceso_reabierto_asunto = "El proceso a sido Reabierto"
