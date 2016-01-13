@@ -40,6 +40,9 @@
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 
 	<body>
+    <div id="page-wrapper" class = "loading-wrapper">
+        <div class="loading">Cargando</div>
+    </div>
 	<div class = "header-container">
 		<header class="principal">
 			<div class="centered">
@@ -207,6 +210,9 @@
 				else
 					$('#ctx-menu-header').addClass('active')
 			});*/
+            window.onload = function(){
+                $(".loading-wrapper").hide();
+            }
 		</script>
 
 {% block js %}
