@@ -21,7 +21,7 @@ class OportunidadForm(forms.ModelForm):
                   'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
-            'titulo': TextInput(attrs={'placeholder': 'escriba el titulo de su vacante', 'class': 'full'}),
+            'titulo': TextInput(attrs={'placeholder': 'Escriba el titulo de su vacante', 'class': 'full'}),
             'carga_horaria': RadioSelect(),
             'tipo_puesto': RadioSelect(),
             'remuneracion': RadioSelect(),
