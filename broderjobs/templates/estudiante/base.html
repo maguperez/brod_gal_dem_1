@@ -39,7 +39,11 @@
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<<<<<<< HEAD
 </head>
+=======
+    </head>
+>>>>>>> 027758feec76d32bf8142f607f754e90df5d142a
 	<body>
     <div id="page-wrapper" class = "loading-wrapper">
         <div class="loading">Cargando</div>
@@ -146,14 +150,26 @@
 				else
 					$('#ctx-menu-header').addClass('active')
 			});*/
+<<<<<<< HEAD
             window.onload = function(){
                 $(".loading-wrapper").hide();
             }
+=======
+
+            window.onload = function(){
+                $(".loading-wrapper").hide();
+            }
+
+>>>>>>> 027758feec76d32bf8142f607f754e90df5d142a
            $('#notifications-header').click(function(){
                 $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
 			        $('#cantidad-notificaciones').html("0");
 		        });
            });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 027758feec76d32bf8142f607f754e90df5d142a
 		</script>
 
 {% block js %}
