@@ -94,6 +94,7 @@ class InfoGeneralView(FormView):
                 'nombre': empresa.nombre,
                 'quienes_somos': empresa.quienes_somos,
                 'RUC': empresa.RUC,
+                'telefono':empresa.telefono,
                 'sector': empresa.sector,
                 'numero_funcionarios': empresa.numero_funcionarios,
                 'facturacion_anual': empresa.facturacion_anual,
@@ -110,6 +111,7 @@ class InfoGeneralView(FormView):
             sector = form.cleaned_data['sector']
             pais = form.cleaned_data['pais']
             id_ciudad = form.cleaned_data['ciudad_hidden']
+            telefono = form.cleaned_data['telefono']
 
             numero_funcionarios = form.cleaned_data['numero_funcionarios']
             facturacion_anual = form.cleaned_data['facturacion_anual']
@@ -130,6 +132,7 @@ class InfoGeneralView(FormView):
             empresa.ano_fundacion = ano_fundacion
             empresa.website =website
             empresa.pais = pais
+            empresa.telefono = telefono
 
             if id_ciudad is not None and id_ciudad != '':
                 try:
