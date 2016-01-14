@@ -191,7 +191,7 @@ class OportunidadEditarView(FormView):
             oportunidad.ciudad = None
         oportunidad.remuneracion = remuneracion
         if fecha_cese is not None:
-            oportunidad.fecha_cese = fecha_cese
+        oportunidad.fecha_cese = None if fecha_cese
         oportunidad.resumen = resumen
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
@@ -308,10 +308,7 @@ def siguiente_fase( request ):
 
     #actualiza a la siguiente fase
     if id_fase > 0:
-        if id_fase < 4:
-            estado_postulacion = 'E'
-        else:
-            estado_postulacion = 'F'
+        estado_postulacion = 'E'
         fase = ProcesoFase.objects.get(pk = id_fase)
         res_postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase,
                                                                                         estado_postulacion = estado_postulacion,
