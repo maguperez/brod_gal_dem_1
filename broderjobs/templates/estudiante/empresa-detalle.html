@@ -716,7 +716,7 @@
     });
     $('.owl-carousel').owlCarousel({
 			 autoPlay: true,
-             items: {%if imagenes %} 1 {%else%} 2 {%endif%},
+             items: {%if imagenes.length > 1 %} 1 {%else%} 2 {%endif%},
 		     singleItem: true,
              loop: true,
              margin: 10,

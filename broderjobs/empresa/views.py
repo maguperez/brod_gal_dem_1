@@ -294,7 +294,7 @@ class OportunidadPostulacionesView(TemplateView):
     def get(self, request, *args, **kwargs):
         id = request.GET['id']
         p = utils.obtener_ultimas_postulaciones(id)
-        c = Postulacion.objects.filter(oportunidad_id = id).count()
+        c = Postulacion.objects.filter(oportunidad_id = id, estado= 'A').count()
         data = []
         data.append((c, p))
         data_json = json.dumps(data)
@@ -304,7 +304,7 @@ class OportunidadEstudiantes(TemplateView):
     def get(self, request, *args, **kwargs):
         id = request.GET['id']
         estudiante = []
-        for p in Postulacion.objects.filter(oportunidad_id=id).order_by("fecha_creacion")[:6]:
+        for p in Postulacion.objects.filter(oportunidad_id=id, estado= 'A').order_by("fecha_creacion")[:6]:
             estudiante.append((p.estudiante.set_foto, p.estudiante.persona.usuario.first_name + " " + p.estudiante.persona.usuario.last_name))
 
         # data = serializers.serialize('json', oportunidad,

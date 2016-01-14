@@ -1,3 +1,4 @@
+{% load estudiante_filters %}
 {% load staticfiles %}
 <html>
 	<head>
@@ -47,14 +48,53 @@
 			<div class="centered">
 				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<ul class="nav navbar-nav notify pull-right header-menu">
+					<li>
+						{% if 'mensaje' in request.path %}
+						<div class="actions">
+							<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
+						</div>
+						{%else%}
+						<div class="actions">
+							<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
+						</div>
+						{% endif %}
 
-					<div class="actions">
-						<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
-					</div>
-					<div class="options">
-						<a class="mensajes" href="{%url 'buzon_entrada'%}">Mensajes</a>
-					</div>
-                    <!-- BEGIN USER DROPDOWN -->
+						<ul class="nav navbar-nav notify pull-right header-menu">
+						<!-- BEGIN NOTIFICATION DROPDOWN -->
+						<li class="dropdown" id="notifications-header">
+							<a href="{%url 'buzon_entrada'%}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
+								<span id="cantidad-notificaciones" class="badge badge-danger badge-header">{{cantidad_notificaciones}}</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header clearfix">
+									<p class="pull-left">Notifications</p>
+								</li>
+								<li>
+									<ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;" id="notificaciones">
+										{%for notificacion in notificaciones %}
+										<li {%if notificacion.leida%} style="background: #f5f5f5" {%endif%}>
+											<a href="">
+												<i class="fa {%if notificacion.es_mensaje %}fa-envelope{%else%} fa-bell {%endif%} p-r-10 f-18"></i>
+												{{notificacion.asunto}}
+												<span class="dropdown-time">{{notificacion.fecha_creacion|get_due_date_string}}</span>
+											</a>
+										</li>
+										{%endfor%}
+									</ul>
+								</li>
+								<li class="dropdown-footer clearfix">
+									<a href="#" class="pull-left">See all notifications</a>
+									<a href="#" class="pull-right">
+										<i class="fa fa-cog"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END NOTIFICATION DROPDOWN -->
+						<!-- BEGIN USER DROPDOWN -->
+						<!-- END USER DROPDOWN -->
+					</ul>
+					</li>
                     <li class="dropdown" id="user-header">
                         <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
 
@@ -71,22 +111,16 @@
                         </ul>
 
                     </li>
-					<!--<div class="options">
-						<a class="mensajes">Mensajes</a>
-					</div>-->
-                    <!-- END USER DROPDOWN -->
                 </ul>
-				<!--<div class="options">
-					<a class="mensajes">Mensajes</a>
-				</div>
-
-				<div class="clear"></div>-->
 			</div>
 		</header>
 		<header class="menu">
 			<div class="centered">
 				<a id = "link-oportunidades" href="{% url 'empresa-oportunidad-listar'%}">Oportunidades</a>
 				<a id = "link-mi_empresa" href="{% url 'mi-empresa' %}">Mi empresa</a>
+				<a id=" link-buzon" href="{% url 'buzon_entrada'%}">Buzón de mensajes</a>
+				<div class="clear"></div>
+
 				<div class="clear"></div>
 			</div>
 		</header>
