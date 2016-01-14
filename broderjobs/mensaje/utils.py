@@ -54,7 +54,11 @@ def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto,
     enviar_notificacion(oportunidad, usuario_destinatario, asunto, True, ususrio_remitente.username)
 
 def enviar_notificacion(oportunidad, usuario_destinatario, asunto, es_mensaje, usuario_creacion):
-    #postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante__persona__usuario = usuario_destinatario.id)
+    # try:
+    #     estudiante = Estudiante.objects.get(persona__usuario = )
+    #
+
+    # postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante__persona__usuario = usuario_destinatario.id)
     notificacion = Notificacion()
     notificacion.oportunidad = oportunidad
     # notificacion.postulacion = postulacion

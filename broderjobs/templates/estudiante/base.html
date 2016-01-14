@@ -64,7 +64,7 @@
                                 <ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;" id="notificaciones">
                                     {%for notificacion in notificaciones %}
                                     <li {%if notificacion.leida%} style="background: #f5f5f5" {%endif%}>
-                                        <a href="{%url 'estudiante-proceso-detalle' notificacion.postulacion.id%}">
+                                        <a href="{%url 'estudiante-proceso-detalle' notificacion.oportunidad.id%}">
                                             <i class="fa {%if notificacion.es_mensaje %}fa-envelope{%else%} fa-bell {%endif%} p-r-10 f-18"></i>
                                             {{notificacion.asunto}}
                                             <span class="dropdown-time">{{notificacion.fecha_creacion|get_due_date_string}}</span>

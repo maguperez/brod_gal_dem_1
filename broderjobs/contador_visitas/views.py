@@ -50,12 +50,15 @@ def get_ip(request):
 def oportunidad_obtener(request):
     id = request.GET['id']
     total = VisitasOportunidad.objects.filter(oportunidad_id = id).count()
+    data = []
     response = {
         'total': total
     }
-    #serialize to json
-    s = StringIO()
-    json.dump(response, s)
-    s.seek(0)
-    return HttpResponse(s.read())
-    # return HttpResponse(data, content_type='application/json')
+    data.append(('total', total))
+    data_json = json.dumps(response)
+    # #serialize to json
+    # s = StringIO()
+    # json.dump(response, s)
+    # s.seek(0)
+    # return HttpResponse(s.read())
+    return HttpResponse(data_json, content_type='application/json')
