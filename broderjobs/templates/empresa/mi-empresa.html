@@ -74,27 +74,51 @@
 					<section class="about">
 						<h3 class="title"><i class="business"></i>Sobre la empresa<button id="info-general-button" class="link editar">Editar</button></h3>
 						<div>
-							<p>{{empresa.quienes_somos}}</p>
+							<p>
+								{% if empresa.quienes_somos != None %}
+									{{empresa.quienes_somos}}
+								{%endif%}
+							</p>
 						</div>
 						<div class="double">
 							<div>
 								<div>
 									<h4>N&uacute;mero de funcionarios</h4>
-									<label>{{empresa.numero_funcionarios}}</label>
+									<label>
+										{% if empresa.numero_funcionarios != None %}
+											{{empresa.numero_funcionarios}}
+										{%endif%}
+									</label>
 								</div>
 								<div>
 									<h4>Facturamiento anual</h4>
-									<label>{{empresa.facturacion_anual}}</label>
+									<label>
+										{% if empresa.facturacion_anual != None %}
+											{{empresa.facturacion_anual}}
+										{%endif%}
+									</label>
 								</div>
 								<div>
 									<h4>Sede Global</h4>
-									<label>{{empresa.ciudad}}, {{empresa.pais}}</label>
+									<label>
+										{% if empresa.ciudad != None %}
+											{% if empresa.pais != None %}
+												{{empresa.ciudad}}, {{empresa.pais}}
+											{%else%}
+												{{empresa.ciudad}}
+											{%endif%}
+										{%endif%}
+									</label>
 								</div>
 							</div>
 							<div>
 								<div>
 									<h4>Sector</h4>
-									<label>{{empresa.sector}}</label>
+									<label>
+										{% if empresa.sector != None %}
+											{{empresa.sector}}
+										{%endif%}
+									</label>
 								</div>
 								<div>
 									<h4>Fundaci&oacute;n</h4>

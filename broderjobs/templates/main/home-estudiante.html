@@ -166,10 +166,13 @@
 			$(function() {
 				if (sessionStorage.getItem("main") != null){
 					activar(sessionStorage.getItem("main"));
+				} else {
+					activar("mensaje-central");
 				}
 				$.slidebars();
 			});
 			function activar(id) {
+				debugger;
 				sessionStorage.setItem("main", id);
 				$(".flex-div:not(#"+id+")").removeClass('active');
 				$(".flex-div:not(#"+id+")").hide();
@@ -182,19 +185,16 @@
 				activar($(this).data("link"));
 			});
 			$('.close').click(function() {
-				$('.link-header').removeClass('active');
-				$('.mensaje-central').removeClass('invisible');
+				activar('mensaje-central');
 			});
 			$('.container').click(function(e) {
 				if ( $(e.target).closest('.login').length === 0 && $(e.target).closest('.link-header').length === 0 ) {
 					activar('mensaje-central');
-					$('.mensaje-central').removeClass('invisible');
 				}
 			});
 			$(document).keydown(function(e) {
 				if (e.keyCode == 27) {
 					activar('mensaje-central');
-					$('.mensaje-central').removeClass('invisible');
 				}
 			});
 		</script>
