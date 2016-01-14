@@ -115,13 +115,13 @@
             </div>
             <div class="estado">
                 {%if oportunidad.estado_oportunidad == 'P' %}
-                <label>oportunidad pendiente</label>
+                <label>oportunidad archivada</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'A' %}
-                <label>oportunidad abierta</label>
+                <label>postulacion abierta</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'C' %}
-                <label>oportunidad cerrada</label>
+                <label>postulacion cerrada</label>
                 {%endif%}
                 <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
             </div>
@@ -307,7 +307,9 @@
                     fnCambioFase(id, id_estudiante);
                 });
                 $("#tb_candidatos").on("click", ".mensaje", function () {
-                    $(".destinatarios ul").append('<li><label class="nombre">'+ $(this).closest('tr').prev().find('td:nth-child(4)').html() +'</label></li>');
+                    $("#tb_candidatos").find('input:checkbox').prop( "checked", false );
+                    $(this).closest('tr').prev().find('input:checkbox').prop( "checked", true );
+                    $(".destinatarios ul").html('<li><label class="nombre">'+ $(this).closest('tr').prev().find('td:nth-child(4)').html() +'</label></li>');
                 });
             };
             this.obtener = function(){
@@ -484,7 +486,7 @@
 
 
         $('#abrir-mensaje').click(function(){
-            $(".destinatarios ul").hmtl = '';
+            $(".destinatarios ul").html('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                $(".destinatarios ul").append('<li><label class="nombre">'+ $(this).parent().parent().find('td:nth-child(4)').html() +'</label></li>');
             });

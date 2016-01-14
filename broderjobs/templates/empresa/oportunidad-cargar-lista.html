@@ -22,13 +22,13 @@
 							</div>
 							<div class="estado">
 								{%if oportunidad.estado_oportunidad == 'P' %}
-									<label>archivada</label>
+									<label>oportunidad archivada</label>
 								{%endif%}
 								{%if oportunidad.estado_oportunidad == 'A' %}
-									<label>abierta</label>
+									<label>postulacion abierta</label>
 								{%endif%}
 								{%if oportunidad.estado_oportunidad == 'C' %}
-									<label>cerrada</label>
+									<label>postulacion cerrada</label>
 								{%endif%}
 								<label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
 							</div>
