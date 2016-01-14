@@ -6,7 +6,7 @@ mixpanel.init("72a03d42a5b1bb8d9eb67b567ccb5b5a");</script><!-- end Mixpanel -->
 <script>
 if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 	sessionStorage.setItem("mixpanel{{oportunidad.id}}", false);
-	mixpanel.track("Visita Oportunidad", {
+	mixpanel.track("Vista Oportunidad", {
 		'OportunidadID': "{{oportunidad.id}}",
 		'Oportunidad' : "{{oportunidad.titulo}}",
 		'EmpresaID' : "{{empresa.id}}",

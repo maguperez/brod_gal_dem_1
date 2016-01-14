@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.db import models
 from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento
@@ -14,5 +15,5 @@ class VisitasOportunidad(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
-    def __unicode__(self):
-        return unicode('%s' % (self.oportunidad)) or u''
+    # def __unicode__(self):
+    #     return unicode('%s' % (self.id)) or u''
