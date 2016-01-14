@@ -24,5 +24,5 @@ def mensajes_actuales(request):
 
 def notificaciones(request):
     cantidad_notificaciones = Notificacion.objects.filter(leido = False, usuario_destinatario = request.user.id).count()
-    notificaciones = Notificacion.objects.filter(usuario_destinatario = request.user.id)[:10]
+    notificaciones = Notificacion.objects.filter(usuario_destinatario = request.user.id).order_by("-fecha_envio")[:10]
     return {'cantidad_notificaciones': cantidad_notificaciones, 'notificaciones': notificaciones}

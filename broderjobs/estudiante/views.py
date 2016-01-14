@@ -1069,7 +1069,7 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
         try:
             mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user,
-                                                           mensaje__oportunidad_id = oportunidad.id)
+                                                           mensaje__oportunidad_id = oportunidad.id).order_by("-fecha_envio")
         except Mensaje_Destinatario.DoesNotExist:
             mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
