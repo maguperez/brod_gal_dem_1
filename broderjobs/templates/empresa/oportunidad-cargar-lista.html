@@ -109,13 +109,21 @@
 					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
 					total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
 				}
-				$("#visualizaciones-"+id).html(total);
+				//$("#visualizaciones-"+id).html(total);
 				$(obj).sparkline(array, {
 					type: 'bar',
 					height: '50px',
 					barSpacing: 7,
 					barWidth: 10,
 					barColor: '#5d9cf9'
+				});
+				$.ajax({
+					data : {'id':id},
+					url: '{%url "contador_visitas-oportunidad-obtener" %}',
+					type: 'get',
+					success: function(data){
+						$("#visualizaciones-"+id).html(data["total"]);
+					}
 				});
 			});
 		});
