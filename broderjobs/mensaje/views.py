@@ -37,6 +37,7 @@ def mensaje_ver( request ):
         'empresa': mensaje.oportunidad.empresa.nombre,
         'empresa_id': str(mensaje.oportunidad.empresa.id),
         'mensaje_id': str(mensaje.id),
+        'permite_respuesta': str(mensaje.permite_respuesta),
     }
     #serialize to json
     s = StringIO()

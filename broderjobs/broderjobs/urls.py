@@ -15,6 +15,8 @@ urlpatterns = [
 
     url(r'^mensaje/', include('mensaje.urls')),
 
+    url(r'^contador_visitas/', include('contador_visitas.urls')),
+
     #ADMIN
     url(r'^admin/', include(admin.site.urls)),
 

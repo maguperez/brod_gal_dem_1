@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'oportunidad',
     'endless_pagination',
     'mensaje',
+    'contador_visitas'
 
 )
 

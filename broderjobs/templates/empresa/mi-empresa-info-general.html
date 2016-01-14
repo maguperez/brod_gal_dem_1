@@ -1,3 +1,13 @@
+<style>
+	.tooltip {
+		width: 167px;
+	}
+
+	.tooltip-arrow{
+		top: 44.1754%;
+	}
+</style>
+
 <div style="margin:0 50px">
 	<form id = "empresa-info_general" class="form-horizontal" action="{% url 'mi-empresa-info-general' %}" method="post">{%csrf_token%}
 		<div class = "form-group">
@@ -8,7 +18,7 @@
 		</div>
 		<div class = "form-group">
 			<label class = "control-label bold col-sm-3">Quienes somos *</label>
-			<div class = "col-sm-12">
+			<div class = "col-sm-9">
 				<textarea id = "txt-quienes_somos" name="quienes_somos_clone"></textarea>
 					{{ form.quienes_somos }}
 			</div>
@@ -90,21 +100,22 @@
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
-				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
-					$("#id_pais").tooltip('destroy');
-					$("#id_pais").tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
-					$("#id_pais").tooltip('show');
-				}
-				else {
+//				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
+				if (element[0].id == 'id_RUC' || element[0].id == 'id_telefono' || element[0].id == 'id_nombre'){
 					$(element).tooltip('destroy');
 					$(element).tooltip({
 						animation: true,
-						placement: "left",
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$(element).tooltip('show');
+				}
+				else{
+					$(element).tooltip('destroy');
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
 						title: $(error).text(),
 						trigger: "manual"
 					} );
@@ -126,13 +137,26 @@
 				},
 				quienes_somos_clone: {
 					required: true,
+					maxlength: 1000
 				},
                 RUC: {
-                    required: true
+                    required: true,
+					maxlength: 20,
+					digits: true
                 },
                 telefono: {
-                    required: true
-                }
+                    required: true,
+					digits: true,
+					maxlength: 20
+                },
+				website:{
+					url: true
+				},
+				ano_fundacion:{
+					digits: true,
+					maxlength: 4,
+					minlength: 4
+				}
             },
             messages: {
 				nombre: {
@@ -140,16 +164,37 @@
 				},
 				quienes_somos_clone: {
 					required: "Este campo es obligatorio",
+					maxlength: "Este campo no puede superar los 1000 caracteres"
 				},
                 RUC: {
                     required: "Este campo es obligatorio",
+					maxlength: "Este campo no puede superar los 20 caracteres",
+					digits: "Este campo solo contiene digitos"
                 },
                 telefono: {
-                    required: "Este campo es obligatorio"
-                }
+                    required: "Este campo es obligatorio",
+					digits: "Este campo solo contiene digitos",
+					maxlength: "Este campo no puede superar los 20 caracteres"
+                },
+				website:{
+					url: 'URL inválida'
+				},
+				ano_fundacion:{
+					digits: "Este campo solo contiene digitos",
+					maxlength: "Este campo debe constar de 4 caracteres",
+					minlength: "Este campo debe constar de 4 caracteres"
+				}
             }
         });
+
+		AgregarPlaceholders();
+
 	});
+
+	function AgregarPlaceholders(){
+		$('#id_ano_fundacion').prop('placeholder','Ej. 2015');
+		$('#id_RUC').prop('placeholder','RUC de su empresa');
+	}
 
 	function InicializarSelect2(){
 		$("#id_pais").select2({

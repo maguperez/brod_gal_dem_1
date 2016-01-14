@@ -156,6 +156,7 @@
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
 <script>
+	$(".loading-wrapper").hide();
 	$("#link-procesos").addClass("active");
 	$('.popup').click(function(e) {
 		if ( $(e.target).closest('.popup-box').length === 0 ) {
@@ -234,6 +235,13 @@
             	$("#mensaje-contenido").html(data["contenido"]);
 				$("#empresa_id").val(data['empresa_id']);
 				$("#mensaje_id").val(data['mensaje_id']);
+				if(data['permite_respuesta'] == "True")
+				{
+					$("#responder-mensaje").show();
+				}
+				else{
+					$("#responder-mensaje").hide();
+				}
 			}
         });
     }
