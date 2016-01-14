@@ -237,11 +237,11 @@
     var iniciado = false;
     var selected;
     $(function(){
-        panel = new MixpanelExport({
+        /*panel = new MixpanelExport({
             api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
             api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
         });
-        /*var date = moment().format("YYYY-MM-DD");
+        var date = moment().format("YYYY-MM-DD");
 		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
         panel.retention({
             from_date: last,
@@ -261,10 +261,10 @@
         });*/
         $.ajax({
             data : {'id':'{{oportunidad.id}}'},
-            url: '{%url "contador_visitas-oportunidad-obtener" %}',
+            url: '{%url "contador-visitas-oportunidad-obtener" %}',
             type: 'get',
             success: function(data){
-                $("#visualizaciones").html(data["total"]);
+            $("#visualizaciones").html(data["total"]);
             }
         });
 
