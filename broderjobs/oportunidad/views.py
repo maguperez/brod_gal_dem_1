@@ -191,7 +191,7 @@ class OportunidadEditarView(FormView):
             oportunidad.ciudad = None
         oportunidad.remuneracion = remuneracion
         if fecha_cese is not None:
-        oportunidad.fecha_cese = None if fecha_cese
+            oportunidad.fecha_cese = None
         oportunidad.resumen = resumen
         oportunidad.tipo_puesto = tipo_puesto
         oportunidad.grado_estudio = grado_estudio
@@ -321,9 +321,9 @@ def siguiente_fase( request ):
     #inactiva o activa a los seleccionados
     else:
         if id_fase == 0: #fue inactivado
-            estado_postulacion = 'F'
+            # estado_postulacion = 'F'
             estado_fase = constants.estado_inactivo
-            notificacion_asunto = constants.proceso_finalizado_asunto
+            # notificacion_asunto = constants.proceso_finalizado_asunto
         if id_fase == -1: #fue reactivado
             estado_postulacion = 'P'
             if oportunidad.fase.id >= 2 and oportunidad.fase.id <= 3:
