@@ -15,6 +15,12 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 		'interval': '7',
 		'url' : window.location.pathname
 	});
+	$.ajax({
+		data : {'id':'{{oportunidad.id}}'},
+		url: '{%url "contador-visitas-oportunidad-enviar" %}',
+		type: 'get',
+		success: function(data){ }
+	});
 }</script>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="oportunidad-detalle">
@@ -27,7 +33,14 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 						<h1>{{oportunidad.titulo}}</h1>
 						<a href="{%url 'estudiante_empresa_detalle' empresa.id%}"><h4 class="link">{{empresa.nombre | upper}}</h4></a>
 						<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
-						<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
+						<label>Remuneraci&oacute;n:
+							{%if oportunidad.remuneracion.id == 3 %}
+								$ {{oportunidad.remuneracion_min}}
+							{%elif oportunidad.remuneracion.id == 2 %}
+								$ {{oportunidad.remuneracion_max}} - {{oportunidad.remuneracion_min}}
+							{%else%}
+								{{oportunidad.remuneracion}}
+							{%endif%}</label>
 					</div>
 					<div class="postulacion">
 						{% if oportunidad.estado_oportunidad == 'A'%}

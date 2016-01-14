@@ -408,7 +408,15 @@
                                             <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{oportunidad.empresa}}</label></div>
                                             <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}},
                                                 {{oportunidad.pais}}</label></div>
-                                            <div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label>
+                                            <div class="remuneracion"><i class="remuneracion"></i><label>
+                                                {%if oportunidad.remuneracion.id == 3 %}
+                                                    {{oportunidad.remuneracion_min}}
+                                                {%elif oportunidad.remuneracion.id == 2 %}
+                                                    {{oportunidad.remuneracion_max}} - {{oportunidad.remuneracion_min}}
+                                                {%else%}
+                                                    {{oportunidad.remuneracion}}
+                                                {%endif%}
+                                            </label>
                                             </div>
                                         </div>
                                         <div class="compatibilidad">
