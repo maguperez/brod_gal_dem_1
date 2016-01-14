@@ -83,4 +83,6 @@ def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunt
         notificacion.asunto = asunto
         notificacion.es_mensaje = es_mensaje
         notificacion.usuario_creacion = usuario_creacion
+        notificacion.fecha_creacion = datetime.now()
+        notificacion.fecha_creacion = datetime.now()
         notificacion.save()

@@ -321,12 +321,12 @@ def siguiente_fase( request ):
     #inactiva o activa a los seleccionados
     else:
         if id_fase == 0: #fue inactivado
-            # estado_postulacion = 'F'
+            estado_postulacion = 'F'
             estado_fase = constants.estado_inactivo
-            # notificacion_asunto = constants.proceso_finalizado_asunto
-            res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
-                                                                              fecha_modificacion = datetime.now(),
-                                                                              usuario_modificacion = user.username)
+            notificacion_asunto = constants.proceso_finalizado_asunto
+            # res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
+            #                                                                   fecha_modificacion = datetime.now(),
+            #                                                                   usuario_modificacion = user.username)
         if id_fase == -1: #fue reactivado
             estado_postulacion = 'P'
             if oportunidad.fase.id >= 2 and oportunidad.fase.id <= 3:
@@ -335,11 +335,11 @@ def siguiente_fase( request ):
                 estado_postulacion = 'F'
             estado_fase = constants.estado_activo
             notificacion_asunto = constants.proceso_reabierto_asunto
-            res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
-                                                                              estado_postulacion = estado_postulacion,
-                                                                              fecha_modificacion = datetime.now(),
-                                                                              usuario_modificacion = user.username)
-            enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, notificacion_asunto, False, user.username)
+        res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
+                                                                          estado_postulacion = estado_postulacion,
+                                                                          fecha_modificacion = datetime.now(),
+                                                                          usuario_modificacion = user.username)
+        enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, notificacion_asunto, False, user.username)
     #define response
     response = {
         'resp': 's'
