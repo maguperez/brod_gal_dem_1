@@ -29,7 +29,7 @@ class Oportunidad(models.Model):
     items_estado = utils.estado_oportunidad()
     periodo= []
     for e in PeriodosGraduacion.objects.all():
-        periodo.append((str(e.id), e.descripcion))
+        periodo.append((str(e.valor), e.descripcion))
 
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
     titulo = models.CharField(max_length="100", default=None, null=True, blank=True )
@@ -56,8 +56,8 @@ class Oportunidad(models.Model):
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
     fecha_publicacion = models.DateField(default=None,null=True, blank=True)
     fecha_cese = models.DateField(default=None,null=True, blank=True )
-    graduacion_desde = models.CharField(choices=periodo, max_length=1, default=None, null=True, blank=True)
-    graduacion_hasta = models.CharField(choices=periodo, max_length=1, default=None, null=True, blank=True)
+    graduacion_desde = models.CharField(choices=periodo, max_length=10, default=None, null=True, blank=True)
+    graduacion_hasta = models.CharField(choices=periodo, max_length=10, default=None, null=True, blank=True)
     fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
