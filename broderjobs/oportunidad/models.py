@@ -36,7 +36,6 @@ class Oportunidad(models.Model):
     carga_horaria = models.ForeignKey(CargaHoraria, default=None, null=True, blank=True, verbose_name="Jornada Laboral" )
     pais = models.ForeignKey(Pais, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, null=True, blank=True )
-    ciudad = models.ForeignKey(Ciudad, null=True, blank=True )
     remuneracion = models.ForeignKey(TipoRemuneracion, default=None, null=True, blank=True, verbose_name="Remuneracion")
     remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )

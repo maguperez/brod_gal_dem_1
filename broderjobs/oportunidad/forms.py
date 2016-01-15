@@ -11,7 +11,8 @@ class OportunidadForm(forms.ModelForm):
     # paises_hidden = forms.CharField(widget=forms.HiddenInput())
     #
     # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-    ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
+    ciudad_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
+    periodo_graduacion_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
     # ciudad = forms.ChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'}))
 

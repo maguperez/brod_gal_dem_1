@@ -916,7 +916,7 @@ button.link { border: none; background-color: transparent; font-weight: normal; 
 .modal-content {
     box-shadow: none !Important; border: 1px solid #ddd !Important; border-radius: 2px  !Important; }
 .empresa .redes h4 { margin: 0px; }
-.header-container { width: 100%; position: fixed; z-index: 4; }
+.header-container { width: 100%; position: fixed; z-index: 1071; }
 .empresa .centered, .oportunidades-empresa .centered
 .empresa > .centered,
 .empresas > .centered,
