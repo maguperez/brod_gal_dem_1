@@ -11,7 +11,7 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista"></ul>
-				<div class="cargando">CARGANDO....</div>
+				<div class="cargando"><br><br><h2>Cargando</h2></div>
 			</div>
 
 </section>
@@ -54,7 +54,7 @@
 	}
 
 	function fnCargarOportunidad(arra, index) {
-		$(".cargando").html("CARGANDO...");
+		$(".cargando").html("<br><br><h2>Cargando</h2>");
 		if (arra.length > index){
 			$.get("{% url 'empresa-oportunidad-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
    				$('#oportunidad-lista').append(htmlexterno);
@@ -62,7 +62,7 @@
 			});
 		}
 		else{
-			$(".cargando").html("<br><br><h1>No hay oportunidades que mostrar</h1>");
+			$(".cargando").html("<br><br><h2>No hay oportunidades que mostrar</h2>");
 		}
 	}
 

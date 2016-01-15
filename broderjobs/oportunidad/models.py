@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
-    Conocimiento, TipoRemuneracion, Beneficio, PeriodoGraduacion
+    Conocimiento, TipoRemuneracion, Beneficio, PeriodosGraduacion
 from empresa.models import Empresa
 from estudiante.models import Estudiante
 from django.contrib.auth.models import User
@@ -28,8 +28,8 @@ class ProcesoFase(models.Model):
 class Oportunidad(models.Model):
     items_estado = utils.estado_oportunidad()
     periodo= []
-    for e in PeriodoGraduacion.objects.all():
-        periodo.append((e.id, e.descripcion))
+    for e in PeriodosGraduacion.objects.all():
+        periodo.append((str(e.id), e.descripcion))
 
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
     titulo = models.CharField(max_length="100", default=None, null=True, blank=True )

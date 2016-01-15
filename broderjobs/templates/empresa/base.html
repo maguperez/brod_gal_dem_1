@@ -49,7 +49,7 @@
 				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<ul class="nav navbar-nav notify pull-right header-menu">
 					<li>
-						{% if 'mensaje' in request.path %}
+						{% if '/mensaje/' in request.path %}
 						<div class="actions">
 							<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
 						</div>

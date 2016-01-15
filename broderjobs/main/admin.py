@@ -25,6 +25,8 @@ admin.site.register(models.TipoRemuneracion)
 
 admin.site.register(models.Beneficio)
 
+admin.site.register(models.PeriodosGraduacion)
+
 
 
 

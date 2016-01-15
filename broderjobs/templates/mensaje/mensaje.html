@@ -1,13 +1,6 @@
+{% extends 'empresa/base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
-    <link rel="stylesheet" href="{% static 'css/broder.css' %}">
+{%block css%}
     <style>
         .mensaje > .centered { max-height: 500px; padding-bottom: 30px; }
         #main-content.page-mailbox h2,
@@ -80,107 +73,8 @@
         }
 
     </style>
-    <script src = "{% static 'js/jquery.min.js' %}"></script>
-    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
-    <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script>
-        $(function(){
-            $(window).load(function(){
-                $('.withScroll').each(function () {
-                    $(this).mCustomScrollbar("destroy");
-                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
-                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
-                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
-                    $(this).mCustomScrollbar({
-                        scrollButtons: {
-                            enable: false
-                        },
-                        //autoHideScrollbar: true,
-                        scrollInertia: 150,
-                        theme: "dark-2",
-                        set_height: scroll_height,
-                        advanced: {
-                            updateOnContentResize: true
-                        }
-                    });
-                });
-                $("[data-rel=tooltip]").tooltip();
-            });
-        })
-    </script>
-</head>
-<body>
-    <div class="header-container">
-		<header class="principal">
-            <div class="centered">
-				<a href = "{% url 'estudiante' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs"></a>
-                <ul class="nav navbar-nav notify pull-right header-menu">
-
-					<div class="actions">
-						<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
-					</div>
-					<div class="options">
-						<a class="mensajes" href="{%url 'buzon_entrada'%}">Mensajes</a>
-					</div>
-                    <!-- BEGIN USER DROPDOWN -->
-                    <li class="dropdown" id="user-header">
-                        <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
-
-
-							<div class="v-line"></div>
-                            <i class="fa fa-angle-down p-r-10"></i>
-                        </a>
-                        <ul class="dropdown-menu contextual">
-							<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
-							<li><a href="/configuracion/"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
-                            <li><a href="/salir/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
-                        </ul>
-
-                    </li>
-					<!--<div class="options">
-						<a class="mensajes">Mensajes</a>
-					</div>-->
-                    <!-- END USER DROPDOWN -->
-                </ul>
-				<!--<div class="options">
-					<a class="mensajes">Mensajes</a>
-				</div>
-
-				<div class="clear"></div>-->
-			</div>
-				<!--<div class="user">
-					<div class="menu" id="menu">
-						<i class="arrow-down white"></i>
-						<div class="v-line"></div>
-						<div class="clear"></div>
-						<div class="contextual-menu" id="ctx-menu-header">
-							<div class="wrapper">
-								<div class="pin"></div>
-								<ul>
-									<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
-									<li><a href="/configuracion/"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
-									<li><a href="/salir/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
-								<ul>
-							</ul></ul></div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-				<div class="options">
-					<a class="mensajes">Mensajes</a>
-				</div>
-				<div class="actions">
-					<a href="crear/">REDACTAR MENSAJE</a>
-				</div>
-				<div class="clear"></div>-->
-		</header>
-		<header class="menu">
-			<div class="centered">
-				<a id="link-oportunidades" class="active">Buzón de mensajes</a>
-				<div class="clear"></div>
-			</div>
-		</header>
-    </div>
+{%endblock%}
+{%block content%}
     <section class = "mensaje">
         <div id="main-content" class="page-mailbox centered">
             <div class="row" data-equal-height="true">
@@ -235,204 +129,7 @@
                                         <p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
                                     </div>
                                 </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar5_big.png" alt="avatar 5" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar10_big.png" alt="avatar 10" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                <h4 class="c-dark">Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar7_big.png" alt="avatar 7" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar9_big.png" alt="avatar 9" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                <h4 class="c-dark">Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar8_big.png" alt="avatar 8" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar11_big.png" alt="avatar 11" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                <h4 class="c-dark">Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar12_big.png" alt="avatar 12" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar13_big.png" alt="avatar 13" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                <h4 class="c-dark">Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar1_big.png" alt="avatar 1" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar5_big.png" alt="avatar 5" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar10_big.png" alt="avatar 10" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                <h4 class="c-dark">Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -550,5 +247,62 @@
             </div>
         </div>
     </section>
-</body>
-</html>
+{%endblock%}
+{%block js%}
+<script src = "{% static 'js/jquery.min.js' %}"></script>
+<script src = "{% static 'js/bootstrap.min.js' %}"></script>
+<script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script>
+    $(function(){
+        $(window).load(function(){
+                $('.withScroll').each(function () {
+                    $(this).mCustomScrollbar("destroy");
+                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
+                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
+                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
+                    $(this).mCustomScrollbar({
+                        scrollButtons: {
+                            enable: false
+                        },
+                        //autoHideScrollbar: true,
+                        scrollInertia: 150,
+                        theme: "dark-2",
+                        set_height: scroll_height,
+                        advanced: {
+                            updateOnContentResize: true
+                        }
+                    });
+                });
+                $("[data-rel=tooltip]").tooltip();
+            });
+		$( '#filtro' ).change( function() {
+			fnCargarMensajes();
+		});
+		fnCargarMensajes();
+    });
+    function fnCargarMensajes(){
+		$.ajax({
+				data: {'b': $( '#filtro' ).val() },
+				url: "{% url 'mensaje-buscar' %}",
+				type: 'get',
+				success: function (data) {
+					 $( '#messages-list' ).html('');
+					 fnCargarMensajes(data, 0);
+				}
+			});
+	}
+
+	function fnCargarMensajes(arra, index) {
+		$(".cargando").html("CARGANDO");
+		if (arra.length > index){
+			$.get("{% url 'mensaje-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
+   				$('#messages-list').append(htmlexterno);
+				fnCargarMensajes(arra, index+1);
+			});
+		}
+		else{
+			$(".cargando").html("<br><br><h1>No hay Mensajes que mostrar</h1>");
+		}
+	}
+    </script>
+{%endblock%}

@@ -1,15 +1,7 @@
+{% extends 'empresa/base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
-    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+{%block css%}
     <link rel="stylesheet" href="{% static 'css/summernote.css' %}">
-    <link rel="stylesheet" href="{% static 'css/broder.css' %}">
     <style>
         .mensaje > .centered { max-height: 500px; padding-bottom: 30px; }
         #main-content.page-mailbox h2,
@@ -99,88 +91,9 @@
         .select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #f50; }
         .note-editor { border: none !Important; }
         .note-toolbar { border: none; background-color: transparent !important;}
-    </style>
-    <script src = "{% static 'js/jquery.min.js' %}"></script>
-    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
-    <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script src = "{% static 'js/select2.js' %}"></script>
-    <script src = "{% static 'js/summernote.js' %}"></script>
-    <script src = "{% static 'js/summernote-i18n/summernote-es-ES.js' %}"></script>
-    <script>
-        $(function(){
-            $(window).load(function(){
-                $('.withScroll').each(function () {
-                    $(this).mCustomScrollbar("destroy");
-                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
-                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
-                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
-                    $(this).mCustomScrollbar({
-                        scrollButtons: {
-                            enable: false
-                        },
-                        //autoHideScrollbar: true,
-                        scrollInertia: 150,
-                        theme: "dark-2",
-                        set_height: scroll_height,
-                        advanced: {
-                            updateOnContentResize: true
-                        }
-                    });
-                });
-                $("[data-rel=tooltip]").tooltip();
-                $(".candidatos").select2({
-                    placeholder: "Candidatos"
-                });
-                $("#summernote").summernote({
-                    height: 325,
-                    lang: 'es-ES'
-                });
-            });
-        })
-    </script>
-</head>
-<body>
-    <div class="header-container">
-		<header class="principal">
-            <div class="centered">
-				<a href = "{% url 'estudiante' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs"></a>
-                <ul class="nav navbar-nav notify pull-right header-menu">
-
-					<div class="actions">
-						<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
-					</div>
-					<div class="options">
-						<a class="mensajes" href="{%url 'buzon_entrada'%}">Mensajes</a>
-					</div>
-                    <!-- BEGIN USER DROPDOWN -->
-                    <li class="dropdown" id="user-header">
-                        <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
-
-
-							<div class="v-line"></div>
-                            <i class="fa fa-angle-down p-r-10"></i>
-                        </a>
-                        <ul class="dropdown-menu contextual">
-							<li><a href="usuarios.html"><i class="users"></i><span class="v-line gray"></span><span>Usuarios</span><div class="clear"></div></a></li>
-							<li><a href="/configuracion/"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
-                            <li><a href="/salir/"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
-                        </ul>
-
-                    </li>
-					<!--<div class="options">
-						<a class="mensajes">Mensajes</a>
-					</div>-->
-                    <!-- END USER DROPDOWN -->
-                </ul>
-            </div>
-		</header>
-		<header class="menu">
-			<div class="centered">
-				<a id="link-oportunidades" class="active">Buzón de mensajes</a>
-				<div class="clear"></div>
-			</div>
-		</header>
-    </div>
+     </style>
+{%endblock%}
+{%block content%}
     <section class = "mensaje">
         <div id="main-content" class="page-mailbox centered">
             <div class="row" data-equal-height="true">
@@ -483,5 +396,44 @@
             </div>
         </div>
     </section>
-</body>
-</html>
+{%endblock%}
+{%block js%}
+    <script src = "{% static 'js/jquery.min.js' %}"></script>
+    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
+    <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src = "{% static 'js/select2.js' %}"></script>
+    <script src = "{% static 'js/summernote.js' %}"></script>
+    <script src = "{% static 'js/summernote-i18n/summernote-es-ES.js' %}"></script>
+    <script>
+        $(function(){
+            $(window).load(function(){
+                $('.withScroll').each(function () {
+                    $(this).mCustomScrollbar("destroy");
+                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
+                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
+                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
+                    $(this).mCustomScrollbar({
+                        scrollButtons: {
+                            enable: false
+                        },
+                        //autoHideScrollbar: true,
+                        scrollInertia: 150,
+                        theme: "dark-2",
+                        set_height: scroll_height,
+                        advanced: {
+                            updateOnContentResize: true
+                        }
+                    });
+                });
+                $("[data-rel=tooltip]").tooltip();
+                $(".candidatos").select2({
+                    placeholder: "Candidatos"
+                });
+                $("#summernote").summernote({
+                    height: 325,
+                    lang: 'es-ES'
+                });
+            });
+        })
+    </script>
+{%endblock%}

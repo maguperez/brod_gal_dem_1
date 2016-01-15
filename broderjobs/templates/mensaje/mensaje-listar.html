@@ -1,0 +1,42 @@
+{%if mensaje%}
+{%for mensaje in mensajes %}
+    <div class="message-item media">
+        <div class="pull-left text-center">
+            <div class="pos-rel message-checkbox">
+                <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+            </div>
+        </div>
+        <div class="message-item-right">
+            <div class="media">
+                <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
+                <div class="media-body">
+                    <small class="pull-right">23 Sept</small>
+                    <h5><strong>Jerry Smith</strong></h5>
+                    <h4>Re: Check Dropbox</h4>
+                </div>
+            </div>
+            <p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+        </div>
+    </div>
+
+    <div class="message-item media message-active">
+        <div class="pull-left text-center">
+            <div class="pos-rel message-checkbox">
+                <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
+            </div>
+        </div>
+        <div class="message-item-right">
+            <div class="media">
+                <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
+                <div class="media-body">
+                    <small class="pull-right">23 Sept</small>
+                    <h5><strong>Jerry Smith</strong></h5>
+                    <h4>Re: Check Dropbox</h4>
+                </div>
+            </div>
+            <p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
+        </div>
+    </div>
+
+{%endfor%}
+{%endif%}

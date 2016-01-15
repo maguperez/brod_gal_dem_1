@@ -187,6 +187,7 @@ class OportunidadListarView(TemplateView):
         context['oportunidades'] = oportunidades
         return context
 
+################################################# PRUEBAS
 class OportunidadBusquedaView(TemplateView):
     def get(self, request, *args, **kwargs):
         # busqueda = request.GET['busqueda']
@@ -261,6 +262,8 @@ def oportunidad_busqueda(request):
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = 'A', empresa_id= empresa.id)
         return render_to_response('empresa/oportunidades.html', {'oportunidades': oportunidades, 'empresa': empresa},
                                   context_instance = RequestContext(request))
+
+##################################################PRUEBAS
 
 class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
