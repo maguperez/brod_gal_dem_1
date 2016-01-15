@@ -115,13 +115,13 @@
             </div>
             <div class="estado">
                 {%if oportunidad.estado_oportunidad == 'P' %}
-                <label>oportunidad pendiente</label>
+                <label>oportunidad archivada</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'A' %}
-                <label>oportunidad abierta</label>
+                <label>postulacion abierta</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'C' %}
-                <label>oportunidad cerrada</label>
+                <label>postulacion cerrada</label>
                 {%endif%}
                 <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
             </div>
@@ -137,7 +137,7 @@
                         <label class="nombre">Inscripciones</label>
                     </div>
                     <div class="estadistica">
-                        <label id = "visualizaciones" class="cifra">792</label>
+                        <label id = "visualizaciones" class="cifra"></label>
                         <label class="nombre">Visualizaciones</label>
                     </div>
                     <div class="clear"></div>
@@ -237,7 +237,7 @@
     var iniciado = false;
     var selected;
     $(function(){
-        panel = new MixpanelExport({
+        /*panel = new MixpanelExport({
             api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
             api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
         });
@@ -258,6 +258,14 @@
                 total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
             }
             $("#visualizaciones").html(total);
+        });*/
+        $.ajax({
+            data : {'id':'{{oportunidad.id}}'},
+            url: '{%url "contador-visitas-oportunidad-obtener" %}',
+            type: 'get',
+            success: function(data){
+            $("#visualizaciones").html(data["total"]);
+            }
         });
 
     })
@@ -299,7 +307,9 @@
                     fnCambioFase(id, id_estudiante);
                 });
                 $("#tb_candidatos").on("click", ".mensaje", function () {
-                    $(".destinatarios ul").append('<li><label class="nombre">'+ $(this).closest('tr').prev().find('td:nth-child(4)').html() +'</label></li>');
+                    $("#tb_candidatos").find('input:checkbox').prop( "checked", false );
+                    $(this).closest('tr').prev().find('input:checkbox').prop( "checked", true );
+                    $(".destinatarios ul").html('<li><label class="nombre">'+ $(this).closest('tr').prev().find('td:nth-child(4)').html() +'</label></li>');
                 });
             };
             this.obtener = function(){
@@ -476,7 +486,7 @@
 
 
         $('#abrir-mensaje').click(function(){
-            $(".destinatarios ul").hmtl = '';
+            $(".destinatarios ul").html('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                $(".destinatarios ul").append('<li><label class="nombre">'+ $(this).parent().parent().find('td:nth-child(4)').html() +'</label></li>');
             });

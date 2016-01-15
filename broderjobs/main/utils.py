@@ -22,8 +22,8 @@ def anos_rango():
 #carga el rango de semestre para el  select
 def semestre_rango():
     semestres = []
-    for y in range(0,3):
-        semestres.append((str(y), "Sem " + str(y)))
+    for y in range(1,3):
+        semestres.append((str(y), "Ciclo " + str(y)))
     return [('', 'Semestre')] + semestres
 
 #carga el rango de semestre para el  select

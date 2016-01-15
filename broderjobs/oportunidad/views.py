@@ -219,7 +219,7 @@ class OportunidadEditarView(FormView):
         estado_anterior = oportunidad.estado_oportunidad
 
         if '_guardar' in self.request.POST:
-            if date.today() > oportunidad.fecha_cese:
+            if oportunidad.fecha_cese is not None and date.today() > oportunidad.fecha_cese:
                 estado_nuevo = constants.estado_cerrado
             else:
                 estado_nuevo = constants.estado_abierto
@@ -328,10 +328,7 @@ def siguiente_fase( request ):
 
     #actualiza a la siguiente fase
     if id_fase > 0:
-        if id_fase < 4:
-            estado_postulacion = 'E'
-        else:
-            estado_postulacion = 'F'
+        estado_postulacion = 'E'
         fase = ProcesoFase.objects.get(pk = id_fase)
         res_postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase,
                                                                                         estado_postulacion = estado_postulacion,
@@ -347,6 +344,9 @@ def siguiente_fase( request ):
             estado_postulacion = 'F'
             estado_fase = constants.estado_inactivo
             notificacion_asunto = constants.proceso_finalizado_asunto
+            # res_postulaciones = Postulacion.objects.filter(pk__in=ids).update(estado_fase = estado_fase,
+            #                                                                   fecha_modificacion = datetime.now(),
+            #                                                                   usuario_modificacion = user.username)
         if id_fase == -1: #fue reactivado
             estado_postulacion = 'P'
             if oportunidad.fase.id >= 2 and oportunidad.fase.id <= 3:
@@ -359,7 +359,7 @@ def siguiente_fase( request ):
                                                                           estado_postulacion = estado_postulacion,
                                                                           fecha_modificacion = datetime.now(),
                                                                           usuario_modificacion = user.username)
-        enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, notificacion_asunto, False, User.username)
+        enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, notificacion_asunto, False, user.username)
     #define response
     response = {
         'resp': 's'

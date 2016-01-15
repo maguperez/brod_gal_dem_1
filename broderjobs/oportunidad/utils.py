@@ -15,7 +15,7 @@ def obtener_candidatos (objects):
         nombre = str(estudiante.persona)
         universidad = str(estudiante.universidad)
         carrera = str(estudiante.carrera)
-        graduacion = "Sem " + str(estudiante.semestre_graduacion) + " del año " + str(estudiante.ano_graduacion)
+        graduacion = "Ciclo " + str(estudiante.semestre_graduacion) + " del año " + str(estudiante.ano_graduacion)
         fecha_postulacion = str(p.fecha_creacion)
         compatibilidad = "60%"
         records = {"checkbox":"", "id":id, "id_estudiante": estudiante.id, "nombre":nombre,"universidad":universidad,"carrera":carrera,

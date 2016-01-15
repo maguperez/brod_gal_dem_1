@@ -2,6 +2,7 @@
 from .models import Mensaje, Mensaje_Destinatario, Notificacion
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
+from main.models import Persona
 from datetime import date, datetime
 
 def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estudiantes, asunto, contenido, permite_respuesta, es_respuesta):
@@ -54,10 +55,15 @@ def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto,
     enviar_notificacion(oportunidad, usuario_destinatario, asunto, True, ususrio_remitente.username)
 
 def enviar_notificacion(oportunidad, usuario_destinatario, asunto, es_mensaje, usuario_creacion):
-    #postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante__persona__usuario = usuario_destinatario.id)
+
+    persona = Persona.objects.get(usuario_id = usuario_destinatario.id)
     notificacion = Notificacion()
+
+    if persona.tipo_persona == 'E':
+        postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante__persona = persona.id)
+        notificacion.postulacion = postulacion
+
     notificacion.oportunidad = oportunidad
-    # notificacion.postulacion = postulacion
     notificacion.usuario_destinatario = usuario_destinatario
     notificacion.asunto = asunto
     notificacion.es_mensaje = es_mensaje
@@ -77,4 +83,6 @@ def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunt
         notificacion.asunto = asunto
         notificacion.es_mensaje = es_mensaje
         notificacion.usuario_creacion = usuario_creacion
+        notificacion.fecha_creacion = datetime.now()
+        notificacion.fecha_creacion = datetime.now()
         notificacion.save()

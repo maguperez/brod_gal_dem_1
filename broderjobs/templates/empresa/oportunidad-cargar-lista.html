@@ -22,13 +22,13 @@
 							</div>
 							<div class="estado">
 								{%if oportunidad.estado_oportunidad == 'P' %}
-									<label>archivada</label>
+									<label>oportunidad archivada</label>
 								{%endif%}
 								{%if oportunidad.estado_oportunidad == 'A' %}
-									<label>abierta</label>
+									<label>postulacion abierta</label>
 								{%endif%}
 								{%if oportunidad.estado_oportunidad == 'C' %}
-									<label>cerrada</label>
+									<label>postulacion cerrada</label>
 								{%endif%}
 								<label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
 							</div>
@@ -98,7 +98,7 @@
 				to_date: date,
 				expire: 8798798765,
 				retention_type: "compounded",
-				event: "Visita Oportunidad",
+				event: "Vista Oportunidad",
 				//born_event: "Visita Oportunidad",
 				where: 'properties["OportunidadID"] == "'+ id +'"'
 			}).then(function(data) {
@@ -109,13 +109,22 @@
 					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
 					total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
 				}
-				$("#visualizaciones-"+id).html(total);
+				//$("#visualizaciones-"+id).html(total);
 				$(obj).sparkline(array, {
 					type: 'bar',
 					height: '50px',
 					barSpacing: 7,
 					barWidth: 10,
 					barColor: '#5d9cf9'
+				});
+				$.ajax({
+					data : {'id':id},
+					url: '{%url "contador-visitas-oportunidad-obtener" %}',
+					type: 'get',
+					success: function(data){
+						debugger;
+						$("#visualizaciones-"+id).html(data["total"]);
+					}
 				});
 			});
 		});

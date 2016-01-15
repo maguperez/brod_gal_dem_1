@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [
     url(r'^oportunidad-enviar/$', 'contador_visitas.views.oportunidad_enviar', name="contador-visitas-oportunidad-enviar"),
 
-    url(r'^oportunidad-obtener/$', 'contador_visitas.views.oportunidad_obtener', name="contador_visitas-oportunidad-obtenet"),
+    url(r'^oportunidad-obtener/$', 'contador_visitas.views.oportunidad_obtener', name="contador-visitas-oportunidad-obtener"),
 ]
 

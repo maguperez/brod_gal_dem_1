@@ -18,7 +18,7 @@ from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
-from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales
+from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
@@ -156,12 +156,14 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             mi_evaluacion.flexibilidad_horarios = 0
             mi_evaluacion.ambiente_trabajo = 0
             mi_evaluacion.salarios = 0
+        imagenes = Picture.objects.filter(empresa_id = empresa.id)
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         context['ranking'] = ranking
         context['mi_evaluacion'] = mi_evaluacion
         context['redes_sociales'] = redes_sociales
+        context['imagenes'] = imagenes
         return context
 
     def form_valid(self, form):
@@ -1067,7 +1069,7 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
         try:
             mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id=self.request.user,
-                                                           mensaje__oportunidad_id = oportunidad.id)
+                                                           mensaje__oportunidad_id = oportunidad.id).order_by("-fecha_envio")
         except Mensaje_Destinatario.DoesNotExist:
             mensajes = None
         context = super(ProcesoDetalleView, self).get_context_data(**kwargs)
