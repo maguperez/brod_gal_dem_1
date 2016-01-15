@@ -12,10 +12,10 @@ class Sector(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
-    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    class Meta:
+        ordering = ["orden"]
 
     def __unicode__(self):
         return self.descripcion
@@ -23,9 +23,13 @@ class Sector(models.Model):
 class Puesto(models.Model):
     descripcion = models.CharField(max_length="50")
 
+    orden = models.IntegerField(null= True, blank= True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["orden"]
 
     def __unicode__(self):
         return self.descripcion
@@ -36,6 +40,9 @@ class NumeroFuncionarios(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    class Meta:
+        ordering = ["orden"]
 
     def __unicode__(self):
         return self.descripcion
@@ -46,6 +53,9 @@ class FacturacionAnual(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    class Meta:
+        ordering = ["orden"]
 
     def __unicode__(self):
         return self.descripcion
@@ -57,6 +67,9 @@ class CategoriaEmpresa(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    class Meta:
+        ordering = ["orden"]
 
     def __unicode__(self):
         return unicode('%s' % (self.persona)) or u''
