@@ -82,8 +82,11 @@
                     <div class="panel panel-default">
                         <div class="panel-body messages">
                             <div class="input-group input-group-lg border-bottom" style = "width: 100%">
-                                <select class="form-control msearch bd-0 bd-white">
-                                    <option>Seleccione oportunidad</option>
+                                <select class="form-control msearch bd-0 bd-white" id="oportunidad_id" placeholder="Seleccione una Oportunidad">
+                                    <option value="0">Todos</option>
+                                    {%for p in oportunidades %}
+                                        <option value="{{p.id}}">{{p.titulo}}</option>
+                                    {%endfor%}
                                 </select>
                             </div>
                             <div class="input-group input-group-lg border-bottom">
@@ -93,42 +96,42 @@
                                 <input type="text" class="form-control  msearch bd-0 bd-white" placeholder="Buscar">
                             </div>
                             <div id="messages-list" class="panel panel-default withScroll" data-height="window" data-padding="255" style="height: 518px;">
-                                <div class="message-item media">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar3_big.png" alt="avatar 3" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                <h4 class="c-dark">Reset your account password</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item media message-active">
-                                    <div class="pull-left text-center">
-                                        <div class="pos-rel message-checkbox">
-                                            <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="message-item-right">
-                                        <div class="media">
-                                            <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
-                                            <div class="media-body">
-                                                <small class="pull-right">23 Sept</small>
-                                                <h5><strong>Jerry Smith</strong></h5>
-                                                <h4>Re: Check Dropbox</h4>
-                                            </div>
-                                        </div>
-                                        <p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>
-                                    </div>
-                                </div>
+                                <!--<div class="message-item media">-->
+                                    <!--<div class="pull-left text-center">-->
+                                        <!--<div class="pos-rel message-checkbox">-->
+                                            <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="message-item-right">-->
+                                        <!--<div class="media">-->
+                                            <!--<img src="assets/img/avatars/avatar3_big.png" alt="avatar 3" width="50" class="pull-left">-->
+                                            <!--<div class="media-body">-->
+                                                <!--<small class="pull-right">23 Sept</small>-->
+                                                <!--<h5 class="c-dark"><strong>John Snow</strong></h5>-->
+                                                <!--<h4 class="c-dark">Reset your account password</h4>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="message-item media message-active">-->
+                                    <!--<div class="pull-left text-center">-->
+                                        <!--<div class="pos-rel message-checkbox">-->
+                                            <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="message-item-right">-->
+                                        <!--<div class="media">-->
+                                            <!--<img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">-->
+                                            <!--<div class="media-body">-->
+                                                <!--<small class="pull-right">23 Sept</small>-->
+                                                <!--<h5><strong>Jerry Smith</strong></h5>-->
+                                                <!--<h4>Re: Check Dropbox</h4>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
                             </div>
                         </div>
@@ -281,28 +284,10 @@
 		fnCargarMensajes();
     });
     function fnCargarMensajes(){
-		$.ajax({
-				data: {'b': $( '#filtro' ).val() },
-				url: "{% url 'mensaje-buscar' %}",
-				type: 'get',
-				success: function (data) {
-					 $( '#messages-list' ).html('');
-					 fnCargarMensajes(data, 0);
-				}
+		$.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val(), function(htmlexterno){
+   				$('#messages-list').append(htmlexterno);
 			});
 	}
 
-	function fnCargarMensajes(arra, index) {
-		$(".cargando").html("CARGANDO");
-		if (arra.length > index){
-			$.get("{% url 'mensaje-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
-   				$('#messages-list').append(htmlexterno);
-				fnCargarMensajes(arra, index+1);
-			});
-		}
-		else{
-			$(".cargando").html("<br><br><h1>No hay Mensajes que mostrar</h1>");
-		}
-	}
     </script>
 {%endblock%}

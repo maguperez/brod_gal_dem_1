@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'django.contrib.postgres',
     'crispy_forms',
     'main',
     'estudiante',
@@ -48,7 +49,8 @@ INSTALLED_APPS = (
     'oportunidad',
     'endless_pagination',
     'mensaje',
-    'contador_visitas'
+    'contador_visitas',
+
 
 )
 

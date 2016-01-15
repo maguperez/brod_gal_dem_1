@@ -52,6 +52,8 @@ def homepage(request):
             registro_form = RegisterForm(request.POST, prefix='registro')
             if '_login' in request.POST:
                 if login_form.is_valid():
+                    if not login_form.cleaned_data['remember_me']:
+                        request.session.set_expiry(0)
                     user = authenticate(username=request.POST["login-email"], password= request.POST["login-password"])
                     if user is not None:
                         persona = Persona()
