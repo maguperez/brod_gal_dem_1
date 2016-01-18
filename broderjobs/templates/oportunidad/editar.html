@@ -295,13 +295,16 @@
 			$("#id_estado_oportunidad").val("C").trigger("change");
 			 $('#form-modal').modal('toggle');
 		}
-		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+
+		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
+
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio'];
 
 		InicializarSelect2(elementosParaSelect2);
 		InicializarTypeahead();
 
 		$("#link-oportunidades").addClass("active");
-		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
+
 		$("#id_fecha_cese").datepicker({
 			language: 'es',
 			format: "dd/mm/yyyy",
