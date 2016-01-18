@@ -16,6 +16,8 @@
 		<script src="{% static 'js/slidebars.min.js' %}"></script>
         <script src="{% static 'js/jquery.validate.min.js' %}"></script>
         <script src="{% static 'js/additional-methods.min.js' %}"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+		<script src="{% static 'js/jstorage.js' %}"></script>
 	</head>
 	<body>
 		<div class="home empresas">
@@ -50,7 +52,7 @@
                                         {{ login_form.password }}
                                     </div>
                                     <div class="opciones">
-                                        <input type="checkbox" id="recordarme" /><label for="recordarme">Recordarme.</label>
+                                        {{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
                                         <a>¿Olvidaste tu contrase&ntilde;a?</a>
                                     </div>
                                     <div class="division">
@@ -261,6 +263,33 @@
             }
         });
         $("#link-sesion").addClass("active");
+
+
+        //Recordar ContraseñaEstudiante
+			var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
+					key = 'savedUsernameRe', keypass='savedPasswordRe',
+					username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
+			if (username) {
+				userField.val(username);
+				passField.val(pass);
+				checkbox.prop('checked', true);
+				$('#id_login-password').focus();
+			}
+			else {
+				userField.val('').focus();
+				passField.val('');
+				checkbox.prop('checked', false);
+			}
+			$("#id_login-remember_me").click(function(){
+				if ($(this).prop('checked')) {
+					$.jStorage.set(key, userField.val());
+					$.jStorage.set(keypass, passField.val());
+				}
+				else {
+					$.jStorage.deleteKey(key);
+					$.jStorage.deleteKey(keypass);
+				}
+			});
     });
 </script>
 	</body>

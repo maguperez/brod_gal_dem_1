@@ -948,7 +948,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
         oportunidades = Oportunidad.objects.filter(
-            Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
+            Q(titulo__unaccent__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
             Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
             Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
             Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).order_by('fecha_publicacion').distinct()
@@ -1013,7 +1013,7 @@ def oportunidad_cargar_lista(request):
 
     busqueda = request.GET.get('b')
     oportunidades = Oportunidad.objects.filter(
-        Q(titulo__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
+        Q(titulo__unaccent__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
         Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
         Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
         Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).order_by('fecha_publicacion').distinct()

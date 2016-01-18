@@ -4,7 +4,6 @@ from django.shortcuts import render, render_to_response, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from django.core import serializers
 from django.contrib.auth.models import User

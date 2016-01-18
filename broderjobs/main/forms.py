@@ -10,7 +10,7 @@ import datetime
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password'}))
-
+    remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
 
 class UniqueUserEmailField(forms.EmailField):
     """
@@ -168,7 +168,6 @@ class RegistroRepresentanteForm(UserCreationForm):
             if commit:
                 user.save()
         return user
-
 
 class EditarUsuarioForm( PasswordChangeForm ):
 

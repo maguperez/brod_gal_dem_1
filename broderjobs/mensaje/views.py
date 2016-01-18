@@ -8,14 +8,23 @@ from django.http import HttpResponse
 from datetime import date, datetime
 import json
 from cStringIO import StringIO
+from django.views.generic import TemplateView, FormView
 from .utils import enviar_mensaje, enviar_mensaje_multiple_estudiantes
 from oportunidad.models import Oportunidad, Postulacion
 from .models import Notificacion
+from main.models import Persona
+from empresa.models import Empresa, Representante
+from main.utils import LoginRequiredMixin
 
 # Create your views here.
 def buzon_entrada(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
-    return render_to_response('mensaje/mensaje.html',
+    user = request.user
+    persona = Persona.objects.get(usuario_id=user.id)
+    representante = Representante.objects.get(persona_id =persona.id)
+    empresa = Empresa.objects.get(id=representante.empresa.id)
+    oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
+    return render_to_response('mensaje/mensaje.html', {'oportunidades' : oportunidades},
                               context_instance=RequestContext(request))
 # Create your views here.
 def mensaje_crear(request):
@@ -110,3 +119,39 @@ def mensaje_notificacion_vista( request ):
     json.dump(response, s)
     s.seek(0)
     return HttpResponse(s.read())
+
+class MensajeBuscarView(LoginRequiredMixin, TemplateView):
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
+        context = super(MensajeBuscarView, self).get_context_data(**kwargs)
+        context['oportunidades'] = oportunidades
+        return context
+
+    def get(self, request, *args, **kwargs):
+        id = request.GET.get('id')
+        user = request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        mensajes = Mensaje()
+        if id != '0':
+            mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id, estado = 'A').order_by("-fecha_creacion")
+        else:
+            mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad__empresa= empresa.id,
+                                                           estado = 'A').order_by("-fecha_creacion")
+        # list_men =[]
+        # for men in mensaje:
+        #     e = {
+        #         "id": op.id
+        #     }
+        #     list_op.append(e)
+        # data = json.dumps(list_op)
+        # # data = serializers.serialize('json', oportunidades, fields=('id', 'titulo', 'fecha_cese'))
+        # return HttpResponse(data, content_type='application/json')
+        return render_to_response('mensaje/mensaje-listar.html', {'mensajes': mensajes},
+                                  context_instance = RequestContext(request))

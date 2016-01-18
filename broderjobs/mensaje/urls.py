@@ -15,6 +15,6 @@ urlpatterns =[
 
     url(r'^notificacion-vistas/', 'mensaje.views.mensaje_notificacion_vista', name='mensaje-notificacion-vistas'),
 
-    # url(r'^listar/', 'mensaje.views.mensaje_buscar', name='mensaje-buscar'),
+    url(r'^listar/', views.MensajeBuscarView.as_view(), name='mensaje-buscar'),
 
 ]
