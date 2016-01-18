@@ -46,7 +46,7 @@ class Oportunidad(models.Model):
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
-    grado_estudio = models.ForeignKey(GradoEstudio,default=None, null=True, blank=True, verbose_name="grado estudios")
+    grado_estudio = models.ManyToManyField(GradoEstudio,default=None, null=True, blank=True, verbose_name="grado estudios")
     universidad = models.ManyToManyField(Universidad, default=None, blank=True, verbose_name="universidad")
     carrera = models.ManyToManyField(Carrera, default=None, blank=True, verbose_name="carrera")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")

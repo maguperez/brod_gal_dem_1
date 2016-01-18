@@ -89,12 +89,12 @@
                                     {%endfor%}
                                 </select>
                             </div>
-                            <div class="input-group input-group-lg border-bottom">
-                                <span class="input-group-btn">
-                                    <a href="" class="btn"><i class="fa fa-search"></i></a>
-                                </span>
-                                <input type="text" class="form-control  msearch bd-0 bd-white" placeholder="Buscar">
-                            </div>
+                            <!--<div class="input-group input-group-lg border-bottom">-->
+                                <!--<span class="input-group-btn">-->
+                                    <!--<a href="" class="btn"><i class="fa fa-search"></i></a>-->
+                                <!--</span>-->
+                                <!--<input type="text" class="form-control  msearch bd-0 bd-white" placeholder="Buscar">-->
+                            <!--</div>-->
                             <div id="messages-list" class="panel panel-default withScroll" data-height="window" data-padding="255" style="height: 518px;">
                                 <!--<div class="message-item media">-->
                                     <!--<div class="pull-left text-center">-->
@@ -282,6 +282,10 @@
 			fnCargarMensajes();
 		});
 		fnCargarMensajes();
+        $("#oportunidad_id").select2({
+  			placeholder: "Todos",
+  			allowClear: true
+		});
     });
     function fnCargarMensajes(){
 		$.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val(), function(htmlexterno){
