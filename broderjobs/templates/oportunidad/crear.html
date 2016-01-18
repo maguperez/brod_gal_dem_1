@@ -27,7 +27,7 @@
 	}
 
 </style>
-<form action="" method="post">{%csrf_token%}
+<form action="" method="post" autocomplete="off">{%csrf_token%}
 	<section class="oportunidad-detalle">
 		<div class="centered">
 			{% if form.errors %}
@@ -161,6 +161,7 @@
 										<label class = "col-sm-3 control-label">Grado de estudio *</label>
 										<div class = "col-sm-9">
 											{{form.grado_estudio}}
+											<div class="tooltip-manual" id="tooltip-grado-estudio"></div>
 											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
 										</div>
 										<div class="clear"></div>
@@ -468,6 +469,26 @@
 
 	function InicializarValidaciones(){
 
+		$.validator.addMethod('MaximoMayorMinimo',function(value, element, param){
+//			debugger;
+
+			var valorRetorno = true;
+
+			if($('#id_remuneracion_1').is(':checked')){
+				if($('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+					var montoMinimo = parseInt($('#id_remuneracion_min').val(),10);
+					var montoMaximo = parseInt($('#id_remuneracion_max').val(),10);
+
+					if(montoMinimo > montoMaximo){
+						valorRetorno = false;
+					}
+				}
+			}
+
+			return valorRetorno;
+
+		},'Valor maximo debe ser mayor que Valor minimo');
+
 		$("form").validate({
             errorPlacement: function (error, element) {
 				if(element[0].id == 'id_pais'){
@@ -475,6 +496,9 @@
 				}
 				else if(element[0].id == 'id_carrera'){
 					ConfigurarTooltip('#tooltip-carrera',error,"right");
+				}
+				else if(element[0].id == 'id_grado_estudio'){
+					ConfigurarTooltip('#tooltip-grado-estudio',error,"right");
 				}
 				else if(element[0].id == 'id_remuneracion_min'){
 					ConfigurarTooltip(element,error,"left");
@@ -522,7 +546,8 @@
 				remuneracion_max:{
 					required: true,
 					digits: true,
-					maxlength: 7
+					maxlength: 7,
+					MaximoMayorMinimo: ''
 				}
 
             },
