@@ -175,6 +175,7 @@
 				$.slidebars();
 			});
 			function activar(id) {
+				$(".tooltip").remove();
 				sessionStorage.setItem("main", id);
 				$(".flex-div:not(#"+id+")").removeClass('active');
 				$(".flex-div:not(#"+id+")").hide();
@@ -300,7 +301,7 @@
 			$("select").on("change", function(){
 				$(this).val() != "" ?
 					$(this).css("color", "black"):
-					$(this).css("color", "#ccc");
+					$(this).css("color", "#a5a5a5");
 			});
             $("#link-registro").addClass("active");
 		    $(".cumpleanos").css("margin-right", "3px")
