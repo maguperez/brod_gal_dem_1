@@ -153,6 +153,12 @@
 {% endblock %}
 {%block js%}
 <script>
-
+$(function(){
+	$(window).scroll(function() {
+		if ( $(this).scrollTop() > 60 )
+			$(".box.alcance").addClass("fixed");
+		else $(".box.alcance").removeClass("fixed");
+	});
+})
 </script>
 {%endblock%}

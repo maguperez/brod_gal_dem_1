@@ -1422,3 +1422,8 @@ a:hover {
     bottom: 30px;
   }
 }
+.box.alcance.fixed{
+    top: 105px;
+    position: fixed;
+    width: 223px;
+}

@@ -313,6 +313,11 @@
 </style>
 <script>
 	$(function(){
+		$(window).scroll(function() {
+			if ( $(this).scrollTop() > 60 )
+				$(".box.alcance").addClass("fixed");
+			else $(".box.alcance").removeClass("fixed");
+		});
 		if(window.location.href.indexOf("archivar") >= 0){
 			$("#id_estado_oportunidad").val("C").trigger("change");
 			 $('#form-modal').modal('toggle');
