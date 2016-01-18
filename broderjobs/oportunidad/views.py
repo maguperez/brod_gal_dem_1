@@ -53,19 +53,15 @@ class OportunidadCrearView(FormView):
         remuneracion = form.cleaned_data['remuneracion']
 
         if remuneracion is not None:
-            if remuneracion is '1':
+            if remuneracion.id is 1:
                 remuneracion_min = None
                 remuneracion_max = None
-            elif remuneracion is '2':
-                    remuneracion_min = form.cleaned_data['remuneracion_min']
-                    remuneracion_max = form.cleaned_data['remuneracion_max']
-            elif remuneracion is '3':
+            elif remuneracion.id is 2:
+                remuneracion_min = form.cleaned_data['remuneracion_min']
+                remuneracion_max = form.cleaned_data['remuneracion_max']
+            elif remuneracion.id is 3:
                 remuneracion_min = form.cleaned_data['remuneracion_min']
                 remuneracion_max = None
-
-
-
-
 
         fecha_cese = form.cleaned_data['fecha_cese']
         resumen = form.cleaned_data['resumen']
@@ -100,7 +96,7 @@ class OportunidadCrearView(FormView):
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
-        oportunidad.grado_estudio = grado_estudio
+
         oportunidad.resumen = resumen
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
@@ -122,6 +118,7 @@ class OportunidadCrearView(FormView):
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         oportunidad.beneficio = beneficio
+        oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
@@ -153,7 +150,7 @@ class OportunidadEditarView(FormView):
                 'tipo_puesto': oportunidad.tipo_puesto,
                 'estado': oportunidad.estado,
                 'estado_oportunidad': oportunidad.estado_oportunidad,
-                'grado_estudio': oportunidad.grado_estudio,
+                'grado_estudio': oportunidad.grado_estudio.all(),
                 'universidad': oportunidad.universidad.all(),
                 'carrera': oportunidad.carrera.all(),
                 'idioma': oportunidad.idioma.all(),
@@ -184,6 +181,20 @@ class OportunidadEditarView(FormView):
         id_ciudad = form.cleaned_data['ciudad_hidden']
 
         remuneracion = form.cleaned_data['remuneracion']
+
+        if remuneracion is not None:
+            if remuneracion.id is 1:
+                remuneracion_min = None
+                remuneracion_max = None
+            elif remuneracion.id is 2:
+                remuneracion_min = form.cleaned_data['remuneracion_min']
+                remuneracion_max = form.cleaned_data['remuneracion_max']
+            elif remuneracion.id is 3:
+                remuneracion_min = form.cleaned_data['remuneracion_min']
+                remuneracion_max = None
+
+
+
         fecha_cese = form.cleaned_data['fecha_cese']
         resumen = form.cleaned_data['resumen']
         beneficio = form.cleaned_data['beneficio']
@@ -209,12 +220,16 @@ class OportunidadEditarView(FormView):
                 oportunidad.ciudad = ciudad
         else:
             oportunidad.ciudad = None
+
         oportunidad.remuneracion = remuneracion
+        oportunidad.remuneracion_min = remuneracion_min
+        oportunidad.remuneracion_max = remuneracion_max
+
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.resumen = resumen
         oportunidad.tipo_puesto = tipo_puesto
-        oportunidad.grado_estudio = grado_estudio
+
         oportunidad.estado = constants.estado_activo
         estado_anterior = oportunidad.estado_oportunidad
 
@@ -249,6 +264,7 @@ class OportunidadEditarView(FormView):
         oportunidad.conocimiento = conocimiento
         oportunidad.beneficio = beneficio
         oportunidad.estado_oportunidad = estado_nuevo
+        oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
 
