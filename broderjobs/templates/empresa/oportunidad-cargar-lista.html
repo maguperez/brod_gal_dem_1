@@ -122,7 +122,6 @@
 					url: '{%url "contador-visitas-oportunidad-obtener" %}',
 					type: 'get',
 					success: function(data){
-						debugger;
 						$("#visualizaciones-"+id).html(data["total"]);
 					}
 				});

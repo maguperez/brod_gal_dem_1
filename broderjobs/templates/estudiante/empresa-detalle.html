@@ -482,10 +482,10 @@
 
                         <div>
                             <div class="facebook">
-                                <h4><a href="{{redes_sociales.facebook}}"> FACEBOOK</a></h4>
+                                <h4><a href="{{redes_sociales.facebook}}" target="_blank"> FACEBOOK</a></h4>
                             </div>
                             <div class="twitter">
-                                <h4><a href="{{redes_sociales.twitter}}">TWITTER</a></h4>
+                                <h4><a href="{{redes_sociales.twitter}}" target="_blank">TWITTER</a></h4>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -774,7 +774,7 @@
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
                 center: new google.maps.LatLng(-12.0570208,-77.0372896),
-                zoom: 8,
+                zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);

@@ -135,9 +135,16 @@
 					<section class="ubicacion">
 						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n<button id="ubicacion-button" class="link editar">Editar</button></h3>
 						<div>
-							<p>{{empresa.direccion_map}}</p>
-							<p id = "empresa-id_latitud">{{empresa.latitud}}</p>
-							<p id = "empresa-id_longitud">{{empresa.longitud}}</p>
+
+
+							<div id = "empresa-id_direccion_map">{{empresa.direccion_map}}</div>
+                            <i class = "fa fa-map-marker"></i>
+                            <label><b>Latitud:</b></label>
+                            <span id = "empresa-id_longitud">{{empresa.longitud}}</span> -
+                            <label><b>Longitud:</b></label>
+                            <span id = "empresa-id_latitud">{{empresa.latitud}}</span><br><br>
+
+
 							<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
 						</div>
 					</section>
@@ -246,11 +253,11 @@
 			var mapCanvas = document.getElementById('empresa-map');
 			var mapOptions = {
 				center: new google.maps.LatLng(44.5403, -78.5463),
-				zoom: 8,
+				zoom: 15,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 			Empresa.map = new google.maps.Map(mapCanvas, mapOptions);
-			if ($("#empresa-id_latitud").html() != "") {
+			if ($("#empresa-id_latitud").html() != ""  && $("#empresa-id_latitud").html() != "None") {
 				var latitud = $("#empresa-id_latitud").html().replace(",",".");
 				var longitud = $("#empresa-id_longitud").html().replace(",",".");
 				var punto = new google.maps.LatLng(latitud, longitud);
@@ -270,6 +277,13 @@
             });
             Empresa.marca = marker;
             Empresa.map.setCenter(coordenadas);
+			var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
+                }, function (response, status) {
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
+                        $("#empresa-id_direccion_map").html(response[0]["formatted_address"]);
+            });
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {

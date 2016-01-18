@@ -269,7 +269,7 @@ a.delete:hover {background-position: 0 -9px;}
 .home .navbar .logo {float: left; margin: 5px 0 0 50px;}
 .home .navbar ul {width: 420px; float: right;}
 .home .navbar ul li {float: left;}
-.home .navbar ul a {width: 120px; height: 32px; line-height: 32px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.1em; color: #fff; display: block; }
+.home .navbar ul a { font-size: 17px !Important; width: 130px;  line-height: 32px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.1em; color: #fff; display: block; }
 a:hover { text-decoration: none !Important }
 .home .navbar ul a.btn-action {margin-right: 20px; border: 1px solid rgba(255,255,255,0.5);}
 .home .navbar ul a.btn-action:hover {border: 1px solid #f50;}
@@ -374,7 +374,7 @@ header.principal .options a.active .notificaciones {width: 18px; height: 18px; l
 header.principal .options .mensajes {background: transparent url('../img/icons/mensajes.png') 0 0 no-repeat;}
 
 header.principal .options .procesos {background: transparent url('../img/icons/procesos.png') 0 0 no-repeat;}
-header.principal .actions {margin-top: 10px;}
+header.principal .actions {margin-top: 10px; margin-right: 10px}
 header.principal .actions a {padding: 8px 15px; border: 1px solid #fff; color: #fff; border-radius: 7px; font-size: 0.95em;}
 header.principal .actions a:hover {color: #f50; background: #fff;}
 header.menu {width: 100%;  border-bottom: 1px solid #ddd; background-color: white;}
@@ -903,9 +903,7 @@ img.img-me {
 .empresa-detalle .tooltip-arrow{
     bottom: 5px !Important;
 }
-.error + .tooltip .tooltip-inner,
 .evaluacion-empresa .tooltip .tooltip-inner{ background-color: #f50 !Important; }
-.error + .tooltip .tooltip-arrow,
 .evaluacion-empresa .tooltip .tooltip-arrow{ border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
 .modal-content .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: #848484; border-radius: 0px; text-align: center; }
@@ -1372,4 +1370,55 @@ a:hover {
   0% {width: 0em; opacity:0.1}
   70% {width: 8em; opacity:1.0}
   100% {width: 10em; opacity:0.0}
+}
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(255, 85, 0, 0.8) url(../img/cd-top-arrow.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.no-touch .cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 60px;
+    width: 60px;
+    right: 30px;
+    bottom: 30px;
+  }
 }
