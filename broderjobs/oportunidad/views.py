@@ -53,13 +53,13 @@ class OportunidadCrearView(FormView):
         remuneracion = form.cleaned_data['remuneracion']
 
         if remuneracion is not None:
-            if remuneracion is '1':
+            if remuneracion.id is 1:
                 remuneracion_min = None
                 remuneracion_max = None
-            elif remuneracion is '2':
-                    remuneracion_min = form.cleaned_data['remuneracion_min']
-                    remuneracion_max = form.cleaned_data['remuneracion_max']
-            elif remuneracion is '3':
+            elif remuneracion.id is 2:
+                remuneracion_min = form.cleaned_data['remuneracion_min']
+                remuneracion_max = form.cleaned_data['remuneracion_max']
+            elif remuneracion.id is 3:
                 remuneracion_min = form.cleaned_data['remuneracion_min']
                 remuneracion_max = None
 
@@ -100,7 +100,7 @@ class OportunidadCrearView(FormView):
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
-        oportunidad.grado_estudio = grado_estudio
+
         oportunidad.resumen = resumen
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
@@ -122,6 +122,7 @@ class OportunidadCrearView(FormView):
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         oportunidad.beneficio = beneficio
+        oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
 
