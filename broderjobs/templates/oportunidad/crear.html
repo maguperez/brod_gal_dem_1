@@ -170,6 +170,7 @@
 										<div class = "col-sm-9">
 											<p class="align-left">
 												Estudiantes de 7° hasta graduados hace un a&ntilde;o
+												{{form.periodo_graduacion_hidden}}
 												<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="[3,7]"/>
 											</p>
 										</div>
@@ -356,7 +357,7 @@
   			allowClear: true
 		});
 
-		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio'];
 		InicializarSelect2(elementosParaSelect2);
 
 		$("#id_pais").change(function() {
