@@ -255,8 +255,16 @@
 <script src = "{% static 'js/jquery.min.js' %}"></script>
 <script src = "{% static 'js/bootstrap.min.js' %}"></script>
 <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 <script>
     $(function(){
+
+        $("#oportunidad_id").select2({
+  			placeholder: "Todos",
+  			allowClear: true
+		});
+
+
         $(window).load(function(){
                 $('.withScroll').each(function () {
                     $(this).mCustomScrollbar("destroy");
@@ -278,14 +286,11 @@
                 });
                 $("[data-rel=tooltip]").tooltip();
             });
-		$( '#filtro' ).change( function() {
+		$( '#oportunidad_id' ).change( function() {
 			fnCargarMensajes();
 		});
 		fnCargarMensajes();
-        $("#oportunidad_id").select2({
-  			placeholder: "Todos",
-  			allowClear: true
-		});
+
     });
     function fnCargarMensajes(){
 		$.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val(), function(htmlexterno){
