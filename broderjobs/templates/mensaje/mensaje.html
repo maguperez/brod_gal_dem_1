@@ -216,7 +216,7 @@
 			fnBuscarMensajes();
 		});
         $( '#oportunidad_redactar_id' ).change( function() {
-			fnCargarCandidados();
+			fnCargarCandidatos($(this).val());
 		});
         $("#messages-list").on('click', '.message-item', function(){
             fnAbrirMensaje($(this).data("id"));
@@ -234,7 +234,13 @@
 			});
 	}
     function fnCargarCandidatos(id){
+        $.get("{% url 'mensaje-cargar-candidatos' %}?id=" + id, function(data){
+   				$(".candidatos").html('');
+                $.each(data, function(i, item) {
+                   $(".candidatos").append('<option value="'+item.id+'">'+item.estudiante+'</option>');
 
+                });
+        });
 	}
     </script>
 {%endblock%}

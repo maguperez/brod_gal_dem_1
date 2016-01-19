@@ -19,4 +19,6 @@ urlpatterns =[
 
     url(r'^abrir-con-relacionados/', views.MensajeAbrirConRelacionados.as_view(), name='mensaje-abrir-con-relacionados'),
 
+    url(r'^cargar-candidatos/', 'mensaje.views.cargar_candidatos', name='mensaje-cargar-candidatos'),
+
 ]

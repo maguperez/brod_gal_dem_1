@@ -24,7 +24,7 @@ def buzon_entrada(request):
     persona = Persona.objects.get(usuario_id=user.id)
     representante = Representante.objects.get(persona_id =persona.id)
     empresa = Empresa.objects.get(id=representante.empresa.id)
-    oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
+    oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado='A').order_by("fecha_publicacion")
     return render_to_response('mensaje/mensaje.html', {'oportunidades' : oportunidades},
                               context_instance=RequestContext(request))
 # Create your views here.
@@ -196,3 +196,13 @@ class MensajeAbrirConRelacionados(LoginRequiredMixin, TemplateView):
         return render_to_response('mensaje/mensaje-relacionados-listar.html', {'mensaje_actual':mensaje_actual,
                                                                                'mensajes_anteriores': mensajes_anteriores},
                                   context_instance = RequestContext(request))
+
+def cargar_candidatos( request ):
+    id = request.GET['id']
+    data = []
+    for p in Postulacion.objects.filter(oportunidad_id = id, estado = 'A' ):
+        res = {"id":p.estudiante.id, "estudiante": str(p.estudiante)}
+        data.append((res))
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
