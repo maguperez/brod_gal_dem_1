@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<title>BroderJobs</title>
+		<title>Broderjobs</title>
 		<link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
 		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
         <meta charset="UTF-8">
@@ -39,6 +39,15 @@
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+        <style>
+            .modal{
+                z-index: 1200;
+            }
+            .select2-dropdown{
+                z-index: 1201;
+            }
+        </style>
 
     </head>
 	<body>

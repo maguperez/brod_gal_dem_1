@@ -7,7 +7,30 @@
 <!--<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">-->
 <!--<link rel="stylesheet" href="{% static 'css/slider.css' %}">-->
 <script src="https://maps.googleapis.com/maps/api/js"></script>
-<form action="" method="post">{%csrf_token%}
+<style>
+	.tooltip-manual + .tooltip, input + .tooltip, select + .tooltip {
+		width: 167px;
+	}
+
+	.tooltip-arrow{
+		top: 44.1754%;
+	}
+
+	.tooltip-manual + .tooltip .tooltip-inner{
+		background-color: #f50 !Important;
+	}
+
+	.tooltip-manual + .tooltip{
+		top: 0px !Important;
+	}
+
+	.tooltip-manual + .tooltip .tooltip-arrow{
+		border-left-color: #f50 !Important;
+		border-right-color: #f50 !Important;
+	}
+
+</style>
+<form action="" method="post" autocomplete="off">{%csrf_token%}
 	<section class="oportunidad-detalle">
 			<div class="centered">
                 <div>
@@ -77,14 +100,11 @@
 										<label class = "col-sm-3 control-label">Localizaci&oacute;n</label>
 										<div class = "col-sm-4">
 											{{form.pais}}
-											<!--{{form.paises}}-->
-											<!--{{form.paises_hidden}}-->
 										</div>
 										<div class = "col-sm-4">
 											<select class="full" id="id_ciudad"></select>
 											{{form.ciudad_hidden}}
-											<!--{{form.ciudades}}-->
-											<!--{{form.ciudades_hidden}}-->
+											<div class="tooltip-manual" id="tooltip-pais"></div>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -144,6 +164,7 @@
 										<label class = "col-sm-3 control-label">Grado de estudio *</label>
 										<div class = "col-sm-9">
 											{{form.grado_estudio}}
+											<div class="tooltip-manual" id="tooltip-grado-estudio"></div>
 											<label class="descripcion">Defina el nivel de graduaci&oacute;n del candidato</label>
 										</div>
 										<div class="clear"></div>
@@ -170,6 +191,7 @@
 										<label class = "col-sm-3 control-label">Carrera *</label>
 										<div class = "col-sm-9">
 											{{form.carrera}}
+											<div class="tooltip-manual" id="tooltip-carrera"></div>
 											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las carreras compatibles con el área donde el profesional actuará.</label>
 										</div>
 										<div class="clear"></div>
@@ -291,17 +313,25 @@
 </style>
 <script>
 	$(function(){
+		$(window).scroll(function() {
+			if ( $(this).scrollTop() > 60 )
+				$(".box.alcance").addClass("fixed");
+			else $(".box.alcance").removeClass("fixed");
+		});
 		if(window.location.href.indexOf("archivar") >= 0){
 			$("#id_estado_oportunidad").val("C").trigger("change");
 			 $('#form-modal').modal('toggle');
 		}
-		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio'];
+
+		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
+
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio'];
 
 		InicializarSelect2(elementosParaSelect2);
-		InicializarTypeahead();
+		InicializarValidaciones();
 
 		$("#link-oportunidades").addClass("active");
-		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
+
 		$("#id_fecha_cese").datepicker({
 			language: 'es',
 			format: "dd/mm/yyyy",
@@ -395,9 +425,9 @@
 	}
 
 	function AgregarEventosRemuneracion(){
-		$('#id_remuneracion_0').click(LogicaSinEspecificar);
+		$('#id_remuneracion_2').click(LogicaSinEspecificar);
 		$('#id_remuneracion_1').click(LogicaIntervalo);
-		$('#id_remuneracion_2').click(LogicaFijo);
+		$('#id_remuneracion_0').click(LogicaFijo);
 	}
 
 	var Editar = {
@@ -407,7 +437,7 @@
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
                 center: new google.maps.LatLng(-12.0570208,-77.0372896),
-                zoom: 8,
+                zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             Editar.map = new google.maps.Map(mapCanvas, mapOptions);
@@ -461,34 +491,57 @@
 		});
 	}
 
-	function InicializarTypeahead(){
+	function ConfigurarTooltip(elemento,error,orientacion){
+		$(elemento).tooltip('destroy');
+		$(elemento).tooltip({
+			animation: true,
+			placement: orientacion,
+			title: $(error).text(),
+			trigger: "manual"
+		});
+		$(elemento).tooltip('show');
+	}
+
+	function InicializarValidaciones(){
+
+		$.validator.addMethod('MaximoMayorMinimo',function(value, element, param){
+
+			var valorRetorno = true;
+
+			if($('#id_remuneracion_1').is(':checked')){
+				if($('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+					var montoMinimo = parseInt($('#id_remuneracion_min').val(),10);
+					var montoMaximo = parseInt($('#id_remuneracion_max').val(),10);
+
+					if(montoMinimo > montoMaximo){
+						valorRetorno = false;
+					}
+				}
+			}
+			return valorRetorno;
+
+		},'Valor maximo debe ser mayor que Valor minimo');
 
 		$("form").validate({
             errorPlacement: function (error, element) {
-                $(element).tooltip('destroy');
-
-				console.log(element[0].id);
-
-				if(element[0].id == 'id_carrera1' || element[0].id == 'id_tipo_puesto1'){
-
-					$(element).tooltip({
-						animation: true,
-						placement: "right",
-						title: $(error).text(),
-						trigger: "manual"
-                	} );
-
+                if(element[0].id == 'id_pais'){
+					ConfigurarTooltip('#tooltip-pais',error,"right");
+				}
+				else if(element[0].id == 'id_carrera'){
+					ConfigurarTooltip('#tooltip-carrera',error,"right");
+				}
+				else if(element[0].id == 'id_grado_estudio'){
+					ConfigurarTooltip('#tooltip-grado-estudio',error,"right");
+				}
+				else if(element[0].id == 'id_remuneracion_min'){
+					ConfigurarTooltip(element,error,"left");
+				}
+				else if(element[0].id == 'id_tipo_puesto_0'){
+					ConfigurarTooltip('#id_tipo_puesto_2',error,"left");
 				}
 				else{
-					$(element).tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
+					ConfigurarTooltip(element,error,"right");
 				}
-
-                $(element).tooltip('show');
 
             },
             success: function (label, element) {
@@ -518,7 +571,18 @@
                 },
 				fecha_cese:{
                     required: true
-                }
+                },
+				remuneracion_min:{
+					required: true,
+					digits: true,
+					maxlength: 7
+				},
+				remuneracion_max:{
+					required: true,
+					digits: true,
+					maxlength: 7,
+					MaximoMayorMinimo: ''
+				}
 
             },
             messages: {
@@ -545,7 +609,17 @@
                 },
 				fecha_cese:{
                     required: "Este campo es obligatorio"
-                }
+                },
+				remuneracion_min:{
+					required: "Este campo es obligatorio",
+					digits: "Este campo es numérico",
+					maxlength: "Este campo no puede tener más de 7 caracteres"
+				},
+				remuneracion_max:{
+					required: "Este campo es obligatorio",
+					digits: "Este campo es numérico",
+					maxlength: "Este campo no puede tener más de 7 caracteres"
+				}
 
             }
         });

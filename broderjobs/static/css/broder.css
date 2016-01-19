@@ -52,7 +52,7 @@ p {text-align: justify; line-height: 20px;}
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
 input[type="text"], input[type="password"], select {padding: 0 6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
 textarea { background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important; }
-select:not(.select-default) {padding-right: 50px; -webkit-appearance: none;  -webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
+select:not(.select-default) {padding-right: 50px; -webkit-appearance: none; -moz-appearance: none; appearance: none;-webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: none !Important; -moz-outline: none; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat; border: none;}
 input[type="radio"] + label {font-size: 1em;}
 input[type="radio"]:hover {background-position: 0 -11px;}
@@ -269,7 +269,7 @@ a.delete:hover {background-position: 0 -9px;}
 .home .navbar .logo {float: left; margin: 5px 0 0 50px;}
 .home .navbar ul {width: 420px; float: right;}
 .home .navbar ul li {float: left;}
-.home .navbar ul a {width: 120px; height: 32px; line-height: 32px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.1em; color: #fff; display: block; }
+.home .navbar ul a { font-size: 17px !Important; width: 130px;  line-height: 32px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.1em; color: #fff; display: block; }
 a:hover { text-decoration: none !Important }
 .home .navbar ul a.btn-action {margin-right: 20px; border: 1px solid rgba(255,255,255,0.5);}
 .home .navbar ul a.btn-action:hover {border: 1px solid #f50;}
@@ -279,7 +279,8 @@ a:hover { text-decoration: none !Important }
 /*.home .flex .flex-div { opacity: 0; position: absolute; margin-top: -20px; top: 50%; left: 50%; text-align: center; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear;}*/
 .home .mensaje-central h1 {color: #fff; font-size: 4em; text-align: center;}
 .home .mensaje-central h3 {margin-top: 8px; color: #fff; font-size: 1.45em; text-align: center;}
-.home .login { margin-top: 80px; margin-bottom: 80px; padding: 24px; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
+.home .login { padding: 24px; pointer-events: none; background: rgba(0,0,0,0.3);  transition: opacity 0.3s linear; -webkit-transition: opacity 0.3s linear; -moz-transition: opacity 0.3s linear; -o-transition: opacity 0.3s linear; /*margin: 80px !Important;*/}
+.home .login#registro { margin-top: 80px; margin-bottom: 80px; }
 .home .login .content {position: relative; min-width: 270px}
 .home .flex-div.active {opacity: 1; pointer-events: all; z-index: 1050}
 .home .login .saludo {margin-bottom: 10px; text-align: center; color: #fff; font-family: 'Roboto Condensed'; display: block;}
@@ -289,7 +290,7 @@ a:hover { text-decoration: none !Important }
 .home .login .datos.registro {margin-top: 20px;}
 .home .login .datos.registro .cumpleanos {width: 31.5%; height: 22px; padding-right: 0px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #aaa; font-size: 0.8em;}
 .home .login .datos input{width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #333; font-size: 0.8em;}
-.home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #ccc; font-size: 0.8em;}
+.home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #a5a5a5; font-size: 0.8em;}
 .home .login .opciones {margin-top: -5px; text-align: center;}
 .home .login .opciones a, .home .login .opciones label{font-size: 10px; color: #fff; font-weight: normal !important;}
 .home .login .opciones input{margin: 0 5px -1px 0;}
@@ -373,7 +374,7 @@ header.principal .options a.active .notificaciones {width: 18px; height: 18px; l
 header.principal .options .mensajes {background: transparent url('../img/icons/mensajes.png') 0 0 no-repeat;}
 
 header.principal .options .procesos {background: transparent url('../img/icons/procesos.png') 0 0 no-repeat;}
-header.principal .actions {margin-top: 10px;}
+header.principal .actions {margin-top: 10px; margin-right: 10px}
 header.principal .actions a {padding: 8px 15px; border: 1px solid #fff; color: #fff; border-radius: 7px; font-size: 0.95em;}
 header.principal .actions a:hover {color: #f50; background: #fff;}
 header.menu {width: 100%;  border-bottom: 1px solid #ddd; background-color: white;}
@@ -535,8 +536,8 @@ header.menu .centered { height: 47px; }
 .cv header {padding-top: 40px; padding-bottom: 40px; position: relative;}
 .cv header .editar {width: 80px; height: 30px; line-height: 30px; position: absolute; top: 30px; right: 25px;}
 .cv .box-imagen:hover {opacity: 0.7;}
-.cv .botones-imagen{float:left; margin-left: -20px;}
-.cv header .imagen, .cv header .detalle {float: left;}
+.cv .botones-imagen{float:right; margin-left: -20px;}
+.cv header .box-imagen, .cv header .detalle {float: left;}
 .cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
 .cv header .detalle {margin: 20px 0 0 60px; max-width: 240px;}
 .cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
@@ -902,12 +903,10 @@ img.img-me {
 .empresa-detalle .tooltip-arrow{
     bottom: 5px !Important;
 }
-.error + .tooltip .tooltip-inner,
 .evaluacion-empresa .tooltip .tooltip-inner{ background-color: #f50 !Important; }
-.error + .tooltip .tooltip-arrow,
 .evaluacion-empresa .tooltip .tooltip-arrow{ border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
-.modal-content .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: #848484; border-radius: 0px; text-align: center; }
+.modal-content .alert-warning, .cv .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: #848484; border-radius: 0px; text-align: center; }
 .home #registro #acepto { vertical-align: top; }
 
 .empresa .panel.left .content h3.link { margin: 0px !important; }
@@ -1371,4 +1370,90 @@ a:hover {
   0% {width: 0em; opacity:0.1}
   70% {width: 8em; opacity:1.0}
   100% {width: 10em; opacity:0.0}
+}
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(255, 85, 0, 0.8) url(../img/cd-top-arrow.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.no-touch .cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 60px;
+    width: 60px;
+    right: 30px;
+    bottom: 30px;
+  }
+}
+.box.alcance.fixed{
+    top: 105px;
+    position: fixed;
+    width: 223px;
+}
+/*Select multiples*/
+.select2-container--default .select2-selection{
+    font-size: 14px;
+    min-height: 34px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background: #f9f9f9 !Important;
+    border: 1px solid #ccc !Important;
+    border-radius: 0px;
+    outline: none;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 34px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 34px;
+}
+.select2-container--open .select2-selection {
+    border-color: #66afe9 !Important;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    border-radius: 0px;
+    color: #555
 }

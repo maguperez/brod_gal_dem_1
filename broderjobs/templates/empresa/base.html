@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<title>Broder jobs</title>
+		<title>Broderjobs</title>
 		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
 		<meta charset="UTF-8">
 		<link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
@@ -38,8 +38,17 @@
 		<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+		<style>
+			.modal{
+				z-index: 1200;
+			}
+			.select2-dropdown{
+                z-index: 1201;
+            }
+		</style>
 	</head>
 	<body>
+	<a href="#0" class="cd-top">Top</a>
 	<div id="page-wrapper" class = "loading-wrapper">
         <div class="loading">Cargando</div>
     </div>
@@ -48,16 +57,17 @@
 			<div class="centered">
 				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<ul class="nav navbar-nav notify pull-right header-menu">
-					<li>
-						{% if '/mensaje/' in request.path %}
-						<div class="actions">
+					{% if '/mensaje/' in request.path %}
+						<li><div class="actions">
 							<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
-						</div>
+						</div></li>
 						{%else%}
-						<div class="actions">
+						<li><div class="actions">
 							<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
-						</div>
+						</div></li>
 						{% endif %}
+					<li>
+
 
 						<ul class="nav navbar-nav notify pull-right header-menu">
 						<!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -67,7 +77,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header clearfix">
-									<p class="pull-left">Notifications</p>
+									<p class="pull-left">Notificaciones</p>
 								</li>
 								<li>
 									<ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;" id="notificaciones">
@@ -83,10 +93,7 @@
 									</ul>
 								</li>
 								<li class="dropdown-footer clearfix">
-									<a href="#" class="pull-left">See all notifications</a>
-									<a href="#" class="pull-right">
-										<i class="fa fa-cog"></i>
-									</a>
+									<a href="#" class="pull-left">Ver todas las notificaciones</a>
 								</li>
 							</ul>
 						</li>
@@ -132,6 +139,33 @@
 </html>
 
 <script>
+	var flag = true;
+	$(function(){
+		var offset = 300,
+			//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+			offset_opacity = 1200,
+			//duration of the top scrolling animation (in ms)
+			scroll_top_duration = 700,
+			//grab the "back to top" link
+			$back_to_top = $('.cd-top');
+
+		//hide or show the "back to top" link
+		$(window).scroll(function(){
+			( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+			if( $(this).scrollTop() > offset_opacity ) {
+				$back_to_top.addClass('cd-fade-out');
+			}
+		});
+
+		//smooth scroll to top
+		$back_to_top.on('click', function(event){
+			event.preventDefault();
+			$('body,html').animate({
+				scrollTop: 0 ,
+				}, scroll_top_duration
+			);
+		});
+	})
 	$('#menu').click(function() {
 		if ($('#ctx-menu-header').hasClass('active'))
 			$('#ctx-menu-header').removeClass('active');
@@ -144,6 +178,13 @@
 			$('body').removeClass('static');
 		}
 	});
+	$("body").on("click", function(e){
+		if ($("#"+event.target.id).parents("#menu-oportunidad").length == 0 &&
+			$('#menu-oportunidad').hasClass("active") && flag){
+			$('#menu-oportunidad').removeClass('active');
+		}
+		flag = true;
+	});
 	$('.popup .close').click(function(e) {
 		window.history.back();
 		$('body').removeClass('static');
@@ -154,6 +195,7 @@
 //			$('body').addClass('static');
 //    });
 	function opciones() {
+		flag = false;
 		if ($('#menu-oportunidad').hasClass('active'))
 			$('#menu-oportunidad').removeClass('active');
 		else
@@ -162,6 +204,7 @@
 	window.onload = function(){
                 $(".loading-wrapper").hide();
             }
+
 </script>
 {% block js %}
 {% endblock %}

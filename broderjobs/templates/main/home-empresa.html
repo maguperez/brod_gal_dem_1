@@ -84,9 +84,13 @@
                                 {{registro_form.password1}}
                                 {{registro_form.password2}}
                             </div><br>
+							<div id= "mensaje-correo" class="alert alert-warning alert-dismissible hidden" role="alert">
+                                Recuerda que debes usar el correo de la <br>compañía para registrarte
+                            </div>
                             <div class="opciones">
                                 <input type="checkbox" id="acepto" class = "white" name = "tyc"/><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
                             </div>
+
                             {%if message %}
                             <div class="alert alert-warning alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -147,9 +151,11 @@
 			</nav>
 		</div>
 
-
+		<style> .tooltip-inner { max-width: 400px !Important;  background-color: #f50 !Important; }
+				.tooltip .tooltip-arrow { border-left-color: #f50 !Important; border-right-color: #f50 !Important; }</style>
 		<script>
             $(function() {
+
 				if (sessionStorage.getItem("main") != null){
 					activar(sessionStorage.getItem("main"));
 				}
@@ -157,10 +163,16 @@
 				$("select").on("change", function(){
 					$(this).val() != "" ?
 						$(this).css("color", "black"):
-						$(this).css("color", "#ccc");
+						$(this).css("color", "#a5a5a5");
 				});
+				$("#id_registro-email").on("focus", function(){
+					$("#mensaje-correo").removeClass("hidden");
+				}).on("blur", function(){
+					$("#mensaje-correo").addClass("hidden");
+				})
 			});
 			function activar(id) {
+				$(".tooltip").remove();
 				sessionStorage.setItem("main", id);
 				$(".flex-div:not(#"+id+")").removeClass('active');
 				$(".flex-div:not(#"+id+")").hide();
@@ -196,6 +208,7 @@
 					$(element).tooltip({
 						animation: true,
 						placement: "left",
+						container: "body",
 						title: $(error).text(),
 						trigger: "manual"
 					} );
@@ -243,6 +256,7 @@
                 $(element).tooltip({
                     animation: true,
                     placement: "left",
+					container: "body",
                     title: $(error).text(),
                     trigger: "manual"
                 } );

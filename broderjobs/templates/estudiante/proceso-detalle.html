@@ -89,6 +89,7 @@
 												<th>Asunto</th>
 												<th>Fecha</th>
 											</tr>
+											{%if mensajes%}
                                             {%for m in mensajes.all%}
 											<tr  class="unread" data-id="{{m.id}}" >
 												<td class="{%if m.leido%}leido{%else%}noleido{%endif%}">
@@ -99,6 +100,9 @@
 												{{m.fecha_creacion}}</td>
 											</tr>
 											{% endfor %}
+											{% else %}
+												<tr><td colspan = "3"> No hay mensajes que mostrar</td></tr>
+											{% endif %}
 										</tbody>
 									</table>
 								</div>
