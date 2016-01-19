@@ -1,0 +1,63 @@
+
+{%if mensaje_actual%}
+    <div class="panel-heading messages message-result">
+        <div class="message-action-btn clearfix p-t-20">
+            <div class="pull-right">
+                <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply"
+                     data-placement="bottom" data-id="{{mensaje_actual.id}}"><i class="fa fa-reply"></i>
+                </div>
+                <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Move to trash"
+                     data-placement="bottom" data-id="{{mensaje_actual.id}}"><i class="fa fa-trash-o"></i>
+                </div>
+            </div>
+        </div>
+        <h2 class="p-t-20 w-500">{{mensaje_actual.asunto}}</h2>
+    </div>
+    <div class="panel-body messages message-result">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="p-20">
+                    <div class="message-item media">
+                        <div class="message-item-right">
+                            <div class="media">
+                                <img src="{{mensaje_actual.foto}}" alt="avatar 4" width="50" class="pull-left">
+                                <div class="media-body">
+                                    <small class="pull-right">{{mensaje_actual.fecha_envio}}</small>
+                                    <h5 class="c-dark"><strong>{{mensaje_actual.remitente}}</strong></h5>
+                                    <!--<p class="c-gray">jerry.smith@gmail.com</p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-body">
+                    {{mensaje_actual.contenido}}
+                </div>
+            </div>
+        </div>
+        <div class="message-between"></div>
+        {%for mensaje in mensajes_anteriores %}
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="p-20">
+                    <h3 class="message-title">{{mensaje.asunto}}</h3>
+                    <div class="message-item media">
+                        <div class="message-item-right">
+                            <div class="media">
+                                <img src="{{mensaje.foto}}" alt="avatar 7" width="50" class="pull-left">
+                                <div class="media-body">
+                                    <small class="pull-right">{{mensaje.fecha_envio}}</small>
+                                    <h5 class="c-dark"><strong>{{mensaje.remitente}}</strong></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-body">
+                    {{mensaje.contenido}}
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+{%endif%}

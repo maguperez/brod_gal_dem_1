@@ -44,13 +44,15 @@
         .message-item h5{margin-top:0;}
         .message-item p{margin-bottom:0;height: 20px;overflow: hidden;}
         .message-item .message-checkbox{height:30px;}
+
+        .message-item:hover{background-color:#dcdcdc; cursor: pointer;}
         .message-active {color:#fff;background-color:#f50; }
         #main-content.page-mailbox .message-active small,
         #main-content.page-mailbox .message-active h5,
         #main-content.page-mailbox .message-active h4,
         #main-content.page-mailbox .message-active p { color: white; }
         a.message-item.message-active:hover{color:#fff;background-color:#008fc0;}
-        a.message-item:hover{text-decoration:none;background-color:#eaeaea;}
+        /*a.message-item:hover{text-decoration:none;background-color:#eaeaea;}*/
         .messages .message-item img{border-radius: 3px;}
         .message-item-right{padding-left:33px;}
         .withScroll {height: auto;overflow: auto;overflow:hidden;}
@@ -89,161 +91,74 @@
                                     {%endfor%}
                                 </select>
                             </div>
-                            <!--<div class="input-group input-group-lg border-bottom">-->
-                                <!--<span class="input-group-btn">-->
-                                    <!--<a href="" class="btn"><i class="fa fa-search"></i></a>-->
-                                <!--</span>-->
-                                <!--<input type="text" class="form-control  msearch bd-0 bd-white" placeholder="Buscar">-->
-                            <!--</div>-->
                             <div id="messages-list" class="panel panel-default withScroll" data-height="window" data-padding="255" style="height: 518px;">
-                                <!--<div class="message-item media">-->
-                                    <!--<div class="pull-left text-center">-->
-                                        <!--<div class="pos-rel message-checkbox">-->
-                                            <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="message-item-right">-->
-                                        <!--<div class="media">-->
-                                            <!--<img src="assets/img/avatars/avatar3_big.png" alt="avatar 3" width="50" class="pull-left">-->
-                                            <!--<div class="media-body">-->
-                                                <!--<small class="pull-right">23 Sept</small>-->
-                                                <!--<h5 class="c-dark"><strong>John Snow</strong></h5>-->
-                                                <!--<h4 class="c-dark">Reset your account password</h4>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<p class="f-14 c-gray">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="message-item media message-active">-->
-                                    <!--<div class="pull-left text-center">-->
-                                        <!--<div class="pos-rel message-checkbox">-->
-                                            <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="message-item-right">-->
-                                        <!--<div class="media">-->
-                                            <!--<img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">-->
-                                            <!--<div class="media-body">-->
-                                                <!--<small class="pull-right">23 Sept</small>-->
-                                                <!--<h5><strong>Jerry Smith</strong></h5>-->
-                                                <!--<h4>Re: Check Dropbox</h4>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 email-hidden-sm detail-message">
-                    <div id="message-detail" class="panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
-                        <div class="panel-heading messages message-result">
-                            <div class="message-action-btn clearfix p-t-20">
-                                <!--<div class="pull-left">
-                                    <div id="go-back" data-rel="tooltip" title="" class="icon-rounded m-r-10 email-go-back" data-original-title="Go back"><i class="fa fa-hand-o-left"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply"><i class="fa fa-reply"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Forward"><i class="fa fa-long-arrow-right"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded heart-red m-r-10" data-original-title="Remove from favs"><i class="fa fa-heart"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Print"><i class="fa fa-print"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Move to trash"><i class="fa fa-trash-o"></i>
-                                    </div>
-                                </div>-->
-                                <div class="pull-right">
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply" data-placement="bottom"><i class="fa fa-reply"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Move to trash" data-placement="bottom"><i class="fa fa-trash-o"></i>
-                                    </div>
-                                    <!--<div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Next"><i class="fa fa-angle-double-right"></i>
-                                    </div>
-                                    <div data-rel="tooltip" title="" class="icon-rounded gear m-r-10" data-original-title="Parameters"><i class="fa fa-gear"></i>
-                                    </div>-->
-                                </div>
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a data-toggle="tab" href="#message-detail">Mensajes</a></li>
+                      <li><a data-toggle="tab" href="#message-detail2">Redactar Mensaje</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="message-detail" class="tab-pane fade in active panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
+                            <div class="panel-heading messages message-result">
+                                <h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2>
                             </div>
-                            <h2 class="p-t-20 w-500">Re: Check Dropbox</h2>
                         </div>
-                        <div class="panel-body messages message-result">
+                        <div id="message-detail2" class="tab-pane fade panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
+                            <div class="panel-heading messages message-result">
+                            <!--<div class="message-action-btn clearfix p-t-20">-->
+                                <!--<div class = "pull-left">-->
+                                        <!--<select id="oportunidad_redactar_id" class="form-control bd-0 bd-white" style="width: 300px">-->
+
+                                            <!--{%for p in oportunidades %}-->
+                                                <!--<option value="{{p.id}}">{{p.titulo}}</option>-->
+                                            <!--{%endfor%}-->
+                                        <!--</select>-->
+                                <!--</div>-->
+                                <!--<div class="pull-right">-->
+                                    <!--<div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Send" data-placement="bottom"><i class="fa fa-send"></i>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<br>-->
+                            <div class="input-group input-group-lg border-bottom">
+                                <span class="input-group-btn">
+                                    <a href="" class="btn" disabled>Oportunidad: </a>
+                                </span>
+                                <select id="oportunidad_redactar_id" class="form-control bd-0 bd-white" style = "width: 100%">
+                                    {%for p in oportunidades %}
+                                        <option value="{{p.id}}">{{p.titulo}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <div class="input-group input-group-lg border-bottom">
+                                <span class="input-group-btn">
+                                    <a href="" class="btn" disabled>Para:</a>
+                                </span>
+                                <select class="form-control candidatos bd-0 bd-white" multiple style = "width: 100%">
+                                    <option>louise.lista@andinas.com</option>
+                                    <option>gabriela.soto@andinas.com</option>
+                                    <option>manuel.perez@andinas.com</option>
+                                    <option>jonathan.quijada@andinas.com</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-lg border-bottom">
+                                <span class="input-group-btn">
+                                    <a href="" class="btn" disabled>Asunto:</a>
+                                </span>
+                                <input type = "text" class="form-control msearch bd-0 bd-white" />
+                            </div>
+                        </div>
+                            <div class="panel-body messages message-result">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="p-20">
-                                        <div class="message-item media">
-                                            <div class="message-item-right">
-                                                <div class="media">
-                                                    <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
-                                                    <div class="media-body">
-                                                        <small class="pull-right">23 Sept</small>
-                                                        <h5 class="c-dark"><strong>Jerry Smith</strong></h5>
-                                                        <p class="c-gray">jerry.smith@gmail.com</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="message-body">
-                                        <p>Hi John,</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, libero corporis ipsam voluptatibus suscipit eos expedita sapiente omnis voluptatum ea! Culpa, vitae eaque quis modi voluptatum quisquam ullam. Modi,
-                                            tempora!</p>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                                        <p>Thanks
-                                            <br>Jerry</p>
-                                        <!--<div class="message-attache">
-                                            <div class="media">
-                                                <i class="fa fa-paperclip pull-left fa-2x"></i>
-                                                <div class="media-body">
-                                                    <div><a href="" class="strong text-regular">Project.zip</a>
-                                                    </div>
-                                                    <span>12 MB</span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <i class="fa fa-file pull-left fa-2x"></i>
-                                                <div class="media-body">
-                                                    <div><a href="" class="strong text-regular">Contract.pdf</a>
-                                                    </div>
-                                                    <span>228 KB</span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                                    </div>
+                                    <div id = "summernote"></div>
                                 </div>
                             </div>
-                            <div class="message-between"></div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="p-20">
-                                        <h3 class="message-title">Check Dropbox</h3>
-                                        <div class="message-item media">
-                                            <div class="message-item-right">
-                                                <div class="media">
-                                                    <img src="assets/img/avatars/avatar7_big.png" alt="avatar 7" width="50" class="pull-left">
-                                                    <div class="media-body">
-                                                        <small class="pull-right">22 Sept</small>
-                                                        <h5 class="c-dark"><strong>John Snow</strong></h5>
-                                                        <p class="c-gray">john.snow@gmail.com</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="message-body">
-                                        <p>Hi Jerry,</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, libero corporis ipsam voluptatibus suscipit eos expedita sapiente omnis voluptatum ea! Culpa, vitae eaque quis modi voluptatum quisquam ullam. Modi,
-                                            tempora!</p>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                                        <p>Thanks<br>John</p>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -256,15 +171,15 @@
 <script src = "{% static 'js/bootstrap.min.js' %}"></script>
 <script src = "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
+<script src = "{% static 'js/summernote.js' %}"></script>
+<script src = "{% static 'js/summernote-i18n/summernote-es-ES.js' %}"></script>
+
 <script>
     $(function(){
-
         $("#oportunidad_id").select2({
   			placeholder: "Todos",
   			allowClear: true
 		});
-
-
         $(window).load(function(){
                 $('.withScroll').each(function () {
                     $(this).mCustomScrollbar("destroy");
@@ -285,18 +200,41 @@
                     });
                 });
                 $("[data-rel=tooltip]").tooltip();
+                $(".candidatos").select2({
+                    placeholder: "Candidatos"
+                });
+                $("#oportunidad_redactar_id").select2({
+                    placeholder: "Seleccione"
+                });
+                $("#summernote").summernote({
+                    height: 325,
+                    lang: 'es-ES'
+                });
             });
+        fnBuscarMensajes();
 		$( '#oportunidad_id' ).change( function() {
-			fnCargarMensajes();
+			fnBuscarMensajes();
 		});
-		fnCargarMensajes();
+        $( '#oportunidad_redactar_id' ).change( function() {
+			fnCargarCandidados();
+		});
+        $("#messages-list").on('click', '.message-item', function(){
+            fnAbrirMensaje($(this).data("id"));
+        });
 
     });
-    function fnCargarMensajes(){
+    function fnBuscarMensajes(){
 		$.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val(), function(htmlexterno){
-   				$('#messages-list').append(htmlexterno);
+   				$('#messages-list').html(htmlexterno);
 			});
 	}
+    function fnAbrirMensaje(id){
+		$.get("{% url 'mensaje-abrir-con-relacionados' %}?id=" + id, function(htmlexterno){
+   				$('#message-detail').html(htmlexterno);
+			});
+	}
+    function fnCargarCandidatos(id){
 
+	}
     </script>
 {%endblock%}

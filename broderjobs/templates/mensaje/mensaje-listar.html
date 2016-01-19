@@ -1,23 +1,43 @@
+
 {%if mensajes%}
 {%for mensaje in mensajes %}
-    <div class="message-item media">
-        <div class="pull-left text-center">
-            <div class="pos-rel message-checkbox">
-                <div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>
-            </div>
-        </div>
+    <div class="message-item media" data-id="{{mensaje.id}}">
+        <!--<div class="pull-left text-center">-->
+            <!--<div class="pos-rel message-checkbox">-->
+                <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="message-item-right">
             <div class="media">
-                <img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">
+                <img src="{{mensaje.foto}}" alt="avatar 4" width="50" class="pull-left">
                 <div class="media-body">
-                    <small class="pull-right">23 Sept</small>
-                    <h5><strong>mensaje.usuario_destinatario</strong></h5>
-                    <h4>mensaje.mensaje.asunto</h4>
+                    <small class="pull-right">{{mensaje.fecha_envio}}</small>
+                    <h5><strong>{{mensaje.usuario_remitente}}</strong></h5>
+                    <h4>{{mensaje.asunto}}</h4>
                 </div>
             </div>
-            <p class="f-14">{{mensaje.mensaje.asunto|truncatechars:30}}...</p>
+            <p class="f-14">{{mensaje.contenido|truncatechars:30}}...</p>
         </div>
     </div>
+
+<!--<div class="message-item media message-active">-->
+                                    <!--<div class="pull-left text-center">-->
+                                        <!--<div class="pos-rel message-checkbox">-->
+                                            <!--<div class=" ui-checkbox"><input type="checkbox" data-style="flat-red"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="message-item-right">-->
+                                        <!--<div class="media">-->
+                                            <!--<img src="assets/img/avatars/avatar4_big.png" alt="avatar 4" width="50" class="pull-left">-->
+                                            <!--<div class="media-body">-->
+                                                <!--<small class="pull-right">23 Sept</small>-->
+                                                <!--<h5><strong>Jerry Smith</strong></h5>-->
+                                                <!--<h4>Re: Check Dropbox</h4>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<p class="f-14">Hello Steve, I have added new files in your Dropbox in order to show you how to...</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
 {%endfor%}
 {%endif%}

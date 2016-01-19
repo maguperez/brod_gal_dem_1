@@ -3,16 +3,18 @@ from .models import Mensaje, Mensaje_Destinatario, Notificacion
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from estudiante.models import Estudiante
 from main.models import Persona
+from empresa.models import Empresa, Representante
 from datetime import date, datetime
 
-def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estudiantes, asunto, contenido, permite_respuesta, es_respuesta):
+def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estudiantes, asunto, contenido,
+                                        permite_respuesta, mensaje_previo):
     mensaje = Mensaje()
     mensaje.oportunidad = oportunidad
     mensaje.usuario_remitente = ususrio_remitente
     mensaje.asunto = asunto
     mensaje.contenido = contenido
     mensaje.permite_respuesta = permite_respuesta
-    mensaje.es_respuesta = es_respuesta
+    # mensaje.mensaje_previo = mensaje_previo
     mensaje.fecha_envio = datetime.now()
 
     mensaje.fecha_creacion = datetime.now()
@@ -27,21 +29,20 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
         mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
         mensaje_destinatarios.fecha_envio = datetime.now()
         mensaje_destinatarios.fecha_creacion = datetime.now()
+        mensaje_destinatarios.mensaje_previo = mensaje_previo
         mensaje_destinatarios.save()
         enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
 
-def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido, permite_respuesta, es_respuesta):
+def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido,
+                   permite_respuesta, mensaje_previo):
     mensaje = Mensaje()
     mensaje.oportunidad = oportunidad
     mensaje.usuario_remitente = ususrio_remitente
     mensaje.asunto = asunto
     mensaje.contenido = contenido
     mensaje.permite_respuesta = permite_respuesta
-    mensaje.es_respuesta = es_respuesta
+    # mensaje.mensaje_previo = mensaje_previo
     mensaje.fecha_envio = datetime.now()
-    if es_respuesta is not None:
-        mensaje.es_respuesta = es_respuesta
-
     mensaje.fecha_creacion = datetime.now()
     mensaje.usuario_creacion = ususrio_remitente.username
     mensaje.save()
@@ -51,6 +52,7 @@ def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto,
     mensaje_destinatarios.mensaje = mensaje
     mensaje_destinatarios.usuario_destinatario = usuario_destinatario
     mensaje_destinatarios.fecha_envio = datetime.now()
+    mensaje_destinatarios.mensaje_previo = mensaje_previo
     mensaje_destinatarios.save()
     enviar_notificacion(oportunidad, usuario_destinatario, asunto, True, ususrio_remitente.username)
 
@@ -86,3 +88,12 @@ def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunt
         notificacion.fecha_creacion = datetime.now()
         notificacion.fecha_creacion = datetime.now()
         notificacion.save()
+
+def obtener_imagen_persona(persona):
+    if persona.tipo_persona == 'E':
+        estudiante = Estudiante.objects.get(persona_id = persona.id)
+        foto = estudiante.set_foto
+    else:
+        representante = Representante.objects.get(persona_id = persona.id)
+        foto = representante.empresa.set_logo
+    return  foto

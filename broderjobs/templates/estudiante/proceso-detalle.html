@@ -96,7 +96,7 @@
 												<td class="{%if m.leido%}leido{%else%}noleido{%endif%}">
 													{{m.mensaje.asunto}}!</td>
 												<td class="{%if m.leido%} leido{%else%}noleido{%endif%}">
-												{{m.fecha_creacion |get_due_date_string}}</td>
+												{{m.fecha_creacion}}</td>
 											</tr>
 											{% endfor %}
 										</tbody>
@@ -150,7 +150,8 @@
     		</div>
 		</div>
 <input type="hidden" id="empresa_id">
-<input type="hidden" id="mensaje_id">
+<input type="hidden" id="mensaje_destinatario_id">
+<input type="hidden" id="usuario_id">
 {%csrf_token%}
 {% endblock content%}
 {% block js %}
@@ -234,7 +235,8 @@
 				$("#mensaje-asunto").html(data["asunto"]);
             	$("#mensaje-contenido").html(data["contenido"]);
 				$("#empresa_id").val(data['empresa_id']);
-				$("#mensaje_id").val(data['mensaje_id']);
+				$("#mensaje_destinatario_id").val(data['mensaje_destinatario_id']);
+				$("#usuario_id").val(data['usuario_id']);
 				if(data['permite_respuesta'] == "True")
 				{
 					$("#responder-mensaje").show();
@@ -254,10 +256,11 @@
 		 var form = new FormData();
 		 form.append('id',$("#empresa_id").val());
 		 form.append('c',$('#contenido-mensaje-enviar').val());
-		 form.append('o','{{postulacion.oportunidad.id}}');
-		 form.append('p','{{postulacion.id}}');
-		 form.append('m', $('#mensaje_id').val());
-		 form.append('pr','N');
+		 form.append('id_o','{{postulacion.oportunidad.id}}');
+		 form.append('id_p','{{postulacion.id}}');
+		 form.append('id_md', $('#mensaje_destinatario_id').val());
+		 form.append('id_u', $('#usuario_id').val());
+		 form.append('pr','S');
 		 form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 		     $.ajax({
                  type:"POST",
@@ -270,7 +273,7 @@
 					 window.history.back();
                  },
                  error: function(x){
-                    console.log(x);
+                    console.log(x.responseText);
                  }
             });
        });

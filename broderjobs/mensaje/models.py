@@ -14,7 +14,7 @@ class Mensaje(models.Model):
     asunto = models.CharField(default=None, null=True, blank=True, max_length=100)
     contenido = models.TextField(default=None, null=True, blank=True)
     permite_respuesta = models.BooleanField(default=False, blank=True)
-    es_respuesta = models.IntegerField(default=None, null=True, blank=True)
+    # mensaje_previo = models.ForeignKey('self', null=True, related_name='respuesta')
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
@@ -24,6 +24,14 @@ class Mensaje(models.Model):
     def __unicode__(self):
         return unicode('%s' % (self.asunto)) or u''
 
+    # def get_anteriores(self):
+    #     if self.mensaje_previo is None:
+    #         return Mensaje.objects.none()
+    #     return Mensaje.objects.filter(pk=self.mensaje_previo.pk)|self.mensaje_previo.get_anteriores()
+    #
+    # def get_mensajes_relacionados(self):
+    #     return Mensaje.objects.filter(pk=self.pk)|self.get_anteriores()
+
 class Mensaje_Destinatario(models.Model):
 
     mensaje = models.ForeignKey(Mensaje, default=None, null=True, blank=True, max_length=1000)
@@ -32,10 +40,20 @@ class Mensaje_Destinatario(models.Model):
     fecha_leido = models.DateField(default=None, null=True, blank=True)
     fecha_envio = models.DateTimeField(default=None, null=True, blank=True)
 
+    mensaje_previo = models.ForeignKey('self', null=True, related_name='respuesta')
+
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def get_anteriores(self):
+        if self.mensaje_previo is None:
+            return Mensaje_Destinatario.objects.none()
+        return Mensaje_Destinatario.objects.filter(pk=self.mensaje_previo.pk)|self.mensaje_previo.get_anteriores()
+
+    def get_mensajes_relacionados(self):
+        return Mensaje_Destinatario.objects.filter(pk=self.pk)|self.get_anteriores()
 
     def __unicode__(self):
         return unicode('%s' % (self.usuario_destinatario)) or u''

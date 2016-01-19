@@ -9,11 +9,12 @@ from datetime import date, datetime
 import json
 from cStringIO import StringIO
 from django.views.generic import TemplateView, FormView
-from .utils import enviar_mensaje, enviar_mensaje_multiple_estudiantes
+from .utils import enviar_mensaje, enviar_mensaje_multiple_estudiantes, obtener_imagen_persona
 from oportunidad.models import Oportunidad, Postulacion
 from .models import Notificacion
 from main.models import Persona
 from empresa.models import Empresa, Representante
+from estudiante.models import Estudiante
 from main.utils import LoginRequiredMixin
 
 # Create your views here.
@@ -37,16 +38,16 @@ def mensaje_ver( request ):
     destinatario= Mensaje_Destinatario.objects.get(id = id)
     mensaje = Mensaje.objects.get(id = destinatario.mensaje.id)
     resp_dest = Mensaje_Destinatario.objects.filter(id = destinatario.id).update(fecha_leido = datetime.now(), leido = True)
-    resp_not = Mensaje_Destinatario.objects.filter(id = destinatario.id).update(fecha_leido = datetime.now(), leido = True)
-    # data = serializers.serialize('json', mensaje,
-    #                                  fields=('asunto','contenido','fecha_creacion'))
+    resp_not = Notificacion.objects.filter(usuario_destinatario = destinatario.usuario_destinatario.id).update(
+                                                                                fecha_leido = datetime.now(), leido = True)
     response = {
         'asunto': mensaje.asunto,
         'contenido': mensaje.contenido,
         'fecha_creacion': str(mensaje.fecha_creacion),
         'empresa': mensaje.oportunidad.empresa.nombre,
         'empresa_id': str(mensaje.oportunidad.empresa.id),
-        'mensaje_id': str(mensaje.id),
+        'mensaje_destinatario_id': str(destinatario.id),
+        'usuario_id': str(mensaje.usuario_remitente.id),
         'permite_respuesta': str(mensaje.permite_respuesta),
     }
     #serialize to json
@@ -60,18 +61,15 @@ def mensaje_enviar_estudiantes( request ):
     ids = json.loads(request.POST['ids'])
     ids_estudiante = json.loads(request.POST['ids_estudiante'])
     contenido = request.POST['c']
-    o = request.POST['o']
+    id_oportunidad = request.POST['o']
     p = request.POST['p']
     permite_respuesta = False
     if p == 'S':
         permite_respuesta = True
-
-
-    oportunidad =  get_object_or_404(Oportunidad, pk=o)
-    user = request.user
-    user = User.objects.get(id = user.id)
+    oportunidad =  get_object_or_404(Oportunidad, pk=id_oportunidad)
+    userio_remitente = User.objects.get(id = request.user.id)
     asunto = "La Empresa " + oportunidad.empresa.nombre + " te ha enviado un mensaje."
-    enviar_mensaje_multiple_estudiantes(oportunidad, user, ids_estudiante, asunto, contenido, permite_respuesta, False)
+    enviar_mensaje_multiple_estudiantes(oportunidad, userio_remitente, ids_estudiante, asunto, contenido, permite_respuesta, None)
     #define response
     response = {'resp': '¡Mensaje enviado con exito!'}
     #serialize to json
@@ -81,24 +79,36 @@ def mensaje_enviar_estudiantes( request ):
     return HttpResponse(s.read())
 
 def mensaje_enviar( request ):
-    id = json.loads(request.POST['id'])
+    id_empresa = json.loads(request.POST['id'])
     contenido = request.POST['c']
-    o = request.POST['o']
-    p = request.POST['p']
-    m = request.POST['m']
+    id_oportunidad = request.POST['id_o']
+    id_postulacion = request.POST['id_p']
+    id_mensaje_destinatario = request.POST['id_md']
+    id_usuario_destinatario = request.POST['id_u']
     pr = request.POST['pr']
     permite_respuesta = False
     if pr == 'S':
         permite_respuesta = True
-    oportunidad =  get_object_or_404(Oportunidad, pk=o)
-    postulacion =  get_object_or_404(Postulacion, pk=p)
-    mensaje_respuesta =  get_object_or_404(Mensaje, pk=m)
-    user = request.user
-    user = User.objects.get(id = user.id)
+    try:
+        postulacion = Postulacion.objects.get(pk=id_postulacion)
+    except Postulacion.DoesNorExist:
+        postulacion = None
+    try:
+        mensaje_previo=  Mensaje_Destinatario.objects.get(pk=id_mensaje_destinatario)
+    except Mensaje.DoesNotExist:
+        mensaje_previo = None
+    oportunidad =  get_object_or_404(Oportunidad, pk=id_oportunidad)
+
+    # usuario logueado es el ue envia
+    usuario_remitente = User.objects.get(id = request.user.id)
+
+    # Id Usuario a enviar mensaje
+    usuario_destinatario = User.objects.get(id = id_usuario_destinatario)
+
     asunto =  postulacion.estudiante.persona.usuario.first_name +" "+postulacion.estudiante.persona.usuario.last_name +\
               " le ha enviado un mensaje."
-    enviar_mensaje(oportunidad, user, mensaje_respuesta.usuario_remitente, asunto, contenido, permite_respuesta,
-                   mensaje_respuesta.id)
+
+    enviar_mensaje(oportunidad, usuario_remitente, usuario_destinatario, asunto, contenido, permite_respuesta, mensaje_previo)
     #define response
     response = {'resp': '¡Mensaje enviado con exito!'}
     #serialize to json
@@ -128,21 +138,61 @@ class MensajeBuscarView(LoginRequiredMixin, TemplateView):
         user = request.user
         persona = Persona.objects.get(usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
-        empresa = Empresa.objects.get(id=representante.empresa.id)
-        mensajes = Mensaje()
         if id != '0':
-            mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id, estado = 'A').order_by("-fecha_creacion")
+            list_mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id,
+                                                                usuario_destinatario_id = user.id,
+                                                                estado = 'A').order_by("-fecha_creacion")
         else:
-            mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad__empresa= empresa.id,
-                                                           estado = 'A').order_by("-fecha_creacion")
-        # list_men =[]
-        # for men in mensaje:
-        #     e = {
-        #         "id": op.id
-        #     }
-        #     list_op.append(e)
-        # data = json.dumps(list_op)
-        # # data = serializers.serialize('json', oportunidades, fields=('id', 'titulo', 'fecha_cese'))
-        # return HttpResponse(data, content_type='application/json')
+           list_mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id = user.id,
+                                                               estado = 'A').order_by("-fecha_creacion")
+        mensajes = []
+        for m in list_mensajes:
+            try:
+                persona = Persona.objects.get(usuario_id =  m.mensaje.usuario_remitente.id)
+                foto = obtener_imagen_persona(persona)
+                mensaje = {'id': m.id,
+                           'usuario_remitente': persona,
+                           'foto': foto,
+                           'fecha_envio': m.fecha_envio,
+                           'asunto': m.mensaje.asunto,
+                           'contenido': m.mensaje.contenido}
+                mensajes.append(mensaje)
+            except Persona.DoesNotExist:
+                pass
+
         return render_to_response('mensaje/mensaje-listar.html', {'mensajes': mensajes},
+                                  context_instance = RequestContext(request))
+
+class MensajeAbrirConRelacionados(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.GET.get('id')
+        # user = request.user
+        # persona = Persona.objects.get(usuario_id=user.id)
+        # representante = get_object_or_404(Representante, persona_id =persona.id)
+        if id != '0':
+            m_actual = get_object_or_404(Mensaje_Destinatario, pk= id)
+            persona_mensaje_actual = Persona.objects.get(usuario_id =  m_actual.mensaje.usuario_remitente.id)
+            foto_persona_actual = obtener_imagen_persona(persona_mensaje_actual)
+            mensaje_actual = {'id': m_actual.id,
+                              'remitente': persona_mensaje_actual,
+                              'foto': foto_persona_actual,
+                              'fecha_envio': m_actual.fecha_envio,
+                              'asunto': m_actual.mensaje.asunto,
+                              'contenido': m_actual.mensaje.contenido}
+            list_mensajes = m_actual.get_anteriores().order_by('-fecha_creacion')
+
+        mensajes_anteriores = []
+        for m in list_mensajes:
+            persona = Persona.objects.get(usuario_id =  m.mensaje.usuario_remitente.id)
+            foto = obtener_imagen_persona(persona)
+            mensaje = {'id': m.id,
+                       'remitente': persona,
+                       'foto': foto,
+                       'fecha_envio': m.fecha_envio,
+                       'asunto': m.mensaje.asunto,
+                       'contenido': m.mensaje.contenido}
+            mensajes_anteriores.append(mensaje)
+        return render_to_response('mensaje/mensaje-relacionados-listar.html', {'mensaje_actual':mensaje_actual,
+                                                                               'mensajes_anteriores': mensajes_anteriores},
                                   context_instance = RequestContext(request))

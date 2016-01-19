@@ -515,13 +515,6 @@
              $.ajax({
                  type:"POST",
                  url:"{%url 'mensaje-enviar-estudiante' %}",
-//                 data: {
-//                     'ids': JSON.stringify($('ids').val()),
-//                     'ids_estudiante': JSON.stringify($('ids_estudiantes').val()),
-//                     'o' : '{{oportunidad.id}}',
-//                     'a': $('#asunto-mensaje').val(),
-//                     'c': $('#contenido-mensaje').val()
-//                 },
                  data: form,
                  processData: false,
                  contentType: false,

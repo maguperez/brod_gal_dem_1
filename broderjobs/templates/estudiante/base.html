@@ -67,7 +67,7 @@
                                         <a href="{%url 'estudiante-proceso-detalle' notificacion.postulacion.id%}">
                                             <i class="fa {%if notificacion.es_mensaje %}fa-envelope{%else%} fa-bell {%endif%} p-r-10 f-18"></i>
                                             {{notificacion.asunto}}
-                                            <span class="dropdown-time">{{notificacion.fecha_creacion|get_due_date_string}}</span>
+                                            <span class="dropdown-time">{{notificacion.fecha_creacion}}</span>
                                         </a>
                                     </li>
                                     {%endfor%}
