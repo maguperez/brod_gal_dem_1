@@ -52,7 +52,7 @@ p {text-align: justify; line-height: 20px;}
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
 input[type="text"], input[type="password"], select {padding: 0 6px; font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
 textarea { background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important; }
-select:not(.select-default) {padding-right: 50px; -webkit-appearance: none;  -webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
+select:not(.select-default) {padding-right: 50px; -webkit-appearance: none; -moz-appearance: none; appearance: none;-webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: none !Important; -moz-outline: none; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat; border: none;}
 input[type="radio"] + label {font-size: 1em;}
 input[type="radio"]:hover {background-position: 0 -11px;}
@@ -536,8 +536,8 @@ header.menu .centered { height: 47px; }
 .cv header {padding-top: 40px; padding-bottom: 40px; position: relative;}
 .cv header .editar {width: 80px; height: 30px; line-height: 30px; position: absolute; top: 30px; right: 25px;}
 .cv .box-imagen:hover {opacity: 0.7;}
-.cv .botones-imagen{float:left; margin-left: -20px;}
-.cv header .imagen, .cv header .detalle {float: left;}
+.cv .botones-imagen{float:right; margin-left: -20px;}
+.cv header .box-imagen, .cv header .detalle {float: left;}
 .cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
 .cv header .detalle {margin: 20px 0 0 60px; max-width: 240px;}
 .cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
@@ -1426,4 +1426,34 @@ a:hover {
     top: 105px;
     position: fixed;
     width: 223px;
+}
+/*Select multiples*/
+.select2-container--default .select2-selection{
+    font-size: 14px;
+    min-height: 34px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background: #f9f9f9 !Important;
+    border: 1px solid #ccc !Important;
+    border-radius: 0px;
+    outline: none;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 34px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 34px;
+}
+.select2-container--open .select2-selection {
+    border-color: #66afe9 !Important;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    border-radius: 0px;
+    color: #555
 }
