@@ -109,22 +109,8 @@
                         </div>
                         <div id="message-detail2" class="tab-pane fade panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
                             <div class="panel-heading messages message-result">
-                            <!--<div class="message-action-btn clearfix p-t-20">-->
-                                <!--<div class = "pull-left">-->
-                                        <!--<select id="oportunidad_redactar_id" class="form-control bd-0 bd-white" style="width: 300px">-->
 
-                                            <!--{%for p in oportunidades %}-->
-                                                <!--<option value="{{p.id}}">{{p.titulo}}</option>-->
-                                            <!--{%endfor%}-->
-                                        <!--</select>-->
-                                <!--</div>-->
-                                <!--<div class="pull-right">-->
-                                    <!--<div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Send" data-placement="bottom"><i class="fa fa-send"></i>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<br>-->
-                            <div class="input-group input-group-lg border-bottom">
+                                <div class="input-group input-group-lg border-bottom">
                                 <span class="input-group-btn">
                                     <a href="" class="btn" disabled>Oportunidad: </a>
                                 </span>
@@ -134,31 +120,28 @@
                                     {%endfor%}
                                 </select>
                             </div>
-                            <div class="input-group input-group-lg border-bottom">
+                                <div class="input-group input-group-lg border-bottom">
                                 <span class="input-group-btn">
                                     <a href="" class="btn" disabled>Para:</a>
                                 </span>
                                 <select class="form-control candidatos bd-0 bd-white" multiple style = "width: 100%">
-                                    <option>louise.lista@andinas.com</option>
-                                    <option>gabriela.soto@andinas.com</option>
-                                    <option>manuel.perez@andinas.com</option>
-                                    <option>jonathan.quijada@andinas.com</option>
+
                                 </select>
                             </div>
-                            <div class="input-group input-group-lg border-bottom">
+                                <div class="input-group input-group-lg border-bottom">
                                 <span class="input-group-btn">
                                     <a href="" class="btn" disabled>Asunto:</a>
                                 </span>
                                 <input type = "text" class="form-control msearch bd-0 bd-white" />
                             </div>
-                        </div>
+                            </div>
                             <div class="panel-body messages message-result">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div id = "summernote"></div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div id = "summernote"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -216,6 +199,9 @@
 			fnBuscarMensajes();
 		});
         $( '#oportunidad_redactar_id' ).change( function() {
+            fnActivaTab('#message-detail');
+            $('#message-detail').hmtl('<div class="panel-heading messages message-result">' +
+                                        '<h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2></div>');
 			fnCargarCandidatos($(this).val());
 		});
         $("#messages-list").on('click', '.message-item', function(){
@@ -242,5 +228,9 @@
                 });
         });
 	}
+
+    function fnActivaTab(tab){
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
     </script>
 {%endblock%}

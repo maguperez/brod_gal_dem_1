@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
-    Conocimiento, TipoRemuneracion, Beneficio, PeriodosGraduacion
+from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, Conocimiento, TipoRemuneracion, Beneficio, PeriodosGraduacion
 from empresa.models import Empresa
 from estudiante.models import Estudiante
 from django.contrib.auth.models import User
@@ -87,6 +86,20 @@ class Postulacion(models.Model):
 
     def __unicode__(self):
 		return unicode(self.estudiante) or u''
+
+class BeneficioExtra(models.Model):
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["orden"]
+
+    def __unicode__(self):
+		return unicode(self.descripcion) or u''
 
 
 
