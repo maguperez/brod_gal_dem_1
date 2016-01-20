@@ -85,20 +85,20 @@ class InfoPersonalForm(EstudianteForm):
 
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Celular'}))
 
-    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'form-control'}))
+    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Universidades', 'class': 'full'}))
     universidades_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'form-control'}))
+    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Carreras', 'class': 'full'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'form-control', }))
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
 
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
-#     paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'form-control'}))
+#     paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
 #     paises_hidden = forms.CharField(widget=forms.HiddenInput    # ())
 
-#     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'form-control'}))
+#     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
 #     ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
 
 class ResumenForm(forms.Form):
@@ -121,11 +121,11 @@ class DisponibilidadForm(forms.ModelForm):
 
 class IdiomaForm(forms.Form):
 
-    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
+    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full'}))
 
 class ConocimientoForm(forms.Form):
 
-    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'form-control', }))
+    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
 
 class ExperienciaForm(forms.ModelForm):
     # fecha_desde = forms.DateField(widget=forms.DateInput())
@@ -133,10 +133,10 @@ class ExperienciaForm(forms.ModelForm):
     fecha_hasta_hidden = forms.CharField(widget=forms.HiddenInput())
     # fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
 
-    puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puesto', 'class': 'form-control'}))
+    puestos = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Puesto', 'class': 'full'}))
     puestos_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    empresas = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Empresa', 'class': 'form-control'}))
+    empresas = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Empresa', 'class': 'full'}))
     empresas_hidden = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
@@ -159,8 +159,8 @@ class VoluntariadoForm(forms.ModelForm):
     fecha_desde_hidden = forms.CharField(widget=forms.HiddenInput())
     fecha_hasta_hidden = forms.CharField(widget=forms.HiddenInput())
     # fecha_hasta = forms.DateField(required=False, widget=forms.DateInput())
-    cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Función', 'class': 'form-control'}))
-    organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización/Evento', 'class': 'form-control'}))
+    cargo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Función', 'class': 'full'}))
+    organizacion = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Organización/Evento', 'class': 'full'}))
     class Meta:
         model = Voluntariado
         fields = ('cargo', 'organizacion', 'descripcion')
