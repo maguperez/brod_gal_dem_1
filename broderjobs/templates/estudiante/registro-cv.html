@@ -191,7 +191,11 @@
 		$.validator.addMethod('universidadExistente',function(value, element, param){
 			return flagSeleccionarUniversidad;
 		},'Debe seleccionar una universidad existente');
+		$.validator.addMethod('validarCiclos',function(value, element, param){
+			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
+				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
 
+		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 		//var ids = ["id_grado_estudio"];
 		InicializarTypeaheadElementos();
 		//InicializarPlugin(ids);
@@ -407,33 +411,37 @@
 <script>
     $(function(){
 
-
         $("form").validate({
 			onfocusout: true,
 			onkeyup:true,
             errorPlacement: function (error, element) {
-                $(element).tooltip('destroy');
+                var object, placement;
 
-				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+				if ($(element).parent().find(".select2").length > 0) {
+					object = $(element).parent().find(".select2");
+					placement = "left";
+				} else if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' ){
+					object = $(element);
+					placement = "right";
 
-					$(element).tooltip({
-						animation: true,
-						placement: "right",
-						title: $(error).text(),
-						trigger: "manual"
-                	} );
-
+				} else if(error[0].innerText == "El ciclo de ingreso debe ser menor que la graduacion estimada"){
+					if (element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+						object = $(element);
+						placement = "right";
+					}
 				}
 				else{
-					$(element).tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
+					object = $(element);
+					placement = "left";
 				}
-
-                $(element).tooltip('show');
+				$(object).tooltip('destroy');
+				$(object).tooltip({
+					animation: true,
+					placement: placement,
+					title: $(error).text(),
+					trigger: "manual"
+				});
+                $(object).tooltip('show');
 
             },
             success: function (label, element) {
@@ -458,16 +466,20 @@
                     required: true
                 },
 				semestre_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				semestre_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				pais:{
                     required: true
