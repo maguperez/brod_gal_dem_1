@@ -197,11 +197,12 @@
         fnBuscarMensajes();
 		$( '#oportunidad_id' ).change( function() {
 			fnBuscarMensajes();
-		});
-        $( '#oportunidad_redactar_id' ).change( function() {
             fnActivaTab('#message-detail');
             $('#message-detail').hmtl('<div class="panel-heading messages message-result">' +
                                         '<h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2></div>');
+		});
+        $( '#oportunidad_redactar_id' ).change( function() {
+
 			fnCargarCandidatos($(this).val());
 		});
         $("#messages-list").on('click', '.message-item', function(){
