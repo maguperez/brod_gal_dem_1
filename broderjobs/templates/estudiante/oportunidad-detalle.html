@@ -189,7 +189,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 <script>
 	$("#link-oportunidad").addClass("active");
 
-	$('#postular').click(function(e) {
+	$('#postular').click(function(event) {
 		fnCargarPopup();
 		window.location = '#resultado-postulacion';
 		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
@@ -207,6 +207,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 
     });
 	function fnPostular(){
+		debugger;
 		var id = {{oportunidad.id}};
 		$.ajax({
 			data : {'id':id},
@@ -256,7 +257,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 	var Detalle = {
         map: null,
         marca: null,
-        inicializar_mapa: function() {
+        inicializar_mapa: function(event) {
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
                 center: new google.maps.LatLng(-12.0570208,-77.0372896),
