@@ -351,7 +351,7 @@ a:hover { text-decoration: none !Important }
 /*AGREGADO POR JONATHAN 20151127_0950*/
 .final-registro .datos .half-medio {width: 49%;}
 /*******/
-.final-registro .datos select, .final-registro .datos input[type="text"] {border: 1px solid #e5e5e5;}
+/*.final-registro .datos select, .final-registro .datos input[type="text"] {border: 1px solid #e5e5e5;}*/
 .final-registro .datos input[type="checkbox"] + label {margin-right: 30px; font-size: 1.1em;}
 .final-registro .finalizar-registro {width: 150px; height: 35px; line-height: 35px; margin: 20px auto -10px auto; text-align: center; font-size: 1.1em; font-family: 'Roboto Condensed'; color: #fff; background: #f50; display: block; border: none; cursor: pointer; display: inherit;}
 

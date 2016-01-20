@@ -92,17 +92,21 @@
 								</div>
 								<div>
 									<label>Ciclo de ingresos</label>
-									<p>
-										{{form.semestre_inicio_estudio}}
-										{{form.ano_inicio_estudio}}
-									</p>
+									<p><div class = "row">
+										<div class = "col-sm-6">
+										{{form.semestre_inicio_estudio}}</div>
+										<div class = "col-sm-6">
+										{{form.ano_inicio_estudio}}</div>
+									</div></p>
 								</div>
 								<div>
 									<label>Graduaci&oacute;n / Grad. estimada</label>
-									<p>
-										{{form.semestre_graduacion}}
-										{{form.ano_graduacion}}
-									</p>
+									<p><div class = "row">
+										<div class = "col-sm-6">
+										{{form.semestre_graduacion}}</div>
+										<div class = "col-sm-6">
+										{{form.ano_graduacion}}</div>
+									</div></p>
 								</div>
 								<div>
 									<label>Pa&iacute;s</label>
@@ -410,7 +414,6 @@
 
 <script>
     $(function(){
-
         $("form").validate({
 			onfocusout: true,
 			onkeyup:true,

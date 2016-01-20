@@ -93,6 +93,7 @@
 		$("form input, form select, form textarea").addClass("form-control");
 		$(".modal-title").html('&nbsp;Información');
 		$("#id_fecha_nacimiento").datepicker({
+			autoclose: true,
 			language: 'es',
 			format: "dd/mm/yyyy",
 			endDate:"0d"
@@ -189,15 +190,13 @@
 					}
 				}
 			}
-
 		});
 	}
 
 	function InicializarValidaciones(){
 		$("form").validate({
-			onfocusout: true,
-			onkeyup:true,
             errorPlacement: function (error, element) {
+				debugger;
                 $(element).tooltip('destroy');
 
 				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
