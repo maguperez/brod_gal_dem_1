@@ -35,7 +35,7 @@ class OportunidadForm(forms.ModelForm):
             'latitud': TextInput(attrs={'placeholder': 'latitud'}),
             'carrera': SelectMultiple(attrs={'class': 'full'}),
             'idioma': SelectMultiple(attrs={'class': 'full'}),
-            'grado_estudio': SelectMultiple(attrs={'class': 'full'}),
+            'grado_estudio': Select(attrs={'class': 'full'}),
             'conocimiento': SelectMultiple(attrs={'class': 'full'}),
             'estado_oportunidad': Select(attrs={'disabled':'disabled'})
         }

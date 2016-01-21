@@ -10,19 +10,19 @@ from main import utils
 
 class RegistroCVForm(forms.ModelForm):
 
-    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Universidad', 'class': 'full'}))
+    universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Universidad', 'class': 'form-control'}))
     universidades_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Carrera', 'class': 'full'}))
+    carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Carrera', 'class': 'form-control'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
+    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'form-control'}))
     # paises_hidden = forms.CharField(widget=forms.HiddenInput())
 
-    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
+    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'form-control'}))
     # ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Seleccione País", required = False, widget=forms.Select(attrs={'class': 'full', }))
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Seleccione País", required = False, widget=forms.Select(attrs={'class': 'form-control', }))
 
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
@@ -31,7 +31,7 @@ class RegistroCVForm(forms.ModelForm):
             fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
                      'ano_graduacion', 'tipo_puesto', 'carga_horaria')
             widgets = {
-                'grado_estudio': Select(attrs={'class': 'full'}),
+                'grado_estudio': Select(attrs={'class': 'form-control'}),
                 'tipo_puesto': CheckboxSelectMultiple(),
                 'carga_horaria': RadioSelect(),
             }
@@ -43,8 +43,8 @@ class RegistroCVForm(forms.ModelForm):
 
         #Carga items Semestre
         items_semestre = utils.semestre_rango()
-        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
-        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
+        self.fields['semestre_inicio_estudio'].widget = forms.Select(attrs={'class': 'form-control'})
+        self.fields['semestre_graduacion'].widget = forms.Select(attrs={'class': 'form-control'})
 
         self.fields['semestre_inicio_estudio'].choices = items_semestre
         self.fields['semestre_graduacion'].choices = items_semestre
@@ -52,10 +52,10 @@ class RegistroCVForm(forms.ModelForm):
         #Carga items a aÃ±os
 
         items_anos = utils.anos_rango()
-        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'half-medio'})
+        self.fields['ano_inicio_estudio'].widget = forms.Select(attrs={'class': 'form-control'})
         self.fields['ano_inicio_estudio'].choices = items_anos
 
-        self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'half-medio'})
+        self.fields['ano_graduacion'].widget = forms.Select(attrs={'class': 'form-control'})
         self.fields['ano_graduacion'].choices = items_anos
 
 class FotoForm(forms.Form):

@@ -150,7 +150,7 @@ class OportunidadEditarView(FormView):
                 'tipo_puesto': oportunidad.tipo_puesto,
                 'estado': oportunidad.estado,
                 'estado_oportunidad': oportunidad.estado_oportunidad,
-                'grado_estudio': oportunidad.grado_estudio.all(),
+                'grado_estudio': oportunidad.grado_estudio,
                 'universidad': oportunidad.universidad.all(),
                 'carrera': oportunidad.carrera.all(),
                 'idioma': oportunidad.idioma.all(),
