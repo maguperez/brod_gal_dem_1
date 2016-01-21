@@ -1,6 +1,7 @@
 
 {%if mensaje_actual%}
     <div class="panel-heading messages message-result">
+        {%if tipo == '0'%}
         <div class="message-action-btn clearfix p-t-20">
             <div class="pull-right">
                 <div data-rel="tooltip" title="" class="icon-rounded m-r-10" data-original-title="Reply"
@@ -11,6 +12,7 @@
                 </div>
             </div>
         </div>
+        {%endif%}
         <h2 class="p-t-20 w-500">{{mensaje_actual.asunto}}</h2>
     </div>
     <div class="panel-body messages message-result">

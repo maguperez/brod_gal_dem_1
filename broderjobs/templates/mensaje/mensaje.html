@@ -215,10 +215,9 @@
             });
         fnBuscarMensajes(0);
 		$( '#oportunidad_id' ).change( function() {
-			fnBuscarMensajes(1);
+			fnBuscarMensajes(0);
 		});
         $('#oportunidad_redactar_id' ).change( function() {
-
 			fnCargarCandidatos($(this).val());
 		});
         $("#messages-list").on('click', '.message-item', function(){
