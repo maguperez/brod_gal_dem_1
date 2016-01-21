@@ -57,18 +57,10 @@
 			<div class="centered">
 				<a href="{% url 'empresa' %}"><img class="logo" src="{% static 'img/logo.png' %}" alt="Broder jobs" /></a>
 				<ul class="nav navbar-nav notify pull-right header-menu">
-					{% if '/mensaje/' in request.path %}
-						<li><div class="actions">
-							<a href="{% url 'mensaje_crear'%}">REDACTAR MENSAJE</a>
-						</div></li>
-						{%else%}
 						<li><div class="actions">
 							<a href="{% url 'oportunidad_crear'%}">ANUNCIAR OPORTUNIDAD</a>
 						</div></li>
-						{% endif %}
 					<li>
-
-
 						<ul class="nav navbar-nav notify pull-right header-menu">
 						<!-- BEGIN NOTIFICATION DROPDOWN -->
 						<li class="dropdown" id="notifications-header">
@@ -204,6 +196,11 @@
 	window.onload = function(){
                 $(".loading-wrapper").hide();
             }
+	$('#notifications-header').click(function(){
+                $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
+			        $('#cantidad-notificaciones').html("0");
+		        });
+           });
 
 </script>
 {% block js %}

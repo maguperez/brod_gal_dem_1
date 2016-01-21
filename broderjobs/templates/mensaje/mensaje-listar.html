@@ -6,8 +6,9 @@
             <div class="media">
                 <img src="{{mensaje.foto}}" alt="avatar 4" width="50" class="pull-left">
                 <div class="media-body">
-                    <small class="pull-right">{{mensaje.fecha_envio}}</small>
-                    <h5><strong>{{mensaje.usuario_remitente}}</strong></h5>
+                    <small class="pull-right" style="display: inline-block">{{mensaje.fecha_envio}}</small>
+                    <small class="pull-right" style="margin-bottom: 5px; display: inline-block"> Oportunidad: {{mensaje.oportunidad}}</small>
+                    <h5 style="display: inline-block"><strong>{{mensaje.usuario_remitente}}</strong></h5>
                     <h4>{{mensaje.asunto}}</h4>
                 </div>
             </div>
