@@ -1,16 +1,68 @@
-{% extends 'estudiante/base.html' %}
-{% load staticfiles %}
+{%load staticfiles %}
 {%block content%}
- <section class = "mensaje">
-        <div id="main-content" class="page-mailbox centered">
-        <ul id="pregunta">
-        </ul>
-            </div>
-     </section>
+<script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
+ <section class = "">
+     <div id = "wizard">
+         <div class="wizard-progress wizard-progress-lg">
+             <ul class="wizard-steps"></ul>
+             <div class="progress" >
+					  <div class="progress-bar progress-bar-striped active" role="progressbar" ></div>
+					</div>
+             <div class="tab-content">
+             </div>
+         </div>
+     </div>
+     <div id="main-content" class="page-mailbox centered">
+         <ul id="pregunta"></ul>
+     </div>
+
+ </section>
+<style>
+    .wizard-progress.wizard-progress-lg{
+        font-size: 14px;
+        height: auto;
+        line-height: 30px;
+    }
+    html .wizard-progress .wizard-steps li, html.dark .wizard-progress .wizard-steps li{
+        min-width: 0px;
+        visibility: hidden;
+    }
+    .wizard-progress .row {
+        height: auto;
+    }
+    .wizard-progress .row div {
+        height: 30px;
+    }
+    .wizard-progress .row .col-sm-3 {
+        text-align:  center;
+    }
+    .wizard-progress .row input[type=radio]{
+        margin: 0px;
+        line-height:30px;
+    }
+
+            .tab-content>.tab-pane{
+                display:block;
+                max-height: 0;
+                opacity:0;
+                overflow: hidden;
+                -webkit-transition: all 1s;
+                  -moz-transition: all 1s;
+                  -ms-transition: all 1s;
+                  -o-transition: all 1s;
+                  transition: all 1s;
+            }
+            .tab-content>.active{
+                opacity: 1;
+                max-height: 250px;
+            }
+</style>
 
 {%endblock%}
 {%block js%}
 <script>
+
+
     var JSPreguntas = function () {
         this.cargar = function(){
             $.ajax({
@@ -24,13 +76,64 @@
                 },
                 success: function(preguntas){
                     $.each(preguntas, function(i, pregunta) {
-                        $("#pregunta").append('<li>ID= '+pregunta.id+', Descripcion: '+pregunta.descripcion+'<ul>');
-                        $.each(pregunta.respuestas, function(i, respuesta) {
-                            $("#pregunta").append('<li>ID= '+respuesta.id+', ' +
-                                                    'Descripcion:'+respuesta.descripcion+',' +
-                                                    'Letra: '+respuesta.letra+'</li>');
-                            });
-                        $("#pregunta").append('</ul></li>');
+                        $(".wizard-steps").append(
+                                '<li'+(i==0 ? ' class="active"':"")+'>'+
+                                    '<a href="#tab'+i+'" data-toggle="tab"></a>'+
+                                '</li>'
+                        );
+                        $(".tab-content").append(
+                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'">'+
+                                    '<div class = "row">'+
+                                        '<div class = "col-sm-12">'+pregunta.descripcion+'</div>'+
+                                    '</div>'+
+                                    '<div class = "row">'+
+                                        '<div class = "col-sm-6"></div>'+
+                                        '<div class = "col-sm-3">Más</div>'+
+                                        '<div class = "col-sm-3">Menos</div>'+
+                                    '</div>'+
+                                '</div>'
+                        );
+                        $.each(pregunta.respuestas, function(j, respuesta) {
+                            $(".tab-content #tab"+i).append(
+                                    '<div class = "row">'+
+                                        '<div class = "col-sm-6">'+respuesta.descripcion+'</div>'+
+                                        '<div class = "col-sm-3"><input type = "radio" name = "mas'+pregunta.id+'" value = "'+respuesta.id+'"></div>'+
+                                        '<div class = "col-sm-3"><input type = "radio" name = "menos'+pregunta.id+'" value = "'+respuesta.id+'"></div>'+
+                                    '</div>'
+                            );
+                        });
+                        $(".tab-content #tab"+i).append('</ul></li>');
+                    });
+                    $('.wizard-progress').bootstrapWizard({
+                        tabClass: 'wizard-steps',
+                        onTabShow: function( tab, navigation, index ) {
+                            var $total = navigation.find('li').length - 1;
+                            var $current = index;
+                            var $percent = Math.floor(( $current / $total ) * 100);
+
+                            $('#wizard').find('.progress-bar').css({ 'width': $percent + '%' });
+
+                            $current >= $total ?
+                                $("#form-preguntas input[type=submit]").removeClass("hidden"):
+                                $("#form-preguntas input[type=submit]").addClass("hidden");
+                            //return false;
+                        }
+                        }, 5000);
+                    $(".tab-pane.active").on("click", "input", function(){
+                        if($(this).is("[name^=mas]:checked")){
+                            $(this).parents(".tab-pane").find("[name^=menos]").each(function() {
+                                $(this).attr("disabled",false);
+                            })
+                            $(this).parents(".row").find("[name^=menos]").attr("disabled", true);
+                        }else {
+                            $(this).parents(".tab-pane").find("[name^=mas]").each(function() {
+                                $(this).attr("disabled",false);
+                            })
+                            $(this).parents(".row").find("[name^=mas]").attr("disabled", true);
+                        }
+                        if ($("[name^=mas]:checked").length > 0 && $("[name^=menos]:checked").length > 0){
+                            $('.wizard-progress').bootstrapWizard('next');
+                        }
                     });
                 }
             });
