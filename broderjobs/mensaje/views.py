@@ -157,7 +157,8 @@ class MensajeBuscarView(LoginRequiredMixin, TemplateView):
                                'foto': foto,
                                'fecha_envio': m.fecha_envio,
                                'asunto': m.mensaje.asunto,
-                               'contenido': m.mensaje.contenido}
+                               'contenido': m.mensaje.contenido,
+                               'oportunidad': m.mensaje.oportunidad}
                     mensajes.append(mensaje)
                 except Persona.DoesNotExist:
                     pass
@@ -179,7 +180,8 @@ class MensajeBuscarView(LoginRequiredMixin, TemplateView):
                            'foto': foto,
                            'fecha_envio': m.fecha_envio,
                            'asunto': m.mensaje.asunto,
-                           'contenido': m.mensaje.contenido}
+                           'contenido': m.mensaje.contenido,
+                           'oportunidad': m.mensaje.oportunidad}
                 mensajes.append(mensaje)
         return render_to_response('mensaje/mensaje-listar.html', {'mensajes': mensajes},
                                   context_instance = RequestContext(request))
@@ -188,16 +190,20 @@ class MensajeAbrirConRelacionados(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         id = request.GET.get('id')
-        # user = request.user
-        # persona = Persona.objects.get(usuario_id=user.id)
-        # representante = get_object_or_404(Representante, persona_id =persona.id)
+        tipo = request.GET.get('t')
         if id != '0':
             m_actual = get_object_or_404(Mensaje_Destinatario, pk= id)
-            persona_mensaje_actual = Persona.objects.get(usuario_id =  m_actual.mensaje.usuario_remitente.id)
-            foto_persona_actual = obtener_imagen_persona(persona_mensaje_actual)
+            if(tipo == '0'):
+                remitente = Estudiante.objects.get(persona__usuario =  m_actual.mensaje.usuario_remitente.id)
+                foto = remitente.set_foto
+            else:
+                remitente = Persona.objects.get(usuario_id =  m_actual.mensaje.usuario_remitente.id)
+                foto = obtener_imagen_persona(remitente)
             mensaje_actual = {'id': m_actual.id,
-                              'remitente': persona_mensaje_actual,
-                              'foto': foto_persona_actual,
+                              'oportunidad_id': m_actual.mensaje.oportunidad.id,
+                              'remitente_id': remitente.id,
+                              'remitente': str(remitente),
+                              'foto': foto,
                               'fecha_envio': m_actual.fecha_envio,
                               'asunto': m_actual.mensaje.asunto,
                               'contenido': m_actual.mensaje.contenido}
@@ -215,7 +221,8 @@ class MensajeAbrirConRelacionados(LoginRequiredMixin, TemplateView):
                        'contenido': m.mensaje.contenido}
             mensajes_anteriores.append(mensaje)
         return render_to_response('mensaje/mensaje-relacionados-listar.html', {'mensaje_actual':mensaje_actual,
-                                                                               'mensajes_anteriores': mensajes_anteriores},
+                                                                               'mensajes_anteriores': mensajes_anteriores,
+                                                                               'tipo': tipo},
                                   context_instance = RequestContext(request))
 
 def cargar_candidatos( request ):

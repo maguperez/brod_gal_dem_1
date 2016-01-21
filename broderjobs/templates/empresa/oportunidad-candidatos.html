@@ -483,8 +483,6 @@
              CandidatosTable.obtener();
         });
 
-
-
         $('#abrir-mensaje').click(function(){
             $(".destinatarios ul").html('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
@@ -492,8 +490,8 @@
             });
         });
 
-         $('#enviar-mensaje').click(function(){
-             ids = new Array();
+        $('#enviar-mensaje').click(function(){
+            ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("id");
             });
