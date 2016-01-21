@@ -60,6 +60,7 @@ def mensaje_ver( request ):
 def mensaje_enviar_estudiantes( request ):
     ids = json.loads(request.POST['ids'])
     ids_estudiante = json.loads(request.POST['ids_estudiante'])
+    asunto = request.POST['a']
     contenido = request.POST['c']
     id_oportunidad = request.POST['o']
     p = request.POST['p']
@@ -68,7 +69,8 @@ def mensaje_enviar_estudiantes( request ):
         permite_respuesta = True
     oportunidad =  get_object_or_404(Oportunidad, pk=id_oportunidad)
     userio_remitente = User.objects.get(id = request.user.id)
-    asunto = "La Empresa " + oportunidad.empresa.nombre + " te ha enviado un mensaje."
+    if asunto == '':
+        asunto = "La Empresa " + oportunidad.empresa.nombre + " te ha enviado un mensaje."
     enviar_mensaje_multiple_estudiantes(oportunidad, userio_remitente, ids_estudiante, asunto, contenido, permite_respuesta, None)
     #define response
     response = {'resp': '¡Mensaje enviado con exito!'}
@@ -135,31 +137,50 @@ class MensajeBuscarView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         id = request.GET.get('id')
-        user = request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = get_object_or_404(Representante, persona_id =persona.id)
-        if id != '0':
-            list_mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id,
-                                                                usuario_destinatario_id = user.id,
-                                                                estado = 'A').order_by("-fecha_creacion")
-        else:
-           list_mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id = user.id,
-                                                               estado = 'A').order_by("-fecha_creacion")
+        tipo= request.GET.get('t')
         mensajes = []
-        for m in list_mensajes:
-            try:
-                persona = Persona.objects.get(usuario_id =  m.mensaje.usuario_remitente.id)
+        user = request.user
+        if tipo == '0':
+            if id != '0':
+                list_mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id,
+                                                                    usuario_destinatario_id = user.id,
+                                                                    estado = 'A').order_by("-fecha_envio")
+            else:
+               list_mensajes = Mensaje_Destinatario.objects.filter(usuario_destinatario_id = user.id,
+                                                                   estado = 'A').order_by("-fecha_envio")
+            for m in list_mensajes:
+                try:
+                    persona = Persona.objects.get(usuario_id =  m.mensaje.usuario_remitente.id)
+                    foto = obtener_imagen_persona(persona)
+                    mensaje = {'id': m.id,
+                               'usuario_remitente': 'De: '+ str(persona),
+                               'foto': foto,
+                               'fecha_envio': m.fecha_envio,
+                               'asunto': m.mensaje.asunto,
+                               'contenido': m.mensaje.contenido}
+                    mensajes.append(mensaje)
+                except Persona.DoesNotExist:
+                    pass
+        elif tipo == '1':
+            # persona = Persona.objects.get(usuario_id = user.id)
+            # foto = obtener_imagen_persona(persona)
+            if id != '0':
+                list_mensajes = Mensaje_Destinatario.objects.filter(mensaje__oportunidad= id,
+                                                                    mensaje__usuario_remitente= user.id,
+                                                                    estado = 'A').order_by("-fecha_envio")
+            else:
+               list_mensajes = Mensaje_Destinatario.objects.filter( mensaje__usuario_remitente= user.id,
+                                                                   estado = 'A').order_by("-fecha_envio")
+            for m in list_mensajes:
+                persona = Persona.objects.get(usuario_id =  m.usuario_destinatario.id)
                 foto = obtener_imagen_persona(persona)
                 mensaje = {'id': m.id,
-                           'usuario_remitente': persona,
+                           'usuario_remitente': 'Para: '+ str(persona),
                            'foto': foto,
                            'fecha_envio': m.fecha_envio,
                            'asunto': m.mensaje.asunto,
                            'contenido': m.mensaje.contenido}
                 mensajes.append(mensaje)
-            except Persona.DoesNotExist:
-                pass
-
         return render_to_response('mensaje/mensaje-listar.html', {'mensajes': mensajes},
                                   context_instance = RequestContext(request))
 

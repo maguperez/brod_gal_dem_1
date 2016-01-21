@@ -507,6 +507,7 @@
              form.append('ids',JSON.stringify(ids));
              form.append('ids_estudiante',JSON.stringify(ids_estudiante));
              form.append('o','{{oportunidad.id}}');
+             form.append('a','');
              form.append('c',$('#contenido-mensaje').val());
              form.append('p',$('#sin-respuesta').is(':checked')? 'N' : 'S');
              form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());

@@ -17,6 +17,8 @@ urlpatterns = [
 
     url(r'^contador_visitas/', include('contador_visitas.urls')),
 
+    url(r'^disc/', include('disc.urls')),
+
     #ADMIN
     url(r'^admin/', include(admin.site.urls)),
 

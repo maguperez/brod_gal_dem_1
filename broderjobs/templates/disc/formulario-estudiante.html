@@ -1,0 +1,45 @@
+{% extends 'estudiante/base.html' %}
+{% load staticfiles %}
+{%block content%}
+ <section class = "mensaje">
+        <div id="main-content" class="page-mailbox centered">
+        <ul id="pregunta">
+        </ul>
+            </div>
+     </section>
+
+{%endblock%}
+{%block js%}
+<script>
+    var JSPreguntas = function () {
+        this.cargar = function(){
+            $.ajax({
+                type:"GET",
+                url:"{%url 'disc-preguntas-estudiante' %}",
+
+                processData: false,
+                contentType: false,
+                error: function(x){
+                    console.log(x);
+                },
+                success: function(preguntas){
+                    $.each(preguntas, function(i, pregunta) {
+                        $("#pregunta").append('<li>ID= '+pregunta.id+', Descripcion: '+pregunta.descripcion+'<ul>');
+                        $.each(pregunta.respuestas, function(i, respuesta) {
+                            $("#pregunta").append('<li>ID= '+respuesta.id+', ' +
+                                                    'Descripcion:'+respuesta.descripcion+',' +
+                                                    'Letra: '+respuesta.letra+'</li>');
+                            });
+                        $("#pregunta").append('</ul></li>');
+                    });
+                }
+            });
+        }
+    }
+    var Preguntas = new JSPreguntas();
+    $(function () {
+        Preguntas.cargar();
+    });
+
+</script>
+{%endblock%}
