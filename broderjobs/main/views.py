@@ -28,7 +28,8 @@ def homepage1(request):
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 def homepage(request):
-    message = None
+    message_registro = None
+    message_login = None
     if request.user.is_authenticated():
         persona = Persona()
         try:
@@ -43,8 +44,10 @@ def homepage(request):
         else:
             login_form = LoginForm(prefix='login')
             registro_form = RegisterForm(prefix='registro')
-
-        return render_to_response('main/home-estudiante.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
+        return render_to_response('main/home-estudiante.html', {'message_login': message_login,
+                                                                'message_registro': message_registro,
+                                                                'login_form': login_form ,
+                                                                'registro_form': registro_form },
                                       context_instance=RequestContext(request))
     else:
         if request.method == "POST":
@@ -66,9 +69,9 @@ def homepage(request):
                                 login(request, user)
                                 return redirect('estudiante-oportunidad-listar')
                             else:
-                                message = "Tu usuario esta inactivo"
+                                message_login = "Tu usuario esta inactivo"
 
-                    message = "Email o contraseña incorrecta"
+                    message_login = "Email o contraseña incorrecta"
 
             if '_registro' in request.POST:
                 if registro_form.is_valid():
@@ -87,11 +90,16 @@ def homepage(request):
                                             password=request.POST['registro-password1'])
                     login(request, new_user)
                     return redirect('registro-cv')
+                else:
+                    message_registro= "Error al registrar"
         else:
             login_form = LoginForm(prefix='login')
             registro_form = RegisterForm(prefix='registro')
 
-        return render_to_response('main/home-estudiante.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
+        return render_to_response('main/home-estudiante.html', {'message_login': message_login,
+                                                                'message_registro': message_registro,
+                                                                'login_form': login_form ,
+                                                                'registro_form': registro_form },
                                       context_instance=RequestContext(request))
 
 def homepage_empresa(request):

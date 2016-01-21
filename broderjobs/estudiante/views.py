@@ -110,13 +110,10 @@ def registro_cv(request):
             if created is True:
                 r.save()
 
-            return redirect('estudiante-oportunidad-listar')
+            return redirect('mi-cv')
 
         else:
             print(form.errors)
-
-
-
     else:
         form = forms.RegistroCVForm()
     return render(request, 'estudiante/registro-cv.html', {'form': form})
@@ -149,8 +146,10 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             ranking.ambiente_trabajo = 0
             ranking.salarios = 0
         mi_evaluacion = EvaluacionEmpresa()
+        total_evaluadores = 0
         try:
             mi_evaluacion = EvaluacionEmpresa.objects.get(empresa_id = empresa.id, usuario_id = self.request.user.id)
+            total_evaluadores = EvaluacionEmpresa.objects.filter(empresa_id = empresa.id, estado = 'A').count()
         except EvaluacionEmpresa.DoesNotExist:
             mi_evaluacion.linea_carrera = 0
             mi_evaluacion.flexibilidad_horarios = 0
@@ -164,6 +163,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         context['mi_evaluacion'] = mi_evaluacion
         context['redes_sociales'] = redes_sociales
         context['imagenes'] = imagenes
+        context['total_evaluadores'] = str(total_evaluadores).zfill(3)
         return context
 
     def form_valid(self, form):
@@ -214,12 +214,14 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
             sector = empresas[i].nombre
             if empresas[i].sector is not None:
                 sector = Sector.objects.get(id=empresas[i].sector.id).descripcion
+            total_evaluadores = EvaluacionEmpresa.objects.filter(empresa_id = empresas[i].id, estado = 'A').count()
             e = {
                 "id": empresas[i].id,
                 "nombre": empresas[i].nombre,
                 "logo": empresas[i].set_logo,
                 "sector": sector,
                 "ranking_general": ranking_general,
+                "total_evaluadores": str(total_evaluadores).zfill(3)
             }
             a_empresas.append(e)
         # data = serializers.serialize('json', a_empresas,

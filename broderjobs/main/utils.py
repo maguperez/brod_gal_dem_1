@@ -24,7 +24,7 @@ def semestre_rango():
     semestres = []
     for y in range(1,3):
         semestres.append((str(y), "Ciclo " + str(y)))
-    return [('', 'Semestre')] + semestres
+    return [('', 'Ciclos')] + semestres
 
 #carga el rango de semestre para el  select
 def dias_del_mes():
@@ -41,7 +41,7 @@ def meses_del_ano():
 
 def anos_nacimiento():
     anos = []
-    for y in range(1950, (date.today().year - 10)):
+    for y in range(date.today().year - 40, (date.today().year - 17)):
         anos.append((y, y))
     return [('','Año')] + anos
 

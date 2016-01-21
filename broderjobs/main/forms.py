@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.contrib.auth.models import User
 
 from empresa.models import Empresa
+from .utils import anos_nacimiento, meses_del_ano, dias_del_mes
 import datetime
 
 
@@ -28,20 +29,9 @@ class UniqueUserEmailField(forms.EmailField):
 
 class RegisterForm(UserCreationForm):
 
-    anos = []
-    for y in range(1950, (datetime.datetime.now().year - 10)):
-        anos.append((y, y))
-    items_anos = [('','Año')] + anos
-
-    meses = []
-    for y in range(1,13):
-        meses.append((y, y))
-    items_meses = [('','Mes')] + meses
-
-    dias = []
-    for y in range(1,32):
-        dias.append((y, y))
-    items_dias =[('','Dia')] + dias
+    items_anos = anos_nacimiento()
+    items_meses = meses_del_ano()
+    items_dias = dias_del_mes()
 
      #Carga items a Grado de Estudio
     empresas= []
