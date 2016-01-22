@@ -254,6 +254,10 @@ class MiCVView(LoginRequiredMixin, FormView):
         if persona.fecha_nacimiento is not None:
             edad = utils.calular_edad(persona.fecha_nacimiento)
             context['edad'] = edad
+
+
+        conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+        context['conocimientos_extras'] = conocimientos_extras
         context['usuario'] = user
         context['persona'] = persona
         context['estudiante'] = estudiante
@@ -585,8 +589,6 @@ class ConocimientoView(LoginRequiredMixin, FormView):
 
         conocimientos = Conocimiento.objects.filter(id__in=conocimientos_ids)
 
-
-        
         for be in conocimientos_nuevos_ids:
             if be.strip() != '':
                 Be_extra = ConocimientoExtra()
