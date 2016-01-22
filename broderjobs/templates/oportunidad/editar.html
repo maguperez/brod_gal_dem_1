@@ -218,7 +218,21 @@
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Beneficios</label>
 										<div class = "col-sm-9">
-											{{form.beneficio}}
+											<!--{{form.beneficio}}-->
+											<select multiple class="full" id="id_beneficio">
+												{% for beneficio in beneficios %}
+													<option value="{{beneficio.id}}" data-info="b" selected>{{beneficio.descripcion}}</option>
+												{% endfor %}
+												{% for beneficio in beneficios_extra %}
+													<option value="{{beneficio.id}}" data-info="be" selected>{{beneficio.descripcion}}</option>
+												{% endfor %}
+												{% for beneficio in beneficios_universo %}
+													<option value="{{beneficio.id}}" data-info="b">{{beneficio.descripcion}}</option>
+												{% endfor %}
+											</select>
+											{{form.beneficios_hidden}}
+											{{form.beneficios_nuevos_hidden}}
+											{{form.beneficios_extras_hidden}}
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -379,6 +393,19 @@
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
 		});
+
+		$("#id_beneficio").change(function() {
+
+			var existentes = $("#id_beneficio option:selected[data-info='b']").map(function(){return this.value}).get();
+			$('#id_beneficios_hidden').val(existentes);
+
+			var extras = $("#id_beneficio option:selected[data-info='be']").map(function(){return this.value}).get();
+			$('#id_beneficios_extras_hidden').val(extras);
+
+			var nuevos = $("#id_beneficio option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
+			$('#id_beneficios_nuevos_hidden').val(nuevos);
+		});
+
 		IniciarCiudades();
 
 		RevisarCheckedRemuneración();
@@ -387,7 +414,7 @@
 	});
 
 	function RevisarCheckedRemuneración(){
-		var listaCheck = [{index:0,funcion:LogicaSinEspecificar},{index:1,funcion:LogicaIntervalo},{index:2,funcion:LogicaFijo}];
+		var listaCheck = [{index:0,funcion:LogicaFijo},{index:1,funcion:LogicaIntervalo},{index:2,funcion:LogicaSinEspecificar}];
 
 		for (var i = 0, len = listaCheck.length; i < len; i++) {
 			var obj = listaCheck[i];
@@ -484,10 +511,21 @@
 	function InicializarSelect2(ids){
 
 		ids.forEach(function(id){
-			$("#"+id).select2({
-				placeholder: "Seleccione por favor",
-				allowClear: true
-			});
+			if(id=='id_beneficio'){
+
+				$("#"+id).select2({
+					placeholder: "Seleccione por favor",
+					allowClear: true,
+					tags: true,
+					tokenSeparators: [',']
+				});
+			}
+			else{
+				$("#"+id).select2({
+					placeholder: "Seleccione por favor",
+					allowClear: true
+				});
+			}
 		});
 	}
 

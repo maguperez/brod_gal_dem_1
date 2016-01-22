@@ -11,3 +11,5 @@ class PostulacionAdmin(admin.ModelAdmin):
 admin.site.register(models.Postulacion, PostulacionAdmin)
 
 admin.site.register(models.ProcesoFase)
+
+admin.site.register(models.BeneficioExtra)
