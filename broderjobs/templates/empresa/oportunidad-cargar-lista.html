@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% csrf_token %}
-<li class="oportunidad-estadistica">
+<li class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
 						<div class="box header">
 							<img class="imagen" src="{{oportunidad.empresa.set_logo}}" />
 							<div class="descripcion">

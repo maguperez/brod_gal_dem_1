@@ -105,7 +105,7 @@
 
                                 <div class="clear"></div>
                             </a></li>
-                            <li><a href="#"><span>Archivar</span>
+                            <li><a class="archivar"><span>Archivar</span>
 
                                 <div class="clear"></div>
                             </a></li>
@@ -200,6 +200,27 @@
         <a class="close">Cerrar</a>
     </div>
 </div>
+
+<div class="modal fade" id="archivar-modal" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"><strong>Archivar Oportunidad</strong></h3>
+                    </div>
+             <div id="archivar-modal-body" class="modal-body">
+				<p>Al archivar la Oportunidad todas las postulaciones relacionadas serán
+					finalizadas.</p>
+
+			</div>
+            <div class="modal-footer">
+				<button type="button" class="btn btn-default btn-archivar" id="btn_archivar">Aceptar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {%csrf_token%}
 <div id="form-modal" class="modal fade">
 	<div class="modal-dialog">
@@ -237,28 +258,7 @@
     var iniciado = false;
     var selected;
     $(function(){
-        /*panel = new MixpanelExport({
-            api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
-            api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
-        });
-        var date = moment().format("YYYY-MM-DD");
-		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
-        panel.retention({
-            from_date: last,
-            to_date: date,
-            expire: 8798798765,
-            retention_type: "compounded",
-            event: "Visita Oportunidad",
-            //born_event: "Visita Oportunidad",
-            where: 'properties["OportunidadID"] == "{{oportunidad.id}}"'
-        }).then(function(data) {
-            var total = 0;
-            for (var i = 6; i >= 0 ; i--) {
-                var last = moment().subtract(i, 'days');
-                total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
-            }
-            $("#visualizaciones").html(total);
-        });*/
+
         $.ajax({
             data : {'id':'{{oportunidad.id}}'},
             url: '{%url "contador-visitas-oportunidad-obtener" %}',
@@ -267,6 +267,21 @@
             $("#visualizaciones").html(data["total"]);
             }
         });
+
+        $('.archivar').click(function(){
+			$('.btn-archivar').data('id', $(this).data('id'));
+			$("#archivar-modal-body").html('<p>Al archivar la Oportunidad todas las postulaciones' +
+					                       ' relacionadas serán finalizadas</p>');
+			$('.btn-archivar').show();
+        	$('#archivar-modal').modal('toggle');
+
+		});
+		$('.btn-archivar').click(function(){
+        	$.get("{% url 'oportunidad-archivar' %}?id=" + $(this).data('id'), function(data){
+				$("#archivar-modal-body").html('<p>'+data+'</p>');
+				$('.btn-archivar').hide();
+			});
+		});
 
     })
     var JSCandidatos = function () {
