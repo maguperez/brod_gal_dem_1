@@ -171,7 +171,7 @@
 		}
 	});
 	$("body").on("click", function(e){
-		if ($("#"+event.target.id).parents("#menu-oportunidad").length == 0 &&
+		if ($("#"+e.target.id).parents("#menu-oportunidad").length == 0 &&
 			$('#menu-oportunidad').hasClass("active") && flag){
 			$('#menu-oportunidad').removeClass('active');
 		}
