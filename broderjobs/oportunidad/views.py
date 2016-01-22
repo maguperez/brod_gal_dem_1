@@ -285,7 +285,7 @@ class OportunidadEditarView(FormView):
 
         beneficios_extras_hidden = form.cleaned_data['beneficios_extras_hidden']
         beneficios_extras_ids = beneficios_extras_hidden.split(',')
-        beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
+        # beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
 
         if beneficios_extras_hidden.strip() != '':
             beneficios_extras_ids = beneficios_extras_hidden.split(',')
@@ -327,12 +327,17 @@ class OportunidadEditarView(FormView):
         beneficios = Beneficio.objects.filter(id__in=beneficios_ids)
 
         if '_abrir' not in self.request.POST:
-            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
+            if beneficios_extras_hidden.strip() != '':
+                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
+            else:
+                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
         else:
             if beneficios_extras_hidden.strip() != '':
                 for be in beneficios_extras:
                     be.oportunidad = oportunidad
                     be.save()
+            else:
+                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
 
         for be in beneficios_nuevos_ids:
             if be.strip() != '':
