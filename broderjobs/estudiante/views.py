@@ -254,6 +254,10 @@ class MiCVView(LoginRequiredMixin, FormView):
         if persona.fecha_nacimiento is not None:
             edad = utils.calular_edad(persona.fecha_nacimiento)
             context['edad'] = edad
+
+
+        conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+        context['conocimientos_extras'] = conocimientos_extras
         context['usuario'] = user
         context['persona'] = persona
         context['estudiante'] = estudiante
@@ -557,7 +561,7 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         return estudiante
 
     def form_valid(self, form):
-        con = form.cleaned_data['conocimiento']
+        # con = form.cleaned_data['conocimiento']
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
@@ -565,7 +569,15 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         
         conocimientos_extras_hidden = form.cleaned_data['conocimientos_extras_hidden']
         conocimientos_extras_ids = conocimientos_extras_hidden.split(',')
-        conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).filter(id__in=conocimientos_extras_ids)
+
+        if conocimientos_extras_hidden.strip() != '':
+            conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).filter(id__in=conocimientos_extras_ids)
+            ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).exclude(id__in = conocimientos_extras).delete()
+            for be in conocimientos_extras:
+                be.estudiante = estudiante
+                be.save()
+        else:
+            ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).delete()
         
         conocimientos_hidden = form.cleaned_data['conocimientos_hidden']
 
@@ -577,10 +589,6 @@ class ConocimientoView(LoginRequiredMixin, FormView):
 
         conocimientos = Conocimiento.objects.filter(id__in=conocimientos_ids)
 
-        for be in conocimientos_extras:
-                be.estudiante = estudiante
-                be.save()
-        
         for be in conocimientos_nuevos_ids:
             if be.strip() != '':
                 Be_extra = ConocimientoExtra()

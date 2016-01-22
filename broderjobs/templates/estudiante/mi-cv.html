@@ -110,6 +110,10 @@
 										{% for conocimiento in estudiante.conocimiento.all %}
                     					<span class="tag">{{ conocimiento.descripcion }}</span>
 										{% endfor %}
+
+										{% for conocimiento in conocimientos_extras %}
+                    					<span class="tag">{{ conocimiento.descripcion }}</span>
+										{% endfor %}
 									</p>
 									<div class="clear"></div>
 								</div>
