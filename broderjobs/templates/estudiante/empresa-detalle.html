@@ -266,7 +266,9 @@
                     <section class="rating">
                         <div id="rating-general" style="margin:auto"></div>
                         <div class="clear"></div>
-                        <label class="puntaje">{{ranking.ranking_general | floatformat:1 }}</label>
+                        <label class="puntaje">{{ranking.ranking_general | floatformat:1 }}
+                        <span style="font-size: 12px;">({{total_evaluadores}} <i class="fa fa-user"></i>)</span>
+                        </label>
                         <input type="hidden" id="rating-rank" value="{{ranking.ranking_general}}">
                         <a class="btn-action" href="#evaluacion">Eval&uacute;a esta empresa</a>
                     </section>

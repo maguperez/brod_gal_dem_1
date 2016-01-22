@@ -85,9 +85,9 @@
                         <div class="panel-body messages">
                             <div class="input-group input-group-lg border-bottom" style = "width: 100%">
                                 <select class="form-control msearch bd-0 bd-white" id="oportunidad_id" placeholder="Seleccione una Oportunidad">
-                                    <option value="0">Todos</option>
+                                    <option value="0">Mensajes por todas las Oportunidades</option>
                                     {%for p in oportunidades %}
-                                        <option value="{{p.id}}">{{p.titulo}}</option>
+                                        <option value="{{p.id}}">Mensajes por: {{p.titulo}}</option>
                                     {%endfor%}
                                 </select>
                             </div>
@@ -98,8 +98,9 @@
                 </div>
                 <div class="col-lg-8 col-md-8 email-hidden-sm detail-message">
                     <ul class="nav nav-tabs">
-                      <li class="active"><a data-toggle="tab" href="#message-detail">Mensajes</a></li>
-                      <li><a data-toggle="tab" href="#message-detail2">Redactar Mensaje</a></li>
+                        <li id="li-0" class="active"><a data-toggle="tab" href="#message-detail">Buzon de Entrada</a></li>
+                        <li id="li-1"><a data-toggle="tab" href="#message-detail1">Buzon de Salida</a></li>
+                        <li id="li-2"><a data-toggle="tab" href="#message-detail2">Redactar Mensaje</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="message-detail" class="tab-pane fade in active panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
@@ -107,32 +108,49 @@
                                 <h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2>
                             </div>
                         </div>
+                        <div id="message-detail1" class="tab-pane fade panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
+                            <div class="panel-heading messages message-result">
+                                <h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2>
+                            </div>
+                        </div>
                         <div id="message-detail2" class="tab-pane fade panel panel-default withScroll" data-height="window" data-padding="160" style="height: 568px;">
                             <div class="panel-heading messages message-result">
-
+                                <div class="message-action-btn clearfix p-t-20">
+                                    <div class = "pull-left">
+                                        <select id="oportunidad_redactar_id" class="form-control bd-0 bd-white" style="width: 300px">
+                                            {%for p in oportunidades %}
+                                                <option value="{{p.id}}">{{p.titulo}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <div class="pull-right">
+                                        <div id="enviar_mensaje" data-rel="tooltip" title="" class="icon-rounded m-r-10"
+                                             data-original-title="Send" data-placement="bottom"><i class="fa fa-send"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <!--<div class="input-group input-group-lg border-bottom">-->
+                                    <!--<span class="input-group-btn">-->
+                                    <!--<a href="" class="btn" disabled>Oportunidad: </a>-->
+                                <!--</span>-->
+                                    <!--<select  class="form-control bd-0 bd-white" style = "width: 100%">-->
+                                    <!--{%for p in oportunidades %}-->
+                                        <!--<option value="{{p.id}}">{{p.titulo}}</option>-->
+                                    <!--{%endfor%}-->
+                                    <!--</select>-->
+                                <!--</div>-->
                                 <div class="input-group input-group-lg border-bottom">
-                                <span class="input-group-btn">
-                                    <a href="" class="btn" disabled>Oportunidad: </a>
-                                </span>
-                                <select id="oportunidad_redactar_id" class="form-control bd-0 bd-white" style = "width: 100%">
-                                    {%for p in oportunidades %}
-                                        <option value="{{p.id}}">{{p.titulo}}</option>
-                                    {%endfor%}
-                                </select>
-                            </div>
-                                <div class="input-group input-group-lg border-bottom">
-                                <span class="input-group-btn">
-                                    <a href="" class="btn" disabled>Para:</a>
-                                </span>
-                                <select class="form-control candidatos bd-0 bd-white" multiple style = "width: 100%">
-
-                                </select>
-                            </div>
+                                    <span class="input-group-btn">
+                                        <a href="" class="btn" disabled>Para:</a>
+                                    </span>
+                                    <select class="form-control candidatos bd-0 bd-white" multiple style = "width: 100%"></select>
+                                </div>
                                 <div class="input-group input-group-lg border-bottom">
                                 <span class="input-group-btn">
                                     <a href="" class="btn" disabled>Asunto:</a>
                                 </span>
-                                <input type = "text" class="form-control msearch bd-0 bd-white" />
+                                <input type = "text" class="form-control msearch bd-0 bd-white asunto" />
                             </div>
                             </div>
                             <div class="panel-body messages message-result">
@@ -148,6 +166,7 @@
             </div>
         </div>
     </section>
+{%csrf_token%}
 {%endblock%}
 {%block js%}
 <script src = "{% static 'js/jquery.min.js' %}"></script>
@@ -158,9 +177,44 @@
 <script src = "{% static 'js/summernote-i18n/summernote-es-ES.js' %}"></script>
 
 <script>
+    var JSMensajes = function(){
+        this.tipo = 0 ;
+        this.sel_id_estudiante = 0 ;
+        this.fnAbrirMensaje = function(id){
+		    $.get("{% url 'mensaje-abrir-con-relacionados' %}?id=" + id+"&t="+this.tipo, function(htmlexterno){
+                var contenedor = $('.nav-tabs .active a').attr('href');
+   				$(contenedor).html(htmlexterno);
+			});
+	    };
+        this.fnCargarCandidatos = function(id){
+            var id_estudiante = this.sel_id_estudiante;
+            $.get("{% url 'mensaje-cargar-candidatos' %}?id=" + id, function(data){
+   				$(".candidatos").html('');
+                $.each(data, function(i, item) {
+                   $(".candidatos").append('<option value="'+item.id+'">'+item.estudiante+'</option>');
+
+                });
+                if(id_estudiante > 0){
+                    $(".candidatos").val(id_estudiante).trigger("change");
+                }
+                else{
+                    $(".candidatos").val(0).trigger("change");
+                    $(".candidatos").prop("disabled", false);
+                }
+            });
+	    };
+        this.fnBuscarMensajes= function(){
+            $('#messages-list').html("cargando....");
+		    $.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val()+"&t="+this.tipo, function(htmlexterno){
+   				$('#messages-list').html(htmlexterno);
+			});
+	    }
+    };
+    var mensajes = new JSMensajes();
+    //var tipo = 0;
     $(function(){
         $("#oportunidad_id").select2({
-  			placeholder: "Todos",
+  			placeholder: "Mensajes por todas las oportunidades",
   			allowClear: true
 		});
         $(window).load(function(){
@@ -184,54 +238,95 @@
                 });
                 $("[data-rel=tooltip]").tooltip();
                 $(".candidatos").select2({
-                    placeholder: "Candidatos"
+                    placeholder: "Candidatos por Oportunidad"
                 });
                 $("#oportunidad_redactar_id").select2({
-                    placeholder: "Seleccione"
+                    placeholder: "Seleccione Oportunidad"
                 });
                 $("#summernote").summernote({
                     height: 325,
                     lang: 'es-ES'
                 });
             });
-        fnBuscarMensajes();
+        mensajes.fnBuscarMensajes();
 		$( '#oportunidad_id' ).change( function() {
-			fnBuscarMensajes();
-            fnActivaTab('#message-detail');
-            $('#message-detail').hmtl('<div class="panel-heading messages message-result">' +
-                                        '<h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2></div>');
+            //mensajes.this = 0;
+            if($(this).val() == null){
+                $(this).val(0);
+            }
+			mensajes.fnBuscarMensajes();
 		});
-        $( '#oportunidad_redactar_id' ).change( function() {
-
-			fnCargarCandidatos($(this).val());
+        $('#oportunidad_redactar_id' ).change( function() {
+            if($(this).val() > 0){
+			    mensajes.fnCargarCandidatos($(this).val());
+            }
 		});
         $("#messages-list").on('click', '.message-item', function(){
-            fnAbrirMensaje($(this).data("id"));
+            if(mensajes.tipo == 0){ fnActivaTab("message-detail"); }
+            if(mensajes.tipo == 1){ fnActivaTab("message-detail1"); }
+            mensajes.fnAbrirMensaje($(this).data("id"));
         });
+        $('#li-0' ).click( function() {
+            mensajes.tipo = 0;
+            mensajes.fnBuscarMensajes();
+            $('#message-detail').html('<div class="panel-heading messages message-result">' +
+                                        '<h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2></div>');
+		});
+        $('#li-1' ).click( function() {
+            mensajes.tipo = 1;
+            mensajes.fnBuscarMensajes();
+            $('#message-detail1').html('<div class="panel-heading messages message-result">' +
+                                        '<h2 class="p-t-20 w-500">No se ha seleccionado un mensaje </h2></div>');
+		});
+        $('#li-2' ).click( function() {
+            mensajes.sel_id_estudiante = 0;
+            $("#oportunidad_redactar_id").val(0).trigger("change");
+            $("#oportunidad_redactar_id").prop("disabled", false);
+            $(".candidatos").val(0).trigger("change");
+            $(".candidatos").prop("disabled", false);
+		});
+        $('#enviar_mensaje').click(function(){
+            ids = new Array();
+            ids_estudiante = new Array();
+            ids_estudiante = $(".candidatos").val();
+            var form = new FormData();
+            form.append('ids',JSON.stringify(ids));
+            form.append('ids_estudiante',JSON.stringify(ids_estudiante));
+            form.append('o',$('#oportunidad_redactar_id').val());
+            form.append('a',$('.asunto').val());
+            form.append('c',$('.note-codable').val());
+            form.append('p','S');
+            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 
+            $.ajax({
+                type:"POST",
+                url:"{%url 'mensaje-enviar-estudiante' %}",
+                data: form,
+                processData: false,
+                contentType: false,
+                error: function(x){
+                    console.log(x);
+                },
+                success: function(data){
+                    fnActivaTab('message-detail1');
+                    $('#li-1').click();
+                    $('#message-detail1').html('<div class="panel-heading messages message-result">' +
+                                            '<h2 class="p-t-20 w-500">Su mensaje se ha enviado correctamente</h2></div>');
+                }
+            });
+       });
+        $("#message-detail").on('click', '.responder', function(){
+            $(".candidatos").prop("disabled", true);
+            mensajes.sel_id_estudiante = $(this).data("info");
+            $("#oportunidad_redactar_id").val($(this).data("id")).trigger("change");
+            $("#oportunidad_redactar_id").prop("disabled", true);
+            $('.asunto').val("Re:"+ $(".panel-heading h2.asunto-mensaje").text());
+            fnActivaTab("message-detail2");
+        });
     });
-    function fnBuscarMensajes(){
-		$.get("{% url 'mensaje-buscar' %}?id=" + $("#oportunidad_id").val(), function(htmlexterno){
-   				$('#messages-list').html(htmlexterno);
-			});
-	}
-    function fnAbrirMensaje(id){
-		$.get("{% url 'mensaje-abrir-con-relacionados' %}?id=" + id, function(htmlexterno){
-   				$('#message-detail').html(htmlexterno);
-			});
-	}
-    function fnCargarCandidatos(id){
-        $.get("{% url 'mensaje-cargar-candidatos' %}?id=" + id, function(data){
-   				$(".candidatos").html('');
-                $.each(data, function(i, item) {
-                   $(".candidatos").append('<option value="'+item.id+'">'+item.estudiante+'</option>');
-
-                });
-        });
-	}
-
     function fnActivaTab(tab){
         $('.nav-tabs a[href="#' + tab + '"]').tab('show');
     };
+
     </script>
 {%endblock%}

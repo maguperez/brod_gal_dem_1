@@ -40,7 +40,8 @@
                     html += '<header><img src="'+ data[i].logo + '"/></header>';
                     html += '<div class="content"><h3 class="link text-uppercase">'+ data[i].nombre+'</h3>';
 					html +=	'<label class="descripcion">' + data[i].sector + '</label>';
-                    html += '<div class="rating"><span class="rating"></span><label>'+data[i].ranking_general+'</label></div></div></a></li>';
+                    html += '<div class="rating"><span class="rating"></span><label>'+data[i].ranking_general+
+							' <span style="font-size: 12px;">('+data[i].total_evaluadores+' <i class="fa fa-user"></i>)</span></label></div></div></a></li>';
 				}
 				$('#datos').html(html);
 			}

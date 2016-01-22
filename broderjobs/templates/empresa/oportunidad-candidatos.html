@@ -483,8 +483,6 @@
              CandidatosTable.obtener();
         });
 
-
-
         $('#abrir-mensaje').click(function(){
             $(".destinatarios ul").html('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
@@ -492,8 +490,8 @@
             });
         });
 
-         $('#enviar-mensaje').click(function(){
-             ids = new Array();
+        $('#enviar-mensaje').click(function(){
+            ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("id");
             });
@@ -507,6 +505,7 @@
              form.append('ids',JSON.stringify(ids));
              form.append('ids_estudiante',JSON.stringify(ids_estudiante));
              form.append('o','{{oportunidad.id}}');
+             form.append('a','');
              form.append('c',$('#contenido-mensaje').val());
              form.append('p',$('#sin-respuesta').is(':checked')? 'N' : 'S');
              form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());

@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'mensaje',
     'contador_visitas',
+    'disc',
 
 
 )

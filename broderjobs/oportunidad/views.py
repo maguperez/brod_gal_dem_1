@@ -23,6 +23,8 @@ from datetime import date, datetime
 import json
 from cStringIO import StringIO
 
+
+
 # Create your views here.
 class OportunidadCrearView(FormView):
     form_class = forms.OportunidadForm

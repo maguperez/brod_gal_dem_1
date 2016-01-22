@@ -64,10 +64,10 @@
 									{{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
 									<a>¿Olvidaste tu contraseña?</a>
 								</div>
-								{%if message %}
+								{%if message_login %}
 								<div class="alert alert-warning alert-dismissible" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-									{{message}}</div>
+									{{message_login}}</div>
 								{% endif%}
 								<input type="submit" name="_login" value="INGRESAR" class="Ingresar" text="Ingresar" />
 								<div class="division">
@@ -106,12 +106,12 @@
 								<div class="opciones">
 									<input type="checkbox" id="acepto" class = "white" name = "tyc" /><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
 								</div>
-								{%if message %}
+								{%if message_registro %}
 								<div class="alert alert-warning alert-dismissible" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-									{{message}}
+									{{message_registro}}
 								</div>
-								{% endif%}
+
 								{%if registro_form.errors %}
 								<div class="alert alert-warning alert-dismissible" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -122,6 +122,7 @@
 									{{ registro_form.password2.errors }}
 								</div>
 								{% endif%}
+									{% endif%}
 								<input type="submit" name="_registro" value="REGISTRARME" class="Ingresar"/>
 
 							</div>
