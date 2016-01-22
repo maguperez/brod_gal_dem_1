@@ -348,10 +348,24 @@
         	$('#form-modal').modal('toggle');
 
 			$("#id_conocimiento").select2({
-						placeholder: "JavaScript, Photoshop, Marketing digital, etc"//,
+						placeholder: "JavaScript, Photoshop, Marketing digital, etc",
+						tags: true,
+						tokenSeparators: [',']
 //						width: 'resolve'
 						//allowClear: true
 					});
+			
+			$("#id_conocimiento").change(function() {
+
+				var existentes = $("#id_conocimiento option:selected[data-info='c']").map(function(){return this.value}).get();
+				$('#id_conocimientos_hidden').val(existentes);
+	
+				var extras = $("#id_conocimiento option:selected[data-info='ce']").map(function(){return this.value}).get();
+				$('#id_conocimientos_extras_hidden').val(extras);
+	
+				var nuevos = $("#id_conocimiento option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
+				$('#id_conocimientos_nuevos_hidden').val(nuevos);
+			});
 
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		});

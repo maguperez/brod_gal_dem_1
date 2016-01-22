@@ -125,7 +125,10 @@ class IdiomaForm(forms.Form):
 
 class ConocimientoForm(forms.Form):
 
-    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+    # conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+    conocimientos_hidden        = forms.CharField(widget=forms.HiddenInput(), required = False)
+    conocimientos_nuevos_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
+    conocimientos_extras_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
 
 class ExperienciaForm(forms.ModelForm):
     # fecha_desde = forms.DateField(widget=forms.DateInput())
