@@ -49,9 +49,11 @@
 							</div>
                             <div class = "col-sm-3"><label>Estado:  </label>{{form.estado_oportunidad}}</div>
                             <!--<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />-->
+							<input type="submit" name="_cancelar" value="CANCELAR" id="cancelar" class="btn-action"/>
 							{% if oportunidad.estado_oportunidad != 'P' %}
 								<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action"/>
-								<input type="submit" name="_archivar" value="ARCHIVAR" id="anunciat" class="btn-action"/>
+								<input type="submit" name="_archivar" value="ARCHIVAR" id="anunciat" class="btn-action" style="display: none;"/>
+
 							{%else%}
 								<input type="submit" name="_abrir" value="ABRIR" id="abrir" class="btn-action"/>
 							{%endif%}
@@ -405,6 +407,10 @@
 
 			var nuevos = $("#id_beneficio option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
 			$('#id_beneficios_nuevos_hidden').val(nuevos);
+		});
+
+		$("#cancelar").click(function(){
+			window.history.back();
 		});
 
 		IniciarCiudades();
