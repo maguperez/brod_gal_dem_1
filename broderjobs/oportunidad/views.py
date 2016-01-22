@@ -287,6 +287,10 @@ class OportunidadEditarView(FormView):
         beneficios_extras_ids = beneficios_extras_hidden.split(',')
         beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
 
+        if beneficios_extras_hidden.strip() != '':
+            beneficios_extras_ids = beneficios_extras_hidden.split(',')
+            beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
+
         if '_guardar' in self.request.POST:
             if oportunidad.fecha_cese is not None and date.today() > oportunidad.fecha_cese:
                 estado_nuevo = constants.estado_cerrado
@@ -325,9 +329,10 @@ class OportunidadEditarView(FormView):
         if '_abrir' not in self.request.POST:
             BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
         else:
-            for be in beneficios_extras:
-                be.oportunidad = oportunidad
-                be.save()
+            if beneficios_extras_hidden.strip() != '':
+                for be in beneficios_extras:
+                    be.oportunidad = oportunidad
+                    be.save()
 
         for be in beneficios_nuevos_ids:
             if be.strip() != '':
