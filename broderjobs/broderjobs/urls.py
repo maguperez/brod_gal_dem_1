@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from app.views import error
+# from app.views import error
 
 urlpatterns = [
     #INICIO ESTUDIANTES
