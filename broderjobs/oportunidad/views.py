@@ -12,7 +12,7 @@ from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from broderjobs import constants
-from .models import Oportunidad, Postulacion, ProcesoFase
+from .models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
 from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
 from empresa.models import Representante, Empresa
@@ -30,6 +30,12 @@ class OportunidadCrearView(FormView):
     form_class = forms.OportunidadForm
     template_name = 'oportunidad/crear.html'
     success_url = reverse_lazy('empresa-oportunidad-listar')
+
+    def get_context_data(self, **kwargs):
+        beneficio =Beneficio.objects.all()
+        context = super(OportunidadCrearView, self).get_context_data(**kwargs)
+        context['beneficios'] = beneficio
+        return context
 
     def get_initial(self):
         user = self.request.user
@@ -65,7 +71,21 @@ class OportunidadCrearView(FormView):
 
         fecha_cese = form.cleaned_data['fecha_cese']
         resumen = form.cleaned_data['resumen']
-        beneficio = form.cleaned_data['beneficio']
+        # beneficio = form.cleaned_data['beneficio']
+
+        beneficios = form.cleaned_data['beneficios_hidden']
+        list_beneficios = []
+        list_beneficios_extras = []
+        list_b = beneficios.split(',')
+        for b in list_b:
+            try:
+                id = int(b)
+                beneficio = Beneficio.objects.get(id = id)
+                if beneficio is not None:
+                    list_beneficios.append(beneficio)
+            except Exception:
+                list_beneficios_extras.append(b)
+
         tipo_puesto = form.cleaned_data['tipo_puesto']
 
         grado_estudio = form.cleaned_data['grado_estudio']
@@ -113,11 +133,18 @@ class OportunidadCrearView(FormView):
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
 
+        for be in list_beneficios_extras:
+            Be_extra = BeneficioExtra()
+            Be_extra.descripcion = be
+            Be_extra.oportunidad = oportunidad
+            Be_extra.save()
+
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
-        oportunidad.beneficio = beneficio
+        # oportunidad.beneficio = beneficio
+        oportunidad.beneficio = list_beneficios
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
         return super(OportunidadCrearView, self).form_valid(form)
@@ -134,6 +161,15 @@ class OportunidadEditarView(FormView):
     def get_initial(self):
         id = self.kwargs["id"]
         oportunidad =get_object_or_404(Oportunidad, id = id)
+
+        beneficios = oportunidad.beneficio.all()
+
+        beneficios_str = ','.join([str(x.id) for x in beneficios])
+
+        beneficios_extra = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id)
+
+        beneficios_extra_str = ','.join([str(x.id) for x in beneficios_extra])
+
         if oportunidad.ciudad is not None:
             ciudad_id = oportunidad.ciudad.id
         else:
@@ -144,7 +180,10 @@ class OportunidadEditarView(FormView):
                 'remuneracion_min' : oportunidad.remuneracion_min,
                 'remuneracion_max' : oportunidad.remuneracion_max,
                 'fecha_cese': oportunidad.fecha_cese,
-                'beneficio': oportunidad.beneficio,
+                # 'beneficio': oportunidad.beneficio,
+                'beneficios_hidden': beneficios_str,
+                'beneficios_extras_hidden': beneficios_extra_str,
+                'beneficios_nuevos_hidden': '',
                 'resumen': oportunidad.resumen,
                 'carga_horaria': oportunidad.carga_horaria,
                 'tipo_puesto': oportunidad.tipo_puesto,
@@ -165,6 +204,17 @@ class OportunidadEditarView(FormView):
         oportunidad =get_object_or_404(Oportunidad, id = id)
         context = super(OportunidadEditarView, self).get_context_data(**kwargs)
         context['oportunidad'] = oportunidad
+
+        beneficios = oportunidad.beneficio.all()
+
+        beneficios_extra = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id)
+
+        beneficios_universo = Beneficio.objects.filter().exclude(id__in = beneficios)
+
+        context['beneficios'] = beneficios
+        context['beneficios_extra'] = beneficios_extra
+        context['beneficios_universo'] = beneficios_universo
+
         return context
 
     def get_object(self, queryset=None):
@@ -197,7 +247,7 @@ class OportunidadEditarView(FormView):
 
         fecha_cese = form.cleaned_data['fecha_cese']
         resumen = form.cleaned_data['resumen']
-        beneficio = form.cleaned_data['beneficio']
+        # beneficio = form.cleaned_data['beneficio']
         tipo_puesto = form.cleaned_data['tipo_puesto']
 
         grado_estudio = form.cleaned_data['grado_estudio']
@@ -233,6 +283,10 @@ class OportunidadEditarView(FormView):
         oportunidad.estado = constants.estado_activo
         estado_anterior = oportunidad.estado_oportunidad
 
+        beneficios_extras_hidden = form.cleaned_data['beneficios_extras_hidden']
+        beneficios_extras_ids = beneficios_extras_hidden.split(',')
+        beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
+
         if '_guardar' in self.request.POST:
             if oportunidad.fecha_cese is not None and date.today() > oportunidad.fecha_cese:
                 estado_nuevo = constants.estado_cerrado
@@ -258,11 +312,35 @@ class OportunidadEditarView(FormView):
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
 
+        beneficios_hidden = form.cleaned_data['beneficios_hidden']
+
+        beneficios_nuevos_hidden = form.cleaned_data['beneficios_nuevos_hidden']
+
+        beneficios_ids = beneficios_hidden.split(',')
+
+        beneficios_nuevos_ids = beneficios_nuevos_hidden.split(',')
+
+        beneficios = Beneficio.objects.filter(id__in=beneficios_ids)
+
+        if '_abrir' not in self.request.POST:
+            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
+        else:
+            for be in beneficios_extras:
+                be.oportunidad = oportunidad
+                be.save()
+
+        for be in beneficios_nuevos_ids:
+            if be.strip() != '':
+                Be_extra = BeneficioExtra()
+                Be_extra.descripcion = be
+                Be_extra.oportunidad = oportunidad
+                Be_extra.save()
+
         oportunidad.universidad = universidad
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
-        oportunidad.beneficio = beneficio
+        oportunidad.beneficio = beneficios
         oportunidad.estado_oportunidad = estado_nuevo
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()

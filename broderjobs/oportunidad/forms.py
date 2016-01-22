@@ -15,11 +15,15 @@ class OportunidadForm(forms.ModelForm):
     periodo_graduacion_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
     # ciudad = forms.ChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'}))
+    beneficios_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
+    beneficios_nuevos_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
+    beneficios_extras_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
 
     class Meta:
         model = Oportunidad
         fields = ('titulo', 'carga_horaria', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
-                  'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
+                  # 'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
+                  'fecha_cese', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud' )
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'Escriba el titulo de su vacante', 'class': 'full'}),

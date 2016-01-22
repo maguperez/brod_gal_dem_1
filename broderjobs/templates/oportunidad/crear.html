@@ -216,7 +216,14 @@
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Beneficios</label>
 										<div class = "col-sm-9">
-											{{form.beneficio}}
+
+											<select multiple class="full" id="id_beneficio">
+												{% for beneficio in beneficios %}
+													<option value="{{beneficio.id}}">{{beneficio.descripcion}}</option>
+												{% endfor %}
+											</select>
+												{{form.beneficios_hidden}}
+											<!--{{form.beneficio}}-->
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -401,6 +408,10 @@
 			$('#id_ciudad_hidden').val($(this).val());
 		});
 
+		$("#id_beneficio").change(function() {
+			$('#id_beneficios_hidden').val($(this).val());
+		});
+
 		InicializarValidaciones();
 
 		AgregarEventosRemuneracion();
@@ -455,10 +466,21 @@
 
 	function InicializarSelect2(ids){
 		ids.forEach(function(id){
-			$("#"+id).select2({
-				placeholder: "Seleccione por favor",
-				allowClear: true
-			});
+			if(id=='id_beneficio'){
+
+				$("#"+id).select2({
+					placeholder: "Seleccione por favor",
+					allowClear: true,
+					tags: true,
+					tokenSeparators: [',']
+				});
+			}
+			else{
+				$("#"+id).select2({
+					placeholder: "Seleccione por favor",
+					allowClear: true
+				});
+			}
 		});
 	}
 
