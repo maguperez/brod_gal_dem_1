@@ -16,8 +16,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from datetime import date,datetime
-from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
-from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
+from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
+from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Conocimiento
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
 from mensaje.models import Mensaje, Mensaje_Destinatario
@@ -516,8 +516,39 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
+        
+        conocimientos = estudiante.conocimiento.all()
 
-        return {'conocimiento': estudiante.conocimiento.all()}
+        conocimientos_str = ','.join([str(x.id) for x in conocimientos])
+
+        conocimientos_extra = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+
+        conocimientos_extra_str = ','.join([str(x.id) for x in conocimientos_extra])
+
+        return {'conocimientos_hidden': conocimientos_str,
+                'conocimientos_extras_hidden': conocimientos_extra_str,
+                'conocimientos_nuevos_hidden': ''
+                # 'conocimiento': estudiante.conocimiento.all()
+                }
+    
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        estudiante = Estudiante.objects.get(persona_id =persona.id)
+        
+        context = super(ConocimientoView, self).get_context_data(**kwargs)
+    
+        conocimientos = estudiante.conocimiento.all()
+    
+        conocimientos_extra = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+    
+        conocimientos_universo = Conocimiento.objects.filter().exclude(id__in = conocimientos)
+    
+        context['conocimientos'] = conocimientos
+        context['conocimientos_extra'] = conocimientos_extra
+        context['conocimientos_universo'] = conocimientos_universo
+    
+        return context
 
     def get_object(self, queryset=None):
         user = self.request.user
@@ -530,7 +561,35 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
         estudiante = Estudiante.objects.get(persona_id=persona.id)
-        estudiante.conocimiento = form.cleaned_data['conocimiento']
+        # estudiante.conocimiento = form.cleaned_data['conocimiento']
+        
+        conocimientos_extras_hidden = form.cleaned_data['conocimientos_extras_hidden']
+        conocimientos_extras_ids = conocimientos_extras_hidden.split(',')
+        conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).filter(id__in=conocimientos_extras_ids)
+        
+        conocimientos_hidden = form.cleaned_data['conocimientos_hidden']
+
+        conocimientos_nuevos_hidden = form.cleaned_data['conocimientos_nuevos_hidden']
+
+        conocimientos_ids = conocimientos_hidden.split(',')
+
+        conocimientos_nuevos_ids = conocimientos_nuevos_hidden.split(',')
+
+        conocimientos = Conocimiento.objects.filter(id__in=conocimientos_ids)
+
+        for be in conocimientos_extras:
+                be.estudiante = estudiante
+                be.save()
+        
+        for be in conocimientos_nuevos_ids:
+            if be.strip() != '':
+                Be_extra = ConocimientoExtra()
+                Be_extra.descripcion = be
+                Be_extra.estudiante = estudiante
+                Be_extra.save()
+
+        estudiante.conocimiento = conocimientos
+        
         estudiante.save()
         return super(ConocimientoView, self).form_valid(form)
 
