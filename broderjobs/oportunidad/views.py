@@ -364,16 +364,17 @@ class OportunidadArchivarView(FormView):
         try:
             oportunidad = Oportunidad.objects.get(id = id)
             oportunidad.estado_oportunidad = constants.estado_archivado
-            postulaciones = Postulacion.objects.filter(oportunidad_idn=id)
+            oportunidad.save()
+            postulaciones = Postulacion.objects.filter(oportunidad_id=id)
             postulaciones.update(estado_fase =  constants.estado_inactivo,estado_postulacion = constants.postulacion_finalizado,
                                                                           fecha_modificacion = datetime.now(),
                                                                           usuario_modificacion = usuario.username)
             ids_estudiante = postulaciones.values_list('estudiante_id', flat=True).order_by('estudiante_id')
             enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, constants.proceso_finalizado_asunto,
                                                      False, usuario.username)
-            response = { 'resp': 'se actualizo correctamente'}
-        except:
-            response = { 'resp': 'no se encontro la oportunidad'}
+            response = 'La oportunidad ha sido archivada'
+        except :
+            response = 'Error al archivar la oportunidad, intente nuevamente.'
         #serialize to json
         s = StringIO()
         json.dump(response, s)

@@ -2,7 +2,7 @@
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
 {% block content %}
-<section class="oportunidades-empresa">
+<section class="oportunidades-empresa" data-id="{{oportunidad.od}}">
 			<div class="centered">
 				<select class="filtro" id="filtro">
 					<option value="A">Postulaciones Abiertas</option>
@@ -11,21 +11,22 @@
 				</select>
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista"></ul>
+				<div id="vacio"></div>
 			</div>
-	<div id="form-modal" class="modal fade">
+	<div id="archivar-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h3 class="modal-title"><strong>Archivar Oportunidad</strong></h3>
                     </div>
-            <div id="form-modal-body" class="modal-body">
-				<p>Al archivar la Oportunidad pasará a estado Cerrada, y todas las postulaciones relacionadas seran
-					canceladas.</p>
+             <div id="archivar-modal-body" class="modal-body">
+				<p>Al archivar la Oportunidad todas las postulaciones relacionadas serán
+					finalizadas.</p>
 
 			</div>
             <div class="modal-footer">
-				<button type="button" class="btn btn-default" id="btn_archivar">Aceptar</button>
+				<button type="button" class="btn btn-default btn-archivar" id="btn_archivar">Aceptar</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
@@ -44,12 +45,19 @@
 		});
 		fnCargarOportunidades();
 		$('#oportunidad-lista').on('click', '.archivar', function(){
-			$('#btn_archivar').data('id', $(this).data('id'));
-        	$('#form-modal').modal('toggle');
-		});
-		$('#oportunidad-lista').on('click', '#btn-archivar', function(){
-        	$.get("{% url 'oportunidad-archivar' %}?id=" + $(this).data('id'), function(resp){
+			$('.btn-archivar').data('id', $(this).data('id'));
+			$("#archivar-modal-body").html('<p>Al archivar la Oportunidad todas las postulaciones' +
+					                       ' relacionadas serán finalizadas</p>');
+			$('.btn-archivar').show();
+        	$('#archivar-modal').modal('toggle');
 
+		});
+		$('.oportunidades-empresa').on('click', '.btn-archivar', function(){
+			var id = $(this).data('id');
+        	$.get("{% url 'oportunidad-archivar' %}?id=" +id, function(data){
+				$("#archivar-modal-body").html('<p>'+data+'</p>');
+				$('.btn-archivar').hide();
+				$("#oportunidad-lista li[data-id='"+id+"']").hide();
 			});
 		});
 
@@ -68,9 +76,12 @@
 				url: "{% url 'empresa-oportunidad-buscar' %}",
 				type: 'get',
 				success: function (data) {
-					 var par= '';
-					 $( '#oportunidad-lista' ).html('');
-					fnCargarOportunidad(data, 0);
+					var par = '';
+					$('#oportunidad-lista').html('');
+					if (data.length > 0)
+						fnCargarOportunidad(data, 0);
+					else
+						$('#vacio').html('<h4>No se encontraron resultados</h4>');
 				}
 			});
 	}

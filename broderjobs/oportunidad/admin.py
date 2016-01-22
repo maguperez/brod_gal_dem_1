@@ -3,7 +3,10 @@ from . import models
 
 # Register your models here.
 
-admin.site.register(models.Oportunidad)
+class OportunidadAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'empresa', 'estado_oportunidad')
+
+admin.site.register(models.Oportunidad, OportunidadAdmin)
 
 class PostulacionAdmin(admin.ModelAdmin):
     list_display = ('estudiante', 'oportunidad')
