@@ -15,7 +15,7 @@
 										<ul>
 											<li><a href="{%url 'oportunidad-editar' request.GET.id%}"><span>Editar</span><div class="clear"></div></a></li>
 											<li><a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
-											<li><a href="{%url 'oportunidad-archivar' request.GET.id%}"><span>Archivar</span><div class="clear"></div></a></li>
+											<li><a class="archivar" data-id="{{oportunidad.id}}"><span>Archivar</span><div class="clear"></div></a></li>
 										<ul>
 									</div>
 								</div>
@@ -84,7 +84,6 @@
 	});
 
 	$(function() {
-
 	$("#link-oportunidades").addClass("active");
 		var date = moment().format("YYYY-MM-DD");
 		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");

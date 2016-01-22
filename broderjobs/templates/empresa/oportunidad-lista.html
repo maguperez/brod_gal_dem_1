@@ -12,6 +12,25 @@
 				<div class="clear"></div>
 				<ul class="list" id ="oportunidad-lista"></ul>
 			</div>
+	<div id="form-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"><strong>Archivar Oportunidad</strong></h3>
+                    </div>
+            <div id="form-modal-body" class="modal-body">
+				<p>Al archivar la Oportunidad pasará a estado Cerrada, y todas las postulaciones relacionadas seran
+					canceladas.</p>
+
+			</div>
+            <div class="modal-footer">
+				<button type="button" class="btn btn-default" id="btn_archivar">Aceptar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 </section>
 
@@ -20,18 +39,22 @@
 {% block js %}
 <script type="text/javascript">
 	$( document ).ready( function() {
-
-//		$( '#filtro' ).change( function() {
-//			b = $( '#filtro' ).val();
-//			$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=' + b );
-//		});
-//		$("#link-oportunidades").addClass("active");
-//		$( '#oportunidad-lista' ).html( '&nbsp;' ).load( '{% url 'empresa-oportunidad-busqueda' %}?b=A');
 		$( '#filtro' ).change( function() {
 			fnCargarOportunidades();
 		});
 		fnCargarOportunidades();
+		$('#oportunidad-lista').on('click', '.archivar', function(){
+			$('#btn_archivar').data('id', $(this).data('id'));
+        	$('#form-modal').modal('toggle');
+		});
+		$('#oportunidad-lista').on('click', '#btn-archivar', function(){
+        	$.get("{% url 'oportunidad-archivar' %}?id=" + $(this).data('id'), function(resp){
+
+			});
+		});
+
 	});
+
 
 	function opciones(id) {
 		if ($('#menu-' + id).hasClass('active'))
@@ -51,7 +74,6 @@
 				}
 			});
 	}
-
 	function fnCargarOportunidad(arra, index) {
 		$(".loading-wrapper").show();
 		if (arra.length > index){

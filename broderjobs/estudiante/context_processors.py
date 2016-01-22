@@ -16,7 +16,7 @@ def estudiante_foto(request):
             if estudiante is not None:
                 estudiante = Estudiante.objects.get(persona_id = persona.id)
                 estudiante_foto = estudiante.set_foto
-                completo_test = estudiante.test_completo
+                completo_test = estudiante.completo_test
     return {'estudiante_foto': estudiante_foto, 'test_completo': completo_test}
 
 def mensajes_actuales(request):

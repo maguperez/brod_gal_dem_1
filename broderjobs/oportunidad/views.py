@@ -346,6 +346,30 @@ class OportunidadEditarView(FormView):
         oportunidad.save()
         return super(OportunidadEditarView, self).form_valid(form)
 
+class OportunidadArchivarView(FormView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.GET.get('id')
+        usuario = User.objects.get(id = self.request.user.id)
+        try:
+            oportunidad = Oportunidad.objects.get(id = id)
+            oportunidad.estado_oportunidad = constants.estado_archivado
+            postulaciones = Postulacion.objects.filter(oportunidad_idn=id)
+            postulaciones.update(estado_fase =  constants.estado_inactivo,estado_postulacion = constants.postulacion_finalizado,
+                                                                          fecha_modificacion = datetime.now(),
+                                                                          usuario_modificacion = usuario.username)
+            ids_estudiante = postulaciones.values_list('estudiante_id', flat=True).order_by('estudiante_id')
+            enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiante, constants.proceso_finalizado_asunto,
+                                                     False, usuario.username)
+            response = { 'resp': 'se actualizo correctamente'}
+        except:
+            response = { 'resp': 'no se encontro la oportunidad'}
+        #serialize to json
+        s = StringIO()
+        json.dump(response, s)
+        s.seek(0)
+        return HttpResponse(s.read())
+
 class OportunidadView(TemplateView):
     login_required = True
     template_name = 'oportunidad/ver.html'
