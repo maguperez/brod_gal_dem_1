@@ -209,7 +209,7 @@
                         <h3 class="modal-title"><strong>Archivar Oportunidad</strong></h3>
                     </div>
              <div id="archivar-modal-body" class="modal-body">
-				<p>Al archivar la Oportunidad todas las postulaciones relacionadas ser·n
+				<p>Al archivar la Oportunidad todas las postulaciones relacionadas ser√°n
 					finalizadas.</p>
 
 			</div>
@@ -271,7 +271,7 @@
         $('.archivar').click(function(){
 			$('.btn-archivar').data('id', $(this).data('id'));
 			$("#archivar-modal-body").html('<p>Al archivar la Oportunidad todas las postulaciones' +
-					                       ' relacionadas ser·n finalizadas</p>');
+					                       ' relacionadas ser√°n finalizadas</p>');
 			$('.btn-archivar').show();
         	$('#archivar-modal').modal('toggle');
 
@@ -280,6 +280,7 @@
         	$.get("{% url 'oportunidad-archivar' %}?id=" + $(this).data('id'), function(data){
 				$("#archivar-modal-body").html('<p>'+data+'</p>');
 				$('.btn-archivar').hide();
+                $('.estado label').html('oportunidad archivada');
 			});
 		});
 
