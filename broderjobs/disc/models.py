@@ -50,7 +50,7 @@ class RespuestaEstudiante(models.Model):
 
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     respuesta = models.ForeignKey(Respuesta, default=None, null=True, blank=True)
-    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True,  )
+    descripcion = models.CharField(max_length="200", default=None, null=True, blank=True,  )
     letra_mas =  models.CharField(choices=letras, max_length=1, default='', null=True, blank=True)
     letra_menos =  models.CharField(choices=letras, max_length=1, default='', null=True, blank=True)
     orden = models.IntegerField(default=None, null=True, blank=True )
@@ -63,3 +63,38 @@ class RespuestaEstudiante(models.Model):
 
     def __unicode__(self):
         return unicode(self.estudiante) or u''
+
+class Perfil(models.Model):
+
+    descripcion = models.TextField(default=None, null=True, blank=True,  )
+    orden = models.IntegerField(default=None, null=True, blank=True )
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode(self.descripcion) or u''
+
+    class Meta:
+        ordering = ["orden"]
+
+class PatronPerfil(models.Model):
+
+    perfil = models.ForeignKey(Perfil, default=None, null=True, blank=True)
+    nro_patron = models.CharField(max_length="50", default=None, null=True, blank=True,  )
+    orden = models.IntegerField(default=None, null=True, blank=True )
+
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    def __unicode__(self):
+        return unicode(self.descripcion) or u''
+
+    class Meta:
+        ordering = ["orden"]

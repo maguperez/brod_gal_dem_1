@@ -7,6 +7,8 @@ admin.site.register(models.Pregunta)
 
 admin.site.register(models.Respuesta)
 
-class RepuestaEstudianteAdmin(admin.ModelAdmin):
-    list_display = ('estudiante', 'respuesta', 'letra_mas', 'letra_menos')
-admin.site.register(models.RespuestaEstudiante, RepuestaEstudianteAdmin)
+admin.site.register(models.Perfil)
+
+class PatronPerfil(admin.ModelAdmin):
+    list_display = ('Perfil', 'nro_patron', 'orden')
+admin.site.register(models.PatronPerfil)

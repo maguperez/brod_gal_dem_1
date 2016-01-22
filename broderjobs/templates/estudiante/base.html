@@ -149,13 +149,17 @@
 </html>
 
 		<!--<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>-->
+{% if 'oportunidad-listar' in request.path and not completo_test %}
+    <script>
+        $(function(){
+            $('#form-preguntas .modal-body').load('/disc/formulario-estudiante/', function () {
+                $('#form-preguntas').modal('toggle');
+                //formAjaxSubmit('#form-preguntas .modal-body form', '#form-preguntas');
+            });
+        });
+    </script>
+{%endif%}
 <script>
-    $(function(){
-        $('#form-preguntas .modal-body').load('/disc/formulario-estudiante/', function () {
-        	$('#form-preguntas').modal('toggle');
-			//formAjaxSubmit('#form-preguntas .modal-body form', '#form-preguntas');
-		});
-    });
 		   $('.withScroll').each(function () {
                     $(this).mCustomScrollbar("destroy");
                     var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';

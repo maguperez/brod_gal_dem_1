@@ -28,6 +28,7 @@ class Estudiante(models.Model):
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
     foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
+    completo_test = models.BooleanField(default=False)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)
@@ -99,3 +100,17 @@ class Voluntariado(models.Model):
 
     def __unicode__(self):
 		return unicode('%s' % (self.cargo)) or u''
+
+class ConocimientoExtra(models.Model):
+    descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["orden"]
+
+    def __unicode__(self):
+		return unicode(self.descripcion) or u''
