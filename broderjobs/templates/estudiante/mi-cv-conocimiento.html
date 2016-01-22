@@ -9,13 +9,13 @@
 					</label>
 					<select multiple class="full" id="id_conocimiento">
 						{% for conocimiento in conocimientos %}
-							<option value="{{conocimiento.id}}" data-info="b" selected>{{conocimiento.descripcion}}</option>
+							<option value="{{conocimiento.id}}" data-info="c" selected>{{conocimiento.descripcion}}</option>
 						{% endfor %}
 						{% for conocimiento in conocimientos_extra %}
-							<option value="{{conocimiento.id}}" data-info="be" selected>{{conocimiento.descripcion}}</option>
+							<option value="{{conocimiento.id}}" data-info="ce" selected>{{conocimiento.descripcion}}</option>
 						{% endfor %}
 						{% for conocimiento in conocimientos_universo %}
-							<option value="{{conocimiento.id}}" data-info="b">{{conocimiento.descripcion}}</option>
+							<option value="{{conocimiento.id}}" data-info="c">{{conocimiento.descripcion}}</option>
 						{% endfor %}
 					</select>
 					{{form.conocimientos_hidden}}
