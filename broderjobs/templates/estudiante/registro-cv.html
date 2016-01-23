@@ -213,7 +213,6 @@
 			return flagSeleccionarCarrera;
 		},'Debe seleccionar una carrera existente');
 
-
 		$('#id_carreras').blur(function(){
 			var strInput = $('#id_carreras').val();
 			var objSeleccionado = $('#id_carreras').typeahead('getActive');
@@ -224,20 +223,14 @@
 				}
 				else{
 					flagSeleccionarCarrera = true;
-//					var validator = $("form").validate();
-//					validator.element( "#id_carreras" );
 				}
 			}
 			else if(strInput.length > 0){
 				flagSeleccionarCarrera = false;
 			}
-
-			var validator = $("form").validate();
-			validator.element( "#id_carreras" );
+			LlamarValidacionElemento('id_carreras');
 		});
 
-
-		//var ids = ["id_grado_estudio"];
 		InicializarTypeaheadElementos();
 		//InicializarPlugin(ids);
 		$('#id_universidades').blur(function(){
@@ -256,27 +249,8 @@
 			else if(strInput.length > 0){
 				flagSeleccionarUniversidad = false;
 			}
-
-			var validator = $("form").validate();
-					validator.element( "#id_universidades" );
-
-//			$("span.help-block").hide();
+			LlamarValidacionElemento('id_universidades');
 		});
-
-		$('#id_carreras').blur(function(){
-			var strInput = $('#id_carreras').val();
-			var objSeleccionado = $('#id_carreras').typeahead('getActive');
-
-			if(objSeleccionado){
-				if(objSeleccionado.name != strInput){
-					$('#id_carreras_hidden').val('0');
-				}
-			}
-			else if(strInput.length > 0){
-				$('#id_carreras_hidden').val('0');
-			}
-		});
-
 
 		$("#id_pais").select2({
   			placeholder: "Selecciona un País",
@@ -324,9 +298,33 @@
 			LlamarValidacionElemento('id_ciudad');
 		});
 
+		$("#id_ano_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_inicio_estudio');
+		});
 
+		$("#id_ano_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_graduacion');
+		});
 
+		$("#id_semestre_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_inicio_estudio');
+		});
+
+		$("#id_semestre_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_graduacion');
+		});
 	});
+
+	function LlamarValidacionCiclos(){
+		LlamarValidacionElemento('id_ano_inicio_estudio');
+		LlamarValidacionElemento('id_ano_graduacion');
+		LlamarValidacionElemento('id_semestre_inicio_estudio');
+		LlamarValidacionElemento('id_semestre_graduacion');
+	}
 
 	function LlamarValidacionElemento(id){
 		var validator = $( "form" ).validate();
@@ -396,59 +394,11 @@
 	}
 
 	function InicializarTypeaheadElementos(){
-
-//		InicializarTypeahead('id_paises', 'id_paises_hidden', '{%url "pais-busqueda" %}');
 		InicializarTypeahead('id_universidades', 'id_universidades_hidden', '{%url "universidad-busqueda" %}');
 		InicializarTypeahead('id_carreras', 'id_carreras_hidden', '{%url "carrera-busqueda" %}');
-
-//		$("#id_ciudades").typeahead({
-//			source: function(buscar,cargarResultado){
-//				var valor = document.getElementById('id_paises_hidden').value;
-//				$.ajax({
-//					data : {'busqueda': buscar,'pais': valor},
-//					url: '{%url "ciudad-busqueda" %}',
-//					type: 'get',
-//					success: function(data){
-//
-//						if(data){
-//							if(data.length > 0) {
-//								var arreglo = [];
-//								data.forEach(function(obj){
-//									var obje = {};
-//									obje.id = obj.pk;
-//									obje.name = obj.fields.descripcion;
-//
-//									arreglo.push(obje);
-//								});
-//
-//								cargarResultado(arreglo);
-//							}
-//						}
-//					}
-//
-//				});
-//			}
-//		});
-//
-//		$("#id_ciudades").change(function() {
-//			var current = $("#id_ciudades").typeahead("getActive");
-//			if (current) {
-//				// Some item from your model is active!
-//				if (current.name == $("#id_ciudades").val()) {
-//					$('#id_ciudades_hidden').val(current.id);
-//				} else {
-//					// This means it is only a partial match, you can either add a new item
-//					// or take the active if you don't want new items
-//				}
-//			} else {
-//				// Nothing is active so it is a new value (or maybe empty value)
-//			}
-//		});
-
 	}
 
 </script>
-
 
 <script>
     $(function(){
