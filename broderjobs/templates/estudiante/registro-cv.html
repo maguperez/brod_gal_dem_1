@@ -189,6 +189,7 @@
 <script>
 
 	var flagSeleccionarUniversidad = true;
+	var flagSeleccionarCarrera = true;
 
 	$('documento').ready(function(){
 
@@ -200,6 +201,31 @@
 				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
 
 		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
+		$.validator.addMethod('carreraExistente',function(value, element, param){
+			return flagSeleccionarCarrera;
+		},'Debe seleccionar una carrera existente');
+
+
+		$('#id_carreras').blur(function(){
+			var strInput = $('#id_carreras').val();
+			var objSeleccionado = $('#id_carreras').typeahead('getActive');
+
+			if(objSeleccionado){
+				if(objSeleccionado.name != strInput){
+					flagSeleccionarCarrera = false;
+				}
+				else{
+					flagSeleccionarCarrera = true;
+					var validator = $("form").validate();
+					validator.element( "#id_carreras" );
+				}
+			}
+			else if(strInput.length > 0){
+				flagSeleccionarCarrera = false;
+			}
+		});
+
+
 		//var ids = ["id_grado_estudio"];
 		InicializarTypeaheadElementos();
 		//InicializarPlugin(ids);
@@ -463,7 +489,8 @@
 					universidadExistente: true
                 },
 				carreras: {
-					required: true
+					required: true,
+					carreraExistente: true
 				},
 				grado_estudio: {
                     required: true
