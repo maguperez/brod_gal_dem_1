@@ -67,7 +67,11 @@
 							<section>
 								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
-									<p>{{resumen.descripcion}}</p>
+									<p>
+										{%if resumen.descripcion != None %}
+											{{resumen.descripcion}}
+										{%endif%}
+									</p>
 								</div>
 							</section>
 							<section>
