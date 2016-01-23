@@ -13,6 +13,8 @@ admin.site.register(models.Universidad)
 
 admin.site.register(models.Carrera)
 
+admin.site.register(models.TipoCarrera)
+
 admin.site.register(models.Idioma)
 
 admin.site.register(models.CargaHoraria)
