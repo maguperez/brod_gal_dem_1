@@ -362,8 +362,19 @@
 								data.forEach(function(obj){
 									var obje = {};
 									obje.id = obj.pk;
-									obje.name = obj.fields.descripcion;
 
+									var descripcion = obj.fields.descripcion;
+									var nemonico = obj.fields.nemonico;
+									var nombre = '';
+									if(nemonico){
+										nombre = descripcion + ' ( '+nemonico+' )';
+									}
+									else{
+										nombre = descripcion;
+									}
+
+//									obje.name = obj.fields.descripcion;
+									obje.name = nombre;
 									arreglo.push(obje);
 								});
 
