@@ -224,13 +224,16 @@
 				}
 				else{
 					flagSeleccionarCarrera = true;
-					var validator = $("form").validate();
-					validator.element( "#id_carreras" );
+//					var validator = $("form").validate();
+//					validator.element( "#id_carreras" );
 				}
 			}
 			else if(strInput.length > 0){
 				flagSeleccionarCarrera = false;
 			}
+
+			var validator = $("form").validate();
+			validator.element( "#id_carreras" );
 		});
 
 
@@ -247,14 +250,15 @@
 				}
 				else{
 					flagSeleccionarUniversidad = true;
-					var validator = $("form").validate();
-					validator.element( "#id_universidades" );
+
 				}
 			}
 			else if(strInput.length > 0){
 				flagSeleccionarUniversidad = false;
 			}
 
+			var validator = $("form").validate();
+					validator.element( "#id_universidades" );
 
 //			$("span.help-block").hide();
 		});
