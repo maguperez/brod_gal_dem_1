@@ -403,6 +403,8 @@
 				$("#id_ciudad").select2("val", "");
 				$("#id_ciudad").attr('disabled', false);
 			}
+
+			LlamarValidacionElemento('id_pais');
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
@@ -418,6 +420,11 @@
 
 		AgregarAnchoLabelRemuneracion();
 	});
+
+	function LlamarValidacionElemento(id){
+		var validator = $( "form" ).validate();
+		validator.element('#'+id);
+	}
 
 	function AgregarAnchoLabelRemuneracion(){
 		$('#id_tipo_puesto_0').parent().css('width','190px');
