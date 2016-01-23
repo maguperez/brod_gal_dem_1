@@ -110,6 +110,12 @@
 			return flagSeleccionarCarrera;
 		},'Debe seleccionar una carrera existente');
 
+		$.validator.addMethod('validarCiclos',function(value, element, param){
+			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
+				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
+
+		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
+
 
 		$('#id_universidades').blur(function(){
 			var strInput = $('#id_universidades').val();
@@ -194,6 +200,26 @@
 
 		IniciarCiudades();
 		InicializarValidaciones();
+
+		$("#id_ano_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_inicio_estudio');
+		});
+
+		$("#id_ano_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_graduacion');
+		});
+
+		$("#id_semestre_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_inicio_estudio');
+		});
+
+		$("#id_semestre_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_graduacion');
+		});
 	});
 
 	function IniciarCiudades() {
@@ -217,10 +243,22 @@
 		});
 	}
 
+	function LlamarValidacionCiclos(){
+		LlamarValidacionElemento('id_ano_inicio_estudio');
+		LlamarValidacionElemento('id_ano_graduacion');
+		LlamarValidacionElemento('id_semestre_inicio_estudio');
+		LlamarValidacionElemento('id_semestre_graduacion');
+	}
+
+	function LlamarValidacionElemento(id){
+		var validator = $( "form" ).validate();
+		validator.element('#'+id);
+	}
+
 	function InicializarValidaciones(){
 		$("form").validate({
             errorPlacement: function (error, element) {
-				debugger;
+
                 $(element).tooltip('destroy');
 
 				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
@@ -261,16 +299,20 @@
 					carreraExistente: true
                 },
 				semestre_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				semestre_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				email: {
                     required: true,
