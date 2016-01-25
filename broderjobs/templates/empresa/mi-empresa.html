@@ -175,7 +175,7 @@
 						<a class="link ver-mas" href="{%url 'empresa-oportunidad-listar'%}">Ver m&aacute;s oportunidades</a>
 					</section>
 					<section class="redes">
-						<h3 class="title"><i class="network"></i>Redes sociales<a class="editar link" href="#editar-redes">Editar</a></h3>
+						<h3 class="title"><i class="network"></i>Redes sociales<button id="redes-sociales-button" class="link editar">Editar</button></h3>
 						<div>
 							<div class="facebook">
 								<h4>FACEBOOK</h4>
@@ -347,6 +347,13 @@
      $('#info-general-button').click(function() {
 		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('info-general/', function () {
+        	$('#form-modal').modal('toggle');
+			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		 });
+	 });
+	 $('#redes-sociales-button').click(function() {
+		 $('#modal-aceptar').css("display", "inline");
+		 $('#form-modal-body').load('redes-sociales/', function () {
         	$('#form-modal').modal('toggle');
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		 });

@@ -1,0 +1,218 @@
+<style>
+	.tooltip {
+		width: 167px;
+	}
+
+	.tooltip-arrow{
+		top: 44.1754%;
+	}
+</style>
+
+<div style="margin:0 50px">
+	<form id = "empresa-redes-sociales" class="form-horizontal" action="{% url 'mi-empresa-redes-sociales' %}" method="post">
+		{%csrf_token%}
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">facebook</label>
+			<div class = "col-sm-9">
+				{{ form.facebook }}
+			</div>
+		</div>
+		<div class = "form-group">
+			<label class = "control-label bold col-sm-3">Twitter</label>
+			<div class = "col-sm-9">
+				{{ form.twitter }}
+			</div>
+		</div>
+		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
+	</form>
+</div>
+<script>
+//	$(function(){
+//		$("#empresa-info_general input").addClass("form-control");
+//		$("#empresa-info_general select").addClass("form-control");
+//		$("#empresa-info_general textarea").addClass("form-control");
+//		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
+//		$("#id_quienes_somos").hide();
+//
+//		$('#id_website').prop( "placeholder", 'Ej: www.example.com' );
+//
+//		InicializarSelect2();
+//
+//		$("#txt-quienes_somos").on("input", function(){
+//			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
+//		});
+//		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
+//
+//		$.validator.addMethod('checkurl',function(value, element, param){
+//
+//			return /^(www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);
+//		},'URL inválida');
+//
+//
+//
+//		$("#empresa-info_general").validate({
+//            errorPlacement: function (error, element) {
+////				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
+//				if (element[0].id == 'id_RUC' || element[0].id == 'id_telefono' || element[0].id == 'id_nombre'){
+//					$(element).tooltip('destroy');
+//					$(element).tooltip({
+//						animation: true,
+//						placement: "right",
+//						title: $(error).text(),
+//						trigger: "manual"
+//					} );
+//					$(element).tooltip('show');
+//				}
+//				else{
+//					$(element).tooltip('destroy');
+//					$(element).tooltip({
+//						animation: true,
+//						placement: "right",
+//						title: $(error).text(),
+//						trigger: "manual"
+//					} );
+//					$(element).tooltip('show');
+//				}
+//            },
+//            success: function (label, element) {
+//				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
+//					$("#id_pais").tooltip('hide');
+//				}
+//				else {
+//					$(element).tooltip('hide');
+//				}
+//
+//            },
+//            rules: {
+//				nombre: {
+//					required: true,
+//				},
+//				quienes_somos_clone: {
+//					required: true,
+//					maxlength: 1000
+//				},
+//                RUC: {
+//                    required: true,
+//					maxlength: 20,
+//					digits: true
+//                },
+//                telefono: {
+//                    required: true,
+//					digits: true,
+//					maxlength: 20
+//                },
+//				website:{
+//					checkurl: true
+//				},
+//				ano_fundacion:{
+//					digits: true,
+//					maxlength: 4,
+//					minlength: 4
+//				}
+//            },
+//            messages: {
+//				nombre: {
+//					required: "Este campo es obligatorio",
+//				},
+//				quienes_somos_clone: {
+//					required: "Este campo es obligatorio",
+//					maxlength: "Este campo no puede superar los 1000 caracteres"
+//				},
+//                RUC: {
+//                    required: "Este campo es obligatorio",
+//					maxlength: "Este campo no puede superar los 20 caracteres",
+//					digits: "Este campo solo contiene digitos"
+//                },
+//                telefono: {
+//                    required: "Este campo es obligatorio",
+//					digits: "Este campo solo contiene digitos",
+//					maxlength: "Este campo no puede superar los 20 caracteres"
+//                },
+//				ano_fundacion:{
+//					digits: "Este campo solo contiene digitos",
+//					maxlength: "Este campo debe constar de 4 caracteres",
+//					minlength: "Este campo debe constar de 4 caracteres"
+//				}
+//            }
+//        });
+//
+//		AgregarPlaceholders();
+//
+//	});
+
+//	function AgregarPlaceholders(){
+//		$('#id_ano_fundacion').prop('placeholder','Ej. 2015');
+//		$('#id_RUC').prop('placeholder','RUC de su empresa');
+//	}
+//
+//	function InicializarSelect2(){
+//		$("#id_pais").select2({
+//  			placeholder: "Pais",
+//  			allowClear: true
+//		});
+//		$("#id_ciudad").select2({
+//  			placeholder: "Ciudad",
+//  			allowClear: true
+//		});
+//
+//		$("#id_pais").change(function() {
+//			if($("#id_pais").val() > 0 ){
+//				$.ajax({
+//					data: {'pais': $("#id_pais").val()},
+//					url: '{%url "ciudad-busqueda" %}',
+//					type: 'get',
+//					success: function (data) {
+//						if (data) {
+//							if (data.length > 0) {
+////								var options = '<option value="">Ciudad</option>';
+//								var options = '';
+//								for (var i = 0; i < data.length; i++) {
+//									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+//								}
+//								$("#id_ciudad").html(options);
+//								// $("#id_ciudad option:first").attr('selected', 'selected');
+//								$("#id_ciudad").select2("val", "");
+//								$("#id_ciudad").attr('disabled', false);
+//							}
+//						}
+//					}
+//				});
+//			}
+//			else{
+//				var options = '';
+//				$("#id_ciudad").html(options);
+//				$("#id_ciudad").select2("val", "");
+//				$("#id_ciudad").attr('disabled', false);
+//			}
+//		});
+//		$("#id_ciudad").change(function() {
+//			$('#id_ciudad_hidden').val($(this).val());
+//		});
+//
+//		IniciarCiudades();
+//	}
+//
+//	function IniciarCiudades() {
+//		$.ajax({
+//			data: {'pais': $("#id_pais").val()},
+//			url: '{%url "ciudad-busqueda" %}',
+//			type: 'get',
+//			success: function (data) {
+//				if (data) {
+//					if (data.length > 0) {
+//						var options = '';
+//						for (var i = 0; i < data.length; i++) {
+//							options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+//						}
+//						$("#id_ciudad").html(options);
+//						$("#id_ciudad").val($("#id_ciudad_hidden").val()).trigger("change");
+//						$("#id_ciudad").attr('disabled', false);
+//					}
+//				}
+//			}
+//
+//		});
+//	}
+//
+
+</script>

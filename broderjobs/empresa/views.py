@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture
+from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture, EmpresaRedesSociales
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
 from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
@@ -26,6 +26,7 @@ from .response import JSONResponse, response_mimetype
 from .serialize import serialize
 from main.utils import LoginRequiredMixin
 from django.core.paginator import InvalidPage, Paginator
+from datetime import date,datetime
 
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
@@ -147,6 +148,52 @@ class InfoGeneralView(FormView):
             empresa.save()
 
             return super(InfoGeneralView, self).form_valid(form)
+
+class RedesSocialesView(FormView):
+
+    form_class = forms.RedesSocialesForm
+    template_name = 'empresa/mi-empresa-redes-sociales.html'
+    success_url = reverse_lazy('mi-empresa')
+
+    def get_initial(self):
+
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        try:
+            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id, estado = 'A')
+        except EmpresaRedesSociales.DoesNotExist:
+            redes_empresa = EmpresaRedesSociales()
+        return {
+            'facebook': redes_empresa.facebook,
+            'twitter': redes_empresa.linkedin,
+            'linkedin': redes_empresa.linkedin}
+
+    def form_invalid(self, form):
+        return 'form.errors'
+
+    def form_valid(self, form):
+        facebook =  form.cleaned_data['facebook']
+        twitter = form.cleaned_data['twitter']
+        linkedin = form.cleaned_data['linkedin']
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        try:
+            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id)
+            redes_empresa.fecha_modificacion = datetime.now()
+            redes_empresa.usuario_modificacion = persona.usuario.username
+        except EmpresaRedesSociales.DoesNotExist:
+            redes_empresa = EmpresaRedesSociales()
+            redes_empresa.fecha_creacion = datetime.now()
+            redes_empresa.usuario_creacion = persona.usuario.username
+        redes_empresa.facebook = facebook
+        redes_empresa.twitter= twitter
+        redes_empresa.linkedin = linkedin
+        redes_empresa.estado = 'A'
+        redes_empresa.save()
+
+        return super(RedesSocialesView, self).form_valid(form)
 
 class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     form_class = forms.LogoForm

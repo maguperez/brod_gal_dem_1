@@ -26,3 +26,15 @@ class UbicacionForm(forms.ModelForm):
         model = Empresa
         fields = ('longitud', 'latitud', 'direccion_map')
 
+class RedesSocialesForm(forms.Form):
+    facebook = forms.CharField(required=False, max_length=200, widget=forms.TextInput(attrs={
+                                                                            'placeholder': 'Ingrese direccion de facebook',
+                                                                            'class': 'form-control'}))
+    twitter = forms.CharField(required=False, max_length=200, widget=forms.TextInput(attrs={
+                                                                            'placeholder': 'Ingrese direccion de twitter',
+                                                                            'class': 'form-control'}))
+    linkedin = forms.CharField(required=False, max_length=200, widget=forms.TextInput(attrs={
+                                                                            'placeholder': 'Ingrese direccion de linkedin',
+                                                                            'class': 'form-control'}))
+
+

@@ -17,6 +17,8 @@ urlpatterns = [
 
     url(r'^mi-empresa/ubicacion/$', views.UbicacionView.as_view(), name="mi-empresa-ubicacion"),
 
+    url(r'^mi-empresa/redes-sociales/$', views.RedesSocialesView.as_view(), name="mi-empresa-redes-sociales"),
+
     url(r'^oportunidades/', 'empresa.views.oportunidades', name='empresa-oportunidad-lista'),
 
     url(r'^oportunidad-listar/', 'empresa.views.oportunidades_listar', name='empresa-oportunidad-listar'),
