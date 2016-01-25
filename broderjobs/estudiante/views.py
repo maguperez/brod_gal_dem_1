@@ -147,9 +147,10 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             ranking.salarios = 0
         mi_evaluacion = EvaluacionEmpresa()
         total_evaluadores = 0
+        total_evaluadores = EvaluacionEmpresa.objects.filter(empresa_id = empresa.id, estado = 'A').count()
         try:
             mi_evaluacion = EvaluacionEmpresa.objects.get(empresa_id = empresa.id, usuario_id = self.request.user.id)
-            total_evaluadores = EvaluacionEmpresa.objects.filter(empresa_id = empresa.id, estado = 'A').count()
+            
         except EvaluacionEmpresa.DoesNotExist:
             mi_evaluacion.linea_carrera = 0
             mi_evaluacion.flexibilidad_horarios = 0
