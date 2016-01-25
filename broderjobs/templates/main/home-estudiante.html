@@ -83,7 +83,8 @@
 						<form method="POST">{% csrf_token %}
 							<div class="content">
 								<label class="saludo">HOLA</label>
-								<a class="ingresa-facebook">REG&Iacute;STRATE CON FACEBOOK</a>
+								<a class="ingresa-facebook" href="{% url 'social:begin' 'facebook' %}">
+									REG&Iacute;STRATE CON FACEBOOK</a>
 								<label class="indicacion">Es m&aacute;s f&aacute;cil y r&aacute;pido</label>
 								<div class="division">
 									<div class="line"></div>

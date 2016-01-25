@@ -7,16 +7,21 @@ def estudiante_foto(request):
     completo_test = False
     estudiante_foto = 'url'
     if request.user.is_authenticated():
-        persona = Persona.objects.get(usuario_id = request.user)
-        if persona.tipo_persona == 'E':
-            try:
-                estudiante = Estudiante.objects.get(persona_id = persona.id)
-            except Estudiante.DoesNotExist:
-                estudiante = None
-            if estudiante is not None:
-                estudiante = Estudiante.objects.get(persona_id = persona.id)
-                estudiante_foto = estudiante.set_foto
-                completo_test = estudiante.completo_test
+        try:
+            persona = Persona.objects.get(usuario_id = request.user)
+            if persona.tipo_persona == 'E':
+                try:
+                    estudiante = Estudiante.objects.get(persona_id = persona.id)
+                except Estudiante.DoesNotExist:
+                    estudiante = None
+                if estudiante is not None:
+                    estudiante = Estudiante.objects.get(persona_id = persona.id)
+                    estudiante_foto = estudiante.set_foto
+                    completo_test = estudiante.completo_test
+        except Persona.DoesNotExist:
+            completo_test = False
+            estudiante_foto = 'url'
+
     return {'estudiante_foto': estudiante_foto, 'test_completo': completo_test}
 
 def mensajes_actuales(request):

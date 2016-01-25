@@ -88,6 +88,8 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'estudiante.context_processors.estudiante_foto',
                 'estudiante.context_processors.notificaciones',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -178,31 +180,26 @@ MEDIA_URL = '/media/'
 
 
 AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     'social.backends.facebook.FacebookAppOAuth2',
     'social.backends.facebook.FacebookOAuth2',
     'broderjobs.backends.EmailOrUsernameModelBackend',
-    'django.contrib.auth.backends.ModelBackend'
-
 )
 
 
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
-
     'social.pipeline.social_auth.social_uid',
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
     'social.pipeline.user.create_user',
-
     'social.pipeline.social_auth.associate_user',
-
     'social.pipeline.social_auth.load_extra_data',
-
     'social.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/ingresar-social-auth/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1203258749688742'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'e3f7f99ea148e1d707487ec3e26cb942'
+SOCIAL_AUTH_FACEBOOK_KEY = '963480823713807'
+SOCIAL_AUTH_FACEBOOK_SECRET = '7119ba6ba620df948721cb20fc9189cc'
