@@ -70,3 +70,5 @@ urlpatterns = [
 	url(r'^proceso-detalle/(?P<id>\d+)/$', views.ProcesoDetalleView.as_view(), name="estudiante-proceso-detalle"),
 
 ]
+
+handler404 = 'main.views.404_view'

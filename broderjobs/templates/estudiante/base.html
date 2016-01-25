@@ -152,7 +152,7 @@
 {% if 'oportunidad-listar' in request.path and not completo_test %}
     <script>
         $(function(){
-            $('#form-preguntas .modal-body').load('/disc/formulario-estudiante/', function () {
+            $('#form-preguntas .modal-body').load('{% url "disc-formulario-estudiante" %}', function () {
                 $('#form-preguntas').modal('toggle');
                 //formAjaxSubmit('#form-preguntas .modal-body form', '#form-preguntas');
             });

@@ -41,3 +41,5 @@ urlpatterns = [
     url(r'^mi-empresa/imagenes/view/$', views.PictureListView.as_view(), name='upload-view'),
 
 ]
+
+handler404 = 'app.views.404_view'
