@@ -19,7 +19,7 @@ from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Conocimiento
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture
-from oportunidad.models import Oportunidad, Postulacion, ProcesoFase
+from oportunidad.models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
 from main.utils import LoginRequiredMixin
@@ -1003,6 +1003,10 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
 
         oportunidad =  get_object_or_404(Oportunidad, pk=id)
         empresa = get_object_or_404(Empresa, pk=oportunidad.empresa.id)
+
+        beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id)
+
+
         postulacion = Postulacion()
         try:
             postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
@@ -1012,6 +1016,7 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         context['postulacion'] = postulacion
+        context['beneficios_extras'] = beneficios_extras
         return context
 
 class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):

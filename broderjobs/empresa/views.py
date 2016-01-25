@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse_lazy
 from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
-from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado
+from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
 from django.core.paginator import Paginator, InvalidPage
 from django.template import RequestContext
 from django.db.models import Q, CharField
@@ -340,12 +340,16 @@ class OportunidadCandidatosCV(TemplateView):
         oportunidad =  get_object_or_404(Oportunidad, pk = id_oportunidad)
         estudiante = get_object_or_404(Estudiante, pk = id_estudiante)
         context = super(OportunidadCandidatosCV, self).get_context_data(**kwargs)
+
+        conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id = estudiante.id)
+
         context['oportunidad'] = oportunidad
         context['estudiante'] = estudiante
         context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id)
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
+        context['conocimientos_extras'] = conocimientos_extras
         return context
 
 #
