@@ -112,6 +112,7 @@ class InfoGeneralView(FormView):
             return 'form.errors'
 
         def form_valid(self, form):
+            nombre =  form.cleaned_data['nombre']
             quienes_somos =  form.cleaned_data['quienes_somos']
             RUC = form.cleaned_data['RUC']
             sector = form.cleaned_data['sector']
@@ -130,6 +131,7 @@ class InfoGeneralView(FormView):
             representante = Representante.objects.get(persona_id =persona.id)
             empresa = Empresa.objects.get(id=representante.empresa.id)
 
+            empresa.nombre = nombre
             empresa.quienes_somos = quienes_somos
             empresa.RUC = RUC
             empresa.sector = sector
@@ -166,12 +168,12 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id, estado = 'A')
+            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id, estado = 'A')
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
         return {
             'facebook': redes_empresa.facebook,
-            'twitter': redes_empresa.linkedin,
+            'twitter': redes_empresa.twitter,
             'linkedin': redes_empresa.linkedin}
 
     def form_invalid(self, form):
@@ -185,13 +187,14 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id)
+            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id)
             redes_empresa.fecha_modificacion = datetime.now()
             redes_empresa.usuario_modificacion = persona.usuario.username
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
             redes_empresa.fecha_creacion = datetime.now()
             redes_empresa.usuario_creacion = persona.usuario.username
+            redes_empresa.empresa = representante.empresa
         redes_empresa.facebook = facebook
         redes_empresa.twitter= twitter
         redes_empresa.linkedin = linkedin
