@@ -107,6 +107,7 @@ class InfoGeneralView(FormView):
             return 'form.errors'
 
         def form_valid(self, form):
+            nombre =  form.cleaned_data['nombre']
             quienes_somos =  form.cleaned_data['quienes_somos']
             RUC = form.cleaned_data['RUC']
             sector = form.cleaned_data['sector']
@@ -125,6 +126,7 @@ class InfoGeneralView(FormView):
             representante = Representante.objects.get(persona_id =persona.id)
             empresa = Empresa.objects.get(id=representante.empresa.id)
 
+            empresa.nombre = nombre
             empresa.quienes_somos = quienes_somos
             empresa.RUC = RUC
             empresa.sector = sector

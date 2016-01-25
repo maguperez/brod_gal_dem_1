@@ -287,8 +287,8 @@
         }
 	};
 	 var formAjaxSubmit = function(form, modal) {
-		// var valid = $(form).validate().valid();
-		 //if (valid){
+		 var valid = $(form).validate().valid();
+		 if (valid){
 			 $(form).submit(function (e) {
 				 e.preventDefault();
 				 $.ajax({
@@ -310,7 +310,7 @@
 					 error: function (xhr, ajaxOptions, thrownError) { }
 				 });
 			 });
-		 //}
+		 }
 	 }
 	 var formAjaxImagen = function(form, modal) {
 		// var valid = $(form).validate().valid();
@@ -348,14 +348,14 @@
 		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
+			//formAjaxSubmit('#form-modal-body form', '#form-modal');
 		 });
 	 });
 	 $('#redes-sociales-button').click(function() {
 		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('redes-sociales/', function () {
         	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
+			//formAjaxSubmit('#form-modal-body form', '#form-modal');
 		 });
 	 });
 	 $('#btn-edit').click(function() {
@@ -368,7 +368,7 @@
 	 $('#ubicacion-button').click(function() {
      	$('#form-modal-body').load('ubicacion/', function () {
         	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
+			//formAjaxSubmit('#form-modal-body form', '#form-modal');
 			google.maps.event.trigger(Empresa.map, "resize");
 		});
 	 });

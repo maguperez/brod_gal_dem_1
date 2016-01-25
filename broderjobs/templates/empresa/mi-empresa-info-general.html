@@ -110,6 +110,7 @@
 
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
+
 //				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
 				if (element[0].id == 'id_RUC' || element[0].id == 'id_telefono' || element[0].id == 'id_nombre'){
 					$(element).tooltip('destroy');
