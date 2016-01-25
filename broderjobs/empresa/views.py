@@ -161,12 +161,12 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id, estado = 'A')
+            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id, estado = 'A')
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
         return {
             'facebook': redes_empresa.facebook,
-            'twitter': redes_empresa.linkedin,
+            'twitter': redes_empresa.twitter,
             'linkedin': redes_empresa.linkedin}
 
     def form_invalid(self, form):
@@ -180,13 +180,14 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = Representante.objects.get(persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(id=representante.empresa.id)
+            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id)
             redes_empresa.fecha_modificacion = datetime.now()
             redes_empresa.usuario_modificacion = persona.usuario.username
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
             redes_empresa.fecha_creacion = datetime.now()
             redes_empresa.usuario_creacion = persona.usuario.username
+            redes_empresa.empresa = representante.empresa
         redes_empresa.facebook = facebook
         redes_empresa.twitter= twitter
         redes_empresa.linkedin = linkedin
