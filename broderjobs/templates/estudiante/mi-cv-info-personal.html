@@ -88,6 +88,7 @@
 <script>
 
 	var flagSeleccionarUniversidad = true;
+	var flagSeleccionarCarrera = true
 
 	$(function(){
 		$("form input, form select, form textarea").addClass("form-control");
@@ -104,6 +105,16 @@
 		$.validator.addMethod('universidadExistente',function(value, element, param){
 			return flagSeleccionarUniversidad;
 		},'Debe seleccionar una universidad existente');
+
+		$.validator.addMethod('carreraExistente',function(value, element, param){
+			return flagSeleccionarCarrera;
+		},'Debe seleccionar una carrera existente');
+
+		$.validator.addMethod('validarCiclos',function(value, element, param){
+			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
+				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
+
+		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 
 
 		$('#id_universidades').blur(function(){
@@ -122,6 +133,25 @@
 			}
 			else if(strInput.length > 0){
 				flagSeleccionarUniversidad = false;
+			}
+		});
+
+		$('#id_carreras').blur(function(){
+			var strInput = $('#id_carreras').val();
+			var objSeleccionado = $('#id_carreras').typeahead('getActive');
+
+			if(objSeleccionado){
+				if(objSeleccionado.name != strInput){
+					flagSeleccionarCarrera = false;
+				}
+				else{
+					flagSeleccionarCarrera = true;
+					var validator = $("form").validate();
+					validator.element( "#id_carreras" );
+				}
+			}
+			else if(strInput.length > 0){
+				flagSeleccionarCarrera = false;
 			}
 		});
 
@@ -170,6 +200,26 @@
 
 		IniciarCiudades();
 		InicializarValidaciones();
+
+		$("#id_ano_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_inicio_estudio');
+		});
+
+		$("#id_ano_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_ano_graduacion');
+		});
+
+		$("#id_semestre_inicio_estudio").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_inicio_estudio');
+		});
+
+		$("#id_semestre_graduacion").change(function() {
+			LlamarValidacionCiclos();
+//			LlamarValidacionElemento('id_semestre_graduacion');
+		});
 	});
 
 	function IniciarCiudades() {
@@ -193,10 +243,22 @@
 		});
 	}
 
+	function LlamarValidacionCiclos(){
+		LlamarValidacionElemento('id_ano_inicio_estudio');
+		LlamarValidacionElemento('id_ano_graduacion');
+		LlamarValidacionElemento('id_semestre_inicio_estudio');
+		LlamarValidacionElemento('id_semestre_graduacion');
+	}
+
+	function LlamarValidacionElemento(id){
+		var validator = $( "form" ).validate();
+		validator.element('#'+id);
+	}
+
 	function InicializarValidaciones(){
 		$("form").validate({
             errorPlacement: function (error, element) {
-				debugger;
+
                 $(element).tooltip('destroy');
 
 				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
@@ -233,19 +295,24 @@
 					universidadExistente: true
                 },
 				carreras: {
-                    required: true
+                    required: true,
+					carreraExistente: true
                 },
 				semestre_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_inicio_estudio:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				semestre_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				ano_graduacion:{
-                    required: true
+                    required: true,
+					validarCiclos: true
                 },
 				email: {
                     required: true,

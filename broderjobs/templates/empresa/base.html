@@ -75,7 +75,7 @@
 									<ul class="dropdown-menu-list withScroll " data-height="220" style="height: 220px;" id="notificaciones">
 										{%for notificacion in notificaciones %}
 										<li {%if notificacion.leida%} style="background: #f5f5f5" {%endif%}>
-											<a href="">
+											<a href="{% url 'buzon_entrada'%}">
 												<i class="fa {%if notificacion.es_mensaje %}fa-envelope{%else%} fa-bell {%endif%} p-r-10 f-18"></i>
 												{{notificacion.asunto}}
 												<span class="dropdown-time">{{notificacion.fecha_creacion|get_due_date_string}}</span>
@@ -171,7 +171,7 @@
 		}
 	});
 	$("body").on("click", function(e){
-		if ($("#"+event.target.id).parents("#menu-oportunidad").length == 0 &&
+		if ($("#"+e.target.id).parents("#menu-oportunidad").length == 0 &&
 			$('#menu-oportunidad').hasClass("active") && flag){
 			$('#menu-oportunidad').removeClass('active');
 		}

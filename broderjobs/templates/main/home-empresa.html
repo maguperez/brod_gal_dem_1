@@ -225,7 +225,7 @@
 	                "registro-password1": { required: true, minlength: 6 },
 					"registro-password2": { required: true, minlength: 6, equalTo: "#id_registro-password1" },
                     "registro-empresa": { required: true },
-                    "registro-telefono": { required: true },
+                    "registro-telefono": { required: true,digits: true,	maxlength: 20 },
 					groups: {
 						date: "registro-dia registro-mes registro-ano"
 					},
@@ -244,7 +244,9 @@
 											minlength: "La contraseña debe tener al menos seis (6) caracteres",
 											equalTo: "Las contraseñas deben ser iguales" },
                     "registro-empresa": { required: "Este campo es obligatorio" },
-                    "registro-telefono": { required: "Este campo es obligatorio" },
+                    "registro-telefono": { required: "Este campo es obligatorio",
+						                   digits: "Este campo solo contiene digitos",
+										   maxlength: "Este campo no puede superar los 20 digitos" },
                     tyc: { required: "Debe aceptar los términos y condiciones" }
 	            }
 	        });

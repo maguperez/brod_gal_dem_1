@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<div class = "form-group">
-			<label class = "control-label bold col-sm-3">Fundación</label>
+			<label class = "control-label bold col-sm-3">Año de Fundación</label>
 			<div class = "col-sm-9">
 				{{ form.ano_fundacion }}
 			</div>
@@ -92,12 +92,22 @@
 		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
 		$("#id_quienes_somos").hide();
 
+		$('#id_website').prop( "placeholder", 'Ej: www.example.com' );
+
 		InicializarSelect2();
 
 		$("#txt-quienes_somos").on("input", function(){
 			$("#id_quienes_somos").val($("#txt-quienes_somos").val());
 		});
 		$("#form-modal .modal-title").html('<i class="business"></i>Sobre la empresa');
+
+		$.validator.addMethod('checkurl',function(value, element, param){
+
+			return /^(www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);
+		},'URL inválida');
+
+
+
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
 //				if ($(element).is("[name=pais]") || $(element).is("[name=ciudad]")){
@@ -150,7 +160,7 @@
 					maxlength: 20
                 },
 				website:{
-					url: true
+					checkurl: true
 				},
 				ano_fundacion:{
 					digits: true,
@@ -176,9 +186,6 @@
 					digits: "Este campo solo contiene digitos",
 					maxlength: "Este campo no puede superar los 20 caracteres"
                 },
-				website:{
-					url: 'URL inválida'
-				},
 				ano_fundacion:{
 					digits: "Este campo solo contiene digitos",
 					maxlength: "Este campo debe constar de 4 caracteres",

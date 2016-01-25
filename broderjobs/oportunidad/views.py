@@ -121,7 +121,7 @@ class OportunidadCrearView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
         if '_guardar' in self.request.POST:
-            oportunidad.estado_oportunidad = constants.estado_archivado
+            oportunidad.estado_oportunidad = constants.estado_cerrado
         elif '_anunciar' in self.request.POST:
             oportunidad.estado_oportunidad = constants.estado_abierto
             oportunidad.fecha_publicacion = datetime.now()
