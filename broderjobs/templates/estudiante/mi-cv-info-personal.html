@@ -117,7 +117,7 @@
 		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 
 
-		$('#id_universidades').blur(function(){
+		$('#id_universidades').change(function(){
 			var strInput = $('#id_universidades').val();
 			var objSeleccionado = $('#id_universidades').typeahead('getActive');
 
@@ -136,7 +136,7 @@
 			}
 		});
 
-		$('#id_carreras').blur(function(){
+		$('#id_carreras').change(function(){
 			var strInput = $('#id_carreras').val();
 			var objSeleccionado = $('#id_carreras').typeahead('getActive');
 

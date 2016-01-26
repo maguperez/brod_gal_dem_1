@@ -439,6 +439,8 @@
 		$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
 		$('#id_remuneracion_min').hide();
 		$('#id_remuneracion_max').hide();
+		$("#id_remuneracion_min").tooltip('hide');
+		$("#id_remuneracion_max").tooltip('hide');
 	}
 
 	function LogicaIntervalo(){
@@ -447,14 +449,19 @@
 		$('#id_remuneracion_min').prop( "placeholder", 'Valor minimo' );
 		$('#id_remuneracion_max').show();
 		$('#id_remuneracion_min').show();
+		$("#id_remuneracion_min").tooltip('hide');
+		$("#id_remuneracion_max").tooltip('hide');
 	}
 
 	function LogicaFijo(){
 		$('#id_remuneracion_max').prop( "disabled", true );
+		$('#id_remuneracion_min').prop( "disabled", false );
 		$('#id_remuneracion_min').prop( "placeholder", 'Valor fijo' );
 		$('#id_remuneracion_max').hide();
 		$('#id_remuneracion_min').show();
 		$('#id_remuneracion_max').val('');
+		$("#id_remuneracion_min").tooltip('hide');
+		$("#id_remuneracion_max").tooltip('hide');
 	}
 
 	function AgregarEventosRemuneracion(){
