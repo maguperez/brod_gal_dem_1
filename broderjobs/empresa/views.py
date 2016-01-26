@@ -50,10 +50,15 @@ class MiEmpresaView(FormView):
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
+
+        redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
+
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         context['imagenes'] = imagenes
+        context['redes_sociales'] = redes_sociales
+
         return context
 
     def form_valid(self, form):
