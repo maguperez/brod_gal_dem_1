@@ -19,3 +19,5 @@ admin.site.register(models.RankingEmpresa)
 
 admin.site.register(models.Picture)
 
+admin.site.register(models.EmpresaRedesSociales)
+

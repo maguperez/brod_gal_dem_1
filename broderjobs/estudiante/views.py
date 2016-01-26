@@ -358,6 +358,9 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         # pais_hidden = pais.id
         ciudad = estudiante.ciudad
         ciudad_hidden = ciudad.id
+
+        genero = persona.genero
+
         return {
             'email': usuario.email,
             'telefono': persona.telefono,
@@ -372,7 +375,8 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
             'ano_graduacion': estudiante.ano_graduacion,
             'semestre_graduacion': estudiante.semestre_graduacion,
             'semestre_inicio_estudio': estudiante.semestre_inicio_estudio,
-            'ano_inicio_estudio': estudiante.ano_inicio_estudio}
+            'ano_inicio_estudio': estudiante.ano_inicio_estudio,
+            'genero': genero}
 
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
@@ -423,6 +427,10 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
         pais = form.cleaned_data['pais']
         id_ciudad = form.cleaned_data['ciudad_hidden']
+
+        genero = form.cleaned_data['genero']
+
+        persona.genero = genero
 
         estudiante.pais = pais
 
