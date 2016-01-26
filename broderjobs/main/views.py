@@ -16,14 +16,6 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.core.context_processors import csrf
 from django.core import serializers
 
-
-def login_facebook(request):
-    first_name = request.GET["first_name"]
-    last_name = request.GET["last_name"]
-    email = request.GET["email"]
-    return render_to_response('404.html',
-                              context_instance=RequestContext(request))
-
 def homepage1(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/estudiante.html',

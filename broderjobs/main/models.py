@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date, datetime
 
 from main import utils
 items_registro = utils.estado_registro()
@@ -11,8 +12,8 @@ class Persona(models.Model):
     tipo_persona = models.CharField(max_length=1, default="E")
     genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=  datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
@@ -22,8 +23,8 @@ class GradoEstudio(models.Model):
     descripcion = models.CharField(max_length="50")
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -36,8 +37,8 @@ class Pais(models.Model):
     descripcion = models.CharField(max_length="50")
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -51,8 +52,8 @@ class Ciudad(models.Model):
     descripcion = models.CharField(max_length="50")
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -67,8 +68,8 @@ class Universidad(models.Model):
     pais = models.ForeignKey(Pais, default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -82,8 +83,8 @@ class TipoCarrera(models.Model):
     total_ciclos = models.IntegerField(null= True, blank= True, verbose_name='total de ciclos')
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -97,8 +98,8 @@ class Carrera(models.Model):
     tipo_carrera = models.ForeignKey(TipoCarrera, default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -111,8 +112,8 @@ class TipoPuesto(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -125,8 +126,8 @@ class CargaHoraria(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -139,8 +140,8 @@ class Idioma(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -153,8 +154,8 @@ class Conocimiento(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -167,8 +168,8 @@ class TipoRemuneracion(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -181,8 +182,8 @@ class Beneficio(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -196,8 +197,8 @@ class PeriodosGraduacion(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
     valor = models.IntegerField(null= True, blank= True)
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -205,7 +206,4 @@ class PeriodosGraduacion(models.Model):
 
     def __unicode__(self):
 		return unicode(self.descripcion) or u''
-
-
-
 

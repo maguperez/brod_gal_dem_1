@@ -25,6 +25,7 @@ urlpatterns = [
 
     #LOGIN WITH SOACIAL
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^login-facebook' , 'broderjobs.views.login_facebook', name='login-facebook'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
