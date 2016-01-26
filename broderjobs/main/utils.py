@@ -17,7 +17,7 @@ def anos_rango():
     anos = []
     for y in range(1980,2020):
         anos.append((str(y), str(y)))
-    return [('','Años')] + anos
+    return [('','Año')] + anos
 
 #carga el rango de semestre para el  select
 def semestre_rango():
