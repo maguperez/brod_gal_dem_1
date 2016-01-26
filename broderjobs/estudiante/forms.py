@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from django.forms import RadioSelect, Select, CheckboxSelectMultiple
+from docutils.parsers.rst.directives import choice
 from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra, Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, CargaHoraria,Idioma, Conocimiento
 from empresa.models import EvaluacionEmpresa, Puesto, Empresa
@@ -80,6 +81,8 @@ class EstudianteForm(forms.ModelForm):
                   'semestre_graduacion', 'ano_graduacion')
 
 class InfoPersonalForm(EstudianteForm):
+    genero = utils.genero()
+
     email = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     fecha_nacimiento = forms.DateField(required=False, input_formats=['%d/%m/%Y'])
 
@@ -95,11 +98,18 @@ class InfoPersonalForm(EstudianteForm):
 
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
+    # genero = forms.CharField(required = True,  max_length = 50, widget=forms.Select)
+    genero = forms.ChoiceField(choices=genero, required = False, widget=forms.RadioSelect())
+
 #     paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
 #     paises_hidden = forms.CharField(widget=forms.HiddenInput    # ())
 
 #     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
 #     ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
+#     def __init__(self, *args, **kwargs):
+#         super(InfoPersonalForm, self).__init__(*args, **kwargs)
+#         self.fields['genero'].widget = forms.Select(attrs={'class': 'form-control'})
+#         self.fields['genero'].choices = utils.genero()
 
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
@@ -147,7 +157,6 @@ class ExperienciaForm(forms.ModelForm):
         fields = ('descripcion',)
         widget = {
             'descripcion': forms.widgets.Textarea
-
         }
 
     @property
