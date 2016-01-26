@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
 <div class = "candidato obx">
 <header>
      <img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
@@ -8,7 +15,6 @@
          <label>{{persona.telefono}} / {{usuario.email}}</label>
      </div>
      <div class="clear"></div>
-     <a class="descargar btn-action">DESCARGAR PDF</a>
  </header>
  <div class="content">
      <section>
@@ -108,11 +114,7 @@
 			</div>
      </section>
  </div>
-</div>
-<script>
-$('.descargar').click(function(){
-    $.get("{% url 'empresa-candidato-cv-pdf' %}?id=" +{{estudiante.id}}, function(data){
+    </div>
 
-         });
-    });
-  </script>
+</body>
+</html>

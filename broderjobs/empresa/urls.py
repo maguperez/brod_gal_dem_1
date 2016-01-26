@@ -37,6 +37,7 @@ urlpatterns = [
 
     url(r'^oportunidad-candidatos/(?P<id>\d+)/cv/(?P<e>\d+)$', views.OportunidadCandidatosCV.as_view(), name="empresa-oportunidad-candidatos-cv"),
 
+    url(r'^candidato-cv-pdf/$', 'empresa.views.canditado_cv_pdf', name="empresa-candidato-cv-pdf"),
 
     url(r'^mi-empresa/delete/(?P<pk>\d+)$', views.PictureDeleteView.as_view(), name='upload-delete'),
     url(r'^mi-empresa/imagenes/$', views.PictureCreateView.as_view(), name='upload-new'),

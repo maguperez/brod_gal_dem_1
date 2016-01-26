@@ -28,6 +28,11 @@ from main.utils import LoginRequiredMixin
 from django.core.paginator import InvalidPage, Paginator
 from datetime import date,datetime
 
+# import ho.pisa as pisa
+# import cStringIO as StringIO
+# import cgi
+from django.template.loader import render_to_string
+
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
 def oportunidad_listar(request):
@@ -507,3 +512,23 @@ class PictureListView(ListView):
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
+
+def generar_pdf(html):
+    # Función para generar el archivo PDF y devolverlo mediante HttpResponse
+    # result = StringIO.StringIO()
+    # pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
+    # if not pdf.err:
+    #     return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    # return HttpResponse('Error al generar el PDF: %s' % cgi.escape(html))
+    return HttpResponse('Error al generar el PDF: ')
+
+def canditado_cv_pdf(request):
+    # vista de ejemplo con un hipotético modelo Libro
+
+    id_estudiante = request.get('id', None)
+    estudiante = get_object_or_404(Estudiante, pk = id_estudiante)
+    conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id = estudiante.id)
+    html = render_to_string('candidato_cv_pdf.html', {'pagesize':'A4', 'estudiante':estudiante,
+                                               'conocimientos_extras' : conocimientos_extras},
+                            context_instance=RequestContext(request))
+    return generar_pdf(html)
