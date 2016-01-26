@@ -9,8 +9,6 @@ urlpatterns =[
 
 	url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
 
-	url(r'^login-facebook' , 'main.views.login_facebook', name='login-facebook'),
-
 	# url(r'^estudiante/$' , 'main.views.estudiante', name='estudiante'),
 
 	url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),

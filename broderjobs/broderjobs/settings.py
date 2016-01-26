@@ -200,6 +200,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_uid',
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
+    'broderjobs.utils.associate_by_email',
     'social.pipeline.user.get_username',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
@@ -208,7 +209,7 @@ SOCIAL_AUTH_PIPELINE = (
     'broderjobs.utils.crear_estudiante'
 )
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/estudiante/registro-cv/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/login-facebook/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '963480823713807'
 SOCIAL_AUTH_FACEBOOK_SECRET = '7119ba6ba620df948721cb20fc9189cc'
