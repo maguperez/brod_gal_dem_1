@@ -188,6 +188,14 @@ AUTHENTICATION_BACKENDS = (
 
 
 SOCIAL_AUTH_PIPELINE = (
+    # 'social.pipeline.social_auth.social_details',
+    # 'social.pipeline.social_auth.social_uid',
+    # 'social.pipeline.social_auth.auth_allowed',
+    # 'social.pipeline.social_auth.social_user',
+    # 'social.pipeline.user.get_username',
+    # 'social.pipeline.user.create_user',
+    # 'social.pipeline.social_auth.associate_user',
+    # 'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
     'social.pipeline.social_auth.auth_allowed',
@@ -197,9 +205,15 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
+    'broderjobs.utils.crear_estudiante'
 )
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/ingresar-social-auth/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/estudiante/registro-cv/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '963480823713807'
 SOCIAL_AUTH_FACEBOOK_SECRET = '7119ba6ba620df948721cb20fc9189cc'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}

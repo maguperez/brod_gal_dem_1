@@ -2,6 +2,7 @@
 from datetime import date, datetime
 from django.contrib.auth.decorators import login_required
 
+
 class LoginRequiredMixin(object):
     @classmethod
     def as_view(cls, **initkwargs):
@@ -70,6 +71,14 @@ def estado_registro():
     anos.append(('A', 'Activo'))
     anos.append(('I', 'Inactivado'))
     return anos
+
+def genero():
+    anos = []
+    anos.append(('M', 'Masculino'))
+    anos.append(('F', 'Femenino'))
+    return anos
+
+
 
 
 
