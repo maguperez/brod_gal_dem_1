@@ -661,9 +661,12 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
+
+        experiencia_descripcion = experiencia.descripcion
+
         context = super(ExperienciaView, self).get_context_data(**kwargs)
         context['experiencia_actual'] = experiencia.trabajo_actual
-
+        context['experiencia_descripcion'] = experiencia_descripcion
         return context
 
     def get_initial(self):
@@ -730,7 +733,8 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
             fecha_hasta = None
 
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
         experiencia.estudiante = estudiante
 
         if puesto_id != "0":

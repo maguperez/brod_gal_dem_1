@@ -25,6 +25,10 @@
 		z-index: 3051;
 	}
 
+	.mantener-line-break{
+		white-space: pre-line;
+	}
+
 </style>
 
 <section class="cv">
@@ -67,7 +71,7 @@
 							<section>
 								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
-									<p style="white-space: pre-line">
+									<p class="mantener-line-break">
 										{{resumen_descripcion}}
 									</p>
 								</div>
@@ -150,7 +154,7 @@
 											{%else%}
 											<label class="nombre">{{experiencia.empresa_referencial}}</label>
 											{%endif%}
-											<pr>{{experiencia.descripcion}}</pr>
+											<p class="mantener-line-break">{{experiencia.descripcion}}</p>
 											<button id="experiencia-{{experiencia.pk}}-editar" class="experiencia-botton link editar" >Editar</button>
 
 											<button id="experiencia-{{experiencia.pk}}-eliminar" class="experiencia-botton link editar">Eliminar</button>
