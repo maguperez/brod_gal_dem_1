@@ -21,7 +21,6 @@
      <div id = "wizard">
          <div class="wizard-progress wizard-progress-lg">
              <ul class="wizard-steps">
-                 <li class=""><a href="#tab" data-toggle="tab"></a></li>
              </ul>
              <div class="progress" >
                  <div class="progress-bar progress-bar-striped active" role="progressbar" >
@@ -113,7 +112,8 @@
                                 '</li>'
                         );
                         $(".tab-content").append(
-                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'" data-id="'+pregunta.id+'">'+
+                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'" data-id="'+pregunta.id+'"' +
+                                ' data-info="'+i+'">'+
                                     '<div class = "row">'+
                                         '<div class = "col-sm-12">'+pregunta.descripcion+'</div>'+
                                     '</div>'+
@@ -143,12 +143,10 @@
                             var $percent = Math.floor(( $current / $total ) * 100);
 
                             $('#wizard').find('.progress-bar').css({ 'width': $percent + '%' });
-
-                            debugger;
                             $current >= $total ?
                                 $("#btn-guardar").show() :
                                     $("#btn-guardar").hide();
-                            //return false;
+                            return false;
                         }
                         }, 5000);
 
@@ -184,6 +182,7 @@
 
         }
         this.finalizar_test = function(finalizo){
+            debugger;
             var form = new FormData();
             form.append('f', finalizo);
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
@@ -198,6 +197,7 @@
                 },
                 success: function(data){
                     console.log(data);
+
                 },
             });
 
@@ -209,9 +209,9 @@
         $('.introduccion').show();
         $('#wizard').hide();
         $('.finalizo').hide();
+        $('#btn-guardar').hide();
         Preguntas.cargar();
         $(".tab-content").on("click", ".tab-pane.active input", function(){
-
             if($(this).is("[name^=mas]:checked")){
                             $(this).parents(".tab-pane").find("[name^=menos]").each(function() {
                                 $(this).attr("disabled",false);
@@ -230,6 +230,10 @@
                                                            $(this).parents(".tab-pane").find("[name^=menos]:checked").val());
                                 $('.wizard-progress').bootstrapWizard('next');
                         }
+            debugger;
+            if($(this).parents(".tab-pane").data("info") == ($(".wizard-steps li").length -1)){
+                $('#btn-guardar').removeAttr("disabled");
+            }
         });
         $('#btn-comenzar').click(function(){
             $('.introduccion').hide();
@@ -237,7 +241,7 @@
             $('#wizard').show();
         });
         $('#btn-guardar').click(function(){
-           Preguntas.finalizar_test(true); //calcula el patron
+           Preguntas.finalizar_test(0); //calcula el patron
             $('#wizard').hide();
             $('.finalizo').show();
             $('#btn-guardar').hide();
@@ -245,7 +249,7 @@
             $('#btn-cerrar').show();
         });
         $('#btn-cancelar').click(function(){
-            Preguntas.finalizar_test(false); // cancela y borra todas las respuestas hasta ahora del estudiante
+            Preguntas.finalizar_test(-1); // cancela y borra todas las respuestas hasta ahora del estudiante
             $('#btn-cerrar').click();
         });
     });

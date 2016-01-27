@@ -24,7 +24,7 @@ def login_facebook(request):
         if Estudiante.objects.filter(persona=persona).exists():
             return redirect('estudiante-oportunidad-listar')
         else:
-            return redirect('estudiante-registro-cv')
+            return redirect('registro-cv')
 
     return render_to_response('404.html',
                               context_instance=RequestContext(request))

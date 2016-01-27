@@ -83,7 +83,7 @@ class DiscCodificacion(models.Model):
     def __unicode__(self):
         return unicode(self.letra) or u''
     class Meta:
-        ordering = ["letra", "orden"]
+        ordering = ["segmento","letra", "orden"]
 
 class Perfil(models.Model):
 
@@ -124,6 +124,13 @@ class EstudiantePatron(models.Model):
 
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     patron_perfil = models.ForeignKey(PatronPerfil, default=None, null=True, blank=True)
+
+    total_d = models.IntegerField(default=None, null=True, blank=True )
+    total_i = models.IntegerField(default=None, null=True, blank=True )
+    total_s = models.IntegerField(default=None, null=True, blank=True )
+    total_c = models.IntegerField(default=None, null=True, blank=True )
+    patron = models.CharField(max_length="50", default=None, null=True, blank=True)
+
     orden = models.IntegerField(default=None, null=True, blank=True )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
@@ -133,7 +140,7 @@ class EstudiantePatron(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.descripcion) or u''
+        return unicode(self.estudiante) or u''
 
     class Meta:
         ordering = ["estudiante"]

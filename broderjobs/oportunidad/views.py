@@ -90,6 +90,7 @@ class OportunidadCrearView(FormView):
 
         grado_estudio = form.cleaned_data['grado_estudio']
         universidad = form.cleaned_data['universidad']
+        tipo_carrera = form.cleaned_data['tipo_carrera']
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
@@ -140,6 +141,7 @@ class OportunidadCrearView(FormView):
             Be_extra.save()
 
         oportunidad.universidad = universidad
+        oportunidad.tipo_carrera = tipo_carrera
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
@@ -191,6 +193,7 @@ class OportunidadEditarView(FormView):
                 'estado_oportunidad': oportunidad.estado_oportunidad,
                 'grado_estudio': oportunidad.grado_estudio,
                 'universidad': oportunidad.universidad.all(),
+                'tipo_carrera': oportunidad.tipo_carrera,
                 'carrera': oportunidad.carrera.all(),
                 'idioma': oportunidad.idioma.all(),
                 'conocimiento': oportunidad.conocimiento.all(),
@@ -252,6 +255,7 @@ class OportunidadEditarView(FormView):
 
         grado_estudio = form.cleaned_data['grado_estudio']
         universidad = form.cleaned_data['universidad']
+        tipo_carrera = form.cleaned_data['tipo_carrera']
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
@@ -347,6 +351,7 @@ class OportunidadEditarView(FormView):
                 Be_extra.save()
 
         oportunidad.universidad = universidad
+        oportunidad.tipo_carrera = tipo_carrera
         oportunidad.carrera = carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento

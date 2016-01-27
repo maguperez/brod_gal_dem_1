@@ -7,8 +7,9 @@ from datetime import date, datetime
 import json
 from cStringIO import StringIO
 from oportunidad.models import Oportunidad, Postulacion
-from .models import Pregunta, Respuesta, EstudianteRespuestas
+from .models import Pregunta, Respuesta, EstudianteRespuestas, PatronPerfil
 from estudiante.models import Estudiante
+import disc
 from datetime import date, datetime
 
 
@@ -23,7 +24,6 @@ def preguntas_estudiante(request):
             respuestas.append(respuesta)
         pregunta = {'id': p.id, 'descripcion': p.descripcion, 'respuestas': respuestas }
         preguntas.append(pregunta)
-
     data = json.dumps(preguntas)
     return HttpResponse(data, content_type='application/json')
 
@@ -57,9 +57,7 @@ def respuesta_estudiante(request):
         resp_estudiante.letra_mas = respuesta_mas.letra
         resp_estudiante.letra_menos = respuesta_menos.letra
         resp_estudiante.save()
-        if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
-            estudiante.completo_test = True
-            estudiante.save()
+
         data = "0"
     except Exception, e:
         resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
@@ -69,14 +67,25 @@ def respuesta_estudiante(request):
     return HttpResponse(data, content_type='application/json')
 
 def finalizo_estudiante(request):
-    # finalizo = request.POST['f']
-    #
-    # if finalizo == 0:
-    #     estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
-    #     if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
-    #         estudiante.completo_test = True
-    #         estudiante.save()
-    #
-    #
-    # data = json.dumps(data)
+    finalizo = request.POST['f']
+    data = ""
+    estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
+    try:
+        if int(finalizo) == 0:
+            if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
+                nro_patron = disc.obtener_patron(estudiante)
+                # patron_perfil = PatronPerfil.objects.
+                estudiante.completo_test = True
+                estudiante.save()
+                data = nro_patron
+            else:
+                resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
+                data = "-2"
+        else:
+            resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
+            data = "-1"
+    except:
+            # resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
+            data = "-3"
+    data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
