@@ -258,6 +258,14 @@ class MiCVView(LoginRequiredMixin, FormView):
 
 
         conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+
+        resumen = Resumen.objects.get(estudiante_id=estudiante.id)
+
+        if resumen is not None:
+            resumen_descripcion = resumen.descripcion
+        else:
+            resumen_descripcion = ''
+
         context['conocimientos_extras'] = conocimientos_extras
         context['usuario'] = user
         context['persona'] = persona
@@ -266,6 +274,7 @@ class MiCVView(LoginRequiredMixin, FormView):
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
+        context['resumen_descripcion'] = resumen_descripcion
         return context
 
     def form_valid(self, form):
