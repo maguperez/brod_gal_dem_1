@@ -9,7 +9,9 @@ admin.site.register(models.Respuesta)
 
 admin.site.register(models.Perfil)
 
-admin.site.register(models.DiscCodificacion)
+class DiscCodificacionAdmin(admin.ModelAdmin):
+    list_display = ('letra', 'valor', 'segmento')
+admin.site.register(models.DiscCodificacion, DiscCodificacionAdmin)
 
 class PatronPerfilAdmin(admin.ModelAdmin):
     list_display = ('perfil', 'nro_patron', 'orden')
