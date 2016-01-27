@@ -14,7 +14,8 @@ from datetime import date, datetime
 def preguntas_estudiante(request):
     preguntas = []
     respuestas = []
-    for p in Pregunta.objects.all():
+    Preg = Pregunta.objects.filter()
+    for p in Preg:
         respuestas = []
         for r in Respuesta.objects.filter(pregunta_id = p.id):
             respuesta={'id': r.id, 'descripcion': r.descripcion, 'letra':r.letra}
@@ -26,5 +27,15 @@ def preguntas_estudiante(request):
     return HttpResponse(data, content_type='application/json')
 
 def formulario_estudiante(request):
-    return render_to_response('disc/formulario-estudiante.html',
+    preguntas = []
+    respuestas = []
+    Preg = Pregunta.objects.filter()[:3]
+    for p in Preg:
+        respuestas = []
+        for r in Respuesta.objects.filter(pregunta_id = p.id):
+            respuesta={'id': r.id, 'descripcion': r.descripcion, 'letra':r.letra}
+            respuestas.append(respuesta)
+        pregunta = {'id': p.id, 'descripcion': p.descripcion, 'respuestas': respuestas }
+        preguntas.append(pregunta)
+    return render_to_response('disc/formulario-estudiante.html',{'preguntas': preguntas},
                               context_instance=RequestContext(request))

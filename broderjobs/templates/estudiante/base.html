@@ -163,45 +163,41 @@
         $(function(){
             $('#form-preguntas .modal-body').load('{% url "disc-formulario-estudiante" %}', function () {
                 $('#form-preguntas').modal('toggle');
-                //formAjaxSubmit('#form-preguntas .modal-body form', '#form-preguntas');
+
             });
         });
     </script>
 {%endif%}
 <script>
-		   $('.withScroll').each(function () {
-                    $(this).mCustomScrollbar("destroy");
-                    var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
-                    var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
-                    if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
-                    $(this).mCustomScrollbar({
-                        scrollButtons: {
-                            enable: false
-                        },
-                        //autoHideScrollbar: true,
-                        scrollInertia: 150,
-                        theme: "dark-2",
-                        set_height: scroll_height,
-                        advanced: {
-                            updateOnContentResize: true
-                        }
-                    });
-                });
+    $('.withScroll').each(function () {
+        $(this).mCustomScrollbar("destroy");
+            var scroll_height = $(this).data('height') ? $(this).data('height') : 'auto';
+            var data_padding = $(this).data('padding') ? $(this).data('padding') : 0;
+            if ($(this).data('height') == 'window') scroll_height = $(window).height() - data_padding;
+            $(this).mCustomScrollbar({
+                scrollButtons: { enable: true },
+                autoHideScrollbar: false,
+                scrollInertia: 150,
+                theme: "dark-2",
+                set_height: scroll_height,
+                advanced: { updateOnContentResize: true }
+            });
+    });
 			/*$('#menu').click(function() {
 				if ($('#ctx-menu-header').hasClass('active'))
 					$('#ctx-menu-header').removeClass('active');
 				else
 					$('#ctx-menu-header').addClass('active')
 			});*/
-           window.onload = function(){
-                $(".loading-wrapper").hide();
-            }
-           $('#notifications-header').click(function(){
-                $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
-			        $('#cantidad-notificaciones').html("0");
-		        });
-           });
-		</script>
+    window.onload = function(){
+        $(".loading-wrapper").hide();
+    }
+    $('#notifications-header').click(function(){
+        $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
+            $('#cantidad-notificaciones').html("0");
+        });
+    });
+</script>
 
 {% block js %}
 {% endblock js %}
