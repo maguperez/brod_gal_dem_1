@@ -81,7 +81,7 @@ class DiscCodificacion(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.estudiante) or u''
+        return unicode(self.letra) or u''
     class Meta:
         ordering = ["letra", "orden"]
 
