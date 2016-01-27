@@ -25,6 +25,10 @@
 		z-index: 3051;
 	}
 
+	.mantener-line-break{
+		white-space: pre-line;
+	}
+
 </style>
 
 <section class="cv">
@@ -67,10 +71,8 @@
 							<section>
 								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
-									<p>
-										{%if resumen.descripcion != None %}
-											{{resumen.descripcion}}
-										{%endif%}
+									<p class="mantener-line-break">
+										{{resumen_descripcion}}
 									</p>
 								</div>
 							</section>
@@ -152,7 +154,7 @@
 											{%else%}
 											<label class="nombre">{{experiencia.empresa_referencial}}</label>
 											{%endif%}
-											<pr>{{experiencia.descripcion}}</pr>
+											<p class="mantener-line-break">{{experiencia.descripcion}}</p>
 											<button id="experiencia-{{experiencia.pk}}-editar" class="experiencia-botton link editar" >Editar</button>
 
 											<button id="experiencia-{{experiencia.pk}}-eliminar" class="experiencia-botton link editar">Eliminar</button>
@@ -170,7 +172,7 @@
 											<p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {% if voluntariado.fecha_hasta != None %} {{voluntariado.fecha_hasta|date:"M Y"}} {%else%} Contin&uacute;o Realiz&aacute;ndolo {%endif%}</p>
 											<label class="tipo">{{voluntariado.cargo}}</label>
 											<label class="nombre">{{voluntariado.organizacion}}</label>
-											<p>{{voluntariado.descripcion}}</p>
+											<p class="mantener-line-break">{{voluntariado.descripcion}}</p>
 										
 											<button id="voluntario-{{voluntariado.pk}}-editar" class="voluntariado-botton link editar" accion="editar">Editar</button>
 											<button id="voluntario-{{voluntariado.pk}}-eliminar" class="voluntariado-botton link editar" accion="eliminat">Eliminar</button>
@@ -296,201 +298,210 @@
 			 });
 		 }
 	 }
-	 $('[data-toggle="tooltip"]').tooltip();
-	 $(".box-imagen" ).mouseover(function() {
-		$(".botones-imagen").css("visibility", "visible");
-	 });
-	 $(".box-imagen" ).mouseout(function() {
-		$(".botones-imagen").css("visibility", "hidden");
-	 });
-	 $("#editar-imagen").click(function(e) {
-	  $("#id_foto").click();
-	 });
-	$("#remover-imagen").click(function(e) {
 
-	    $("#cambiar_imagen").click();
-	 });
-	 $("#id_foto").change(function(){
-        $("#cambiar_imagen").click();
-	 });
+	 $(function(){
 
-     $('#comment-button').click(function() {
-     	$('#form-modal-body').load('resumen/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('.popup .close').click(function(e) {
-		window.history.back();
-		$('body').removeClass('static');
-	});
-	 $('#info-personal-button').click(function() {
-     	$('#form-modal-body').load('info-personal/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('#disponibilidad-button').click(function() {
-     	$('#form-modal-body').load('disponibilidad/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('#idioma-button').click(function() {
-     	$('#form-modal-body').load('idioma/', function () {
-        	$('#form-modal').modal('toggle');
+		 $('[data-toggle="tooltip"]').tooltip();
+		 $(".box-imagen" ).mouseover(function() {
+			$(".botones-imagen").css("visibility", "visible");
+		 });
+		 $(".box-imagen" ).mouseout(function() {
+			$(".botones-imagen").css("visibility", "hidden");
+		 });
+		 $("#editar-imagen").click(function(e) {
+		  $("#id_foto").click();
+		 });
+		$("#remover-imagen").click(function(e) {
 
-			$("#id_idioma").select2({
-						placeholder: "Seleccione por favor"//,
-//						width: 'resolve'
-						//allowClear: true
-					});
-//			$("#id_idioma").val(['1','2']).trigger("change");
+			$("#cambiar_imagen").click();
+		 });
+		 $("#id_foto").change(function(){
+			$("#cambiar_imagen").click();
+		 });
 
-
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('#conocimiento-button').click(function() {
-     	$('#form-modal-body').load('conocimiento/', function () {
-        	$('#form-modal').modal('toggle');
-
-			$("#id_conocimiento").select2({
-						placeholder: "JavaScript, Photoshop, Marketing digital, etc",
-						tags: true,
-						tokenSeparators: [',']
-//						width: 'resolve'
-						//allowClear: true
-					});
-			
-			$("#id_conocimiento").change(function() {
-
-				var existentes = $("#id_conocimiento option:selected[data-info='c']").map(function(){return this.value}).get();
-				$('#id_conocimientos_hidden').val(existentes);
-	
-				var extras = $("#id_conocimiento option:selected[data-info='ce']").map(function(){return this.value}).get();
-				$('#id_conocimientos_extras_hidden').val(extras);
-	
-				var nuevos = $("#id_conocimiento option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
-				$('#id_conocimientos_nuevos_hidden').val(nuevos);
+		 $('#comment-button').click(function() {
+			$('#form-modal-body').load('resumen/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
 			});
-
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
+		 });
+		 $('.popup .close').click(function(e) {
+			window.history.back();
+			$('body').removeClass('static');
 		});
+		 $('#info-personal-button').click(function() {
+			$('#form-modal-body').load('info-personal/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('#disponibilidad-button').click(function() {
+			$('#form-modal-body').load('disponibilidad/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('#idioma-button').click(function() {
+			$('#form-modal-body').load('idioma/', function () {
+				$('#form-modal').modal('toggle');
+
+				$("#id_idioma").select2({
+							placeholder: "Seleccione por favor"//,
+	//						width: 'resolve'
+							//allowClear: true
+						});
+	//			$("#id_idioma").val(['1','2']).trigger("change");
+
+
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('#conocimiento-button').click(function() {
+			$('#form-modal-body').load('conocimiento/', function () {
+				$('#form-modal').modal('toggle');
+
+				$("#id_conocimiento").select2({
+							placeholder: "JavaScript, Photoshop, Marketing digital, etc",
+							tags: true,
+							tokenSeparators: [',']
+	//						width: 'resolve'
+							//allowClear: true
+						});
+
+				$("#id_conocimiento").change(function() {
+
+					var existentes = $("#id_conocimiento option:selected[data-info='c']").map(function(){return this.value}).get();
+					$('#id_conocimientos_hidden').val(existentes);
+
+					var extras = $("#id_conocimiento option:selected[data-info='ce']").map(function(){return this.value}).get();
+					$('#id_conocimientos_extras_hidden').val(extras);
+
+					var nuevos = $("#id_conocimiento option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
+					$('#id_conocimientos_nuevos_hidden').val(nuevos);
+				});
+
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('.experiencia-botton').click(function() {
+			 var aInfo = $(this).attr("id").split("-");
+			 var id=  aInfo[1];
+			 var accion= aInfo[2];
+			 if (accion == 'editar') {
+				 $('#form-modal-body').load('experiencia/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+			 if (accion == 'eliminar') {
+				 $('#form-modal-body').load('experiencia-eliminar/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+		 });
+		 $('#experiencia-crear-button').click(function() {
+			 var id = $(this).find("button").attr("id");
+			$('#form-modal-body').load('experiencia-crear/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('.voluntariado-botton').click(function() {
+			 var aInfo = $(this).attr("id").split("-");
+			 var id=  aInfo[1];
+			 var accion= aInfo[2];
+			 if (accion == 'editar') {
+				 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+			 if (accion == 'eliminar') {
+				 $('#form-modal-body').load('voluntariado-eliminar/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+		 });
+		 $('#voluntariado-crear-button').click(function() {
+			 var id = $(this).find("button").attr("id");
+			$('#form-modal-body').load('voluntariado-crear/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $('.actividad-extra-botton').click(function() {
+			 var aInfo = $(this).attr("id").split("-");
+			 var id=  aInfo[1];
+			 var accion= aInfo[2];
+			 if (accion == 'editar') {
+				 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+			 if (accion == 'eliminar') {
+				 $('#form-modal-body').load('actividad-extra-eliminar/' + id + '/', function () {
+					 $('#form-modal').modal('toggle');
+					 formAjaxSubmit('#form-modal-body form', '#form-modal');
+				 });
+			 }
+		 });
+		 $('#actividad-extra-crear-button').click(function() {
+			 var id = $(this).find("button").attr("id");
+			$('#form-modal-body').load('actividad-extra-crear/', function () {
+				$('#form-modal').modal('toggle');
+				formAjaxSubmit('#form-modal-body form', '#form-modal');
+			});
+		 });
+		 $("#form-modal .btn-submit").on("click", function() {
+
+			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+			 if (formularioPrueba.id == 'cv-experiencia') {
+				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
+				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
+
+				 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
+				 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde_hidden'].value = fechaDesdeCompleta;
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta_hidden'].value = fechaHastaCompleta;
+			 }
+
+			 if (formularioPrueba.id == 'cv-voluntariado') {
+				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
+				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
+
+				 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
+				 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
+
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde_hidden'].value = fechaDesdeCompleta;
+				 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta_hidden'].value = fechaHastaCompleta;
+			 }
+
+			 $(this).parents("#form-modal").find("form").submit();
+
+		 });
+
+
+		 $.fn.modal.Constructor.prototype.enforceFocus = function () {
+			  var that = this;
+			  $(document).on('focusin.modal', function (e) {
+				 if ($(e.target).hasClass('select2-input')) {
+					return true;
+				 }
+
+				 if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
+					that.$element.focus();
+				 }
+			  });
+		   };
+
+
 	 });
-	 $('.experiencia-botton').click(function() {
-		 var aInfo = $(this).attr("id").split("-");
-		 var id=  aInfo[1];
-		 var accion= aInfo[2];
-		 if (accion == 'editar') {
-			 $('#form-modal-body').load('experiencia/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-		 if (accion == 'eliminar') {
-			 $('#form-modal-body').load('experiencia-eliminar/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-	 });
-	 $('#experiencia-crear-button').click(function() {
-		 var id = $(this).find("button").attr("id");
-     	$('#form-modal-body').load('experiencia-crear/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('.voluntariado-botton').click(function() {
-		 var aInfo = $(this).attr("id").split("-");
-		 var id=  aInfo[1];
-		 var accion= aInfo[2];
-		 if (accion == 'editar') {
-			 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-		 if (accion == 'eliminar') {
-			 $('#form-modal-body').load('voluntariado-eliminar/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-	 });
-	 $('#voluntariado-crear-button').click(function() {
-		 var id = $(this).find("button").attr("id");
-     	$('#form-modal-body').load('voluntariado-crear/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $('.actividad-extra-botton').click(function() {
-		 var aInfo = $(this).attr("id").split("-");
-		 var id=  aInfo[1];
-		 var accion= aInfo[2];
-		 if (accion == 'editar') {
-			 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-		 if (accion == 'eliminar') {
-			 $('#form-modal-body').load('actividad-extra-eliminar/' + id + '/', function () {
-				 $('#form-modal').modal('toggle');
-				 formAjaxSubmit('#form-modal-body form', '#form-modal');
-			 });
-		 }
-	 });
-	 $('#actividad-extra-crear-button').click(function() {
-		 var id = $(this).find("button").attr("id");
-     	$('#form-modal-body').load('actividad-extra-crear/', function () {
-        	$('#form-modal').modal('toggle');
-			formAjaxSubmit('#form-modal-body form', '#form-modal');
-		});
-	 });
-	 $("#form-modal .btn-submit").on("click", function() {
 
-		 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
-		 if (formularioPrueba.id == 'cv-experiencia') {
-			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
-			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
 
-			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
-			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
-
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde_hidden'].value = fechaDesdeCompleta;
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta_hidden'].value = fechaHastaCompleta;
-		 }
-
-		 if (formularioPrueba.id == 'cv-voluntariado') {
-			 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
-			 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
-
-			 var fechaDesdeCompleta = moment(fechaDesde).format('DD/MM/YYYY');
-			 var fechaHastaCompleta = moment(fechaHasta).format('DD/MM/YYYY');
-
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_desde_hidden'].value = fechaDesdeCompleta;
-			 $(this).parents("#form-modal").find("form")[0]['id_fecha_hasta_hidden'].value = fechaHastaCompleta;
-		 }
-
-		 $(this).parents("#form-modal").find("form").submit();
-
-	 });
-
-	 $.fn.modal.Constructor.prototype.enforceFocus = function () {
-      var that = this;
-      $(document).on('focusin.modal', function (e) {
-         if ($(e.target).hasClass('select2-input')) {
-            return true;
-         }
-
-         if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
-            that.$element.focus();
-         }
-      });
-   };
 
 
  </script>

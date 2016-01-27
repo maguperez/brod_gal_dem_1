@@ -37,7 +37,7 @@
 		</div>
 		<div class = "form-group">
 			<label class = "control-label">Describe tus actividades</label>
-			<textarea id = "txt-descripcion" name="descripcion"></textarea>
+			<textarea id = "txt-descripcion" name="descripcion_txt">{{voluntariado_descripcion}}</textarea>
 				{{form.descripcion}}
 		</div>
 	</form>
@@ -72,9 +72,9 @@
 			}
 		});
 
-		if($("#id_descripcion").val()){
-			$("#txt-descripcion").val($("#id_descripcion").val());
-		}
+//		if($("#id_descripcion").val()){
+//			$("#txt-descripcion").val($("#id_descripcion").val());
+//		}
 		
 		var fechaDesde = {};
 

@@ -258,6 +258,14 @@ class MiCVView(LoginRequiredMixin, FormView):
 
 
         conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+
+        resumen = Resumen.objects.get(estudiante_id=estudiante.id)
+
+        if resumen is not None:
+            resumen_descripcion = resumen.descripcion
+        else:
+            resumen_descripcion = ''
+
         context['conocimientos_extras'] = conocimientos_extras
         context['usuario'] = user
         context['persona'] = persona
@@ -266,6 +274,7 @@ class MiCVView(LoginRequiredMixin, FormView):
         context['actividades_extra'] = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
         context['experiencias_profesionales'] = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
+        context['resumen_descripcion'] = resumen_descripcion
         return context
 
     def form_valid(self, form):
@@ -652,9 +661,12 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
         experiencia = get_object_or_404(ExperienciaProfesional, id= id)
+
+        experiencia_descripcion = experiencia.descripcion
+
         context = super(ExperienciaView, self).get_context_data(**kwargs)
         context['experiencia_actual'] = experiencia.trabajo_actual
-
+        context['experiencia_descripcion'] = experiencia_descripcion
         return context
 
     def get_initial(self):
@@ -721,7 +733,8 @@ class ExperienciaView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin
             fecha_hasta = None
 
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
         experiencia.estudiante = estudiante
 
         if puesto_id != "0":
@@ -793,7 +806,10 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         else:
             fecha_hasta = None
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+
+        descripcion = self.request.POST['descripcion_txt']
+
         experiencia.estudiante = estudiante
 
         if puesto_id != "0":
@@ -831,8 +847,10 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
         voluntariado = get_object_or_404(Voluntariado, id= id)
+        voluntariado_descripcion = voluntariado.descripcion
         context = super(VoluntariadoView, self).get_context_data(**kwargs)
         context['voluntariado_actual'] = voluntariado.voluntariado_actual
+        context['voluntariado_descripcion'] = voluntariado_descripcion
 
         return context
 
@@ -865,7 +883,8 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
 
         cargo = form.cleaned_data['cargo']
         organizacion = form.cleaned_data['organizacion']
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
 
         try:
             check = self.request.POST['voluntariado_actual']
@@ -936,7 +955,8 @@ class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplat
         else:
             fecha_hasta = None
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
         voluntariado.estudiante = estudiante
         voluntariado.cargo = cargo
         voluntariado.organizacion = organizacion
