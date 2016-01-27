@@ -48,7 +48,7 @@ def respuesta_estudiante(request):
     estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
     try:
         pregunta = Pregunta.objects.get(id = pregunta_id)
-        c = EstudianteRespuestas.objects.get(id_pregunta = pregunta.id, estudiante_id = estudiante.id).delete()
+        c = EstudianteRespuestas.objects.filter(pregunta_id = pregunta.id, estudiante_id = estudiante.id).delete()
         respuesta_mas = Respuesta.objects.get(id = resp_mas_id, pregunta_id = pregunta_id)
         respuesta_menos = Respuesta.objects.get(id = resp_menos_id, pregunta_id = pregunta_id)
         resp_estudiante = EstudianteRespuestas()
@@ -57,12 +57,26 @@ def respuesta_estudiante(request):
         resp_estudiante.letra_mas = respuesta_mas.letra
         resp_estudiante.letra_menos = respuesta_menos.letra
         resp_estudiante.save()
-        estudiante.completo_test = True
-        estudiante.save()
+        if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
+            estudiante.completo_test = True
+            estudiante.save()
         data = "0"
     except Exception, e:
         resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
         data = str(e)
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def finalizo_estudiante(request):
+    finalizo = request.POST['f']
+
+    if finalizo == 0:
+        estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
+        if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
+            estudiante.completo_test = True
+            estudiante.save()
+            
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
