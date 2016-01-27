@@ -3,21 +3,56 @@
 <!--&lt;!&ndash;<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>&ndash;&gt;-->
 <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
  <section class = "">
+     <div class="row introduccion">
+                         <div class="col-sm-12"><h3>Test</h3></div>
+                         <div class="col-sm-12">Instrucciones: </div>
+                         <div class="col-sm-12">
+                         <p>Se presentan una serie de preguntas, para cada una debes elegir cual es la que MÁS te describe,
+                             y cual te describe MENOS.
+                         </p>
+                             <ul>
+                                 <li> - Debes completar el test de lo contrario las respuestas no se almacenaran,
+                                        si no puedes terminarlo ahora selecciona <b>En otro momento</b> para realizarlo nuevamente</li>
+                                 <li> - Porfavor se se cuidadoso, una vez seleccionada las opciones no podrás regresar de pregunta</li>
+                                 <li> - No hay limite de tiempo, puedes hacerlo con calma, tratar de ser lo más sincero posible</li>
+                             </ul>
+                         </div>
+                     </div>
      <div id = "wizard">
          <div class="wizard-progress wizard-progress-lg">
-             <ul class="wizard-steps"></ul>
+             <ul class="wizard-steps">
+                 <li class=""><a href="#tab" data-toggle="tab"></a></li>
+             </ul>
              <div class="progress" >
-					  <div class="progress-bar progress-bar-striped active" role="progressbar" ></div>
-					</div>
+                 <div class="progress-bar progress-bar-striped active" role="progressbar" >
+
+                      </div>
+             </div>
              <div class="tab-content">
+                 <div class="tab-pane" id="tab">
+
+                 </div>
              </div>
          </div>
-     </div>
      <div id="main-content" class="page-mailbox centered">
          <ul id="pregunta"></ul>
      </div>
-
+{%csrf_token%}
  </section>
+     <div class="row finalizo">
+         <div class="col-sm-12"><h3>Test</h3></div>
+         <div class="col-sm-12">¡Test realizado satisfactoriamente!: </div>
+         <div class="col-sm-12">
+            <p>Gracias por completar el Test, el mismo te ayudara a encontrar las oportunidades perfectas para ti.</p>
+         </div>
+     </div>
+     <div class="row error">
+         <div class="col-sm-12"><h3>Test</h3></div>
+         <div class="col-sm-12">¡Error!: </div>
+         <div class="col-sm-12">
+            <p>Lo lamentamos hubo un error, debes comenzar nuevamente.</p>
+         </div>
+     </div>
 <style>
     .wizard-progress.wizard-progress-lg{
         font-size: 14px;
@@ -60,21 +95,17 @@
 </style>
 
 <script>
-
-
     var JSPreguntas = function () {
         this.cargar = function(){
             $.ajax({
                 type:"GET",
                 url:"{%url 'disc-preguntas-estudiante' %}",
-
                 processData: false,
                 contentType: false,
                 error: function(x){
                     console.log(x);
                 },
                 success: function(preguntas){
-                    debugger;
                     $.each(preguntas, function(i, pregunta) {
                         $(".wizard-steps").append(
                                 '<li'+(i==0 ? ' class="active"':"")+'>'+
@@ -82,7 +113,7 @@
                                 '</li>'
                         );
                         $(".tab-content").append(
-                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'">'+
+                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'" data-id="'+pregunta.id+'">'+
                                     '<div class = "row">'+
                                         '<div class = "col-sm-12">'+pregunta.descripcion+'</div>'+
                                     '</div>'+
@@ -113,15 +144,52 @@
 
                             $('#wizard').find('.progress-bar').css({ 'width': $percent + '%' });
 
+                            debugger;
                             $current >= $total ?
-                                $("#form-preguntas input[type=submit]").removeClass("hidden"):
-                                $("#form-preguntas input[type=submit]").addClass("hidden");
+                                $("#btn-guardar").show() :
+                                    $("#btn-guardar").hide();
                             //return false;
                         }
                         }, 5000);
 
                     //$(".tab-pane.active").on("click", "input", function(){
-                    $(".tab-content").on("click", ".tab-pane.active input", function(){
+
+                },
+            });
+
+        },
+        this.enviar_respuesta = function(preg, resp_mas, resp_menos){
+            var form = new FormData();
+            form.append('p', preg);
+            form.append('r_mas', resp_mas);
+            form.append('r_menos', resp_menos);
+            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
+            $.ajax({
+                type:"POST",
+                url:"{%url 'disc-respuesta-estudiante' %}",
+                data: form,
+                processData: false,
+                contentType: false,
+                error: function(x){
+                    console.log(x.responseText);
+                },
+                success: function(data){
+//                    if(data != '0'){
+//                         $('#btn-cerrar').click();
+//                    }
+                },
+            });
+
+
+        }
+    }
+    var Preguntas = new JSPreguntas();
+    $(function () {
+        $('.introduccion').show();
+        $('#wizard').hide();
+        $('.finalizo').hide();
+        Preguntas.cargar();
+        $(".tab-content").on("click", ".tab-pane.active input", function(){
 
                         if($(this).is("[name^=mas]:checked")){
                             $(this).parents(".tab-pane").find("[name^=menos]").each(function() {
@@ -134,79 +202,30 @@
                             })
                             $(this).parents(".row").find("[name^=mas]").attr("disabled", true);
                         }
-                        debugger;
-                        if ($("[name^=mas]:checked").length > 0 && $("[name^=menos]:checked").length > 0){
-                            $('.wizard-progress').bootstrapWizard('next');
+                        if ( $(this).parents(".tab-pane").find("[name^=mas]:checked").length > 0 &&
+                                $(this).parents(".tab-pane").find("[name^=menos]:checked").length > 0){
+                                Preguntas.enviar_respuesta($(this).parents(".tab-pane").data("id"),
+                                                           $(this).parents(".tab-pane").find("[name^=mas]:checked").val(),
+                                                           $(this).parents(".tab-pane").find("[name^=menos]:checked").val());
+                                $('.wizard-progress').bootstrapWizard('next');
                         }
                     });
-                }
-            });
-
-        }
-    }
-    var Preguntas = new JSPreguntas();
-    $(function () {
-        Preguntas.cargar();
+        $('#btn-comenzar').click(function(){
+            $('.introduccion').hide();
+            $('#btn-comenzar').hide();
+            $('#wizard').show();
+        });
+        $('#btn-guardar').click(function(){
+            $('#wizard').hide();
+            $('.finalizo').show();
+            $('#btn-guardar').hide();
+            $('#btn-cancelar').hide();
+            $('#btn-cerrar').show();
+        });
+        $('#btn-cancelar').click(function(){
+            Preguntas.enviar_respuesta(0,0,0); // cancela y borra todas las respuestas hasta ahora del estudiante
+            $('#btn-cerrar').click();
+        });
     });
 
 </script>
-
-<!--<div id="rootwizard">-->
-	<!--<div class="navbar">-->
-	  <!--<div class="navbar-inner">-->
-	    <!--<div class="container">-->
-	<!--<ul>-->
-	  	<!--<li><a href="#tab1" data-toggle="tab">First</a></li>-->
-		<!--<li><a href="#tab2" data-toggle="tab">Second</a></li>-->
-		<!--<li><a href="#tab3" data-toggle="tab">Third</a></li>-->
-		<!--<li><a href="#tab4" data-toggle="tab">Forth</a></li>-->
-		<!--<li><a href="#tab5" data-toggle="tab">Fifth</a></li>-->
-		<!--<li><a href="#tab6" data-toggle="tab">Sixth</a></li>-->
-		<!--<li><a href="#tab7" data-toggle="tab">Seventh</a></li>-->
-	<!--</ul>-->
-	 <!--</div>-->
-	  <!--</div>-->
-	<!--</div>-->
-	<!--<div id="bar" class="progress progress-striped active">-->
-	  <!--<div class="bar"></div>-->
-	<!--</div>-->
-	<!--<div class="tab-content">-->
-	    <!--<div class="tab-pane" id="tab1">-->
-	      <!--1-->
-	    <!--</div>-->
-	    <!--<div class="tab-pane" id="tab2">-->
-	      <!--2-->
-	    <!--</div>-->
-		<!--<div class="tab-pane" id="tab3">-->
-			<!--3-->
-	    <!--</div>-->
-		<!--<div class="tab-pane" id="tab4">-->
-			<!--4-->
-	    <!--</div>-->
-		<!--<div class="tab-pane" id="tab5">-->
-			<!--5-->
-	    <!--</div>-->
-		<!--<div class="tab-pane" id="tab6">-->
-			<!--6-->
-	    <!--</div>-->
-		<!--<div class="tab-pane" id="tab7">-->
-			<!--7-->
-	    <!--</div>-->
-		<!--<ul class="pager wizard">-->
-			<!--<li class="previous first" style="display:none;"><a href="#">First</a></li>-->
-			<!--<li class="previous"><a href="#">Previous</a></li>-->
-			<!--<li class="next last" style="display:none;"><a href="#">Last</a></li>-->
-		  	<!--<li class="next"><a href="#">Next</a></li>-->
-		<!--</ul>-->
-	<!--</div>-->
-<!--</div>-->
-<!--<script>-->
-    <!--$(document).ready(function() {-->
-  	<!--$('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {-->
-		<!--var $total = navigation.find('li').length;-->
-		<!--var $current = index+1;-->
-		<!--var $percent = ($current/$total) * 100;-->
-		<!--$('#rootwizard').find('.bar').css({width:$percent+'%'});-->
-	<!--}});-->
-<!--});-->
-<!--</script>-->

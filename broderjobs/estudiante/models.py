@@ -57,7 +57,7 @@ class Resumen(models.Model):
 
 class ActividadesExtra(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
-    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
+    descripcion = models.TextField(default=None, null=True, blank=True)
     organizacion = models.CharField(max_length="50", default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
