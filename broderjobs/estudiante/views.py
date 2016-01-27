@@ -847,8 +847,10 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
         voluntariado = get_object_or_404(Voluntariado, id= id)
+        voluntariado_descripcion = voluntariado.descripcion
         context = super(VoluntariadoView, self).get_context_data(**kwargs)
         context['voluntariado_actual'] = voluntariado.voluntariado_actual
+        context['voluntariado_descripcion'] = voluntariado_descripcion
 
         return context
 
@@ -881,7 +883,8 @@ class VoluntariadoView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixi
 
         cargo = form.cleaned_data['cargo']
         organizacion = form.cleaned_data['organizacion']
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
 
         try:
             check = self.request.POST['voluntariado_actual']
@@ -952,7 +955,8 @@ class VoluntariadoCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplat
         else:
             fecha_hasta = None
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+        descripcion = self.request.POST['descripcion_txt']
         voluntariado.estudiante = estudiante
         voluntariado.cargo = cargo
         voluntariado.organizacion = organizacion
