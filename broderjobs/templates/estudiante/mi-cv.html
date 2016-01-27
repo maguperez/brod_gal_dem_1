@@ -129,7 +129,7 @@
 								<div class="detalle">
 									{% for actividad in actividades_extra %}
 											<div>
-												<p>{{actividad.descripcion | lower}}</p>
+												<p class="mantener-line-break">{{actividad.descripcion | lower}}</p>
 												<div class="clear"></div>
 												<label>{{actividad.organizacion | lower}}</label>
 												<button id="actividad-{{actividad.pk}}-editar" class="actividad-extra-botton link editar" >Editar</button>
