@@ -70,6 +70,7 @@ class EstudianteRespuestas(models.Model):
 class DiscCodificacion(models.Model):
 
     letra =  models.CharField(choices=letras, max_length=1, default='', null=True, blank=True)
+    valor = models.IntegerField(default=None, null=True, blank=True)
     segmento = models.IntegerField(default=None, null=True, blank=True, )
     orden = models.IntegerField(default=None, null=True, blank=True, )
 

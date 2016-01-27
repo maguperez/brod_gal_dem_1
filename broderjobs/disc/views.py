@@ -69,14 +69,14 @@ def respuesta_estudiante(request):
     return HttpResponse(data, content_type='application/json')
 
 def finalizo_estudiante(request):
-    finalizo = request.POST['f']
-
-    if finalizo == 0:
-        estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
-        if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
-            estudiante.completo_test = True
-            estudiante.save()
-            
-
-    data = json.dumps(data)
+    # finalizo = request.POST['f']
+    #
+    # if finalizo == 0:
+    #     estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
+    #     if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
+    #         estudiante.completo_test = True
+    #         estudiante.save()
+    #
+    #
+    # data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
