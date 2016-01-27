@@ -806,7 +806,10 @@ class ExperienciaCrearView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplate
         else:
             fecha_hasta = None
 
-        descripcion = form.cleaned_data['descripcion']
+        # descripcion = form.cleaned_data['descripcion']
+
+        descripcion = self.request.POST['descripcion_txt']
+
         experiencia.estudiante = estudiante
 
         if puesto_id != "0":
