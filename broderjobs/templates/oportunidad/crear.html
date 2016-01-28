@@ -179,7 +179,7 @@
 										<label class = "col-sm-3 control-label">Tipo Carrera *</label>
 										<div class = "col-sm-9">
 											{{form.tipo_carrera}}
-											<div class="tooltip-manual" id="tooltip-tipo-carerra"></div>
+											<div class="tooltip-manual" id="tooltip-tipo-carrera"></div>
 											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las tipo carreras compatibles con el área donde el profesional actuará.</label>
 										</div>
 										<div class="clear"></div>
@@ -404,6 +404,18 @@
 								$("#id_ciudad").select2("val", "");
 								$("#id_ciudad").attr('disabled', false);
 							}
+							else{
+								var options = '';
+								$("#id_ciudad").html(options);
+								$("#id_ciudad").select2("val", "");
+								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+						else{
+							var options = '';
+							$("#id_ciudad").html(options);
+							$("#id_ciudad").select2("val", "");
+							$("#id_ciudad").attr('disabled', false);
 						}
 					}
 				});
@@ -436,19 +448,34 @@
 								// $("#id_ciudad option:first").attr('selected', 'selected');
 								$("#id_carrera").select2("val", "");
 								$("#id_carrera").attr('disabled', false);
+								$("#tooltip-carrera").tooltip('hide');
 							}
+							else{
+								var options = '';
+								$("#id_carrera").html(options);
+								$("#id_carrera").select2("val", "");
+								$("#id_carrera").attr('disabled', false);
+								$("#tooltip-carrera").tooltip('hide');
+							}
+						}
+						else{
+							var options = '';
+							$("#id_carrera").html(options);
+							$("#id_carrera").select2("val", "");
+							$("#id_carrera").attr('disabled', false);
+							$("#tooltip-carrera").tooltip('hide');
 						}
 					}
 				});
 			}
 			else{
 				var options = '';
-				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
-				$("#id_ciudad").attr('disabled', false);
+				$("#id_carrera").html(options);
+				$("#id_carrera").select2("val", "");
+				$("#id_carrera").attr('disabled', false);
 			}
-
-			LlamarValidacionElemento('id_pais');
+			$("#tooltip-carrera").tooltip('hide');
+			LlamarValidacionElemento('id_tipo_carrera');
 		});
 
 		$("#id_grado_estudio").change(function() {
@@ -585,6 +612,9 @@
 				else if(element[0].id == 'id_carrera'){
 					ConfigurarTooltip('#tooltip-carrera',error,"right");
 				}
+				else if(element[0].id == 'id_tipo_carrera'){
+					ConfigurarTooltip('#tooltip-tipo-carrera',error,"right");
+				}
 				else if(element[0].id == 'id_grado_estudio'){
 					ConfigurarTooltip('#tooltip-grado-estudio',error,"right");
 				}
@@ -636,6 +666,9 @@
 					digits: true,
 					maxlength: 7,
 					MaximoMayorMinimo: ''
+				},
+				tipo_carrera:{
+					required: true
 				}
 
             },
@@ -673,6 +706,9 @@
 					required: "Este campo es obligatorio",
 					digits: "Este campo es numérico",
 					maxlength: "Este campo no puede tener más de 7 caracteres"
+				},
+				tipo_carrera:{
+					required: "Este campo es obligatorio"
 				}
 
             }
