@@ -997,7 +997,7 @@ class UniversidadBusquedaView(LoginRequiredMixin, TemplateView):
 
 class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
+        busqueda = request.GET['tipo']
         carreras = Carrera.objects.filter(Q(descripcion__icontains=busqueda))
         data = serializers.serialize('json', carreras,
                                      fields=('id','descripcion'))

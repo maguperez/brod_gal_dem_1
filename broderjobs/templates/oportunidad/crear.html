@@ -419,9 +419,9 @@
 		});
 
 		$("#id_tipo_carrera").change(function() {
-			if($("#id_tipo_carerra").val() > 0 ){
+			if($("#id_tipo_carrera").val() > 0 ){
 				$.ajax({
-					data: {'tipo': $("#id_tipo_carerra").val()},
+					data: {'tipo': $("#id_tipo_carrera").val()},
 					url: '{%url "carrera-busqueda" %}',
 					type: 'get',
 					success: function (data) {
