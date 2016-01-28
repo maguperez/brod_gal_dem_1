@@ -70,7 +70,8 @@ class EstudianteRespuestas(models.Model):
 class DiscCodificacion(models.Model):
 
     letra =  models.CharField(choices=letras, max_length=1, default='', null=True, blank=True)
-    valor = models.IntegerField(default=None, null=True, blank=True)
+    valor_desde = models.IntegerField(default=None, null=True, blank=True)
+    valor_hasta = models.IntegerField(default=None, null=True, blank=True)
     segmento = models.IntegerField(default=None, null=True, blank=True, )
     orden = models.IntegerField(default=None, null=True, blank=True, )
 
@@ -83,7 +84,7 @@ class DiscCodificacion(models.Model):
     def __unicode__(self):
         return unicode(self.letra) or u''
     class Meta:
-        ordering = ["segmento","letra", "orden"]
+        ordering = ["letra","valor_desde", "valor_hasta" ,"segmento","orden"]
 
 class Perfil(models.Model):
 
@@ -115,7 +116,7 @@ class PatronPerfil(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.nro_patron) or u''
+        return unicode(self.perfil) or u''
 
     class Meta:
         ordering = ["orden"]

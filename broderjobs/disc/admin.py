@@ -10,7 +10,7 @@ admin.site.register(models.Respuesta)
 admin.site.register(models.Perfil)
 
 class DiscCodificacionAdmin(admin.ModelAdmin):
-    list_display = ('letra', 'valor', 'segmento')
+    list_display = ('letra', 'valor_desde', 'valor_hasta', 'segmento')
 admin.site.register(models.DiscCodificacion, DiscCodificacionAdmin)
 
 class PatronPerfilAdmin(admin.ModelAdmin):

@@ -1,4 +1,4 @@
-from .models import Pregunta, Respuesta, EstudianteRespuestas, DiscCodificacion, EstudiantePatron
+from .models import Pregunta, Respuesta, EstudianteRespuestas, DiscCodificacion, EstudiantePatron, PatronPerfil
 
 
 def obtener_patron(estudiante):
@@ -26,14 +26,16 @@ def obtener_patron(estudiante):
     estudiante_patron.total_c = total_C
     estudiante_patron.save()
     try:
-        D = DiscCodificacion.objects.get(letra ='D', valor = total_D)
-        I = DiscCodificacion.objects.get(letra ='I', valor = total_I)
-        S = DiscCodificacion.objects.get(letra ='S', valor = total_S)
-        C = DiscCodificacion.objects.get(letra ='C', valor = total_C)
-        DISC = str(D.segmento)+str(I.segmento)+str(S.segmento)+str(C.segmento)
-        estudiante_patron.patron = DISC
+        D = DiscCodificacion.objects.get(letra ='D', valor_desde__lte = total_D, valor_hasta__gte= total_D)
+        I = DiscCodificacion.objects.get(letra ='I', valor_desde__lte = total_I, valor_hasta__gte= total_I)
+        S = DiscCodificacion.objects.get(letra ='S', valor_desde__lte = total_S, valor_hasta__gte= total_S)
+        C = DiscCodificacion.objects.get(letra ='C', valor_desde__lte = total_C, valor_hasta__gte= total_C)
+        nro_patron = str(D.segmento)+str(I.segmento)+str(S.segmento)+str(C.segmento)
+        patron_perfil = PatronPerfil.objects.get(nro_patron = nro_patron)
+        estudiante_patron.patron = nro_patron
+        estudiante_patron.patron_perfil = patron_perfil
         estudiante_patron.save()
     except:
-        DISC = "-1"
+        nro_patron = "-1"
         # resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
-    return DISC
+    return nro_patron

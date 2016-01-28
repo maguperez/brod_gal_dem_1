@@ -45,13 +45,13 @@
             <p>Gracias por completar el Test, el mismo te ayudara a encontrar las oportunidades perfectas para ti.</p>
          </div>
      </div>
-     <!--<div class="row error">-->
-         <!--<div class="col-sm-12"><h3>Test</h3></div>-->
-         <!--<div class="col-sm-12">¡Error!: </div>-->
-         <!--<div class="col-sm-12">-->
-            <!--<p>Lo lamentamos hubo un error, debes comenzar nuevamente.</p>-->
-         <!--</div>-->
-     <!--</div>-->
+     <div class="row error">
+         <div class="col-sm-12"><h3>Test</h3></div>
+         <div class="col-sm-12">¡Error!: </div>
+         <div class="col-sm-12">
+            <p>Lo lamentamos hubo un error, debes comenzar nuevamente.</p>
+         </div>
+     </div>
 <style>
     .wizard-progress.wizard-progress-lg{
         font-size: 14px;
@@ -174,6 +174,7 @@
                 success: function(data){
                     if(data != '0'){
                          $('#btn-cerrar').click();
+
                     }
                     console.log(data);
                 },
@@ -182,7 +183,6 @@
 
         }
         this.finalizar_test = function(finalizo){
-            debugger;
             var form = new FormData();
             form.append('f', finalizo);
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
@@ -196,21 +196,31 @@
                     console.log(x.responseText);
                 },
                 success: function(data){
+                    if(data == "1"){
+                        $('#wizard').hide();
+                        $('.finalizo').show();
+                        $('#btn-guardar').hide();
+                        $('#btn-cancelar').hide();
+                        $('#btn-cerrar').show();
+                        $('#preguntas-alert').hide();
+                    }
+                    else if(data == "-1"){
+                        $('#wizard').hide();
+                        $('.error').show();
+                        $('#btn-guardar').hide();
+                        $('#btn-cancelar').show();
+                    }
                     console.log(data);
 
                 },
             });
-
-
         }
     }
     var Preguntas = new JSPreguntas();
     $(function () {
-        $('.introduccion').show();
-        $('#wizard').hide();
-        $('.finalizo').hide();
-        $('#btn-guardar').hide();
         Preguntas.cargar();
+
+        fnIniciarModelPreguntas();
         $(".tab-content").on("click", ".tab-pane.active input", function(){
             if($(this).is("[name^=mas]:checked")){
                             $(this).parents(".tab-pane").find("[name^=menos]").each(function() {
@@ -225,15 +235,15 @@
                         }
             if ( $(this).parents(".tab-pane").find("[name^=mas]:checked").length > 0 &&
                     $(this).parents(".tab-pane").find("[name^=menos]:checked").length > 0){
-                                Preguntas.enviar_respuesta($(this).parents(".tab-pane").data("id"),
+                Preguntas.enviar_respuesta($(this).parents(".tab-pane").data("id"),
                                                            $(this).parents(".tab-pane").find("[name^=mas]:checked").val(),
                                                            $(this).parents(".tab-pane").find("[name^=menos]:checked").val());
-                                $('.wizard-progress').bootstrapWizard('next');
-                        }
-            debugger;
-            if($(this).parents(".tab-pane").data("info") == ($(".wizard-steps li").length -1)){
-                $('#btn-guardar').removeAttr("disabled");
+                $('.wizard-progress').bootstrapWizard('next');
+                if($(this).parents(".tab-pane").data("info") == ($(".wizard-steps li").length -1)){
+                    $('#btn-guardar').removeAttr("disabled");
+                }
             }
+
         });
         $('#btn-comenzar').click(function(){
             $('.introduccion').hide();
@@ -242,16 +252,19 @@
         });
         $('#btn-guardar').click(function(){
            Preguntas.finalizar_test(0); //calcula el patron
-            $('#wizard').hide();
-            $('.finalizo').show();
-            $('#btn-guardar').hide();
-            $('#btn-cancelar').hide();
-            $('#btn-cerrar').show();
+//            $('#wizard').hide();
+//            $('.finalizo').show();
+//            $('#btn-guardar').hide();
+//            $('#btn-cancelar').hide();
+//            $('#btn-cerrar').show();
         });
         $('#btn-cancelar').click(function(){
             Preguntas.finalizar_test(-1); // cancela y borra todas las respuestas hasta ahora del estudiante
             $('#btn-cerrar').click();
         });
+
+
     });
+
 
 </script>

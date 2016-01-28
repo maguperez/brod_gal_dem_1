@@ -68,24 +68,30 @@ def respuesta_estudiante(request):
 
 def finalizo_estudiante(request):
     finalizo = request.POST['f']
-    data = ""
+    data = []
     estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
     try:
         if int(finalizo) == 0:
             if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
                 nro_patron = disc.obtener_patron(estudiante)
-                # patron_perfil = PatronPerfil.objects.
-                estudiante.completo_test = True
-                estudiante.save()
-                data = nro_patron
+                if int(nro_patron) > 0:
+                    estudiante.completo_test = True
+                    estudiante.save()
+                    data = "1"
+                else:
+                    data = "-1"
+                # realizo el test correctamente
             else:
                 resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
-                data = "-2"
+                data = "-1"
+                # el test esta incompleto debe comenzar de nuevo
         else:
             resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
-            data = "-1"
+            data = "0"
+            # la accion fue sallir debe comenzar de nuevo luego
     except:
             # resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
-            data = "-3"
+            data = "-1"
+            #hubo un error en el proceso
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')

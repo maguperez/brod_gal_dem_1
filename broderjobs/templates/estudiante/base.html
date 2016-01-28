@@ -62,11 +62,19 @@
                 border-left-color: #f50 !Important;
                 border-right-color: #f50 !Important;
             }
+            #preguntas-alert {
+                margin-top: 4px;
+                position: fixed;
+                width: 35%;
+                right: 13%;
+            }
 
         </style>
 
     </head>
 	<body>
+    <!--{{ request.META.HTTP_REFERER }}   ,-->
+    <!--{{'http://'|add:request.META.HTTP_HOST|add:'/'}}-->
     <div id="page-wrapper" class = "loading-wrapper">
         <div class="loading">Cargando</div>
     </div>
@@ -127,12 +135,22 @@
                 </ul>
 			</div>
 		</header>
+        {% if completo_test == false%}
+            <div class="container" id="preguntas-alert">
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" id="cerrar-preguntas-alert">&times;</a>
+                        <strong>Importante!</strong> Debes completar el test de compatibilidad para conocer las oportunidades perfectas para ti.
+                        <a id="completar-test">Completar Test</a>
+                    </div>
+                </div>
+        {%endif%}
 		<header class="menu">
 			<div class="centered">
 				<a id = "link-oportunidad" href="{% url 'estudiante-oportunidad-listar' %}">Oportunidades</a>
 				<a id = "link-empresa" href="{% url 'estudiante-empresa-lista' %}">Empresas</a>
 				<a id = "link-procesos" href="{% url 'estudiante-proceso-lista' %}">Mis procesos</a>
 				<div class="clear"></div>
+
 			</div>
 		</header>
 		</div>
@@ -146,7 +164,7 @@
                     <input type="button" class="btn btn-primary btn-submit" id="btn-comenzar" value = "Comenzar">
                     <input type="button" class="btn btn-primary btn-submit" disabled id="btn-guardar" value = "Guardar">
                     <input type="button" class="btn btn-primary btn-submit" id="btn-cancelar" value = "En otro momento...">
-                    <button type="button" class="btn btn-default hidden" data-dismiss="modal"  id="btn-cerrar">Finalizar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"  id="btn-cerrar">Finalizar</button>
                 </div>
             </div>
         </div>
@@ -155,22 +173,22 @@
         {% endblock %}
 		{% block popup %}
         {% endblock %}
-		
+
 	</body>
 </html>
-
+<!--'oportunidad-listar' in request.path-->
 		<!--<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>-->
-{% if 'oportunidad-listar' in request.path and not completo_test %}
+{% if completo_test == false%}
+    {%if 'http://'|add:request.META.HTTP_HOST|add:'/' == request.META.HTTP_REFERER or 'registro-cv' in request.META.HTTP_REFERER%}
     <script>
         $(function(){
             $('#form-preguntas .modal-body').load('{% url "disc-formulario-estudiante" %}', function () {
                 $('#form-preguntas').modal('toggle');
 
             });
-
-
         });
     </script>
+    {%endif%}
 {%endif%}
 <script>
     $('.withScroll').each(function () {
@@ -201,6 +219,22 @@
             $('#cantidad-notificaciones').html("0");
         });
     });
+    $('#completar-test').click(function(){
+        fnIniciarModelPreguntas();
+       $('#form-preguntas .modal-body').load('{% url "disc-formulario-estudiante" %}', function () {
+                $('#form-preguntas').modal('toggle');
+       });
+    });
+    function fnIniciarModelPreguntas(){
+        $('.introduccion').show();
+        $('#btn-comenzar').show();
+        $('#btn-cancelar').show();
+        $('#wizard').hide();
+        $('.finalizo').hide();
+        $('.error').hide();
+        $('#btn-guardar').hide();
+        $('#btn-cerrar').hide();
+    }
 </script>
 
 {% block js %}
