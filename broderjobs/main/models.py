@@ -195,7 +195,8 @@ class Beneficio(models.Model):
 class PeriodosGraduacion(models.Model):
 
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    valor = models.IntegerField(null= True, blank= True)
+    secuencia_universitaria = models.IntegerField(null= True, blank= True)
+    secuencia_tecnica = models.IntegerField(null= True, blank= True)
     orden = models.IntegerField(null= True, blank= True)
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)

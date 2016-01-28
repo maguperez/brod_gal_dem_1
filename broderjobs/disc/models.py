@@ -115,7 +115,7 @@ class PatronPerfil(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.descripcion) or u''
+        return unicode(self.nro_patron) or u''
 
     class Meta:
         ordering = ["orden"]

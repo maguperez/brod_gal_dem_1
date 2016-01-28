@@ -220,10 +220,6 @@
 	<input type="submit" id="cambiar_imagen">
 	</form>
 </div>
-
-
-
-
 <style>
 	.owl-carousel {
         height:369px;
@@ -240,17 +236,17 @@
 		 Empresa.inicializar_mapa();
 		 $("#link-mi_empresa").addClass("active")
 		 $('[data-toggle="tooltip"]').tooltip();
-	 })
-
+		 var imagenes = {%if imagenes|length > 0%} 1 {%else%} 2 {%endif%};
 	 $('.owl-carousel').owlCarousel({
 			 autoPlay: true,
-             items: {%if imagenes.length > 1 %} 1 {%else%} 2 {%endif%},
+             items:imagenes ,
 		     singleItem: true,
              loop: true,
              margin: 10,
              pagination: true,
 
 		 });
+	 });
 	 var Empresa = {
 		map: null,
 		marca: null,

@@ -603,6 +603,15 @@
 <script>
     var animationInterval = 0;
     $(function () {
+        $('.owl-carousel').owlCarousel({
+			 autoPlay: true,
+             items: {%if imagenes|length > 0%} 1 {%else%} 2 {%endif%},
+		     singleItem: true,
+             loop: true,
+             margin: 10,
+             pagination: true
+
+        });
         $("#declaro").tooltip({
             animation: true,
             placement: "left",
@@ -716,15 +725,7 @@
         fnCalculoRanking($("#ranking_salarios"));
 
     });
-    $('.owl-carousel').owlCarousel({
-			 autoPlay: true,
-             items: {%if imagenes.length > 1 %} 1 {%else%} 2 {%endif%},
-		     singleItem: true,
-             loop: true,
-             margin: 10,
-             pagination: true
 
-    });
 
     $("#enviar-evaluacion").click(function (e) {
         $("#id_linea_carrera").val($("#rating-linea_carrera").attr("data-rate-value") > 0 ? $("#rating-linea_carrera").attr("data-rate-value") : 0);
