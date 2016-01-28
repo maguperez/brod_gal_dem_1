@@ -381,7 +381,8 @@
   			allowClear: true
 		});
 
-		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio'];
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio',
+			'id_grado_estudio', 'id_tipo_carrera'];
 		InicializarSelect2(elementosParaSelect2);
 
 		$("#id_pais").change(function() {
@@ -402,6 +403,39 @@
 								// $("#id_ciudad option:first").attr('selected', 'selected');
 								$("#id_ciudad").select2("val", "");
 								$("#id_ciudad").attr('disabled', false);
+							}
+						}
+					}
+				});
+			}
+			else{
+				var options = '';
+				$("#id_ciudad").html(options);
+				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").attr('disabled', false);
+			}
+
+			LlamarValidacionElemento('id_pais');
+		});
+
+		$("#id_tipo_carrera").change(function() {
+			if($("#id_tipo_carerra").val() > 0 ){
+				$.ajax({
+					data: {'tipo': $("#id_tipo_carerra").val()},
+					url: '{%url "carrera-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+//								var options = '<option value="">Ciudad</option>';
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_carrera").html(options);
+								// $("#id_ciudad option:first").attr('selected', 'selected');
+								$("#id_carrera").select2("val", "");
+								$("#id_carrera").attr('disabled', false);
 							}
 						}
 					}

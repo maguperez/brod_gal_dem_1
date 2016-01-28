@@ -7,7 +7,7 @@ from  django.utils.dateparse import parse_date
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
-from .models import Persona, Ciudad, Pais
+from .models import Persona, Ciudad, Pais, Carrera
 from . import forms
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
@@ -218,6 +218,14 @@ class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
         pais = request.GET['pais']
         ciudades = Ciudad.objects.filter(pais_id=pais )
         data = serializers.serialize('json', ciudades,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        tipo = request.GET['tipo']
+        carreras = Carrera.objects.filter(tipo_carerra_id =tipo )
+        data = serializers.serialize('json', carreras,
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 

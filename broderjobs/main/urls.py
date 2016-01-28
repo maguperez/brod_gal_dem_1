@@ -41,4 +41,6 @@ urlpatterns =[
 
 	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
 
+	url(r'^carrera-busqueda/$', views.CarreraBusquedaView.as_view(), name="ciudad-busqueda"),
+
 ]
