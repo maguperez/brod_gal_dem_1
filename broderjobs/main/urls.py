@@ -27,7 +27,9 @@ urlpatterns =[
 
 	url(r'^usuarios/$', views.UsuariosView.as_view(), name="usuarios"),
 
-	url(r'^editar-cuenta/$', 'main.views.editar_cuenta', name="editar-cuenta"),
+	url(r'^cuenta-editar/$', views.CuentaEditarView.as_view(), name="cuenta-editar"),
+
+	url(r'^contrasena-editar/$', 'main.views.contrasena_editar', name="contrasena-editar"),
 
 	url(r'^terminos-condiciones/$', 'main.views.terminos_condiciones', name="terminos-condiciones"),
 

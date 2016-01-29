@@ -6,6 +6,7 @@ from mensaje.models import Mensaje_Destinatario, Notificacion
 def estudiante_foto(request):
     completo_test = False
     estudiante_foto = 'url'
+    completo_test= 0
     if request.user.is_authenticated():
         try:
             persona = Persona.objects.get(usuario_id = request.user)
@@ -18,11 +19,15 @@ def estudiante_foto(request):
                     estudiante = Estudiante.objects.get(persona_id = persona.id)
                     estudiante_foto = estudiante.set_foto
                     completo_test = estudiante.completo_test
+                    # if test :
+                    #     completo_test = 0
+                    # else:
+                    #     completo_test = 1
         except Persona.DoesNotExist:
             completo_test = False
             estudiante_foto = 'url'
 
-    return {'estudiante_foto': estudiante_foto, 'test_completo': completo_test}
+    return {'estudiante_foto': estudiante_foto, 'completo_test': completo_test}
 
 def mensajes_actuales(request):
     cantidad_mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id).count()

@@ -16,19 +16,22 @@
 			    <div class="content">
                     <section class="pos-relative">
                        <form action="" method="post">{%csrf_token%}
-                            <h3 class="title"><i class="info"></i>Mi cuenta</h3>
+                            <h3 class="title"><i class="info"></i>Cambio de Contraseña</h3>
                             <input type="submit" value="GUARDAR" class="btn-action">
                            {%if message%}
                                 <p>{{message}}</p>
                            {%endif%}
                             <div class="detalle col-3-7">
-                                <!--<div>-->
-                                    <!--<label>Nombre y Apellidos</label>-->
-                                    <!--<p><input class="half" type="text" placeholder="Escriba su nombre completo" />-->
+                                {%if form.errors %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{ form.first_name.errors }}
+									{{ form.last_name.errors }}
+									{{ form.email.errors }}
+                                    {{ form.telefono.errors }}
 
-                                    <!--</p>-->
-                                    <!--<div class="clear"></div>-->
-                                <!--</div>-->
+								</div>
+								{% endif%}
                                 <div>
                                     <label>Contrase&ntilde;a actual</label>
                                     <p><!--<input class="half" type="text" placeholder="Escriba su contrase&ntilde;a actual" />-->

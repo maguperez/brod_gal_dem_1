@@ -127,7 +127,7 @@
                         </a>
                         <ul class="dropdown-menu contextual">
 							<li><a href="{% url 'mi-cv' %}"><i class="cv"></i><span class="v-line gray"></span><span>Mi CV</span><div class="clear"></div></a></li>
-							<li><a href="{%url 'editar-cuenta'%}"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
+							<li><a href="{%url 'contrasena-editar'%}"><i class="config"></i><span class="v-line gray"></span><span>Mi Cuenta</span><div class="clear"></div></a></li>
 							<li><a href="{%url 'salir' %}"><i class="exit"></i><span class="v-line gray"></span><span>Salir</span><div class="clear"></div></a></li>
                         </ul>
                     </li>
@@ -135,7 +135,7 @@
                 </ul>
 			</div>
 		</header>
-        {% if completo_test %}
+        {% if completo_test == False %}
             <div class="container" id="preguntas-alert">
                     <div class="alert alert-danger">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" id="cerrar-preguntas-alert">&times;</a>
