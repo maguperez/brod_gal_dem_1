@@ -12,6 +12,7 @@ from django.views.generic import UpdateView, CreateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
 from broderjobs import constants
+from main.models import PeriodosGraduacion
 from .models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
 from estudiante.models import Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, CargaHoraria, TipoRemuneracion, Beneficio, Conocimiento
@@ -97,6 +98,23 @@ class OportunidadCrearView(FormView):
         longitud = form.cleaned_data['longitud']
         latitud = form.cleaned_data['latitud']
 
+        periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
+
+        if periodo_graduacion_hidden is not None and periodo_graduacion_hidden != '':
+            periodo_split = periodo_graduacion_hidden.split(',')
+            periodo_desde = periodo_split[0]
+            periodo_hasta = periodo_split[1]
+        else:
+            periodo_desde = ''
+            periodo_hasta = ''
+
+        if periodo_desde == '' or periodo_hasta == '':
+            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=periodo_desde)
+            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=periodo_hasta)
+        else:
+            periodo_graduacion_desde = None
+            periodo_graduacion_hasta = None
+
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
         oportunidad.titulo = titulo
@@ -114,6 +132,9 @@ class OportunidadCrearView(FormView):
         oportunidad.remuneracion_min = remuneracion_min
         oportunidad.remuneracion_max = remuneracion_max
 
+        oportunidad.graduacion_desde = periodo_graduacion_desde
+        oportunidad.graduacion_hasta = periodo_graduacion_hasta
+
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
         oportunidad.tipo_puesto = tipo_puesto
@@ -122,7 +143,7 @@ class OportunidadCrearView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.fase = fase
         if '_guardar' in self.request.POST:
-            oportunidad.estado_oportunidad = constants.estado_cerrado
+            oportunidad.estado_oportunidad = constants.estado_archivado
         elif '_anunciar' in self.request.POST:
             oportunidad.estado_oportunidad = constants.estado_abierto
             oportunidad.fecha_publicacion = datetime.now()
