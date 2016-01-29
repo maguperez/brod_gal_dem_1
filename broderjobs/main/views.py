@@ -173,7 +173,43 @@ class UsuariosView(TemplateView):
         context['tipo'] = tipo
         return context
 
-def editar_cuenta(request, template_name='main/editar-cuenta.html',
+class CuentaEditarView(LoginRequiredMixin, FormView):
+    template_name = 'main/cuenta-editar.html'
+    form_class = forms.CuentaEditarForm
+    success_url = reverse_lazy('cuenta-editar')
+
+    def get_initial(self):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        return {'first_name': persona.usuario.first_name,
+                'last_name': persona.usuario.last_name,
+                'email': persona.usuario.email,
+                'telefono': persona.telefono,}
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        if persona.tipo_persona == 'R':
+            tipo = True
+        else:
+            tipo = False
+        context = super(CuentaEditarView, self).get_context_data(**kwargs)
+        context['tipo'] = tipo
+        return context
+
+
+    def form_valid(self, form):
+        user = self.request.user
+        usuario = User.objects.get(pk = user.id)
+        persona = Persona.objects.get(usuario_id=user.id)
+        usuario.first_name= form.cleaned_data['first_name']
+        usuario.last_name= form.cleaned_data['last_name']
+        usuario.email = form.cleaned_data['email']
+        persona.telefono = form.cleaned_data['telefono']
+        usuario.save()
+        persona.save()
+        return super(CuentaEditarView, self).form_valid(form)
+
+def contrasena_editar(request, template_name='main/contrasena-editar.html',
                     post_change_redirect=None):
     message = None
     persona = Persona.objects.get(usuario = request.user)
@@ -205,6 +241,7 @@ def terminos_condiciones(request):
 def error404 (request):
     return render_to_response('404.html',
                               context_instance=RequestContext(request))
+
 class UniversidadBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']

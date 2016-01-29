@@ -164,3 +164,10 @@ class EditarUsuarioForm( PasswordChangeForm ):
     new_password1 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba su nueva Contraseña', 'type':'password', 'class':'half'}))
     new_password2 = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba otra vez su nueva contraseña', 'type':'password', 'class':'half'}))
     old_password = forms.CharField(required = True, max_length = 10, widget=forms.TextInput(attrs={'placeholder': 'Escriba su contraseña actual', 'type':'password', 'class':'half'}))
+
+class CuentaEditarForm(forms.Form):
+    first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres'}))
+    last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
+

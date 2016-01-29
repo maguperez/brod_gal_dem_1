@@ -624,7 +624,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-empresa .candidatos tr.active .opciones {display: block;}
 
 /*USUARIOS*/
-.usuarios .btn-action {width: 85px; height: 30px; line-height: 30px; position: absolute; top: 0; right: 0; display: block; background-color: transparent}
+.usuarios .btn-action {width: 140px; height: 30px; line-height: 30px; position: absolute; top: 0; right: 0; display: block; background-color: transparent}
 
 /*POPUP CANDIDATO*/
 .modal .candidato header {padding-top: 30px; padding-bottom: 30px; position: relative;}
@@ -1301,7 +1301,7 @@ a:hover {
     position: absolute;
     top: -6px;
 }
-.dropdown-menu.contextual { width: 150px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
+.dropdown-menu.contextual { width: 200px; /*position: absolute; right: 5px; top: 30px; opacity: 0; pointer-events: none;*/ border: 1px solid #ddd; background: #fff; box-shadow: 3px 3px 14px rgba(0,0,0,0.4); /*z-index: 10; */transition: opacity 0.2s linear, transform 0.2s ease-in-out;}
 #tb_candidatos { width: 100% !Important; }
 
 .select2-container--default .select2-selection--multiple .select2-selection__clear { position: absolute; top: 0; right: 0; }
