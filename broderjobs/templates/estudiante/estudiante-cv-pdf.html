@@ -4,64 +4,98 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
+        body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {
+            font-family: 'Arial';
+            font-weight: normal;
+            font-size: 13.4px;
+            color: #0c0c0c;
+        }
+        .box .content .section .title i {margin-right: 10px;}
+
+        .box .content .section .detalle {margin-left: 37px;}
+        .box .content .section .detalle  > .div .less-margin {margin-bottom: 20px;}
+        .box .content .section .detalle > .div > .label {font-size: 14px; font-weight: bold; color: #848484; float: left;}
+        .box .content .section .detalle > .div > .p {float: left;}
+        .box .content .section .detalle.col-2-8 .label {width: 20%;}
+        .box .content .section .detalle.col-2-8 .p {width: 80%;}
+        .box .content .section .detalle.col-3-7 .label {width: 30%;}
+        .box .content .section .detalle.col-3-7 .p {width: 70%;}
+        .box .content .section .detalle.col-4-6 .label {width: 40%;}
+        .box .content .section .detalle.col-4-6 .p {width: 60%;}
+        .box .content .section .detalle .full .label {width: auto;}
+        .box .content .section .detalle .full .p {width: auto;}
+        .box .content .section .detalle .descripcion {width: 97% !important; margin: 5px 0 0 5px; font-size: 0.9em; display: block;}
+        .box .content .section .detalle .mapa img {width: 100%;}
+        .box .content .section .input.full {width: 100%;}
+        .box .content .section .input.half {width: 70%;}
+        .box .content .section .detalle.timeline {position: relative;}
+        .box .content .section .detalle.timeline p, .box .content .section .detalle.timeline .label {float: none; display: block;}
+        .modal .candidato .header {padding-top: 30px; padding-bottom: 30px; position: relative;}
+        .modal .candidato .header .descargar {width: 130px; height: 30px; line-height: 30px; position: absolute; top: 45px; right: 35px;}
+        .modal .candidato .header .imagen, .popup.candidato header .detalle {float: left;}
+        .modal .candidato .header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
+        .modal .candidato .header .detalle {margin: 20px 0 0 60px;}
+        .modal .candidato .header .detalle h3 {color: #848484; font-weight: bold;}
+        .modal .candidato .header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
+        .modal .candidato .detalle {margin-left: 37px !important;}
 
     </style>
 </head>
-<body>
+<body style="margin: 30px">
 <div class = "candidato obx">
-<header>
-     <img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"  alt="image" width="200" height="150"/>
-     <div class="detalle">
-         <h3>{{estudiante | upper}}</h3>
-         <label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
-         <label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
-         <label>{{persona.telefono}} / {{usuario.email}}</label>
+<header class="header">
+     <img src="{{estudiante.foto}}" id="imgen_perfil" class="imagen"/>
+     <div class="detalle div">
+         <h3 class ="h3" >{{estudiante | upper}}</h3>
+         <label class ="label">{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
+         <label class ="label">{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
+         <label class ="label">{{persona.telefono}} / {{usuario.email}}</label>
      </div>
-     <div class="clear"></div>
+     <div class="clear div"></div>
  </header>
- <div class="content">
-     <section>
-         <h3 class="title"><i class="profile"></i>Resumen</h3>
+ <div class="content div">
+     <section class="section">
+         <h3 class="title h3"><i class="profile"></i>Resumen</h3>
 
-         <div class="detalle">
-            <p>{{resumen.descripcion}}</p>
+         <div class="detalle div">
+            <p class="p">{{resumen.descripcion}}</p>
          </div>
      </section>
-     <section>
-         <h3 class="title"><i class="time"></i>Disponibilidad</h3>
-         <div class="detalle col-3-7">
-            <div>
-                <label>Acepto propuestas de</label>
-				<p>
+     <section class="section">
+         <h3 class="title h3"><i class="time"></i>Disponibilidad</h3>
+         <div class="detalle col-3-7 div">
+            <div class="div">
+                <label class ="label">Acepto propuestas de</label>
+				<p class="p">
 				    {% for tipo_puesto in estudiante.tipo_puesto.all %}
 					<span class="tag">{{ tipo_puesto.descripcion }}</span>
 					{% endfor %}
                 </p>
 				<div class="clear"></div>
             </div>
-             <div>
-                 <label>Carga horaria</label>
-                 <p>
+             <div class="div">
+                 <label class ="label">Carga horaria</label>
+                 <p class="p">
 				    <span class="tag">{{ estudiante.carga_horaria }}</span>
                  </p>
                  <div class="clear"></div>
              </div>
      </section>
-     <section>
-         <h3 class="title"><i class="language"></i>Idiomas</h3>
-         <div class="detalle">
-            <p>
+     <section class="section">
+         <h3 class="title h3"><i class="language"></i>Idiomas</h3>
+         <div class="detalle div">
+            <p class="p">
                 {% for idioma in estudiante.idioma.all %}
                 <span class="tag">{{ idioma.descripcion }}</span>
 				{% endfor %}
             </p>
-             <div class="clear"></div>
+             <div class="clear div"></div>
          </div>
      </section>
-     <section>
-         <h3 class="title"><i class="knowledge"></i>Conocimientos</h3>
+     <section class="section ">
+         <h3 class="title h3"><i class="knowledge"></i>Conocimientos</h3>
          <div class="detalle">
-             <p>
+             <p class="p">
                  {% for conocimiento in estudiante.conocimiento.all %}
                  <span class="tag">{{ conocimiento.descripcion }}</span>
                  {% endfor %}
@@ -73,20 +107,20 @@
              <div class="clear"></div>
          </div>
      </section>
-     <section>
-         <h3 class="title"><i class="clip"></i>Actividades extraacad&eacute;micas</h3>
+     <section class="section">
+         <h3 class="title h3"><i class="clip"></i>Actividades extraacad&eacute;micas</h3>
          <div class="detalle">
              {% for actividad in actividades_extra %}
-			<div>
-			    <p>{{actividad.descripcion | lower}}</p>
+			<div class="div">
+			    <p class="p">{{actividad.descripcion | lower}}</p>
 			    <div class="clear"></div>
-			    <label>{{actividad.organizacion | lower}}</label>
+			    <label class ="label">{{actividad.organizacion | lower}}</label>
 			    </div>
 			{% endfor %}
          </div>
      </section>
-     <section>
-         <h3 class="title"><i class="work"></i>Experiencia Profesional</h3>
+     <section class="section">
+         <h3 class="title h3"><i class="work"></i>Experiencia Profesional</h3>
          <div class="detalle timeline">
              {% for experiencia in experiencias_profesionales %}
              <div class="experiencia" id="{{experiencia.id}}">
@@ -102,16 +136,16 @@
 			{% endfor %}
          </div>
      </section>
-     <section>
-         <h3 class="title"><i class="volunteer"></i>Voluntariado</h3>
+     <section class="section">
+         <h3 class="title h3"><i class="volunteer"></i>Voluntariado</h3>
          <div class="detalle timeline">
              {% for voluntariado in voluntariados %}
              {{voluntariado}}
-			<div>
+			<div class="div">
 			    <p class="fecha">{{voluntariado.fecha_desde|date:"M Y"}} - {{voluntariado.fecha_hasta|date:"M Y"}}</p>
 				<label class="tipo">{{voluntariado.cargo}}</label>
 				<label class="nombre">{{voluntariado.organizacion}}</label>
-				<p>{{voluntariado.descripcion}}</p>
+				<p class="p">{{voluntariado.descripcion}}</p>
 				</div>
 			{% endfor %}
 			</div>
@@ -121,6 +155,6 @@
 
 </body>
 </html>
-<script type="text/javascript">
-window.onload = function () { window.print(); }
-</script>
+<!--<script type="text/javascript">-->
+<!--window.onload = function () { window.print(); }-->
+<!--</script>-->

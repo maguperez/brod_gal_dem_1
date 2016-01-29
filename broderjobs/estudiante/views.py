@@ -535,11 +535,8 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         estudiante = Estudiante.objects.get(persona_id=persona.id)
         
         conocimientos = estudiante.conocimiento.all()
-
         conocimientos_str = ','.join([str(x.id) for x in conocimientos])
-
         conocimientos_extra = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
-
         conocimientos_extra_str = ','.join([str(x.id) for x in conocimientos_extra])
 
         return {'conocimientos_hidden': conocimientos_str,
@@ -554,13 +551,9 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         estudiante = Estudiante.objects.get(persona_id =persona.id)
         
         context = super(ConocimientoView, self).get_context_data(**kwargs)
-    
         conocimientos = estudiante.conocimiento.all()
-    
         conocimientos_extra = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
-    
         conocimientos_universo = Conocimiento.objects.filter().exclude(id__in = conocimientos)
-    
         context['conocimientos'] = conocimientos
         context['conocimientos_extra'] = conocimientos_extra
         context['conocimientos_universo'] = conocimientos_universo
@@ -1098,7 +1091,8 @@ def oportunidad_cargar_lista(request):
         Q(titulo__unaccent__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
         Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
         Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
-        Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).order_by('fecha_publicacion').distinct()
+        Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).exclude(
+        estado_oportunidad ='P').order_by('-fecha_publicacion').distinct()
     return render_to_response('estudiante/oportunidad-cargar-lista.html', {'oportunidades': oportunidades},
                               context_instance = RequestContext(request))
 
@@ -1161,35 +1155,35 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         context['mensajes'] = mensajes
         return context
 
-
-######################################################################
-from io import BytesIO
-from reportlab.pdfgen import canvas
+#
+# ######################################################################
+# from io import BytesIO
+# from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-
-def cv_pdf1(request):
-     # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
-
-    buffer = BytesIO()
-
-    # Create the PDF object, using the BytesIO object as its "file."
-    p = canvas.Canvas(buffer)
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
-
-    # Close the PDF object cleanly.
-    p.showPage()
-    p.save()
-
-    # Get the value of the BytesIO buffer and write it to the response.
-    pdf = buffer.getvalue()
-    buffer.close()
-    response.write(pdf)
-    return response
+#
+# def cv_pdf1(request):
+#      # Create the HttpResponse object with the appropriate PDF headers.
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+#
+#     buffer = BytesIO()
+#
+#     # Create the PDF object, using the BytesIO object as its "file."
+#     p = canvas.Canvas(buffer)
+#
+#     # Draw things on the PDF. Here's where the PDF generation happens.
+#     # See the ReportLab documentation for the full list of functionality.
+#     p.drawString(100, 100, "Hello world.")
+#
+#     # Close the PDF object cleanly.
+#     p.showPage()
+#     p.save()
+#
+#     # Get the value of the BytesIO buffer and write it to the response.
+#     pdf = buffer.getvalue()
+#     buffer.close()
+#     response.write(pdf)
+#     return response
 
 def cv_pdf(request, id = "0"):
     estudiante = get_object_or_404(Estudiante, id = id)
@@ -1210,9 +1204,23 @@ def cv_pdf(request, id = "0"):
                                         'actividades_extra': actividades_extra,
                                         'experiencias_profesionales': experiencias_profesionales,
                                         'voluntariados': voluntariados})
-    html = template.render(context) 
-    result = StringIO.StringIO() 
+    html = template.render(context)
+    result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), dest=result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
-    else: return HttpResponse('Errors') 
+    else: return HttpResponse('Errors')
+
+    # return render_to_response('estudiante/estudiante-cv-pdf.html', {'estudiante': estudiante,
+    #                                                                 'edad': edad,
+    #                                                                 'resumen': resumen,
+    #                                                                 'conocimientos_extras':conocimientos_extras,
+    #                                                                 'actividades_extra': actividades_extra,
+    #                                                                 'experiencias_profesionales': experiencias_profesionales,
+    #                                                                 'voluntariados': voluntariados},
+    #                           context_instance = RequestContext(request))
+    # outputFilename = "test.pdf"
+    # resultFile = open(outputFilename, "w+b")
+    # pisa.CreatePDF(html,dest=resultFile)
+    #
+    # return HttpResponse(resultFile, content_type='application/pdf')
