@@ -1,4 +1,5 @@
 # coding=utf-8
+import json
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect, HttpResponseRedirect, render
 from .forms import RegisterForm, LoginForm
@@ -287,11 +288,35 @@ class PeriodosGraduacionBusquedaView(LoginRequiredMixin, TemplateView):
         tipo = request.GET['tipo']
         tipo_carrera = TipoCarrera.objects.get(id = tipo)
         if  tipo_carrera.id == 1:
-            carreras = PeriodosGraduacion.objects.filter()
+            listado_periodo = PeriodosGraduacion.objects.filter()
+
+            l_periodo =[]
+
+            for periodo in listado_periodo:
+                e = {
+                    "id": periodo.id,
+                    "descripcion": periodo.descripcion,
+                    "secuencia": periodo.secuencia_universitaria
+                }
+                l_periodo.append(e)
+            data = json.dumps(l_periodo)
+            # data = serializers.serialize('json', carreras,
+            #                          fields=('id','descripcion', 'secuencia_universitaria'))
         else:
-            carreras = PeriodosGraduacion.objects.filter(secuencia_tecnica__isnull=False)
-        data = serializers.serialize('json', carreras,
-                                     fields=('id','descripcion', 'secuencia_universitaria', 'secuencia_tecnica'))
+            listado_periodo = PeriodosGraduacion.objects.filter(secuencia_tecnica__isnull=False)
+            l_periodo =[]
+
+            for periodo in listado_periodo:
+                e = {
+                    "id": periodo.id,
+                    "descripcion": periodo.descripcion,
+                    "secuencia": periodo.secuencia_tecnica
+                }
+                l_periodo.append(e)
+            data = json.dumps(l_periodo)
+            # data = serializers.serialize('json', carreras,
+            #                          fields=('id','descripcion', 'secuencia_tecnica'))
+
         return HttpResponse(data, content_type='application/json')
 
 
