@@ -7,7 +7,7 @@ from  django.utils.dateparse import parse_date
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
-from .models import Persona, Ciudad, Pais, Carrera
+from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion
 from . import forms
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
@@ -227,6 +227,18 @@ class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
         carreras = Carrera.objects.filter(tipo_carerra_id =tipo )
         data = serializers.serialize('json', carreras,
                                      fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class PeriodosGraduacionBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        tipo = request.GET['tipo']
+        tipo_carrera = TipoCarrera.objects.get(id = tipo)
+        if  tipo_carrera.id == 1:
+            carreras = PeriodosGraduacion.objects.filter()
+        else:
+            carreras = PeriodosGraduacion.objects.filter(secuencia_tecnica__isnull=False)
+        data = serializers.serialize('json', carreras,
+                                     fields=('id','descripcion', 'secuencia_universitaria', 'secuencia_tecnica'))
         return HttpResponse(data, content_type='application/json')
 
 

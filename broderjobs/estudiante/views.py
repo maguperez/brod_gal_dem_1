@@ -1,4 +1,4 @@
-import json
+# coding=utf-8
 import json
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -6,11 +6,8 @@ from django.shortcuts import render, render_to_response, redirect, get_object_or
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
 from django.db.models import Q
-from django.http import Http404
 from django.http import JsonResponse
-from django.contrib.auth import views
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import TemplateView, FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
@@ -24,6 +21,11 @@ from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
 from main.utils import LoginRequiredMixin
 from empresa.utils import actualizar_ranking_empresa
+
+from xhtml2pdf import pisa
+import cStringIO as StringIO
+from django.template.loader import get_template
+from django.template import Context
 
 @login_required(login_url='/estudiante-registro/')
 def registro_cv(request):
@@ -308,17 +310,10 @@ class FotoView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'estudiante/mi-cv-foto.html'
     success_url =reverse_lazy('mi-cv')
 
-    # def get_object(self, queryset=None):
-    #     user = self.request.user
-    #     persona = Persona.objects.get(usuario_id=user.id)
-    #     estudiante = Estudiante.objects.get(persona_id =persona.id)
-    #     return estudiante
-
     def post(self, request, *args, **kwargs):
 
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-
         if request.is_ajax():
             foto = self.request.FILES['foto']
             user = self.request.user
@@ -1212,16 +1207,28 @@ def cv_pdf1(request):
     response.write(pdf)
     return response
 
-from xhtml2pdf import pisa 
-import cStringIO as StringIO 
-from django.template.loader import get_template 
-from django.template import Context 
-def cv_pdf(request): 
-    template = get_template("empresa/candidato_cv_pdf.html") 
-    context = Context({'pagesize':'A4'}) 
+def cv_pdf(request, id = "0"):
+    estudiante = get_object_or_404(Estudiante, id = id)
+
+    if estudiante.persona.fecha_nacimiento is not None:
+            edad = utils.calular_edad(estudiante.persona.fecha_nacimiento)
+    conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
+    resumen = Resumen.objects.get(estudiante_id=estudiante.id)
+    actividades_extra = ActividadesExtra.objects.filter(estudiante_id=estudiante.id)
+    experiencias_profesionales = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
+    voluntariados = Voluntariado.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
+
+    template = get_template("estudiante/estudiante-cv-pdf.html")
+    context = Context({'pagesize':'A4','estudiante': estudiante,
+                                        'edad': edad,
+                                        'resumen': resumen,
+                                        'conocimientos_extras':conocimientos_extras,
+                                        'actividades_extra': actividades_extra,
+                                        'experiencias_profesionales': experiencias_profesionales,
+                                        'voluntariados': voluntariados})
     html = template.render(context) 
     result = StringIO.StringIO() 
     pdf = pisa.pisaDocument(StringIO.StringIO(html), dest=result) 
-    if not pdf.err: 
-        return HttpResponse(result.getvalue(), content_type='application/pdf') 
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
     else: return HttpResponse('Errors') 

@@ -6,10 +6,10 @@
          <h3>{{estudiante | upper}}</h3>
          <label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
          <label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
-         <label>{{persona.telefono}} / {{usuario.email}}</label>
+         <label>{{estudiante.persona.telefono}} / {{estudiante.persona.usuario.email}}</label>
      </div>
      <div class="clear"></div>
-     <a href="{%url 'cv-pdf'%}" class="descargar btn-action">DESCARGAR PDF</a>
+     <a href="{%url 'cv-pdf' estudiante.pk%}" target="_blank" class="descargar btn-action">DESCARGAR PDF</a>
  </header>
  <div class="content">
      <section>
