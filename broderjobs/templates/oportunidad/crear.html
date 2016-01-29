@@ -393,6 +393,9 @@
 		AgregarEventosRemuneracion();
 
 		AgregarAnchoLabelRemuneracion();
+
+		resetCarrera();
+		$("#tooltip-carrera").tooltip('hide');
 	});
 
 	function resetCarrera(){
@@ -453,7 +456,7 @@
 			resetCarrera();
 			if($("#id_tipo_carrera").val() > 0 ){
 				ActualizarListadoCarreras();
-//				ActualizarListadoPeriodoGraduacion();
+				ActualizarListadoPeriodoGraduacion();
 			}
 
 			$("#tooltip-carrera").tooltip('hide');
@@ -478,41 +481,18 @@
 	}
 
 	function ActualizarListadoPeriodoGraduacion(){
-//		$.ajax({
-//					data: {'tipo': $("#id_tipo_carrera").val()},
-//					url: '{%url "carrera-busqueda" %}',
-//					type: 'get',
-//					success: function (data) {
-//						if (data) {
-//							if (data.length > 0) {
-////								var options = '<option value="">Ciudad</option>';
-//								var options = '';
-//								for (var i = 0; i < data.length; i++) {
-//									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
-//								}
-//								$("#id_carrera").html(options);
-//								// $("#id_ciudad option:first").attr('selected', 'selected');
-//								$("#id_carrera").select2("val", "");
-//								$("#id_carrera").attr('disabled', false);
-//								$("#tooltip-carrera").tooltip('hide');
-//							}
-//							else{
-//								var options = '';
-//								$("#id_carrera").html(options);
-//								$("#id_carrera").select2("val", "");
-//								$("#id_carrera").attr('disabled', false);
-//								$("#tooltip-carrera").tooltip('hide');
-//							}
-//						}
-//						else{
-//							var options = '';
-//							$("#id_carrera").html(options);
-//							$("#id_carrera").select2("val", "");
-//							$("#id_carrera").attr('disabled', false);
-//							$("#tooltip-carrera").tooltip('hide');
-//						}
-//					}
-//				});
+		$.ajax({
+					data: {'tipo': $("#id_tipo_carrera").val()},
+					url: '{%url "periodos-graduacion-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+
+							}
+						}
+					}
+				});
 	}
 
 	function ActualizarListadoCarreras(){
