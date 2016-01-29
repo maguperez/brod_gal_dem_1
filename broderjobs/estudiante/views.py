@@ -1181,3 +1181,47 @@ class ProcesoDetalleView(LoginRequiredMixin, TemplateView):
         context['empresa'] = empresa
         context['mensajes'] = mensajes
         return context
+
+
+######################################################################
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+
+def cv_pdf1(request):
+     # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+
+    buffer = BytesIO()
+
+    # Create the PDF object, using the BytesIO object as its "file."
+    p = canvas.Canvas(buffer)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly.
+    p.showPage()
+    p.save()
+
+    # Get the value of the BytesIO buffer and write it to the response.
+    pdf = buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+    return response
+
+from xhtml2pdf import pisa 
+import cStringIO as StringIO 
+from django.template.loader import get_template 
+from django.template import Context 
+def cv_pdf(request): 
+    template = get_template("empresa/candidato_cv_pdf.html") 
+    context = Context({'pagesize':'A4'}) 
+    html = template.render(context) 
+    result = StringIO.StringIO() 
+    pdf = pisa.pisaDocument(StringIO.StringIO(html), dest=result) 
+    if not pdf.err: 
+        return HttpResponse(result.getvalue(), content_type='application/pdf') 
+    else: return HttpResponse('Errors') 
