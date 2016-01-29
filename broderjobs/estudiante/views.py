@@ -982,22 +982,6 @@ class VoluntariadoEliminarView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemp
    model = Voluntariado
    success_url = reverse_lazy('mi-cv')
 
-class UniversidadBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['busqueda']
-        universidades = Universidad.objects.filter(Q(descripcion__icontains=busqueda))
-        data = serializers.serialize('json', universidades,
-                                     fields=('id','descripcion','nemonico'))
-        return HttpResponse(data, content_type='application/json')
-
-class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
-        busqueda = request.GET['tipo']
-        carreras = Carrera.objects.filter(tipo_carrera_id=busqueda)
-        data = serializers.serialize('json', carreras,
-                                     fields=('id','descripcion'))
-        return HttpResponse(data, content_type='application/json')
-
 class EstudianteEmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
@@ -1228,7 +1212,7 @@ def cv_pdf(request, id = "0"):
                                         'voluntariados': voluntariados})
     html = template.render(context) 
     result = StringIO.StringIO() 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html), dest=result) 
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), dest=result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     else: return HttpResponse('Errors') 

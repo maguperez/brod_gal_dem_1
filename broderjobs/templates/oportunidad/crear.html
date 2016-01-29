@@ -518,7 +518,7 @@
 	function ActualizarListadoCarreras(){
 		$.ajax({
 					data: {'tipo': $("#id_tipo_carrera").val()},
-					url: '{%url "carrera-busqueda" %}',
+					url: '{%url "carrera-busqueda-por-tipo" %}',
 					type: 'get',
 					success: function (data) {
 						if (data) {

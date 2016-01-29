@@ -37,11 +37,15 @@ urlpatterns =[
 
 	# url(r'^editar-cuenta/$', views.EditarUsuarioEstudianteView.as_view(), name="editar-cuenta"),
 
+	url(r'^universidad-busqueda/$', views.UniversidadBusquedaView.as_view(), name="universidad-busqueda"),
+
 	url(r'^pais-busqueda/$', views.PaisBusquedaView.as_view(), name="pais-busqueda"),
 
 	url(r'^ciudad-busqueda/$', views.CiudadBusquedaView.as_view(), name="ciudad-busqueda"),
 
 	url(r'^carrera-busqueda/$', views.CarreraBusquedaView.as_view(), name="carrera-busqueda"),
+
+	url(r'^carrera-busqueda-por-tipo/$', views.CarreraBusquedaPorTipoView.as_view(), name="carrera-busqueda-por-tipo"),
 
 	url(r'^periodos-graduacion-busqueda/$', views.PeriodosGraduacionBusquedaView.as_view(), name="periodos-graduacion-busqueda"),
 

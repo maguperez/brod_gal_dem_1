@@ -7,7 +7,7 @@ from  django.utils.dateparse import parse_date
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
-from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion
+from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion, Universidad
 from . import forms
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
@@ -15,6 +15,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.core.context_processors import csrf
 from django.core import serializers
+from django.db.models import Q
 
 def homepage1(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
@@ -204,6 +205,13 @@ def terminos_condiciones(request):
 def error404 (request):
     return render_to_response('404.html',
                               context_instance=RequestContext(request))
+class UniversidadBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        universidades = Universidad.objects.filter(Q(descripcion__icontains=busqueda))
+        data = serializers.serialize('json', universidades,
+                                     fields=('id','descripcion','nemonico'))
+        return HttpResponse(data, content_type='application/json')
 
 class PaisBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
@@ -221,10 +229,18 @@ class CiudadBusquedaView(LoginRequiredMixin, TemplateView):
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
 
-class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
+class CarreraBusquedaPorTipoView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         tipo = request.GET['tipo']
-        carreras = Carrera.objects.filter(tipo_carerra_id =tipo )
+        carreras = Carrera.objects.filter(tipo_carrera_id =tipo )
+        data = serializers.serialize('json', carreras,
+                                     fields=('id','descripcion'))
+        return HttpResponse(data, content_type='application/json')
+
+class CarreraBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        carreras = Carrera.objects.filter(Q(descripcion__icontains=busqueda))
         data = serializers.serialize('json', carreras,
                                      fields=('id','descripcion'))
         return HttpResponse(data, content_type='application/json')
