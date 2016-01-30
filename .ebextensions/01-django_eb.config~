@@ -13,7 +13,3 @@ option_settings:
     PYTHONPATH: "/opt/python/current/app/broderjobs:$PYTHONPATH"
   "aws:elasticbeanstalk:container:python":
     WSGIPath: "broderjobs/broderjobs/wsgi.py"
-
-
-
-
