@@ -1,23 +1,65 @@
 {%load staticfiles %}
-
+<style>
+    .introduccion, .error, .finalizo{
+        margin: 30px;
+    }
+    .introduccion h3, .error h3, .finalizo h3{
+            font-family: 'Roboto Condensed';
+    margin-bottom: 25px;
+    font-weight: normal;
+    font-size: 1.7em;
+        color: #5d9cf9;
+    }
+    .introduccion p, .error p, .finalizo p{
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    .introduccion ul li{
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        margin-left: 25px;
+    }
+    .introduccion li:before {
+        font-family: 'FontAwesome';
+        content: '\f00c';
+        margin:0 5px 0 -25px;
+        color: #5d9cf9;
+        }
+    .introduccion .fa-exclamation-circle{
+        color: #f50;
+    }
+    .error .fa-exclamation-circle{
+        color: #b40002;
+    }
+    .introduccion .info{
+        font-family: 'Roboto Condensed';
+        font-size: 1.3em;
+        text-align: center;
+        width: 80%;
+        margin: 50px auto 0px;
+    }
+</style>
 <!--&lt;!&ndash;<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>&ndash;&gt;-->
 <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
- <section class = "">
-     <div class="row introduccion">
-                         <div class="col-sm-12"><h3>Test</h3></div>
-                         <div class="col-sm-12">Instrucciones: </div>
-                         <div class="col-sm-12">
-                         <p>Se presentan una serie de preguntas, para cada una debes elegir cual es la que MÁS te describe,
-                             y cual te describe MENOS.
-                         </p>
-                             <ul>
-                                 <li> - Debes completar el test de lo contrario las respuestas no se almacenaran,
-                                        si no puedes terminarlo ahora selecciona <b>En otro momento</b> para realizarlo nuevamente</li>
-                                 <li> - Porfavor se se cuidadoso, una vez seleccionada las opciones no podrás regresar de pregunta</li>
-                                 <li> - No hay limite de tiempo, puedes hacerlo con calma, tratar de ser lo más sincero posible</li>
-                             </ul>
-                         </div>
-                     </div>
+ <section>
+     <div class="introduccion">
+         <div class="row">
+             <div class="col-sm-12"><h3 class="title"><i class="fa fa-pencil-square-o"></i>  ¡Queremos conocerte!</h3></div>
+             <div class="col-sm-12">
+                <p>Cuéntanos cómo eres, respondiendo a las siguientes preguntas dinos con cual te identificas mas
+                    <i class="fa fa-thumbs-o-up"></i> y cuál crees que te describe menos <i class="fa fa-thumbs-o-down"></i>.</p>
+                 <p>Para ello ten encuenta que:</p>
+                <ul>
+                    <li> Debes completar el test, de lo contrario las respuestas no se almacenarán,
+                    sí no puedes terminarlo ahora selecciona <i>En otro momento</i>.</li>
+                    <li>Por favor se cuidadoso, una vez seleccionada las opciones no podrás regresar a la pregunta anterior.</li>
+                    <li>No hay limite de tiempo, puedes hacerlo con calma, tratar de ser lo más sincero posible.</li>
+                </ul>
+                 <p class="info"><i class="fa fa-exclamation-circle"></i><b> Ten en cuenta que no hay respuestas malas ni buenas,
+                     solo queremos saber más acerca de ti!</b></p>
+             </div>
+         </div>
+     </div>
      <div id = "wizard">
          <div class="wizard-progress wizard-progress-lg">
              <ul class="wizard-steps">
@@ -40,14 +82,13 @@
  </section>
      <div class="row finalizo">
          <div class="col-sm-12"><h3>Test</h3></div>
-         <div class="col-sm-12">¡Test realizado satisfactoriamente!: </div>
+         <div class="col-sm-12">¡Test realizado satisfactoriamente!</div>
          <div class="col-sm-12">
             <p>Gracias por completar el Test, el mismo te ayudara a encontrar las oportunidades perfectas para ti.</p>
          </div>
      </div>
      <div class="row error">
-         <div class="col-sm-12"><h3>Test</h3></div>
-         <div class="col-sm-12">¡Error!: </div>
+         <div class="col-sm-12"><h3><i class="fa fa-exclamation-circle"></i>¡Error!: </h3></div>
          <div class="col-sm-12">
             <p>Lo lamentamos hubo un error, debes comenzar nuevamente.</p>
          </div>
@@ -105,53 +146,62 @@
                     console.log(x);
                 },
                 success: function(preguntas){
-                    $.each(preguntas, function(i, pregunta) {
-                        $(".wizard-steps").append(
-                                '<li'+(i==0 ? ' class="active"':"")+'>'+
-                                    '<a href="#tab'+i+'" data-toggle="tab"></a>'+
-                                '</li>'
-                        );
-                        $(".tab-content").append(
-                                '<div class="tab-pane '+(i==0 ? 'active':'')+'" id="tab'+i+'" data-id="'+pregunta.id+'"' +
-                                ' data-info="'+i+'">'+
-                                    '<div class = "row">'+
-                                        '<div class = "col-sm-12">'+pregunta.descripcion+'</div>'+
-                                    '</div>'+
-                                    '<div class = "row">'+
-                                        '<div class = "col-sm-6"></div>'+
-                                        '<div class = "col-sm-3">Más</div>'+
-                                        '<div class = "col-sm-3">Menos</div>'+
-                                    '</div>'+
-                                '</div>'
-                        );
-                        $.each(pregunta.respuestas, function(j, respuesta) {
-                            $(".tab-content #tab"+i).append(
-                                    '<div class = "row">'+
-                                        '<div class = "col-sm-6">'+respuesta.descripcion+'</div>'+
-                                        '<div class = "col-sm-3"><input type = "radio" name = "mas'+pregunta.id+'" value = "'+respuesta.id+'"></div>'+
-                                        '<div class = "col-sm-3"><input type = "radio" name = "menos'+pregunta.id+'" value = "'+respuesta.id+'"></div>'+
+                    if(preguntas.length  > 0 ) {
+                        $.each(preguntas, function (i, pregunta) {
+                            $(".wizard-steps").append(
+                                    '<li' + (i == 0 ? ' class="active"' : "") + '>' +
+                                    '<a href="#tab' + i + '" data-toggle="tab"></a>' +
+                                    '</li>'
+                            );
+                            $(".tab-content").append(
+                                    '<div class="tab-pane ' + (i == 0 ? 'active' : '') + '" id="tab' + i + '" data-id="' + pregunta.id + '"' +
+                                    ' data-info="' + i + '">' +
+                                    '<div class = "row">' +
+                                    '<div class = "col-sm-12">' + pregunta.descripcion + '</div>' +
+                                    '</div>' +
+                                    '<div class = "row">' +
+                                    '<div class = "col-sm-6"></div>' +
+                                    '<div class = "col-sm-3">Más</div>' +
+                                    '<div class = "col-sm-3">Menos</div>' +
+                                    '</div>' +
                                     '</div>'
                             );
+                            $.each(pregunta.respuestas, function (j, respuesta) {
+                                $(".tab-content #tab" + i).append(
+                                        '<div class = "row">' +
+                                        '<div class = "col-sm-6">' + respuesta.descripcion + '</div>' +
+                                        '<div class = "col-sm-3"><input type = "radio" name = "mas' + pregunta.id + '" value = "' + respuesta.id + '"></div>' +
+                                        '<div class = "col-sm-3"><input type = "radio" name = "menos' + pregunta.id + '" value = "' + respuesta.id + '"></div>' +
+                                        '</div>'
+                                );
+                            });
+                            $(".tab-content #tab" + i).append('</ul></li>');
                         });
-                        $(".tab-content #tab"+i).append('</ul></li>');
-                    });
-                    $('.wizard-progress').bootstrapWizard({
-                        tabClass: 'wizard-steps',
-                        onTabShow: function( tab, navigation, index ) {
-                            var $total = navigation.find('li').length - 1;
-                            var $current = index;
-                            var $percent = Math.floor(( $current / $total ) * 100);
+                        $('.wizard-progress').bootstrapWizard({
+                            tabClass: 'wizard-steps',
+                            onTabShow: function (tab, navigation, index) {
+                                var $total = navigation.find('li').length - 1;
+                                var $current = index;
+                                var $percent = Math.floor(( $current / $total ) * 100);
 
-                            $('#wizard').find('.progress-bar').css({ 'width': $percent + '%' });
-                            $current >= $total ?
-                                $("#btn-guardar").show() :
-                                    $("#btn-guardar").hide();
-                            return false;
-                        }
+                                $('#wizard').find('.progress-bar').css({'width': $percent + '%'});
+                                $current >= $total ?
+                                        $("#btn-guardar").show() :
+                                        $("#btn-guardar").hide();
+                                return false;
+                            }
                         }, 5000);
 
-                    //$(".tab-pane.active").on("click", "input", function(){
-
+                        //$(".tab-pane.active").on("click", "input", function(){
+                    }else{
+                        $('#wizard').hide();
+                        $('.finalizo').show();
+                        $('#btn-guardar').hide();
+                        $('#btn-cancelar').hide();
+                        $('#btn-cerrar').show();
+//                        $('#preguntas-alert').html("");
+                        $('#preguntas-alert').hide();
+                    }
                 },
             });
 

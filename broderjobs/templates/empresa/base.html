@@ -172,50 +172,45 @@
 				}, scroll_top_duration
 			);
 		});
-	})
-	$('#menu').click(function() {
-		if ($('#ctx-menu-header').hasClass('active'))
-			$('#ctx-menu-header').removeClass('active');
-		else
-			$('#ctx-menu-header').addClass('active')
-	});
-	$('.popup').click(function(e) {
-		if ( $(e.target).closest('.popup-box').length === 0 ) {
+		});
+		$('#menu').click(function() {
+			if ($('#ctx-menu-header').hasClass('active'))
+				$('#ctx-menu-header').removeClass('active');
+			else
+				$('#ctx-menu-header').addClass('active')
+		});
+		$('.popup').click(function(e) {
+			if ( $(e.target).closest('.popup-box').length === 0 ) {
+				window.history.back();
+				$('body').removeClass('static');
+			}
+		});
+		$("body").on("click", function(e){
+			if ($("#"+e.target.id).parents("#menu-oportunidad").length == 0 &&
+				$('#menu-oportunidad').hasClass("active") && flag){
+				$('#menu-oportunidad').removeClass('active');
+			}
+			flag = true;
+		});
+		$('.popup .close').click(function(e) {
 			window.history.back();
 			$('body').removeClass('static');
+		});
+		function opciones() {
+			flag = false;
+			if ($('#menu-oportunidad').hasClass('active'))
+				$('#menu-oportunidad').removeClass('active');
+			else
+				$('#menu-oportunidad').addClass('active')
 		}
+		window.onload = function(){
+					$(".loading-wrapper").hide();
+				}
+		$('#notifications-header').click(function(){
+					$.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
+			$('#cantidad-notificaciones').html("0");
+		});
 	});
-	$("body").on("click", function(e){
-		if ($("#"+e.target.id).parents("#menu-oportunidad").length == 0 &&
-			$('#menu-oportunidad').hasClass("active") && flag){
-			$('#menu-oportunidad').removeClass('active');
-		}
-		flag = true;
-	});
-	$('.popup .close').click(function(e) {
-		window.history.back();
-		$('body').removeClass('static');
-	});
-//	$('a').click(function(event) {
-//		var id = event.target.href.substr(event.target.href.lastIndexOf('#'))
-//        if ($(id).hasClass('popup'))
-//			$('body').addClass('static');
-//    });
-	function opciones() {
-		flag = false;
-		if ($('#menu-oportunidad').hasClass('active'))
-			$('#menu-oportunidad').removeClass('active');
-		else
-			$('#menu-oportunidad').addClass('active')
-	}
-	window.onload = function(){
-                $(".loading-wrapper").hide();
-            }
-	$('#notifications-header').click(function(){
-                $.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
-			        $('#cantidad-notificaciones').html("0");
-		        });
-           });
 
 </script>
 {% block js %}

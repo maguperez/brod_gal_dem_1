@@ -45,6 +45,10 @@ urlpatterns = [
 
 	url(r'^empresa-detalle/(?P<id>\d+)/$', views.EmpresaDetalleView.as_view(), name="estudiante_empresa_detalle"),
 
+	# url(r'^universidad-busqueda/$', views.UniversidadBusquedaView.as_view(), name="universidad-busqueda"),
+    #
+	# url(r'^carrera-busqueda/$', views.CarreraBusquedaView.as_view(), name="carrera-busqueda"),
+
 	url(r'^estudiante-empresa-busqueda/$', views.EstudianteEmpresaBusquedaView.as_view(), name="empresa-busqueda"),
 
 	url(r'^estudiante-puesto-busqueda/$', views.EstudiantePuestoBusquedaView.as_view(), name="puesto-busqueda"),
@@ -65,7 +69,6 @@ urlpatterns = [
 
 	url(r'^proceso-detalle/(?P<id>\d+)/$', views.ProcesoDetalleView.as_view(), name="estudiante-proceso-detalle"),
 
-	url(r'^cv-pdf/(?P<id>\d+)/$', 'estudiante.views.cv_pdf', name='cv-pdf'),
 
 ]
 

@@ -518,6 +518,12 @@ class PictureListView(ListView):
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
 
+def empresa_slider_imagenes(request, id):
+    # id = request.GET.get('id')
+    imagenes = Picture.objects.filter(empresa_id = id)
+    return render_to_response('empresa/mi-empresa-slider-imagenes.html', {'imagenes': imagenes},
+                              context_instance = RequestContext(request))
+
 def generar_pdf(html):
     # Función para generar el archivo PDF y devolverlo mediante HttpResponse
     # result = StringIO.StringIO()

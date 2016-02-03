@@ -122,13 +122,18 @@
                                                 <option value="{{p.id}}">{{p.titulo}}</option>
                                             {%endfor%}
                                         </select>
+                                         <input type="checkbox" id="sin-respuesta"/> Sin Respuesta
                                     </div>
                                     <div class="pull-right">
-                                        <div id="enviar_mensaje" data-rel="tooltip" title="" class="icon-rounded m-r-10"
-                                             data-original-title="Send" data-placement="bottom"><i class="fa fa-send"></i>
-                                        </div>
-                                        <input type="checkbox" id="permite_respuesta"> Sin Respuesta
+
                                     </div>
+                                    <div class="pull-right">
+
+                                        <div id="enviar_mensaje" data-rel="tooltip" title="" class="icon-rounded m-r-10"
+                                             data-original-title="Enviar" data-placement="bottom"><i class="fa fa-send"></i>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <br>
                                 <!--<div class="input-group input-group-lg border-bottom">-->
@@ -296,7 +301,7 @@
             form.append('o',$('#oportunidad_redactar_id').val());
             form.append('a',$('.asunto').val());
             form.append('c',$('.note-codable').val());
-            form.append('p','S');
+            form.append('p', $('#sin-respuesta').is(':checked')? 'N' : 'S');
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 
             $.ajax({

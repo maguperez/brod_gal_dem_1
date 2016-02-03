@@ -39,6 +39,7 @@ urlpatterns = [
 
     url(r'^candidato-cv-pdf/$', 'empresa.views.canditado_cv_pdf', name="empresa-candidato-cv-pdf"),
 
+    url(r'^mi-empresa/slider-imagenes/(?P<id>\d+)/$', 'empresa.views.empresa_slider_imagenes', name="empresa-slider-imagenes"),
     url(r'^mi-empresa/delete/(?P<pk>\d+)$', views.PictureDeleteView.as_view(), name='upload-delete'),
     url(r'^mi-empresa/imagenes/$', views.PictureCreateView.as_view(), name='upload-new'),
     url(r'^mi-empresa/imagenes/view/$', views.PictureListView.as_view(), name='upload-view'),

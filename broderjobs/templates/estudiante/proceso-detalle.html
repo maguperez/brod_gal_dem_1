@@ -97,7 +97,7 @@
 												<td class="{%if m.leido%}leido{%else%}noleido{%endif%}">
 													{{m.mensaje.asunto}}!</td>
 												<td class="{%if m.leido%} leido{%else%}noleido{%endif%}">
-												{{m.fecha_creacion}}</td>
+												{{m.fecha_creacion | date:"j/m/Y"}}</td>
 											</tr>
 											{% endfor %}
 											{% else %}

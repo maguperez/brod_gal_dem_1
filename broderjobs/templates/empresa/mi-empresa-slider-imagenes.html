@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<div class="slider">
+    <div class="owl-carousel">
+    {%if imagenes%}
+		{%for i in imagenes.all%}
+            <div class="item">
+            <!--<img src="{%static 'img/oficina-11.png' %}"/>-->
+			<img src="{{i.set_imagen}}"/></div>
+        {%endfor%}
+		{%else%}
+		<div class="item">
+            <img src="{%static 'img/imagen-default-mensaje.png' %}"/>
+        </div>
+    {%endif%}
+    </div>
+</div>
+<input type="hidden" id="cant_imagenes" value="{{imagenes | length}}">
+<script>
+     $(function(){
+		var initial_img = 2;
+        if($('#cant_imagenes').val() > 1)
+            initial_img = 1;
+	     $('.owl-carousel').owlCarousel({
+			 autoPlay: true,
+             items:initial_img ,
+		     singleItem: true,
+             loop: true,
+             margin: 10,
+             pagination: true,
+
+		 });
+	 });
+</script>

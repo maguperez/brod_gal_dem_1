@@ -28,16 +28,17 @@ def preguntas_estudiante(request):
     return HttpResponse(data, content_type='application/json')
 
 def formulario_estudiante(request):
+    estudiante = Estudiante.objects.get(persona__usuario = request.user.id)
     preguntas = []
-    respuestas = []
-    Preg = Pregunta.objects.filter()[:3]
-    for p in Preg:
-        respuestas = []
-        for r in Respuesta.objects.filter(pregunta_id = p.id):
-            respuesta={'id': r.id, 'descripcion': r.descripcion, 'letra':r.letra}
-            respuestas.append(respuesta)
-        pregunta = {'id': p.id, 'descripcion': p.descripcion, 'respuestas': respuestas }
-        preguntas.append(pregunta)
+    Preg = Pregunta.objects.filter()
+    if estudiante.completo_test == False:
+        for p in Preg:
+            respuestas = []
+            for r in Respuesta.objects.filter(pregunta_id = p.id):
+                respuesta={'id': r.id, 'descripcion': r.descripcion}
+                respuestas.append(respuesta)
+            pregunta = {'id': p.id, 'descripcion': p.descripcion, 'respuestas': respuestas }
+            preguntas.append(pregunta)
     return render_to_response('disc/formulario-estudiante.html',{'preguntas': preguntas},
                               context_instance=RequestContext(request))
 

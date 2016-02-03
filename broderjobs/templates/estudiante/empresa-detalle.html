@@ -580,6 +580,7 @@
         <a class="close">Cerrar</a>
     </div>
 </div>
+<input id="cant_imagenes" type="hidden" value="{{imagenes|length}}">
 <style>
     .owl-carousel {
         height:369px;
@@ -603,9 +604,12 @@
 <script>
     var animationInterval = 0;
     $(function () {
+        var initial_img = 2;
+        if($('#cant_imagenes').val() > 1)
+            initial_img = 1;
         $('.owl-carousel').owlCarousel({
 			 autoPlay: true,
-             items: {%if imagenes|length > 0%} 1 {%else%} 2 {%endif%},
+             items: initial_img,
 		     singleItem: true,
              loop: true,
              margin: 10,
