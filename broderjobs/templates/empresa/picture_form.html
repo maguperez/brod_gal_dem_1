@@ -15,7 +15,6 @@
 </style>
 
 <div class="">
-
     <!-- The file upload form used as target for the file upload widget -->
     <form id="fileupload" method="post" action="{%url 'upload-new'%}" enctype="multipart/form-data">{% csrf_token %}
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -59,6 +58,35 @@
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
     </form>
     <br>
+</div>
+
+<div class="videos">
+     <div class="row">
+            <div class="col-lg-12">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success video-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Agregar URL de video...</span>
+                    <input type="file" name="file" multiple>
+                </span>
+                <button type="button" class="btn btn-danger delete">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Eliminar</span>
+                </button>
+                <input type="checkbox" class="toggle">
+                <!-- The loading indicator is shown during file processing -->
+                <span class="fileupload-loading"></span>
+            </div>
+            <!-- The global progress information -->
+            <div class="col-lg-12 fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                <!-- The extended global progress information -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+     </div>
 </div>
 <!-- The blueimp Gallery widget -->
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
