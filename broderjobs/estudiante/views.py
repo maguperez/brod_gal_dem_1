@@ -1198,7 +1198,7 @@ def cv_pdf(request, id = "0"):
 
     template = get_template("estudiante/estudiante-cv-pdf.html")
     context = Context({'pagesize':'A4','estudiante': estudiante,
-                                        'edad': edad,
+                                        # 'edad': edad,
                                         'resumen': resumen,
                                         'conocimientos_extras':conocimientos_extras,
                                         'actividades_extra': actividades_extra,
