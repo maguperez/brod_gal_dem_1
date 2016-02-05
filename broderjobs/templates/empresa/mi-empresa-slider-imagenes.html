@@ -12,6 +12,14 @@
             <img src="{%static 'img/imagen-default-mensaje.png' %}"/>
         </div>
     {%endif%}
+    {% if videos %}
+
+    {% for video in videos.all %}
+       <div class="item-video">
+            <a class="owl-video" href="{{ video.url }}"></a>&ndash;&gt;-->
+        </div>
+    {% endfor %}
+    {% endif %}
     </div>
 </div>
 <input type="hidden" id="cant_imagenes" value="{{imagenes | length}}">

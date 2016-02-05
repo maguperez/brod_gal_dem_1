@@ -21,3 +21,5 @@ admin.site.register(models.Picture)
 
 admin.site.register(models.EmpresaRedesSociales)
 
+admin.site.register(models.VideoUrl)
+

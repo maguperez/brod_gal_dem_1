@@ -1276,7 +1276,7 @@ a:hover {
     background-color: white;
     margin-bottom: -2px;
 }
-#user-header .portrait {width: 36px; height: 36px; /*float: right; margin: 0 10px 0 25px; */border: 1px solid #fff; border-radius: 50%;}
+#user-header .portrait {width: 36px; height: 36px; /*float: right; margin: 0 10px 0 25px; border: 1px solid #fff;*/ border-radius: 50%;}
 .notify #notifications-header .dropdown-toggle {background: transparent url('../img/icons/procesos.png') 0 0 no-repeat; margin-top: 10px; height: 18px;}
 .withScroll {height: auto;overflow: auto;overflow:hidden;}
 .notify.nav .open>a, .notify.nav .open>a:focus, .notify.nav .open>a:hover, .notify.nav { background-color: transparent !important;}

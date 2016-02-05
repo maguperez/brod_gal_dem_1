@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.views.generic import UpdateView
 from django.views.generic import TemplateView, FormView
 from django.core.urlresolvers import reverse_lazy
-from .models import Puesto, Empresa, Representante, Sector, Empresa_Imagenes, Picture, EmpresaRedesSociales
+from .models import Puesto, Empresa, Representante, Sector, Picture, EmpresaRedesSociales, VideoUrl
 from main.models import Persona, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma
 from oportunidad.models import Oportunidad, Postulacion
 from estudiante.models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
@@ -50,6 +50,7 @@ class MiEmpresaView(FormView):
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
+        videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
         redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
 
@@ -58,6 +59,7 @@ class MiEmpresaView(FormView):
         context['oportunidades'] = oportunidades
         context['imagenes'] = imagenes
         context['redes_sociales'] = redes_sociales
+        context['videos'] = videos
 
         return context
 
@@ -517,6 +519,41 @@ class PictureListView(ListView):
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
+
+def video_url_create(request):
+    url = request.POST['url']
+    try:
+        representante = Representante.objects.get(persona__usuario = request.user.id)
+        empresa = Empresa.objects.get(id = representante.empresa.id)
+        video_url = VideoUrl()
+        video_url.empresa = empresa
+        video_url.url = url
+        video_url.save()
+        data = video_url.id
+    except Exception:
+        data = "-1"
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def video_url_delete(request):
+    id = request.POST['id']
+
+    try:
+        video_url = VideoUrl.objects.get(id =id).delete()
+        data = "0"
+    except:
+        data = "-1"
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
+def video_url_list(request):
+    videos = VideoUrl.objects.filter()
+    data = serializers.serialize('json', videos,
+                                     fields=('id','url'))
+    return HttpResponse(data, content_type='application/json')
+
 
 def empresa_slider_imagenes(request, id):
     # id = request.GET.get('id')

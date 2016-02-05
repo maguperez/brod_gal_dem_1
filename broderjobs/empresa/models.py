@@ -230,6 +230,14 @@ class Picture(models.Model):
         else:
             return "/static/img/profile/profile_default.png"
 
+class VideoUrl(models.Model):
+
+    url = models.URLField(default=None, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.url
+
 class EmpresaRedesSociales(models.Model):
 
     empresa = models.ForeignKey(Empresa)

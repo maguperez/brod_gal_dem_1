@@ -44,6 +44,10 @@ urlpatterns = [
     url(r'^mi-empresa/imagenes/$', views.PictureCreateView.as_view(), name='upload-new'),
     url(r'^mi-empresa/imagenes/view/$', views.PictureListView.as_view(), name='upload-view'),
 
+    url(r'^mi-empresa/video-delete/$', 'empresa.views.video_url_delete', name='empresa-video-delete'),
+    url(r'^mi-empresa/video-create/$','empresa.views.video_url_create', name='empresa-video-create'),
+    url(r'^mi-empresa/video-list/view/$', 'empresa.views.video_url_list', name='empresa-video-list'),
+
 ]
 
 handler404 = 'app.views.404_view'

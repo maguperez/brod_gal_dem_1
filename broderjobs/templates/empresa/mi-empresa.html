@@ -28,7 +28,7 @@
 					<!--<button id="logo-button" class="editar btn-edit">Editar</button>-->
 					<img class="imagen" src="{{empresa.set_logo}}" />
 					<div class="botones-imagen" style="visibility:hidden;">
-						<a id="editar-imagen"  data-toggle="tooltip" data-placement="top"
+						<a id="btn-logo"  data-toggle="tooltip" data-placement="top"
 						 title="Se recomienda que las dimensiones de la imagen sean mayores a 230x230 píxeles"><i class="fa fa-pencil"></i></a>
 						<a id="remover-imagen"><i class="fa fa-times"></i></a>
 					</div>
@@ -385,7 +385,7 @@
 		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('redes-sociales/', function () {
         	$('#form-modal').modal('toggle');
-			//formAjaxSubmit('#form-modal-body form', '#form-modal');
+			//formAjaxSubmit('#form-modal-body form', '#editar-imagenform-modal');
 		 });
 	 });
 	 $('#btn-imagenes').click(function() {
