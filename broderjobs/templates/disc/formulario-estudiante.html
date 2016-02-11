@@ -90,7 +90,7 @@
      <div class="row error">
          <div class="col-sm-12"><h3><i class="fa fa-exclamation-circle"></i>¡Error!: </h3></div>
          <div class="col-sm-12">
-            <p>Lo lamentamos hubo un error, debes comenzar nuevamente.</p>
+            <p>Lo lamentamos, tus respuestas no fueron concluyentes debes completar el test nuevamente.</p>
          </div>
      </div>
 <style>
@@ -252,10 +252,9 @@
                         $('#btn-guardar').hide();
                         $('#btn-cancelar').hide();
                         $('#btn-cerrar').show();
-//                        $('#preguntas-alert').html("");
                         $('#preguntas-alert').hide();
                     }
-                    else if(data == "-1"){
+                    else {
                         $('#wizard').hide();
                         $('.error').show();
                         $('#btn-guardar').hide();

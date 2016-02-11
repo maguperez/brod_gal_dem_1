@@ -35,6 +35,8 @@ def obtener_patron(estudiante):
         estudiante_patron.patron = nro_patron
         estudiante_patron.patron_perfil = patron_perfil
         estudiante_patron.save()
+        if patron_perfil.no_concluyente == True:
+            resp = "-1"
     except:
         nro_patron = "-1"
         # resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()

@@ -79,9 +79,9 @@ def finalizo_estudiante(request):
                     estudiante.completo_test = True
                     estudiante.save()
                     data = "1"
+                    # realizo el test correctamente
                 else:
                     data = "-1"
-                # realizo el test correctamente
             else:
                 resp = EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).delete()
                 data = "-1"

@@ -88,7 +88,8 @@ class DiscCodificacion(models.Model):
 
 class Perfil(models.Model):
 
-    descripcion = models.TextField(default=None, null=True, blank=True,  )
+    descripcion = models.TextField(default=None, null=True, blank=True, )
+    no_concluyente = models.BooleanField(default=False, blank=True)
     orden = models.IntegerField(default=None, null=True, blank=True )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
