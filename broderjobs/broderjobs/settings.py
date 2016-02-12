@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'mensaje',
     'contador_visitas',
     'disc',
+    'cultura_empresarial',
 
 
 )
@@ -88,6 +89,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'estudiante.context_processors.estudiante_foto',
                 'estudiante.context_processors.notificaciones',
+                # 'cultura_empresarial.context_processors.calcular_cultura_empresa',
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
