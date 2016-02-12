@@ -129,12 +129,10 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 					<section class="ubicacion">
 						<h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>
 						<div style="margin:0 50px">
-							<div id = "id_direccion_map">{{oportunidad.direccion_map}}</div>
-							<i class = "fa fa-map-marker"></i>
-							<label><b>Latitud:</b></label>
-							<span id = "id_longitud">{{oportunidad.longitud}}</span> -
-							<label><b>Longitud:</b></label>
-							<span id = "id_latitud">{{oportunidad.latitud}}</span><br><br>
+							<div><i class = "fa fa-map-marker"></i>
+                                <span id = "id_direccion_map">{{oportunidad.direccion_map}}</span></div>
+							<span id = "id_longitud" style = "display:none">{{oportunidad.longitud}}</span>
+							<span id = "id_latitud" style = "display:none">{{oportunidad.latitud}}</span><br><br>
 						</div>
 						<div id = "map" style = "height: 350px; width: 100%"></div><!--
 						<div class="detalle">

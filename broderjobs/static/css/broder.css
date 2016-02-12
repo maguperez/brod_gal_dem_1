@@ -44,8 +44,20 @@ p {text-align: justify; line-height: 20px;}
 }
 
 /**GENERAL DE AUTOCOMPLETE*/
-.typeahead .active a{
+/*.typeahead .active a{
     color: #3276b1 !important;
+}*/
+.typeahead li.active {
+    background-color: #5897fb;
+    color: white;
+}
+.typeahead li {
+    line-height: 20px;
+    padding: 6px;
+}
+.typeahead li a {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
 }
 
 /*CONTROLES*/
@@ -542,9 +554,9 @@ header.menu .centered { height: 47px; }
 .cv header .detalle {margin: 20px 0 0 60px; max-width: 240px;}
 .cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
 .cv header .detalle label {margin-top: 10px; display: block; font-size: 14px;}
-.cv .timeline .fecha {font-size: 0.8em !important;}
-.cv .timeline .tipo {margin-top: 12px; font-size: 0.95em !important;}
-.cv .timeline .nombre {margin-bottom: 15px; font-weight: normal !important; font-size: 0.9em !important;}
+.cv .timeline .fecha {font-size: 12px !important;}
+.cv .timeline .tipo {margin-top: 12px; font-size: 14px !important;}
+.cv .timeline .nombre {margin-bottom: 15px; font-weight: normal !important; font-size: 13px !important;}
 .cv .wizard {padding: 24px;}
 .cv .wizard h4 {margin-bottom: 5px; font-size: 14px; color: #848484; font-weight: bold;}
 .cv .wizard i {margin: 16px 10px -3px 0; display: inline-block;}

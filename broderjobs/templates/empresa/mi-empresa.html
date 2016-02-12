@@ -138,12 +138,10 @@
 						<div>
 
 
-							<div id = "empresa-id_direccion_map">{{empresa.direccion_map}}</div>
-                            <i class = "fa fa-map-marker"></i>
-                            <label><b>Latitud:</b></label>
-                            <span id = "empresa-id_longitud">{{empresa.longitud}}</span> -
-                            <label><b>Longitud:</b></label>
-                            <span id = "empresa-id_latitud">{{empresa.latitud}}</span><br><br>
+							<div><i class = "fa fa-map-marker"></i>
+                            <span id = "empresa-id_direccion_map" >{{empresa.direccion_map}}</span></div>
+                            <span id = "empresa-id_longitud" style = "display:none">{{empresa.longitud}}</span>
+                            <span id = "empresa-id_latitud" style = "display:none">{{empresa.latitud}}</span><br><br>
 
 
 							<div id = "empresa-map" class="mapa" style="width: 630px; height: 230px"></div>
