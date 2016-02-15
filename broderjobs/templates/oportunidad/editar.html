@@ -47,7 +47,7 @@
 								<h3>Editar Oportunidad</h3>
 								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
 							</div>
-                            <div class = "col-sm-3"><label>Estado:  </label>{{form.estado_oportunidad}}</div>
+                            <div class = "col-sm-3"></div>
                             <!--<input type="submit" name="_guardar" value="GUARDAR" id="guardar" class="btn-action" />-->
 							<input type="submit" name="_cancelar" value="CANCELAR" id="cancelar" class="btn-action"/>
 							{% if oportunidad.estado_oportunidad != 'P' %}
@@ -56,7 +56,9 @@
 
 							{%else%}
 								<input type="submit" name="_abrir" value="ABRIR" id="abrir" class="btn-action"/>
-							{%endif%}
+							{%endif%}<br><br>
+                            <div style = "text-align:center; float:right"><label style = "display:inline-block">Estado: &nbsp;</label>
+                                <div style = "display: inline-block">{{form.estado_oportunidad}}</div></div>
 								<div class="clear"></div>
 
 						</header>
@@ -329,6 +331,16 @@
 </style>
 <script>
 	$(function(){
+        $('textarea').each(function(){
+            $(this).after("<div class = 'textarea-feedback'></div>");
+            var text_length = $(this).val().length;
+            $(this).next().html(text_length + ' caracteres');
+        });
+
+        $('textarea').on("keyup", function() {
+            var text_length = $(this).val().length;
+            $(this).next().html(text_length + ' caracteres');
+        });
 		$(window).scroll(function() {
 			if ( $(this).scrollTop() > 60 )
 				$(".box.alcance").addClass("fixed");
