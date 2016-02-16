@@ -3,6 +3,7 @@ from empresa.models import Empresa
 
 
 def calcular_cultura_empresa(empresa):
+    
     if EmpresaRespuestas.objects.filter(empresa_id = empresa.id).count() == PreguntaCultura.objects.filter().count():
         clan_total = EmpresaRespuestas.objects.filter(empresa_id = empresa.id, respuesta_perfil_cultura = 1 ).count()
         adhocrata_total = EmpresaRespuestas.objects.filter(empresa_id = empresa.id, respuesta_perfil_cultura = 2 ).count()
