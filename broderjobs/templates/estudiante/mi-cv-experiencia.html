@@ -54,6 +54,17 @@
 		$("#txt-descripcion").on("input", function(){
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
+        $('textarea').each(function(){
+            $(this).after("<div class = 'textarea-feedback'></div>");
+            var text_length = $(this).val().length;
+            $(this).next().html(text_length + ' caracteres');
+        });
+
+        $('textarea').on("keyup", function() {
+            var text_length = $(this).val().length;
+
+            $(this).next().html(text_length + ' caracteres');
+        });
 
 		if($("#id_descripcion").val()){
 //			$("#txt-descripcion").val($("#id_descripcion").val());

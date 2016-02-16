@@ -1493,3 +1493,9 @@ a:hover {
     -o-transition: width .6s ease;
     transition: width .6s ease;
 }
+.no-results{
+    font-family: 'Roboto Light';
+    font-size: 19px;
+    text-align:center;
+	color:#d44e4e;
+}

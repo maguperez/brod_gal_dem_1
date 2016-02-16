@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/oportunidad/crear.html" afterPath="$PROJECT_DIR$/broderjobs/templates/oportunidad/crear.html" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
     <ignored path=".idea/workspace.xml" />
