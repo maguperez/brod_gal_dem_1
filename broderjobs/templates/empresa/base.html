@@ -50,12 +50,15 @@
 			.select2-dropdown{
                 z-index: 1201;
             }
-
-			.tooltip .tooltip-inner{
+            input:not([type=submit]) + .tooltip .tooltip-inner,
+            select + .tooltip .tooltip-inner,
+            textarea + .tooltip .tooltip-inner{
 				background-color: #f50 !Important;
 			}
 
-			.tooltip .tooltip-arrow{
+			input:not([type=submit]) + .tooltip .tooltip-arrow,
+            select + .tooltip .tooltip-arrow,
+            textarea + .tooltip .tooltip-arrow{
 				border-left-color: #f50 !Important;
 				border-right-color: #f50 !Important;
 			}

@@ -8,22 +8,25 @@
 	.tooltip-manual + .tooltip, input + .tooltip, select + .tooltip {
 		width: 167px;
 	}
-
-	.tooltip-arrow{
+    .tooltip-manual + .tooltip .tooltip-arrow,
+	input:not([type=submit]) + .tooltip .tooltip-arrow,
+    select + .tooltip .tooltip-arrow{
 		top: 44.1754%;
-	}
-
-	.tooltip-manual + .tooltip .tooltip-inner, .tooltip .tooltip-inner{
-		background-color: #f50 !Important;
-	}
-
-	.tooltip-manual + .tooltip{
-		top: 0px !Important;
-	}
-
-	.tooltip-manual + .tooltip .tooltip-arrow, .tooltip .tooltip-arrow{
 		border-left-color: #f50 !Important;
 		border-right-color: #f50 !Important;
+	}
+
+	.tooltip-manual + .tooltip .tooltip-inner,
+    input:not([type=submit]) + .tooltip .tooltip-inner,
+    select + .tooltip .tooltip-inner{
+		background-color: #f50 !Important;
+	}
+    input[type=submit] + .tooltip .tooltip-inner{
+        max-width: 250px;
+        min-width: 250px;
+    }
+	.tooltip-manual + .tooltip{
+		top: 0px !Important;
 	}
 
 </style>
@@ -47,14 +50,15 @@
 			{% endif %}
 				<div class="panel left principal">
 					<div class="box">
-						<header>
+						<header class = "no-top">
 							<div class="descripcion">
 								<h2 class = "bold">ANUNCIAR OPORTUNIDAD, {{empresa}} {{empresa}}</h2>
 								<label class="indicacion">Los campos marcados con (*) son obligatorios</label>
 							</div>
-							<input type="submit" name="_anunciar" value="ANUNCIAR" id="anunciat" class="btn-action" tooltip="Guarda y coloca la Oportunidada Abierta para Inscripciones"/>
+							<input type="submit" name="_anunciar" value="ANUNCIAR" id="anunciat" class="btn-action"
+                                   data-toggle="tooltip" data-placement="top" title="Guarda y coloca la Oportunidada Abierta para Inscripciones"/>
 							<input type="submit" name="_guardar" value="ARCHIVAR" id="guardar" class="btn-action"
-							tooltip="Guarda y coloca la Oportunidada en estado archivada no visible para Inscripciones"/>
+							       data-toggle="tooltip" data-placement="top" title="Guarda y coloca la Oportunidada en estado archivada no visible para Inscripciones"/>
 							<div class="clear"></div>
 						</header>
 						<div class="content">
@@ -359,6 +363,7 @@
         },
     };
 	$(function(){
+        $("[data-toggle=tooltip]").tooltip()
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;
