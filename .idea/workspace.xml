@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/css/broder.css" afterPath="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/mi-cv.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-detalle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/registro-cv.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
@@ -35,17 +28,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.626556">
-              <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
                 <element signature="e#390#1186#0" expanded="false" />
                 <element signature="e#1230#1944#0" expanded="false" />
                 <element signature="e#1989#2892#0" expanded="false" />
                 <element signature="e#2938#4042#0" expanded="false" />
+                <element signature="e#4088#5015#0" expanded="false" />
+                <element signature="e#5058#6102#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -83,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cultura_empresarial.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cultura_empresarial.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.21091811">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#0#70#0" expanded="true" />
               </folding>
@@ -106,38 +100,6 @@
                 <element signature="e#1906#3003#0" expanded="false" />
                 <element signature="e#3043#4328#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/disc/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="options.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/contrib/admin/options.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1466" column="0" selection-start-line="1466" selection-start-column="0" selection-end-line="1466" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="decorators.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/utils/decorators.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -177,9 +139,9 @@
         <option value="$PROJECT_DIR$/broderjobs/disc/models.py" />
         <option value="$PROJECT_DIR$/broderjobs/cultura_empresarial/context_processors.py" />
         <option value="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
-        <option value="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" />
         <option value="$PROJECT_DIR$/broderjobs/cultura_empresarial/admin.py" />
         <option value="$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" />
       </list>
     </option>
   </component>
@@ -219,6 +181,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -265,7 +229,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="disc" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -283,14 +247,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cultura_empresarial" />
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oportunidad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="empresa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -564,7 +552,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455312399258</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Test funcionando">
+      <created>1455630712942</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1455630712942</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -576,10 +570,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3274648" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4753521" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24119718" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33626762" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2576687" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26533744" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -632,7 +626,8 @@
     <MESSAGE value="agregado validacion para test no concluyente" />
     <MESSAGE value="agregando tablas necesarias para cultura empresarial" />
     <MESSAGE value="test de cultura para empresas funcionando" />
-    <option name="LAST_COMMIT_MESSAGE" value="test de cultura para empresas funcionando" />
+    <MESSAGE value="Test funcionando" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test funcionando" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -653,36 +648,17 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="49" selection-end-column="64" />
-          <folding>
-            <element signature="e#1523#2991#0#HTML" expanded="false" />
-            <element signature="e#2996#7299#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/empresa/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="75" column="25" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
           <folding>
-            <element signature="e#15#72#0" expanded="true" />
+            <element signature="e#15#72#0" expanded="false" />
             <element signature="e#20137#21251#0" expanded="false" />
             <element signature="e#21294#21598#0" expanded="false" />
             <element signature="e#21637#22337#0" expanded="false" />
@@ -697,7 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -705,31 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1040" column="50" selection-start-line="1030" selection-start-column="7" selection-end-line="1040" selection-end-column="50" />
-          <folding>
-            <element signature="e#15#26#0" expanded="false" />
-            <element signature="e#13210#14271#0" expanded="false" />
-            <element signature="e#14331#18902#0" expanded="false" />
-            <element signature="e#18957#19822#0" expanded="false" />
-            <element signature="e#19926#20670#0" expanded="false" />
-            <element signature="e#20724#21411#0" expanded="false" />
-            <element signature="e#21471#25113#0" expanded="false" />
-            <element signature="e#25216#25522#0" expanded="false" />
-            <element signature="e#25628#26365#0" expanded="false" />
-            <element signature="e#26477#26608#0" expanded="false" />
-            <element signature="e#26706#30723#0" expanded="false" />
-            <element signature="e#30826#33240#0" expanded="false" />
-            <element signature="e#33349#33484#0" expanded="false" />
-            <element signature="e#33583#36590#0" expanded="false" />
-            <element signature="e#34193#34906#0" expanded="false" />
-            <element signature="e#34948#36427#0" expanded="false" />
-            <element signature="e#36694#38815#0" expanded="false" />
-            <element signature="e#38925#39049#0" expanded="false" />
-            <element signature="e#39957#41070#0" expanded="false" />
-            <element signature="e#43015#44264#0" expanded="false" />
-            <element signature="e#45129#46919#0" expanded="false" />
-            <element signature="e#46985#47945#0" expanded="false" />
-            <element signature="e#48977#51500#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -737,7 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="140" column="104" selection-start-line="140" selection-start-column="104" selection-end-line="140" selection-end-column="104" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,7 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="475" column="30" selection-start-line="475" selection-start-column="30" selection-end-line="475" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -753,10 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="49" selection-end-column="64" />
-          <folding>
-            <element signature="e#1523#2991#0#HTML" expanded="false" />
-            <element signature="e#2996#7299#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -764,7 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -773,7 +716,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
           <folding>
-            <element signature="e#15#72#0" expanded="true" />
+            <element signature="e#15#72#0" expanded="false" />
             <element signature="e#20137#21251#0" expanded="false" />
             <element signature="e#21294#21598#0" expanded="false" />
             <element signature="e#21637#22337#0" expanded="false" />
@@ -788,7 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,19 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="240" column="0" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="false" />
-            <element signature="e#307#776#0" expanded="false" />
-            <element signature="e#810#1280#0" expanded="false" />
-            <element signature="e#1326#1795#0" expanded="false" />
-            <element signature="e#1839#2308#0" expanded="false" />
-            <element signature="e#2879#4974#0" expanded="false" />
-            <element signature="e#5675#6662#0" expanded="false" />
-            <element signature="e#6705#7662#0" expanded="false" />
-            <element signature="e#7707#9024#0" expanded="false" />
-            <element signature="e#9059#10151#0" expanded="false" />
-            <element signature="e#10188#10376#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -858,7 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -881,7 +809,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding>
-            <element signature="e#15#72#0" expanded="true" />
+            <element signature="e#15#72#0" expanded="false" />
             <element signature="e#20137#21251#0" expanded="false" />
             <element signature="e#21294#21598#0" expanded="false" />
             <element signature="e#21637#22337#0" expanded="false" />
@@ -896,31 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1040" column="50" selection-start-line="1030" selection-start-column="7" selection-end-line="1040" selection-end-column="50" />
-          <folding>
-            <element signature="e#15#26#0" expanded="false" />
-            <element signature="e#13210#14271#0" expanded="false" />
-            <element signature="e#14331#18902#0" expanded="false" />
-            <element signature="e#18957#19822#0" expanded="false" />
-            <element signature="e#19926#20670#0" expanded="false" />
-            <element signature="e#20724#21411#0" expanded="false" />
-            <element signature="e#21471#25113#0" expanded="false" />
-            <element signature="e#25216#25522#0" expanded="false" />
-            <element signature="e#25628#26365#0" expanded="false" />
-            <element signature="e#26477#26608#0" expanded="false" />
-            <element signature="e#26706#30723#0" expanded="false" />
-            <element signature="e#30826#33240#0" expanded="false" />
-            <element signature="e#33349#33484#0" expanded="false" />
-            <element signature="e#33583#36590#0" expanded="false" />
-            <element signature="e#34193#34906#0" expanded="false" />
-            <element signature="e#34948#36427#0" expanded="false" />
-            <element signature="e#36694#38815#0" expanded="false" />
-            <element signature="e#38925#39049#0" expanded="false" />
-            <element signature="e#39957#41070#0" expanded="false" />
-            <element signature="e#43015#44264#0" expanded="false" />
-            <element signature="e#45129#46919#0" expanded="false" />
-            <element signature="e#46985#47945#0" expanded="false" />
-            <element signature="e#48977#51500#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -928,10 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16536964">
           <caret line="203" column="38" selection-start-line="203" selection-start-column="38" selection-end-line="203" selection-end-column="38" />
-          <folding>
-            <element signature="e#1523#2991#0#HTML" expanded="false" />
-            <element signature="e#2996#7299#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -939,7 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="140" column="104" selection-start-line="140" selection-start-column="104" selection-end-line="140" selection-end-column="104" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,7 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="475" column="30" selection-start-line="475" selection-start-column="30" selection-end-line="475" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -955,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8076925">
           <caret line="256" column="25" selection-start-line="256" selection-start-column="25" selection-end-line="256" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.461538">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -979,9 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -989,7 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.0689654">
           <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,7 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="17" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1005,7 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7636364">
           <caret line="143" column="57" selection-start-line="143" selection-start-column="57" selection-end-line="143" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,7 +901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="527" column="0" selection-start-line="527" selection-start-column="0" selection-end-line="527" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,7 +908,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,7 +915,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1037,9 +922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1047,9 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5558583">
           <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="42" selection-end-column="97" />
-          <folding>
-            <element signature="e#0#30#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,9 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1067,7 +943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1075,7 +950,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.62069">
           <caret line="85" column="58" selection-start-line="85" selection-start-column="58" selection-end-line="85" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1083,16 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0703125">
           <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="67" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#28#0" expanded="false" />
-            <element signature="e#323#1054#0" expanded="false" />
-            <element signature="e#1093#2012#0" expanded="false" />
-            <element signature="e#2061#3196#0" expanded="false" />
-            <element signature="e#3241#4258#0" expanded="false" />
-            <element signature="e#4293#5090#0" expanded="false" />
-            <element signature="e#5131#5948#0" expanded="false" />
-            <element signature="e#5993#7199#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1100,22 +964,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/disc/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-          <folding>
-            <element signature="e#608#1128#0" expanded="false" />
-            <element signature="e#1170#1865#0" expanded="false" />
-            <element signature="e#1906#3003#0" expanded="false" />
-            <element signature="e#3043#4328#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1135,21 +983,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/django/utils/decorators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-cargar-lista.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-lista.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57894737">
+          <caret line="83" column="27" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/django/contrib/admin/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1466" column="0" selection-start-line="1466" selection-start-column="0" selection-end-line="1466" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/disc/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+          <folding>
+            <element signature="e#608#1128#0" expanded="false" />
+            <element signature="e#1170#1865#0" expanded="false" />
+            <element signature="e#1906#3003#0" expanded="false" />
+            <element signature="e#3043#4328#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="e#390#1186#0" expanded="false" />
+            <element signature="e#1230#1944#0" expanded="false" />
+            <element signature="e#1989#2892#0" expanded="false" />
+            <element signature="e#2938#4042#0" expanded="false" />
+            <element signature="e#4088#5015#0" expanded="false" />
+            <element signature="e#5058#6102#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1163,24 +1051,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/contrib/admin/options.py">
+    <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1466" column="0" selection-start-line="1466" selection-start-column="0" selection-end-line="1466" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.626556">
-          <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.21091811">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#390#1186#0" expanded="false" />
-            <element signature="e#1230#1944#0" expanded="false" />
-            <element signature="e#1989#2892#0" expanded="false" />
-            <element signature="e#2938#4042#0" expanded="false" />
+            <element signature="e#0#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
