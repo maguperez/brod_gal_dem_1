@@ -122,7 +122,7 @@
                                                 <option value="{{p.id}}">{{p.titulo}}</option>
                                             {%endfor%}
                                         </select>
-                                         <input type="checkbox" id="sin-respuesta"/> Sin Respuesta
+                                         <input type="checkbox" id="permite-respuesta"/> Permite Respuesta
                                     </div>
                                     <div class="pull-right">
 
@@ -301,7 +301,7 @@
             form.append('o',$('#oportunidad_redactar_id').val());
             form.append('a',$('.asunto').val());
             form.append('c',$('.note-codable').val());
-            form.append('p', $('#sin-respuesta').is(':checked')? 'N' : 'S');
+            form.append('p', $('#permite-respuesta').is(':checked')? 'S' : 'N');
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 
             $.ajax({

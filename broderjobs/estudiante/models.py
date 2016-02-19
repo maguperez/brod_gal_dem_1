@@ -113,4 +113,4 @@ class ConocimientoExtra(models.Model):
         ordering = ["orden"]
 
     def __unicode__(self):
-		return unicode('s' % self.descripcion) or u''
+		return unicode(self.descripcion) or u''

@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^mi-empresa/video-delete/$', 'empresa.views.video_url_delete', name='empresa-video-delete'),
     url(r'^mi-empresa/video-create/$','empresa.views.video_url_create', name='empresa-video-create'),
     url(r'^mi-empresa/video-list/view/$', 'empresa.views.video_url_list', name='empresa-video-list'),
+    url(r'^mi-empresa/videos/$', views.VideosListView.as_view(), name='videos-list'),
 
 ]
 

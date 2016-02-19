@@ -105,16 +105,16 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'BroderJobs1',
-        # 'USER': 'broder',
-        # 'PASSWORD': 'br753des',
-        # 'HOST': '191.168.19.11',
-        # 'PORT': '5434',
         'NAME': 'BroderJobs1',
-        'USER': 'sa',
-        'PASSWORD': 'abc#123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': 'broder',
+        'PASSWORD': 'br753des',
+        'HOST': '191.168.19.11',
+        'PORT': '5434',
+        # 'NAME': 'BroderJobs1',
+        # 'USER': 'sa',
+        # 'PASSWORD': 'abc#123',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
     }
 }
 

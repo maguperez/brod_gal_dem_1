@@ -538,11 +538,13 @@ def video_url_create(request):
 
 def video_url_delete(request):
     id = request.POST['id']
-
+    user = request.user
+    persona = Persona.objects.get(usuario_id=user.id)
+    representante = Representante.objects.get(persona_id =persona.id)
     try:
-        video_url = VideoUrl.objects.get(id =id).delete()
+        video_url = VideoUrl.objects.get(id = id).delete()
         data = "0"
-    except:
+    except Exception:
         data = "-1"
 
     data = json.dumps(data)
@@ -554,6 +556,17 @@ def video_url_list(request):
                                      fields=('id','url'))
     return HttpResponse(data, content_type='application/json')
 
+class VideosListView(TemplateView):
+    template_name = 'empresa/video_form.html'
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        persona = Persona.objects.get(usuario_id=user.id)
+        representante = Representante.objects.get(persona_id =persona.id)
+        empresa = Empresa.objects.get(id=representante.empresa.id)
+        videos = VideoUrl.objects.filter(empresa_id = empresa.id)
+        context = super(VideosListView, self).get_context_data(**kwargs)
+        context['videos'] = videos
+        return context
 
 def empresa_slider_imagenes(request, id):
     # id = request.GET.get('id')

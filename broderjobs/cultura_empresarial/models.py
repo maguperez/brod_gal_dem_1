@@ -128,3 +128,49 @@ class EmpresaCultura(models.Model):
 
     def __unicode__(self):
         return unicode(self.empresa) or u''
+
+class EstudianteCultura(models.Model):
+
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    porcentaje_clan = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_adhocracia = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_jerarquico = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_racional = models.FloatField(default=None, null=True, blank=True )
+
+
+    orden = models.IntegerField(default=None, null=True, blank=True)
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["estudiante"]
+
+    def __unicode__(self):
+        return unicode(self.estudiante) or u''
+
+class EstudianteEmpresaCultura(models.Model):
+
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
+    porcentaje_clan = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_adhocracia = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_jerarquico = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_racional = models.FloatField(default=None, null=True, blank=True )
+    compatibilidad_cultural = models.FloatField(default=None, null=True, blank=True )
+
+
+    orden = models.IntegerField(default=None, null=True, blank=True)
+    usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["estudiante", "empresa"]
+
+    def __unicode__(self):
+        return unicode(self.estudiante) or u''

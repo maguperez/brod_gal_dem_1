@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import EmpresaRespuestas, PreguntaCultura, EmpresaCultura
+from .models import EmpresaRespuestas, PreguntaCultura, EmpresaCultura, EstudianteCultura, EstudianteEmpresaCultura
 from .cultura_empresarial import calcular_cultura_empresa
 
 admin.site.register(models.PerfilCultura)
@@ -35,8 +35,13 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.porcentaje_jerarquico = porcentaje_jerarquico
             empresa_cultura.porcentaje_racional = porcentaje_racional
             empresa_cultura.save()
+
         obj.save()
 
 admin.site.register(models.EmpresaRespuestas, EmpresaRespuestasAdmin)
 
 admin.site.register(models.EmpresaCultura)
+
+admin.site.register(models.EstudianteCultura)
+
+admin.site.register(models.EstudianteEmpresaCultura)

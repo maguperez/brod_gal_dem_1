@@ -144,10 +144,10 @@
                     <div class="clear"></div>
                 </div>
                 <textarea id="contenido-mensaje-enviar" placeholder="Redacte su mensaje"></textarea>
-                <!--<div class="sin-respuesta">-->
-                    <!--<input type="checkbox" id="sin-respuesta"/>-->
-                    <!--<label for="sin-respuesta">Sin respuesta </label><a>(<span class="orange">?</span>)</a>-->
-                <!--</div>-->
+                <div class="sin-respuesta">-->
+                    <input type="checkbox" id="sin-respuesta"/>-->
+                    <label for="sin-respuesta">Permitir respuesta </label><a>(<span class="orange">?</span>)</a>-->
+                </div>
             </section>
         </div>
         		<a class="close">Cerrar</a>
@@ -264,7 +264,7 @@
 		 form.append('id_p','{{postulacion.id}}');
 		 form.append('id_md', $('#mensaje_destinatario_id').val());
 		 form.append('id_u', $('#usuario_id').val());
-		 form.append('pr','S');
+		 form.append('pr', $('#permite-respuesta').is(':checked')? 'S' : 'N');
 		 form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 		     $.ajax({
                  type:"POST",
@@ -273,6 +273,7 @@
                  processData: false,
                  contentType: false,
                  success: function(x){
+                     $('#contenido-mensaje-enviar').val("");
                      window.history.back();
 					 window.history.back();
                  },

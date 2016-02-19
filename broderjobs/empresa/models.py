@@ -141,7 +141,7 @@ class EvaluacionEmpresa(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode('%s' % (self.empresa)) or u''
+        return unicode((self.empresa)) or u''
 
 class RankingEmpresa(models.Model):
 

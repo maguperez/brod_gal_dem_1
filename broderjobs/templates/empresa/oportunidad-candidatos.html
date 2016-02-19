@@ -191,9 +191,9 @@
                     <div class="clear"></div>
                 </div>
                 <textarea id="contenido-mensaje" placeholder="Redacte su mensaje"></textarea>
-                <div class="sin-respuesta">
-                    <input type="checkbox" id="sin-respuesta"/>
-                    <label for="sin-respuesta">Sin respuesta </label><a>(<span class="orange">?</span>)</a>
+                <div class="permite-respuesta">
+                    <input type="checkbox" id="permite-respuesta"/>
+                    <label for="permite-respuesta">Permitir respuesta </label><a>(<span class="orange">?</span>)</a>
                 </div>
             </section>
         </div>
@@ -523,7 +523,7 @@
              form.append('o','{{oportunidad.id}}');
              form.append('a','');
              form.append('c',$('#contenido-mensaje').val());
-             form.append('p',$('#sin-respuesta').is(':checked')? 'N' : 'S');
+             form.append('p',$('#permite-respuesta').is(':checked')? 'S' : 'N');
              form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
 
 
@@ -534,6 +534,7 @@
                  processData: false,
                  contentType: false,
                  success: function(x){
+                     $('#contenido-mensaje').val("");
                      window.history.back();
                  },
                  error: function(x){

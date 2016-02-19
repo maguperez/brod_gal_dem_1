@@ -23,7 +23,7 @@
 							{%endif%}
 						</label></div>
 					</div>
-					<div class="compatibilidad">
+					<div class="compatibilidad" data-info="{{oportunidad.empresa.id}}" id="oport-{{oportunidad.id}}">
 						<div class = "consolidado">
 							<div class="circular-bar ">
 								<div class="circular-bar-chart" data-percent="73">
@@ -107,8 +107,22 @@
 					barColor: "#5d9cf9",
 					size: 65,
 				});
-
-
 	});
+
+    var CompatibilidadJD = function(){
+        this.fnCargar = function() {
+            $.get("{% url 'estudiante-cargar-compatibilidad' %}", function(data){
+
+                $.each(data, function(i, item) {
+                   $(".candidatos").append('<option value="'+item.id+'">'+item.estudiante+'</option>');
+                    $("#oport-"data[item].id).find(".academico .circular-bar-chart").data('easyPieChart').update(data[item].compatibilidad_academica);
+                    $("#oport-"data[item].id).find(".circular-bar-chart").data('easyPieChart').update(data[item].compatibilidad_academica);
+
+                });
+
+            });
+        }
+    }
+
 
 </script>

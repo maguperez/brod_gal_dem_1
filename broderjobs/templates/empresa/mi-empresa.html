@@ -67,7 +67,11 @@
 					<div id="slider-empresa"></div>
 					<div class ="boton-imagen edit" id="btn-imagenes">
 						<a class data-toggle="tooltip" data-placement="top"
-						 title="Se recomienda que las dimensiones de la imagen sean mayores a 725x370 píxeles"><i class="fa fa-pencil"></i></a>
+						 title="Se recomienda que las dimensiones de la imagen sean mayores a 725x370 píxeles"><i class="fa fa-picture-o"></i></a>
+					</div>
+                    <div class ="boton-video edit" id="btn-videos">
+						<a class data-toggle="tooltip" data-placement="top"
+						 title="Ingresa las url de Youtube"><i class="fa fa-video-camera"></i></a>
 					</div>
 					<!--<a href="{%url 'upload-new'%}" class="btn-edit" data-toggle="modal" data-target="#imagenes"></a>-->
 				</header>
@@ -390,6 +394,14 @@
 		 $('#modal-aceptar').css("display", "none");
 		 $('#modal-cerrar').css("display", "none");
 		 $('#form-modal-body').load('imagenes/', function () {
+        	$('#form-modal').modal('toggle');
+			//formAjaxImagen('#form-modal-body form', '#form-modal');
+		 });
+	 });
+     $('#btn-videos').click(function() {
+		 $('#modal-aceptar').css("display", "none");
+		 $('#modal-cerrar').css("display", "none");
+		 $('#form-modal-body').load('videos/', function () {
         	$('#form-modal').modal('toggle');
 			//formAjaxImagen('#form-modal-body form', '#form-modal');
 		 });
