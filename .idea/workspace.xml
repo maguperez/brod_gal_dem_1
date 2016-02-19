@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="Test funcionando">
-      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\media\pictures\5_sFq4rqc.png" afterPath="" />
-      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\media\pictures\cocacola1_rzzOx0I.jpg" afterPath="" />
-      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\media\pictures\cocacola2_EyhqGvb.png" afterPath="" />
-      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\media\pictures\cocacola3_bto5pr8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\templates\empresa\mi-empresa-logo.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/admin.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/admin.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/css/broder.css" afterPath="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/cultura_empresarial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje.html" afterPath="$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/models.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/models.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/proceso-detalle.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/proceso-detalle.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" afterPath="$PROJECT_DIR$/broderjobs/broderjobs/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/urls.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/disc/views.py" afterPath="$PROJECT_DIR$/broderjobs/disc/views.py" />
+    <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/empresa/views.py" afterPath="$PROJECT_DIR$/broderjobs/empresa/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/views.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
@@ -38,7 +20,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/brod_gal_dem_1$debug.coverage" NAME="debug Coverage Results" MODIFIED="1455889587732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/broderjobs" />
+    <SUITE FILE_PATH="coverage/brod_gal_dem_1$debug.coverage" NAME="debug Coverage Results" MODIFIED="1455893826975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/broderjobs" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -49,74 +31,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1161" column="36" selection-start-line="1161" selection-start-column="0" selection-end-line="1162" selection-end-column="0" />
-              <folding>
-                <element signature="e#1500#5050#0" expanded="false" />
-                <element signature="e#5140#5200#0" expanded="false" />
-                <element signature="e#5263#8333#0" expanded="false" />
-                <element signature="e#8398#8445#0" expanded="false" />
-                <element signature="e#8512#10019#0" expanded="false" />
-                <element signature="e#10071#10569#0" expanded="false" />
-                <element signature="e#10622#12646#0" expanded="false" />
-                <element signature="e#12685#13137#0" expanded="false" />
-                <element signature="e#13210#14271#0" expanded="false" />
-                <element signature="e#14331#18902#0" expanded="false" />
-                <element signature="e#18957#19822#0" expanded="false" />
-                <element signature="e#19926#20670#0" expanded="false" />
-                <element signature="e#20724#21411#0" expanded="false" />
-                <element signature="e#21471#25113#0" expanded="false" />
-                <element signature="e#25216#25522#0" expanded="false" />
-                <element signature="e#25628#26365#0" expanded="false" />
-                <element signature="e#26477#26608#0" expanded="false" />
-                <element signature="e#26706#30723#0" expanded="false" />
-                <element signature="e#30826#33240#0" expanded="false" />
-                <element signature="e#33349#33484#0" expanded="false" />
-                <element signature="e#33583#36590#0" expanded="false" />
-                <element signature="e#36694#38815#0" expanded="false" />
-                <element signature="e#38925#39049#0" expanded="false" />
-                <element signature="e#39126#39465#0" expanded="false" />
-                <element signature="e#39541#39887#0" expanded="false" />
-                <element signature="e#39957#41070#0" expanded="false" />
-                <element signature="e#41141#42944#0" expanded="false" />
-                <element signature="e#43015#44264#0" expanded="false" />
-                <element signature="e#45129#46919#0" expanded="false" />
-                <element signature="e#46985#47945#0" expanded="false" />
-                <element signature="e#48977#51500#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mensaje.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.0384617">
-              <caret line="205" column="21" selection-start-line="205" selection-start-column="21" selection-end-line="205" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="picture_form.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.9272728">
-              <caret line="75" column="65" selection-start-line="75" selection-start-column="65" selection-end-line="75" selection-end-column="65" />
-              <folding>
-                <element signature="e#2608#2625#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/broderjobs/empresa/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.17917676">
               <caret line="234" column="7" selection-start-line="234" selection-start-column="4" selection-end-line="234" selection-end-column="7" />
               <folding>
                 <element signature="e#5675#6655#0" expanded="false" />
@@ -124,57 +42,6 @@
                 <element signature="e#7700#9017#0" expanded="false" />
                 <element signature="e#9052#10144#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mi-empresa.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39285713">
-              <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
-              <folding>
-                <element signature="e#11356#11404#0#HTML" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/empresa/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-269.65518">
-              <caret line="523" column="0" selection-start-line="523" selection-start-column="0" selection-end-line="523" selection-end-column="0" />
-              <folding>
-                <element signature="e#20137#21251#0" expanded="false" />
-                <element signature="e#21294#21598#0" expanded="false" />
-                <element signature="e#23309#23513#0" expanded="false" />
-                <element signature="e#24115#24369#0" expanded="false" />
-                <element signature="e#24398#24812#0" expanded="false" />
-                <element signature="e#24849#25391#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/empresa/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6896553">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/views/generic/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -199,7 +66,6 @@
         <option value="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos-cv.html" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/admin.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/disc/formulario-estudiante.html" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/context_processors.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/base.html" />
@@ -218,13 +84,15 @@
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/proceso-detalle.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" />
-        <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/static/css/broder.css" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
-        <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/video_form.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
+        <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
+        <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" />
       </list>
     </option>
   </component>
@@ -332,7 +200,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="empresa" />
+              <option name="myItemId" value="estudiante" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="estudiante" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -351,6 +237,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="empresa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cultura_empresarial" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="contador_visitas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brod_gal_dem_1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="broderjobs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -638,27 +578,39 @@
       <option name="project" value="LOCAL" />
       <updated>1455630712942</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Arreglado de videos">
+      <created>1455892296536</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1455892296536</updated>
+    </task>
+    <task id="LOCAL-00010" summary="video form html">
+      <created>1455892493977</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1455892493977</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1364" height="726" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1702454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46830985" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5721831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36091548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1702454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36091548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52288735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22359155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -666,6 +618,28 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46830985" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36091548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1702454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52288735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -685,7 +659,9 @@
     <MESSAGE value="agregando tablas necesarias para cultura empresarial" />
     <MESSAGE value="test de cultura para empresas funcionando" />
     <MESSAGE value="Test funcionando" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test funcionando" />
+    <MESSAGE value="Arreglado de videos" />
+    <MESSAGE value="video form html" />
+    <option name="LAST_COMMIT_MESSAGE" value="video form html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -710,30 +686,21 @@
           <line>76</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/broderjobs/empresa/views.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6060605">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-candidatos-cv.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6238532">
           <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -1068,46 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1161" column="36" selection-start-line="1161" selection-start-column="0" selection-end-line="1162" selection-end-column="0" />
-          <folding>
-            <element signature="e#1500#5050#0" expanded="false" />
-            <element signature="e#5140#5200#0" expanded="false" />
-            <element signature="e#5263#8333#0" expanded="false" />
-            <element signature="e#8398#8445#0" expanded="false" />
-            <element signature="e#8512#10019#0" expanded="false" />
-            <element signature="e#10071#10569#0" expanded="false" />
-            <element signature="e#10622#12646#0" expanded="false" />
-            <element signature="e#12685#13137#0" expanded="false" />
-            <element signature="e#13210#14271#0" expanded="false" />
-            <element signature="e#14331#18902#0" expanded="false" />
-            <element signature="e#18957#19822#0" expanded="false" />
-            <element signature="e#19926#20670#0" expanded="false" />
-            <element signature="e#20724#21411#0" expanded="false" />
-            <element signature="e#21471#25113#0" expanded="false" />
-            <element signature="e#25216#25522#0" expanded="false" />
-            <element signature="e#25628#26365#0" expanded="false" />
-            <element signature="e#26477#26608#0" expanded="false" />
-            <element signature="e#26706#30723#0" expanded="false" />
-            <element signature="e#30826#33240#0" expanded="false" />
-            <element signature="e#33349#33484#0" expanded="false" />
-            <element signature="e#33583#36590#0" expanded="false" />
-            <element signature="e#36694#38815#0" expanded="false" />
-            <element signature="e#38925#39049#0" expanded="false" />
-            <element signature="e#39126#39465#0" expanded="false" />
-            <element signature="e#39541#39887#0" expanded="false" />
-            <element signature="e#39957#41070#0" expanded="false" />
-            <element signature="e#41141#42944#0" expanded="false" />
-            <element signature="e#43015#44264#0" expanded="false" />
-            <element signature="e#45129#46919#0" expanded="false" />
-            <element signature="e#46985#47945#0" expanded="false" />
-            <element signature="e#48977#51500#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/static/css/broder.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5604027">
@@ -1142,40 +1069,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="234" column="7" selection-start-line="234" selection-start-column="4" selection-end-line="234" selection-end-column="7" />
-          <folding>
-            <element signature="e#5675#6655#0" expanded="false" />
-            <element signature="e#6698#7655#0" expanded="false" />
-            <element signature="e#7700#9017#0" expanded="false" />
-            <element signature="e#9052#10144#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.9272728">
           <caret line="75" column="65" selection-start-line="75" selection-start-column="65" selection-end-line="75" selection-end-column="65" />
           <folding>
             <element signature="e#2608#2625#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-269.65518">
-          <caret line="523" column="0" selection-start-line="523" selection-start-column="0" selection-end-line="523" selection-end-column="0" />
-          <folding>
-            <element signature="e#20137#21251#0" expanded="false" />
-            <element signature="e#21294#21598#0" expanded="false" />
-            <element signature="e#23309#23513#0" expanded="false" />
-            <element signature="e#24115#24369#0" expanded="false" />
-            <element signature="e#24398#24812#0" expanded="false" />
-            <element signature="e#24849#25391#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1190,10 +1089,117 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39285713">
-          <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.517341">
+          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
           <folding>
+            <element signature="e#1455#7479#0#HTML" expanded="false" />
+            <element signature="e#7527#8338#0#HTML" expanded="false" />
+            <element signature="e#8355#8559#0#HTML" expanded="false" />
             <element signature="e#11356#11404#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.081081">
+          <caret line="126" column="55" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
+          <folding>
+            <element signature="e#15#26#0" expanded="true" />
+            <element signature="e#1510#5060#0" expanded="false" />
+            <element signature="e#5150#5210#0" expanded="false" />
+            <element signature="e#5273#8444#0" expanded="false" />
+            <element signature="e#8509#8556#0" expanded="false" />
+            <element signature="e#8623#10130#0" expanded="false" />
+            <element signature="e#10182#10680#0" expanded="false" />
+            <element signature="e#10733#12757#0" expanded="false" />
+            <element signature="e#12796#13248#0" expanded="false" />
+            <element signature="e#13321#14382#0" expanded="false" />
+            <element signature="e#14442#19013#0" expanded="false" />
+            <element signature="e#19068#19933#0" expanded="false" />
+            <element signature="e#20037#20781#0" expanded="false" />
+            <element signature="e#20835#21522#0" expanded="false" />
+            <element signature="e#21582#25224#0" expanded="false" />
+            <element signature="e#25327#25633#0" expanded="false" />
+            <element signature="e#25739#26476#0" expanded="false" />
+            <element signature="e#26588#26719#0" expanded="false" />
+            <element signature="e#26817#30834#0" expanded="false" />
+            <element signature="e#30937#33351#0" expanded="false" />
+            <element signature="e#33460#33595#0" expanded="false" />
+            <element signature="e#33694#36701#0" expanded="false" />
+            <element signature="e#36805#38926#0" expanded="false" />
+            <element signature="e#39036#39160#0" expanded="false" />
+            <element signature="e#39237#39576#0" expanded="false" />
+            <element signature="e#39652#39998#0" expanded="false" />
+            <element signature="e#40068#41181#0" expanded="false" />
+            <element signature="e#41252#43055#0" expanded="false" />
+            <element signature="e#43126#44375#0" expanded="false" />
+            <element signature="e#45240#47030#0" expanded="false" />
+            <element signature="e#47096#48056#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#3462#3914#0" expanded="false" />
+            <element signature="e#3958#6890#0" expanded="false" />
+            <element signature="e#6932#8846#0" expanded="false" />
+            <element signature="e#8919#9339#0" expanded="false" />
+            <element signature="e#9417#9847#0" expanded="false" />
+            <element signature="e#9896#10518#0" expanded="false" />
+            <element signature="e#10625#11662#0" expanded="false" />
+            <element signature="e#11696#13189#0" expanded="false" />
+            <element signature="e#13374#14153#0" expanded="false" />
+            <element signature="e#14279#15232#0" expanded="false" />
+            <element signature="e#15278#15537#0" expanded="false" />
+            <element signature="e#15593#15952#0" expanded="false" />
+            <element signature="e#16002#16615#0" expanded="false" />
+            <element signature="e#16664#17405#0" expanded="false" />
+            <element signature="e#17456#18535#0" expanded="false" />
+            <element signature="e#20145#21259#0" expanded="false" />
+            <element signature="e#21302#21606#0" expanded="false" />
+            <element signature="e#22382#22853#0" expanded="false" />
+            <element signature="e#22890#23282#0" expanded="false" />
+            <element signature="e#23317#23521#0" expanded="false" />
+            <element signature="e#23563#24075#0" expanded="false" />
+            <element signature="e#24478#24892#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="14.884615">
+          <caret line="590" column="57" selection-start-line="590" selection-start-column="57" selection-end-line="590" selection-end-column="57" />
+          <folding>
+            <element signature="e#8142#20023#0#HTML" expanded="false" />
+            <element signature="e#20114#23592#0#HTML" expanded="false" />
+            <element signature="e#23593#24175#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.625323">
+          <caret line="31" column="28" selection-start-line="29" selection-start-column="8" selection-end-line="31" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/empresa/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17917676">
+          <caret line="234" column="7" selection-start-line="234" selection-start-column="4" selection-end-line="234" selection-end-column="7" />
+          <folding>
+            <element signature="e#5675#6655#0" expanded="false" />
+            <element signature="e#6698#7655#0" expanded="false" />
+            <element signature="e#7700#9017#0" expanded="false" />
+            <element signature="e#9052#10144#0" expanded="false" />
           </folding>
         </state>
       </provider>

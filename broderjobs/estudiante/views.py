@@ -15,7 +15,7 @@ from django.views.generic.edit import UpdateView,CreateView, DeleteView
 from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Conocimiento
-from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture
+from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture, VideoUrl
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from main import utils
@@ -159,6 +159,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             mi_evaluacion.ambiente_trabajo = 0
             mi_evaluacion.salarios = 0
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
+        videos = VideoUrl.objects.filter(empresa_id = empresa.id)
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -166,6 +167,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         context['mi_evaluacion'] = mi_evaluacion
         context['redes_sociales'] = redes_sociales
         context['imagenes'] = imagenes
+        context['videos'] = videos
         context['total_evaluadores'] = str(total_evaluadores).zfill(3)
         return context
 

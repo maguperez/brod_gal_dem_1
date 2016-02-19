@@ -290,11 +290,20 @@
 								<img src="{{i.set_imagen}}"/>
                             </div>
 							{%endfor%}
-							{%else%}
+
+							{%endif%}
+                        {% if videos %}
+                        {% for video in videos.all %}
+                           <div class="item-video">
+                                <a class="owl-video" href="{{ video.url }}"></a>&ndash;&gt;-->
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                        {%if imagenes|length == 0 and videos|length == 0%}
 							 <div class="item">
                                 <img src="{%static 'img/imagen-default.png' %}"/>
                             </div>
-							{%endif%}
+                        {%endif %}
                         </div>
                     </div>
                 </header>
@@ -579,6 +588,7 @@
     </div>
 </div>
 <input id="cant_imagenes" type="hidden" value="{{imagenes|length}}">
+    <input id="cant_videos" type="hidden" value="{{videos|length}}">
 <style>
     .owl-carousel {
         height:369px;
@@ -603,7 +613,8 @@
     var animationInterval = 0;
     $(function () {
         var initial_img = 2;
-        if($('#cant_imagenes').val() > 1)
+        cant = parseInt($('#cant_imagenes').val()) + parseInt($('#cant_videos').val());
+        if(cant > 1)
             initial_img = 1;
         $('.owl-carousel').owlCarousel({
 			 autoPlay: true,

@@ -49,17 +49,17 @@ class MiEmpresaView(FormView):
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
-        imagenes = Picture.objects.filter(empresa_id = empresa.id)
-        videos = VideoUrl.objects.filter(empresa_id = empresa.id)
+        # imagenes = Picture.objects.filter(empresa_id = empresa.id)
+        # videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
         redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
 
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
-        context['imagenes'] = imagenes
+        # context['imagenes'] = imagenes
         context['redes_sociales'] = redes_sociales
-        context['videos'] = videos
+        # context['videos'] = videos
 
         return context
 
@@ -571,7 +571,8 @@ class VideosListView(TemplateView):
 def empresa_slider_imagenes(request, id):
     # id = request.GET.get('id')
     imagenes = Picture.objects.filter(empresa_id = id)
-    return render_to_response('empresa/mi-empresa-slider-imagenes.html', {'imagenes': imagenes},
+    videos = VideoUrl.objects.filter(empresa_id = id)
+    return render_to_response('empresa/mi-empresa-slider-imagenes.html', {'imagenes': imagenes, 'videos': videos},
                               context_instance = RequestContext(request))
 
 def generar_pdf(html):
