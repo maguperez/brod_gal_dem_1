@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'Roboto Condensed Light' !important;
+  src: url('fonts/RobotoCondensed-Light.eot');
+  src: url('fonts/RobotoCondensed-Light.eot?#iefix') format('embedded-opentype'),
+       url('fonts/RobotoCondensed-Light.woff') format('woff'),
+       url('fonts/RobotoCondensed-Light.ttf') format('truetype'),
+       url('fonts/RobotoCondensed-Light.svg#RobotoCondensed-Light') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('fonts/RobotoCondensed-Regular.eot');
+  src: url('fonts/RobotoCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+       url('fonts/RobotoCondensed-Regular.woff') format('woff'),
+       url('fonts/RobotoCondensed-Regular.ttf') format('truetype'),
+       url('fonts/RobotoCondensed-Regular.svg#RobotoCondensed-Regular') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto Light';
+  src: url('fonts/Roboto-Light.eot');
+  src: url('fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Roboto-Light.woff') format('woff'),
+       url('fonts/Roboto-Light.ttf') format('truetype'),
+       url('fonts/Roboto-Light.svg#Roboto-Light') format('svg');
+}
+#header:not(.sticky-header) .standard-logo{
+    height: 100px;    
+}
+#header.sticky-header .standard-logo{
+    height: 60px;    
+}
+#header .standard-logo {
+    display: flex !Important;
+    align-items: center;
+    justify-content: center;
+}
+#header:not(.sticky-header) .standard-logo img{
+    height: 50px
+}
+#header.sticky-header .standard-logo img{
+    height: 40px !Important;
+}
+#primary-menu ul li a div {
+    font-size: 17px;
+    font-weight: normal;
+    text-transform: none;
+    font-family: 'Roboto Condensed';
+}
+#primary-menu ul li a:hover div{
+    color: #FB4100;
+}
+.home-img:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%; 
+}
+.home-img.left::after {
+    background: rgba(0,0,0,0.6);
+    background: -moz-linear-gradient(left, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,0.6)), color-stop(100%, rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(left, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(left, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+}
+.home-img.right::after {
+    background: rgba(255,255,255,0);
+    background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(100%, rgba(0,0,0,0.6)));
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000', GradientType=1 );
+}
+
+.rs-background-video-layer::after {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: '';
+    top: 0;
+    background: rgba(0,0,0,0.7);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 28%, rgba(0,0,0,0.3) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,0.7)), color-stop(28%, rgba(0,0,0,0.3)), color-stop(100%, rgba(0,0,0,0.3)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 28%, rgba(0,0,0,0.3) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 28%, rgba(0,0,0,0.3) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 28%, rgba(0,0,0,0.3) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 28%, rgba(0,0,0,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
+
+}
