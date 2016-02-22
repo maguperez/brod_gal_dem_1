@@ -18,6 +18,7 @@ from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciuda
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture, VideoUrl
 from oportunidad.models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
 from mensaje.models import Mensaje, Mensaje_Destinatario
+from cultura_empresarial.models import EstudianteEmpresaCultura
 from main import utils
 from main.utils import LoginRequiredMixin
 from empresa.utils import actualizar_ranking_empresa
@@ -1226,3 +1227,29 @@ def cv_pdf(request, id = "0"):
     # pisa.CreatePDF(html,dest=resultFile)
     #
     # return HttpResponse(resultFile, content_type='application/pdf')
+
+def compatibilidad_oportunidad(request):
+    id = request.GET.get('id')
+    empresa = request.GET.get('e')
+    user = request.user
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
+    data = []
+    try:
+        cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = estudiante.id, empresa_id = empresa)
+        compatibilidad ={
+            'cultural':  cultura.compatibilidad_cultural,
+            'academico': 70,
+            'consolidado': (cultura.compatibilidad_cultural + 70)/2
+        }
+        data.append(compatibilidad)
+    except:
+        compatibilidad ={
+            'cultural':  0,
+            'academico': 70,
+            'consolidado': (0 + 70)/2
+        }
+        data.append(compatibilidad)
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')

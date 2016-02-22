@@ -59,6 +59,9 @@ class Oportunidad(models.Model):
     fecha_cese = models.DateField(default=None,null=True, blank=True )
     graduacion_desde = models.ForeignKey(PeriodosGraduacion, default=None,  null=True, blank=True, related_name="graduacion_desde")
     graduacion_hasta = models.ForeignKey(PeriodosGraduacion, default=None,  null=True, blank=True, related_name="graduacion_hasta" )
+    edad_desde = models.IntegerField(default=None, null=True, blank=True)
+    edad_hasta = models.IntegerField(default=None, null=True, blank=True)
+    genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
     fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)

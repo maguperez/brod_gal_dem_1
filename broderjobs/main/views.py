@@ -23,6 +23,11 @@ def homepage1(request):
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 
+def newhome(request):
+    # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
+    return render_to_response('main/home.html',
+                              context_instance=RequestContext(request))
+
 def homepage(request):
     message_registro = None
     message_login = None

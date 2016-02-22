@@ -23,7 +23,7 @@
 							{%endif%}
 						</label></div>
 					</div>
-					<div class="compatibilidad" data-info="{{oportunidad.empresa.id}}" id="oport-{{oportunidad.id}}">
+					<div class="compatibilidad" data-info="{{oportunidad.empresa.id}}" id="oport-{{oportunidad.id}}" data-id="{{oportunidad.id}}">
 						<div class = "consolidado">
 							<div class="circular-bar ">
 								<div class="circular-bar-chart" data-percent="73">
@@ -43,7 +43,7 @@
 							</div>
 							<div class = "academico">
 								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="49">
+									<div class="circular-bar-chart" data-percent="{{ estudiante_cultura. }}">
 										<label><span class="percent">49</span>%</label>
 									</div>
 								</div>
@@ -66,63 +66,71 @@
 
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script>
-	 $(function(){
-	    $("#link-oportunidad").addClass("active");
-	   	$("body").on("mouseenter", ".compatibilidad", function(){
-			$(this).find(".consolidado").css("opacity",0);
-		  	$(this).find(".desglose").css("opacity",1);
-			var data = 0;
-			data = $(this).find(".cultural .circular-bar-chart").data("percent");
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+{#    var CompatibilidadJD = function(){#}
+{#        this.fnCargar = function(id, empresa) {#}
+{#            $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){#}
+{#                debugger;#}
+{#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
+{#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
+{#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}
+{##}
+{#            });#}
+{#        }#}
+{#    };#}
+{#    var compatibilidad = new CompatibilidadJD();#}
+{#	 $(function(){#}
+{#	    $("#link-oportunidad").addClass("active");#}
+{#	   	$("body").on("mouseenter", ".compatibilidad", function(){#}
+{#			$(this).find(".consolidado").css("opacity",0);#}
+{#		  	$(this).find(".desglose").css("opacity",1);#}
+{#			var data = 0;#}
+{#			data = $(this).find(".cultural .circular-bar-chart").data("percent");#}
+{#			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);#}
+{#			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);#}
+{##}
+{#			data = $(this).find(".academico .circular-bar-chart").data("percent");#}
+{#			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);#}
+{#			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);#}
+{#		});#}
+{#	   	$("body").on("mouseleave", ".compatibilidad", function(){#}
+{#		   	$(this).find(".consolidado").css("opacity",1);#}
+{#		  	$(this).find(".desglose").css("opacity",0);#}
+{#			$('.chart').data('easyPieChart').update(40);#}
+{#		});#}
+{##}
+{#		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({#}
+{#					animate: 2000,#}
+{#					scaleLength: 0,#}
+{#					lineWidth: 5,#}
+{#					barColor: "#1dcfac",#}
+{#					size: 65,#}
+{#				});#}
+{#		 $('.cultural .circular-bar-chart').easyPieChart({#}
+{#					animate: 2000,#}
+{#					scaleLength: 0,#}
+{#					lineWidth: 5,#}
+{#					barColor: "#c0392b",#}
+{#					size: 65,#}
+{#				});#}
+{#		 $('.academico .circular-bar-chart').easyPieChart({#}
+{#					animate: 2000,#}
+{#					scaleLength: 0,#}
+{#					lineWidth: 5,#}
+{#					barColor: "#5d9cf9",#}
+{#					size: 65,#}
+{#				});#}
+{##}
+{#         $(".class").each(function() {#}
+{##}
+{#        });#}
+{#         $(".Compatibilidad").each(function(index, obj){#}
+{#             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );#}
+{#        });#}
+{##}
+{##}
+{#	});#}
 
-			data = $(this).find(".academico .circular-bar-chart").data("percent");
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
-		});
-	   	$("body").on("mouseleave", ".compatibilidad", function(){
-		   	$(this).find(".consolidado").css("opacity",1);
-		  	$(this).find(".desglose").css("opacity",0);
-			$('.chart').data('easyPieChart').update(40);
-		});
 
-		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#1dcfac",
-					size: 65,
-				});
-		 $('.cultural .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#c0392b",
-					size: 65,
-				});
-		 $('.academico .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#5d9cf9",
-					size: 65,
-				});
-	});
-
-    var CompatibilidadJD = function(){
-        this.fnCargar = function() {
-            $.get("{% url 'estudiante-cargar-compatibilidad' %}", function(data){
-
-                $.each(data, function(i, item) {
-                   $(".candidatos").append('<option value="'+item.id+'">'+item.estudiante+'</option>');
-                    $("#oport-"data[item].id).find(".academico .circular-bar-chart").data('easyPieChart').update(data[item].compatibilidad_academica);
-                    $("#oport-"data[item].id).find(".circular-bar-chart").data('easyPieChart').update(data[item].compatibilidad_academica);
-
-                });
-
-            });
-        }
-    }
 
 
 </script>

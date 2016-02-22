@@ -71,6 +71,8 @@ urlpatterns = [
 
 	url(r'^cv-pdf/(?P<id>\d+)/$', 'estudiante.views.cv_pdf', name='cv-pdf'),
 
+	url(r'^compatibilidad/$', 'estudiante.views.compatibilidad_oportunidad', name='estudiante-compatibilidad'),
+
 
 ]
 
