@@ -106,7 +106,7 @@
 											{{form.pais}}
 										</div>
 										<div class = "col-sm-4">
-											<select class="full" id="id_ciudad"></select>
+											<select class="full actualizar" id="id_ciudad"></select>
 											{{form.ciudad_hidden}}
 											<div class="tooltip-manual" id="tooltip-pais"></div>
 										</div>
@@ -709,6 +709,38 @@
 
 		});
 	}
+
+    $('.actualizar').change(function(){
+        alert("cambio");
+{#            ids = new Array();#}
+{#            ids_estudiante = new Array();#}
+{#            ids_estudiante = $(".candidatos").val();#}
+{#            var form = new FormData();#}
+{#            form.append('ids',JSON.stringify(ids));#}
+{#            form.append('ids_estudiante',JSON.stringify(ids_estudiante));#}
+{#            form.append('o',$('#oportunidad_redactar_id').val());#}
+{#            form.append('a',$('.asunto').val());#}
+{#            form.append('c',$('.note-codable').val());#}
+{#            form.append('p', $('#permite-respuesta').is(':checked')? 'S' : 'N');#}
+{#            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());#}
+{##}
+{#            $.ajax({#}
+{#                type:"POST",#}
+{#                url:"{%url 'mensaje-enviar-estudiante' %}",#}
+{#                data: form,#}
+{#                processData: false,#}
+{#                contentType: false,#}
+{#                error: function(x){#}
+{#                    console.log(x);#}
+{#                },#}
+{#                success: function(data){#}
+{#                    fnActivaTab('message-detail1');#}
+{#                    $('#li-1').click();#}
+{#                    $('#message-detail1').html('<div class="panel-heading messages message-result">' +#}
+{#                                            '<h2 class="p-t-20 w-500">Su mensaje se ha enviado correctamente</h2></div>');#}
+{#                }#}
+{#            });#}
+       });
 
 
 </script>

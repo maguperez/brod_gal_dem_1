@@ -23,14 +23,14 @@ class OportunidadForm(forms.ModelForm):
         model = Oportunidad
         fields = ('titulo', 'carga_horaria', 'remuneracion', 'remuneracion_min', 'remuneracion_max',
                   # 'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
-                  'fecha_cese', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
+                  'fecha_cese', 'resumen','edad_desde', 'edad_hasta', 'genero', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud',
                   'tipo_carrera')
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'Escriba el titulo de su vacante', 'class': 'full'}),
             'carga_horaria': RadioSelect(),
-            'tipo_puesto': RadioSelect(),
-            'remuneracion': RadioSelect(),
+            'tipo_puesto': RadioSelect(attrs={'class': 'actualizar'}),
+            'remuneracion': RadioSelect(attrs={'class': 'actualizar'}),
             'resumen': Textarea(),
             'remuneracion_min': TextInput(attrs={'placeholder': 'Valor minimo'}),
             'remuneracion_max': TextInput(attrs={'placeholder': 'Valor maximo'}),
@@ -38,11 +38,15 @@ class OportunidadForm(forms.ModelForm):
             'direccion_map': TextInput(attrs={'placeholder': 'Direccion', 'class': 'full'}),
             'longitud': TextInput(attrs={'placeholder': 'longitud'}),
             'latitud': TextInput(attrs={'placeholder': 'latitud'}),
-            'carrera': SelectMultiple(attrs={'class': 'full'}),
-            'idioma': SelectMultiple(attrs={'class': 'full'}),
-            'grado_estudio': Select(attrs={'class': 'full'}),
-            'conocimiento': SelectMultiple(attrs={'class': 'full'}),
-            'estado_oportunidad': Select(attrs={'disabled':'disabled'})
+            'carrera': SelectMultiple(attrs={'class': 'full actualizar'}),
+            'universidad': SelectMultiple(attrs={'class': 'actualizar'}),
+            'idioma': SelectMultiple(attrs={'class': 'full actualizar'}),
+            'grado_estudio': Select(attrs={'class': 'full actualizar'}),
+            'conocimiento': SelectMultiple(attrs={'class': 'full actualizar'}),
+            'estado_oportunidad': Select(attrs={'disabled':'disabled'}),
+            'edad_desde': TextInput(attrs={'class': 'actualizar'}),
+            'edad_hasta': TextInput(attrs={'class': 'actualizar'}),
+            'genero': TextInput(attrs={'class': 'actualizar'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -57,10 +61,10 @@ class OportunidadForm(forms.ModelForm):
 class OportunidadCrearForm(OportunidadForm):
 
     grado_estudio = forms.ModelChoiceField(queryset=GradoEstudio.objects.all(), empty_label="Grado Estudio", required = False, widget=forms.Select(attrs={'class': 'full', }))
-    universidad = forms.ModelMultipleChoiceField(queryset=Universidad.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
-    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
-    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
-    carrera = forms.ModelMultipleChoiceField(queryset=Carrera.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full', }))
+    universidad = forms.ModelMultipleChoiceField(queryset=Universidad.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full actualizar', }))
+    idioma = forms.ModelMultipleChoiceField(queryset= Idioma.objects.all(), required = False, widget=forms.SelectMultiple(attrs={'class': 'full actualizar', }))
+    conocimiento = forms.ModelMultipleChoiceField(queryset=Conocimiento.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full actualizar', }))
+    carrera = forms.ModelMultipleChoiceField(queryset=Carrera.objects.all(),  required = False, widget=forms.SelectMultiple(attrs={'class': 'full actualizar', }))
 
 # class OportunidadEditarForm(forms.Form):
 #

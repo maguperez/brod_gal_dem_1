@@ -9,6 +9,8 @@ urlpatterns =[
 
 	url(r'^home/$' , 'main.views.newhome', name='newhome'),
 
+	url(r'^ingreso_estudiante/$' , 'main.views.newingresoestudiante', name='newingresoestudiante'),
+
 	url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
 
 	# url(r'^estudiante/$' , 'main.views.estudiante', name='estudiante'),
