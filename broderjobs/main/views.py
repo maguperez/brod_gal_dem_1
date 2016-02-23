@@ -23,10 +23,80 @@ def homepage1(request):
     return render_to_response('main/estudiante.html',
                               context_instance=RequestContext(request))
 
-def newhome(request):
-    # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
-    return render_to_response('main/home.html',
-                              context_instance=RequestContext(request))
+def home(request):
+    message_registro = None
+    message_login = None
+    if request.user.is_authenticated():
+        persona = Persona()
+        try:
+            persona = Persona.objects.get(usuario_id=request.user.id)
+        except persona.DoesNotExist:
+            persona = None
+        if persona is not None:
+            if persona.tipo_persona == 'E':
+                return redirect('estudiante-oportunidad-listar')
+            if persona.tipo_persona == 'R':
+                return redirect('empresa-oportunidad-listar')
+        else:
+            login_form = LoginForm(prefix='login')
+            registro_form = RegisterForm(prefix='registro')
+        return render_to_response('main/home-estudiante.html', {'message_login': message_login,
+                                                                'message_registro': message_registro,
+                                                                'login_form': login_form ,
+                                                                'registro_form': registro_form },
+                                      context_instance=RequestContext(request))
+    else:
+        if request.method == "POST":
+            login_form = LoginForm(request.POST, prefix='login')
+            registro_form = RegisterForm(request.POST, prefix='registro')
+            if '_login' in request.POST:
+                if login_form.is_valid():
+                    if not login_form.cleaned_data['remember_me']:
+                        request.session.set_expiry(0)
+                    user = authenticate(username=request.POST["login-email"], password= request.POST["login-password"])
+                    if user is not None:
+                        persona = Persona()
+                        try:
+                            persona = Persona.objects.get(usuario_id=user.id, tipo_persona= "E")
+                        except persona.DoesNotExist:
+                            persona = None
+                        if persona is not None:
+                            if user.is_active:
+                                login(request, user)
+                                return redirect('estudiante-oportunidad-listar')
+                            else:
+                                message_login = "Tu usuario esta inactivo"
+
+                    message_login = "Email o contraseña incorrecta"
+
+            if '_registro' in request.POST:
+                if registro_form.is_valid():
+                    user = registro_form.save()
+                    persona = Persona()
+                    persona.usuario = user
+                    persona.fecha_nacimiento = registro_form.cleaned_data['fecha_nacimiento']
+                    dia = registro_form.cleaned_data['dia']
+                    mes  = registro_form.cleaned_data['mes']
+                    ano  = registro_form.cleaned_data['ano']
+                    fecha = parse_date(ano + '-' + mes + '-' + dia)
+                    persona.fecha_nacimiento = fecha
+                    persona.tipo_persona = "E"
+                    persona.save()
+                    new_user = authenticate(username=request.POST['registro-email'],
+                                            password=request.POST['registro-password1'])
+                    login(request, new_user)
+                    return redirect('registro-cv')
+                else:
+                    message_registro= "Error al registrar"
+        else:
+            login_form = LoginForm(prefix='login')
+            registro_form = RegisterForm(prefix='registro')
+
+        return render_to_response('main/home.html', {'message_login': message_login,
+                                                                'message_registro': message_registro,
+                                                                'login_form': login_form ,
+                                                                'registro_form': registro_form },
+                                      context_instance=RequestContext(request))
 def newingresoestudiante(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     return render_to_response('main/ingreso-estudiante.html',
