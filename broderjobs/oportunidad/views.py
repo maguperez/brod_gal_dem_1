@@ -526,4 +526,26 @@ def siguiente_fase( request ):
     s.seek(0)
     return HttpResponse(s.read())
 
+def actualizar_compatibilidad(request):
+    id              = request.GET.get('id')
+    carrera         = request.GET.get('carrera')
+    universidad     = request.GET.get('universidad')
+    grado_estudio   = request.GET.get('grado_estudio')
+    # perido = request.GET.get('carrera')
+    edad_desde      = request.GET.get('edad_desde')
+    edad_hasta      = request.GET.get('edad_hasta')
+    pais            = request.GET.get('pais')
+    ciudad          = request.GET.get('ciudad')
+    genero          = request.GET.get('genero')
+    tipo_puesto     = request.GET.get('tipo_puesto')
+    carga_horaria   = request.GET.get('carga_horaria')
+    remuneracion    = request.GET.get('remuneracion')
+    idioma          = request.GET.get('idioma')
+    conocimiento    = request.GET.get('conocimiento')
+    # experiencia     = request.GET.get('conocimiento')
+
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
+
 

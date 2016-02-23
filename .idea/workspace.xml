@@ -2,152 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="home de prueba">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/._index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Roboto-Light.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Roboto-Light.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Roboto-Light.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Roboto-Light.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Light.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Light.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Light.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Light.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Regular.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Simple-Line-Icons.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Simple-Line-Icons.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Simple-Line-Icons.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/bicicleta.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/closedhand.cur" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/coloredbg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/empresa.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/estado.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/fb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/font-icons.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/font-icons.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/font-icons.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/fr.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/gridtile.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/gridtile_3x3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/gridtile_3x3_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/gridtile_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/ig.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/image.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/css/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/fonts/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/revicons/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/source/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/lined-icons.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/lined-icons.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/lined-icons.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/loader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/openhand.cur" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/post.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/images/preloader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/revicons/revicons.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/revicons/revicons.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/revicons/revicons.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/revolution_slide1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/revolution_slide2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/tw.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/videos/video.mp4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/vm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/wc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/assets/sources/yt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/._helper.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/._pe-icon-7-stroke.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroke.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Roboto-Light.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Light.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/RobotoCondensed-Regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Simple-Line-Icons.dev.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/Simple-Line-Icons.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/animate.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/ares.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/custom.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/custom.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/dark.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/dione.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/erinyen.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/css/font-awesome.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/font-icons.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/font-icons.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/font-awesome/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/functions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/gyges.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/hades.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/hebe.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/helper.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/hephaistos.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/hermes.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/hesperiden.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/jquery.themepunch.enablelog.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/source/jquery.themepunch.enablelog.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/source/jquery.themepunch.revolution.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/jquery.themepunch.revolution.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/jquery.themepunch.tools.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/source/jquery.themepunch.tools.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/layers.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/fonts/lined-icons.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/logo-dark.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/logo.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/magnific-popup.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/metis.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/persephone.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/plugins.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/responsive.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/fonts/revicons/revicons.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.actions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.actions.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.carousel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.carousel.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.kenburn.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.layeranimation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.migration.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.migration.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.navigation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.parallax.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.slideanims.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/source/revolution.extension.video.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/js/extensions/revolution.extension.video.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/settings.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/uranus.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/include/rs-plugin/css/navigation-skins/zeus.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/home.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\.idea\libraries\Django_Lib3.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
@@ -173,57 +31,116 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/home.html">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2">
-              <caret line="153" column="54" selection-start-line="153" selection-start-column="47" selection-end-line="153" selection-end-column="54" />
+            <state vertical-scroll-proportion="-4.1034484">
+              <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
               <folding>
-                <element signature="n#style#0;n#div#1;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#3;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#div#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#6;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#15#39#0" expanded="true" />
+                <element signature="e#347#3828#0" expanded="false" />
+                <element signature="e#3880#4717#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preloader.gif" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/broderjobs/static/template/css/images/preloader.gif">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="empresa.jpg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/static/template/images/empresa.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home-empresa.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/home-empresa.html">
+      <file leaf-file-name="editar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2">
-              <caret line="208" column="29" selection-start-line="208" selection-start-column="26" selection-end-line="208" selection-end-column="29" />
+            <state vertical-scroll-proportion="2.6363637">
+              <caret line="247" column="51" selection-start-line="247" selection-start-column="51" selection-end-line="247" selection-end-column="51" />
+              <folding>
+                <element signature="e#590#1047#0#HTML" expanded="false" />
+                <element signature="e#11527#12273#0#HTML" expanded="false" />
+                <element signature="e#12290#12571#0#HTML" expanded="false" />
+                <element signature="e#12594#15689#0#HTML" expanded="false" />
+                <element signature="e#15731#16046#0#HTML" expanded="false" />
+                <element signature="e#16080#16495#0#HTML" expanded="false" />
+                <element signature="e#16524#16867#0#HTML" expanded="false" />
+                <element signature="e#16891#17268#0#HTML" expanded="false" />
+                <element signature="e#17308#17462#0#HTML" expanded="false" />
+                <element signature="e#19533#19857#0#HTML" expanded="false" />
+                <element signature="e#19914#20108#0#HTML" expanded="false" />
+                <element signature="e#20145#23443#0#HTML" expanded="false" />
+                <element signature="e#23473#24021#0#HTML" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+              <folding>
+                <element signature="e#484#1340#0" expanded="false" />
+                <element signature="e#5164#6201#0" expanded="false" />
+                <element signature="e#6243#6845#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="85" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="85" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.62222224">
+              <caret line="540" column="54" selection-start-line="540" selection-start-column="54" selection-end-line="540" selection-end-column="54" />
+              <folding>
+                <element signature="e#1402#7515#0" expanded="false" />
+                <element signature="e#7560#16423#0" expanded="false" />
+                <element signature="e#16471#17809#0" expanded="false" />
+                <element signature="e#17852#18306#0" expanded="false" />
+                <element signature="e#18347#20066#0" expanded="false" />
+                <element signature="e#20103#23154#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/mensaje/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="191" column="8" selection-start-line="191" selection-start-column="8" selection-end-line="192" selection-end-column="35" />
+              <folding>
+                <element signature="e#1782#2912#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/main/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.9259257">
+              <caret line="11" column="67" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="67" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/broderjobs/main/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -269,18 +186,23 @@
         <option value="$PROJECT_DIR$/broderjobs/empresa/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/video_form.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/picture_form.html" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
         <option value="$PROJECT_DIR$/broderjobs/empresa/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa-slider-imagenes.html" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
         <option value="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" />
-        <option value="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
         <option value="$PROJECT_DIR$/broderjobs/oportunidad/migrations/0041_auto_20160222_0839.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/main/home.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/forms.py" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" />
+        <option value="$PROJECT_DIR$/broderjobs/templates/main/ingreso-estudiante.html" />
         <option value="$PROJECT_DIR$/broderjobs/main/urls.py" />
         <option value="$PROJECT_DIR$/broderjobs/main/views.py" />
-        <option value="$PROJECT_DIR$/broderjobs/templates/main/home.html" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" />
+        <option value="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
       </list>
     </option>
   </component>
@@ -292,10 +214,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="2" />
+    <option name="y" value="1" />
+    <option name="width" value="1363" />
+    <option name="height" value="726" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -320,6 +242,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -384,41 +307,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="include" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rs-plugin" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,23 +329,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="include" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="oportunidad" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -470,27 +347,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="include" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sources" />
+              <option name="myItemId" value="mensaje" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -508,156 +365,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="videos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="portfolio" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brod_gal_dem_1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="broderjobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -667,18 +381,6 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template\images" />
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template\include\rs-plugin" />
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template\images\videos" />
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template\images\portfolio" />
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\louise.lista\Desktop\Repositorio BroderJobs\brod_gal_dem_1\broderjobs\static\template\css\images" />
-    </key>
   </component>
   <component name="RunManager" selected="Python.debug">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -978,29 +680,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="2" y="1" width="1363" height="726" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1709531" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46830985" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3611111" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36091548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1696086" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22359155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22359155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1015,14 +717,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24471831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36091548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1702454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1696086" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22359155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22359155" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1088,13 +790,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python27/Lib/site-packages/django/utils/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-lista.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57894737">
@@ -1196,6 +891,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="63.846153">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1245,6 +941,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8968872">
           <caret line="536" column="21" selection-start-line="536" selection-start-column="21" selection-end-line="536" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1273,6 +970,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1280,6 +978,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.6896553">
           <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#51#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1297,17 +998,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.517341">
-          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/empresa-detalle.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="14.884615">
           <caret line="590" column="57" selection-start-line="590" selection-start-column="57" selection-end-line="590" selection-end-column="57" />
+          <folding>
+            <element signature="e#8142#20023#0#HTML" expanded="false" />
+            <element signature="e#20114#23592#0#HTML" expanded="false" />
+            <element signature="e#23593#24175#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1315,6 +1014,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.625323">
           <caret line="31" column="28" selection-start-line="29" selection-start-column="8" selection-end-line="31" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1336,14 +1036,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="153" column="30" selection-start-line="153" selection-start-column="6" selection-end-line="153" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="196" column="12" selection-start-line="196" selection-start-column="12" selection-end-line="196" selection-end-column="83" />
-          <folding />
+          <folding>
+            <element signature="e#390#1186#0" expanded="false" />
+            <element signature="e#1230#1944#0" expanded="false" />
+            <element signature="e#1989#2892#0" expanded="false" />
+            <element signature="e#2938#4042#0" expanded="false" />
+            <element signature="e#4088#5015#0" expanded="false" />
+            <element signature="e#5058#6102#0" expanded="false" />
+            <element signature="e#6148#7203#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1433,24 +1134,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/estudiante/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="57" column="17" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="17" />
+          <folding>
+            <element signature="e#417#2548#0" expanded="false" />
+            <element signature="e#2583#3055#0" expanded="false" />
+            <element signature="e#3099#3618#0" expanded="false" />
+            <element signature="e#3668#4698#0" expanded="false" />
+            <element signature="e#4738#5603#0" expanded="false" />
+            <element signature="e#5648#6248#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/main/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-3.5172415">
           <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="102" />
           <folding>
             <element signature="e#0#28#0" expanded="false" />
@@ -1458,12 +1159,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/migrations/0041_auto_20160222_0839.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="12" selection-start-line="27" selection-start-column="7" selection-end-line="31" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/empresa/mi-empresa.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6357143">
+          <caret line="133" column="60" selection-start-line="133" selection-start-column="60" selection-end-line="133" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49514562">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33214286">
+          <caret line="14" column="99" selection-start-line="14" selection-start-column="93" selection-end-line="14" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33214286">
+          <caret line="107" column="72" selection-start-line="107" selection-start-column="71" selection-end-line="107" selection-end-column="72" />
+          <folding>
+            <element signature="e#15621#16956#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1034484">
+          <caret line="60" column="44" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+            <element signature="e#347#3828#0" expanded="false" />
+            <element signature="e#3880#4717#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/main/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="11" column="67" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/ingreso-estudiante.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29766536">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.6363637">
+          <caret line="247" column="51" selection-start-line="247" selection-start-column="51" selection-end-line="247" selection-end-column="51" />
+          <folding>
+            <element signature="e#590#1047#0#HTML" expanded="false" />
+            <element signature="e#11527#12273#0#HTML" expanded="false" />
+            <element signature="e#12290#12571#0#HTML" expanded="false" />
+            <element signature="e#12594#15689#0#HTML" expanded="false" />
+            <element signature="e#15731#16046#0#HTML" expanded="false" />
+            <element signature="e#16080#16495#0#HTML" expanded="false" />
+            <element signature="e#16524#16867#0#HTML" expanded="false" />
+            <element signature="e#16891#17268#0#HTML" expanded="false" />
+            <element signature="e#17308#17462#0#HTML" expanded="false" />
+            <element signature="e#19533#19857#0#HTML" expanded="false" />
+            <element signature="e#19914#20108#0#HTML" expanded="false" />
+            <element signature="e#20145#23443#0#HTML" expanded="false" />
+            <element signature="e#23473#24021#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="74" selection-start-line="67" selection-start-column="74" selection-end-line="67" selection-end-column="74" />
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="false" />
             <element signature="e#484#1340#0" expanded="false" />
             <element signature="e#5164#6201#0" expanded="false" />
             <element signature="e#6243#6845#0" expanded="false" />
@@ -1471,91 +1273,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/main/views.py">
+    <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/main/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="59" />
+          <caret line="17" column="85" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="85" />
           <folding>
-            <element signature="e#0#51#0" expanded="false" />
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/template/js/jquery.js">
+    <entry file="file://$PROJECT_DIR$/broderjobs/mensaje/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/template/images/logo-dark.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/template/images/empresa.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/home-empresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2">
-          <caret line="208" column="29" selection-start-line="208" selection-start-column="26" selection-end-line="208" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/template/images/estado.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/templates/main/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2">
-          <caret line="153" column="54" selection-start-line="153" selection-start-column="47" selection-end-line="153" selection-end-column="54" />
+          <caret line="191" column="8" selection-start-line="191" selection-start-column="8" selection-end-line="192" selection-end-column="35" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#li#0;n#ul#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#div#0;n#a#0;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#4;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#div#5;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#6;n#section#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1782#2912#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/broderjobs/static/template/css/images/preloader.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/broderjobs/oportunidad/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62222224">
+          <caret line="540" column="54" selection-start-line="540" selection-start-column="54" selection-end-line="540" selection-end-column="54" />
+          <folding>
+            <element signature="e#1402#7515#0" expanded="false" />
+            <element signature="e#7560#16423#0" expanded="false" />
+            <element signature="e#16471#17809#0" expanded="false" />
+            <element signature="e#17852#18306#0" expanded="false" />
+            <element signature="e#18347#20066#0" expanded="false" />
+            <element signature="e#20103#23154#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
