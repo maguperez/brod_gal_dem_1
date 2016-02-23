@@ -93,3 +93,22 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=0 );
 
 }
+
+.link-button-facebook {
+    width: 268px;
+    height: 37px;
+    line-height: 37px;
+    color: #fff;
+    font-family: 'Roboto Condensed';
+    text-align: center;
+    text-indent: -30px;
+    font-size: 1.15em;
+    background: transparent url('../images/buttons/ingresa_facebook.png') 0 0 no-repeat;
+    display: inline-block;
+}
+
+#login .division {margin: 25px 0;}
+#login .division .line {width: 45%; height: 1px; background: rgba(100,100,100,0.5); float: left; clear:none;}
+#login .division .line.full {width: 100%;}
+#login .division label {width: 10%; line-height: 1px; float: left; text-align: center; }
+#login .modal-title { font-family: 'Roboto Condensed';}
