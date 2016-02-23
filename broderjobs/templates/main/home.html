@@ -116,7 +116,7 @@
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
-                                <li><a href="../ingreso_estudiante"><div>Regístrate</div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#register"><div>Regístrate</div></a>
                                 </li>
                             </ul>
                             
@@ -627,18 +627,67 @@
                                     <label for="login-form-password">Contraseña:</label>
                                     {{ login_form.password }}
                                 </div>
-                                <div class="form-group ">
-                                    {{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
+                                <div class="form-group text-left">
+                                    {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
                                 <div class="form-group nobottommargin">
-                                    <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Inicia sesión</button>
+                                    <button class="button button-3d nomargin" id="login-form-submit" name="login-form-submit" value="login">Ingresar</button>
+                                    <div class="clear"></div>
+                                    <br><br>
                                     <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <div class="clear"></div>
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Hola</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                                <div class="form-group">
+                                    <label for="register-form-name">Nombres:</label>
+                                    <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-name">Apellidos:</label>
+                                    <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register-form-email">Correo:</label>
+                                    <input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-password">Contraseña:</label>
+                                    <input type="password" id="register-form-password" name="register-form-password" value="" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register-form-repassword">Confirmar contraseña:</label>
+                                    <input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
+                                </div>
+                                <div class="form-group row">
+                                    <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
+                                    <div class =" col-sm-4">
+                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
+                                    <div class =" col-sm-4">
+                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
+                                    <div class =" col-sm-4">
+                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
+                                </div>
+                                <div class="form-group nobottommargin">
+                                    <button class="button button-3d nomargin" id="register-form-submit" name="register-form-submit" value="register">Register Now</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
