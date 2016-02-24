@@ -112,11 +112,11 @@
                         <nav id="primary-menu">
                             
                             <ul>
-                                <li class="current"><a href="home"><div>Para Empresas</div></a>
+                                <li class="current"><a href="#"><div>Para Empresas</div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
-                                <li><a href="../ingreso_estudiante"><div>Regístrate</div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#register"><div>Regístrate</div></a>
                                 </li>
                             </ul>
                             
@@ -217,9 +217,8 @@
 
                     tpj(document).ready(function() {
 
-                        var apiRevoSlider = tpj('.tp-banner').show().revolution(
-                                {
-                                    sliderType:"standard",
+                        var apiRevoSlider = tpj('.tp-banner').show().revolution({
+                            sliderType:"standard",
                             jsFileLocation:"include/rs-plugin/js/",
                             sliderLayout:"fullscreen",
                             dottedOverlay:"none",
@@ -312,51 +311,55 @@
             <section id="content">                   
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 1"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 2"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 3"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 4"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 5"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 6"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
+                    </div>
+                    <div class=4"oc-item">
+                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 7"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
                     </div>
-                    
                 </div>
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 1"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 2"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class=4"oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 3"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 4"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 5"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 6"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 7"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
                     </div>
-                    
+                    <div class="oc-item">
+                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
+                    </div>
                 </div>
                 <a class="button button-full button-dark center tright ">
                     <div class="container clearfix">
@@ -381,7 +384,7 @@
                                 0:{ items:2 },
                                 600:{ items:3 },
                                 1000:{ items:4 },
-                                1200:{ items:5 }
+                                1200:{ items:4 }
                             }
                         });
 
@@ -601,7 +604,7 @@
             </footer><!-- #footer end -->
             
         </div><!-- #wrapper end -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade login" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-body">
                     <div class="modal-content">
@@ -610,7 +613,7 @@
                             <h4 class="modal-title text-center">Hola</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-button-facebook">INGRESA CON FACEBOOK</a>
+                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>
                             <div class="division">
                                 <div class="line notopmargin nobottommargin"></div>
                                 <label>o</label>
@@ -627,18 +630,97 @@
                                     <label for="login-form-password">Contraseña:</label>
                                     {{ login_form.password }}
                                 </div>
-                                <div class="form-group ">
-                                    {{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
+                                <div class="form-group text-left">
+                                    {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
+                                {%if message_login %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_login}}</div>
+								{% endif%}
                                 <div class="form-group nobottommargin">
-                                    <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Inicia sesión</button>
+                                    <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
+                                    <div class="clear"></div>
+                                    <br><br>
                                     <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <div class="clear"></div>
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Hola</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
+									REG&Iacute;STRATE CON FACEBOOK</a>
+                            <label>Es más fácil y rápido</label>
+                            <div class="division">
+                                <div class="line notopmargin nobottommargin"></div>
+                                <label>o</label>
+                                <div class="line notopmargin nobottommargin"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <a class="registro" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
+                            <div class="clear"></div>
+                            <div class="registro-email" id="registro-email">
+                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="register-form-name">Nombres:</label>
+                                        {{ registro_form.first_name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-name">Apellidos:</label>
+                                        {{ registro_form.last_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-form-email">Correo:</label>
+                                        {{ registro_form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-password">Contraseña:</label>
+                                        {{ registro_form.password1 }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-form-repassword">Confirmar contraseña:</label>
+                                        {{ registro_form.password2 }}
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.dia}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.mes}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.ano}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
+                                            Acepto los
+                                                <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
+                                    </div>
+                                    {%if message_registro %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        {{message_registro}}
+                                    </div>
+                                    {% endif%}
+                                    <div class="form-group nobottommargin">
+                                        <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -651,6 +733,144 @@
         <!-- Footer Scripts
         ============================================= -->
         <script type="text/javascript" src="{% static 'template/js/functions.js' %}"></script>
-        
+        <script src="{% static 'template/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'template/js/jquery.validate.additional-methods.min.js' %}"></script>
+		<script src="{% static 'template/js/json2.js' %}"></script>
+		<script src="{% static 'template/js/jstorage.js' %}"></script>
+        <script>
+            $(function(){
+
+                $("#login-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "login-email": { required: true, email: true },
+                        "login-password": { required: true, minlength: 6}
+                    },
+                    messages: {
+                        "login-email": { 	required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo válido" },
+                        "login-password": { required: "Este campo es obligatorio",
+                                            minlength: "La contraseña debe tener al menos seis (6) caracteres" }
+                    }
+                })
+                $("#register-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "registro-first_name": { required: true },
+                        "registro-last_name": { required: true },
+                        "registro-email": { required: true, email: true },
+                        "registro-password1": { required: true, minlength: 6, maxlength: 15 },
+                        "registro-password2": { required: true, minlength: 6, maxlength: 15, equalTo: "#id_registro-password1" },
+                        "registro-dia": { required: true },
+                        "registro-mes": { required: true },
+                        "registro-ano": { required: true },
+                        groups: {
+                            date: "registro-dia registro-mes registro-ano"
+                        },
+                        tyc: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        "registro-first_name": { required: "Este campo es obligatorio" },
+                        "registro-last_name": { required: "Este campo es obligatorio" },
+                        "registro-email": { required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo valido" },
+                        "registro-password1": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres"},
+                        "registro-password2": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres",
+                                                equalTo: "Las contraseñas deben ser iguales" },
+                        "registro-dia": { required: "La fecha de nacimiento es obligatoria"	},
+                        "registro-mes": { required: "La fecha de nacimiento es obligatoria" },
+                        "registro-ano": { required: "La fecha de nacimiento es obligatoria" },
+                        tyc: { required: "Debe aceptar los términos y condiciones" }
+                    }
+                });
+                //Recordar ContraseñaEstudiante
+                var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
+                        key = 'savedUsername', keypass='savedPassword',
+                        username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
+                if (username) {
+                    userField.val(username);
+                    passField.val(pass);
+                    checkbox.prop('checked', true);
+                    $('#id_login-password').focus();
+                }
+                else {
+                    userField.val('').focus();
+                    passField.val('');
+                    checkbox.prop('checked', false);
+                }
+                $("#id_login-remember_me").click(function(){
+                    if ($(this).prop('checked')) {
+                        $.jStorage.set(key, userField.val());
+                        $.jStorage.set(keypass, passField.val());
+                    }
+                    else {
+                        $.jStorage.deleteKey(key);
+                        $.jStorage.deleteKey(keypass);
+                    }
+                });
+            });
+            window.onload = function(){
+                debugger;
+                $("#primary-menu a").on("click", function(){
+                    sessionStorage.setItem("main", $(this).attr("data-target"));
+                })
+                if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
+					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
+				}
+                else {
+                    $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
+                }
+            }
+        </script>
     </body>
 </html>

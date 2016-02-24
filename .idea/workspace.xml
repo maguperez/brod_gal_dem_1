@@ -2,10 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="home de prueba">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" afterPath="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/alicorp.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/bbva.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/bcp.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/easytaxi.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/exsa.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/facusa.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/gloria.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/portfolio/rimac.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Django_Lib2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/jquery.validate.additional-methods.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/jquery.validate.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/json2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/broderjobs/static/template/js/jstorage.js" />
+      <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\static\template\images\portfolio\image.jpg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/template/images/bicicleta.jpg" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/bicicleta.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/template/images/empresa.jpg" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/empresa.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/template/images/estado.jpg" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/estado.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/template/images/videos/video.mp4" afterPath="$PROJECT_DIR$/broderjobs/static/template/images/videos/video.mp4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/template/css/custom.css" afterPath="$PROJECT_DIR$/broderjobs/static/template/css/custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/home.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
     <ignored path=".idea/workspace.xml" />
