@@ -107,13 +107,57 @@
     display: inline-block;
 }
 
-.login .division {margin: 15px 0;}
-.login .division .line {width: 45%; height: 1px; background: rgba(100,100,100,0.5); float: left; clear:none;}
-.login .division .line.full {width: 100%;}
-.login .division label {width: 10%; line-height: 1px; float: left; text-align: center; }
-.login .modal-title{ font-family: 'Roboto Condensed';}
-.login .modal-dialog{ width: 400px; }
-.login .modal-content{ border-radius: 2px; }
-.login .registro-email {max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -moz-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s; -o-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;}
-.login .registro-email:target {max-height: 800px; opacity: 1;}
-.login label.error { display: inline-block !Important; text-transform: none; margin-bottom: 0px; }
+.login .division {
+    margin: 15px 0;
+}
+.login .division .line {
+    width: 45%;
+    height: 1px;
+    background: rgba(100,100,100,0.5);
+    float: left;
+    clear:none;
+}
+.login .division .line.full {
+    width: 100%;
+}
+.login .division label {
+    width: 10%;
+    line-height: 1px;
+    float: left;
+    text-align: center;
+}
+.login .modal-title{
+    font-family: 'Roboto Condensed';
+}
+.login .modal-dialog{
+    width: 400px;
+}
+.login .modal-content{
+    border-radius: 2px;
+}
+.login .registro-email {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;
+    -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;
+    -moz-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;
+    -o-transition: max-height 0.4s ease-in-out, opacity 0.2s linear 0.4s;
+}
+.login .registro-email:target {
+    max-height: 800px;
+    opacity: 1;
+}
+.login label.error {
+    display: inline-block !Important;
+    text-transform: none;
+    margin-bottom: 0px;
+}
+.login .alert-warning {
+    background-color: rgba(255,85,0,0.3);
+    border-color: rgba(255,85,0,0.3);
+    color: #FB4100;
+    border-radius: 0px;
+    text-align: center;
+    font-family: Roboto Condensed;
+}

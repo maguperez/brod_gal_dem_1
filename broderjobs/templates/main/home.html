@@ -112,7 +112,7 @@
                         <nav id="primary-menu">
                             
                             <ul>
-                                <li class="current"><a href="home"><div>Para Empresas</div></a>
+                                <li class="current"><a href="#"><div>Para Empresas</div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -217,9 +217,8 @@
 
                     tpj(document).ready(function() {
 
-                        var apiRevoSlider = tpj('.tp-banner').show().revolution(
-                                {
-                                    sliderType:"standard",
+                        var apiRevoSlider = tpj('.tp-banner').show().revolution({
+                            sliderType:"standard",
                             jsFileLocation:"include/rs-plugin/js/",
                             sliderLayout:"fullscreen",
                             dottedOverlay:"none",
@@ -312,51 +311,55 @@
             <section id="content">                   
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 1"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 2"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 3"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 4"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 5"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 6"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
+                    </div>
+                    <div class=4"oc-item">
+                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 7"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
                     </div>
-                    
                 </div>
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 1"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 2"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class=4"oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 3"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 4"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 5"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 6"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/image.jpg' %}" alt="Image 7"></a>
+                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
                     </div>
-                    
+                    <div class="oc-item">
+                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
+                    </div>
                 </div>
                 <a class="button button-full button-dark center tright ">
                     <div class="container clearfix">
@@ -381,7 +384,7 @@
                                 0:{ items:2 },
                                 600:{ items:3 },
                                 1000:{ items:4 },
-                                1200:{ items:5 }
+                                1200:{ items:4 }
                             }
                         });
 
@@ -636,7 +639,7 @@
 									{{message_login}}</div>
 								{% endif%}
                                 <div class="form-group nobottommargin">
-                                    <button class="button button-3d nomargin" id="login-form-submit" name="login-form-submit" value="login">Ingresar</button>
+                                    <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
                                     <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
@@ -714,7 +717,7 @@
                                     </div>
                                     {% endif%}
                                     <div class="form-group nobottommargin">
-                                        <button class="button button-3d nomargin" id="register-form-submit" name="register-form-submit" value="register">Registrarme</button>
+                                        <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
                                     </div>
                                 </form>
                             </div>
@@ -736,6 +739,7 @@
 		<script src="{% static 'template/js/jstorage.js' %}"></script>
         <script>
             $(function(){
+
                 $("#login-form").validate({
                     highlight: function( label ) {
                         $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -854,7 +858,19 @@
                         $.jStorage.deleteKey(keypass);
                     }
                 });
-            })
+            });
+            window.onload = function(){
+                debugger;
+                $("#primary-menu a").on("click", function(){
+                    sessionStorage.setItem("main", $(this).attr("data-target"));
+                })
+                if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
+					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
+				}
+                else {
+                    $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
+                }
+            }
         </script>
     </body>
 </html>
