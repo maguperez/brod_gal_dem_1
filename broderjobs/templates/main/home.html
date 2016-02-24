@@ -601,7 +601,7 @@
             </footer><!-- #footer end -->
             
         </div><!-- #wrapper end -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade login" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-body">
                     <div class="modal-content">
@@ -610,7 +610,7 @@
                             <h4 class="modal-title text-center">Hola</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-button-facebook">INGRESA CON FACEBOOK</a>
+                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>
                             <div class="division">
                                 <div class="line notopmargin nobottommargin"></div>
                                 <label>o</label>
@@ -630,6 +630,11 @@
                                 <div class="form-group text-left">
                                     {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
+                                {%if message_login %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_login}}</div>
+								{% endif%}
                                 <div class="form-group nobottommargin">
                                     <button class="button button-3d nomargin" id="login-form-submit" name="login-form-submit" value="login">Ingresar</button>
                                     <div class="clear"></div>
@@ -643,7 +648,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade login" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-body">
                     <div class="modal-content">
@@ -652,42 +657,67 @@
                             <h4 class="modal-title text-center">Hola</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
-                                <div class="form-group">
-                                    <label for="register-form-name">Nombres:</label>
-                                    <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-name">Apellidos:</label>
-                                    <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
-                                </div>
+                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
+									REG&Iacute;STRATE CON FACEBOOK</a>
+                            <label>Es más fácil y rápido</label>
+                            <div class="division">
+                                <div class="line notopmargin nobottommargin"></div>
+                                <label>o</label>
+                                <div class="line notopmargin nobottommargin"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <a class="registro" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
+                            <div class="clear"></div>
+                            <div class="registro-email" id="registro-email">
+                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="register-form-name">Nombres:</label>
+                                        {{ registro_form.first_name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-name">Apellidos:</label>
+                                        {{ registro_form.last_name }}
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="register-form-email">Correo:</label>
-                                    <input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-password">Contraseña:</label>
-                                    <input type="password" id="register-form-password" name="register-form-password" value="" class="form-control" />
-                                </div>
+                                    <div class="form-group">
+                                        <label for="register-form-email">Correo:</label>
+                                        {{ registro_form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-password">Contraseña:</label>
+                                        {{ registro_form.password1 }}
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="register-form-repassword">Confirmar contraseña:</label>
-                                    <input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
-                                </div>
-                                <div class="form-group row">
-                                    <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
-                                    <div class =" col-sm-4">
-                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                    <div class =" col-sm-4">
-                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                    <div class =" col-sm-4">
-                                        <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                </div>
-                                <div class="form-group nobottommargin">
-                                    <button class="button button-3d nomargin" id="register-form-submit" name="register-form-submit" value="register">Register Now</button>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        <label for="register-form-repassword">Confirmar contraseña:</label>
+                                        {{ registro_form.password2 }}
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.dia}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.mes}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.ano}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
+                                            Acepto los
+                                                <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
+                                    </div>
+                                    {%if message_registro %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        {{message_registro}}
+                                    </div>
+                                    {% endif%}
+                                    <div class="form-group nobottommargin">
+                                        <button class="button button-3d nomargin" id="register-form-submit" name="register-form-submit" value="register">Registrarme</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -700,6 +730,131 @@
         <!-- Footer Scripts
         ============================================= -->
         <script type="text/javascript" src="{% static 'template/js/functions.js' %}"></script>
-        
+        <script src="{% static 'template/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'template/js/jquery.validate.additional-methods.min.js' %}"></script>
+		<script src="{% static 'template/js/json2.js' %}"></script>
+		<script src="{% static 'template/js/jstorage.js' %}"></script>
+        <script>
+            $(function(){
+                $("#login-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "login-email": { required: true, email: true },
+                        "login-password": { required: true, minlength: 6}
+                    },
+                    messages: {
+                        "login-email": { 	required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo válido" },
+                        "login-password": { required: "Este campo es obligatorio",
+                                            minlength: "La contraseña debe tener al menos seis (6) caracteres" }
+                    }
+                })
+                $("#register-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "registro-first_name": { required: true },
+                        "registro-last_name": { required: true },
+                        "registro-email": { required: true, email: true },
+                        "registro-password1": { required: true, minlength: 6, maxlength: 15 },
+                        "registro-password2": { required: true, minlength: 6, maxlength: 15, equalTo: "#id_registro-password1" },
+                        "registro-dia": { required: true },
+                        "registro-mes": { required: true },
+                        "registro-ano": { required: true },
+                        groups: {
+                            date: "registro-dia registro-mes registro-ano"
+                        },
+                        tyc: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        "registro-first_name": { required: "Este campo es obligatorio" },
+                        "registro-last_name": { required: "Este campo es obligatorio" },
+                        "registro-email": { required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo valido" },
+                        "registro-password1": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres"},
+                        "registro-password2": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres",
+                                                equalTo: "Las contraseñas deben ser iguales" },
+                        "registro-dia": { required: "La fecha de nacimiento es obligatoria"	},
+                        "registro-mes": { required: "La fecha de nacimiento es obligatoria" },
+                        "registro-ano": { required: "La fecha de nacimiento es obligatoria" },
+                        tyc: { required: "Debe aceptar los términos y condiciones" }
+                    }
+                });
+                //Recordar ContraseñaEstudiante
+                var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
+                        key = 'savedUsername', keypass='savedPassword',
+                        username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
+                if (username) {
+                    userField.val(username);
+                    passField.val(pass);
+                    checkbox.prop('checked', true);
+                    $('#id_login-password').focus();
+                }
+                else {
+                    userField.val('').focus();
+                    passField.val('');
+                    checkbox.prop('checked', false);
+                }
+                $("#id_login-remember_me").click(function(){
+                    if ($(this).prop('checked')) {
+                        $.jStorage.set(key, userField.val());
+                        $.jStorage.set(keypass, passField.val());
+                    }
+                    else {
+                        $.jStorage.deleteKey(key);
+                        $.jStorage.deleteKey(keypass);
+                    }
+                });
+            })
+        </script>
     </body>
 </html>
