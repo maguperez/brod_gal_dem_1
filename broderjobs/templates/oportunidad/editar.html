@@ -711,35 +711,30 @@
 	}
 
     $('.actualizar').change(function(){
-        alert("cambio");
-{#            ids = new Array();#}
-{#            ids_estudiante = new Array();#}
-{#            ids_estudiante = $(".candidatos").val();#}
-{#            var form = new FormData();#}
-{#            form.append('ids',JSON.stringify(ids));#}
-{#            form.append('ids_estudiante',JSON.stringify(ids_estudiante));#}
-{#            form.append('o',$('#oportunidad_redactar_id').val());#}
-{#            form.append('a',$('.asunto').val());#}
-{#            form.append('c',$('.note-codable').val());#}
-{#            form.append('p', $('#permite-respuesta').is(':checked')? 'S' : 'N');#}
-{#            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());#}
-{##}
-{#            $.ajax({#}
-{#                type:"POST",#}
-{#                url:"{%url 'mensaje-enviar-estudiante' %}",#}
-{#                data: form,#}
-{#                processData: false,#}
-{#                contentType: false,#}
-{#                error: function(x){#}
-{#                    console.log(x);#}
-{#                },#}
-{#                success: function(data){#}
-{#                    fnActivaTab('message-detail1');#}
-{#                    $('#li-1').click();#}
-{#                    $('#message-detail1').html('<div class="panel-heading messages message-result">' +#}
-{#                                            '<h2 class="p-t-20 w-500">Su mensaje se ha enviado correctamente</h2></div>');#}
-{#                }#}
-{#            });#}
+{#        alert("cambio");#}
+            ids = new Array();
+            ids_estudiante = new Array();
+            ids_estudiante = $(".candidatos").val();
+            var form = new FormData();
+            form.append('carrera', $('#id_carrera').val()== null ? 0 : $('#id_carrera').val() );
+            form.append('universidad', $('#id_universidad').val() == null ? 0 : $('#id_universidad').val() );
+            form.append('grado_estudio', $('#id_grado_estudio').val());
+            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
+             $(".alcance .cifra").html("Calculando...");
+            $.ajax({
+                type:"POST",
+                url:"{%url 'total-compatibles' %}",
+                data: form,
+                processData: false,
+                contentType: false,
+                error: function(x){
+                    console.log(x);
+                    $(".alcance .cifra").html("error...");
+                },
+                success: function(data){
+                    $(".alcance .cifra").html(data);
+                }
+            });
        });
 
 

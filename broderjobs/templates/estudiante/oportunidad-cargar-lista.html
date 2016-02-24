@@ -78,57 +78,57 @@
 {#        }#}
 {#    };#}
 {#    var compatibilidad = new CompatibilidadJD();#}
-{#	 $(function(){#}
-{#	    $("#link-oportunidad").addClass("active");#}
-{#	   	$("body").on("mouseenter", ".compatibilidad", function(){#}
-{#			$(this).find(".consolidado").css("opacity",0);#}
-{#		  	$(this).find(".desglose").css("opacity",1);#}
-{#			var data = 0;#}
-{#			data = $(this).find(".cultural .circular-bar-chart").data("percent");#}
-{#			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);#}
-{#			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);#}
-{##}
-{#			data = $(this).find(".academico .circular-bar-chart").data("percent");#}
-{#			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);#}
-{#			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);#}
-{#		});#}
-{#	   	$("body").on("mouseleave", ".compatibilidad", function(){#}
-{#		   	$(this).find(".consolidado").css("opacity",1);#}
-{#		  	$(this).find(".desglose").css("opacity",0);#}
-{#			$('.chart').data('easyPieChart').update(40);#}
-{#		});#}
-{##}
-{#		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({#}
-{#					animate: 2000,#}
-{#					scaleLength: 0,#}
-{#					lineWidth: 5,#}
-{#					barColor: "#1dcfac",#}
-{#					size: 65,#}
-{#				});#}
-{#		 $('.cultural .circular-bar-chart').easyPieChart({#}
-{#					animate: 2000,#}
-{#					scaleLength: 0,#}
-{#					lineWidth: 5,#}
-{#					barColor: "#c0392b",#}
-{#					size: 65,#}
-{#				});#}
-{#		 $('.academico .circular-bar-chart').easyPieChart({#}
-{#					animate: 2000,#}
-{#					scaleLength: 0,#}
-{#					lineWidth: 5,#}
-{#					barColor: "#5d9cf9",#}
-{#					size: 65,#}
-{#				});#}
-{##}
-{#         $(".class").each(function() {#}
-{##}
-{#        });#}
+	 $(function(){
+	    $("#link-oportunidad").addClass("active");
+	   	$("body").on("mouseenter", ".compatibilidad", function(){
+			$(this).find(".consolidado").css("opacity",0);
+		  	$(this).find(".desglose").css("opacity",1);
+			var data = 0;
+			data = $(this).find(".cultural .circular-bar-chart").data("percent");
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+
+			data = $(this).find(".academico .circular-bar-chart").data("percent");
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
+		});
+	   	$("body").on("mouseleave", ".compatibilidad", function(){
+		   	$(this).find(".consolidado").css("opacity",1);
+		  	$(this).find(".desglose").css("opacity",0);
+			$('.chart').data('easyPieChart').update(40);
+		});
+
+		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#1dcfac",
+					size: 65,
+				});
+		 $('.cultural .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#c0392b",
+					size: 65,
+				});
+		 $('.academico .circular-bar-chart').easyPieChart({
+					animate: 2000,
+					scaleLength: 0,
+					lineWidth: 5,
+					barColor: "#5d9cf9",
+					size: 65,
+				});
+
+         $(".class").each(function() {
+
+        });
 {#         $(".Compatibilidad").each(function(index, obj){#}
 {#             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );#}
 {#        });#}
-{##}
-{##}
-{#	});#}
+
+
+	});
 
 
 
