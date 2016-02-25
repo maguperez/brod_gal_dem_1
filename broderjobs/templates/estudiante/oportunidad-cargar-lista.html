@@ -1,33 +1,33 @@
 {% load staticfiles %}
-{%for oportunidad in oportunidades%}
+{%for opo in oportunidades%}
 <li>
 	<div class="box oportunidad-box">
 		<div class="content">
-			<a href="{%url 'estudiante_empresa_detalle' oportunidad.empresa.id %}"><img class="imagen" src="{{oportunidad.empresa.set_logo}}"/></a>
+			<a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}"><img class="imagen" src="{{opo.oportunidad.empresa.set_logo}}"/></a>
 			<div class="detalle">
-				<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+				<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}"><h2 class="link">{{opo.oportunidad.titulo}}</h2></a>
 				<div class="descripcion">
 					<div class="datos">
 						<div class="empresa">
 							<i class="empresa"></i>
-							<label class ="text-uppercase"><a href="{%url 'estudiante_empresa_detalle' oportunidad.empresa.id %}">{{oportunidad.empresa}}</a></label>
+							<label class ="text-uppercase"><a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}">{{opo.oportunidad.empresa}}</a></label>
 						</div>
-						<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+						<div class="ubicacion"><i class="ubicacion"></i><label>{{opo.oportunidad.ciudad}}, {{opo.oportunidad.pais}}</label></div>
 						<div class="remuneracion"><i class="remuneracion"></i><label>
-							{%if oportunidad.remuneracion.id == 3 %}
-								{{oportunidad.remuneracion_min}}
-							{%elif oportunidad.remuneracion.id == 2 %}
-								{{oportunidad.remuneracion_max}} - {{oportunidad.remuneracion_min}}
+							{%if opo.oportunidad.remuneracion.id == 3 %}
+								{{opo.oportunidad.remuneracion_min}}
+							{%elif opo.oportunidad.remuneracion.id == 2 %}
+								{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
 							{%else%}
-								{{oportunidad.remuneracion}}
+								{{opo.oportunidad.remuneracion}}
 							{%endif%}
 						</label></div>
 					</div>
-					<div class="compatibilidad" data-info="{{oportunidad.empresa.id}}" id="oport-{{oportunidad.id}}" data-id="{{oportunidad.id}}">
+					<div class="compatibilidad" data-info="{{opo.oportunidad.empresa.id}}" id="oport-{{opo.oportunidad.id}}" data-id="{{opo.oportunidad.id}}">
 						<div class = "consolidado">
 							<div class="circular-bar ">
-								<div class="circular-bar-chart" data-percent="73">
-									<label><span class="percent">73</span>%</label>
+								<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_promedio }}">
+									<label><span class="percent">{{ opo.compatibilidad_promedio }}</span>%</label>
 								</div>
 							</div>
 							<label class="resultado">Compatible</label>
@@ -35,16 +35,16 @@
 						<div class = "desglose" style = "opacity: 0">
 							<div class = "cultural">
 								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="63">
-										<label><span class="percent">53</span>%</label>
+									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_cultural}}">
+										<label><span class="percent">{{ opo.compatibilidad_cultural}}</span>%</label>
 									</div>
 								</div>
 								<label class="resultado">Cultural</label>
 							</div>
 							<div class = "academico">
 								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="{{ estudiante_cultura. }}">
-										<label><span class="percent">49</span>%</label>
+									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_academica}}">
+										<label><span class="percent">{{ opo.compatibilidad_academica}}</span>%</label>
 									</div>
 								</div>
 								<label class="resultado">Académico</label>
@@ -52,8 +52,8 @@
 						</div>
 					</div>
 					<div class="ver-oportunidad">
-						<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id %}">VER OPORTUNIDAD</a>
-						<label class="cierre">CIERRA {{ oportunidad.fecha_cese | date:"j.m.Y"}}</label>
+						<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id %}">VER OPORTUNIDAD</a>
+						<label class="cierre">CIERRA {{ opo.oportunidad.fecha_cese | date:"j.m.Y"}}</label>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -66,18 +66,18 @@
 
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script>
-{#    var CompatibilidadJD = function(){#}
-{#        this.fnCargar = function(id, empresa) {#}
-{#            $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){#}
-{#                debugger;#}
+    var CompatibilidadJD = function(){
+        this.fnCargar = function(id, empresa) {
+            $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){
+                debugger;
 {#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
 {#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
 {#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}
-{##}
-{#            });#}
-{#        }#}
-{#    };#}
-{#    var compatibilidad = new CompatibilidadJD();#}
+
+            });
+        }
+    };
+    var compatibilidad = new CompatibilidadJD();
 	 $(function(){
 	    $("#link-oportunidad").addClass("active");
 	   	$("body").on("mouseenter", ".compatibilidad", function(){
@@ -123,9 +123,9 @@
          $(".class").each(function() {
 
         });
-{#         $(".Compatibilidad").each(function(index, obj){#}
-{#             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );#}
-{#        });#}
+         $(".Compatibilidad").each(function(index, obj){
+             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );
+        });
 
 
 	});

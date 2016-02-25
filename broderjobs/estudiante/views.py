@@ -16,7 +16,7 @@ from datetime import date,datetime
 from .models import Estudiante, Resumen, ActividadesExtra, ExperienciaProfesional, Voluntariado, ConocimientoExtra
 from main.models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, Idioma, Conocimiento
 from empresa.models import Puesto, Empresa, Sector, RankingEmpresa, EvaluacionEmpresa, EmpresaRedesSociales, Picture, VideoUrl
-from oportunidad.models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra
+from oportunidad.models import Oportunidad, Postulacion, ProcesoFase, BeneficioExtra, OportunidadCompatibilidad
 from mensaje.models import Mensaje, Mensaje_Destinatario
 from cultura_empresarial.models import EstudianteEmpresaCultura
 from main import utils
@@ -1090,12 +1090,19 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
 def oportunidad_cargar_lista(request):
 
     busqueda = request.GET.get('b')
-    oportunidades = Oportunidad.objects.filter(
-        Q(titulo__unaccent__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
-        Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
-        Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
-        Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).exclude(
-        estado_oportunidad ='P').order_by('-fecha_publicacion').distinct()
+    # oportunidades = Oportunidad.objects.filter(
+    #     Q(titulo__unaccent__icontains=busqueda) | Q(empresa__nombre__icontains = busqueda) |
+    #     Q(ciudad__descripcion__icontains=busqueda) | Q(pais__descripcion__icontains = busqueda) |
+    #     Q(tipo_puesto__descripcion__startswith=busqueda) | Q(carga_horaria__descripcion__startswith=busqueda) |
+    #     Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).exclude(
+    #     estado_oportunidad ='P').order_by('-fecha_publicacion').distinct()
+    oportunidades = OportunidadCompatibilidad.objects.filter(
+        Q(oportunidad__titulo__unaccent__icontains=busqueda) | Q(oportunidad__empresa__nombre__icontains = busqueda) |
+        Q(oportunidad__ciudad__descripcion__icontains=busqueda) | Q(oportunidad__pais__descripcion__icontains = busqueda) |
+        Q(oportunidad__tipo_puesto__descripcion__startswith=busqueda) | Q(oportunidad__carga_horaria__descripcion__startswith=busqueda) |
+        Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda )).exclude(
+        oportunidad__estado_oportunidad ='P').order_by('compatibilidad_academica').distinct()
+
     return render_to_response('estudiante/oportunidad-cargar-lista.html', {'oportunidades': oportunidades},
                               context_instance = RequestContext(request))
 

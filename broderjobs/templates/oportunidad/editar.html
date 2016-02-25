@@ -854,10 +854,10 @@
                 contentType: false,
                 error: function(x){
                     console.log(x);
-                    $(".alcance .cifra").html("error...");
+{#                    $(".alcance .cifra").html("error...");#}
                 },
                 success: function(data){
-                    $(".alcance .cifra").html(data);
+                    $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)no va');
                 }
             });
        });

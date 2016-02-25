@@ -7,6 +7,8 @@ from estudiante.models import Estudiante
 from django.contrib.auth.models import User
 
 from main import utils
+
+
 items_registro = utils.estado_registro()
 
 class ProcesoFase(models.Model):
@@ -95,6 +97,23 @@ class Postulacion(models.Model):
 class BeneficioExtra(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)
     oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    orden = models.IntegerField(null= True, blank= True)
+    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+
+    class Meta:
+        ordering = ["orden"]
+
+    def __unicode__(self):
+		return unicode(self.descripcion) or u''
+
+class OportunidadCompatibilidad(models.Model):
+    oportunidad = models.ForeignKey(Oportunidad, default=None, null=True, blank=True)
+    estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
+    compatibilidad_academica = models.IntegerField(default=0, null= True, blank= True)
+    compatibilidad_cultural = models.IntegerField(default=0, null= True, blank= True)
+    compatibilidad_promedio = models.IntegerField(default=0, null= True, blank= True)
     orden = models.IntegerField(null= True, blank= True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     fecha_modificacion = models.DateField(default=None, null=True, blank=True)

@@ -23,7 +23,7 @@ from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
 from cStringIO import StringIO
-from .compatibilidad import calcular_compatibilidad
+from .compatibilidad import calcular_compatibilidad, guardar_compatibilidad
 
 
 # Create your views here.
@@ -380,6 +380,8 @@ class OportunidadEditarView(FormView):
         oportunidad.estado_oportunidad = estado_nuevo
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
+        total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
+                                       oportunidad.empresa, oportunidad.id)
         return super(OportunidadEditarView, self).form_valid(form)
 
 class OportunidadArchivarView(FormView):
