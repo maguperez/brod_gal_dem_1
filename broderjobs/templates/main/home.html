@@ -714,7 +714,15 @@
 		<script src="{% static 'template/js/jstorage.js' %}"></script>
         <script>
             $(function(){
-
+                $("select").on("change", function(){
+					$(this).val() != "" ?
+						$(this).css("color", "#555555"):
+						$(this).css("color", "#a5a5a5");
+				});
+                $("select").each(function(){
+                    if ($(this).val()=="")
+                        $(this).css("color", "#a5a5a5");
+                });
                 $("#login-form").validate({
                     highlight: function( label ) {
                         $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
