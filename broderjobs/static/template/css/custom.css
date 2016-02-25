@@ -38,6 +38,12 @@
 #header:not(.sticky-header) .standard-logo img{
     height: 50px
 }
+div#logo,
+div#header-wrap,
+#primary-menu .sf-js-enabled{
+    border: none !Important;
+}
+
 #header.sticky-header .standard-logo img{
     height: 40px !Important;
 }
@@ -161,4 +167,7 @@
     border-radius: 0px;
     text-align: center;
     font-family: Roboto Condensed;
+}
+.oc-images .oc-item {
+    cursor: default;
 }
