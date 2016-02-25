@@ -97,10 +97,55 @@ def home(request):
                                                                 'login_form': login_form ,
                                                                 'registro_form': registro_form },
                                       context_instance=RequestContext(request))
-def newingresoestudiante(request):
-    # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
-    return render_to_response('main/ingreso-estudiante.html',
-                              context_instance=RequestContext(request))
+
+def home_empresa(request):
+    message = None
+    if request.user.is_authenticated():
+        return redirect('empresa-oportunidad-listar')
+    else:
+        if request.method == "POST":
+            login_form = LoginForm(request.POST, prefix='login')
+            registro_form = RegisterForm(request.POST, prefix='registro')
+            if '_login' in request.POST:
+                if login_form.is_valid():
+                    email = request.POST["login-email"]
+                    password = request.POST["login-password"]
+                    user = authenticate(username=email, password=password)
+                    if user is not None:
+                        persona = Persona()
+                        try:
+                            persona = Persona.objects.get(usuario_id=user.id, tipo_persona="R")
+                        except persona.DoesNotExist:
+                            persona = None
+                        if persona is not None:
+                            if user.is_active:
+                                login(request, user)
+                                return redirect('empresa-oportunidad-listar')
+                            else:
+                                message = "tu usuario esta inactivo"
+                    message = "Email o contraseña incorrecta"
+            if '_registro' in request.POST:
+                if registro_form.is_valid():
+                    user = registro_form.save()
+                    persona = Persona()
+                    persona.usuario = user
+                    persona.tipo_persona = "R"
+                    persona.telefono = registro_form.cleaned_data['telefono']
+                    empresa = registro_form.cleaned_data['empresa']
+                    persona.save()
+                    representante = Representante()
+                    representante.persona = persona
+                    representante.empresa = empresa
+                    representante.save()
+                    new_user = authenticate(username=request.POST['registro-email'], password=request.POST['registro-password1'])
+                    login(request, new_user)
+                    mensaje = "Se ha registrado satisfactoriamente"
+                    return redirect('empresa-oportunidad-listar')
+        else:
+            login_form = LoginForm(prefix='login')
+            registro_form = RegisterForm(prefix='registro')
+        return render_to_response('main/inicio-empresa.html', {'message': message, 'login_form': login_form , 'registro_form': registro_form },
+                                      context_instance=RequestContext(request))
 
 def homepage(request):
     message_registro = None

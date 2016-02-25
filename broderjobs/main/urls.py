@@ -9,7 +9,7 @@ urlpatterns =[
 
 	url(r'^home/$' , 'main.views.home', name='home'),
 
-	url(r'^ingreso_estudiante/$' , 'main.views.newingresoestudiante', name='newingresoestudiante'),
+	url(r'^home-empresa/$' , 'main.views.home_empresa', name='home-empresa'),
 
 	url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
 
