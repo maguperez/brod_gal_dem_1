@@ -23,7 +23,7 @@ from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
 from cStringIO import StringIO
-
+from .compatibilidad import calcular_compatibilidad
 
 
 # Create your views here.
@@ -526,26 +526,33 @@ def siguiente_fase( request ):
     s.seek(0)
     return HttpResponse(s.read())
 
-def actualizar_compatibilidad(request):
-    id              = request.GET.get('id')
-    carrera         = request.GET.get('carrera')
-    universidad     = request.GET.get('universidad')
-    grado_estudio   = request.GET.get('grado_estudio')
-    # perido = request.GET.get('carrera')
-    edad_desde      = request.GET.get('edad_desde')
-    edad_hasta      = request.GET.get('edad_hasta')
-    pais            = request.GET.get('pais')
-    ciudad          = request.GET.get('ciudad')
-    genero          = request.GET.get('genero')
-    tipo_puesto     = request.GET.get('tipo_puesto')
-    carga_horaria   = request.GET.get('carga_horaria')
-    remuneracion    = request.GET.get('remuneracion')
-    idioma          = request.GET.get('idioma')
-    conocimiento    = request.GET.get('conocimiento')
-    # experiencia     = request.GET.get('conocimiento')
+def total_compatibles(request):
+    carrera         = request.POST.get('carrera').split(",")
+    universidad     = request.POST.get('universidad').split(",")
+    grado_estudio   =  request.POST.get('grado_estudio')
 
+    user = get_object_or_404(User, pk = request.user.id)
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    representante =get_object_or_404(Representante, persona_id=persona.id)
 
-    data = json.dumps(data)
+    # id              = request.GET.get('id')
+    # carrera         = request.GET.get('carrera')
+    # universidad     = request.GET.get('universidad')
+    # grado_estudio   = request.GET.get('grado_estudio')
+    # # perido = request.GET.get('carrera')
+    # edad_desde      = request.GET.get('edad_desde')
+    # edad_hasta      = request.GET.get('edad_hasta')
+    # pais            = request.GET.get('pais')
+    # ciudad          = request.GET.get('ciudad')
+    # genero          = request.GET.get('genero')
+    # tipo_puesto     = request.GET.get('tipo_puesto')
+    # carga_horaria   = request.GET.get('carga_horaria')
+    # remuneracion    = request.GET.get('remuneracion')
+    # idioma          = request.GET.get('idioma')
+    # conocimiento    = request.GET.get('conocimiento')
+    # # experiencia     = request.GET.get('conocimiento')
+    total = calcular_compatibilidad(carrera, universidad, grado_estudio, representante.empresa.id)
+    data = json.dumps(total)
     return HttpResponse(data, content_type='application/json')
 
 

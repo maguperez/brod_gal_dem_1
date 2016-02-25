@@ -15,5 +15,5 @@ urlpatterns = [
 
     url(r'^sig-fase/$', 'oportunidad.views.siguiente_fase', name="siguiente-fase"),
 
-    url(r'^actualizar-compatibilidad/$', 'oportunidad.views.actualizar_compatibilidad', name="actualizar-compatibilidad"),
+    url(r'^total-compatibles/$', 'oportunidad.views.total_compatibles', name="total-compatibles"),
 ]
