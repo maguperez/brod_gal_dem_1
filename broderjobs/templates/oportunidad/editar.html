@@ -181,6 +181,15 @@
 										</div>
 										<div class="clear"></div>
 									</div>
+                                    <div class ="form-group ">
+										<label class = "col-sm-3 control-label">Tipo Carrera *</label>
+										<div class = "col-sm-9">
+											{{form.tipo_carrera}}
+											<div class="tooltip-manual" id="tooltip-tipo-carrera"></div>
+											<label class="descripcion">En caso los candidatos no necesiten de educación superior, escoja las tipo carreras compatibles con el área donde el profesional actuará.</label>
+										</div>
+										<div class="clear"></div>
+									</div>
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Carrera *</label>
 										<div class = "col-sm-9">
@@ -193,10 +202,15 @@
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Periodo de graduaci&oacute;n</label>
 										<div class = "col-sm-9">
-											<p class="align-left">
-												Estudiantes de 7° hasta graduados hace un a&ntilde;o
-												<input id="slider-periodo" type="text" class="slider" value="" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="[3,7]"/>
-											</p>
+											<div class="row">
+											<label class="col-sm-12" id="periodo-descripcion" style="font-size: 10pt;"><b>Estudiantes de 7° hasta graduados hace un a&ntilde;o</b></label>
+											</div>
+											<div class="row">
+												{{form.periodo_graduacion_hidden}}
+												<div class="col-sm-12">
+													<input id="slider-periodo" type="text" class="slider"/>
+												</div>
+											</div>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -330,6 +344,12 @@
 	}
 </style>
 <script>
+    var periodoGraduacion = [
+		{secuencia: 1,descripcion:'Ciclo 1'},
+		{secuencia: 2,descripcion:'Ciclo 2'},
+		{secuencia: 3,descripcion:'Ciclo 3'},
+		{secuencia: 4,descripcion:'Ciclo 4'},
+		{secuencia: 5,descripcion:'Ciclo 5'}];
 	$(function(){
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
@@ -358,6 +378,22 @@
 		InicializarSelect2(elementosParaSelect2);
 		InicializarValidaciones();
 
+        $("#id_tipo_carrera").change(function() {
+			resetCarrera();
+			if($("#id_tipo_carrera").val() > 0 ){
+				ActualizarListadoCarreras();
+				ActualizarListadoPeriodoGraduacion();
+			}
+			else{
+				$('#slider-periodo').slider('setAttribute', 'enabled', false);
+				$('#slider-periodo').slider('refresh');
+				$('#id_periodo_graduacion_hidden').val('');
+			}
+
+			$("#tooltip-carrera").tooltip('hide');
+			LlamarValidacionElemento('id_tipo_carrera');
+		});
+
 		$("#link-oportunidades").addClass("active");
 
 		$("#id_fecha_cese").datepicker({
@@ -365,7 +401,35 @@
 			language: 'es',
 			format: "dd/mm/yyyy",
 		});
-		$("#slider-periodo").slider({});
+		$("#slider-periodo").slider({
+			min: 1,
+			max: 5,
+			value: [1,4],
+			tooltip: 'hide',
+			enabled: false,
+			formatter: function(value){
+				var cadena = '';
+				if(periodoGraduacion){
+					var objetoMin = _.find(periodoGraduacion, function(o) { return o.secuencia == value[0]; });
+					var objetoMax = _.find(periodoGraduacion, function(o) { return o.secuencia == value[1]; });
+					if(objetoMin && objetoMax){
+						cadena = objetoMin.descripcion+' , '+objetoMax.descripcion;
+						$('#periodo-descripcion b').text(cadena);
+
+						cad_id =  objetoMin.id+','+objetoMax.id;
+
+						$('#id_periodo_graduacion_hidden').val(cad_id);
+					}
+					else{
+						cadena = value;
+					}
+				}
+				else{
+						cadena = value;
+					}
+				return cadena;
+			}
+		});
 		Editar.inicializar_mapa();
 		$("#id_pais").select2({
   			placeholder: "Pais",
@@ -430,7 +494,68 @@
 		AgregarEventosRemuneracion();
 
 	});
+    function resetCarrera(){
+		var options = '';
+		$("#id_carrera").html(options);
+		$("#id_carrera").select2("val", "");
+		$("#id_carrera").attr('disabled', false);
+		$("#id_carrera").trigger("change");
+	}
+    function LlamarValidacionElemento(id){
+		var validator = $( "form" ).validate();
+		validator.element('#'+id);
+	}
+   	function ActualizarListadoCarreras(){
+		$.ajax({
+					data: {'tipo': $("#id_tipo_carrera").val()},
+					url: '{%url "carrera-busqueda-por-tipo" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+								var options = '';
+								for (var i = 0; i < data.length; i++) {
+									options += '<option value="' + data[i].pk + '">' + data[i].fields['descripcion'] + '</option>';
+								}
+								$("#id_carrera").html(options);
+								$("#id_carrera").select2("val", "");
+								$("#id_carrera").attr('disabled', false);
+								$("#tooltip-carrera").tooltip('hide');
+							}
+							else{
+								resetCarrera();
+								$("#tooltip-carrera").tooltip('hide');
+							}
+						}
+						else{
+							resetCarrera();
+							$("#tooltip-carrera").tooltip('hide');
+						}
+					}
+				});
+	}
+   	function ActualizarListadoPeriodoGraduacion(){
+		$.ajax({
+					data: {'tipo': $("#id_tipo_carrera").val()},
+					url: '{%url "periodos-graduacion-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
 
+								var ordenado = _.sortBy(data,'secuencia');
+
+								$('#slider-periodo').slider('setAttribute', 'min', _.head(ordenado).secuencia);
+								$('#slider-periodo').slider('setAttribute', 'max', _.last(ordenado).secuencia);
+								$('#slider-periodo').slider('setAttribute', 'enabled', true);
+								$('#slider-periodo').slider('refresh');
+
+								periodoGraduacion = data;
+							}
+						}
+					}
+				});
+	}
 	function RevisarCheckedRemuneración(){
 		var listaCheck = [{index:0,funcion:LogicaFijo},{index:1,funcion:LogicaIntervalo},{index:2,funcion:LogicaSinEspecificar}];
 
