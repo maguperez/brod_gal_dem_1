@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
     <head>
-        
+        <title>BroderJobs</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="SemiColonWeb" />
-            
+        
         <!-- Stylesheets
         ============================================= -->
+        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
         <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
@@ -15,25 +16,74 @@
         <link rel="stylesheet" href="{% static 'template/css/font-icons.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/animate.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/magnific-popup.css' %}" type="text/css" />
-
+        
         <link rel="stylesheet" href="{% static 'template/css/responsive.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/custom.css' %}" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lt IE 9]>
-                <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+                <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js' %}"></script>
         <![endif]-->
-            
+        
         <!-- External JavaScripts
         ============================================= -->
         <script type="text/javascript" src="{% static 'template/js/jquery.js' %}"></script>
         <script type="text/javascript" src="{% static 'template/js/plugins.js' %}"></script>
-            
+        
+        <!-- SLIDER REVOLUTION 5.x SCRIPTS  -->
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.video.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.actions.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.migration.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+        
+        <!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/settings.css' %}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/layers.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/navigation.css' %}">
+        
         <!-- Document Title
         ============================================= -->
-        <title>Login - Layout 3 | Canvas</title>
-            
-    </head>
         
+        <style>
+            
+            .revo-slider-emphasis-text {
+                font-size: 64px;
+                font-weight: 700;
+                letter-spacing: -1px;
+                font-family: 'Raleway', sans-serif;
+                padding: 15px 20px;
+                border-top: 2px solid #FFF;
+                border-bottom: 2px solid #FFF;
+            }
+            
+            .revo-slider-desc-text {
+                font-size: 20px;
+                font-family: 'Lato', sans-serif;
+                width: 650px;
+                text-align: center;
+                line-height: 1.5;
+            }
+            
+            .revo-slider-caps-text {
+                font-size: 16px;
+                font-weight: 400;
+                letter-spacing: 3px;
+                font-family: 'Raleway', sans-serif;
+            }
+            
+            .tp-video-play-button { display: none !important; }
+            
+            .tp-caption { white-space: nowrap; }
+            
+        </style>
+        
+    </head>
+    
     <body class="stretched">
         
         <!-- Document Wrapper
@@ -42,130 +92,189 @@
             
             <!-- Header
             ============================================= -->
-            <header id="header" class="full-header">
+            <header id="header" class="transparent-header full-header" data-sticky-class="not-dark">
                 
                 <div id="header-wrap">
                     
                     <div class="container clearfix">
                         
                         <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-                            
+                        
                         <!-- Logo
                         ============================================= -->
                         <div id="logo">
-                            <a href="../home" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
-                            <a href="../home" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
+                            <a href="home" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
+                            <a href="home" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
                         </div><!-- #logo end -->
-                            
+                        
                         <!-- Primary Navigation
                         ============================================= -->
                         <nav id="primary-menu">
+                            
                             <ul>
-                                <li><a href="../home"><div>Para Empresas</div></a>
+                                <li class="current"><a href="{% url 'empresa' %}"><div>Para Empresas</div></a>
                                 </li>
-                                <li id="li-login" class="links current"><a href="#"><div>Iniciar Sesión</div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
-                                <li id="li-register" class="links"><a href="#"><div>Regístrate</div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#register"><div>Regístrate</div></a>
                                 </li>
                             </ul>
-                                
+                            
+                            
                         </nav><!-- #primary-menu end -->
-                            
-                    </div>
                         
-                </div>
+                    </div>
                     
+                </div>
+                
             </header><!-- #header end -->
+            
+            <section id="slider" class="slider-parallax revoslider-wrap clearfix">
                 
-            <!-- Page Title
-            ============================================= -->
-            <section id="page-title" style = "padding: 20px">
-            </section><!-- #page-title end -->
-                
-            <!-- Content
-            ============================================= -->
-            <section id="content">
-                
-                <div class="content-wrap">
-                    
-                    <div class="container clearfix">
+                <!--
+                #################################
+                        - THEMEPUNCH BANNER -
+                #################################
+                -->
+                <div class="tp-banner-container rev_slider_wrapper fullscreen-container">
+                    <div class="tp-banner" >
+                        <ul>    <!-- SLIDE  -->
+                            <li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{% static 'template/images/slider/rev/main/s1-thumb.jpg' %}"  data-saveperformance="off"  data-title="Welcome to Canvas">
+                                <!-- MAIN IMAGE -->
+                                <img src="{% static 'img/empresas.jpg' %}"  alt="video_woman_cover3"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                <!-- LAYERS -->
+
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption customin ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
+                                     data-x="300"
+                                     data-y="260"
+                                     data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
+                                     data-speed="800"
+                                     data-start="1200"
+                                     data-easing="easeOutQuad"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.1"
+                                     data-endspeed="1000"
+                                     data-endeasing="Power4.easeIn" style="z-index: 3; white-space: nowrap;">Anuncia gratis</div>
+                                
+                                <div class="tp-caption customin ltl tp-resizeme revo-slider-desc-text"
+                                     data-x="195"
+                                     data-y="370"
+                                     data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
+                                     data-speed="800"
+                                     data-start="1400"
+                                     data-easing="easeOutQuad"
+                                     data-splitin="none"
+                                     data-splitout="none"
+                                     data-elementdelay="0.01"
+                                     data-endelementdelay="0.1"
+                                     data-endspeed="1000"
+                                     data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal;">Publica tus oportunidades de forma clara y atractiva para los jóvenes profesionales</div>
+                            </li>
+                        </ul>
                         
-                        <div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
-                            
-                            <div id ="login" class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Inicia sesión en tu cuenta</div>
-                            <div class="acc_content clearfix">
-                                <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
-                                    <div class="form-group">
-                                        <label for="login-form-username">Correo:</label>
-                                        {{ login_form.email }}
-                                        <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />
-                                    </div>
-                                        
-                                    <div class="form-group">
-                                        <label for="login-form-password">Contraseña:</label>
-									    {{ login_form.password }}
-                                    </div>
-                                    <div class="form-group ">
-                                        {{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
-                                    </div>
-                                    <div class="form-group nobottommargin">
-                                        <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Inicia sesión</button>
-                                        <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
-                                    </div>
-                                </form>
-                            </div>
-                                
-                            <div id ="register" class="acctitle"><i class="acc-closed icon-user4"></i><i class="acc-open icon-ok-sign"></i>¿No estás registrado? Regístrate AQUÍ</div>
-                            <div class="acc_content clearfix">
-                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
-                                    <div class="form-group">
-                                        <label for="register-form-name">Nombres:</label>
-                                        <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-form-name">Apellidos:</label>
-                                        <input type="text" id="register-form-name" name="register-form-name" value="" class="form-control" />
-                                    </div>
-                                            
-                                    <div class="form-group">
-                                        <label for="register-form-email">Correo:</label>
-                                        <input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-form-password">Contraseña:</label>
-                                        <input type="password" id="register-form-password" name="register-form-password" value="" class="form-control" />
-                                    </div>
-                                        
-                                    <div class="form-group">
-                                        <label for="register-form-repassword">Confirmar contraseña:</label>
-                                        <input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
-                                        <div class =" col-sm-4">
-                                            <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                        <div class =" col-sm-4">
-                                            <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                            <div class =" col-sm-4">
-                                            <select id="register-form-repassword" name="register-form-repassword" class="form-control" ></select></div>
-                                    </div>    
-                                    <div class="form-group nobottommargin">
-                                        <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Register Now</button>
-                                    </div>
-                                </form>
-                            </div>
-                                
-                        </div>
-                            
                     </div>
-                        
                 </div>
-                    
-            </section><!-- #content end -->
                 
+                <script type="text/javascript">
+
+                    var tpj=jQuery;
+                    tpj.noConflict();
+
+                    tpj(document).ready(function() {
+
+                        var apiRevoSlider = tpj('.tp-banner').show().revolution({
+                            sliderType:"standard",
+                            jsFileLocation:"include/rs-plugin/js/",
+                            sliderLayout:"fullscreen",
+                            dottedOverlay:"none",
+                            delay:9000,
+                            responsiveLevels:[1200,992,768,480,320],
+                            startwidth:1140,
+                            startheight:600,
+                            hideThumbs:200,
+
+                            thumbWidth:100,
+                            thumbHeight:50,
+                            thumbAmount:3,
+
+                            touchenabled:"on",
+                            onHoverStop:"on",
+
+                            swipe_velocity: 0.7,
+                            swipe_min_touches: 1,
+                            swipe_max_touches: 1,
+                            drag_block_vertical: false,
+
+
+                            parallax:"mouse",
+                            parallaxBgFreeze:"on",
+                            parallaxLevels:[8,7,6,5,4,3,2,1],
+                            parallaxDisableOnMobile:"on",
+
+                            keyboardNavigation:"on",
+
+                            shadow:0,
+                            fullWidth:"off",
+                            fullScreen:"on",
+
+                            spinner:"spinner0",
+
+                            stopLoop:"off",
+                            stopAfterLoops:-1,
+                            stopAtSlide:-1,
+
+                            shuffle:"off",
+
+
+                            forceFullWidth:"off",
+                            fullScreenAlignForce:"off",
+                            minFullScreenHeight:"400",
+
+                            hideThumbsOnMobile:"off",
+                            hideNavDelayOnMobile:1500,
+                            hideBulletsOnMobile:"off",
+                            hideArrowsOnMobile:"off",
+                            hideThumbsUnderResolution:0,
+
+                            hideSliderAtLimit:0,
+                            hideCaptionAtLimit:0,
+                            hideAllCaptionAtLilmit:0,
+                            startWithSlide:0,
+                            fullScreenOffset:"0px"
+                        });
+
+                        apiRevoSlider.bind("revolution.slide.onchange",function (e,data) {
+                            if( $(window).width() > 992 ) {
+                                if( $('#slider ul > li').eq(data.slideIndex-1).hasClass('dark') ){
+                                    $('#header.transparent-header:not(.sticky-header,.semi-transparent)').addClass('dark');
+                                    $('#header.transparent-header.sticky-header,#header.transparent-header.semi-transparent.sticky-header').removeClass('dark');
+                                    $('#header-wrap').removeClass('not-dark');
+                                } else {
+                                    if( $('body').hasClass('dark') ) {
+                                        $('#header.transparent-header:not(.semi-transparent)').removeClass('dark');
+                                        $('#header.transparent-header:not(.sticky-header,.semi-transparent)').find('#header-wrap').addClass('not-dark');
+                                    } else {
+                                        $('#header.transparent-header:not(.semi-transparent)').removeClass('dark');
+                                        $('#header-wrap').removeClass('not-dark');
+                                    }
+                                }
+                                SEMICOLON.header.logo();
+                            }
+                        });
+
+                    }); //ready
+
+                </script>
+                <!-- END REVOLUTION SLIDER -->
+                
+            </section>
             <!-- Footer
             ============================================= -->
-            <footer id="footer" class="dark">                    
+            <footer id="footer" class="dark">
+                
                 <!-- Copyrights
                 ============================================= -->
                 <div id="copyrights">
@@ -173,84 +282,331 @@
                     <div class="container clearfix">
                         
                         <div class="col_half">
-                            Copyrights &copy; 2014 All Rights Reserved by Canvas Inc.<br>
-                            <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                            Broderjobs 2015 &copy; <br>
+                            <div class="copyright-links"><a href="{% url 'terminos-condiciones' %}" target ="_blank">Términos y Condiciones</a></div>
                         </div>
-                            
+                        
                         <div class="col_half col_last tright">
                             <div class="fright clearfix">
                                 <a href="#" class="social-icon si-small si-borderless si-facebook">
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
                                 </a>
-                                    
+
                                 <a href="#" class="social-icon si-small si-borderless si-twitter">
                                     <i class="icon-twitter"></i>
                                     <i class="icon-twitter"></i>
                                 </a>
-                                    
+                                <!--
                                 <a href="#" class="social-icon si-small si-borderless si-gplus">
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
                                 </a>
-                                    
+                                
                                 <a href="#" class="social-icon si-small si-borderless si-pinterest">
                                     <i class="icon-pinterest"></i>
                                     <i class="icon-pinterest"></i>
                                 </a>
-                                    
+                                
                                 <a href="#" class="social-icon si-small si-borderless si-vimeo">
                                     <i class="icon-vimeo"></i>
                                     <i class="icon-vimeo"></i>
                                 </a>
-                                    
+                                
                                 <a href="#" class="social-icon si-small si-borderless si-github">
                                     <i class="icon-github"></i>
                                     <i class="icon-github"></i>
                                 </a>
-                                    
+                                
                                 <a href="#" class="social-icon si-small si-borderless si-yahoo">
                                     <i class="icon-yahoo"></i>
                                     <i class="icon-yahoo"></i>
                                 </a>
-                                    
+                                
                                 <a href="#" class="social-icon si-small si-borderless si-linkedin">
                                     <i class="icon-linkedin"></i>
                                     <i class="icon-linkedin"></i>
-                                </a>
+                                </a>-->
                             </div>
-                                
-                            <div class="clear"></div>
-                                
-                            <i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
-                        </div>
                             
-                    </div>
+                            <div class="clear"></div>
+                            
+                            <i class="icon-envelope2"></i> info@broderjobs.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +51 997 368 676 <!--<span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype-->
+                        </div>
                         
-                </div><!-- #copyrights end -->
+                    </div>
                     
-            </footer><!-- #footer end -->
+                </div><!-- #copyrights end -->
                 
-        </div><!-- #wrapper end -->
+            </footer><!-- #footer end -->
             
+        </div><!-- #wrapper end -->
+        <div class="modal fade login" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Hola</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>
+                            <div class="division">
+                                <div class="line notopmargin nobottommargin"></div>
+                                <label>o</label>
+                                <div class="line notopmargin nobottommargin"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
+                                <div class="form-group">
+                                    <label for="login-form-username">Correo:</label>
+                                    {{ login_form.email }}
+{#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-form-password">Contraseña:</label>
+                                    {{ login_form.password }}
+                                </div>
+                                <div class="form-group text-left">
+                                    {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
+                                </div>
+                                {%if message_login %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_login}}</div>
+								{% endif%}
+                                <div class="form-group nobottommargin">
+                                    <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
+                                    <div class="clear"></div>
+                                    <br><br>
+                                    <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Hola</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
+									REG&Iacute;STRATE CON FACEBOOK</a>
+                            <label>Es más fácil y rápido</label>
+                            <div class="division">
+                                <div class="line notopmargin nobottommargin"></div>
+                                <label>o</label>
+                                <div class="line notopmargin nobottommargin"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <a class="registro" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
+                            <div class="clear"></div>
+                            <div class="registro-email" id="registro-email">
+                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="register-form-name">Nombres:</label>
+                                        {{ registro_form.first_name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-name">Apellidos:</label>
+                                        {{ registro_form.last_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-form-email">Correo:</label>
+                                        {{ registro_form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="register-form-password">Contraseña:</label>
+                                        {{ registro_form.password1 }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register-form-repassword">Confirmar contraseña:</label>
+                                        {{ registro_form.password2 }}
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.dia}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.mes}}</div>
+                                        <div class =" col-sm-4">
+                                            {{registro_form.ano}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
+                                            Acepto los
+                                                <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
+                                    </div>
+                                    {%if message_registro %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        {{message_registro}}
+                                    </div>
+                                    {% endif%}
+                                    <div class="form-group nobottommargin">
+                                        <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Go To Top
         ============================================= -->
         <div id="gotoTop" class="icon-angle-up"></div>
-            
+        
         <!-- Footer Scripts
         ============================================= -->
         <script type="text/javascript" src="{% static 'template/js/functions.js' %}"></script>
+        <script src="{% static 'template/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'template/js/jquery.validate.additional-methods.min.js' %}"></script>
+		<script src="{% static 'template/js/json2.js' %}"></script>
+		<script src="{% static 'template/js/jstorage.js' %}"></script>
         <script>
             $(function(){
-                $(".links").on("click", function(){
-                    debugger;
-                   $(this).is($("#li-login"))?
-                       $("#login").trigger("click"):
-                       $("#register").trigger("click");
-                   $(".links").removeClass("current");
-                   $(this).addClass("current");
+
+                $("#login-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "login-email": { required: true, email: true },
+                        "login-password": { required: true, minlength: 6}
+                    },
+                    messages: {
+                        "login-email": { 	required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo válido" },
+                        "login-password": { required: "Este campo es obligatorio",
+                                            minlength: "La contraseña debe tener al menos seis (6) caracteres" }
+                    }
+                })
+                $("#register-form").validate({
+                    highlight: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function( label ) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function( error, element ) {
+                        if ($(element).is("[name=registro-dia]") ||
+                            $(element).is("[name=registro-mes]") ||
+						    $(element).is("[name=registro-ano]")){
+                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
+                            $("#id_registro-dia").parents(".form-group").append(error);
+                            return;
+                        }
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.parent().append(error);
+                        }
+                    },
+                    rules: {
+                        "registro-first_name": { required: true },
+                        "registro-last_name": { required: true },
+                        "registro-email": { required: true, email: true },
+                        "registro-password1": { required: true, minlength: 6, maxlength: 15 },
+                        "registro-password2": { required: true, minlength: 6, maxlength: 15, equalTo: "#id_registro-password1" },
+                        "registro-dia": { required: true },
+                        "registro-mes": { required: true },
+                        "registro-ano": { required: true },
+                        groups: {
+                            date: "registro-dia registro-mes registro-ano"
+                        },
+                        tyc: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        "registro-first_name": { required: "Este campo es obligatorio" },
+                        "registro-last_name": { required: "Este campo es obligatorio" },
+                        "registro-email": { required: "Este campo es obligatorio",
+                                            email: "Introduzca un correo valido" },
+                        "registro-password1": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres"},
+                        "registro-password2": { required: "Este campo es obligatorio",
+                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
+                                                maxlength: "La contraseña no debe exceder de los quince (15) caracteres",
+                                                equalTo: "Las contraseñas deben ser iguales" },
+                        "registro-dia": { required: "La fecha de nacimiento es obligatoria"	},
+                        "registro-mes": { required: "La fecha de nacimiento es obligatoria" },
+                        "registro-ano": { required: "La fecha de nacimiento es obligatoria" },
+                        tyc: { required: "Debe aceptar los términos y condiciones" }
+                    }
+                });
+                //Recordar ContraseñaEstudiante
+                var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
+                        key = 'savedUsername', keypass='savedPassword',
+                        username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
+                if (username) {
+                    userField.val(username);
+                    passField.val(pass);
+                    checkbox.prop('checked', true);
+                    $('#id_login-password').focus();
+                }
+                else {
+                    userField.val('').focus();
+                    passField.val('');
+                    checkbox.prop('checked', false);
+                }
+                $("#id_login-remember_me").click(function(){
+                    if ($(this).prop('checked')) {
+                        $.jStorage.set(key, userField.val());
+                        $.jStorage.set(keypass, passField.val());
+                    }
+                    else {
+                        $.jStorage.deleteKey(key);
+                        $.jStorage.deleteKey(keypass);
+                    }
                 });
             });
-        </script>    
+            window.onload = function(){
+                $("#primary-menu a").on("click", function(){
+                    sessionStorage.setItem("main", $(this).attr("data-target"));
+                })
+                if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
+					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
+				}
+                else {
+                    $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
+                }
+            }
+        </script>
     </body>
 </html>

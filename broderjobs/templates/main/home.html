@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
     <head>
-        
+        <title>BroderJobs</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="SemiColonWeb" />
         
         <!-- Stylesheets
         ============================================= -->
+        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
         <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
@@ -47,7 +48,6 @@
         
         <!-- Document Title
         ============================================= -->
-        <title>Home - Corporate Layout | Canvas</title>
         
         <style>
             
@@ -112,7 +112,7 @@
                         <nav id="primary-menu">
                             
                             <ul>
-                                <li class="current"><a href="#"><div>Para Empresas</div></a>
+                                <li class="current"><a href="{% url 'empresa' %}"><div>Para Empresas</div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -189,21 +189,6 @@
                                      data-endelementdelay="0.1"
                                      data-endspeed="1000"
                                      data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal;">Encuentra prácticas y primeros empleos en las mejores empresas del país</div>
-                                
-                                <div class="tp-caption customin ltl tp-resizeme"
-                                     data-x="496"
-                                     data-y="478"
-                                     data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
-                                     data-speed="800"
-                                     data-start="1550"
-                                     data-easing="easeOutQuad"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.01"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="1000"
-                                     data-endeasing="Power4.easeIn" style="z-index: 3; white-space: nowrap;"><a href="#" class="button button-border button-white button-light button-large button-rounded tright nomargin"><span>Regístrate</span> <i class="icon-angle-right"></i></a></div>
-                                
                             </li>
                         </ul>
                         
@@ -363,7 +348,7 @@
                 </div>
                 <a class="button button-full button-dark center tright ">
                     <div class="container clearfix">
-                        Encuentra el trabajo de tus sueños en las mejores empresas del país. <strong>Ver más</strong> <i class="icon-caret-right" style="top:4px;"></i>
+                        Encuentra el trabajo de tus sueños en las mejores empresas del país.
                     </div>
                 </a>
                 <script type="text/javascript">
@@ -407,9 +392,6 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem maiores pariatur voluptatem placeat laborum iste accusamus nam unde, iure id.</p>
                             
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
-                            
-                            <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">Start Trial</a>
-                            
                         </div>
                         
                     </div>
@@ -427,11 +409,7 @@
                             </div>
                             
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
-                            
-                            <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">View Gallery</a>
-                            
                         </div>
-                        
                     </div>
                 </div>
                 <div class="section nobottommargin notopmargin" style="padding-bottom: 150px;">
@@ -450,9 +428,6 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem maiores pariatur voluptatem placeat laborum iste accusamus nam unde, iure id.</p>
                             
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
-                            
-                            <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">Start Trial</a>
-                            
                         </div>
                         
                     </div>
@@ -491,21 +466,21 @@
                     
                 </div>
                 
-                
+                <!--
                 <div class="section nobottommargin notopmargin">
                     <div class="container clearfix">
                         
                         <div class="heading-block center">
-                            <h3>Subscribe to our <span>Newsletter</span></h3>
+                            <h3>Suscríbete a nuestro <span>Boletín</span></h3>
                         </div>
                         
                         <div id="widget-subscribe-form2-result" data-notify-type="success" data-notify-msg=""></div>
                         <form id="widget-subscribe-form2" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
                             <div class="input-group input-group-lg divcenter" style="max-width:600px;">
                                 <span class="input-group-addon"><i class="icon-email2"></i></span>
-                                <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                                <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Introduce tu correo">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Subscribe Now</button>
+                                    <button class="btn btn-default" type="submit">Suscríbete ahora</button>
                                 </span>
                             </div>
                         </form>
@@ -529,7 +504,7 @@
                         
                     </div>
                 </div>
-                
+                -->
                 
                 
             </section><!-- #content end -->
@@ -545,8 +520,8 @@
                     <div class="container clearfix">
                         
                         <div class="col_half">
-                            Copyrights &copy; 2014 All Rights Reserved by Canvas Inc.<br>
-                            <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                            Broderjobs 2015 &copy; <br>
+                            <div class="copyright-links"><a href="{% url 'terminos-condiciones' %}" target ="_blank">Términos y Condiciones</a></div>
                         </div>
                         
                         <div class="col_half col_last tright">
@@ -555,12 +530,12 @@
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
                                 </a>
-                                
+
                                 <a href="#" class="social-icon si-small si-borderless si-twitter">
                                     <i class="icon-twitter"></i>
                                     <i class="icon-twitter"></i>
                                 </a>
-                                
+                                <!--
                                 <a href="#" class="social-icon si-small si-borderless si-gplus">
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
@@ -589,12 +564,12 @@
                                 <a href="#" class="social-icon si-small si-borderless si-linkedin">
                                     <i class="icon-linkedin"></i>
                                     <i class="icon-linkedin"></i>
-                                </a>
+                                </a>-->
                             </div>
                             
                             <div class="clear"></div>
                             
-                            <i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
+                            <i class="icon-envelope2"></i> info@broderjobs.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +51 997 368 676 <!--<span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype-->
                         </div>
                         
                     </div>
@@ -860,7 +835,6 @@
                 });
             });
             window.onload = function(){
-                debugger;
                 $("#primary-menu a").on("click", function(){
                     sessionStorage.setItem("main", $(this).attr("data-target"));
                 })
