@@ -6,13 +6,9 @@
       <change type="DELETED" beforePath="F:\Repositorio Broder\brod_gal_dem_1\broderjobs\templates\main\ingreso-estudiante.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/compatibilidad.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/compatibilidad.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" afterPath="$PROJECT_DIR$/broderjobs/templates/oportunidad/editar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" afterPath="$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/main/urls.py" afterPath="$PROJECT_DIR$/broderjobs/main/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/estudiante/views.py" afterPath="$PROJECT_DIR$/broderjobs/estudiante/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/main/views.py" afterPath="$PROJECT_DIR$/broderjobs/main/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" afterPath="$PROJECT_DIR$/broderjobs/oportunidad/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/home.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/main/ingreso-estudiante.html" afterPath="$PROJECT_DIR$/broderjobs/templates/main/ingreso-estudiante.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/static/css/select2.css" afterPath="$PROJECT_DIR$/broderjobs/static/css/select2.css" />
     </list>
     <ignored path="brod_gal_dem_1.iws" />
     <ignored path=".idea/workspace.xml" />
