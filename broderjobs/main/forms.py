@@ -51,7 +51,7 @@ class RegisterForm(UserCreationForm):
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     dia = forms.ChoiceField(choices=items_dias, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico', 'class': 'form-control'}))
-    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False)
+    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False, widget=forms.Select(attrs={'class': 'form-control', 'title': 'Recuerda que debes usar el correo de la compañía para registrarte', 'data-placement': 'right'}))
 
     def __init__(self, *args, **kwargs):
         """

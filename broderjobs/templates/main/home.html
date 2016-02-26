@@ -296,54 +296,54 @@
             <section id="content">                   
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
+                        <img src="{% static 'template/images/portfolio/alicorp.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
+                        <img src="{% static 'template/images/portfolio/bbva.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
+                        <img src="{% static 'template/images/portfolio/bcp.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
+                        <img src="{% static 'template/images/portfolio/easytaxi.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
+                        <img src="{% static 'template/images/portfolio/exsa.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
+                        <img src="{% static 'template/images/portfolio/facusa.jpg' %}">
                     </div>
                     <div class=4"oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
+                        <img src="{% static 'template/images/portfolio/gloria.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
+                        <img src="{% static 'template/images/portfolio/rimac.jpg' %}">
                     </div>
                 </div>
                 <div class=" oc-images owl-carousel image-carousel">                            
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/exsa.jpg' %}" alt="Image 1"></a>
+                        <img src="{% static 'template/images/portfolio/exsa.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/facusa.jpg' %}" alt="Image 2"></a>
+                        <img src="{% static 'template/images/portfolio/facusa.jpg' %}">
                     </div>
                     <div class=4"oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/gloria.jpg' %}" alt="Image 3"></a>
+                        <img src="{% static 'template/images/portfolio/gloria.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/rimac.jpg' %}" alt="Image 4"></a>
+                        <img src="{% static 'template/images/portfolio/rimac.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/alicorp.jpg' %}" alt="Image 1"></a>
+                        <img src="{% static 'template/images/portfolio/alicorp.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/bbva.jpg' %}" alt="Image 2"></a>
+                        <img src="{% static 'template/images/portfolio/bbva.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/bcp.jpg' %}" alt="Image 3"></a>
+                        <img src="{% static 'template/images/portfolio/bcp.jpg' %}">
                     </div>
                     <div class="oc-item">
-                        <a href="#"><img src="{% static 'template/images/portfolio/easytaxi.jpg' %}" alt="Image 4"></a>
+                        <img src="{% static 'template/images/portfolio/easytaxi.jpg' %}">
                     </div>
                 </div>
                 <a class="button button-full button-dark center tright ">
@@ -714,7 +714,15 @@
 		<script src="{% static 'template/js/jstorage.js' %}"></script>
         <script>
             $(function(){
-
+                $("select").on("change", function(){
+					$(this).val() != "" ?
+						$(this).css("color", "#555555"):
+						$(this).css("color", "#a5a5a5");
+				});
+                $("select").each(function(){
+                    if ($(this).val()=="")
+                        $(this).css("color", "#a5a5a5");
+                });
                 $("#login-form").validate({
                     highlight: function( label ) {
                         $(label).closest('.form-group').removeClass('has-success').addClass('has-error');

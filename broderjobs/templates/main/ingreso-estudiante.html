@@ -112,7 +112,7 @@
                         <nav id="primary-menu">
                             
                             <ul>
-                                <li class="current"><a href="{% url 'empresa' %}"><div>Para Empresas</div></a>
+                                <li class="current"><a href="{% url 'estudiante' %}"><div>Para Estudiantes</div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -347,16 +347,9 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Hola</h4>
+                            <h4 class="modal-title text-center">Inicia sesión</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>
-                            <div class="division">
-                                <div class="line notopmargin nobottommargin"></div>
-                                <label>o</label>
-                                <div class="line notopmargin nobottommargin"></div>
-                                <div class="clear"></div>
-                            </div>
                             <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
                                     <label for="login-form-username">Correo:</label>
@@ -394,70 +387,55 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Hola</h4>
+                            <h4 class="modal-title text-center">Regístrate con tu E-mail</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
-									REG&Iacute;STRATE CON FACEBOOK</a>
-                            <label>Es más fácil y rápido</label>
-                            <div class="division">
-                                <div class="line notopmargin nobottommargin"></div>
-                                <label>o</label>
-                                <div class="line notopmargin nobottommargin"></div>
-                                <div class="clear"></div>
-                            </div>
-                            <a class="registro" href="#registro-email">Reg&iacute;strate con tu e-mail</a>
-                            <div class="clear"></div>
-                            <div class="registro-email" id="registro-email">
-                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <label for="register-form-name">Nombres:</label>
-                                        {{ registro_form.first_name }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-form-name">Apellidos:</label>
-                                        {{ registro_form.last_name }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="register-form-email">Correo:</label>
-                                        {{ registro_form.email }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-form-password">Contraseña:</label>
-                                        {{ registro_form.password1 }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="register-form-repassword">Confirmar contraseña:</label>
-                                        {{ registro_form.password2 }}
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="register-form-repassword" class ="col-sm-12">Fecha de nacimiento:</label><br>
-                                        <div class =" col-sm-4">
-                                            {{registro_form.dia}}</div>
-                                        <div class =" col-sm-4">
-                                            {{registro_form.mes}}</div>
-                                        <div class =" col-sm-4">
-                                            {{registro_form.ano}}</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
-                                            Acepto los
-                                                <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
-                                    </div>
-                                    {%if message_registro %}
+                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="register-form-name">Nombres:</label>
+                                    {{ registro_form.first_name }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-name">Apellidos:</label>
+                                    {{ registro_form.last_name }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-email">Correo:</label>
+                                    {{ registro_form.email }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-email">Empresa:</label>
+                                    {{ registro_form.empresa }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-email">Teléfono:</label>
+                                    {{ registro_form.telefono }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-password">Contraseña:</label>
+                                    {{ registro_form.password1 }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-form-repassword">Confirmar contraseña:</label>
+                                    {{ registro_form.password2 }}
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
+                                    Acepto los
+                                    <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
+                                </div>
+                                {%if message_registro %}
                                     <div class="alert alert-warning alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                         {{message_registro}}
                                     </div>
-                                    {% endif%}
-                                    <div class="form-group nobottommargin">
-                                        <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
-                                    </div>
-                                </form>
-                            </div>
+                                {% endif%}
+                                <div class="form-group nobottommargin">
+                                    <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
