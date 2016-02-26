@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from estudiante.models import Estudiante
 from .models import EmpresaRespuestas, PreguntaCultura, EmpresaCultura, EstudianteCultura, EstudianteEmpresaCultura
 from .cultura_empresarial import calcular_cultura_empresa
 
@@ -35,6 +36,18 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.porcentaje_jerarquico = porcentaje_jerarquico
             empresa_cultura.porcentaje_racional = porcentaje_racional
             empresa_cultura.save()
+
+            for estudiante in EstudianteCultura.objects.filter(estado='A'):
+                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id)
+                if created is True:
+                    est_empr_cultura.estudiante = estudiante
+                est_empr_cultura.empresa = empresa_cultura.empresa
+                clan = (estudiante.compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
+                adhocracia = (estudiante.compatibilidad_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
+                jerarquica = (estudiante.compatibilidad_jerarquica/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
+                racional = (estudiante.compatibilidad_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
+                est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
+                est_empr_cultura.save()
 
         obj.save()
 
