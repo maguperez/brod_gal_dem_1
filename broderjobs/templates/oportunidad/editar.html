@@ -164,6 +164,23 @@
 							<section class="perfil">
 								<h2 class="title bold"><i class="profile"></i>Perfil del candidato</h2>
 								<div class="detalle">
+                                    <div class ="form-group">
+										<label class = "col-sm-3">Rango de Edad</label>
+										<div class = "col-sm-4">
+											{{form.edad_desde}}
+										</div>
+										<div class = "col-sm-4">
+											{{form.edad_hasta}}
+										</div>
+										<div class="clear"></div>
+									</div>
+                                    <div class ="form-group ">
+										<label class = "col-sm-3 control-label">Género</label>
+										<div class = "col-sm-9">
+											{{form.genero}}
+										</div>
+										<div class="clear"></div>
+									</div>
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Grado de estudio *</label>
 										<div class = "col-sm-9">
@@ -286,7 +303,7 @@
 						<div class="content">
 							<section class="grafico">
 								<h4>Alcance de Candidatos</h4>
-								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>
+								<label><i class="alcance bajo"></i><span class="cifra"></span> candidatos</label>
 								<div class="grafico-alcance">
 									<div class="alto inactive">
 										<div class="adecuado inactive">
@@ -373,7 +390,7 @@
 
 		$("input:not([type=submit]):not(:radio), select, textarea").addClass("form-control");
 
-		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio'];
+		var elementosParaSelect2 = ['id_universidad','id_carrera','id_idioma', 'id_conocimiento','id_beneficio','id_grado_estudio', 'id_genero'];
 
 		InicializarSelect2(elementosParaSelect2);
 		InicializarValidaciones();
@@ -843,9 +860,18 @@
             var form = new FormData();
             form.append('carrera', $('#id_carrera').val()== null ? 0 : $('#id_carrera').val() );
             form.append('universidad', $('#id_universidad').val() == null ? 0 : $('#id_universidad').val() );
-            form.append('grado_estudio', $('#id_grado_estudio').val());
+            form.append('grado_estudio', $('#id_grado_estudio').val() == '' ? 0 : $('#id_grado_estudio').val() );
+            form.append('edad_desde', $('#id_edad_desde').val() == '' ? 0 : $('#id_edad_desde').val() );
+            form.append('edad_hasta', $('#id_edad_hasta').val() == '' ? 0 : $('#id_edad_hasta').val() );
+            form.append('pais', $('#id_pais').val() == '' ? 0 : $('#id_pais').val() );
+            form.append('ciudad', $('#id_ciudad').val() == '' ? 0 : $('#id_ciudad').val() );
+            form.append('genero', $('#id_genero').val() == '' ? 0 : $('#id_genero').val() );
+            form.append('tipo_puesto', $('input[name=tipo_puesto]:checked').val() == null ? 0 : $('input[name=tipo_puesto]:checked').val() );
+            form.append('carga_horaria',$('input[name=carga_horaria]:checked').val() == null ? 0 :$('input[name=carga_horaria]:checked').val() );
+            form.append('idioma', $('#id_idioma').val()== null ? 0 : $('#id_idioma').val() );
+            form.append('conocimiento', $('#id_conocimiento').val()== null ? 0 : $('#id_conocimiento').val() );
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
-             $(".alcance .cifra").html("Calculando...");
+            $(".alcance .cifra").html("Calculando...");
             $.ajax({
                 type:"POST",
                 url:"{%url 'total-compatibles' %}",
@@ -857,7 +883,7 @@
 {#                    $(".alcance .cifra").html("error...");#}
                 },
                 success: function(data){
-                    $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)no va');
+                    $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)');
                 }
             });
        });

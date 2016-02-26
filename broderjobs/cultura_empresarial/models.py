@@ -155,11 +155,11 @@ class EstudianteEmpresaCultura(models.Model):
 
     estudiante = models.ForeignKey(Estudiante, default=None, null=True, blank=True)
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
-    porcentaje_clan = models.FloatField(default=None, null=True, blank=True )
-    porcentaje_adhocracia = models.FloatField(default=None, null=True, blank=True )
-    porcentaje_jerarquico = models.FloatField(default=None, null=True, blank=True )
-    porcentaje_racional = models.FloatField(default=None, null=True, blank=True )
-    compatibilidad_cultural = models.FloatField(default=None, null=True, blank=True )
+    porcentaje_clan = models.FloatField(default=0.00, null=True, blank=True )
+    porcentaje_adhocracia = models.FloatField(default=0.00, null=True, blank=True )
+    porcentaje_jerarquico = models.FloatField(default=0.00, null=True, blank=True )
+    porcentaje_racional = models.FloatField(default=0.00, null=True, blank=True )
+    compatibilidad_cultural = models.FloatField(default=0.00, null=True, blank=True )
 
 
     orden = models.IntegerField(default=None, null=True, blank=True)
