@@ -200,14 +200,11 @@
 	var flagSeleccionarCarrera = true;
 
 	$('documento').ready(function(){
-
 		$.validator.addMethod('universidadExistente',function(value, element, param){
 			return flagSeleccionarUniversidad;
 		},'Debe seleccionar una universidad existente');
 		$.validator.addMethod('validarCiclos',function(value, element, param){
-			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
-				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
-
+			return (parseInt($("#id_ano_graduacion").val() + $("#id_semestre_graduacion").val()) >= parseInt($("#id_ano_inicio_estudio").val() +$("#id_semestre_inicio_estudio").val()));
 		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 		$.validator.addMethod('carreraExistente',function(value, element, param){
 			return flagSeleccionarCarrera;
@@ -233,7 +230,7 @@
 
 		InicializarTypeaheadElementos();
 		//InicializarPlugin(ids);
-		$('#id_universidades').blur(function(){
+		$('#id_universidades').on("blur", function(){
 			var strInput = $('#id_universidades').val();
 			var objSeleccionado = $('#id_universidades').typeahead('getActive');
 
@@ -260,7 +257,6 @@
   			placeholder: "Selecciona una Ciudad",
   			allowClear: true
 		});
-
 		$("#id_pais").change(function() {
 			if($("#id_pais").val() > 0 ){
 				$.ajax({
@@ -297,38 +293,21 @@
 			$('#id_ciudad_hidden').val($(this).val());
 			LlamarValidacionElemento('id_ciudad');
 		});
-
-		$("#id_ano_inicio_estudio").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_ano_inicio_estudio');
-		});
-
-		$("#id_ano_graduacion").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_ano_graduacion');
-		});
-
-		$("#id_semestre_inicio_estudio").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_semestre_inicio_estudio');
-		});
-
-		$("#id_semestre_graduacion").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_semestre_graduacion');
+		$("#id_ano_inicio_estudio, #id_ano_graduacion, "+
+            "#id_semestre_inicio_estudio, #id_semestre_graduacion").change(function() {
+            if ($(this).val() != "")
+			LlamarValidacionCiclos($(this).attr("id"));
 		});
 	});
 
-	function LlamarValidacionCiclos(){
-		LlamarValidacionElemento('id_ano_inicio_estudio');
-		LlamarValidacionElemento('id_ano_graduacion');
-		LlamarValidacionElemento('id_semestre_inicio_estudio');
-		LlamarValidacionElemento('id_semestre_graduacion');
+	function LlamarValidacionCiclos(id){
+		if (id != "id_ano_inicio_estudio") LlamarValidacionElemento('id_ano_inicio_estudio');
+		if (id != "id_ano_graduacion") LlamarValidacionElemento('id_ano_graduacion');
+		if (id != "id_semestre_inicio_estudio") LlamarValidacionElemento('id_semestre_inicio_estudio');
+		if (id != "id_semestre_graduacion") LlamarValidacionElemento('id_semestre_graduacion');
 	}
-
 	function LlamarValidacionElemento(id){
-		var validator = $( "form" ).validate();
-		validator.element('#'+id);
+		$('#'+id).valid();
 	}
 
 	function GuardarValorHidden(idHidden, idElemento, ui){
@@ -414,8 +393,6 @@
 <script>
     $(function(){
         $("form").validate({
-			onfocusout: true,
-			onkeyup:true,
             errorPlacement: function (error, element) {
                 var object, placement;
 
@@ -431,6 +408,9 @@
 						object = $(element);
 						placement = "right";
 					}
+                    else {
+                        $(element).tooltip('hide');
+                    }
 				}
 				else{
 					object = $(element);
