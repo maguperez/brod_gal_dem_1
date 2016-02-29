@@ -42,10 +42,10 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
                 if created is True:
                     est_empr_cultura.estudiante = estudiante
                 est_empr_cultura.empresa = empresa_cultura.empresa
-                clan = (estudiante.compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
-                adhocracia = (estudiante.compatibilidad_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
-                jerarquica = (estudiante.compatibilidad_jerarquica/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
-                racional = (estudiante.compatibilidad_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
+                clan = (estudiante.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
+                adhocracia = (estudiante.porcentaje_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
+                jerarquica = (estudiante.porcentaje_jerarquico/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
+                racional = (estudiante.porcentaje_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
                 est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
                 est_empr_cultura.save()
 
