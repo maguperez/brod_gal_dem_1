@@ -30,41 +30,43 @@ def calcular_cultura_estudiate(estudiante):
     try:
         disc_estudiante = EstudiantePatron.objects.get(estudiante_id = estudiante.id)
         cultura_clan = CulturaMatrizDISC.objects.get(orden = 1)
-        cultura_adhocracia = CulturaMatrizDISC.objects.get(orden = 2)
-        cultura_jerarquica = CulturaMatrizDISC.objects.get(orden = 3)
-        cultura_racional = CulturaMatrizDISC.objects.get(orden = 4)
+        cultura_jerarquica = CulturaMatrizDISC.objects.get(orden = 2)
+        cultura_racional = CulturaMatrizDISC.objects.get(orden = 3)
+        cultura_adhocracia = CulturaMatrizDISC.objects.get(orden = 4)
 
-        delta_clan_d = abs(disc_estudiante.total_d - cultura_clan.letra_d)
-        delta_clan_i = abs(disc_estudiante.total_i - cultura_clan.letra_i)
-        delta_clan_s = abs(disc_estudiante.total_s - cultura_clan.letra_s)
-        delta_clan_c = abs(disc_estudiante.total_c - cultura_clan.letra_c)
+        disc = [int(i) for i in disc_estudiante.patron]
+
+        delta_clan_d = abs(disc[0] - cultura_clan.letra_d)
+        delta_clan_i = abs(disc[1] - cultura_clan.letra_i)
+        delta_clan_s = abs(disc[2] - cultura_clan.letra_s)
+        delta_clan_c = abs(disc[3] - cultura_clan.letra_c)
         total_delta_clan = delta_clan_d + delta_clan_i + delta_clan_s + delta_clan_c
         subtotal = total_delta_clan/4.00
         subtotal = subtotal * 14.28
         compatibilidad_clan =  100.00 - subtotal
 
-        delta_adhocracia_d = abs(disc_estudiante.total_d - cultura_adhocracia.letra_d)
-        delta_adhocracia_i = abs(disc_estudiante.total_i - cultura_adhocracia.letra_i)
-        delta_adhocracia_s = abs(disc_estudiante.total_s - cultura_adhocracia.letra_s)
-        delta_adhocracia_c = abs(disc_estudiante.total_c - cultura_adhocracia.letra_c)
+        delta_adhocracia_d = abs(disc[0] - cultura_adhocracia.letra_d)
+        delta_adhocracia_i = abs(disc[1] - cultura_adhocracia.letra_i)
+        delta_adhocracia_s = abs(disc[2] - cultura_adhocracia.letra_s)
+        delta_adhocracia_c = abs(disc[3] - cultura_adhocracia.letra_c)
         total_delta_adhocracia = delta_adhocracia_d + delta_adhocracia_i + delta_adhocracia_s + delta_adhocracia_c
         subtotal = total_delta_adhocracia/4.00
         subtotal = subtotal * 14.28
         compatibilidad_adhocracia = 100.00 - subtotal
 
-        delta_jerarquica_d = abs(disc_estudiante.total_d - cultura_jerarquica.letra_d)
-        delta_jerarquica_i = abs(disc_estudiante.total_i - cultura_jerarquica.letra_i)
-        delta_jerarquica_s = abs(disc_estudiante.total_s - cultura_jerarquica.letra_s)
-        delta_jerarquica_c = abs(disc_estudiante.total_c - cultura_jerarquica.letra_c)
+        delta_jerarquica_d = abs(disc[0] - cultura_jerarquica.letra_d)
+        delta_jerarquica_i = abs(disc[1] - cultura_jerarquica.letra_i)
+        delta_jerarquica_s = abs(disc[2]- cultura_jerarquica.letra_s)
+        delta_jerarquica_c = abs(disc[3] - cultura_jerarquica.letra_c)
         total_delta_jerarquica = delta_jerarquica_d + delta_jerarquica_i + delta_jerarquica_s + delta_jerarquica_c
         subtotal = total_delta_jerarquica/4.00
         subtotal = subtotal * 14.28
         compatibilidad_jerarquica =  100.00 - subtotal
 
-        delta_racional_d = abs(disc_estudiante.total_d - cultura_racional.letra_d)
-        delta_racional_i = abs(disc_estudiante.total_i - cultura_racional.letra_i)
-        delta_racional_s = abs(disc_estudiante.total_s - cultura_racional.letra_s)
-        delta_racional_c = abs(disc_estudiante.total_c - cultura_racional.letra_c)
+        delta_racional_d = abs(disc[0] - cultura_racional.letra_d)
+        delta_racional_i = abs(disc[1] - cultura_racional.letra_i)
+        delta_racional_s = abs(disc[2] - cultura_racional.letra_s)
+        delta_racional_c = abs(disc[3] - cultura_racional.letra_c)
         total_delta_racional = delta_racional_d + delta_racional_i + delta_racional_s + delta_racional_c
         subtotal = total_delta_racional/4.00
         subtotal = subtotal * 14.28
@@ -93,6 +95,10 @@ def calcular_cultura_estudiate(estudiante):
             #                                            (compatibilidad_jerarquica * empresa_cultura.porcentaje_jerarquico) + \
             #                                            (compatibilidad_racional * empresa_cultura.porcentaje_racional)
             est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
+            est_empr_cultura. porcentaje_clan = clan
+            est_empr_cultura. porcentaje_adhocracia = adhocracia
+            est_empr_cultura. porcentaje_jerarquica = jerarquica
+            est_empr_cultura. porcentaje_racional = racional
             est_empr_cultura.save()
             return 1
     except:
