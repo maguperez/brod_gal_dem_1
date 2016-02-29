@@ -29,6 +29,7 @@ class ProcesoFase(models.Model):
 
 class Oportunidad(models.Model):
     items_estado = utils.estado_oportunidad()
+    genero = utils.genero()
     # periodo= []
     # for e in PeriodosGraduacion.objects.all():
     #     periodo.append((str(e.valor), e.descripcion))
@@ -63,7 +64,7 @@ class Oportunidad(models.Model):
     graduacion_hasta = models.ForeignKey(PeriodosGraduacion, default=None,  null=True, blank=True, related_name="graduacion_hasta" )
     edad_desde = models.IntegerField(default=None, null=True, blank=True)
     edad_hasta = models.IntegerField(default=None, null=True, blank=True)
-    genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
+    genero = models.CharField(choices=genero, max_length=1, default='', null=True, blank=True)
     fase = models.ForeignKey(ProcesoFase, default=None, null=True, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
@@ -123,7 +124,7 @@ class OportunidadCompatibilidad(models.Model):
         ordering = ["orden"]
 
     def __unicode__(self):
-		return unicode(self.descripcion) or u''
+		return unicode(self.estudiante) or u''
 
 
 

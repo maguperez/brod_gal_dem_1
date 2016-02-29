@@ -3,18 +3,14 @@ from django import forms
 from django.forms import ModelForm, Textarea, RadioSelect, TextInput, DateInput, SelectMultiple, Select
 from models import Oportunidad, TipoPuesto, CargaHoraria, Universidad, Idioma, Conocimiento, Beneficio, GradoEstudio, \
     TipoRemuneracion, Carrera, Pais
+from main.utils import genero
 
 
 class OportunidadForm(forms.ModelForm):
 
-    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'País', 'class': 'full'}))
-    # paises_hidden = forms.CharField(widget=forms.HiddenInput())
-    #
-    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     periodo_graduacion_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
-    # ciudad = forms.ChoiceField(required = False, widget=forms.Select(attrs={'class': 'full'}))
     beneficios_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     beneficios_nuevos_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     beneficios_extras_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
@@ -28,7 +24,7 @@ class OportunidadForm(forms.ModelForm):
                   'tipo_carrera')
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'Escriba el titulo de su vacante', 'class': 'full'}),
-            'carga_horaria': RadioSelect(),
+            'carga_horaria': RadioSelect(attrs={'class': 'actualizar'}),
             'tipo_puesto': RadioSelect(attrs={'class': 'actualizar'}),
             'remuneracion': RadioSelect(attrs={'class': 'actualizar'}),
             'resumen': Textarea(),
@@ -44,9 +40,9 @@ class OportunidadForm(forms.ModelForm):
             'grado_estudio': Select(attrs={'class': 'full actualizar'}),
             'conocimiento': SelectMultiple(attrs={'class': 'full actualizar'}),
             'estado_oportunidad': Select(attrs={'disabled':'disabled'}),
-            'edad_desde': TextInput(attrs={'class': 'actualizar'}),
-            'edad_hasta': TextInput(attrs={'class': 'actualizar'}),
-            'genero': TextInput(attrs={'class': 'actualizar'}),
+            'edad_desde': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Desde'}),
+            'edad_hasta': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Hasta'}),
+            'genero': Select(attrs={'class': 'actualizar'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -57,6 +53,9 @@ class OportunidadForm(forms.ModelForm):
 
         self.fields['grado_estudio'].empty_label = "Seleccione"
         self.fields['pais'].empty_label = "Pais"
+        self.fields['genero'].empty_label = "Indistinto"
+        # self.fields['genero'].choices = genero()
+
 
 class OportunidadCrearForm(OportunidadForm):
 
