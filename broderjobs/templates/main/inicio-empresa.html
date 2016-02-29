@@ -1,597 +1,312 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-    <head>
-        <title>BroderJobs</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="author" content="SemiColonWeb" />
-        
-        <!-- Stylesheets
-        ============================================= -->
-        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
-        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/dark.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/font-icons.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/animate.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/magnific-popup.css' %}" type="text/css" />
-        
-        <link rel="stylesheet" href="{% static 'template/css/responsive.css' %}" type="text/css" />
-        <link rel="stylesheet" href="{% static 'template/css/custom.css' %}" type="text/css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!--[if lt IE 9]>
-                <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js' %}"></script>
-        <![endif]-->
-        
-        <!-- External JavaScripts
-        ============================================= -->
-        <script type="text/javascript" src="{% static 'template/js/jquery.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/js/plugins.js' %}"></script>
-        
-        <!-- SLIDER REVOLUTION 5.x SCRIPTS  -->
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.video.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.actions.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.migration.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'template/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js' %}"></script>
-        
-        <!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
-        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/settings.css' %}" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/layers.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/navigation.css' %}">
-        
-        <!-- Document Title
-        ============================================= -->
-        
-        <style>
-            
-            .revo-slider-emphasis-text {
-                font-size: 64px;
-                font-weight: 700;
-                letter-spacing: -1px;
-                font-family: 'Raleway', sans-serif;
-                padding: 15px 20px;
-                border-top: 2px solid #FFF;
-                border-bottom: 2px solid #FFF;
-            }
-            
-            .revo-slider-desc-text {
-                font-size: 20px;
-                font-family: 'Lato', sans-serif;
-                width: 650px;
-                text-align: center;
-                line-height: 1.5;
-            }
-            
-            .revo-slider-caps-text {
-                font-size: 16px;
-                font-weight: 400;
-                letter-spacing: 3px;
-                font-family: 'Raleway', sans-serif;
-            }
-            
-            .tp-video-play-button { display: none !important; }
-            
-            .tp-caption { white-space: nowrap; }
-            .tooltip-inner { max-width: 250px !Important; width: 300px !Important }
-        </style>
-        
-    </head>
-    
-    <body class="stretched">
-        
-        <!-- Document Wrapper
-        ============================================= -->
-        <div id="wrapper" class="clearfix">
-            
-            <!-- Header
-            ============================================= -->
-            <header id="header" class="transparent-header full-header" data-sticky-class="not-dark">
-                
-                <div id="header-wrap">
-                    
-                    <div class="container clearfix">
-                        
-                        <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-                        
-                        <!-- Logo
-                        ============================================= -->
-                        <div id="logo">
-                            <a href="home" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
-                            <a href="home" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
-                        </div><!-- #logo end -->
-                        
-                        <!-- Primary Navigation
-                        ============================================= -->
-                        <nav id="primary-menu">
-                            
-                            <ul>
-                                <li class="current"><a href="{% url 'estudiante' %}"><div>Para Estudiantes</div></a>
-                                </li>
-                                <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
-                                </li>
-                                <li><a href = "#" data-toggle="modal" data-target="#register"><div>Regístrate</div></a>
-                                </li>
-                            </ul>
-                            
-                            
-                        </nav><!-- #primary-menu end -->
-                        
-                    </div>
-                    
-                </div>
-                
-            </header><!-- #header end -->
-            
-            <section id="slider" class="slider-parallax revoslider-wrap clearfix">
-                
-                <!--
-                #################################
-                        - THEMEPUNCH BANNER -
-                #################################
-                -->
-                <div class="tp-banner-container rev_slider_wrapper fullscreen-container">
-                    <div class="tp-banner" >
-                        <ul>    <!-- SLIDE  -->
-                            <li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{% static 'template/images/slider/rev/main/s1-thumb.jpg' %}"  data-saveperformance="off"  data-title="Welcome to Canvas">
-                                <!-- MAIN IMAGE -->
-                                <img src="{% static 'img/empresas.jpg' %}"  alt="video_woman_cover3"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-                                <!-- LAYERS -->
-
-                                <!-- LAYER NR. 2 -->
-                                <div class="tp-caption customin ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                                     data-x="300"
-                                     data-y="260"
-                                     data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
-                                     data-speed="800"
-                                     data-start="1200"
-                                     data-easing="easeOutQuad"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.01"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="1000"
-                                     data-endeasing="Power4.easeIn" style="z-index: 3; white-space: nowrap;">Anuncia gratis</div>
-                                
-                                <div class="tp-caption customin ltl tp-resizeme revo-slider-desc-text"
-                                     data-x="195"
-                                     data-y="370"
-                                     data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
-                                     data-speed="800"
-                                     data-start="1400"
-                                     data-easing="easeOutQuad"
-                                     data-splitin="none"
-                                     data-splitout="none"
-                                     data-elementdelay="0.01"
-                                     data-endelementdelay="0.1"
-                                     data-endspeed="1000"
-                                     data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal;">Publica tus oportunidades de forma clara y atractiva para los jóvenes profesionales</div>
-                            </li>
-                        </ul>
-                        
-                    </div>
-                </div>
-                
-                <script type="text/javascript">
-
-                    var tpj=jQuery;
-                    tpj.noConflict();
-
-                    tpj(document).ready(function() {
-
-                        var apiRevoSlider = tpj('.tp-banner').show().revolution({
-                            sliderType:"standard",
-                            jsFileLocation:"include/rs-plugin/js/",
-                            sliderLayout:"fullscreen",
-                            dottedOverlay:"none",
-                            delay:9000,
-                            responsiveLevels:[1200,992,768,480,320],
-                            startwidth:1140,
-                            startheight:600,
-                            hideThumbs:200,
-
-                            thumbWidth:100,
-                            thumbHeight:50,
-                            thumbAmount:3,
-
-                            touchenabled:"on",
-                            onHoverStop:"on",
-
-                            swipe_velocity: 0.7,
-                            swipe_min_touches: 1,
-                            swipe_max_touches: 1,
-                            drag_block_vertical: false,
-
-
-                            parallax:"mouse",
-                            parallaxBgFreeze:"on",
-                            parallaxLevels:[8,7,6,5,4,3,2,1],
-                            parallaxDisableOnMobile:"on",
-
-                            keyboardNavigation:"on",
-
-                            shadow:0,
-                            fullWidth:"off",
-                            fullScreen:"on",
-
-                            spinner:"spinner0",
-
-                            stopLoop:"off",
-                            stopAfterLoops:-1,
-                            stopAtSlide:-1,
-
-                            shuffle:"off",
-
-
-                            forceFullWidth:"off",
-                            fullScreenAlignForce:"off",
-                            minFullScreenHeight:"400",
-
-                            hideThumbsOnMobile:"off",
-                            hideNavDelayOnMobile:1500,
-                            hideBulletsOnMobile:"off",
-                            hideArrowsOnMobile:"off",
-                            hideThumbsUnderResolution:0,
-
-                            hideSliderAtLimit:0,
-                            hideCaptionAtLimit:0,
-                            hideAllCaptionAtLilmit:0,
-                            startWithSlide:0,
-                            fullScreenOffset:"0px"
-                        });
-
-                        apiRevoSlider.bind("revolution.slide.onchange",function (e,data) {
-                            if( $(window).width() > 992 ) {
-                                if( $('#slider ul > li').eq(data.slideIndex-1).hasClass('dark') ){
-                                    $('#header.transparent-header:not(.sticky-header,.semi-transparent)').addClass('dark');
-                                    $('#header.transparent-header.sticky-header,#header.transparent-header.semi-transparent.sticky-header').removeClass('dark');
-                                    $('#header-wrap').removeClass('not-dark');
-                                } else {
-                                    if( $('body').hasClass('dark') ) {
-                                        $('#header.transparent-header:not(.semi-transparent)').removeClass('dark');
-                                        $('#header.transparent-header:not(.sticky-header,.semi-transparent)').find('#header-wrap').addClass('not-dark');
-                                    } else {
-                                        $('#header.transparent-header:not(.semi-transparent)').removeClass('dark');
-                                        $('#header-wrap').removeClass('not-dark');
-                                    }
-                                }
-                                SEMICOLON.header.logo();
-                            }
-                        });
-
-                    }); //ready
-
-                </script>
-                <!-- END REVOLUTION SLIDER -->
-                
-            </section>
-            <!-- Footer
-            ============================================= -->
-            <footer id="footer" class="dark">
-                
-                <!-- Copyrights
-                ============================================= -->
-                <div id="copyrights">
-                    
-                    <div class="container clearfix">
-                        
-                        <div class="col_half">
-                            Broderjobs 2015 &copy; <br>
-                            <div class="copyright-links"><a href="{% url 'terminos-condiciones' %}" target ="_blank">Términos y Condiciones</a></div>
+<html>
+	<head>
+		<title>BroderJobs</title>
+		<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+        <meta charset="UTF-8">
+		<link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="{% static 'css/broder.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/slidebars.min.css' %}">
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/slidebars.min.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/additional-methods.min.js' %}"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+		<script src="{% static 'js/jstorage.js' %}"></script>
+	</head>
+	<body>
+		<div class="home empresas">
+			<div class="container">
+				<nav class="navbar navbar-fixed-top sb-slide" role="navigation">
+					<div class="sb-toggle-left navbar-left visible-xs">
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+						<div class="navicon-line"></div>
+					</div>
+					<a class = "link-header" data-link="mensaje-central">
+						<img class="logo" src="{%static 'img/logo.png' %}" alt="Broder jobs" /></a>
+					<ul class = "hidden-xs">
+						<li><a class="btn-action" href="{% url 'estudiante' %}">Para Estudiantes</a></li>
+						<li><a class="link-header" data-link="login">Iniciar sesi&oacute;n</a></li>
+						<li><a class="link-header" data-link="registro">Reg&iacute;strate</a></li>
+					</ul>
+					<div class="clear"></div>
+				</nav>
+                <div id = "sb-site" class="container">
+					<div class = "flex">
+                        <div class="flex-div mensaje-central active" id="mensaje-central">
+                            <h1>Anuncia gratis</h1>
+                            <h3>Publica tus oportunidades de forma clara y atractiva para los j&oacute;venes profesionales</h3>
                         </div>
-                        
-                        <div class="col_half col_last tright">
-                            <div class="fright clearfix">
-                                <a href="#" class="social-icon si-small si-borderless si-facebook">
-                                    <i class="icon-facebook"></i>
-                                    <i class="icon-facebook"></i>
-                                </a>
-
-                                <a href="#" class="social-icon si-small si-borderless si-twitter">
-                                    <i class="icon-twitter"></i>
-                                    <i class="icon-twitter"></i>
-                                </a>
-                                <!--
-                                <a href="#" class="social-icon si-small si-borderless si-gplus">
-                                    <i class="icon-gplus"></i>
-                                    <i class="icon-gplus"></i>
-                                </a>
-                                
-                                <a href="#" class="social-icon si-small si-borderless si-pinterest">
-                                    <i class="icon-pinterest"></i>
-                                    <i class="icon-pinterest"></i>
-                                </a>
-                                
-                                <a href="#" class="social-icon si-small si-borderless si-vimeo">
-                                    <i class="icon-vimeo"></i>
-                                    <i class="icon-vimeo"></i>
-                                </a>
-                                
-                                <a href="#" class="social-icon si-small si-borderless si-github">
-                                    <i class="icon-github"></i>
-                                    <i class="icon-github"></i>
-                                </a>
-                                
-                                <a href="#" class="social-icon si-small si-borderless si-yahoo">
-                                    <i class="icon-yahoo"></i>
-                                    <i class="icon-yahoo"></i>
-                                </a>
-                                
-                                <a href="#" class="social-icon si-small si-borderless si-linkedin">
-                                    <i class="icon-linkedin"></i>
-                                    <i class="icon-linkedin"></i>
-                                </a>-->
-                            </div>
-                            
-                            <div class="clear"></div>
-                            
-                            <i class="icon-envelope2"></i> info@broderjobs.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +51 997 368 676 <!--<span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype-->
-                        </div>
-                        
-                    </div>
-                    
-                </div><!-- #copyrights end -->
-                
-            </footer><!-- #footer end -->
-            
-        </div><!-- #wrapper end -->
-        <div class="modal fade login" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-body">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Inicia sesión</h4>
-                        </div>
-                        <div class="modal-body text-center">
-                            <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
-                                <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
-                                    {{ login_form.email }}
-{#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
-                                </div>
-                                <div class="form-group">
-                                    <label for="login-form-password">Contraseña:</label>
-                                    {{ login_form.password }}
-                                </div>
-                                <div class="form-group text-left">
-                                    {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
-                                </div>
-                                {%if message_login %}
-								<div class="alert alert-warning alert-dismissible" role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-									{{message_login}}</div>
-								{% endif%}
-                                <div class="form-group nobottommargin">
-                                    <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
-                                    <div class="clear"></div>
-                                    <br><br>
-                                    <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
-                                    <div class="clear"></div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade login" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-body">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Regístrate con tu E-mail</h4>
-                        </div>
-                        <div class="modal-body text-center">
-                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="register-form-name">Nombres:</label>
-                                    {{ registro_form.first_name }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-name">Apellidos:</label>
-                                    {{ registro_form.last_name }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-email">Correo:</label>
-                                    {{ registro_form.email }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-email">Empresa:</label>
-                                    {{ registro_form.empresa }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-email">Teléfono:</label>
-                                    {{ registro_form.telefono }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-password">Contraseña:</label>
-                                    {{ registro_form.password1 }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="register-form-repassword">Confirmar contraseña:</label>
-                                    {{ registro_form.password2 }}
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" id="check-tyc" class = "white" name = "tyc" />
-                                    Acepto los
-                                    <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
-                                </div>
-                                {%if message_registro %}
+                        <div class="flex-div login" id="login">
+                            <form action="" method="post" autocomplete="off">{%csrf_token%}
+                                <div class="content">
+                                    <label class="ingresa-email">Iniciar Sesi&oacute;n</label>
+                                    <div class="datos">
+                                        {{ login_form.email }}
+                                        {{ login_form.password }}
+                                    </div>
+                                    <div class="opciones">
+                                        {{ login_form.remember_me }}<label for="recordarme">Recordarme.</label>
+                                        <a>¿Olvidaste tu contrase&ntilde;a?</a>
+                                    </div>
+                                    <div class="division">
+                                        <div class="full line"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    {%if message %}
                                     <div class="alert alert-warning alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        {{message_registro}}
-                                    </div>
-                                {% endif%}
-                                <div class="form-group nobottommargin">
-                                    <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
+                                        {{message}}</div>
+                                    {% endif%}
+                                    <input type="submit" name="_login" value="INGRESAR" class="Ingresar"/>
+                                    <a class="registrate" onclick="activar('registro');">¿No est&aacute;s registrado? Reg&iacute;strate AQU&Iacute;.</a>
+                                    <a class="close" onclick="activar('mensaje-central');">x</a>
                                 </div>
                             </form>
-
                         </div>
+                        <div class="flex-div login" id="registro">
+					<form action="" method="post">{%csrf_token%}
+			            <div class="content">
+                            <label class="saludo"></label>
+                            <span class="registrate">Reg&iacute;strate con tu e-mail</span>
+                            <div class="datos registro">
+                                {{registro_form.first_name}}
+                                {{registro_form.last_name}}
+                                {{registro_form.email}}
+                                {{registro_form.empresa}}
+                                {{registro_form.telefono}}
+                                {{registro_form.password1}}
+                                {{registro_form.password2}}
+                            </div><br>
+							<div id= "mensaje-correo" class="alert alert-warning alert-dismissible hidden" role="alert">
+                                Recuerda que debes usar el correo de la <br>compañía para registrarte
+                            </div>
+                            <div class="opciones">
+                                <input type="checkbox" id="acepto" class = "white" name = "tyc"/><label for="acepto">Acepto los <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>.</label>
+                            </div>
+
+                            {%if message %}
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{message}}
+                            </div>
+                            {% endif%}
+                            {%if registro_form.errors %}
+
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{ registro_form.first_name.errors }}
+								{{ registro_form.last_name.errors }}
+								{{ registro_form.email.errors }}
+								{{ registro_form.password1.errors }}
+								{{ registro_form.password2.errors }}
+                            </div>
+                            {% endif%}
+                            <input type="submit" name="_registro" value="REGISTRARME"  class="Ingresar"/>
+                            <a class="close" onclick="activar('mensaje-central');">x</a>
+		                </div>
+	                </form>
+				</div>
+                        <footer class= "hidden-xs">
+							<div class = "row">
+								<div class = "col-sm-4">
+									<ul class="links">
+										<li class="link"><a>Cont&aacute;ctanos</a></li>
+										<li class="link"><a href="{% url 'terminos-condiciones' %}">T&eacute;rminos y condiciones</a></li>
+										<li class="link"><a>Blog</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class="social text-center">
+										<li class="social"><a class="facebook">Facebook</a></li>
+										<li class="social"><a class="twitter">Twitter</a></li>
+									</ul>
+								</div>
+								<div class = "col-sm-4">
+									<ul class = "copy text-center">
+										<li class="copy">Broder jobs&copy; 2015</li>
+									</ul>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</footer>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Go To Top
-        ============================================= -->
-        <div id="gotoTop" class="icon-angle-up"></div>
-        
-        <!-- Footer Scripts
-        ============================================= -->
-        <script type="text/javascript" src="{% static 'template/js/functions.js' %}"></script>
-        <script src="{% static 'template/js/jquery.validate.min.js' %}"></script>
-        <script src="{% static 'template/js/jquery.validate.additional-methods.min.js' %}"></script>
-		<script src="{% static 'template/js/json2.js' %}"></script>
-		<script src="{% static 'template/js/jstorage.js' %}"></script>
-        <script>
-            $(function(){
-                $("select").on("change", function(){
+			</div>
+		</div>
+		<div class="sb-slidebar sb-left">
+			<nav>
+				<ul class="sb-menu">
+					<li><img src="{%static 'img/logo.png' %}"  alt="Slidebars" ></li>
+					<li class="sb-close"><a href="{%url 'estudiante'%}">Para Estudiantes</a></li>
+					<li class="sb-close"><a class="link-header" data-link="login">Iniciar sesi&oacute;n</a></li>
+					<li class="sb-close"><a class="link-header" data-link="registro">Reg&iacute;strate</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<style> .tooltip-inner { max-width: 400px !Important;  background-color: #f50 !Important; }
+				.tooltip .tooltip-arrow { border-left-color: #f50 !Important; border-right-color: #f50 !Important; }</style>
+		<script>
+            $(function() {
+
+				if (sessionStorage.getItem("main") != null){
+					activar(sessionStorage.getItem("main"));
+				}
+				$.slidebars();
+				$("select").on("change", function(){
 					$(this).val() != "" ?
-						$(this).css("color", "#555555"):
+						$(this).css("color", "black"):
 						$(this).css("color", "#a5a5a5");
 				});
-                $("select").each(function(){
-                    if ($(this).val()=="")
-                        $(this).css("color", "#a5a5a5");
-                });
-                $("#id_registro-empresa").tooltip();
-                $("#login-form").validate({
-                    highlight: function( label ) {
-                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    success: function( label ) {
-                        $(label).closest('.form-group').removeClass('has-error');
-                        label.remove();
-                    },
-                    errorPlacement: function( error, element ) {
-                        if ($(element).is("[name=registro-dia]") ||
-                            $(element).is("[name=registro-mes]") ||
-						    $(element).is("[name=registro-ano]")){
-                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
-                            $("#id_registro-dia").parents(".form-group").append(error);
-                            return;
-                        }
-                        var placement = element.closest('.input-group');
-                        if (!placement.get(0)) {
-                            placement = element;
-                        }
-                        if (error.text() !== '') {
-                            placement.parent().append(error);
-                        }
-                    },
-                    rules: {
-                        "login-email": { required: true, email: true },
-                        "login-password": { required: true, minlength: 6}
-                    },
-                    messages: {
-                        "login-email": { 	required: "Este campo es obligatorio",
-                                            email: "Introduzca un correo válido" },
-                        "login-password": { required: "Este campo es obligatorio",
-                                            minlength: "La contraseña debe tener al menos seis (6) caracteres" }
-                    }
-                })
-                $("#register-form").validate({
-                    highlight: function( label ) {
-                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    success: function( label ) {
-                        $(label).closest('.form-group').removeClass('has-error');
-                        label.remove();
-                    },
-                    errorPlacement: function( error, element ) {
-                        if ($(element).is("[name=registro-dia]") ||
-                            $(element).is("[name=registro-mes]") ||
-						    $(element).is("[name=registro-ano]")){
-                            if ($("#id_registro-dia").parents(".form-group").find("label.error").length == 0)
-                            $("#id_registro-dia").parents(".form-group").append(error);
-                            return;
-                        }
-                        var placement = element.closest('.input-group');
-                        if (!placement.get(0)) {
-                            placement = element;
-                        }
-                        if (error.text() !== '') {
-                            placement.parent().append(error);
-                        }
-                    },
-                    rules: {
-                        "registro-first_name": { required: true },
-                        "registro-last_name": { required: true },
-                        "registro-email": { required: true, email: true },
-                        "registro-password1": { required: true, minlength: 6 },
-                        "registro-password2": { required: true, minlength: 6, equalTo: "#id_registro-password1" },
-                        "registro-empresa": { required: true },
-                        "registro-telefono": { required: true,digits: true,	maxlength: 20 },
-                        groups: {
-                            date: "registro-dia registro-mes registro-ano"
-                        },
-                        tyc: {
-                            required: true
-                        }
-                    },
-                    messages: {
-                        "registro-first_name": { required: "Este campo es obligatorio" },
-                        "registro-last_name": { required: "Este campo es obligatorio" },
-                        "registro-email": { required: "Este campo es obligatorio",
-                                            email: "Introduzca un correo valido" },
-                        "registro-password1": { required: "Este campo es obligatorio",
-                                                minlength: "La contraseña debe tener al menos seis (6) caracteres" },
-                        "registro-password2": { required: "Este campo es obligatorio",
-                                                minlength: "La contraseña debe tener al menos seis (6) caracteres",
-                                                equalTo: "Las contraseñas deben ser iguales" },
-                        "registro-empresa": { required: "Este campo es obligatorio" },
-                        "registro-telefono": { required: "Este campo es obligatorio",
-                                               digits: "Este campo solo contiene digitos",
-                                               maxlength: "Este campo no puede superar los 20 digitos" },
-                        tyc: { required: "Debe aceptar los términos y condiciones" }
-                    }
-                });
-                //Recordar ContraseñaEstudiante
-                var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
-                        key = 'savedUsername', keypass='savedPassword',
-                        username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
-                if (username) {
-                    userField.val(username);
-                    passField.val(pass);
-                    checkbox.prop('checked', true);
-                    $('#id_login-password').focus();
-                }
-                else {
-                    userField.val('').focus();
-                    passField.val('');
-                    checkbox.prop('checked', false);
-                }
-                $("#id_login-remember_me").click(function(){
-                    if ($(this).prop('checked')) {
-                        $.jStorage.set(key, userField.val());
-                        $.jStorage.set(keypass, passField.val());
-                    }
-                    else {
-                        $.jStorage.deleteKey(key);
-                        $.jStorage.deleteKey(keypass);
-                    }
-                });
-            });
-            window.onload = function(){
-                $("#primary-menu a").on("click", function(){
-                    sessionStorage.setItem("main", $(this).attr("data-target"));
-                })
-                if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
-					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
+				$("#id_registro-email").on("focus", function(){
+					$("#mensaje-correo").removeClass("hidden");
+				}).on("blur", function(){
+					$("#mensaje-correo").addClass("hidden");
+				})
+			});
+			function activar(id) {
+				$(".tooltip").remove();
+				sessionStorage.setItem("main", id);
+				$(".flex-div:not(#"+id+")").removeClass('active');
+				$(".flex-div:not(#"+id+")").hide();
+				$('#' + id).addClass('active');
+				$('#' + id).show();
+				$('.link-header').removeClass('active');
+				$("[data-link="+id+"]").addClass('active');
+			}
+			$('.link-header').click(function(event) {
+				activar($(this).data("link"));
+			});
+			$('.container').click(function(e) {
+				if ( $(e.target).closest('.login').length === 0 && $(e.target).closest('.link-header').length === 0 ) {
+					activar('mensaje-central');
+					$('.mensaje-central').removeClass('invisible');
 				}
-                else {
-                    $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
-                }
+			});
+			$(document).keydown(function(e) {
+				if (e.keyCode == 27) {
+					activar('mensaje-central');
+					$('.mensaje-central').removeClass('invisible');
+				}
+			});
+			$('.close').click(function() {
+				$('.link-header').removeClass('active');
+				$('.mensaje-central').removeClass('invisible');
+			});
+
+            $(function(){
+                $("#registro form").validate({
+            	errorPlacement: function (error, element) {
+					$(element).tooltip('destroy');
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						container: "body",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+					$(element).tooltip('show');
+
+	            },
+	            success: function (label, element) {
+					$(element).tooltip('hide');
+	            },
+	            rules: {
+					"registro-first_name": { required: true },
+					"registro-last_name": { required: true },
+	                "registro-email": { required: true, email: true },
+	                "registro-password1": { required: true, minlength: 6 },
+					"registro-password2": { required: true, minlength: 6, equalTo: "#id_registro-password1" },
+                    "registro-empresa": { required: true },
+                    "registro-telefono": { required: true,digits: true,	maxlength: 20 },
+					groups: {
+						date: "registro-dia registro-mes registro-ano"
+					},
+					tyc: {
+						required: true
+					}
+	            },
+	            messages: {
+					"registro-first_name": { required: "Este campo es obligatorio" },
+					"registro-last_name": { required: "Este campo es obligatorio" },
+	                "registro-email": { required: "Este campo es obligatorio",
+	                    				email: "Introduzca un correo valido" },
+	                "registro-password1": { required: "Este campo es obligatorio",
+											minlength: "La contraseña debe tener al menos seis (6) caracteres" },
+					"registro-password2": { required: "Este campo es obligatorio",
+											minlength: "La contraseña debe tener al menos seis (6) caracteres",
+											equalTo: "Las contraseñas deben ser iguales" },
+                    "registro-empresa": { required: "Este campo es obligatorio" },
+                    "registro-telefono": { required: "Este campo es obligatorio",
+						                   digits: "Este campo solo contiene digitos",
+										   maxlength: "Este campo no puede superar los 20 digitos" },
+                    tyc: { required: "Debe aceptar los términos y condiciones" }
+	            }
+	        });
+		$("#link-registro").addClass("active");
+
+        $("#login form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+                $(element).tooltip({
+                    animation: true,
+                    placement: "left",
+					container: "body",
+                    title: $(error).text(),
+                    trigger: "manual"
+                } );
+                $(element).tooltip('show');
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                "login-email": { required: true, email: true },
+                "login-password": { required: true, minlength: 6 }
+            },
+            messages: {
+                "login-email": { 	required: "Este campo es obligatorio",
+                    				email: "Introduzca un correo válido" },
+                "login-password": { required: "Este campo es obligatorio",
+									minlength: "La contraseña debe tener al menos seis (6) caracteres"}
             }
-        </script>
-    </body>
+        });
+        $("#link-sesion").addClass("active");
+
+
+        //Recordar ContraseñaEstudiante
+			var checkbox = $('#id_login-remember_me'), userField = $('#id_login-email'), passField = $('#id_login-password'),
+					key = 'savedUsernameRe', keypass='savedPasswordRe',
+					username = $.jStorage.get(key), pass = $.jStorage.get(keypass);
+			if (username) {
+				userField.val(username);
+				passField.val(pass);
+				checkbox.prop('checked', true);
+				$('#id_login-password').focus();
+			}
+			else {
+				userField.val('').focus();
+				passField.val('');
+				checkbox.prop('checked', false);
+			}
+			$("#id_login-remember_me").click(function(){
+				if ($(this).prop('checked')) {
+					$.jStorage.set(key, userField.val());
+					$.jStorage.set(keypass, passField.val());
+				}
+				else {
+					$.jStorage.deleteKey(key);
+					$.jStorage.deleteKey(keypass);
+				}
+			});
+    });
+</script>
+	</body>
 </html>
