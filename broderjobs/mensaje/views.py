@@ -21,8 +21,8 @@ from main.utils import LoginRequiredMixin
 def buzon_entrada(request):
     # return render_to_response('main/home-estudiante.html',context_instance=RequestContext(request))
     user = request.user
-    persona = Persona.objects.get(usuario_id=user.id)
-    representante = Representante.objects.get(persona_id =persona.id)
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
     empresa = Empresa.objects.get(id=representante.empresa.id)
     oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado='A').order_by("fecha_publicacion")
     return render_to_response('mensaje/mensaje.html', {'oportunidades' : oportunidades},

@@ -40,8 +40,8 @@ class OportunidadCrearView(FormView):
 
     def get_initial(self):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return {'longitud': empresa.longitud, 'latitud': empresa.latitud}
 
@@ -49,7 +49,7 @@ class OportunidadCrearView(FormView):
         user_id = self.request.user
         user = get_object_or_404(User, pk = user_id.id)
         persona = get_object_or_404(Persona, usuario_id=user.id)
-        representante =get_object_or_404(Representante, persona_id=persona.id)
+        representante = get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
         fase = fase =  get_object_or_404(ProcesoFase, pk = 1)
         titulo = form.cleaned_data['titulo']
