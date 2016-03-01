@@ -39,15 +39,20 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.save()
 
             for e in EstudianteCultura.objects.filter(estado='A'):
-                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.id)
+                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.id,
+                                                                                           empresa_id = empresa_cultura.empresa.id)
                 if created is True:
                     est_empr_cultura.estudiante = e.estudiante
-                est_empr_cultura.empresa = empresa_cultura.empresa
+                    est_empr_cultura.empresa = empresa_cultura.empresa
                 clan = (e.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
                 adhocracia = (e.porcentaje_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
                 jerarquica = (e.porcentaje_jerarquico/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
                 racional = (e.porcentaje_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
                 est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
+                est_empr_cultura.porcentaje_clan = clan
+                est_empr_cultura.porcentaje_adhocracia = adhocracia
+                est_empr_cultura.porcentaje_jerarquica = jerarquica
+                est_empr_cultura.porcentaje_racional = racional
                 est_empr_cultura.save()
 
 
