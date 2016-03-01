@@ -17,6 +17,7 @@ admin.site.register(models.CulturaMatrizDISC)
 class EmpresaRespuestasAdmin(admin.ModelAdmin):
     list_display = ('empresa','pregunta', 'respuesta')
     def save_model(self, request, obj, form, change):
+        obj.save()
         if EmpresaRespuestas.objects.filter(empresa_id = obj.empresa.id).count() == PreguntaCultura.objects.filter().count():
             clan_total = EmpresaRespuestas.objects.filter(empresa_id = obj.empresa.id, respuesta__perfil_cultura = 1 ).count()
             adhocrata_total = EmpresaRespuestas.objects.filter(empresa_id = obj.empresa.id, respuesta__perfil_cultura = 2 ).count()
@@ -37,19 +38,19 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.porcentaje_racional = porcentaje_racional
             empresa_cultura.save()
 
-            for estudiante in EstudianteCultura.objects.filter(estado='A'):
-                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id)
+            for e in EstudianteCultura.objects.filter(estado='A'):
+                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.id)
                 if created is True:
-                    est_empr_cultura.estudiante = estudiante
+                    est_empr_cultura.estudiante = e.estudiante
                 est_empr_cultura.empresa = empresa_cultura.empresa
-                clan = (estudiante.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
-                adhocracia = (estudiante.porcentaje_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
-                jerarquica = (estudiante.porcentaje_jerarquico/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
-                racional = (estudiante.porcentaje_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
+                clan = (e.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
+                adhocracia = (e.porcentaje_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
+                jerarquica = (e.porcentaje_jerarquico/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
+                racional = (e.porcentaje_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
                 est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
                 est_empr_cultura.save()
 
-        obj.save()
+
 
 admin.site.register(models.EmpresaRespuestas, EmpresaRespuestasAdmin)
 
