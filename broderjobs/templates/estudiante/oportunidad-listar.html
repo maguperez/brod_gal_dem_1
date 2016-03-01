@@ -6,8 +6,10 @@
 				<div class="centered"></div>
 				<ul class="panel left principal" id="oportunidad-lista">
 				</ul>
+
 				<div class="clear"></div>
 			</div>
+<div id="vacio"></div>
 		</section>
 {% endblock%}
 
@@ -101,6 +103,10 @@
 
 	function fnCargarOportunidad() {
 		$.get("{% url 'estudiante-oportunidad-cargar-lista' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
+            if($.trim(htmlexterno)==""){
+                $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+            }
+            else
 			$('#oportunidad-lista').html(htmlexterno);
 		});
 		document.ready
