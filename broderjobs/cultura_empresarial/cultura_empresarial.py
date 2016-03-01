@@ -82,10 +82,11 @@ def calcular_cultura_estudiate(estudiante):
         estudiante_cultura.save()
 
         for empresa_cultura in EmpresaCultura.objects.filter(estado = 'A'):
-            est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id)
+            est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id,
+                                                                                       empresa_id = empresa_cultura.empresa.id)
             if created is True:
                 est_empr_cultura.estudiante = estudiante
-            est_empr_cultura.empresa = empresa_cultura.empresa
+                est_empr_cultura.empresa = empresa_cultura.empresa
             clan = (compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
             adhocracia = (compatibilidad_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
             jerarquica = (compatibilidad_jerarquica/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
@@ -100,7 +101,7 @@ def calcular_cultura_estudiate(estudiante):
             est_empr_cultura. porcentaje_jerarquica = jerarquica
             est_empr_cultura. porcentaje_racional = racional
             est_empr_cultura.save()
-            return 1
+        return 1
     except:
         return -1
     return 0

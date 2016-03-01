@@ -264,7 +264,10 @@ class MiCVView(LoginRequiredMixin, FormView):
 
         conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
 
-        resumen = Resumen.objects.get(estudiante_id=estudiante.id)
+        resumen, created = Resumen.objects.get_or_create(estudiante_id=estudiante.id)
+        if created:
+            resumen.estudiante = estudiante
+            resumen.save()
 
         if resumen is not None:
             resumen_descripcion = resumen.descripcion

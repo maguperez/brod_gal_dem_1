@@ -77,7 +77,7 @@ def finalizo_estudiante(request):
             if EstudianteRespuestas.objects.filter(estudiante_id = estudiante.id).count() == Pregunta.objects.filter().count():
                 nro_patron = disc.obtener_patron(estudiante)
                 porcentaje_cultural = calcular_cultura_estudiate(estudiante)
-                if int(nro_patron) > 0:
+                if int(nro_patron) > 0 and porcentaje_cultural > 0:
                     estudiante.completo_test = True
                     estudiante.save()
                     data = "1"
