@@ -63,4 +63,7 @@ admin.site.register(models.EmpresaCultura)
 
 admin.site.register(models.EstudianteCultura)
 
-admin.site.register(models.EstudianteEmpresaCultura)
+
+class EstudianteEmpresaCulturaAdmin(admin.ModelAdmin):
+    list_display = ('estudiante','empresa', 'compatibilidad_cultural')
+admin.site.register(models.EstudianteEmpresaCultura, EstudianteEmpresaCulturaAdmin )
