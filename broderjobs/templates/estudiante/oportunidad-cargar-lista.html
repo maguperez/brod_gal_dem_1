@@ -63,7 +63,7 @@
 	</div>
 </li>
 {%endfor%}
-
+{%if opo%}
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script>
     var CompatibilidadJD = function(){
@@ -134,3 +134,4 @@
 
 
 </script>
+{%endif%}

@@ -363,11 +363,11 @@
                                 <div class="form-group text-left">
                                     {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
-                                {%if message_login %}
-								<div class="alert alert-warning alert-dismissible" role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-									{{message_login}}</div>
-								{% endif%}
+                                {%if message %}
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        {{message}}</div>
+                                {%endif%}
                                 <div class="form-group nobottommargin">
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
@@ -425,12 +425,23 @@
                                     Acepto los
                                     <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
                                 </div>
-                                {%if message_registro %}
-                                    <div class="alert alert-warning alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        {{message_registro}}
-                                    </div>
-                                {% endif%}
+                                {%if message %}
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{message}}
+                            </div>
+                            {% endif%}
+                            {%if registro_form.errors %}
+
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{ registro_form.first_name.errors }}
+								{{ registro_form.last_name.errors }}
+								{{ registro_form.email.errors }}
+								{{ registro_form.password1.errors }}
+								{{ registro_form.password2.errors }}
+                            </div>
+                            {% endif%}
                                 <div class="form-group nobottommargin">
                                     <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>
                                 </div>

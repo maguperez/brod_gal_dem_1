@@ -3,16 +3,16 @@
 {% load staticfiles %}
 {% block content %}
 <section class="oportunidades-empresa" data-id="{{oportunidad.od}}">
-			<div class="centered">
-				<select class="filtro" id="filtro">
-					<option value="A">Postulaciones Abiertas</option>
-					<option value="C">Postulaciones Cerradas</option>
-					<option value="P">Oportunidades Archivadas</option>
-				</select>
-				<div class="clear"></div>
-				<ul class="list" id ="oportunidad-lista"></ul>
-				<div id="vacio"></div>
-			</div>
+    <div class="centered">
+        <select class="filtro" id="filtro">
+            <option value="A">Postulaciones Abiertas</option>
+            <option value="C">Postulaciones Cerradas</option>
+            <option value="P">Oportunidades Archivadas</option>
+        </select>
+        <div class="clear"></div>
+        <ul class="list" id ="oportunidad-lista"></ul>
+        <div id="vacio"></div>
+    </div>
 	<div id="archivar-modal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -38,7 +38,18 @@
 {% csrf_token %}
 {% endblock%}
 {% block js %}
+<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'js/chartist.min.js' %}"></script>
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
+<link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script type="text/javascript">
+    moment.locale('es');
+	panel = new MixpanelExport({
+		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
+		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
+	});
 	$( document ).ready( function() {
 		$( '#filtro' ).change( function() {
 			fnCargarOportunidades();
@@ -90,6 +101,7 @@
 		if (arra.length > index){
 			$.get("{% url 'empresa-oportunidad-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
    				$('#oportunidad-lista').append(htmlexterno);
+                fnCargarInfo();
 				fnCargarOportunidad(arra, index+1);
 			});
 		}
@@ -97,6 +109,88 @@
 			$(".loading-wrapper").hide();
 		}
 	}
+    function fnCargarInfo(){
+        var id = $(".sparklines").last().data("id");
+        var data = $(".sparklines").last().data("info");
+        var obj = $(".sparklines").last();
+        var date = moment().format("YYYY-MM-DD");
+		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
+        panel.retention({
+            from_date: last,
+            to_date: date,
+            expire: 8798798765,
+            retention_type: "compounded",
+            event: "Vista Oportunidad",
+            //born_event: "Visita Oportunidad",
+            where: 'properties["OportunidadID"] == "'+ id +'"'
+        }).then(function(data) {
+            var array = new Array();
+            var total = 0;
+            for (var i = 6; i >= 0 ; i--) {
+                var last = moment().subtract(i, 'days');
+                array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
+                total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
+            }
+            //$("#visualizaciones-"+id).html(total);
+            $(obj).sparkline(array, {
+                type: 'bar',
+                height: '50px',
+                barSpacing: 7,
+                barWidth: 10,
+                barColor: '#5d9cf9'
+            });
+            $.ajax({
+                data : {'id':id},
+                url: '{%url "contador-visitas-oportunidad-obtener" %}',
+                type: 'get',
+                success: function(data){
+                    debugger;
+                    $("#visualizaciones-"+id).html(data["total"]);
+                }
+            });
+        });
+        var array = new Array();
+		for (var i = 6; i >= 0 ; i--) {
+			var last = moment().subtract(i, 'days');
+			array.push(last.format('dddd'));
+		}
+
+        var id = $(".ct-chart").last().data("id");
+        var d = [];
+        $.ajax({
+            data: {'id': id},
+            url: '{%url "empresa-oportunidad-postulaciones" %}',
+            type: 'get',
+            success: function (data) {
+                $("#cifra-"+id).html(data[0][0]);
+                new Chartist.Line("#chart-id-"+id, {
+                    labels: array,
+                    colors:["#333", "#222", "#111", "#000"],
+                    series: [data[0][1]]
+                }, {
+                    low: 0,
+                    showArea: true
+                });
+            }
+        });
+
+        var ele = $(".fotos-post").last().attr("id").split("-");
+        var id = ele[2];
+        $.ajax({
+            data: {'id': id},
+            url: '{%url "empresa-oportunidad-estudiantes" %}',
+            type: 'get',
+            success: function (data) {
+                var html = "";
+                for(var i = 0; i <data.length ; i++) {
+                    html += '<img src="'+ data[i][0] +'" title="'+data[i][1]+'"/>';
+                }
+                $("img").tooltip();
+                $("#foto-post-"+id).html(html);
+            }
+        });
+
+    }
 
 </script>
 
