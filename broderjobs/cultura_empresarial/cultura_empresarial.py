@@ -82,25 +82,22 @@ def calcular_cultura_estudiate(estudiante):
         estudiante_cultura.save()
 
         for empresa_cultura in EmpresaCultura.objects.filter(estado = 'A'):
-            est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id)
+            est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id,
+                                                                                       empresa_id = empresa_cultura.empresa.id)
             if created is True:
                 est_empr_cultura.estudiante = estudiante
-            est_empr_cultura.empresa = empresa_cultura.empresa
+                est_empr_cultura.empresa = empresa_cultura.empresa
             clan = (compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
             adhocracia = (compatibilidad_adhocracia/100.00) *(empresa_cultura.porcentaje_adhocracia/100.00)
             jerarquica = (compatibilidad_jerarquica/100.00) * (empresa_cultura.porcentaje_jerarquico/100.00)
             racional = (compatibilidad_racional/100.00) * (empresa_cultura.porcentaje_racional/100.00)
-            # est_empr_cultura.compatibilidad_cultural = (compatibilidad_clan * empresa_cultura.porcentaje_clan) +\
-            #                                            (compatibilidad_adhocracia * empresa_cultura.porcentaje_adhocracia) + \
-            #                                            (compatibilidad_jerarquica * empresa_cultura.porcentaje_jerarquico) + \
-            #                                            (compatibilidad_racional * empresa_cultura.porcentaje_racional)
             est_empr_cultura.compatibilidad_cultural = (clan*100) + (adhocracia*100) + (jerarquica*100) + (racional*100)
-            est_empr_cultura. porcentaje_clan = clan
-            est_empr_cultura. porcentaje_adhocracia = adhocracia
-            est_empr_cultura. porcentaje_jerarquica = jerarquica
-            est_empr_cultura. porcentaje_racional = racional
+            est_empr_cultura.porcentaje_clan = clan
+            est_empr_cultura.porcentaje_adhocracia = adhocracia
+            est_empr_cultura.porcentaje_jerarquica = jerarquica
+            est_empr_cultura.porcentaje_racional = racional
             est_empr_cultura.save()
-            return 1
+        return 1
     except:
         return -1
     return 0

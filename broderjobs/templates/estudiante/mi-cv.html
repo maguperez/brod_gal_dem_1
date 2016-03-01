@@ -72,7 +72,9 @@
 								<h3 class="title"><i class="profile"></i>Resumen<button id="comment-button" class="link editar">Editar</button></h3>
 								<div class="detalle">
 									<p class="mantener-line-break">
-										{{resumen_descripcion}}
+										{% if resumen_descripcion %}
+                                        {{resumen_descripcion}}
+                                        {%endif %}
 									</p>
 								</div>
 							</section>
