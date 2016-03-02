@@ -1100,11 +1100,12 @@ def oportunidad_cargar_lista(request):
     #     Q(carrera__descripcion__startswith=busqueda) | Q(conocimiento__descripcion__startswith=busqueda )).exclude(
     #     estado_oportunidad ='P').order_by('-fecha_publicacion').distinct()
     oportunidades = OportunidadCompatibilidad.objects.filter(
+        Q(estudiante__persona__usuario_id = request.user.id) & (
         Q(oportunidad__titulo__unaccent__icontains=busqueda) | Q(oportunidad__empresa__nombre__icontains = busqueda) |
         Q(oportunidad__ciudad__descripcion__icontains=busqueda) | Q(oportunidad__pais__descripcion__icontains = busqueda) |
         Q(oportunidad__tipo_puesto__descripcion__startswith=busqueda) | Q(oportunidad__carga_horaria__descripcion__startswith=busqueda) |
-        Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda )).exclude(
-        oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
+        Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda))).exclude(
+        oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio')
 
     return render_to_response('estudiante/oportunidad-cargar-lista.html', {'oportunidades': oportunidades},
                               context_instance = RequestContext(request))

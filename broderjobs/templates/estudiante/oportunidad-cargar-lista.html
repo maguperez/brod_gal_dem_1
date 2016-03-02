@@ -63,7 +63,7 @@
 	</div>
 </li>
 {%endfor%}
-{%if opo%}
+
 <script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script>
     var CompatibilidadJD = function(){
@@ -73,7 +73,6 @@
 {#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
 {#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
 {#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}
-
             });
         }
     };
@@ -87,7 +86,6 @@
 			data = $(this).find(".cultural .circular-bar-chart").data("percent");
 			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
 			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
-
 			data = $(this).find(".academico .circular-bar-chart").data("percent");
 			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
 			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
@@ -97,7 +95,6 @@
 		  	$(this).find(".desglose").css("opacity",0);
 			$('.chart').data('easyPieChart').update(40);
 		});
-
 		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
@@ -119,19 +116,10 @@
 					barColor: "#5d9cf9",
 					size: 65,
 				});
-
          $(".class").each(function() {
-
         });
          $(".Compatibilidad").each(function(index, obj){
              compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );
         });
-
-
 	});
-
-
-
-
 </script>
-{%endif%}

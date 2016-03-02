@@ -36,6 +36,10 @@ from django.template.loader import render_to_string
 # Create your views here.
 @login_required(login_url='/empresa-registro/')
 def oportunidad_listar(request):
+    user = request.user
+    persona = Persona.objects.get(usuario_id=user.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
+
     return render(request, 'empresa/oportunidades-listar.html')
 
 class MiEmpresaView(FormView):
@@ -100,7 +104,7 @@ class InfoGeneralView(FormView):
 
             user = self.request.user
             persona = Persona.objects.get(usuario_id=user.id)
-            representante = Representante.objects.get(persona_id =persona.id)
+            representante =get_object_or_404(Representante, persona_id =persona.id)
             empresa = Empresa.objects.get(id=representante.empresa.id)
             return {
                 'nombre': empresa.nombre,
@@ -173,7 +177,7 @@ class RedesSocialesView(FormView):
 
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         try:
             redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id, estado = 'A')
         except EmpresaRedesSociales.DoesNotExist:
@@ -218,7 +222,7 @@ class LogoView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return empresa
 
@@ -230,7 +234,7 @@ class UbicacionView(SuccessMessageMixin, AjaxTemplateMixin,UpdateView):
     def get_object(self, queryset=None):
         user = self.request.user
         persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        representante =  get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return empresa
 
@@ -239,8 +243,8 @@ class OportunidadListarView(TemplateView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
         context = super(OportunidadListarView, self).get_context_data(**kwargs)
@@ -308,14 +312,17 @@ def oportunidades(request):
     return HttpResponse(data, content_type='application/json')
 
 def oportunidades_listar( request ):
+    user = request.user
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
 
 def oportunidad_busqueda(request):
     if request.is_ajax():
         busqueda = request.GET.get('b')
         user = request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
             oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= empresa.id).order_by("-fecha_publicacion")
@@ -330,7 +337,7 @@ class OportunidadBuscarView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET.get('b')
         user = request.user
-        persona = Persona.objects.get(usuario_id=user.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         if busqueda is not None:
@@ -383,8 +390,8 @@ class OportunidadCandidatos(TemplateView):
         id = kwargs.get('id', None)
         oportunidad =  get_object_or_404(Oportunidad, pk = id)
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         postulaciones = Postulacion.objects.filter(oportunidad_id = id).count()
         context = super(OportunidadCandidatos, self).get_context_data(**kwargs)
@@ -468,8 +475,8 @@ class PictureCreateView(CreateView):
 
     def get_initial(self):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         return {
             'empresa':empresa,
@@ -507,8 +514,8 @@ class PictureListView(ListView):
 
     def get_queryset(self):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         pictures = Picture.objects.filter(empresa_id = empresa.id)
         return pictures
@@ -523,7 +530,7 @@ class PictureListView(ListView):
 def video_url_create(request):
     url = request.POST['url']
     try:
-        representante = Representante.objects.get(persona__usuario = request.user.id)
+        representante = get_object_or_404(Representante, persona__usuario = request.user.id)
         empresa = Empresa.objects.get(id = representante.empresa.id)
         video_url = VideoUrl()
         video_url.empresa = empresa
@@ -540,7 +547,7 @@ def video_url_delete(request):
     id = request.POST['id']
     user = request.user
     persona = Persona.objects.get(usuario_id=user.id)
-    representante = Representante.objects.get(persona_id =persona.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
     try:
         video_url = VideoUrl.objects.get(id = id).delete()
         data = "0"
@@ -560,8 +567,8 @@ class VideosListView(TemplateView):
     template_name = 'empresa/video_form.html'
     def get_context_data(self, **kwargs):
         user = self.request.user
-        persona = Persona.objects.get(usuario_id=user.id)
-        representante = Representante.objects.get(persona_id =persona.id)
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         videos = VideoUrl.objects.filter(empresa_id = empresa.id)
         context = super(VideosListView, self).get_context_data(**kwargs)
