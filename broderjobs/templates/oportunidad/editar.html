@@ -57,9 +57,9 @@
 							{%else%}
 								<input type="submit" name="_abrir" value="ABRIR" id="abrir" class="btn-action"/>
 							{%endif%}<br><br>
-                            <div style = "text-align:center; float:right"><label style = "display:inline-block">Estado: &nbsp;</label>
-                                <div style = "display: inline-block">{{form.estado_oportunidad}}</div></div>
-								<div class="clear"></div>
+{#                            <div style = "text-align:center; float:right; diaplay:none;"><label style = "display:inline-block">Estado: &nbsp;</label>#}
+{#                                <div style = "display: inline-block">{{form.estado_oportunidad}}</div></div>#}
+{#								<div class="clear"></div>#}
 
 						</header>
 						{% if form.errors %}
@@ -883,7 +883,7 @@
 {#                    $(".alcance .cifra").html("error...");#}
                 },
                 success: function(data){
-                    $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)');
+                    $(".alcance .cifra").html(data.total);
                     $(".grafico-alcance div").removeClass("active");
                     debugger;
                     if (data.nivel <= 29){
