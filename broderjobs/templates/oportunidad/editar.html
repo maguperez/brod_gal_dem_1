@@ -307,7 +307,7 @@
 								<div class="grafico-alcance">
 									<div class="alto inactive">
 										<div class="adecuado inactive">
-											<div class="bajo active">
+											<div class="bajo inactive">
 												<label>Bajo</label>
 											</div>
 										</div>
@@ -884,6 +884,23 @@
                 },
                 success: function(data){
                     $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)');
+                    $(".grafico-alcance div").removeClass("active");
+                    debugger;
+                    if (data.nivel <= 29){
+                        $(".grafico-alcance .bajo").removeClass("inactive");
+                        $(".grafico-alcance .bajo").addClass("active");
+                        $(".grafico-alcance label").html("Bajo");
+                    }
+                    else if (data.nivel <= 70){
+                        $(".grafico-alcance .adecuado").removeClass("inactive");
+                        $(".grafico-alcance .adecuado").addClass("active");
+                        $(".grafico-alcance label").html("Medio");
+                    }
+                    else {
+                        $(".grafico-alcance .alto").removeClass("inactive");
+                        $(".grafico-alcance .alto").addClass("active");
+                        $(".grafico-alcance label").html("Alto");
+                    }
                 }
             });
        });

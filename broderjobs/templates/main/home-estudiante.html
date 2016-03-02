@@ -105,8 +105,8 @@
                         <!-- Logo
                         ============================================= -->
                         <div id="logo">
-                            <a href="home" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
-                            <a href="home" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
+                            <a href="{% url 'estudiante' %}" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
+                            <a href="{% url 'estudiante' %}" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
                         </div><!-- #logo end -->
 
                         <!-- Primary Navigation
@@ -143,7 +143,7 @@
                         <ul>    <!-- SLIDE  -->
                             <li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{% static 'template/images/slider/rev/main/s1-thumb.jpg' %}"  data-saveperformance="off"  data-title="Welcome to Canvas">
                                 <!-- MAIN IMAGE -->
-                                <img src="{% static 'template/images/videos/explore-poster.jpg' %}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                                <img src="{% static 'template/images/videos/video.png' %}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                                 <!-- LAYERS -->
 
                                 <!-- LAYER NR. 1 -->
@@ -152,8 +152,8 @@
                                      data-volume="mute"
                                      data-videowidth="100%"
                                      data-videoheight="100%"
+                                     data-videopreload="none"
                                      data-videomp4="{% static 'template/images/videos/video.mp4' %}"
-                                     data-videopreload="preload"
                                      data-videoloop="loop"
                                      data-forceCover="1"
                                      data-aspectratio="16:9"
@@ -378,8 +378,7 @@
                 <div class="section notopmargin nobottommargin">
                     <div class="home-img right hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url('/static/template/images/empresa.jpg') bottom right no-repeat; background-size: cover"></div>
                     <div class="container clearfix">
-                        <div class="col_half"></div>
-                        <div class="col_half nobottommargin topmargin-lg col_last dark">
+                        <div class="col-md-6 col-md-offset-6 nobottommargin topmargin-lg col_last dark">
 
                             <div class="heading-block topmargin-lg">
                                 <h2>Typically Responsive</h2>
