@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="home de prueba" />
+=======
     <list default="true" id="e40ca3a7-1824-4972-9f65-98e6ea7e49ab" name="Default" comment="home de prueba">
 <<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/cultura_empresarial/admin.py" afterPath="$PROJECT_DIR$/broderjobs/cultura_empresarial/admin.py" />
@@ -11,6 +14,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-lista.html" afterPath="$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-lista.html" />
 >>>>>>> 0c2b13c8577adc5279b0b76a735b3b83cd9d9b53
     </list>
+>>>>>>> a5120570ba0b29bf8d51050cddd46fe9cf152de7
     <ignored path="brod_gal_dem_1.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -359,6 +363,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="brod_gal_dem_1" />
@@ -457,6 +463,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+>>>>>>> a5120570ba0b29bf8d51050cddd46fe9cf152de7
         </subPane>
       </pane>
       <pane id="Scratches">
@@ -798,13 +805,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+<<<<<<< HEAD
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27155825" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" />
+=======
 <<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18879509" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" />
 =======
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27155825" sideWeight="0.49346405" order="0" side_tool="false" content_ui="combo" />
 >>>>>>> 0c2b13c8577adc5279b0b76a735b3b83cd9d9b53
+>>>>>>> a5120570ba0b29bf8d51050cddd46fe9cf152de7
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922536" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31690142" sideWeight="0.5026861" order="7" side_tool="true" content_ui="tabs" />

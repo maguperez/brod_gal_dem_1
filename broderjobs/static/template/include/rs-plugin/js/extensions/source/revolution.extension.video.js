@@ -236,12 +236,13 @@ jQuery.extend(true,_R, {
 		return addedApis;
 	},
 
-	manageVideoLayer : function(_nc,opt,recalled,internrecalled) {				
+	manageVideoLayer : function(_nc,opt,recalled,internrecalled) {
+		debugger;
 		// YOUTUBE AND VIMEO LISTENRES INITIALISATION		
 		var vida = _nc.data("videoattributes"),
 			vidytid = _nc.data('ytid'),
 			vimeoid = _nc.data('vimeoid'),
-			videopreload = _nc.data('videpreload'),
+			videopreload = _nc.data('videopreload'),
 			videomp = _nc.data('videomp4'),
 			videowebm = _nc.data('videowebm'),
 			videoogv = _nc.data('videoogv'),
