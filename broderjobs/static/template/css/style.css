@@ -9,6 +9,7 @@
 
 -----------------------------------------------------------------------------------*/
 
+@font-face { font-family: 'Helvetica Neue'; src: url('fonts/HelveticaNeue.otf'); }
 
 dl, dt, dd, ol, ul, li {
 	margin: 0;
