@@ -15,6 +15,7 @@ class Persona(models.Model):
     fecha_creacion = models.DateField(default=  datetime.now, null=True, blank=True)
     fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
+    estado2 =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
 		return unicode(self.usuario.first_name+ " "+self.usuario.last_name) or u''
