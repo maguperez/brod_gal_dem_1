@@ -1,0 +1,10 @@
+branch-defaults:
+  testing:
+    environment: Broderjobs-dev
+global:
+  application_name: Broderjobs
+  default_ec2_keyname: aws-eb2
+  default_platform: 64bit Amazon Linux 2015.09 v2.0.6 running Python 2.7
+  default_region: us-west-2
+  profile: eb-cli
+  sc: git

@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'contador_visitas',
     'disc',
     'cultura_empresarial',
-
+    'storages',
 
 )
 
@@ -103,19 +103,19 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BroderJobs1',
-        'USER': 'broder',
-        'PASSWORD': 'br753des',
-        'HOST': '191.168.19.11',
-        'PORT': '5434',
-        # 'NAME': 'BroderJobs1',
-        # 'USER': 'sa',
-        # 'PASSWORD': 'abc#123',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-    }
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'broderjobsinstance',
+			'USER': 'broder',
+			'PASSWORD': 'br753des',
+			'HOST': 'broderjobsinstance.cscdf74uioh9.us-west-2.rds.amazonaws.com',
+			'PORT': '5432',
+			# 'NAME': 'BroderJobs',
+			# 'USER': 'sa',
+			# 'PASSWORD': 'abc#123',
+			# 'HOST': 'localhost',
+			# 'PORT': '5432',
+		}
 }
 
 
@@ -152,18 +152,38 @@ LOGIN_URL = reverse_lazy('homepage')
 LOGIN_REDIRECT_URL = reverse_lazy('oportunidades')
 LOGOUT_URL = reverse_lazy('logout')
 
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+	'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+}
 
-STATIC_ROOT = ''
+AWS_STORAGE_BUCKET_NAME = 'broderjobs'
+AWS_ACCESS_KEY_ID = 'AKIAJB4CICGN7PI5OWNA'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATICFILES_LOCATION = 'static'
+
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATICFILES_STORAGE = 'broderjobs.custom_storages.StaticStorage'
+
+#STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    '/BroderJobs/broderjobs/static/',
+#    '/BroderJobs/broderjobs/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -175,7 +195,11 @@ STATICFILES_FINDERS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
+
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'broderjobs.custom_storages.MediaStorage'
 
 #Social-Autt
 #variable
