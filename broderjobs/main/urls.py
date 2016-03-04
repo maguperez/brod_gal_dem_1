@@ -7,27 +7,14 @@ urlpatterns =[
 
 	url(r'^$' , 'main.views.homepage', name='homepage'),
 
-	url(r'^home/$' , 'main.views.home', name='home'),
-
-	url(r'^home-empresa/$' , 'main.views.home_empresa', name='home-empresa'),
-
 	url(r'^estudiante/$' , 'main.views.homepage', name='estudiante'),
-
-	# url(r'^estudiante/$' , 'main.views.estudiante', name='estudiante'),
 
 	url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),
 
-	# url(r'^empresa/$' , 'main.views.empresa', name='empresa'),
-    #
-	# url(r'^estudiante-login/$' , 'main.views.login_estudiante', name='estudiante-login'),
-    #
-	# url(r'^empresa-login/$' , 'main.views.empresa_login', name='empresa-login'),
+	url(r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
+	url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm'),
 
 	url(r'^salir/$' , 'django.contrib.auth.views.logout_then_login', name='salir'),
-
-	# url(r'^estudiante-registro/$','main.views.estudiante_registro' , name = 'estudiante-registro'),
-
-	# url(r'^empresa-registro/$','main.views.empresa_registro' , name = 'empresa-registro'),
 
 	url(r'^usuarios/$', views.UsuariosView.as_view(), name="usuarios"),
 

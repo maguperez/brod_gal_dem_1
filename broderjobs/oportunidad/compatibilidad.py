@@ -182,8 +182,8 @@ def guardar_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_edad
     return data
 
 def actualizar_compatibilidad(estudiante):
-    # try:
-    if estudiante.id > 0:
+    try:
+    # if estudiante.id > 0:
         oportunidades = Oportunidad.objects.filter(estado = 'A')
 
         for oportunidad in oportunidades.all():
@@ -248,8 +248,13 @@ def actualizar_compatibilidad(estudiante):
                                         carga_horaria + conocimiento
 
             try:
-                estudiante_cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = estudiante.pk,
-                                                                          empresa_id = oportunidad.empresa.id )
+                estudiante_cultura, create_ec = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.pk,
+                                                                                     empresa_id = oportunidad.empresa.id )
+                if create_ec:
+                    estudiante_cultura.estudiante = estudiante
+                    estudiante_cultura.empresa = oportunidad.empresa
+                    estudiante_cultura.compatibilidad_cultural = 0
+                    estudiante_cultura.save()
                 oportunidad_comp, create = OportunidadCompatibilidad.objects.get_or_create(oportunidad_id = oportunidad.id,
                                                                                        estudiante_id = estudiante.id)
                 if create:
@@ -262,8 +267,8 @@ def actualizar_compatibilidad(estudiante):
                 data = "ok"
             except:
                 data= "error"
-    # except:
-    #     data = "error"
+    except:
+        data = "error"
     return data
 
 

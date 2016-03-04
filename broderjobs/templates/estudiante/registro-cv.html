@@ -72,6 +72,7 @@
 							{{ form.pais.errors}}
 							{{ form.ciudad.errors}}
 							{{ form.tipo_puesto.errors}}
+                            {{ form.genero.errors}}
 						{% endif%}
 					<section>
 							{% if user.is_authenticated %}
@@ -79,6 +80,10 @@
 							{% endif %}
 							<p class="indicacion">Ay&uacute;danos a ayudarte. Ingresa la siguiente informaci&oacute;n para poder mostrarte las oportunidades m&aacute;s adecuadas seg&uacute;n tu perfil y preferencias.</p>
 							<div class="datos">
+                                <div>
+									<label>Genero</label>
+									<p>{{form.genero}}</p>
+								</div>
 								<div>
 									<label>Grado de estudios</label>
 									<p>{{form.grado_estudio}}</p>
@@ -100,12 +105,19 @@
 								</div>
 								<div>
 									<label>Ciclo de ingresos</label>
-									<p><div class = "row">
+                                    <p><div class = "row">
 										<div class = "col-sm-6">
 										{{form.semestre_inicio_estudio}}</div>
 										<div class = "col-sm-6">
 										{{form.ano_inicio_estudio}}</div>
 									</div></p>
+
+								</div>
+                                <div id ="ciclo-actual" class="hidden">
+									<label>Ciclo de Actual</label>
+                                    <p>
+										{{form.semestre_actual}}
+										</p>
 								</div>
 								<div>
 									<label>Graduaci&oacute;n / Grad. estimada</label>
@@ -551,6 +563,14 @@
         });
         $("select").on("click", function(){
             $(this).css("color", "black");
-        })
+        });
+        $("#id_grado_estudio").change(function(){
+            if($("#id_grado_estudio").val()== 1){
+                $("#ciclo-actual").removeClass("hidden");
+            }else{
+                $("#ciclo-actual").addClass("hidden");
+            }
+
+        });
     });
 </script>

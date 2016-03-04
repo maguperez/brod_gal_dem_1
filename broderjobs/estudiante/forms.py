@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
-from django.forms import RadioSelect, Select, CheckboxSelectMultiple
+from django.forms import RadioSelect, Select, CheckboxSelectMultiple, TextInput
 from docutils.parsers.rst.directives import choice
 from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra, Estudiante
 from models import Persona, GradoEstudio, Universidad, Carrera, Pais, Ciudad, TipoPuesto, CargaHoraria,Idioma, Conocimiento
@@ -10,27 +10,21 @@ from empresa.models import EvaluacionEmpresa, Puesto, Empresa
 from main import utils
 
 class RegistroCVForm(forms.ModelForm):
+    genero = utils.genero()
 
     universidades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Universidad', 'class': 'form-control'}))
     universidades_hidden = forms.CharField(widget=forms.HiddenInput())
 
     carreras = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Selecciona una Carrera', 'class': 'form-control'}))
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
-
-    # paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'form-control'}))
-    # paises_hidden = forms.CharField(widget=forms.HiddenInput())
-
-    # ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'form-control'}))
-    # ciudades_hidden = forms.CharField(widget=forms.HiddenInput(), required=False)
-
+    genero = forms.ChoiceField(choices=genero, required = False, widget=forms.RadioSelect())
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Seleccione País", required = False, widget=forms.Select(attrs={'class': 'form-control', }))
-
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
             model = Estudiante
             fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion',
-                     'ano_graduacion', 'tipo_puesto', 'carga_horaria')
+                     'ano_graduacion', 'tipo_puesto', 'carga_horaria', 'semestre_actual')
             widgets = {
                 'grado_estudio': Select(attrs={'class': 'form-control'}),
                 'tipo_puesto': CheckboxSelectMultiple(),
@@ -78,7 +72,12 @@ class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
         fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio',
-                  'semestre_graduacion', 'ano_graduacion')
+                  'semestre_graduacion', 'ano_graduacion', 'remuneracion_max', 'remuneracion_min', 'semestre_actual')
+        widgets = {
+                'remuneracion_min': TextInput(attrs={'placeholder': 'Desde'}),
+                'remuneracion_max': TextInput(attrs={'placeholder': 'Hasta'}),
+
+            }
 
 class InfoPersonalForm(EstudianteForm):
     genero = utils.genero()
@@ -95,21 +94,8 @@ class InfoPersonalForm(EstudianteForm):
     carreras_hidden = forms.CharField(widget=forms.HiddenInput())
 
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
-
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput())
-
-    # genero = forms.CharField(required = True,  max_length = 50, widget=forms.Select)
     genero = forms.ChoiceField(choices=genero, required = False, widget=forms.RadioSelect())
-
-#     paises = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Pais', 'class': 'full'}))
-#     paises_hidden = forms.CharField(widget=forms.HiddenInput    # ())
-
-#     ciudades = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ciudad', 'class': 'full'}))
-#     ciudades_hidden = forms.CharField(widget=forms.HiddenInput())
-#     def __init__(self, *args, **kwargs):
-#         super(InfoPersonalForm, self).__init__(*args, **kwargs)
-#         self.fields['genero'].widget = forms.Select(attrs={'class': 'form-control'})
-#         self.fields['genero'].choices = utils.genero()
 
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
