@@ -108,7 +108,7 @@ class Empresa(models.Model):
         if self.logo:
             return self.logo.url
         else:
-            return STATIC_URL+"/static/img/profile/profile_default.png"
+            return STATIC_URL+"img/profile/profile_default.png"
 
 class Representante(models.Model):
 
