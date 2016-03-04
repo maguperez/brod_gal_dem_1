@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
     Conocimiento
 from main import utils
-
+from broderjobs.settings import STATIC_URL
 items_registro = utils.estado_registro()
 
 
@@ -108,7 +108,7 @@ class Empresa(models.Model):
         if self.logo:
             return self.logo.url
         else:
-            return "/static/img/profile/profile_default.png"
+            return STATIC_URL+"/static/img/profile/profile_default.png"
 
 class Representante(models.Model):
 

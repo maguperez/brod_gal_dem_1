@@ -1,4 +1,6 @@
 branch-defaults:
+  prod:
+    environment: Broderjobs-swap
   testing:
     environment: Broderjobs-dev
 global:
