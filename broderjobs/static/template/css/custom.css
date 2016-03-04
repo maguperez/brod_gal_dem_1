@@ -24,7 +24,6 @@
        url('fonts/Roboto-Light.ttf') format('truetype'),
        url('fonts/Roboto-Light.svg#Roboto-Light') format('svg');
 }
-
 .section {
     background-color: rgb(128,32,0);
 }
@@ -39,8 +38,8 @@
     align-items: center;
     justify-content: center;
 }
-#header:not(.sticky-header) .standard-logo img{
-    height: 50px
+#header .standard-logo img{
+    height: 33px !Important;
 }
 div#logo,
 div#header-wrap,
@@ -48,9 +47,6 @@ div#header-wrap,
     border: none !Important;
 }
 
-#header.sticky-header .standard-logo img{
-    height: 40px !Important;
-}
 #primary-menu ul li a div {
     font-size: 17px;
     font-weight: normal;
