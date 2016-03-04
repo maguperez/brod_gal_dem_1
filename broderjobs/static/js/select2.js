@@ -5536,3 +5536,12 @@ S2.define('jquery.mousewheel',[
   // Return the Select2 instance for anyone who is importing it.
   return select2;
 }));
+
+$.fn.select2.amd.require(['select2/selection/search'], function (Search) {
+    var oldRemoveChoice = Search.prototype.searchRemoveChoice;
+
+    Search.prototype.searchRemoveChoice = function () {
+        oldRemoveChoice.apply(this, arguments);
+        this.$search.val('');
+    };
+});

@@ -648,7 +648,7 @@ header.menu .centered { height: 47px; }
 .modal .candidato header .descargar {width: 130px; height: 30px; line-height: 30px; position: absolute; top: 45px; right: 35px;}
 .modal .candidato header .imagen, .popup.candidato header .detalle {float: left;}
 .modal .candidato header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
-.modal .candidato header .detalle {margin: 20px 0 0 60px;}
+.modal .candidato header .detalle {margin: 20px 0 0 60px; float: left}
 .modal .candidato header .detalle h3 {color: #848484; font-weight: bold;}
 .modal .candidato header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
 .modal .candidato .detalle {margin-left: 37px !important;}
