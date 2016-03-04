@@ -79,14 +79,14 @@
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
-					barColor: "#c0392b",
+					barColor: "#27ae60",
 					size: 65,
 				});
 				$('.academico .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
-					barColor: "#5d9cf9",
+					barColor: "#c0392b",
 					size: 65,
 				});
 			}
@@ -104,7 +104,6 @@
 
 	function fnCargarOportunidad() {
 		$.get("{% url 'estudiante-oportunidad-cargar-lista' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
-            debugger;
             if($.trim(htmlexterno)==""){
                 $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
             }

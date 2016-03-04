@@ -51,7 +51,9 @@
                 border-left-color: #f50 !Important;
                 border-right-color: #f50 !Important;
             }
-
+            .final-registro .box{
+                width: 600px;
+            }
 		</style>
 
 	</head>
@@ -59,7 +61,7 @@
 		<section class="final-registro">
 			<img class="logo" src="{% static "img/logo_orange.png" %}" alt="broderjobs"/>
 			<div class="box">
-				<div class="content">
+				<div class="content" style = "padding-top:0px">
 					<form action="" method="post" autocomplete="off">{%csrf_token%}
 						{%if form.errors %}
 							{{ form.grado_estudio.errors }}

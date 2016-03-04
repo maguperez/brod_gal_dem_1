@@ -9,7 +9,6 @@
         <!-- Stylesheets
         ============================================= -->
         <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
-        <link href="http://fonts.googleapis.com/css?family=Lato|Raleway|Crete+Round" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/dark.css' %}" type="text/css" />
@@ -54,28 +53,28 @@
         <style>
 
             .revo-slider-emphasis-text {
-                font-size: 64px;
-                font-weight: 700;
+                font-size: 72px;
+                font-weight: 900;
                 letter-spacing: -1px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
                 padding: 15px 20px;
                 border-top: 2px solid #FFF;
                 border-bottom: 2px solid #FFF;
             }
 
             .revo-slider-desc-text {
-                font-size: 20px;
-                font-family: 'Lato', sans-serif;
+                font-size: 23px;
+                font-family: 'Roboto Light', sans-serif;
                 width: 650px;
                 text-align: center;
-                line-height: 1.5;
+                line-height: 0;
             }
 
             .revo-slider-caps-text {
                 font-size: 16px;
                 font-weight: 400;
                 letter-spacing: 3px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
             }
 
             .tp-video-play-button { display: none !important; }
@@ -114,7 +113,7 @@
                         <nav id="primary-menu">
 
                             <ul>
-                                <li class="current"><a href="{% url 'empresa' %}"><div>Para Empresas</div></a>
+                                <li><a  class = "emphasis" href="{% url 'empresa' %}"><div><span>Para Empresas</span></div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -141,7 +140,7 @@
                 <div class="tp-banner-container rev_slider_wrapper fullscreen-container">
                     <div class="tp-banner" >
                         <ul>    <!-- SLIDE  -->
-                            <li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{% static 'template/images/slider/rev/main/s1-thumb.jpg' %}"  data-saveperformance="off"  data-title="Welcome to Canvas">
+                            <li class="dark" data-transition="none" data-slotamount="1" data-masterspeed="0" data-thumb="{% static 'template/images/slider/rev/main/s1-thumb.jpg' %}"  data-saveperformance="off"  data-title="Welcome to Canvas">
                                 <!-- MAIN IMAGE -->
                                 <img src="{% static 'template/images/videos/video.png' %}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                                 <!-- LAYERS -->
@@ -165,7 +164,7 @@
 
                                 <!-- LAYER NR. 2 -->
                                 <div class="tp-caption customin ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                                     data-x="300"
+                                     data-x="280"
                                      data-y="260"
                                      data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
                                      data-speed="800"
@@ -322,11 +321,6 @@
                         <img src="{% static 'template/images/portfolio/rimac.jpg' %}">
                     </div>
                 </div>
-                <a class="button button-full button-dark center tright ">
-                    <div class="container clearfix">
-                        Encuentra el trabajo de tus sueños en las mejores empresas del país.
-                    </div>
-                </a>
                 <script type="text/javascript">
 
                     jQuery(document).ready(function($) {
@@ -344,10 +338,10 @@
                             loop:true,
                             navRewind: false,
                             responsive:{
-                                0:{ items:2 },
-                                600:{ items:3 },
-                                1000:{ items:4 },
-                                1200:{ items:5 }
+                                0:{ items:3 },
+                                600:{ items:4 },
+                                1000:{ items:5 },
+                                1200:{ items:6 }
                             }
                         });
 
@@ -410,6 +404,13 @@
                     </div>
 
                 </div>
+
+
+                <a class="button button-full button-dark center tright ">
+                    <div class="container clearfix">
+                        Encuentra el trabajo de tus sueños en las mejores empresas del país.
+                    </div>
+                </a>
                 <div class="col_full common-height nobottommargin">
 
                     <div class="col-md-4 dark col-padding ohidden" style="background-color: #1abc9c;">
@@ -482,7 +483,6 @@
                     </div>
                 </div>
                 -->
-
 
             </section><!-- #content end -->
 
@@ -574,12 +574,10 @@
                             </div>
                             <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
                                     {{ login_form.email }}
 {#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
                                 </div>
                                 <div class="form-group">
-                                    <label for="login-form-password">Contraseña:</label>
                                     {{ login_form.password }}
                                 </div>
                                 <div class="form-group text-left">
@@ -607,14 +605,12 @@
             <div class="modal-dialog">
                 <div class="modal-body">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Hola</h4>
-                        </div>
                         <div class="modal-body text-center">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
-									REG&Iacute;STRATE CON FACEBOOK</a>
-                            <label>Es más fácil y rápido</label>
+									REG&Iacute;STRATE CON FACEBOOK</a><br>
+                            <span>Es más fácil y rápido</span>
                             <div class="division">
                                 <div class="line notopmargin nobottommargin"></div>
                                 <label>o</label>
@@ -627,25 +623,20 @@
                                 <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
-                                        <label for="register-form-name">Nombres:</label>
                                         {{ registro_form.first_name }}
                                     </div>
                                     <div class="form-group">
-                                        <label for="register-form-name">Apellidos:</label>
                                         {{ registro_form.last_name }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="register-form-email">Correo:</label>
                                         {{ registro_form.email }}
                                     </div>
                                     <div class="form-group">
-                                        <label for="register-form-password">Contraseña:</label>
                                         {{ registro_form.password1 }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="register-form-repassword">Confirmar contraseña:</label>
                                         {{ registro_form.password2 }}
                                     </div>
                                     <div class="form-group row">

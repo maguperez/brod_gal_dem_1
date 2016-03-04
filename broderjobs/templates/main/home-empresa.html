@@ -8,8 +8,6 @@
 
         <!-- Stylesheets
         ============================================= -->
-        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
-        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/dark.css' %}" type="text/css" />
@@ -52,28 +50,28 @@
         <style>
 
             .revo-slider-emphasis-text {
-                font-size: 64px;
-                font-weight: 700;
+                font-size: 72px;
+                font-weight: 900;
                 letter-spacing: -1px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
                 padding: 15px 20px;
                 border-top: 2px solid #FFF;
                 border-bottom: 2px solid #FFF;
             }
 
             .revo-slider-desc-text {
-                font-size: 20px;
-                font-family: 'Lato', sans-serif;
+                font-size: 23px;
+                font-family: 'Roboto Light', sans-serif;
                 width: 650px;
                 text-align: center;
-                line-height: 1.5;
+                line-height: 0;
             }
 
             .revo-slider-caps-text {
                 font-size: 16px;
                 font-weight: 400;
                 letter-spacing: 3px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
             }
 
             .tp-video-play-button { display: none !important; }
@@ -112,7 +110,7 @@
                         <nav id="primary-menu">
 
                             <ul>
-                                <li class="current"><a href="{% url 'estudiante' %}"><div>Para Estudiantes</div></a>
+                                <li><a class = "emphasis" href="{% url 'estudiante' %}"><div><span>Para Estudiantes</span></div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -352,12 +350,10 @@
                         <div class="modal-body text-center">
                             <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
                                     {{ login_form.email }}
 {#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
                                 </div>
                                 <div class="form-group">
-                                    <label for="login-form-password">Contraseña:</label>
                                     {{ login_form.password }}
                                 </div>
                                 <div class="form-group text-left">
@@ -393,31 +389,24 @@
                             <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label for="register-form-name">Nombres:</label>
                                     {{ registro_form.first_name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-name">Apellidos:</label>
                                     {{ registro_form.last_name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Correo:</label>
                                     {{ registro_form.email }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Empresa:</label>
                                     {{ registro_form.empresa }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Teléfono:</label>
                                     {{ registro_form.telefono }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-password">Contraseña:</label>
                                     {{ registro_form.password1 }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-repassword">Confirmar contraseña:</label>
                                     {{ registro_form.password2 }}
                                 </div>
                                 <div class="form-group">
