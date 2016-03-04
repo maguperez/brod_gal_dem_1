@@ -592,7 +592,8 @@
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">
+                                    ¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
                             </form>
@@ -675,6 +676,40 @@
                                     </div>
                                 </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login" id="reset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Olvide Contraseña</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
+                                <div class="form-group">
+                                    <label for="login-form-username">Correo:</label>
+                                    {{ reset_form.email_or_username}}
+{#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
+                                </div>
+
+                                {%if message_reset %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_reset}}</div>
+								{% endif%}
+                                <div class="form-group nobottommargin">
+                                    <button class="button button-3d nomargin" id="login-form-submit" name="_reset" value="login">Enviar</button>
+                                    <div class="clear"></div>
+                                    <br><br>
+
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

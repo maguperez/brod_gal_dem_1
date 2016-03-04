@@ -47,6 +47,12 @@
 					{{form.ano_inicio_estudio}}
 				</div>
 			</div>
+            <div class ="form-group {%if form.grado_estudio.value != 1%} hidden {% endif %}"   id ="ciclo-actual">
+				<label class = "col-sm-3">Ciclo Actual</label>
+				<div class = "col-sm-4">
+					{{form.semestre_actual}}
+				</div>
+			</div>
 			<div class ="form-group">
 				<label class = "col-sm-3">Graduación / Grad. estimada</label>
 				<div class = "col-sm-4">
@@ -90,6 +96,15 @@
 							 {{ genero }}
 						{% endfor %}
 					</p>
+				</div>
+			</div>
+            <div class ="form-group">
+				<label class = "col-sm-3">Remuneracion deseada</label>
+				<div class = "col-sm-4">
+					{{form.remuneracion_min}}
+				</div>
+				<div class = "col-sm-4">
+					{{form.remuneracion_max}}
 				</div>
 			</div>
 		</div>
@@ -230,6 +245,16 @@
 			LlamarValidacionCiclos();
 //			LlamarValidacionElemento('id_semestre_graduacion');
 		});
+
+        $("#id_grado_estudio").change(function(){
+            if($("#id_grado_estudio").val()== 1){
+                $("#ciclo-actual").removeClass("hidden");
+            }else{
+                $("#ciclo-actual").addClass("hidden");
+                $("#id_semestre_actual").val("");
+            }
+
+        });
 	});
 
 	function IniciarCiudades() {

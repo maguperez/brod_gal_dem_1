@@ -1,4 +1,4 @@
-# coding=utf-8
+   # coding=utf-8
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
@@ -10,7 +10,8 @@ from datetime import date, datetime
 items_registro = utils.estado_registro()
 
 class Estudiante(models.Model):
-    items_semestre = utils.semestre_rango()
+    items_ciclo = utils.semestre_rango()
+    items_ciclo_carrera = utils.semestre_carrera()
     items_anos = utils.anos_rango()
 
     persona = models.OneToOneField(Persona)
@@ -18,9 +19,10 @@ class Estudiante(models.Model):
     universidad = models.ForeignKey(Universidad,default=None, null=True, blank=True )
     carrera = models.ForeignKey(Carrera, default=None, null=True, blank=True )
     carrera_referencial = models.CharField(max_length="100", default=None, null=True, blank=True)
-    semestre_inicio_estudio = models.CharField(choices=items_semestre,max_length=2, default=None, null=True, blank=True)
+    semestre_actual = models.CharField(choices=items_ciclo_carrera, max_length=2, default=None, null=True, blank=True, )
+    semestre_inicio_estudio = models.CharField(choices=items_ciclo,max_length=2, default=None, null=True, blank=True)
     ano_inicio_estudio = models.CharField(choices=items_anos, max_length=4, default=None, null=True,  blank=True, )
-    semestre_graduacion = models.CharField(choices=items_semestre, max_length=2, default=None, null=True, blank=True, )
+    semestre_graduacion = models.CharField(choices=items_ciclo, max_length=2, default=None, null=True, blank=True, )
     ano_graduacion= models.CharField(choices=items_anos, max_length=4, default=None, null=True, blank=True)
     pais = models.ForeignKey(Pais, default=None, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
@@ -28,6 +30,8 @@ class Estudiante(models.Model):
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
+    remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
+    remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )
     foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
     completo_test = models.BooleanField(default=False)
 

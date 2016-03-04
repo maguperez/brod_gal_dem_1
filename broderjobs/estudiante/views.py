@@ -22,6 +22,7 @@ from cultura_empresarial.models import EstudianteEmpresaCultura
 from main import utils
 from main.utils import LoginRequiredMixin
 from empresa.utils import actualizar_ranking_empresa
+from oportunidad.compatibilidad import actualizar_compatibilidad
 
 from xhtml2pdf import pisa
 import cStringIO as StringIO
@@ -37,20 +38,16 @@ def registro_cv(request):
         if form.is_valid():
             user = request.user
             persona = get_object_or_404(Persona, usuario_id=user.id)
+            genero = form.cleaned_data['genero']
             grado_estudio = form.cleaned_data['grado_estudio']
             id_universidad = form.cleaned_data['universidades_hidden']
             id_carrera = form.cleaned_data['carreras_hidden']
-
             carrera_form = form.cleaned_data['carreras']
-
             pais = form.cleaned_data['pais']
-
-            # id_pais = form.cleaned_data['paises_hidden']
-
-            # id_ciudad = form.cleaned_data['ciudades_hidden']
             id_ciudad = form.cleaned_data['ciudad_hidden']
             tipo_puesto = form.cleaned_data['tipo_puesto']
             ano_inicio = form.cleaned_data['ano_inicio_estudio']
+            semestre_actual = form.cleaned_data['semestre_actual']
             semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
             ano_graduacion = form.cleaned_data['ano_graduacion']
             semestre_graduacion = form.cleaned_data['semestre_graduacion']
@@ -64,6 +61,8 @@ def registro_cv(request):
                 estudiante = Estudiante()
                 estudiante.persona = persona
 
+            estudiante.persona.genero = genero
+            estudiante.persona.save()
             estudiante.grado_estudio = grado_estudio
             universidad = Universidad.objects.get(id= id_universidad )
             if universidad is not None:
@@ -80,10 +79,6 @@ def registro_cv(request):
                 estudiante.carrera_referencial = carrera_form
 
             estudiante.pais = pais
-            # pais = Pais.objects.get(id= id_pais)
-            # if pais is not None:
-            #     estudiante.pais = pais
-
             if id_ciudad is not None and id_ciudad != '':
                 try:
                     ciudad = Ciudad.objects.get(id = id_ciudad)
@@ -91,12 +86,9 @@ def registro_cv(request):
                     ciudad = None
                 if ciudad is not None:
                     estudiante.ciudad = ciudad
-
-            # ciudad = Ciudad.objects.get(id = id_ciudad)
-            # if ciudad is not None:
-            #     estudiante.ciudad = ciudad
             estudiante.ano_inicio_estudio = ano_inicio
             estudiante.semestre_inicio_estudio = semestre_inicio
+            estudiante.semestre_actual = semestre_actual
             estudiante.ano_graduacion = ano_graduacion
             estudiante.semestre_graduacion = semestre_graduacion
             estudiante.carga_horaria = carga_horaria
@@ -104,17 +96,11 @@ def registro_cv(request):
 
             estudiante.tipo_puesto = tipo_puesto
             estudiante.save()
-
-            # resumen = Resumen(estudiante_id = estudiante.id)
-            # if Resumen is None:
-            #     resumen.estudiante = estudiante
-            #     resumen.save()
             r, created = Resumen.objects.get_or_create(estudiante_id = estudiante.id)
             if created is True:
                 r.save()
-
+            actualizar_compatibilidad(estudiante)
             return redirect('mi-cv')
-
         else:
             print(form.errors)
     else:
@@ -354,8 +340,6 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         estudiante = Estudiante.objects.get(persona_id =persona.id)
         universidad = estudiante.universidad
         universidad_hidden = universidad.id
-
-
         if estudiante.carrera is not None:
             carrera = estudiante.carrera
             carrera_hidden = carrera.id
@@ -368,8 +352,6 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         # pais_hidden = pais.id
         ciudad = estudiante.ciudad
         ciudad_hidden = ciudad.id
-
-        genero = persona.genero
 
         return {
             'email': usuario.email,
@@ -386,7 +368,10 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
             'semestre_graduacion': estudiante.semestre_graduacion,
             'semestre_inicio_estudio': estudiante.semestre_inicio_estudio,
             'ano_inicio_estudio': estudiante.ano_inicio_estudio,
-            'genero': genero}
+            'genero': persona.genero,
+            'remuneracion_max': estudiante.remuneracion_max,
+            'remuneracion_min': estudiante.remuneracion_min,
+            'semestre_actual': estudiante.semestre_actual}
 
     def form_invalid(self, form):
         # response = super(AjaxableResponseMixin, self).form_invalid(form)
@@ -408,6 +393,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         # id_ciudad = form.cleaned_data['ciudades_hidden']
         ano_inicio = form.cleaned_data['ano_inicio_estudio']
         semestre_inicio = form.cleaned_data['semestre_inicio_estudio']
+        semestre_actual = form.cleaned_data['semestre_actual']
         ano_graduacion = form.cleaned_data['ano_graduacion']
         semestre_graduacion = form.cleaned_data['semestre_graduacion']
 
@@ -431,16 +417,16 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         else:
             estudiante.carrera_referencial = carrera_form
 
-        # carrera = Carrera.objects.get(id = id_carrera)
-        # if carrera is not None:
-        #     estudiante.carrera = carrera
-
         pais = form.cleaned_data['pais']
         id_ciudad = form.cleaned_data['ciudad_hidden']
 
         genero = form.cleaned_data['genero']
+        remuneracion_min = form.cleaned_data['remuneracion_min']
+        remuneracion_max = form.cleaned_data['remuneracion_max']
 
         persona.genero = genero
+        estudiante.remuneracion_min = remuneracion_min
+        estudiante.remuneracion_max = remuneracion_max
 
         estudiante.pais = pais
 
@@ -454,6 +440,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
 
         estudiante.ano_inicio_estudio = ano_inicio
         estudiante.semestre_inicio_estudio = semestre_inicio
+        estudiante.semestre_actual = semestre_actual
         estudiante.ano_graduacion = ano_graduacion
         estudiante.semestre_graduacion = semestre_graduacion
 

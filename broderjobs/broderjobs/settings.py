@@ -115,6 +115,12 @@ DATABASES = {
         # 'PASSWORD': 'abc#123',
         # 'HOST': 'localhost',
         # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'broderjobsinstance',
+        # 'USER': 'broder',
+        # 'PASSWORD': 'br753des',
+        # 'HOST': 'broderjobsinstance.cscdf74uioh9.us-west-2.rds.amazonaws.com',
+        # 'PORT': '5432',
     }
 }
 
@@ -187,6 +193,15 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'broderjobs.backends.EmailOrUsernameModelBackend',
 )
+
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'info@broderjobs.com'
+SERVER_EMAIL = 'info@broderjobs.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'info@broderjobs.com'
+EMAIL_HOST_PASSWORD = 'infbrodperu123'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 SOCIAL_AUTH_PIPELINE = (

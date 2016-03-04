@@ -171,3 +171,6 @@ class CuentaEditarForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
 
+class PasswordResetForm(forms.Form):
+    email_or_username = forms.CharField(label=("Correo"), widget=forms.TextInput(attrs={'placeholder': 'Nombres',
+                                                                                        'class': 'form-control'}), max_length=254)
