@@ -102,28 +102,29 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BroderJobs1',
-        'USER': 'broder',
-        'PASSWORD': 'br753des',
-        'HOST': '191.168.19.11',
-        'PORT': '5434',
-        # 'NAME': 'BroderJobs1',
-        # 'USER': 'sa',
-        # 'PASSWORD': 'abc#123',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'broderjobsinstance',
-        # 'USER': 'broder',
-        # 'PASSWORD': 'br753des',
-        # 'HOST': 'broderjobsinstance.cscdf74uioh9.us-west-2.rds.amazonaws.com',
-        # 'PORT': '5432',
-    }
-}
 
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'BroderJobs1',
+            'USER': 'broder',
+            'PASSWORD': 'br753des',
+            'HOST': '191.168.19.11',
+            'PORT': '5434',
+        }
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -159,29 +160,60 @@ LOGIN_REDIRECT_URL = reverse_lazy('oportunidades')
 LOGOUT_URL = reverse_lazy('logout')
 
 
-STATIC_ROOT = ''
+if 'RDS_DB_NAME' in os.environ:
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+    AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+            'Cache-Control': 'max-age=94608000',
+    }
 
+    AWS_STORAGE_BUCKET_NAME = 'broderjobs'
+    AWS_ACCESS_KEY_ID = 'AKIAJB4CICGN7PI5OWNA'
+    AWS_SECRET_ACCESS_KEY = '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'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/BroderJobs/broderjobs/static/',
-)
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+    STATICFILES_LOCATION = 'static'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+    STATICFILES_STORAGE = 'broderjobs.custom_storages.StaticStorage'
+
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    #    '/BroderJobs/broderjobs/static/',
+    )
+
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    )
+
+else:
+    STATIC_ROOT = ''
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+        '/BroderJobs/broderjobs/static/',
+    )
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    )
+
+if 'RDS_DB_NAME' in os.environ:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'broderjobs.custom_storages.MediaStorage'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+
 
 #Social-Autt
 #variable
