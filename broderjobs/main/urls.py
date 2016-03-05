@@ -11,8 +11,13 @@ urlpatterns =[
 
 	url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),
 
-	url(r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
-	url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm'),
+	# url(r'^account/reset_password', views.ResetPasswordRequestView.as_view(), name="reset_password"),
+    #
+	# url(r'^account/reset_password_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirmView.as_view(),name='reset_password_confirm'),
+
+
+	# url(r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
+	# url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm'),
 
 	url(r'^salir/$' , 'django.contrib.auth.views.logout_then_login', name='salir'),
 
@@ -43,3 +48,4 @@ urlpatterns =[
 	url(r'^periodos-graduacion-busqueda/$', views.PeriodosGraduacionBusquedaView.as_view(), name="periodos-graduacion-busqueda"),
 
 ]
+
