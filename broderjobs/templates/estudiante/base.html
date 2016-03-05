@@ -244,6 +244,8 @@
         $('#btn-cerrar').hide();
     }
     $(function(){
+
+            sessionStorage.clear();
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             $(this).next().html("0 caracteres");

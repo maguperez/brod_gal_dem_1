@@ -450,11 +450,11 @@
 		Editar.inicializar_mapa();
 		$("#id_pais").select2({
   			placeholder: "Pais",
-  			allowClear: true
+  			//allowClear: true
 		});
 		$("#id_ciudad").select2({
   			placeholder: "Ciudad",
-  			allowClear: true
+  			//allowClear: true
 		});
 		$("#id_pais").change(function() {
 			if($("#id_pais").val() > 0 ){
@@ -682,7 +682,7 @@
 
 				$("#"+id).select2({
 					placeholder: "Seleccione por favor",
-					allowClear: true,
+					//allowClear: true,
 					tags: true,
 					tokenSeparators: [',']
 				});
@@ -690,7 +690,7 @@
 			else{
 				$("#"+id).select2({
 					placeholder: "Seleccione por favor",
-					allowClear: true
+					//allowClear: true
 				});
 			}
 		});
