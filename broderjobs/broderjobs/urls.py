@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^disc/', include('disc.urls')),
 
     #ADMIN
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^galexito/', include(admin.site.urls)),
 
     #LOGIN WITH SOACIAL
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
