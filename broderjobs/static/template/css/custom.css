@@ -60,36 +60,42 @@ div#header-wrap,
     font-family: 'Roboto Light';
     color: white;
 }
-#header .emphasis {
+#primary-menu ul li a.emphasis {
     width: 190px;
 }
-#header .emphasis span{
+#primary-menu ul li a:not(.emphasis){
+    width: 170px;
+}
+#header span{
     padding: 10px;
     margin-right: -10px;
-    display:inline;
+    display:inline !Important;
 }
-#header:not(.sticky-header) #primary-menu ul li a.emphasis span{
-    border: solid 1px white;
+#header #primary-menu ul li a.emphasis span{
+    border: solid 1.2px white;
 }
 #header.sticky-header #primary-menu ul li a.emphasis span{
     color: white;
-    border: solid 1px white !Important;
 }
 #header:not(.sticky-header) #primary-menu ul li a.emphasis:hover span{
     color: white !Important;
     background-color: #FB4100;
-    border: solid 1px #FB4100 !Important;
+    border: solid 1.2px #FB4100 !Important;
+}
+#header #primary-menu span{
+    border-radius: 4px !important;
 }
 #header.sticky-header #primary-menu ul li a.emphasis:hover span{
     color: #FB4100 !Important;
     background-color: white;
-    border: solid 1px white !Important;
+    border: solid 1.2px white !Important;
 }
+#header.sticky-header #primary-menu ul li a:hover span{
+    border: solid 1.2px white !Important;
+}
+
 #header:not(.sticky-header) #primary-menu ul li a:not(.emphasis):hover div{
     color: #FB4100;
-}
-#header.sticky-header #primary-menu ul li a:not(.emphasis):hover div{
-    color: black;
 }
 .home-img:after {
     content: '';
