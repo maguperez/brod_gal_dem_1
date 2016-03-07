@@ -63,6 +63,9 @@ div#header-wrap,
 #primary-menu ul li a.emphasis {
     width: 190px;
 }
+#primary-menu ul li a:not(.emphasis){
+    width: 170px;
+}
 #header span{
     padding: 10px;
     margin-right: -10px;
