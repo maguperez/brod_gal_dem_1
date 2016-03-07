@@ -41,7 +41,9 @@
 #header .standard-logo img{
     height: 33px !Important;
 }
-
+#header.sticky-header #header-wrap{
+    background-color: #FB4100;
+}
 div#logo,
 div#header-wrap,
 #primary-menu .sf-js-enabled{
@@ -56,6 +58,7 @@ div#header-wrap,
     font-weight: normal;
     text-transform: none;
     font-family: 'Roboto Light';
+    color: white;
 }
 #header .emphasis span{
     padding: 10px;
@@ -66,17 +69,24 @@ div#header-wrap,
     border: solid 1px white;
 }
 #header.sticky-header #primary-menu ul li a.emphasis span{
-    color: #FB4100;
-    border: solid 1px #FB4100;
+    color: white;
+    border: solid 1px white !Important;
 }
-#primary-menu ul li a.emphasis:hover span{
+#header:not(.sticky-header) #primary-menu ul li a.emphasis:hover span{
     color: white !Important;
     background-color: #FB4100;
     border: solid 1px #FB4100 !Important;
-
 }
-#primary-menu ul li a:not(.emphasis):hover div{
+#header.sticky-header #primary-menu ul li a.emphasis:hover span{
+    color: #FB4100 !Important;
+    background-color: white;
+    border: solid 1px white !Important;
+}
+#header:not(.sticky-header) #primary-menu ul li a:not(.emphasis):hover div{
     color: #FB4100;
+}
+#header.sticky-header #primary-menu ul li a:not(.emphasis):hover div{
+    color: black;
 }
 .home-img:after {
     content: '';
