@@ -406,7 +406,9 @@
 			autoclose: true,
 			language: 'es',
 			format: "dd/mm/yyyy",
-		})
+		}).on("hide", function(e) {
+            $(this).blur();
+        })
 		$("#slider-periodo").slider({
 			min: 1,
 			max: 5,
