@@ -40,8 +40,8 @@ class OportunidadForm(forms.ModelForm):
             'grado_estudio': Select(attrs={'class': 'full actualizar'}),
             'conocimiento': SelectMultiple(attrs={'class': 'full actualizar'}),
             'estado_oportunidad': Select(attrs={'disabled':'disabled'}),
-            'edad_desde': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Desde'}),
-            'edad_hasta': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Hasta'}),
+            'edad_desde': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Desde', 'type': 'number'}),
+            'edad_hasta': TextInput(attrs={'class': 'actualizar', 'placeholder': 'Hasta', 'type': 'number'}),
             'genero': Select(attrs={'class': 'actualizar'}),
         }
 
