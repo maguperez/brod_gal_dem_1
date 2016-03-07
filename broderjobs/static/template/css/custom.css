@@ -60,6 +60,9 @@ div#header-wrap,
     font-family: 'Roboto Light';
     color: white;
 }
+#header .emphasis {
+    width: 180px;
+}
 #header .emphasis span{
     padding: 10px;
     margin-right: -10px;
