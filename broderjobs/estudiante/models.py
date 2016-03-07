@@ -6,6 +6,7 @@ from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrer
 from empresa.models import Empresa, Puesto
 from main import utils
 from datetime import date, datetime
+from broderjobs.settings import MEDIA_URL, STATIC_URL
 
 items_registro = utils.estado_registro()
 
@@ -28,7 +29,7 @@ class Estudiante(models.Model):
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
-    foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
+    foto = models.ImageField('foto perfil', upload_to=MEDIA_URL+'img/%Y/%m/%d', null=True, blank=True)
     completo_test = models.BooleanField(default=False)
 
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
@@ -43,7 +44,7 @@ class Estudiante(models.Model):
         if self.foto:
             return self.foto.url
         else:
-            return "/static/img/profile/profile_default.png"
+            return STATIC_URL+"img/profile/profile_default.png"
 
 class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)

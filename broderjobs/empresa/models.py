@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
     Conocimiento
 from main import utils
-from broderjobs.settings import STATIC_URL
+from broderjobs.settings import MEDIA_URL, STATIC_URL
 items_registro = utils.estado_registro()
 
 
@@ -88,7 +88,7 @@ class Empresa(models.Model):
     pais = models.ForeignKey(Pais, default=None, null=True, blank=True )
     ciudad = models.ForeignKey(Ciudad, default=None, null=True, blank=True )
     website = models.CharField(max_length="50", default=None, null=True, blank=True )
-    logo = models.ImageField('logo', upload_to='img/%Y/%m/%d', null=True, blank=True)
+    logo = models.ImageField('logo', upload_to=MEDIA_URL+'img/%Y/%m/%d', null=True, blank=True)
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
@@ -164,7 +164,7 @@ class RankingEmpresa(models.Model):
 class Empresa_Imagenes(models.Model):
 
     empresa = models.ForeignKey(Empresa, default=None, null=True, blank=True)
-    file = models.ImageField(upload_to='img/%Y/%m/%d', default=None, null=True, blank=True)
+    file = models.ImageField(upload_to=MEDIA_URL+'img/%Y/%m/%d', default=None, null=True, blank=True)
     slug = models.SlugField(max_length=50, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
@@ -228,7 +228,7 @@ class Picture(models.Model):
         if self.file:
             return self.file.url
         else:
-            return "/static/img/profile/profile_default.png"
+            return STATIC_URL+"img/profile/profile_default.png"
 
 class VideoUrl(models.Model):
 
