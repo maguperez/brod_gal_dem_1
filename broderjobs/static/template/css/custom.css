@@ -49,7 +49,12 @@ div#header-wrap,
 #primary-menu .sf-js-enabled{
     border: none !Important;
 }
-
+@media (max-width: 991px) {
+    #header.semi-transparent, #header.transparent-header {
+        background: #FB4100 !Important;
+        border-bottom: none;
+    }
+}
 #footer {
     margin-top: 0px !Important;
 }
