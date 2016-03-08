@@ -6,6 +6,14 @@
 {% block content %}
 
 <style>
+    .cropit-image-preview { height: 130px; width: 130px; border-radius: 50%; }
+    .cropit-image-background-container { top: 0px !Important; max-height: 130px; max-width: 130px; left: 0 !Important }
+    .cropit-image-background {
+        transform: translateY(-100px) translateX(-100px);
+        opacity: .2;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+        filter: alpha(opacity=20);
+    }
 	.select2-search__field{
 		width: 142px !important;
 	}
@@ -28,6 +36,15 @@
 	.mantener-line-break{
 		white-space: pre-line;
 	}
+    .botones-imagen{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+    .botones-imagen .tooltip-inner {
+        width: 300px;
+        max-width: 300px;
+    }
 
 </style>
 
@@ -38,12 +55,24 @@
 					<div class="box">
 						<header>
 							<div class="box-imagen" >
-								<img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
-								<div class="botones-imagen" style="visibility:hidden;">
+								<!--<img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>-->
+
+                                <div id="image-cropper" class ="form-group col-sm-12">
+                                    <form class="form-horizontal hidden" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
+                                        {{form.as_p}}
+                                        <input type="submit" id="cambiar_imagen">
+                                    </form>
+                                    <div class="cropit-image-preview-container">
+                                        <div class="cropit-image-preview"></div>
+                                        <input type="range" class="cropit-image-zoom-input hidden" />
+                                    </div>
+                                    <div class="botones-imagen" style="visibility:hidden;">
 								<a id="editar-imagen" data-toggle="tooltip" data-placement="top"
 								   title="Se recomienda que las dimensiones de la imagen sean mayores a 130x130 píxeles"><i class="fa fa-pencil"></i></a>
 								<a id="remover-imagen"><i class="fa fa-times"></i></a>
 								</div>
+                                </div>
+
 							</div>
 
 							<div class="detalle">
@@ -254,12 +283,6 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div style="display: none">
-	<form class="form-horizontal" enctype="multipart/form-data"  action="" method="post">{% csrf_token %}
-	{{form.as_p}}
-	<input type="submit" id="cambiar_imagen">
-	</form>
-</div>
 <style>
 	#info-personal-button {
 		text-transform: uppercase;
@@ -268,7 +291,7 @@
 </style>
 {% endblock content%}
 {% block js %}
-
+<script type="text/javascript" src="{% static 'js/jquery.cropit.js' %}"></script>
  <script>
 
 	 var formAjaxSubmit = function(form, modal) {
@@ -301,7 +324,12 @@
 	 }
 
 	 $(function(){
-
+         $("input[type=file]").addClass("cropit-image-input");
+         $('#image-cropper').cropit({
+             imageBackground: true,
+             imageBackgroundBorderWidth: 100// Width of background border
+         });
+         $('#image-cropper').cropit('imageSrc', '{{estudiante.set_foto}}');
 		 $('[data-toggle="tooltip"]').tooltip();
 		 $(".box-imagen" ).mouseover(function() {
 			$(".botones-imagen").css("visibility", "visible");
