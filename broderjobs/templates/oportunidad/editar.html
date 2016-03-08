@@ -55,7 +55,7 @@
 								<input type="submit" name="_archivar" value="ARCHIVAR" id="anunciat" class="btn-action" style="display: none;"/>
 
 							{%else%}
-								<input type="submit" name="_abrir" value="ABRIR" id="abrir" class="btn-action"/>
+								<input type="submit" name="_abrir" value="PUBLICAR" id="abrir" class="btn-action"/>
 							{%endif%}<br><br>
 {#                            <div style = "text-align:center; float:right; diaplay:none;"><label style = "display:inline-block">Estado: &nbsp;</label>#}
 {#                                <div style = "display: inline-block">{{form.estado_oportunidad}}</div></div>#}
@@ -303,7 +303,7 @@
 						<div class="content">
 							<section class="grafico">
 								<h4>Alcance de Candidatos</h4>
-								<label><i class="alcance bajo"></i><span class="cifra"></span> candidatos</label>
+								<label><i class="alcance bajo"></i><span class="cifra">Cargando</span> candidatos</label>
 								<div class="grafico-alcance">
 									<div class="alto inactive">
 										<div class="adecuado inactive">
@@ -726,7 +726,9 @@
 			return valorRetorno;
 
 		},'Valor maximo debe ser mayor que Valor minimo');
-
+        $.validator.addMethod('RangoEdad',function(value, element, param) {
+            return $("#id_edad_desde").val() <= $("#id_edad_hasta").val();
+        },'Edad máxima debe ser mayor o igual que edad mínima');
 		$("form").validate({
             errorPlacement: function (error, element) {
                 if(element[0].id == 'id_pais'){
@@ -787,7 +789,15 @@
 					digits: true,
 					maxlength: 7,
 					MaximoMayorMinimo: ''
-				}
+				},
+                edad_desde: {
+                    RangoEdad: true,
+                    min: 1
+                },
+                edad_hasta: {
+                    RangoEdad: true,
+                    min: 1
+                }
 
             },
             messages: {
@@ -824,8 +834,13 @@
 					required: "Este campo es obligatorio",
 					digits: "Este campo es numérico",
 					maxlength: "Este campo no puede tener más de 7 caracteres"
-				}
-
+				},
+                edad_desde: {
+                    min: "Debe ser un número mayor a 1"
+                },
+                edad_hasta: {
+                    min: "Debe ser un número mayor a 1"
+                }
             }
         });
 	}
@@ -885,7 +900,7 @@
                 success: function(data){
                     $(".alcance .cifra").html(data.total);
                     $(".grafico-alcance div").removeClass("active");
-                    debugger;
+
                     if (data.nivel <= 29){
                         $(".grafico-alcance .bajo").removeClass("inactive");
                         $(".grafico-alcance .bajo").addClass("active");
