@@ -59,17 +59,17 @@ div#header-wrap,
     margin-top: 0px !Important;
 }
 #primary-menu ul li a div {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: normal;
     text-transform: none;
     font-family: 'Roboto Light';
     color: white;
 }
-#primary-menu ul li a.emphasis {
-    width: 190px;
+#primary-menu ul li a.emphasis{
+    padding: 0px;
 }
-#primary-menu ul li a:not(.emphasis){
-    width: 170px;
+#primary-menu ul li a.emphasis div{
+    width: 155px;
 }
 #header span{
     padding: 10px;
@@ -95,10 +95,9 @@ div#header-wrap,
     background-color: white;
     border: solid 1.2px white !Important;
 }
-#header.sticky-header #primary-menu ul li a:hover span{
-    border: solid 1.2px white !Important;
+#header.sticky-header #primary-menu ul li a:hover div{
+    color: black !Important;
 }
-
 #header:not(.sticky-header) #primary-menu ul li a:not(.emphasis):hover div{
     color: #FB4100;
 }
@@ -127,6 +126,9 @@ div#header-wrap,
     background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000', GradientType=1 );
+}
+.heading-block>span:not(.before-heading){
+    color: white;
 }
 footer#footer a{
     color:rgba(255,255,255,.3)
