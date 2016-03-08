@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
     Conocimiento
 from main import utils
+from datetime import date, datetime
 from broderjobs.settings import STATIC_URL
 
 items_registro = utils.estado_registro()
