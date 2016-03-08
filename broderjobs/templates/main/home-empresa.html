@@ -8,8 +8,6 @@
 
         <!-- Stylesheets
         ============================================= -->
-        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
-        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/dark.css' %}" type="text/css" />
@@ -50,36 +48,33 @@
         ============================================= -->
 
         <style>
-
             .revo-slider-emphasis-text {
-                font-size: 64px;
-                font-weight: 700;
+                font-size: 72px;
+                font-weight: 900;
                 letter-spacing: -1px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
                 padding: 15px 20px;
                 border-top: 2px solid #FFF;
                 border-bottom: 2px solid #FFF;
             }
-
             .revo-slider-desc-text {
-                font-size: 20px;
-                font-family: 'Lato', sans-serif;
+                font-size: 23px;
+                font-family: 'Roboto Light', sans-serif;
                 width: 650px;
                 text-align: center;
-                line-height: 1.5;
+                line-height: 23px;
             }
-
             .revo-slider-caps-text {
                 font-size: 16px;
                 font-weight: 400;
                 letter-spacing: 3px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto Light', sans-serif;
             }
-
             .tp-video-play-button { display: none !important; }
-
             .tp-caption { white-space: nowrap; }
             .tooltip-inner { max-width: 250px !Important; width: 300px !Important }
+            .tooltip-inner{ background-color: #f50 !Important; }
+            .tooltip-arrow{ border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
         </style>
 
     </head>
@@ -112,7 +107,7 @@
                         <nav id="primary-menu">
 
                             <ul>
-                                <li class="current"><a href="{% url 'estudiante' %}"><div>Para Estudiantes</div></a>
+                                <li><a class = "emphasis" href="{% url 'estudiante' %}"><div><span>Para Estudiantes</span></div></a>
                                 </li>
                                 <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
@@ -146,7 +141,7 @@
 
                                 <!-- LAYER NR. 2 -->
                                 <div class="tp-caption customin ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                                     data-x="300"
+                                     data-x="350"
                                      data-y="260"
                                      data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;s:800;e:Power4.easeOutQuad;"
                                      data-speed="800"
@@ -174,17 +169,13 @@
                                      data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal;">Publica tus oportunidades de forma clara y atractiva para los jóvenes profesionales</div>
                             </li>
                         </ul>
-
                     </div>
                 </div>
 
                 <script type="text/javascript">
-
                     var tpj=jQuery;
                     tpj.noConflict();
-
                     tpj(document).ready(function() {
-
                         var apiRevoSlider = tpj('.tp-banner').show().revolution({
                             sliderType:"standard",
                             jsFileLocation:"include/rs-plugin/js/",
@@ -195,57 +186,42 @@
                             startwidth:1140,
                             startheight:600,
                             hideThumbs:200,
-
                             thumbWidth:100,
                             thumbHeight:50,
                             thumbAmount:3,
-
                             touchenabled:"on",
                             onHoverStop:"on",
-
                             swipe_velocity: 0.7,
                             swipe_min_touches: 1,
                             swipe_max_touches: 1,
                             drag_block_vertical: false,
-
-
                             parallax:"mouse",
                             parallaxBgFreeze:"on",
                             parallaxLevels:[8,7,6,5,4,3,2,1],
                             parallaxDisableOnMobile:"on",
-
                             keyboardNavigation:"on",
-
                             shadow:0,
                             fullWidth:"off",
                             fullScreen:"on",
-
                             spinner:"spinner0",
-
                             stopLoop:"off",
                             stopAfterLoops:-1,
                             stopAtSlide:-1,
-
                             shuffle:"off",
-
-
                             forceFullWidth:"off",
                             fullScreenAlignForce:"off",
                             minFullScreenHeight:"400",
-
                             hideThumbsOnMobile:"off",
                             hideNavDelayOnMobile:1500,
                             hideBulletsOnMobile:"off",
                             hideArrowsOnMobile:"off",
                             hideThumbsUnderResolution:0,
-
                             hideSliderAtLimit:0,
                             hideCaptionAtLimit:0,
                             hideAllCaptionAtLilmit:0,
                             startWithSlide:0,
                             fullScreenOffset:"0px"
                         });
-
                         apiRevoSlider.bind("revolution.slide.onchange",function (e,data) {
                             if( $(window).width() > 992 ) {
                                 if( $('#slider ul > li').eq(data.slideIndex-1).hasClass('dark') ){
@@ -264,9 +240,7 @@
                                 SEMICOLON.header.logo();
                             }
                         });
-
                     }); //ready
-
                 </script>
                 <!-- END REVOLUTION SLIDER -->
 
@@ -302,27 +276,22 @@
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-pinterest">
                                     <i class="icon-pinterest"></i>
                                     <i class="icon-pinterest"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-vimeo">
                                     <i class="icon-vimeo"></i>
                                     <i class="icon-vimeo"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-github">
                                     <i class="icon-github"></i>
                                     <i class="icon-github"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-yahoo">
                                     <i class="icon-yahoo"></i>
                                     <i class="icon-yahoo"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-linkedin">
                                     <i class="icon-linkedin"></i>
                                     <i class="icon-linkedin"></i>
@@ -331,7 +300,7 @@
 
                             <div class="clear"></div>
 
-                            <i class="icon-envelope2"></i> info@broderjobs.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +51 997 368 676 <!--<span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype-->
+                            <i class="icon-envelope2"></i> <a href = "mailto:info@broderjobs.com">info@broderjobs.com</a> <span class="middot">&middot;</span> <i class="icon-headphones"></i> <a href = "callto:+51997368676">+51 997 368 676</a> <!--<span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype-->
                         </div>
 
                     </div>
@@ -352,27 +321,33 @@
                         <div class="modal-body text-center">
                             <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
                                     {{ login_form.email }}
 {#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
                                 </div>
                                 <div class="form-group">
-                                    <label for="login-form-password">Contraseña:</label>
                                     {{ login_form.password }}
                                 </div>
                                 <div class="form-group text-left">
                                     {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
-                                {%if message %}
+                                {%if message_login %}
                                     <div class="alert alert-warning alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        {{message}}</div>
+                                        {{message_login}}</div>
                                 {%endif%}
+                                {%if login_form.errors %}
+
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+								{{ login_form.email.errors }}
+								{{ login_form.password.errors }}
+                            </div>
+                            {% endif%}
                                 <div class="form-group nobottommargin">
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
                             </form>
@@ -393,31 +368,24 @@
                             <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label for="register-form-name">Nombres:</label>
                                     {{ registro_form.first_name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-name">Apellidos:</label>
                                     {{ registro_form.last_name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Correo:</label>
                                     {{ registro_form.email }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Empresa:</label>
                                     {{ registro_form.empresa }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-email">Teléfono:</label>
                                     {{ registro_form.telefono }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-password">Contraseña:</label>
                                     {{ registro_form.password1 }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="register-form-repassword">Confirmar contraseña:</label>
                                     {{ registro_form.password2 }}
                                 </div>
                                 <div class="form-group">
@@ -425,10 +393,10 @@
                                     Acepto los
                                     <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
                                 </div>
-                                {%if message %}
+                                {%if message_registro %}
                             <div class="alert alert-warning alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                {{message}}
+                                {{message_registro}}
                             </div>
                             {% endif%}
                             {%if registro_form.errors %}
@@ -447,6 +415,42 @@
                                 </div>
                             </form>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login" id="reset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Olvide Contraseña</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
+                                <div class="form-group">
+{#                                    <label for="login-form-username">Correo:</label>#}
+                                    {{ reset_form.as_p }}
+
+{#                                    {{ reset_form.email_or_username}}#}
+{#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
+                                </div>
+
+                                {%if message_reset %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_reset}}</div>
+								{% endif%}
+                                <div class="form-group nobottommargin">
+                                    <button class="button button-3d nomargin" id="reset-form-submit" name="_reset" value="reset">Enviar</button>
+                                    <div class="clear"></div>
+                                    <br><br>
+
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,14 +3,16 @@ from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\
     Conocimiento
 from main import utils
-from broderjobs.settings import MEDIA_URL, STATIC_URL
+from datetime import date, datetime
+from broderjobs.settings import STATIC_URL
+
 items_registro = utils.estado_registro()
 
 
 class Sector(models.Model):
     descripcion = models.CharField(max_length="50")
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
     orden = models.IntegerField(null= True, blank= True)
 
@@ -24,8 +26,8 @@ class Puesto(models.Model):
     descripcion = models.CharField(max_length="50")
 
     orden = models.IntegerField(null= True, blank= True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
@@ -37,8 +39,8 @@ class Puesto(models.Model):
 class NumeroFuncionarios(models.Model):
     descripcion = models.CharField(max_length="50")
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
     orden = models.IntegerField(null= True, blank= True)
     class Meta:
@@ -50,8 +52,8 @@ class NumeroFuncionarios(models.Model):
 class FacturacionAnual(models.Model):
     descripcion = models.CharField(max_length="50")
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
     orden = models.IntegerField(null= True, blank= True)
     class Meta:
@@ -64,8 +66,8 @@ class CategoriaEmpresa(models.Model):
 
     descripcion = models.CharField(max_length="50")
 
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
     orden = models.IntegerField(null= True, blank= True)
     class Meta:
@@ -94,9 +96,9 @@ class Empresa(models.Model):
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
 
@@ -114,15 +116,16 @@ class Representante(models.Model):
 
     persona = models.OneToOneField(Persona)
     empresa = models.ForeignKey(Empresa)
+    administrador = models.BooleanField(default=False, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode('%s' % (self.persona)) or u''
+        return unicode(self.persona) or u''
 
 class EvaluacionEmpresa(models.Model):
 
@@ -135,9 +138,9 @@ class EvaluacionEmpresa(models.Model):
     ranking = models.FloatField(default=None, null=True, blank=True )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
@@ -153,9 +156,9 @@ class RankingEmpresa(models.Model):
     ranking_general = models.FloatField(default=None, null=True, blank=True )
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
@@ -168,9 +171,9 @@ class Empresa_Imagenes(models.Model):
     slug = models.SlugField(max_length=50, blank=True)
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
@@ -247,9 +250,9 @@ class EmpresaRedesSociales(models.Model):
 
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):

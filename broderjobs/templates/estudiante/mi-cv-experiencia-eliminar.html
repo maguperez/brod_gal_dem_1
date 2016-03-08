@@ -1,6 +1,18 @@
 <form method="post" action="{{ request.build_absolute_uri }}">{% csrf_token %}
     <p>Esta seguro que desea eliminar la experiencia en: </p>
-	<p> {{ object.empresa }} como {{ object.puesto }} </p>
+	<p>
+        {%if object.empresa != None %}
+        {{ object.empresa }}
+        {%else%}
+        {{ object.empresa_referencial }}
+        {%endif%}
+        como
+        {%if object.puesto != None %}
+        {{ object.puesto }}
+        {%else%}
+        {{ object.puesto_referencial }}
+        {%endif%}
+    </p>
     <!--<p><input type="submit" value="Aceptar" /></p>-->
 </form>
 </form>

@@ -7,6 +7,24 @@ from empresa.models import Empresa
 from .utils import anos_nacimiento, meses_del_ano, dias_del_mes
 import datetime
 
+class CuentaCrearForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name' ]
+
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if email is None or email == '':
+            raise forms.ValidationError('Email es obligatorio')
+        try:
+            User._default_manager.get(email=email)
+        except User.DoesNotExist:
+            return email
+        #raise forms.ValidationError(self.error_messages['duplicate_email'])
+        raise forms.ValidationError('Email ya esta registrado')
+
 
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
@@ -171,3 +189,6 @@ class CuentaEditarForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico'}))
 
+class ContrasenaRestaurarForm(forms.Form):
+    email_or_username = forms.CharField(label=("Correo"), widget=forms.TextInput(attrs={'placeholder': 'Nombres',
+                                                                                        'class': 'form-control'}), max_length=254)

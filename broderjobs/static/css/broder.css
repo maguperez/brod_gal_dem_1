@@ -62,7 +62,7 @@ p {text-align: justify; line-height: 20px;}
 
 /*CONTROLES*/
 textarea {max-width: 100%; min-width: 100%; min-height: 100px; padding: 8px; background: #f9f9f9; font-size: 1em; border: none;}
-input[type="text"], input[type="password"], select {font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
+input[type="text"], input[type="password"], input[type="number"],  select {font-size: 1.1em; /*border: none;*/ background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important;}
 textarea { background: #f9f9f9 !Important; -webkit-border-radius: 0; border-radius: 0 !important; }
 select:not(.select-default) {padding-right: 50px; -webkit-appearance: none; -moz-appearance: none; appearance: none;-webkit-border-radius: 0; border-radius: 0 !important; background: #f9f9f9 url('../img/assets/combobox.png') 99% 50% no-repeat !important; }
 input[type="radio"] {width: 11px; height: 11px; margin: 0 10px -1px 0; -webkit-appearance: none; outline: none !Important; -moz-outline: none; background: transparent url('../img/assets/radiobutton.png') 0 0 no-repeat; border: none;}
@@ -648,7 +648,7 @@ header.menu .centered { height: 47px; }
 .modal .candidato header .descargar {width: 130px; height: 30px; line-height: 30px; position: absolute; top: 45px; right: 35px;}
 .modal .candidato header .imagen, .popup.candidato header .detalle {float: left;}
 .modal .candidato header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
-.modal .candidato header .detalle {margin: 20px 0 0 60px;}
+.modal .candidato header .detalle {margin: 20px 0 0 60px; float: left}
 .modal .candidato header .detalle h3 {color: #848484; font-weight: bold;}
 .modal .candidato header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
 .modal .candidato .detalle {margin-left: 37px !important;}

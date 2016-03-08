@@ -51,7 +51,9 @@
                 border-left-color: #f50 !Important;
                 border-right-color: #f50 !Important;
             }
-
+            .final-registro .box{
+                width: 600px;
+            }
 		</style>
 
 	</head>
@@ -59,7 +61,7 @@
 		<section class="final-registro">
 			<img class="logo" src="{% static "img/logo_orange.png" %}" alt="broderjobs"/>
 			<div class="box">
-				<div class="content">
+				<div class="content" style = "padding-top:0px">
 					<form action="" method="post" autocomplete="off">{%csrf_token%}
 						{%if form.errors %}
 							{{ form.grado_estudio.errors }}
@@ -72,6 +74,7 @@
 							{{ form.pais.errors}}
 							{{ form.ciudad.errors}}
 							{{ form.tipo_puesto.errors}}
+                            {{ form.genero.errors}}
 						{% endif%}
 					<section>
 							{% if user.is_authenticated %}
@@ -79,6 +82,10 @@
 							{% endif %}
 							<p class="indicacion">Ay&uacute;danos a ayudarte. Ingresa la siguiente informaci&oacute;n para poder mostrarte las oportunidades m&aacute;s adecuadas seg&uacute;n tu perfil y preferencias.</p>
 							<div class="datos">
+                                <div>
+									<label>Genero</label>
+									<p>{{form.genero}}</p>
+								</div>
 								<div>
 									<label>Grado de estudios</label>
 									<p>{{form.grado_estudio}}</p>
@@ -100,12 +107,13 @@
 								</div>
 								<div>
 									<label>Ciclo de ingresos</label>
-									<p><div class = "row">
+                                    <p><div class = "row">
 										<div class = "col-sm-6">
 										{{form.semestre_inicio_estudio}}</div>
 										<div class = "col-sm-6">
 										{{form.ano_inicio_estudio}}</div>
 									</div></p>
+
 								</div>
 								<div>
 									<label>Graduaci&oacute;n / Grad. estimada</label>
@@ -115,6 +123,12 @@
 										<div class = "col-sm-6">
 										{{form.ano_graduacion}}</div>
 									</div></p>
+								</div>
+                                <div id ="ciclo-actual" class="hidden">
+									<label>Ciclo de Actual</label>
+                                    <p>
+										{{form.semestre_actual}}
+										</p>
 								</div>
 								<div>
 									<label>Pa&iacute;s</label>
@@ -209,7 +223,11 @@
 		$.validator.addMethod('carreraExistente',function(value, element, param){
 			return flagSeleccionarCarrera;
 		},'Debe seleccionar una carrera existente');
+        $.validator.addMethod('validarSemestreActual',function(value, element, param){
+			return $("#id_grado_estudio option[value=1]").is(":selected") && $("#id_semestre_actual").val() != "" ;
+		},'Debe seleccionar su ciclo actual');
 
+        $("[name=genero]").parent().unwrap()
 		$('#id_carreras').blur(function(){
 			var strInput = $('#id_carreras').val();
 			var objSeleccionado = $('#id_carreras').typeahead('getActive');
@@ -251,11 +269,11 @@
 
 		$("#id_pais").select2({
   			placeholder: "Selecciona un País",
-  			allowClear: true
+  			//allowClear: true
 		});
 		$("#id_ciudad").select2({
   			placeholder: "Selecciona una Ciudad",
-  			allowClear: true
+  			//allowClear: true
 		});
 		$("#id_pais").change(function() {
 			if($("#id_pais").val() > 0 ){
@@ -320,7 +338,7 @@
 		ids.forEach(function(id){
 			$("#"+id).select2({
 				placeholder: "Seleccione por favor",
-				allowClear: true
+				//allowClear: true
 			});
 		});
 	}
@@ -356,12 +374,10 @@
 									obje.name = nombre;
 									arreglo.push(obje);
 								});
-
 								cargarResultado(arreglo);
 							}
 						}
 					}
-
 				});
 			},
 			minLength: 3
@@ -465,6 +481,9 @@
                     required: true,
 					validarCiclos: true
                 },
+                semestre_actual:{
+                    validarSemestreActual: true,
+                },
 				pais:{
                     required: true
                 },
@@ -476,6 +495,9 @@
                 },
 				tipo_puesto:{
                     required: true
+                },
+                genero: {
+                    required: true,
                 }
 
             },
@@ -508,6 +530,9 @@
 				ano_graduacion:{
                     required: "Este campo es obligatorio"
                 },
+                semestre_actual:{
+                    required: "Este campo es obligatorio"
+                },
 				pais:{
                     required: "Este campo es obligatorio"
                 },
@@ -518,6 +543,9 @@
                     required: "Este campo es obligatorio"
                 },
 				tipo_puesto:{
+                    required: "Este campo es obligatorio"
+                },
+                genero:{
                     required: "Este campo es obligatorio"
                 }
 
@@ -551,6 +579,15 @@
         });
         $("select").on("click", function(){
             $(this).css("color", "black");
-        })
+        });
+        $("#id_grado_estudio").change(function(){
+            $("form").valid();
+            if($("#id_grado_estudio").val()== 1){
+                $("#ciclo-actual").removeClass("hidden");
+            }else{
+                $("#ciclo-actual").addClass("hidden");
+            }
+
+        });
     });
 </script>

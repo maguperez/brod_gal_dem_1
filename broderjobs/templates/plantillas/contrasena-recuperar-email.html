@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Haz sido agregado  {{ site_name }}.{% endblocktrans %}
+
+{% trans "Haz solicitado rcuperar tu contraseña, porfavor sigue el siguiente enlace" %}
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url 'contrasena-recuperar' uidb64=uid token=token %}
+{% endblock %}
+{% trans "Tu usuario para ingresar a nuestra plataforma es:" %} {{ user.get_email }}
+
+{% trans "Gracias!" %}
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

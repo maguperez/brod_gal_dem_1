@@ -498,9 +498,12 @@
              $("#fase").val($(this).data("info"));
              CandidatosTable.obtener();
         });
-
+        $("table").on("click",".btn-option.mensaje", function(){
+            $("#contenido-mensaje").val('');
+        })
         $('#abrir-mensaje').click(function(){
             $(".destinatarios ul").html('');
+            $("#contenido-mensaje").val('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                $(".destinatarios ul").append('<li><label class="nombre">'+ $(this).parent().parent().find('td:nth-child(4)').html() +'</label></li>');
             });

@@ -83,7 +83,11 @@
              {% for experiencia in experiencias_profesionales %}
              <div class="experiencia" id="{{experiencia.id}}">
                  <p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
-                 <label class="tipo">{{experiencia.puesto}}</label>
+                 {%if experiencia.puesto != None %}
+                    <label class="tipo">{{experiencia.puesto}}</label>
+                 {%else%}
+                    <label class="tipo">{{experiencia.puesto_referencial}}</label>
+                 {%endif%}
                  {%if experiencia.empresa != None %}
                  <label class="nombre">{{experiencia.empresa}}</label>
 				{%else%}
@@ -116,4 +120,5 @@ $('.descargar').click(function(){
 
          });
     });
+    $("#form-modal .modal-title").html("Perfil del candidato");
   </script>

@@ -295,7 +295,7 @@
                         {% if videos %}
                         {% for video in videos.all %}
                            <div class="item-video">
-                                <a class="owl-video" href="{{ video.url }}"></a>&ndash;&gt;-->
+                                <a class="owl-video" href="{{ video.url }}"></a>
                             </div>
                         {% endfor %}
                         {% endif %}
@@ -625,6 +625,11 @@
              pagination: true
 
         });
+        if (cant==1 && parseInt($('#cant_videos').val()) == 1){
+             $(".owl-item.active").css("width","100%");
+             $(".owl-item.active").parent().css("width","inherit");
+         }
+
         $("#declaro").tooltip({
             animation: true,
             placement: "left",
