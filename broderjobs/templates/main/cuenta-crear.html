@@ -1,0 +1,109 @@
+{% extends  tipo|yesno:"empresa/base.html,estudiante/base.html" %}
+{%block css%}
+{%endblock%}
+{% block content %}
+{% load staticfiles %}
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'js/additional-methods.min.js' %}"></script>
+<section class="usuarios">
+    <div class="centered">
+        <div class="panel left principal">
+            <div class="box">
+			    <div class="content">
+                    <section class="pos-relative">
+                       <form action="" method="post">{%csrf_token%}
+                            <h3 class="title"><i class="info"></i>Usuario Nuevo</h3>
+                            <input type="submit" value="GUARDAR" class="btn-action">
+
+                            {%if form.errors %}
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{ form.first_name.errors }}
+								{{ form.last_name.errors }}
+								{{ form.email.errors }}
+                            </div>
+                            {% endif%}
+                            <div class="detalle col-3-7">
+                                <div>
+                                    <label>Nombres</label>
+                                    <p>
+                                        {{form.first_name}}
+                                    </p>
+                                    <div class="clear"></div>
+                                </div>
+                                <div>
+                                    <label>Apellidos</label>
+                                    <p>{{form.last_name}}
+                                    </p>
+                                    <div class="clear"></div>
+                                </div>
+{#                                <div>#}
+{#                                    <label>Teléfono</label>#}
+{#                                    <p>#}
+{#                                        {{form.telefono}}#}
+{##}
+{#                                    </p>#}
+{#                                    <div class="clear"></div>#}
+{#                                </div>#}
+                                <div>
+                                    <label>Correo</label>
+                                    <p>
+                                        {{form.email}}
+                                    </p>
+{#                           {{ form.as_p }}#}
+                                    <label class="indicacion">*Con este correo iniciara sesion</label>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+				</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</section>
+{% endblock content%}
+{% block js %}
+<script>
+    $(function(){
+        /*$("input[type=submit]").on("click", function(e){
+            e.preventDefault();
+            debugger;
+        });*/
+        $("input:not([type=submit])").addClass("form-control");
+        $("form").validate({
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+                $(element).tooltip({
+                    animation: true,
+                    placement: "right",
+                    title: $(error).text(),
+                    trigger: "manual"
+                } );
+                $(element).tooltip('show');
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+                "old_password": { required: true, minlength: 6 },
+                "new_password1": { required: true, minlength: 6 },
+                "new_password2": { required: true, minlength: 6, equalTo: "#id_new_password1" },
+            },
+            messages: {
+                "old_password": { 	required: "Este campo es obligatorio",
+									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
+                "new_password1": {  required: "Este campo es obligatorio",
+									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
+                "new_password2": {  required: "Este campo es obligatorio",
+                                    minlength: "La contraseña debe tener al menos seis (6) caracteres",
+									equalTo: "Las contraseñas deben ser iguales" },
+            }
+        });
+    });
+</script>
+{% endblock %}

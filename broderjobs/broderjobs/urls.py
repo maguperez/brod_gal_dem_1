@@ -23,6 +23,8 @@ urlpatterns = [
     #ADMIN
     url(r'^admin/', include(admin.site.urls)),
 
+    url('^', include('django.contrib.auth.urls')),
+
     #LOGIN WITH SOACIAL
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^login-facebook' , 'broderjobs.views.login_facebook', name='login-facebook'),

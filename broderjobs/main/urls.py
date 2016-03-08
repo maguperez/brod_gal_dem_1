@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from . import views
+from django.contrib.auth import views as auth_views
 
 
 
@@ -11,21 +12,26 @@ urlpatterns =[
 
 	url(r'^empresa/$' , 'main.views.homepage_empresa', name='empresa'),
 
-	# url(r'^account/reset_password', views.ResetPasswordRequestView.as_view(), name="reset_password"),
-    #
-	# url(r'^account/reset_password_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirmView.as_view(),name='reset_password_confirm'),
-
-
-	# url(r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
-	# url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm'),
-
 	url(r'^salir/$' , 'django.contrib.auth.views.logout_then_login', name='salir'),
 
 	url(r'^usuarios/$', views.UsuariosView.as_view(), name="usuarios"),
 
 	url(r'^cuenta-editar/$', views.CuentaEditarView.as_view(), name="cuenta-editar"),
 
+	url(r'^cuenta-crear/$', views.CuentaCrearView.as_view(), name="cuenta-crear"),
+
 	url(r'^contrasena-editar/$', 'main.views.contrasena_editar', name="contrasena-editar"),
+
+	# url(r'^contrasena-crear/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+	# 	auth_views.password_reset_confirm, {'template_name': 'main/contrasena-crear.html'}, name="contrasena-crear"),
+
+	url(r'^contrasena-crear/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+		auth_views.password_reset_confirm, {'template_name': 'main/contrasena-restablecer.html',
+										'post_reset_redirect' : 'homepage'}, name="contrasena-crear"),
+
+	url(r'^contrasena-recuperar/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+		auth_views.password_reset_confirm, {'template_name': 'main/contrasena-restablecer.html',
+										'post_reset_redirect' : 'homepage'}, name="contrasena-recuperar"),
 
 	url(r'^terminos-condiciones/$', 'main.views.terminos_condiciones', name="terminos-condiciones"),
 
@@ -46,6 +52,7 @@ urlpatterns =[
 	url(r'^carrera-busqueda-por-tipo/$', views.CarreraBusquedaPorTipoView.as_view(), name="carrera-busqueda-por-tipo"),
 
 	url(r'^periodos-graduacion-busqueda/$', views.PeriodosGraduacionBusquedaView.as_view(), name="periodos-graduacion-busqueda"),
+
 
 ]
 

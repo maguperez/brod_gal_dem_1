@@ -692,8 +692,10 @@
                         <div class="modal-body text-center">
                             <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
-                                    {{ reset_form.email_or_username}}
+{#                                    <label for="login-form-username">Correo:</label>#}
+                                    {{ reset_form.as_p }}
+
+{#                                    {{ reset_form.email_or_username}}#}
 {#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
                                 </div>
 
