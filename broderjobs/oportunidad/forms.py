@@ -10,7 +10,7 @@ class OportunidadForm(forms.ModelForm):
 
     ciudad_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     periodo_graduacion_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full', }))
+    pais = forms.ModelChoiceField(queryset=Pais.objects.all(), empty_label="Pais", required = False, widget=forms.Select(attrs={'class': 'full actualizar', }))
     beneficios_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     beneficios_nuevos_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)
     beneficios_extras_hidden = forms.CharField(widget=forms.HiddenInput(), required = False)

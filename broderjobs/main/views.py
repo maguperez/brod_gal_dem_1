@@ -101,7 +101,7 @@ def homepage(request):
                     login(request, new_user)
                     return redirect('registro-cv')
                 else:
-                    message_registro= "Error al registrar"
+                    message_registro= "El email ya ha sido  registrado"
             if '_reset' in request.POST:
                 data = None
                 if reset_form.is_valid():
