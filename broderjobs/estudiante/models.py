@@ -29,7 +29,7 @@ class Estudiante(models.Model):
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
-    foto = models.ImageField('foto perfil', upload_to=MEDIA_URL+'img/%Y/%m/%d', null=True, blank=True)
+    foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
     completo_test = models.BooleanField(default=False)
 
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
