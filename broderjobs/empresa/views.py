@@ -393,7 +393,7 @@ class OportunidadCandidatos(TemplateView):
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        postulaciones = Postulacion.objects.filter(oportunidad_id = id).count()
+        postulaciones = Postulacion.objects.filter(oportunidad_id = id, estado = 'A').count()
         context = super(OportunidadCandidatos, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad

@@ -229,11 +229,16 @@ AUTHENTICATION_BACKENDS = (
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'info@broderjobs.com'
 SERVER_EMAIL = 'info@broderjobs.com'
+# DEFAULT_FROM_EMAIL = 'sotofgabriela@gmail.com'
+# SERVER_EMAIL = 'sotofgabriela@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'info@broderjobs.com'
 EMAIL_HOST_PASSWORD = 'infbrodperu123'
+# EMAIL_HOST_USER = 'sotofgabriela@gmail.com'
+# EMAIL_HOST_PASSWORD = 'gjemsf86'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 
 
 SOCIAL_AUTH_PIPELINE = (

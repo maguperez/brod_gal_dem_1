@@ -48,7 +48,6 @@
         ============================================= -->
 
         <style>
-
             .revo-slider-emphasis-text {
                 font-size: 72px;
                 font-weight: 900;
@@ -58,7 +57,6 @@
                 border-top: 2px solid #FFF;
                 border-bottom: 2px solid #FFF;
             }
-
             .revo-slider-desc-text {
                 font-size: 23px;
                 font-family: 'Roboto Light', sans-serif;
@@ -66,16 +64,13 @@
                 text-align: center;
                 line-height: 23px;
             }
-
             .revo-slider-caps-text {
                 font-size: 16px;
                 font-weight: 400;
                 letter-spacing: 3px;
                 font-family: 'Roboto Light', sans-serif;
             }
-
             .tp-video-play-button { display: none !important; }
-
             .tp-caption { white-space: nowrap; }
             .tooltip-inner { max-width: 250px !Important; width: 300px !Important }
             .tooltip-inner{ background-color: #f50 !Important; }
@@ -178,12 +173,9 @@
                 </div>
 
                 <script type="text/javascript">
-
                     var tpj=jQuery;
                     tpj.noConflict();
-
                     tpj(document).ready(function() {
-
                         var apiRevoSlider = tpj('.tp-banner').show().revolution({
                             sliderType:"standard",
                             jsFileLocation:"include/rs-plugin/js/",
@@ -194,57 +186,42 @@
                             startwidth:1140,
                             startheight:600,
                             hideThumbs:200,
-
                             thumbWidth:100,
                             thumbHeight:50,
                             thumbAmount:3,
-
                             touchenabled:"on",
                             onHoverStop:"on",
-
                             swipe_velocity: 0.7,
                             swipe_min_touches: 1,
                             swipe_max_touches: 1,
                             drag_block_vertical: false,
-
-
                             parallax:"mouse",
                             parallaxBgFreeze:"on",
                             parallaxLevels:[8,7,6,5,4,3,2,1],
                             parallaxDisableOnMobile:"on",
-
                             keyboardNavigation:"on",
-
                             shadow:0,
                             fullWidth:"off",
                             fullScreen:"on",
-
                             spinner:"spinner0",
-
                             stopLoop:"off",
                             stopAfterLoops:-1,
                             stopAtSlide:-1,
-
                             shuffle:"off",
-
-
                             forceFullWidth:"off",
                             fullScreenAlignForce:"off",
                             minFullScreenHeight:"400",
-
                             hideThumbsOnMobile:"off",
                             hideNavDelayOnMobile:1500,
                             hideBulletsOnMobile:"off",
                             hideArrowsOnMobile:"off",
                             hideThumbsUnderResolution:0,
-
                             hideSliderAtLimit:0,
                             hideCaptionAtLimit:0,
                             hideAllCaptionAtLilmit:0,
                             startWithSlide:0,
                             fullScreenOffset:"0px"
                         });
-
                         apiRevoSlider.bind("revolution.slide.onchange",function (e,data) {
                             if( $(window).width() > 992 ) {
                                 if( $('#slider ul > li').eq(data.slideIndex-1).hasClass('dark') ){
@@ -263,9 +240,7 @@
                                 SEMICOLON.header.logo();
                             }
                         });
-
                     }); //ready
-
                 </script>
                 <!-- END REVOLUTION SLIDER -->
 
@@ -301,27 +276,22 @@
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-pinterest">
                                     <i class="icon-pinterest"></i>
                                     <i class="icon-pinterest"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-vimeo">
                                     <i class="icon-vimeo"></i>
                                     <i class="icon-vimeo"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-github">
                                     <i class="icon-github"></i>
                                     <i class="icon-github"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-yahoo">
                                     <i class="icon-yahoo"></i>
                                     <i class="icon-yahoo"></i>
                                 </a>
-
                                 <a href="#" class="social-icon si-small si-borderless si-linkedin">
                                     <i class="icon-linkedin"></i>
                                     <i class="icon-linkedin"></i>
@@ -360,16 +330,24 @@
                                 <div class="form-group text-left">
                                     {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>
                                 </div>
-                                {%if message %}
+                                {%if message_login %}
                                     <div class="alert alert-warning alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        {{message}}</div>
+                                        {{message_login}}</div>
                                 {%endif%}
+                                {%if login_form.errors %}
+
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+								{{ login_form.email.errors }}
+								{{ login_form.password.errors }}
+                            </div>
+                            {% endif%}
                                 <div class="form-group nobottommargin">
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href="#" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
                             </form>
@@ -415,10 +393,10 @@
                                     Acepto los
                                     <a class="terminos-condiciones" href="{% url 'terminos-condiciones' %}" target ="_blank">T&eacute;rminos y condiciones, y<br> Pol&iacute;ticas de Privacidad de BRODER</a>
                                 </div>
-                                {%if message %}
+                                {%if message_registro %}
                             <div class="alert alert-warning alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                {{message}}
+                                {{message_registro}}
                             </div>
                             {% endif%}
                             {%if registro_form.errors %}
@@ -442,7 +420,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade login" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade login" id="reset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-body">
                     <div class="modal-content">
@@ -451,29 +429,25 @@
                             <h4 class="modal-title text-center">Olvide Contraseña</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
+                            <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
-                                    <label for="login-form-username">Correo:</label>
-                                    {{ reset_form.email_or_username }}
+{#                                    <label for="login-form-username">Correo:</label>#}
+                                    {{ reset_form.as_p }}
+
+{#                                    {{ reset_form.email_or_username}}#}
 {#                                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control" />#}
                                 </div>
-{#                                <div class="form-group">#}
-{#                                    <label for="login-form-password">Contraseña:</label>#}
-{#                                    {{ login_form.password }}#}
-{#                                </div>#}
-{#                                <div class="form-group text-left">#}
-{#                                    {{ login_form.remember_me }}   <label for="recordarme">Recordarme.</label>#}
-{#                                </div>#}
-                                {%if message %}
-                                    <div class="alert alert-warning alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        {{message}}
-                                    </div>
-                                {%endif%}
+
+                                {%if message_reset %}
+								<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+									{{message_reset}}</div>
+								{% endif%}
                                 <div class="form-group nobottommargin">
-                                    <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
+                                    <button class="button button-3d nomargin" id="reset-form-submit" name="_reset" value="reset">Enviar</button>
                                     <div class="clear"></div>
                                     <br><br>
+
                                     <div class="clear"></div>
                                 </div>
                             </form>
