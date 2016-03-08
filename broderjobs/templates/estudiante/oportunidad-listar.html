@@ -99,15 +99,21 @@
    	$('#busqueda').keyup(function() {
 		if($('#busqueda').val().length > 3 || $('#busqueda').val().length == 0 )
 			fnCargarOportunidad();
+        
 	});
 
 	function fnCargarOportunidad() {
 		$.get("{% url 'estudiante-oportunidad-cargar-lista' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
+            debugger;
             if($.trim(htmlexterno)==""){
                 $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
             }
-            else
-			$('#oportunidad-lista').html(htmlexterno);
+            else {
+                $('#oportunidad-lista').html(htmlexterno);
+                if ($(".box.oportunidad-box").length ==0){
+                    $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+                }
+            }
 		});
 		document.ready
 	}

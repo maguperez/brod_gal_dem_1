@@ -47,6 +47,9 @@ div#header-wrap,
     border: none !Important;
 }
 
+#footer {
+    margin-top: 0px !Important;
+}
 #primary-menu ul li a div {
     font-size: 17px;
     font-weight: normal;
