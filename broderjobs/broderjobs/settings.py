@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'contador_visitas',
     'disc',
     'cultura_empresarial',
-
+    'storages',
 
 )
 
