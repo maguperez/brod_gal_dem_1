@@ -262,9 +262,13 @@
 
                         <div class="col_half col_last tright">
                             <div class="fright clearfix">
-                                <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                <a href="http://www.facebook.com/broderjobs" class="social-icon si-small si-borderless si-facebook">
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
+                                </a>
+                                <a href="http://www.snapchat.com/broderjobs" class="social-icon si-small si-borderless si-snapchat">
+                                    <i><img src="{% static 'template/images/logo-snapchat-grey.png' %}" height="14"></i>
+                                    <i><img src="{% static 'template/images/logo-snapchat-white.png' %}"  height="14"></i>
                                 </a>
                                 <!--
 
@@ -478,7 +482,9 @@
                     if ($(this).val()=="")
                         $(this).css("color", "#a5a5a5");
                 });
-                $("#id_registro-empresa").tooltip();
+                $("#id_registro-email").attr('title','Recuerda que debes usar el correo de la compañía para registrarte');
+                $("#id_registro-email").attr('data-placement', 'right');
+                $("#id_registro-email").tooltip();
                 $("#login-form").validate({
                     highlight: function( label ) {
                         $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
