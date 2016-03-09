@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
 from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion, Universidad
+from estudiante.modles import Estudiante
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
@@ -96,6 +97,9 @@ def homepage(request):
                     persona.fecha_nacimiento = fecha
                     persona.tipo_persona = "E"
                     persona.save()
+                    estudiante = Estudiante()
+                    estudiante.persona = persona
+                    estudiante.save()
                     new_user = authenticate(username=request.POST['registro-email'],
                                             password=request.POST['registro-password1'])
                     login(request, new_user)
@@ -225,7 +229,7 @@ def homepage_empresa(request):
 
                     message_registro = "Tu usuario esta siendo validado pronto nos comunicaremos contigo"
                 else:
-                    message_registro= "error al registrar"
+                    message_registro= "El email ya ha sido  registrado"
 
             if '_reset' in request.POST:
                 data = None
