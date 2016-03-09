@@ -26,9 +26,11 @@ RUTA_PROYECTO=Path(__file__).ancestor(2)
 SECRET_KEY = 'f6x=__b=u%r1^czhr#-)tmh%ur*o%w(knn0!jg8l1fxu3oc44q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+ADMINS = [('Gabriela', 'sotofgabriela@gmail.com'), ('Admin', 'info@broderjobs.com')]
 
 
 # Application definition

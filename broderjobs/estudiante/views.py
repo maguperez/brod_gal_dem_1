@@ -1005,6 +1005,7 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
         except Postulacion.DoesNotExist:
             postulacion = None
         context = super(OportunidadDetalleView, self).get_context_data(**kwargs)
+        context['estudiante'] = estudiante
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         context['postulacion'] = postulacion
