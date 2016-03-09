@@ -115,10 +115,27 @@
 
 		$.validator.addMethod('checkurl',function(value, element, param){
 
-			return /^(www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);
+            if( !(value.substr(0,7) == 'http://' || value.substr(0,8) == 'https://') ){
+                value = 'http://' + value;
+            }
+
+            if(value.substr(value.length-1, 1) != '/'){
+                value = value + '/';
+            }
+            return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
 		},'URL inválida');
 
-
+        /*
+        $.validator.addMethod("cus_url", function(value, element) {
+    if(value.substr(0,7) != 'http://'){
+        value = 'http://' + value;
+    }
+    if(value.substr(value.length-1, 1) != '/'){
+        value = value + '/';
+    }
+    return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+}, "Not valid url.");
+         */
 
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {

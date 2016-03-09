@@ -557,6 +557,10 @@ def total_compatibles(request):
     carga_horaria   = request.POST.get('carga_horaria')
     idioma          = request.POST.get('idioma')
     conocimiento    = request.POST.get('conocimiento')
+    remuneracion_min    = request.POST.get('remuneracion_min')
+    remuneracion_max    = request.POST.get('remuneracion_max')
+    remuneracion_min    = request.POST.get('remuneracion_min')
+    remuneracion_max    = request.POST.get('remuneracion_max')
 
     user = get_object_or_404(User, pk = request.user.id)
     persona = get_object_or_404(Persona, usuario_id=user.id)
@@ -579,7 +583,8 @@ def total_compatibles(request):
     # conocimiento    = request.GET.get('conocimiento')
     # # experiencia     = request.GET.get('conocimiento')
     total = calcular_compatibilidad(carrera, universidad, grado_estudio, edad_desde, edad_hasta, pais, ciudad, genero,
-                                    tipo_puesto, carga_horaria, idioma, conocimiento, representante.empresa.id)
+                                    tipo_puesto, carga_horaria, idioma, conocimiento, remuneracion_min, remuneracion_max,
+                                    representante.empresa.id)
     data = json.dumps(total)
     return HttpResponse(data, content_type='application/json')
 

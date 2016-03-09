@@ -11,6 +11,10 @@
 		background: #fff !important;
 		font-weight: normal !important;
 	}
+
+    .ocultar{
+     display: none;
+    }
 </style>
 {%endblock%}
 {% block content %}
@@ -151,7 +155,7 @@
                     <div class="clear"></div>
                 </div>
                 <textarea id="contenido-mensaje-enviar" placeholder="Redacte su mensaje"></textarea>
-                <div class="sin-respuesta">-->
+                <div class="sin-respuesta ocultar">-->
                     <input type="checkbox" id="sin-respuesta"/>-->
                     <label for="sin-respuesta">Permitir respuesta </label><a>(<span class="orange">?</span>)</a>-->
                 </div>
