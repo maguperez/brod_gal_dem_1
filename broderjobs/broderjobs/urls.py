@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^login-facebook' , 'broderjobs.views.login_facebook', name='login-facebook'),
 
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': settings.DEBUG}),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
