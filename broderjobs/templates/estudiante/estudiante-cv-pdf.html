@@ -44,12 +44,21 @@
 <body style="margin: 30px">
 <div class = "candidato obx">
 <header class="header">
-     <img src="{{estudiante.foto}}" id="imgen_perfil" class="imagen"/>
+     <img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
+
      <div class="detalle div">
          <h3 class ="h3" >{{estudiante | upper}}</h3>
          <label class ="label">{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
          <label class ="label">{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
-         <label class ="label">{{persona.telefono}} / {{usuario.email}}</label>
+         <label class ="label">
+             {%if estudiante.persona.telefono != None and estudiante.persona.telefono != '' and estudiante.persona.usuario.email != None and estudiante.persona.usuario.email != ''  %}
+                   {{estudiante.persona.telefono}} / {{estudiante.persona.usuario.email}}
+             {%elif estudiante.persona.telefono != None and estudiante.persona.usuario.email == None or  estudiante.persona.usuario.email == ''  %}
+                   {{estudiante.persona.telefono}}
+             {%elif estudiante.persona.telefono == None or estudiante.persona.telefono == '' and estudiante.persona.usuario.email != None  %}
+                   {{estudiante.persona.usuario.email}}
+             {%endif%}
+         </label>
      </div>
      <div class="clear div"></div>
  </header>
@@ -58,7 +67,12 @@
          <h3 class="title h3"><i class="profile"></i>Resumen</h3>
 
          <div class="detalle div">
-            <p class="p">{{resumen.descripcion}}</p>
+             {%if resumen.descripcion != None %}
+                  <p class="p">{{resumen.descripcion}}</p>
+             {%else%}
+               <p class="p"></p>
+             {%endif%}
+
          </div>
      </section>
      <section class="section">
@@ -125,11 +139,16 @@
              {% for experiencia in experiencias_profesionales %}
              <div class="experiencia" id="{{experiencia.id}}">
                  <p class="fecha">{{experiencia.fecha_desde|date:"M Y"}} - {{experiencia.fecha_hasta|date:"M Y"}}</p>
-                 <label class="tipo">{{experiencia.puesto}}</label>
+
+                 {%if experiencia.puesto != None %}
+                    <label class="tipo">{{experiencia.puesto}}</label>
+                 {%else%}
+                    <label class="tipo">{{experiencia.puesto_referencial}}</label>
+                 {%endif%}
                  {%if experiencia.empresa != None %}
-                 <label class="nombre">{{experiencia.empresa}}</label>
+                    <label class="nombre">{{experiencia.empresa}}</label>
 				{%else%}
-				<label class="nombre">{{experiencia.empresa_referencial}}</label>
+				    <label class="nombre">{{experiencia.empresa_referencial}}</label>
 				{%endif%}
 				<pr>{{experiencia.descripcion}}</pr>
 				</div>
