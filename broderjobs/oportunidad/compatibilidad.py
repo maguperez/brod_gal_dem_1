@@ -9,7 +9,8 @@ from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 def calcular_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_edad_desde, p_edad_hasta, p_pais, p_ciudad,
-                            p_genero, p_tipo_puesto, p_carga_horaria, p_idioma, p_conocimiento, p_empresa):
+                            p_genero, p_tipo_puesto, p_carga_horaria, p_idioma, p_conocimiento, p_remuneracion_min,
+                            p_remuneracion_max, p_empresa):
     total_compatibles = 0
     estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = p_empresa, compatibilidad_cultural__gte = 20).values('estudiante_id')
     estudiantes = Estudiante.objects.filter(pk__in = estudiantes_cultura)

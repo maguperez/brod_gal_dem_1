@@ -20,6 +20,13 @@ def anos_rango():
         anos.append((str(y), str(y)))
     return [('','Año')] + anos
 
+#carga el rago de años para el select
+def anos_experiencia():
+    anos = []
+    for y in range(2,11):
+        anos.append((str(y), 'desde ' + str(y)+ 'años'))
+    return [('','Año')]+ [('0','sin experiencia')]+ [('1','hasta 1 año')] + anos
+
 #carga el rango de semestre para el  select
 def semestre_rango():
     semestres = []

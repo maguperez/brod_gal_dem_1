@@ -865,6 +865,8 @@
             form.append('carga_horaria',$('input[name=carga_horaria]:checked').val() == null ? 0 :$('input[name=carga_horaria]:checked').val() );
             form.append('idioma', $('#id_idioma').val()== null ? 0 : $('#id_idioma').val() );
             form.append('conocimiento', $('#id_conocimiento').val()== null ? 0 : $('#id_conocimiento').val() );
+            form.append('remuneracion_min', $('#id_remuneracion_min').val()== null ? 0 : $('#id_remuneracion_min').val() );
+            form.append('remuneracion_max', $('#id_remuneracion_max').val()== null ? 0 : $('#id_remuneracion_max').val() );
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
             $(".alcance .cifra").html("Calculando...");
             $.ajax({

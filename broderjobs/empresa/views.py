@@ -179,7 +179,10 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id, estado = 'A')
+            redes_empresa, crear =EmpresaRedesSociales.objects.get_or_create(empresa_id=representante.empresa.id, estado = 'A')
+            if crear:
+                redes_empresa.empresa = representante.empresa
+                redes_empresa.save()
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
         return {

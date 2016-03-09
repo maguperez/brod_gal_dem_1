@@ -8,7 +8,7 @@ items_registro = utils.estado_registro()
 class Persona(models.Model):
     usuario = models.OneToOneField(User)
     telefono = models.CharField(default=None, null=True, blank=True, max_length=20)
-    fecha_nacimiento = models.DateField(null=True)
+    fecha_nacimiento = models.DateField(default=None, null=True, blank=True)
     tipo_persona = models.CharField(max_length=1, default="E")
     genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
 

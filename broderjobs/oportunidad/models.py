@@ -30,6 +30,7 @@ class ProcesoFase(models.Model):
 class Oportunidad(models.Model):
     items_estado = utils.estado_oportunidad()
     genero = utils.genero()
+    anos_experiencia = utils.anos_experiencia()
     # periodo= []
     # for e in PeriodosGraduacion.objects.all():
     #     periodo.append((str(e.valor), e.descripcion))
@@ -55,6 +56,7 @@ class Oportunidad(models.Model):
     carrera = models.ManyToManyField(Carrera, default=None, blank=True, verbose_name="carrera")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
+    experiencia = models.CharField(choices=anos_experiencia, max_length="1", default=None, null=True, blank=True)
     direccion_map = models.CharField(max_length="100", default=None, null=True, blank=True)
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
