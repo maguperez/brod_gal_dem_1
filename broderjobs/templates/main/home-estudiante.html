@@ -602,7 +602,7 @@
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">
+                                    <a id = "a-recordar_clave" href = "#" data-toggle="modal" data-dismiss="modal" data-target="#reset" class="fright">
                                     ¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
@@ -868,16 +868,20 @@
                     }
                 });
             });
+
             window.onload = function(){
-                $("#primary-menu a").on("click", function(){
+                $("#primary-menu a, #a-recordar_clave").on("click", function(){
                     sessionStorage.setItem("main", $(this).attr("data-target"));
                 })
+                {%if message_registro or message_login or message_reset %}
                 if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
 					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
 				}
                 else {
                     $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
                 }
+
+                {%endif%}
             }
         </script>
     </body>
