@@ -15,6 +15,7 @@ ul, ol {list-style: none;}
 a {text-decoration: none; cursor: pointer;}
 p {text-align: justify; line-height: 20px;}
 
+.modal-backdrop { z-index:1072; }
 /*FONTS*/
 @font-face {
   font-family: 'Roboto Condensed Light' !important;

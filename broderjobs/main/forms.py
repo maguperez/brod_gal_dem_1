@@ -59,7 +59,7 @@ class RegisterForm(UserCreationForm):
 
 
     username = forms.CharField(required = False, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'username', 'class': 'form-control'}))
-    email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
+    email = UniqueUserEmailField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control',}))
     first_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Nombres', 'class': 'form-control'}))
     last_name = forms.CharField(required = True, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'Apellidos', 'class': 'form-control'}))
     password1 = forms.CharField(required = True, widget=forms.TextInput(attrs={'placeholder': 'Contraseña', 'type':'password', 'class': 'form-control'}))
@@ -69,7 +69,7 @@ class RegisterForm(UserCreationForm):
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     dia = forms.ChoiceField(choices=items_dias, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico', 'class': 'form-control'}))
-    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False, widget=forms.Select(attrs={'class': 'form-control', 'title': 'Recuerda que debes usar el correo de la compañía para registrarte', 'data-placement': 'right'}))
+    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False, widget=forms.Select(attrs={'class': 'form-control'}))
 
     def __init__(self, *args, **kwargs):
         """
