@@ -6,7 +6,15 @@
          <h3>{{estudiante | upper}}</h3>
          <label>{{estudiante.universidad | upper }} ({{estudiante.ano_inicio_estudio}}- {{estudiante.ano_graduacion}})</label>
          <label>{{edad}} a&ntilde;os - {{estudiante.ciudad}}, {{estudiante.pais}}</label>
-         <label>{{estudiante.persona.telefono}} / {{estudiante.persona.usuario.email}}</label>
+         <label>
+             {%if estudiante.persona.telefono != None and estudiante.persona.telefono != '' and estudiante.persona.usuario.email != None and estudiante.persona.usuario.email != ''  %}
+                   {{estudiante.persona.telefono}} / {{estudiante.persona.usuario.email}}
+             {%elif estudiante.persona.telefono != None and estudiante.persona.usuario.email == None or  estudiante.persona.usuario.email == ''  %}
+                   {{estudiante.persona.telefono}}
+             {%elif estudiante.persona.telefono == None or estudiante.persona.telefono == '' and estudiante.persona.usuario.email != None  %}
+                   {{estudiante.persona.usuario.email}}
+             {%endif%}
+         </label>
      </div>
      <div class="clear"></div>
      <a href="{%url 'cv-pdf' estudiante.pk%}" target="_blank" class="descargar btn-action">DESCARGAR PDF</a>
@@ -16,7 +24,12 @@
          <h3 class="title"><i class="profile"></i>Resumen</h3>
 
          <div class="detalle">
-            <p>{{resumen.descripcion}}</p>
+
+             {%if resumen.descripcion != None %}
+                   <p>{{resumen.descripcion}}</p>
+             {%else%}
+                <p></p>
+             {%endif%}
          </div>
      </section>
      <section>

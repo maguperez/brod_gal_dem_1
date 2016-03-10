@@ -87,6 +87,21 @@
             .fullcoveredvideo video, .fullscreenvideo video{
                 background-image:url({% static 'template/images/videos/video.png' %});
             }
+            #div-pasos h3 {
+            	font-weight: 600;
+            	margin: 0px;
+            	font-family: 'Roboto Regular';
+            	color: #292929;
+            	font-size: 30px;
+            }
+            #div-pasos p {
+            	line-height: 1.8; 
+            	width: 60%; 
+            	margin: auto;
+            	font-family: 'Roboto Thin';
+            	font-size: 19px;
+            	color: #292929;
+            }
         </style>
 
     </head>
@@ -417,13 +432,13 @@
 {#                        Encuentra el trabajo de tus sueños en las mejores empresas del país.#}
 {#                    </div>#}
 {#                </a>#}
-                <div class="col_full common-height nobottommargin  text-center">
+                <div id = "div-pasos" class="col_full common-height nobottommargin  text-center">
 
                     <div class="col-md-4 col-padding ohidden" >
                         <div>
                             <img src="{% static 'template/images/paso1.png' %}">
-                            <h3 class="" style="font-weight: 600; margin: 0">Paso 1</h3>
-                            <p style="line-height: 1.8; width: 60%; margin: auto;">Déjanos saber tu perfil y qué tipo de trabajo buscas.</p>
+                            <h3 class="" >Paso 1</h3>
+                            <p>Déjanos saber tu perfil y qué tipo de trabajo buscas.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
                         </div>
                     </div>
@@ -431,8 +446,8 @@
                     <div class="col-md-4 col-padding ohidden  text-center">
                         <div>
                             <img src="{% static 'template/images/paso2.png' %}">
-                            <h3 class="" style="font-weight: 600; margin: 0 ">Paso 2</h3>
-                            <p style="line-height: 1.8; width: 60%; margin: auto;">Completa el test para saber cómo eres en el trabajo.</p>
+                            <h3 class="">Paso 2</h3>
+                            <p >Completa el test para saber cómo eres en el trabajo.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
                         </div>
                     </div>
@@ -440,8 +455,8 @@
                     <div class="col-md-4 col-padding ohidden text-center">
                         <div>
                             <img src="{% static 'template/images/paso3.png' %}">
-                            <h3 class="" style="font-weight: 600; margin: 0">Paso 3</h3>
-                            <p style="line-height: 1.8; width: 60%; margin: auto;">Es hora de postular a las mejores empresas para ti.</p>
+                            <h3 class="">Paso 3</h3>
+                            <p >Es hora de postular a las mejores empresas para ti.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
                         </div>
                     </div>
@@ -509,9 +524,13 @@
 
                         <div class="col_half col_last tright">
                             <div class="fright clearfix">
-                                <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                <a href="http://www.facebook.com/broderjobs" class="social-icon si-small si-borderless si-facebook">
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
+                                </a>
+                                <a href="http://www.snapchat.com/broderjobs" class="social-icon si-small si-borderless si-snapchat">
+                                    <i><img src="{% static 'template/images/logo-snapchat-grey.png' %}" height="14"></i>
+                                    <i><img src="{% static 'template/images/logo-snapchat-white.png' %}"  height="14"></i>
                                 </a>
 <!--
                                 <a href="#" class="social-icon si-small si-borderless si-twitter">
@@ -598,7 +617,7 @@
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">
+                                    <a id = "a-recordar_clave" href = "#" data-toggle="modal" data-dismiss="modal" data-target="#reset" class="fright">
                                     ¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
@@ -864,16 +883,20 @@
                     }
                 });
             });
+
             window.onload = function(){
-                $("#primary-menu a").on("click", function(){
+                $("#primary-menu a, #a-recordar_clave").on("click", function(){
                     sessionStorage.setItem("main", $(this).attr("data-target"));
                 })
+                {%if message_registro or message_login or message_reset %}
                 if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
 					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
 				}
                 else {
                     $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
                 }
+
+                {%endif%}
             }
         </script>
     </body>

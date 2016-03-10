@@ -24,7 +24,7 @@ from cStringIO import StringIO
 from django.views.generic import CreateView, DeleteView, ListView
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
-from main.utils import LoginRequiredMixin
+from main.utils import LoginRequiredMixin, calular_edad
 from django.core.paginator import InvalidPage, Paginator
 from datetime import date,datetime
 
@@ -418,6 +418,11 @@ class OportunidadCandidatosCV(TemplateView):
 
         conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id = estudiante.id)
 
+        fecha_nac = estudiante.persona.fecha_nacimiento
+
+        edad = calular_edad(fecha_nac)
+
+        context['edad'] = edad
         context['oportunidad'] = oportunidad
         context['estudiante'] = estudiante
         context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)
