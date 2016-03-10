@@ -158,10 +158,11 @@ class OportunidadCrearView(FormView):
         oportunidad.save()
 
         for be in list_beneficios_extras:
-            Be_extra = BeneficioExtra()
-            Be_extra.descripcion = be
-            Be_extra.oportunidad = oportunidad
-            Be_extra.save()
+            if be != '':
+                Be_extra = BeneficioExtra()
+                Be_extra.descripcion = be
+                Be_extra.oportunidad = oportunidad
+                Be_extra.save()
 
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
