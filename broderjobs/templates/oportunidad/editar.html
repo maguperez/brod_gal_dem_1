@@ -459,35 +459,9 @@
 			language: 'es',
 			format: "dd/mm/yyyy",
 		});
-		$("#slider-periodo").slider({
-			min: 1,
-			max: 5,
-			value: [1,4],
-			tooltip: 'hide',
-			enabled: false,
-			formatter: function(value){
-				var cadena = '';
-				if(periodoGraduacion){
-					var objetoMin = _.find(periodoGraduacion, function(o) { return o.secuencia == value[0]; });
-					var objetoMax = _.find(periodoGraduacion, function(o) { return o.secuencia == value[1]; });
-					if(objetoMin && objetoMax){
-						cadena = objetoMin.descripcion+' , '+objetoMax.descripcion;
-						$('#periodo-descripcion b').text(cadena);
 
-						cad_id =  objetoMin.id+','+objetoMax.id;
+        InicializarPeriodoGraduacion();
 
-						$('#id_periodo_graduacion_hidden').val(cad_id);
-					}
-					else{
-						cadena = value;
-					}
-				}
-				else{
-						cadena = value;
-					}
-				return cadena;
-			}
-		});
 		Editar.inicializar_mapa();
 		$("#id_pais").select2({
   			placeholder: "Pais",
@@ -551,6 +525,22 @@
 		RevisarCheckedRemuneración();
 		AgregarEventosRemuneracion();
 
+        $("#id_tipo_carrera").change(function() {
+			resetCarrera();
+			if($("#id_tipo_carrera").val() > 0 ){
+				ActualizarListadoCarreras();
+				ActualizarListadoPeriodoGraduacion();
+			}
+			else{
+				$('#slider-periodo').slider('setAttribute', 'enabled', false);
+				$('#slider-periodo').slider('refresh');
+				$('#id_periodo_graduacion_hidden').val('');
+			}
+
+			$("#tooltip-carrera").tooltip('hide');
+			LlamarValidacionElemento('id_tipo_carrera');
+		});
+
 	});
     function resetCarrera(){
 		var options = '';
@@ -592,6 +582,76 @@
 					}
 				});
 	}
+
+    function InicializarSlider(){
+
+        var value = $('#id_periodo_graduacion_hidden').val().split(',');
+
+        var objetoMin = _.find(periodoGraduacion, function(o) { return o.id == value[0]; });
+        var objetoMax = _.find(periodoGraduacion, function(o) { return o.id == value[1]; });
+
+        var ordenado = _.sortBy(periodoGraduacion,'secuencia');
+
+        var valorMin =  _.head(ordenado).secuencia;
+
+        var valorMax =  _.last(ordenado).secuencia
+
+        $("#slider-periodo").slider({
+			min: valorMin,
+			max: valorMax,
+			value: [objetoMin.secuencia,objetoMax.secuencia],
+			tooltip: 'hide',
+			enabled: false,
+			formatter: function(value){
+				var cadena = '';
+				if(periodoGraduacion){
+					var objetoMin = _.find(periodoGraduacion, function(o) { return o.secuencia == value[0]; });
+					var objetoMax = _.find(periodoGraduacion, function(o) { return o.secuencia == value[1]; });
+					if(objetoMin && objetoMax){
+						cadena = objetoMin.descripcion+' , '+objetoMax.descripcion;
+						$('#periodo-descripcion b').text(cadena);
+
+						cad_id =  objetoMin.id+','+objetoMax.id;
+
+						$('#id_periodo_graduacion_hidden').val(cad_id);
+					}
+					else{
+						cadena = value;
+					}
+				}
+				else{
+						cadena = value;
+					}
+				return cadena;
+			}
+		});
+    }
+
+    function InicializarPeriodoGraduacion(){
+        $.ajax({
+					data: {'tipo': $("#id_tipo_carrera").val()},
+					url: '{%url "periodos-graduacion-busqueda" %}',
+					type: 'get',
+					success: function (data) {
+						if (data) {
+							if (data.length > 0) {
+
+{#								var ordenado = _.sortBy(data,'secuencia');#}
+{##}
+{#								$('#slider-periodo').slider('setAttribute', 'min', _.head(ordenado).secuencia);#}
+{#								$('#slider-periodo').slider('setAttribute', 'max', _.last(ordenado).secuencia);#}
+{#								$('#slider-periodo').slider('setAttribute', 'enabled', true);#}
+{#								$('#slider-periodo').slider('refresh');#}
+
+								periodoGraduacion = data;
+
+                                InicializarSlider();
+							}
+						}
+					}
+				});
+    }
+
    	function ActualizarListadoPeriodoGraduacion(){
 		$.ajax({
 					data: {'tipo': $("#id_tipo_carrera").val()},
