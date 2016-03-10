@@ -456,6 +456,7 @@
 				 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                     validacionVoluntariado(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -470,6 +471,7 @@
 			$('#form-modal-body').load('voluntariado-crear/', function () {
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                validacionVoluntariado(formulario);
 			});
 		 });
 		 $('.actividad-extra-botton').click(function() {
@@ -561,6 +563,89 @@
 			  });
 		   };
 	 });
+
+     function validacionVoluntariado(formulario){
+
+		$.validator.addMethod('validarFecha',function(value, element, param){
+
+			if(element.id == 'id_fecha_desde'){
+				if(!value){
+					return false;
+				}
+			}
+			else if(element.id == 'id_fecha_hasta'){
+				if(!$("#id_voluntariado_actual").is(":checked") && !value){
+					return false;
+				}
+			}
+			return true;
+		},"Este campo es obligatorio");
+
+		$(formulario).validate({
+//			onfocusout: true,
+//			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_organizacion' || element[0].id == 'id_fecha_hasta'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				cargo: {
+					required: true
+                },
+				organizacion:{
+                    required: true
+                },
+				descripcion_txt:{
+					required: true,
+					maxlength: 1000
+				},
+				fecha_desde:{
+					validarFecha:true
+				},
+				fecha_hasta:{
+					validarFecha:true
+				}
+
+            },
+            messages: {
+				cargo: {
+					required: "Este campo es obligatorio"
+                },
+				organizacion:{
+                    required: "Este campo es obligatorio"
+                },
+				descripcion_txt:{
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+	}
 
      function validacionActividadesExtras(formulario){
          $(formulario).validate({
