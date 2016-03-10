@@ -33,6 +33,10 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from .models import User
 
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+
 def homepage(request):
     message_registro = None
     message_login = None
@@ -115,35 +119,32 @@ def homepage(request):
                     if associated_users.exists():
                         for user in associated_users:
                                  # Copied from django/contrib/auth/views.py : password_reset
-                            opts = {
-                                'use_https': request.is_secure(),
-                                'email_template_name': 'plantillas/contrasena-recuperar-email.html',
-                                'subject_template_name': 'plantillas/contrasena-recuperar-subject.txt',
-                                'request': request,
-                                # 'html_email_template_name': provide an HTML content template if you desire.
-                            }
+                            # opts = {
+                            #     'use_https': request.is_secure(),
+                            #     'email_template_name': 'correos/OlvidoContrasena.html',
+                            #     'subject_template_name': 'correos/OlvidoContrasenaSubject.txt',
+                            #     'request': request,
+                            #     # 'html_email_template_name': provide an HTML content template if you desire.
+                            # }
                             # This form sends the email on save()
-                            reset_form.save(**opts)
-                                # c = {
-                                #     'email': user.email,
-                                #     'domain': request.META['HTTP_HOST'],
-                                #     'site_name': 'your site',
-                                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                #     'user': user,
-                                #     'token': default_token_generator.make_token(user),
-                                #     'protocol': 'http',
-                                #     }
-                                # subject_template_name='plantillas/contrasena-recuperar-subject.txt'
-                                # # copied from django/contrib/admin/templates/registration/password_reset_subject.txt to templates directory
-                                # email_template_name='plantillas/contrasena-recuperar-email.html'
-                                # # copied from django/contrib/admin/templates/registration/password_reset_email.html to templates directory
-                                # subject = loader.render_to_string(subject_template_name, c)
-                                # # Email subject *must not* contain newlines
-                                # subject = ''.join(subject.splitlines())
-                                # email = loader.render_to_string(email_template_name, c)
-                                # send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
-                        # result = self.form_valid(form)
-                        message_reset= "se ha enviado un correo"# return result
+                            # reset_form.save(**opts)
+                            c = {
+                                'email': user.email,
+                                'domain': request.META['HTTP_HOST'],
+                                'site_name': 'your site',
+                                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                'user': user,
+                                'token': default_token_generator.make_token(user),
+                                'protocol': 'http',
+                            }
+                            subject_template_name='correos/OlvidoContrasenaSubject.txt'
+                            email_template_name='correos/OlvidoContrasena.html'
+                            subject = loader.render_to_string(subject_template_name, c)
+                            subject = ''.join(subject.splitlines())
+                            email = loader.render_to_string(email_template_name, c)
+                            send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
+                            # result = reset_form(form)
+                        message_reset= "se ha enviado un correo" # return result
                     else:
                         message_reset = "No pudimos encontrar el correo"
                     # return result
@@ -216,14 +217,14 @@ def homepage_empresa(request):
                         'email': user.email,
                         'telefono': persona.telefono
                     }
-                    email_template_name='plantillas/registro_empresa_broder.html'
-                    subject = 'Registro de Empresa'
+                    email_template_name='correos/AvisoRegistroEmpresa.html'
+                    subject = 'correos/AvisoRegistroEmpresaSubject.txt'
                     email = loader.render_to_string(email_template_name, datos)
                     send_mail(subject, email, DEFAULT_FROM_EMAIL , [DEFAULT_FROM_EMAIL], fail_silently=False)
 
                     #Envio de mensaje a Representante
-                    email_template_name='plantillas/registro_empresa_representante.html'
-                    subject = 'Registro de Empresa'
+                    email_template_name='correos/CuentaRegistroEmpresa.html'
+                    subject = 'correos/CuentaRegistroEmpresaSubject.txt'
                     email = loader.render_to_string(email_template_name, datos)
                     send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
 
@@ -241,8 +242,8 @@ def homepage_empresa(request):
                         for user in associated_users:
                             opts = {
                                 'use_https': request.is_secure(),
-                                'email_template_name': 'plantillas/contrasena-recuperar-email.html',
-                                'subject_template_name': 'plantillas/contrasena-recuperar-subject.txt',
+                                'email_template_name': 'correos/OlvidoContrasena.html',
+                                'subject_template_name': 'correos/OlvidoContrasenaSubject.txt',
                                 'request': request,
                             }
                             reset_form.save(**opts)
@@ -387,8 +388,8 @@ class CuentaCrearView(LoginRequiredMixin, FormView):
         # Copied from django/contrib/auth/views.py : password_reset
         opts = {
             'use_https': self.request.is_secure(),
-            'email_template_name': 'plantillas/cuenta-creada-email.html',
-            'subject_template_name': 'plantillas/cuenta-creada-subject.txt',
+            'email_template_name': 'correos/CuentaCreada.html',
+            'subject_template_name': 'correos/CuentaCreadaSubject.txt',
             'request': self.request,
             # 'html_email_template_name': provide an HTML content template if you desire.
         }
@@ -550,8 +551,6 @@ class PeriodosGraduacionBusquedaView(LoginRequiredMixin, TemplateView):
             #                          fields=('id','descripcion', 'secuencia_tecnica'))
 
         return HttpResponse(data, content_type='application/json')
-
-
 
 def validate_email_address(email):
     try:

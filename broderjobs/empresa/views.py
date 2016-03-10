@@ -284,7 +284,7 @@ class OportunidadBusquedaView(TemplateView):
         return HttpResponse(data, content_type='application/json')
 
 def oportunidades(request):
-    oportunidades = Oportunidad.objects.all().order_by('fecha_publicacion')
+    oportunidades = Oportunidad.objects.all().order_by('-fecha_publicacion')
     a_oportunidades =[]
     for i in range(0, len(oportunidades)):
         empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)

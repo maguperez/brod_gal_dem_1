@@ -28,13 +28,13 @@ and open the template in the editor.
             <div style ="font-size: 31pt; color: #5F5F5F; text-align: center"> 
                 Solicitud de contraseña </div>
             <div style ="font-size: 20pt; text-align: center; margin-top: 40px"> 
-                <b>Hola John</b> </div>
+                <b>Hola {{ user.first_name }}, {{ c.user.first_name }}</b> </div>
             <div style = "margin: 40px auto; text-align: center;">
                 Para restablecer su contraseña solo haga<br>
                 click en el botón de abajo y siga las instrucciones.
             </div>
             <div style="text-align: center; display: block">
-                <a href="#" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 300px; text-decoration: none">Reestablecer contraseña</a>
+                <a href="{{ protocol }}://{{ domain }}{% url 'contrasena-recuperar' uidb64=uid token=token %}" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 300px; text-decoration: none">Reestablecer contraseña</a>
             </div>
         </div>
         <div style="margin-top: 30px; margin-bottom: 10px; text-align: center; color: #999; font-size: 14pt">
