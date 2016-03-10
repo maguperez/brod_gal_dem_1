@@ -46,6 +46,14 @@
         max-width: 300px;
     }
 
+    .tooltip{
+        width: 167px;
+    }
+
+    .tooltip-arrow{
+        top: 48.1754%;
+    }
+
 </style>
 
 <section class="cv">
@@ -428,6 +436,8 @@
 			$('#form-modal-body').load('experiencia-crear/', function () {
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+
+                pruebaValidacion('#form-modal-body form');
 			});
 		 });
 		 $('.voluntariado-botton').click(function() {
@@ -480,7 +490,16 @@
 		 });
 		 $("#form-modal .btn-submit").on("click", function() {
 
+             debugger;
+
 			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+
+             if(formularioPrueba.id == 'cv-experiencia'){
+                 var validez = $(formularioPrueba).validate();
+{#                var validator = $( "form" ).validate();#}
+		        var validezElemento = validez.element('#id_puestos');
+             }
+
 			 if (formularioPrueba.id == 'cv-experiencia') {
 				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
 				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
@@ -535,7 +554,86 @@
 		   };
 	 });
 
+    function pruebaValidacion(formulario){
+        $.validator.addMethod('validarFecha',function(value, element, param){
 
+ 			if(element.id == 'id_fecha_desde'){
+ 				if(!value){
+ 					return false;
+ 				}
+ 			}
+ 			else if(element.id == 'id_fecha_hasta'){
+ 				if(!$("#id_experiencia_actual").is(":checked") && !value){
+ 					return false;
+ 				}
+ 			}
+ 			return true;
+ 		},"Este campo es obligatorio");
+
+		$(formulario).validate({
+//			onfocusout: true,
+//			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_empresas' || element[0].id == 'id_fecha_hasta'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				puestos: {
+					required: true
+                },
+				empresas:{
+                    required: true
+                },
+				descripcion_txt:{
+					required: true,
+					maxlength: 1000
+				},
+ 				fecha_desde:{
+ 					validarFecha:true
+ 				},
+ 				fecha_hasta: {
+					validarFecha: true
+				}
+            },
+            messages: {
+				puestos: {
+					required: "Este campo es obligatorio"
+                },
+				empresas:{
+                    required: "Este campo es obligatorio"
+                },
+				descripcion_txt:{
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+    }
 
 
  </script>
