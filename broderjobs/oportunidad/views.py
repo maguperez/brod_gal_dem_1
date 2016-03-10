@@ -111,11 +111,11 @@ class OportunidadCrearView(FormView):
             periodo_hasta = ''
 
         if periodo_desde == '' or periodo_hasta == '':
-            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=periodo_desde)
-            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=periodo_hasta)
-        else:
             periodo_graduacion_desde = None
             periodo_graduacion_hasta = None
+        else:
+            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=int(periodo_desde))
+            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=int(periodo_hasta))
 
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
@@ -158,10 +158,11 @@ class OportunidadCrearView(FormView):
         oportunidad.save()
 
         for be in list_beneficios_extras:
-            Be_extra = BeneficioExtra()
-            Be_extra.descripcion = be
-            Be_extra.oportunidad = oportunidad
-            Be_extra.save()
+            if be != '':
+                Be_extra = BeneficioExtra()
+                Be_extra.descripcion = be
+                Be_extra.oportunidad = oportunidad
+                Be_extra.save()
 
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
