@@ -172,10 +172,11 @@ class OportunidadCrearView(FormView):
         oportunidad.beneficio = list_beneficios
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
-        total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
-                                       oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
-                                       oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
-                                       oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        # total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
+        #                                oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
+        #                                oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
+        #                                oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        resp = guardar_compatibilidad(oportunidad)
         return super(OportunidadCrearView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -394,10 +395,11 @@ class OportunidadEditarView(FormView):
         oportunidad.estado_oportunidad = estado_nuevo
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
-        total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
-                                       oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
-                                       oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
-                                       oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        # total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
+        #                                oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
+        #                                oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
+        #                                oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        resp = guardar_compatibilidad(oportunidad)
         return super(OportunidadEditarView, self).form_valid(form)
 
 class OportunidadArchivarView(FormView):
