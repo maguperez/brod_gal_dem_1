@@ -333,6 +333,9 @@
 
 	 $(function(){
          $("input[type=file]").addClass("cropit-image-input");
+
+         var formulario = '#form-modal-body form';
+
          $('#image-cropper').cropit({
              imageBackground: true,
              imageBackgroundBorderWidth: 100// Width of background border
@@ -358,6 +361,8 @@
 		 $('#comment-button').click(function() {
 			$('#form-modal-body').load('resumen/', function () {
 				$('#form-modal').modal('toggle');
+
+                validacionResumen(formulario)
 			});
 		 });
 		 $('.popup .close').click(function(e) {
@@ -368,7 +373,7 @@
 			$('#form-modal-body').load('info-personal/', function () {
 				$('#form-modal').modal('toggle');
 
-                validacionInfoPersonal('#form-modal-body form');
+                validacionInfoPersonal(formulario);
 			});
 		 });
 		 $('#disponibilidad-button').click(function() {
@@ -424,7 +429,7 @@
 				 $('#form-modal-body').load('experiencia/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
-                     validacionExperiencia('#form-modal-body form');
+                     validacionExperiencia(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -440,7 +445,7 @@
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 
-                validacionExperiencia('#form-modal-body form');
+                validacionExperiencia(formulario);
 			});
 		 });
 		 $('.voluntariado-botton').click(function() {
@@ -492,8 +497,6 @@
 			});
 		 });
 		 $("#form-modal .btn-submit").on("click", function() {
-
-             debugger;
 
 			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
 
@@ -637,6 +640,54 @@
             }
         });
     }
+
+     function validacionResumen(formulario){
+         $(formulario).validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				resumen: {
+					required: true,
+                    maxlength: 1000
+                }
+            },
+            messages: {
+				resumen: {
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+     }
 
     function validacionInfoPersonal(formulario){
 
