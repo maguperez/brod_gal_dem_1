@@ -21,30 +21,30 @@
 				</div>
 				<div class="panel right principal">
 					<ul class="list">
-						{% for oportunidad in oportunidades %}
+						{% for opo in oportunidades %}
                         <li>
 							<div class="box oportunidad-box">
 								<div class="content">
 									<div class="detalle full">
-										<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo | title }}</h2></a>
+										<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}"><h2 class="link">{{opo.oportunidad.titulo | title }}</h2></a>
                                         <div class="descripcion">
                                             <div class="datos">
-                                                <div class="empresa"><i class="empresa"></i><label><a href="{%url 'estudiante_empresa_detalle' empresa.id%}">{{oportunidad.empresa | upper}}</a></label></div>
+                                                <div class="empresa"><i class="empresa"></i><label><a href="{%url 'estudiante_empresa_detalle' empresa.id%}">{{opo.oportunidad.empresa | upper}}</a></label></div>
                                                 <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
                                                 <div class="remuneracion"><i class="remuneracion"></i><label>
-													{%if oportunidad.remuneracion.id == 3 %}
-                                                    	{{oportunidad.remuneracion_min}}
-                                                	{%elif oportunidad.remuneracion.id == 2 %}
-                                                    	{{oportunidad.remuneracion_max}} - {{oportunidad.remuneracion_min}}
+													{%if opo.oportunidad.remuneracion.id == 3 %}
+                                                    	{{opo.oportunidad.remuneracion_min}}
+                                                	{%elif opo.oportunidad.remuneracion.id == 2 %}
+                                                    	{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
                                                 	{%else%}
-                                                    	{{oportunidad.remuneracion}}
+                                                    	{{opo.oportunidad.remuneracion}}
                                                 	{%endif%}</label></div>
                                             </div>
                                            	<div class="compatibilidad">
 												<div class="consolidado">
 													<div class="circular-bar ">
-														<div class="circular-bar-chart" data-percent="73">
-															<label><span class="percent">73</span>%</label>
+														<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_promedio }}">
+															<label><span class="percent">{{ opo.compatibilidad_promedio }}</span>%</label>
 														</div>
 													</div>
 													<label class="resultado">Compatible</label>
@@ -52,16 +52,16 @@
 												<div class="desglose" style="opacity: 0">
 													<div class="cultural">
 														<div class="circular-bar">
-															<div class="circular-bar-chart" data-percent="63">
-																<label><span class="percent">53</span>%</label>
+															<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_cultural }}">
+																<label><span class="percent">{{ opo.compatibilidad_cultural }}</span>%</label>
 															</div>
 														</div>
 														<label class="resultado">Cultural</label>
 													</div>
 													<div class="academico">
 														<div class="circular-bar">
-															<div class="circular-bar-chart" data-percent="49">
-																<label><span class="percent">49</span>%</label>
+															<div class="circular-bar-chart" data-percent="{{opo.compatibilidad_academica}}">
+																<label><span class="percent">{{opo.compatibilidad_academica}}</span>%</label>
 															</div>
 														</div>
 														<label class="resultado">Académico</label>
@@ -69,7 +69,7 @@
 												</div>
 											</div>
 											<div class="ver-oportunidad">
-                                                <a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' oportunidad.id%}">VER OPORTUNIDAD</a>
+                                                <a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}">VER OPORTUNIDAD</a>
                                                 <label class="cierre">CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
                                             </div>
                                             <div class="clear"></div>
@@ -111,21 +111,21 @@
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#1dcfac",
+            barColor: "#5D9CF9",
             size: 65,
         });
         $('.cultural .circular-bar-chart').easyPieChart({
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#c0392b",
+            barColor: "#27ae60",
             size: 65,
         });
         $('.academico .circular-bar-chart').easyPieChart({
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#5d9cf9",
+            barColor: "#c0392b",
             size: 65,
         });
 	});

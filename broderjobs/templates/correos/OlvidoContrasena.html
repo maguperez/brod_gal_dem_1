@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -12,11 +13,11 @@ and open the template in the editor.
         <style>
             @font-face {
                 font-family: 'Roboto Light';
-                src: url('archivos/fonts/Roboto-Light.eot');
-                src: url('archivos/fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),
-                     url('archivos/fonts/Roboto-Light.woff') format('woff'),
-                     url('archivos/fonts/Roboto-Light.ttf') format('truetype'),
-                     url('archivos/fonts/Roboto-Light.svg#Roboto-Light') format('svg');
+                src: url({{ protocol }}://{{ domain }}{% static 'archivos/fonts/Roboto-Light.eot' %});
+                src: url({{ protocol }}://{{ domain }}{% static 'archivos/fonts/Roboto-Light.eot?#iefix' %}) format('embedded-opentype'),
+                     url({{ protocol }}://{{ domain }}{% static 'archivos/fonts/Roboto-Light.woff'%}) format('woff'),
+                     url({{ protocol }}://{{ domain }}{% static 'archivos/fonts/Roboto-Light.ttf'%}) format('truetype'),
+                     url({{ protocol }}://{{ domain }}{% static 'archivos/fonts/Roboto-Light.svg#Roboto-Light'%}) format('svg');
             }
         </style>
     </head>
@@ -28,7 +29,7 @@ and open the template in the editor.
             <div style ="font-size: 31pt; color: #5F5F5F; text-align: center"> 
                 Solicitud de contraseña </div>
             <div style ="font-size: 20pt; text-align: center; margin-top: 40px"> 
-                <b>Hola {{ user.first_name }}, {{ c.user.first_name }}</b> </div>
+                <b>Hola {{nombre}}</b> </div>
             <div style = "margin: 40px auto; text-align: center;">
                 Para restablecer su contraseña solo haga<br>
                 click en el botón de abajo y siga las instrucciones.
@@ -42,13 +43,13 @@ and open the template in the editor.
         </div>
         <div style="text-align: center">
             <span style="padding-top: 45px; margin-bottom: 15px; display: inline-block; border-top: solid 1px #999">
-            <a href="#"><img src="archivos/icon-facebook.png" width = 45 /></a>
-            <a href="#"><img src="archivos/icon-twitter.png" width = 45 /></a>
-            <a href="#"><img src="archivos/icon-snapchat.png" width = 45 /></a>
+            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-facebook.png' %}" width = 45 /></a>
+            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-twitter.png' %}" width = 45 /></a>
+            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-snapchat.png' %}" width = 45 /></a>
             </span>
         </div>
         <div style="margin:15px;text-align: center; font-size: 11pt; color: #999 ">
-            Enviado con <img src="archivos/icon-corazon.png" width = 11 /> por personas que aman lo que hacen
+            Enviado con <img src="{% static 'archivos/icon-corazon.png' %}" width = 11 /> por personas que aman lo que hacen
         </div>
     </body>
 </html>
