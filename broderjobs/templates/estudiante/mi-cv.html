@@ -46,6 +46,14 @@
         max-width: 300px;
     }
 
+    .tooltip{
+        width: 167px;
+    }
+
+    .tooltip-arrow{
+        top: 48.1754%;
+    }
+
 </style>
 
 <section class="cv">
@@ -325,6 +333,9 @@
 
 	 $(function(){
          $("input[type=file]").addClass("cropit-image-input");
+
+         var formulario = '#form-modal-body form';
+
          $('#image-cropper').cropit({
              imageBackground: true,
              imageBackgroundBorderWidth: 100// Width of background border
@@ -350,6 +361,8 @@
 		 $('#comment-button').click(function() {
 			$('#form-modal-body').load('resumen/', function () {
 				$('#form-modal').modal('toggle');
+
+                validacionResumen(formulario)
 			});
 		 });
 		 $('.popup .close').click(function(e) {
@@ -359,6 +372,8 @@
 		 $('#info-personal-button').click(function() {
 			$('#form-modal-body').load('info-personal/', function () {
 				$('#form-modal').modal('toggle');
+
+                validacionInfoPersonal(formulario);
 			});
 		 });
 		 $('#disponibilidad-button').click(function() {
@@ -414,6 +429,7 @@
 				 $('#form-modal-body').load('experiencia/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                     validacionExperiencia(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -428,6 +444,8 @@
 			$('#form-modal-body').load('experiencia-crear/', function () {
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+
+                validacionExperiencia(formulario);
 			});
 		 });
 		 $('.voluntariado-botton').click(function() {
@@ -438,6 +456,7 @@
 				 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                     validacionVoluntariado(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -452,6 +471,7 @@
 			$('#form-modal-body').load('voluntariado-crear/', function () {
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                validacionVoluntariado(formulario);
 			});
 		 });
 		 $('.actividad-extra-botton').click(function() {
@@ -462,6 +482,7 @@
 				 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                     validacionActividadesExtras(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -475,12 +496,20 @@
 			 var id = $(this).find("button").attr("id");
 			$('#form-modal-body').load('actividad-extra-crear/', function () {
 				$('#form-modal').modal('toggle');
+                validacionActividadesExtras(formulario);
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 			});
 		 });
 		 $("#form-modal .btn-submit").on("click", function() {
 
 			 var formularioPrueba = $(this).parents("#form-modal").find("form")[0];
+
+             if(formularioPrueba.id == 'cv-experiencia'){
+                 var validez = $(formularioPrueba).validate();
+{#                var validator = $( "form" ).validate();#}
+		        var validezElemento = validez.element('#id_puestos');
+             }
+
 			 if (formularioPrueba.id == 'cv-experiencia') {
 				 var fechaDesde = $('#id_fecha_desde').datepicker('getDate');
 				 var fechaHasta = $('#id_fecha_hasta').datepicker('getDate');
@@ -535,7 +564,467 @@
 		   };
 	 });
 
+     function validacionVoluntariado(formulario){
 
+		$.validator.addMethod('validarFecha',function(value, element, param){
+
+			if(element.id == 'id_fecha_desde'){
+				if(!value){
+					return false;
+				}
+			}
+			else if(element.id == 'id_fecha_hasta'){
+				if(!$("#id_voluntariado_actual").is(":checked") && !value){
+					return false;
+				}
+			}
+			return true;
+		},"Este campo es obligatorio");
+
+		$(formulario).validate({
+//			onfocusout: true,
+//			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_organizacion' || element[0].id == 'id_fecha_hasta'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				cargo: {
+					required: true
+                },
+				organizacion:{
+                    required: true
+                },
+				descripcion_txt:{
+					required: true,
+					maxlength: 1000
+				},
+				fecha_desde:{
+					validarFecha:true
+				},
+				fecha_hasta:{
+					validarFecha:true
+				}
+
+            },
+            messages: {
+				cargo: {
+					required: "Este campo es obligatorio"
+                },
+				organizacion:{
+                    required: "Este campo es obligatorio"
+                },
+				descripcion_txt:{
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+	}
+
+     function validacionActividadesExtras(formulario){
+         $(formulario).validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				organizacion: {
+					required: true,
+                    maxlength: 50
+                },
+				descripcion:{
+                    maxlength: 1000
+                }
+            },
+            messages: {
+				organizacion: {
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 50 caracteres"
+                },
+				descripcion:{
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+     }
+
+    function validacionExperiencia(formulario){
+        $.validator.addMethod('validarFecha',function(value, element, param){
+
+ 			if(element.id == 'id_fecha_desde'){
+ 				if(!value){
+ 					return false;
+ 				}
+ 			}
+ 			else if(element.id == 'id_fecha_hasta'){
+ 				if(!$("#id_experiencia_actual").is(":checked") && !value){
+ 					return false;
+ 				}
+ 			}
+ 			return true;
+ 		},"Este campo es obligatorio");
+
+		$(formulario).validate({
+//			onfocusout: true,
+//			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_empresas' || element[0].id == 'id_fecha_hasta'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				puestos: {
+					required: true
+                },
+				empresas:{
+                    required: true
+                },
+				descripcion_txt:{
+					required: true,
+					maxlength: 1000
+				},
+ 				fecha_desde:{
+ 					validarFecha:true
+ 				},
+ 				fecha_hasta: {
+					validarFecha: true
+				}
+            },
+            messages: {
+				puestos: {
+					required: "Este campo es obligatorio"
+                },
+				empresas:{
+                    required: "Este campo es obligatorio"
+                },
+				descripcion_txt:{
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+    }
+
+     function validacionResumen(formulario){
+         $(formulario).validate({
+			onfocusout: true,
+			onkeyup:true,
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' || element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+                $(element).tooltip('hide');
+            },
+            rules: {
+				resumen: {
+					required: true,
+                    maxlength: 1000
+                }
+            },
+            messages: {
+				resumen: {
+					required: "Este campo es obligatorio",
+                    maxlength: "Este campo no puede superar los 1000 caracteres"
+                }
+            }
+        });
+     }
+
+    function validacionInfoPersonal(formulario){
+
+        $.validator.addMethod('universidadExistente',function(value, element, param){
+			return flagSeleccionarUniversidad;
+		},'Debe seleccionar una universidad existente');
+
+		$.validator.addMethod('carreraExistente',function(value, element, param){
+			return flagSeleccionarCarrera;
+		},'Debe seleccionar una carrera existente');
+
+		$.validator.addMethod('validarCiclos',function(value, element, param){
+			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
+				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
+
+		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
+
+        $.validator.addMethod('MaximoMayorMinimo',function(value, element, param){
+
+
+			var valorRetorno = true;
+
+            if(!$('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+                valorRetorno = false;
+            }
+
+            if($('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+                var montoMinimo = parseInt($('#id_remuneracion_min').val(),10);
+                var montoMaximo = parseInt($('#id_remuneracion_max').val(),10);
+
+                if(montoMinimo > montoMaximo){
+                    valorRetorno = false;
+                }
+            }
+
+
+			return valorRetorno;
+
+		},'Hasta debe ser mayor que Desde');
+
+
+            $(formulario).validate({
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'
+						|| element[0].id == 'id_telefono' || element[0].id == 'id_remuneracion_max'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else if(element[0].id == 'id_genero_0'){
+					$('#id_genero_1').tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+					$('#id_genero_1').tooltip('show');
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+				if(element.id == 'id_genero_0'){
+					$('#id_genero_1').tooltip('hide');
+				}
+				else{
+					$(element).tooltip('hide');
+				}
+
+            },
+            rules: {
+				grado_estudio: {
+                    required: true
+                },
+				universidades: {
+                    required: true,
+					universidadExistente: true
+                },
+				carreras: {
+                    required: true,
+					carreraExistente: true
+                },
+				semestre_inicio_estudio:{
+                    required: true,
+					validarCiclos: true
+                },
+				ano_inicio_estudio:{
+                    required: true,
+					validarCiclos: true
+                },
+				semestre_graduacion:{
+                    required: true,
+					validarCiclos: true
+                },
+				ano_graduacion:{
+                    required: true,
+					validarCiclos: true
+                },
+				email: {
+                    required: true,
+                    email: true
+                },
+				telefono: {
+                    digits: true
+                },
+				pais:{
+                    required: true
+                },
+				ciudad:{
+                    required: true
+                },
+				fecha_nacimiento:{
+					required: true
+				},
+				genero:{
+					required: true
+				},
+                remuneracion_min:{
+                    digits: true,
+                    maxlength: 7,
+					MaximoMayorMinimo: ''
+                },
+                remuneracion_max:{
+					digits: true,
+                    maxlength: 7
+				}
+
+            },
+            messages: {
+				grado_estudio: {
+                    required: "Este campo es obligatorio"
+                },
+				universidades: {
+                    required: "Este campo es obligatorio"
+                },
+				carreras: {
+                    required: "Este campo es obligatorio"
+                },
+				semestre_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				semestre_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+				telefono: {
+                    digits: "Este campo solo contiene digitos"
+                },
+				pais:{
+                    required: "Este campo es obligatorio"
+                },
+				ciudad:{
+                    required: "Este campo es obligatorio"
+                },
+				fecha_nacimiento:{
+					required: "Este campo es obligatorio"
+				},
+				genero:{
+					required: "Este campo es obligatorio"
+				},
+                remuneracion_min:{
+					digits: "Este campo es numérico",
+                    maxlength: "Este campo no puede tener más de 7 caracteres"
+				},
+				remuneracion_max:{
+					digits: "Este campo es numérico",
+                    maxlength: "Este campo no puede tener más de 7 caracteres"
+				}
+            }
+        });
+    }
 
 
  </script>

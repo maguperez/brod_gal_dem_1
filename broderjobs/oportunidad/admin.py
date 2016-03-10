@@ -10,8 +10,8 @@ admin.site.register(models.Oportunidad, OportunidadAdmin)
 
 
 class OportunidadCompatibilidadAdmin(admin.ModelAdmin):
-    list_display = ('estudiante', 'empresa', 'compatibilidad_promedio', 'compatibilidad_cultural', 'compatibilidad_academica')
-admin.site.register(models.OportunidadCompatibilidad)
+    list_display = ('estudiante', 'oportunidad', 'compatibilidad_promedio', 'compatibilidad_cultural', 'compatibilidad_academica')
+admin.site.register(models.OportunidadCompatibilidad, OportunidadCompatibilidadAdmin)
 
 class PostulacionAdmin(admin.ModelAdmin):
     list_display = ('estudiante', 'oportunidad')

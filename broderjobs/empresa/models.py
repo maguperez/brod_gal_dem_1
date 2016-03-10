@@ -78,7 +78,7 @@ class CategoriaEmpresa(models.Model):
 
 class Empresa(models.Model):
 
-    nombre =  models.CharField(max_length="100", default=None, null=True, blank=True )
+    nombre =  models.CharField(max_length="1000", default=None, null=True, blank=True )
     descripcion = models.CharField(max_length="200", default=None, null=True, blank=True )
     quienes_somos = models.CharField(max_length="1000", default=None, null=True, blank=True )
     telefono = models.CharField(max_length="100", default=None, null=True, blank=True )
