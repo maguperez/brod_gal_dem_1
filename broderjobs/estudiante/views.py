@@ -120,7 +120,10 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  OportunidadCompatibilidad.objects.filter(oportunidad__empresa_id = empresa.id,
+        user = self.request.user
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
+        oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
                                                                   oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()[:2]
         try:
             redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
@@ -226,8 +229,11 @@ class OportunidadesEmpresaView(TemplateView):
     template_name = 'estudiante/oportunidades-empresa.html'
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
+        user = self.request.user
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  OportunidadCompatibilidad.objects.filter(oportunidad__empresa_id = empresa.id,
+        oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
                                                                   oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()[:2]
         context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
