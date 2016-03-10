@@ -845,6 +845,29 @@
 
 		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 
+        $.validator.addMethod('MaximoMayorMinimo',function(value, element, param){
+
+
+			var valorRetorno = true;
+
+            if(!$('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+                valorRetorno = false;
+            }
+
+            if($('#id_remuneracion_min').val() && $('#id_remuneracion_max').val()){
+                var montoMinimo = parseInt($('#id_remuneracion_min').val(),10);
+                var montoMaximo = parseInt($('#id_remuneracion_max').val(),10);
+
+                if(montoMinimo > montoMaximo){
+                    valorRetorno = false;
+                }
+            }
+
+
+			return valorRetorno;
+
+		},'Hasta debe ser mayor que Desde');
+
 
             $(formulario).validate({
             errorPlacement: function (error, element) {
@@ -852,7 +875,7 @@
                 $(element).tooltip('destroy');
 
 				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'
-						|| element[0].id == 'id_telefono'){
+						|| element[0].id == 'id_telefono' || element[0].id == 'id_remuneracion_max'){
 
 					$(element).tooltip({
 						animation: true,
@@ -938,7 +961,17 @@
 				},
 				genero:{
 					required: true
+				},
+                remuneracion_min:{
+                    digits: true,
+                    maxlength: 7,
+					MaximoMayorMinimo: ''
+                },
+                remuneracion_max:{
+					digits: true,
+                    maxlength: 7
 				}
+
             },
             messages: {
 				grado_estudio: {
@@ -980,6 +1013,14 @@
 				},
 				genero:{
 					required: "Este campo es obligatorio"
+				},
+                remuneracion_min:{
+					digits: "Este campo es numérico",
+                    maxlength: "Este campo no puede tener más de 7 caracteres"
+				},
+				remuneracion_max:{
+					digits: "Este campo es numérico",
+                    maxlength: "Este campo no puede tener más de 7 caracteres"
 				}
             }
         });

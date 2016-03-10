@@ -196,6 +196,12 @@ if 'RDS_DB_NAME' in os.environ:
 
 else:
     STATIC_ROOT = ''
+
+    if DEBUG: 
+       STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+    else:
+       STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+
     STATIC_URL = '/static/'
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"),
@@ -206,6 +212,8 @@ else:
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     )
+
+
 
 if 'RDS_DB_NAME' in os.environ:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
