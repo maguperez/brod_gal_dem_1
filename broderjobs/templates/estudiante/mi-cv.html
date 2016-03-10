@@ -367,6 +367,8 @@
 		 $('#info-personal-button').click(function() {
 			$('#form-modal-body').load('info-personal/', function () {
 				$('#form-modal').modal('toggle');
+
+                validacionInfoPersonal('#form-modal-body form');
 			});
 		 });
 		 $('#disponibilidad-button').click(function() {
@@ -422,6 +424,7 @@
 				 $('#form-modal-body').load('experiencia/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
 {#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
+                     validacionExperiencia('#form-modal-body form');
 				 });
 			 }
 			 if (accion == 'eliminar') {
@@ -437,7 +440,7 @@
 				$('#form-modal').modal('toggle');
 {#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 
-                pruebaValidacion('#form-modal-body form');
+                validacionExperiencia('#form-modal-body form');
 			});
 		 });
 		 $('.voluntariado-botton').click(function() {
@@ -554,7 +557,7 @@
 		   };
 	 });
 
-    function pruebaValidacion(formulario){
+    function validacionExperiencia(formulario){
         $.validator.addMethod('validarFecha',function(value, element, param){
 
  			if(element.id == 'id_fecha_desde'){
@@ -631,6 +634,162 @@
 					required: "Este campo es obligatorio",
                     maxlength: "Este campo no puede superar los 1000 caracteres"
                 }
+            }
+        });
+    }
+
+    function validacionInfoPersonal(formulario){
+
+        $.validator.addMethod('universidadExistente',function(value, element, param){
+			return flagSeleccionarUniversidad;
+		},'Debe seleccionar una universidad existente');
+
+		$.validator.addMethod('carreraExistente',function(value, element, param){
+			return flagSeleccionarCarrera;
+		},'Debe seleccionar una carrera existente');
+
+		$.validator.addMethod('validarCiclos',function(value, element, param){
+			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
+				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
+
+		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
+
+
+            $(formulario).validate({
+            errorPlacement: function (error, element) {
+
+                $(element).tooltip('destroy');
+
+				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'
+						|| element[0].id == 'id_telefono'){
+
+					$(element).tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+
+				}
+				else if(element[0].id == 'id_genero_0'){
+					$('#id_genero_1').tooltip({
+						animation: true,
+						placement: "right",
+						title: $(error).text(),
+						trigger: "manual"
+                	} );
+					$('#id_genero_1').tooltip('show');
+				}
+				else{
+					$(element).tooltip({
+						animation: true,
+						placement: "left",
+						title: $(error).text(),
+						trigger: "manual"
+					} );
+				}
+
+                $(element).tooltip('show');
+
+            },
+            success: function (label, element) {
+				if(element.id == 'id_genero_0'){
+					$('#id_genero_1').tooltip('hide');
+				}
+				else{
+					$(element).tooltip('hide');
+				}
+
+            },
+            rules: {
+				grado_estudio: {
+                    required: true
+                },
+				universidades: {
+                    required: true,
+					universidadExistente: true
+                },
+				carreras: {
+                    required: true,
+					carreraExistente: true
+                },
+				semestre_inicio_estudio:{
+                    required: true,
+					validarCiclos: true
+                },
+				ano_inicio_estudio:{
+                    required: true,
+					validarCiclos: true
+                },
+				semestre_graduacion:{
+                    required: true,
+					validarCiclos: true
+                },
+				ano_graduacion:{
+                    required: true,
+					validarCiclos: true
+                },
+				email: {
+                    required: true,
+                    email: true
+                },
+				telefono: {
+                    digits: true
+                },
+				pais:{
+                    required: true
+                },
+				ciudad:{
+                    required: true
+                },
+				fecha_nacimiento:{
+					required: true
+				},
+				genero:{
+					required: true
+				}
+            },
+            messages: {
+				grado_estudio: {
+                    required: "Este campo es obligatorio"
+                },
+				universidades: {
+                    required: "Este campo es obligatorio"
+                },
+				carreras: {
+                    required: "Este campo es obligatorio"
+                },
+				semestre_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_inicio_estudio:{
+                    required: "Este campo es obligatorio"
+                },
+				semestre_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				ano_graduacion:{
+                    required: "Este campo es obligatorio"
+                },
+				email: {
+                    required: "Este campo es obligatorio",
+                    email: "Introduzca un correo válido"
+                },
+				telefono: {
+                    digits: "Este campo solo contiene digitos"
+                },
+				pais:{
+                    required: "Este campo es obligatorio"
+                },
+				ciudad:{
+                    required: "Este campo es obligatorio"
+                },
+				fecha_nacimiento:{
+					required: "Este campo es obligatorio"
+				},
+				genero:{
+					required: "Este campo es obligatorio"
+				}
             }
         });
     }
