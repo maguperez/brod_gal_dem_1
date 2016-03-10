@@ -56,7 +56,10 @@ class MiEmpresaView(FormView):
         # imagenes = Picture.objects.filter(empresa_id = empresa.id)
         # videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
-        redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
+        redes_sociales, crear =EmpresaRedesSociales.objects.get_or_create(empresa_id=representante.empresa.id, estado = 'A')
+        if crear:
+            redes_sociales.empresa = representante.empresa
+            redes_sociales.save()
 
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
 from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion, Universidad
-from estudiante.modles import Estudiante
+from estudiante.models import Estudiante
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect

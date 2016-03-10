@@ -121,11 +121,11 @@ def calcular_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_eda
     }
     return data
 
-def guardar_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_edad_desde, p_edad_hasta, p_pais, p_ciudad,
-                           p_genero, p_tipo_puesto, p_carga_horaria, p_idioma, p_conocimiento, p_empresa, p_oportunidad_id):
+def guardar_compatibilidad(oportunidad):
     try:
         total_compatibles = 0
-        estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = p_empresa, compatibilidad_cultural__gte = 20).values('estudiante_id')
+        estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = oportunidad.empresa,
+                                                                      compatibilidad_cultural__gte = 20).values('estudiante_id')
         estudiantes = Estudiante.objects.filter(pk__in = estudiantes_cultura)
         total_estudiantes = estudiantes.count()
 
@@ -140,64 +140,68 @@ def guardar_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_edad
             carga_horaria = 0
             idioma = 0
             conocimiento = 0
-            if  p_carreras.all() == 0 or  e.carrera in p_carreras.all():
+            if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
                 carrera = 11
-            if p_universidades.filter().count() == 0 or e.universidad in p_universidades.all():
+            if oportunidad.universidad.filter().count() == 0 or e.universidad in oportunidad.universidad.all():
                 universidad = 5
-            if p_grado_estudios is None or e.grado_estudio == p_grado_estudios:
+            if oportunidad.grado_estudio is None or e.grado_estudio == oportunidad.grado_estudio:
                 grado_estudio = 11
-            if( p_edad_desde == '' or p_edad_desde is None) or (p_edad_hasta == '' or p_edad_hasta is None):
+            if( oportunidad.edad_desde == '' or oportunidad.edad_desde is None) or \
+                    (oportunidad.edad_hasta == '' or oportunidad.edad_hasta is None):
                 edad = 8
             elif e.persona.fecha_nacimiento is not None :
-                if calular_edad(e.persona.fecha_nacimiento) in range(int(p_edad_desde), int(p_edad_hasta)):
+                if calular_edad(e.persona.fecha_nacimiento) in range(int(oportunidad.edad_desde), int(oportunidad.edad_hasta)):
                     edad = 8
-            if p_pais != None:
-                if p_ciudad != None:
-                    if p_ciudad == e.ciudad:
+            if oportunidad.pais != None:
+                if oportunidad.ciudad != None:
+                    if oportunidad.ciudad == e.ciudad:
                         ubicacion = 6
                 else:
-                    if p_pais == e.pais:
+                    if oportunidad.pais == e.pais:
                         ubicacion = 6
             else:
                 ubicacion = 6
-            if p_genero == None or e.persona.genero == p_genero:
+            if oportunidad.genero == None or e.persona.genero == oportunidad.genero:
                 genero = 2
-            if p_tipo_puesto == None or e.tipo_puesto.filter(id = p_tipo_puesto.id).count()>0:
+            if oportunidad.tipo_puesto == None or e.tipo_puesto.filter(id = oportunidad.tipo_puesto.id).count()>0:
                 tipo_puesto = 12
-            if p_carga_horaria == None or e.carga_horaria == p_carga_horaria:
+            if oportunidad.carga_horaria == None or e.carga_horaria == oportunidad.carga_horaria:
                 carga_horaria = 11
-            if p_idioma.count() == 0:
+            if oportunidad.idioma.count() == 0:
                 idioma = 11
             else:
-                peso_idioma = 11/ p_idioma.count()
-                for i in p_idioma.all():
+                peso_idioma = 11/ oportunidad.idioma.count()
+                for i in oportunidad.idioma.all():
                     for x in e.idioma.filter():
                         if x.idiomabase == i.idiomabase and x.orden >= i.orden:
                             idioma = idioma + peso_idioma
                             break
-            if p_conocimiento.count() == 0:
+            if oportunidad.conocimiento.count() == 0:
                 # or e.conocimiento.filter(id__in = map(int, p_conocimiento)).count() > 0 :
                 conocimiento = 9
             else:
-                peso_conocimiento = 9 / p_conocimiento.count()
-                for i in p_conocimiento.all():
+                peso_conocimiento = 9 / oportunidad.conocimiento.count()
+                for i in oportunidad.conocimiento.all():
                     for x in e.conocimiento.filter():
                         if x.id == i.id:
                             conocimiento = conocimiento + peso_conocimiento
                             break
 
-            compatibilidad_academica =  carrera + universidad + grado_estudio + edad + ubicacion + genero + tipo_puesto + idioma + \
-                                        carga_horaria + conocimiento
+            compatibilidad_academica =  carrera + universidad + grado_estudio + edad + ubicacion + genero + tipo_puesto \
+                                        + idioma + carga_horaria + conocimiento
 
-            if p_oportunidad_id > 0:
-                    estudiante_cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = e.pk, empresa_id = p_empresa.id )
-                    c, created = OportunidadCompatibilidad.objects.get_or_create(estudiante_id = e.pk, oportunidad_id = p_oportunidad_id)
+            if oportunidad.id > 0:
+                    estudiante_cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = e.pk,
+                                                                              empresa_id = oportunidad.empresa.id )
+                    c, created = OportunidadCompatibilidad.objects.get_or_create(estudiante_id = e.pk,
+                                                                                 oportunidad_id = oportunidad.id)
                     if created:
                         c.estudiante = e
-                    c.oportunidad.id = p_oportunidad_id
+                    c.oportunidad.id = oportunidad.id
                     c.compatibilidad_academica = compatibilidad_academica
                     c.compatibilidad_cultural = estudiante_cultura.compatibilidad_cultural
                     c.compatibilidad_promedio = (c.compatibilidad_academica + c.compatibilidad_cultural) / 2
+                    c.estado = oportunidad.estado
                     c.save()
 
             if compatibilidad_academica > 10:
