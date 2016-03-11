@@ -110,8 +110,7 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-<<<<<<< HEAD
-=======
+
 
 if 'RDS_HOSTNAME' in os.environ:
 	DATABASES = {
@@ -140,7 +139,7 @@ else:
 			# 'PORT': '5432',
 		}
 	}
->>>>>>> 3643e54838f7934c5734932f7b68cdc88b2fa78e
+
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
