@@ -84,7 +84,7 @@ def calcular_cultura_estudiate(estudiante):
         for empresa_cultura in EmpresaCultura.objects.filter(estado = 'A'):
             est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id,
                                                                                        empresa_id = empresa_cultura.empresa.id)
-            if created is True:
+            if created:
                 est_empr_cultura.estudiante = estudiante
                 est_empr_cultura.empresa = empresa_cultura.empresa
             clan = (compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)

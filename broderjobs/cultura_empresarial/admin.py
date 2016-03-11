@@ -39,9 +39,9 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.save()
 
             for e in EstudianteCultura.objects.filter(estado='A'):
-                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.id,
+                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.estudiante.id,
                                                                                            empresa_id = empresa_cultura.empresa.id)
-                if created is True:
+                if created:
                     est_empr_cultura.estudiante = e.estudiante
                     est_empr_cultura.empresa = empresa_cultura.empresa
                 clan = (e.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)

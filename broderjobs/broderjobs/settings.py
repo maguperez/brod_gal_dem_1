@@ -139,6 +139,11 @@ else:
 			# 'PORT': '5432',
 		}
 	}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> be2d9a8e8f851519708e7b0c26e4de9d49251ae1
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {

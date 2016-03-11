@@ -189,8 +189,7 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
 def guardar_compatibilidad(oportunidad):
     try:
         total_compatibles = 0
-        estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = oportunidad.empresa,
-                                                                      compatibilidad_cultural__gte = 20).values('estudiante_id')
+        estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = oportunidad.empresa).values('estudiante_id')
         estudiantes = Estudiante.objects.filter(pk__in = estudiantes_cultura)
         total_estudiantes = estudiantes.count()
 

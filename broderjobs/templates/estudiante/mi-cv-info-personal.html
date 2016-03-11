@@ -126,7 +126,9 @@
 			language: 'es',
 			format: "dd/mm/yyyy",
 			endDate:"0d"
-		})
+		}).on("hide", function(e) {
+            $(this).blur();
+        })
 
 		InicializarTypeaheadElementos();
         $.validator.addMethod('validarSemestreActual',function(value, element, param){
@@ -294,7 +296,7 @@
                         $(element).tooltip('hide');
                     }
 				}
-				else if(element[0].id == 'id_telefono' || element[0].id == 'id_semestre_actual'){
+				else if(element[0].id == 'id_telefono' || element[0].id == 'id_semestre_actual' || element[0].id == "id_fecha_nacimiento"){
                     object = $(element);
                     placement = "right";
 				}
