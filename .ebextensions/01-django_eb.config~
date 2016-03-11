@@ -1,0 +1,15 @@
+container_commands:
+  01_migrate:
+    command: "python manage.py migrate"
+    leader_only: true
+
+option_settings:
+  "aws:elasticbeanstalk:application:environment":
+    DJANGO_SETTINGS_MODULE: "broderjobs.settings"
+    PYTHONPATH: "/opt/python/current/app/broderjobs:$PYTHONPATH"
+  "aws:elasticbeanstalk:container:python":
+    WSGIPath: "broderjobs/broderjobs/wsgi.py"
+
+packages:
+  yum:
+    postgresql93-devel: []

@@ -417,16 +417,16 @@
                                     <div class="descripcion">
                                         <div class="datos">
                                             <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{opo.oportunidad.empresa}}</label></div>
-                                            <div class="ubicacion"><i class="ubicacion"></i><label>{{o.oportunidad.ciudad}},
+                                            <div class="ubicacion"><i class="ubicacion"></i><label>{{opo.oportunidad.ciudad}},
                                                 {{opo.oportunidad.pais}}</label></div>
                                             <div class="remuneracion"><i class="remuneracion"></i><label>
                                                 {%if opo.oportunidad.remuneracion.id == 3 %}
-                                                    {{opo.oportunidad.remuneracion_min}}
-                                                {%elif opo.oportunidad.remuneracion.id == 2 %}
-                                                    {{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
-                                                {%else%}
-                                                    {{opo.oportunidad.remuneracion}}
-                                                {%endif%}
+                                                    	{{opo.oportunidad.remuneracion_min}}
+                                                	{%elif opo.oportunidad.remuneracion.id == 2 %}
+                                                    	{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
+                                                	{%else%}
+                                                    	{{opo.oportunidad.remuneracion}}
+                                                	{%endif%}
                                             </label>
                                             </div>
                                         </div>
@@ -472,8 +472,13 @@
                             </li>
                             {% endfor %}
                         </ul>
+
+                    {% if oportunidades %}
                         <a class="link ver-mas" href="{%url 'estudiante-oportunidades-empresa' empresa.id%}">Ver m&aacute;s
                             oportunidades</a>
+                        {% else %}
+                        Esta Empresa no posee de oportunidades abiertas
+                    {% endif %}
                     </section>
                     <section class="ubicacion">
                         <h3 class="title"><i class="location"></i>Ubicaci&oacute;n</h3>

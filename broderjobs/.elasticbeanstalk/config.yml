@@ -1,9 +1,0 @@
-branch-defaults:
-  default:
-    environment: null
-global:
-  application_name: Broderjobs
-  default_platform: Python 2.7
-  default_region: us-east-1
-  profile: eb-cli
-  sc: null

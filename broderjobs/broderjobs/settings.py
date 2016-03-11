@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
+
+# ENVIRONMENTS
+PRODUCTION = 1
+DEVELOPMENT = 2
+LOCAL = 3
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -104,6 +110,37 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+<<<<<<< HEAD
+=======
+
+if 'RDS_HOSTNAME' in os.environ:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.mysql',
+			'NAME': os.environ['RDS_DB_NAME'],
+			'USER': os.environ['RDS_USERNAME'],
+			'PASSWORD': os.environ['RDS_PASSWORD'],
+			'HOST': os.environ['RDS_HOSTNAME'],
+			'PORT': os.environ['RDS_PORT'],
+		}
+	}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'BroderJobs1',
+			'USER': 'broder',
+			'PASSWORD': 'br753des',
+			'HOST': '191.168.19.11',
+			'PORT': '5434',
+			# 'NAME': 'BroderJobs',
+			# 'USER': 'sa',
+			# 'PASSWORD': 'abc#123',
+			# 'HOST': 'localhost',
+			# 'PORT': '5432',
+		}
+	}
+>>>>>>> 3643e54838f7934c5734932f7b68cdc88b2fa78e
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
@@ -282,3 +319,14 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email',
 }
+
+
+# Set AWS configuration
+AWS_STORAGE_BUCKET_NAME = 'elasticbeanstalk-us-west-2-953444065529'
+#AWS_QUERYSTRING_AUTH = False
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+#AWS_ACCESS_KEY_ID = '##################'
+#AWS_SECRET_ACCESS_KEY = '##################'
+
