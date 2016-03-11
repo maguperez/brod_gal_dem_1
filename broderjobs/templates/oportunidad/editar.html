@@ -410,6 +410,12 @@
 		{secuencia: 4,descripcion:'Ciclo 4'},
 		{secuencia: 5,descripcion:'Ciclo 5'}];
 	$(function(){
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;

@@ -452,7 +452,13 @@
         },
     };
 	$(function(){
-        $("[data-toggle=tooltip]").tooltip()
+        $("[data-toggle=tooltip]").tooltip();
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;
