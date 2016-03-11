@@ -27,20 +27,20 @@ and open the template in the editor.
             <img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.png' %}"/>
         </div>
         <div style ="background-color:white; margin: 15px; padding: 45px" >
-            <div style ="font-size: 31pt; color: #5F5F5F; text-align: center"> 
+            <div style ="font-family: Helvetica; font-size: 31pt; color: #5F5F5F; text-align: center ">
                 Solicitud de contraseña </div>
-            <div style ="font-size: 20pt; text-align: center; margin-top: 40px"> 
+            <div style ="font-family: Helvetica; font-size: 20pt; text-align: center; margin-top: 40px">
                 <b>Hola {{nombre}}</b> </div>
-            <div style = "margin: 40px auto; text-align: center;">
+            <div style = "font-family: Helvetica; margin: 40px auto; text-align: center;">
                 Para restablecer su contraseña solo haga<br>
                 click en el botón de abajo y siga las instrucciones.
             </div>
-            <div style="text-align: center; display: block">
+            <div style="font-family: Helvetica; text-align: center; display: block">
                 <a href="{{ protocol }}://{{ domain }}{% url 'contrasena-recuperar' uidb64=uid token=token %}" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 300px; text-decoration: none">Reestablecer contraseña</a>
             </div>
         </div>
         <div style="margin-top: 30px; margin-bottom: 10px; text-align: center; color: #999; font-size: 14pt">
-            ¿Preguntas? <a href="callto:989505387" style="text-decoration: none; color: #999;">989 505 387</a>
+            ¿Preguntas? <a href="callto:989505387" style="font-family: Helvetica; text-decoration: none; color: #999;">989 505 387</a>
         </div>
         <div style="text-align: center">
             <span style="padding-top: 45px; margin-bottom: 15px; display: inline-block; border-top: solid 1px #999">
