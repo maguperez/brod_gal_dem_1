@@ -303,6 +303,8 @@ class OportunidadEditarView(FormView):
         id = self.kwargs["id"]
         oportunidad = get_object_or_404(Oportunidad, id = id)
 
+        longitud = form.cleaned_data['longitud']
+        latitud = form.cleaned_data['latitud']
 
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
@@ -385,6 +387,10 @@ class OportunidadEditarView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.usuario_modificacion = user.username
         oportunidad.fecha_modificacion = datetime.now()
+
+        oportunidad.longitud = longitud
+        oportunidad.latitud = latitud
+
         oportunidad.save()
 
         beneficios_hidden = form.cleaned_data['beneficios_hidden']
