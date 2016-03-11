@@ -5,6 +5,9 @@
 {% load staticfiles %}
 <script src="{% static 'js/jquery.validate.min.js' %}"></script>
 <script src="{% static 'js/additional-methods.min.js' %}"></script>
+<style>
+    .tooltip-inner { width: 100px;}
+</style>
 <section class="usuarios">
     <div class="centered">
         <div class="panel left principal">
@@ -90,18 +93,19 @@
                 $(element).tooltip('hide');
             },
             rules: {
-                "old_password": { required: true, minlength: 6 },
-                "new_password1": { required: true, minlength: 6 },
-                "new_password2": { required: true, minlength: 6, equalTo: "#id_new_password1" },
+                "email": { required: true, minlength: 6 },
+                "first_name": { required: true, pattern: /^([^\d]*)$/},
+                "last_name": { required: true, pattern: /^([^\d]*)$/ }
             },
             messages: {
-                "old_password": { 	required: "Este campo es obligatorio",
-									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
-                "new_password1": {  required: "Este campo es obligatorio",
-									minlength: "La contraseña debe tener al menos seis (6) caracteres"},
-                "new_password2": {  required: "Este campo es obligatorio",
-                                    minlength: "La contraseña debe tener al menos seis (6) caracteres",
-									equalTo: "Las contraseñas deben ser iguales" },
+                "email": { 	required: "Este campo es obligatorio",
+                            email: "Introduzca un correo válido"},
+                "first_name": {
+                    required: "Este campo es obligatorio",
+                    pattern: "Este campo no permite caracteres numéricos" },
+                "last_name": {
+                    required: "Este campo es obligatorio",
+                    pattern: "Este campo no permite caracteres numéricos" }
             }
         });
     });
