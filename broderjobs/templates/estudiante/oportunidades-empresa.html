@@ -30,7 +30,7 @@
                                         <div class="descripcion">
                                             <div class="datos">
                                                 <div class="empresa"><i class="empresa"></i><label><a href="{%url 'estudiante_empresa_detalle' empresa.id%}">{{opo.oportunidad.empresa | upper}}</a></label></div>
-                                                <div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
+                                                <div class="ubicacion"><i class="ubicacion"></i><label>{{opo.oportunidad.ciudad |default_if_none:""}}, {{opo.oportunidad.pais |default_if_none:""}}</label></div>
                                                 <div class="remuneracion"><i class="remuneracion"></i><label>
 													{%if opo.oportunidad.remuneracion.id == 3 %}
                                                     	{{opo.oportunidad.remuneracion_min}}
@@ -70,7 +70,7 @@
 											</div>
 											<div class="ver-oportunidad">
                                                 <a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}">VER OPORTUNIDAD</a>
-                                                <label class="cierre">CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
+                                                <label class="cierre">CIERRA EL {{opo.oportunidad.fecha_cese | date:"j.m.Y"}}</label>
                                             </div>
                                             <div class="clear"></div>
                                         </div>

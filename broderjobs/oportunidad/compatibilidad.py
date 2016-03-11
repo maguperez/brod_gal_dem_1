@@ -121,6 +121,71 @@ def calcular_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_eda
     }
     return data
 
+#calcula la compatibilidad academica dado un estudiante y oportunidad
+def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
+    e = estudiante
+    carrera = 0
+    universidad = 0
+    grado_estudio = 0
+    edad = 0
+    ubicacion = 0
+    genero = 0
+    tipo_puesto = 0
+    carga_horaria = 0
+    idioma = 0
+    conocimiento = 0
+
+    if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
+        carrera = 11
+    if oportunidad.universidad.filter().count() == 0 or e.universidad in oportunidad.universidad.all():
+        universidad = 5
+    if oportunidad.grado_estudio is None or e.grado_estudio == oportunidad.grado_estudio:
+        grado_estudio = 11
+    if( oportunidad.edad_desde == '' or oportunidad.edad_desde is None) or (oportunidad.edad_hasta == '' or
+                                                                            oportunidad.edad_hasta is None):
+        edad = 8
+    elif e.persona.fecha_nacimiento is not None :
+        if calular_edad(e.persona.fecha_nacimiento) in range(int(oportunidad.edad_desde), int(oportunidad.edad_hasta)):
+            edad = 8
+    if oportunidad.pais != None:
+        if oportunidad.ciudad != None:
+            if oportunidad.ciudad == e.ciudad:
+                ubicacion = 6
+        else:
+            if oportunidad.pais == e.pais:
+                ubicacion = 6
+    else:
+        ubicacion = 6
+    if oportunidad.genero == None or e.persona.genero == oportunidad.genero:
+        genero = 2
+    if oportunidad.tipo_puesto == None or e.tipo_puesto.filter(id = oportunidad.tipo_puesto.id).count()>0:
+        tipo_puesto = 12
+    if oportunidad.carga_horaria == None or e.carga_horaria == oportunidad.carga_horaria:
+        carga_horaria = 11
+    if oportunidad.idioma.count() == 0:
+        idioma = 11
+    else:
+        peso_idioma = 11/ oportunidad.idioma.count()
+        for i in oportunidad.idioma.all():
+            for x in e.idioma.filter():
+                if x.idiomabase == i.idiomabase and x.orden >= i.orden:
+                    idioma = idioma + peso_idioma
+                    break
+    if oportunidad.conocimiento.count() == 0:
+        # or e.conocimiento.filter(id__in = map(int, p_conocimiento)).count() > 0 :
+        conocimiento = 9
+    else:
+        peso_conocimiento = 9 / oportunidad.conocimiento.count()
+        for i in oportunidad.conocimiento.all():
+            for x in e.conocimiento.filter():
+                if x.id == i.id:
+                    conocimiento = conocimiento + peso_conocimiento
+                break
+
+    compatibilidad_academica =  carrera + universidad + grado_estudio + edad + ubicacion + genero + tipo_puesto \
+                                        + idioma + carga_horaria + conocimiento
+    return compatibilidad_academica
+
 def guardar_compatibilidad(oportunidad):
     try:
         total_compatibles = 0
@@ -130,85 +195,25 @@ def guardar_compatibilidad(oportunidad):
         total_estudiantes = estudiantes.count()
 
         for e in estudiantes:
-            carrera = 0
-            universidad = 0
-            grado_estudio = 0
-            edad = 0
-            ubicacion = 0
-            genero = 0
-            tipo_puesto = 0
-            carga_horaria = 0
-            idioma = 0
-            conocimiento = 0
-            if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
-                carrera = 11
-            if oportunidad.universidad.filter().count() == 0 or e.universidad in oportunidad.universidad.all():
-                universidad = 5
-            if oportunidad.grado_estudio is None or e.grado_estudio == oportunidad.grado_estudio:
-                grado_estudio = 11
-            if( oportunidad.edad_desde == '' or oportunidad.edad_desde is None) or \
-                    (oportunidad.edad_hasta == '' or oportunidad.edad_hasta is None):
-                edad = 8
-            elif e.persona.fecha_nacimiento is not None :
-                if calular_edad(e.persona.fecha_nacimiento) in range(int(oportunidad.edad_desde), int(oportunidad.edad_hasta)):
-                    edad = 8
-            if oportunidad.pais != None:
-                if oportunidad.ciudad != None:
-                    if oportunidad.ciudad == e.ciudad:
-                        ubicacion = 6
-                else:
-                    if oportunidad.pais == e.pais:
-                        ubicacion = 6
-            else:
-                ubicacion = 6
-            if oportunidad.genero == None or e.persona.genero == oportunidad.genero:
-                genero = 2
-            if oportunidad.tipo_puesto == None or e.tipo_puesto.filter(id = oportunidad.tipo_puesto.id).count()>0:
-                tipo_puesto = 12
-            if oportunidad.carga_horaria == None or e.carga_horaria == oportunidad.carga_horaria:
-                carga_horaria = 11
-            if oportunidad.idioma.count() == 0:
-                idioma = 11
-            else:
-                peso_idioma = 11/ oportunidad.idioma.count()
-                for i in oportunidad.idioma.all():
-                    for x in e.idioma.filter():
-                        if x.idiomabase == i.idiomabase and x.orden >= i.orden:
-                            idioma = idioma + peso_idioma
-                            break
-            if oportunidad.conocimiento.count() == 0:
-                # or e.conocimiento.filter(id__in = map(int, p_conocimiento)).count() > 0 :
-                conocimiento = 9
-            else:
-                peso_conocimiento = 9 / oportunidad.conocimiento.count()
-                for i in oportunidad.conocimiento.all():
-                    for x in e.conocimiento.filter():
-                        if x.id == i.id:
-                            conocimiento = conocimiento + peso_conocimiento
-                            break
-
-            compatibilidad_academica =  carrera + universidad + grado_estudio + edad + ubicacion + genero + tipo_puesto \
-                                        + idioma + carga_horaria + conocimiento
-
+            compatibilidad_academica = calcular_compatibilidad_academica_estudiante(e, oportunidad)
             if oportunidad.id > 0:
-                    estudiante_cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = e.pk,
-                                                                              empresa_id = oportunidad.empresa.id )
-                    c, created = OportunidadCompatibilidad.objects.get_or_create(estudiante_id = e.pk,
-                                                                                 oportunidad_id = oportunidad.id)
-                    if created:
-                        c.estudiante = e
+                estudiante_cultura = EstudianteEmpresaCultura.objects.get(estudiante_id = e.pk,
+                                                                          empresa_id = oportunidad.empresa.id )
+                c, created = OportunidadCompatibilidad.objects.get_or_create(estudiante_id = e.pk,
+                                                                             oportunidad_id = oportunidad.id)
+                if created:
+                    c.estudiante = e
                     c.oportunidad.id = oportunidad.id
                     c.compatibilidad_academica = compatibilidad_academica
                     c.compatibilidad_cultural = estudiante_cultura.compatibilidad_cultural
                     c.compatibilidad_promedio = (c.compatibilidad_academica + c.compatibilidad_cultural) / 2
                     c.estado = oportunidad.estado
                     c.save()
-
             if compatibilidad_academica > 10:
                 total_compatibles =  total_compatibles + 1
-
         nivel = (total_compatibles * 100)/total_estudiantes if total_compatibles > 0 else 0
-    except:
+    except Exception, e:
+        mensaje = str(e)
         total_compatibles= 0
         nivel= 0
 
@@ -218,80 +223,26 @@ def guardar_compatibilidad(oportunidad):
     }
     return data
 
-def actualizar_compatibilidad(estudiante):
+# calcula la compatibilidad para todas las oportunidades dado un estudinate,
+# crea si no existe la compatibilidad cultural como 0
+def actualizar_compatibilidad_oportunidades(estudiante):
     try:
     # if estudiante.id > 0:
+        data = None
         oportunidades = Oportunidad.objects.filter(estado = 'A')
 
         for oportunidad in oportunidades.all():
-            carrera = 0
-            universidad = 0
-            grado_estudio = 0
-            edad = 0
-            ubicacion = 0
-            genero = 0
-            tipo_puesto = 0
-            carga_horaria = 0
-            idioma = 0
-            conocimiento = 0
-            if oportunidad.carrera.all() == 0 or estudiante.carrera.id in oportunidad.carrera.all() :
-                carrera = 11
-            if oportunidad.universidad.all() == 0 or estudiante.universidad in oportunidad.universidad.all() :
-                universidad = 5
-            if oportunidad.grado_estudio is None or estudiante.grado_estudio == oportunidad.grado_estudio:
-                grado_estudio = 11
-            if (oportunidad.edad_desde == '' or oportunidad.edad_desde is None) or \
-                    (oportunidad.edad_hasta == '' or oportunidad.edad_hasta is None):
-                edad = 8
-            elif estudiante.persona.fecha_nacimiento is not None :
-                if calular_edad(estudiante.persona.fecha_nacimiento) in range(int(oportunidad.edad_desde),
-                                                                              int(oportunidad.edad_hasta)):
-                    edad = 8
-            if oportunidad.pais != None:
-                if oportunidad.ciudad != None:
-                    if oportunidad.ciudad == estudiante.ciudad:
-                        ubicacion = 6
-                else:
-                    if oportunidad.pais == estudiante.pais:
-                        ubicacion = 6
-            else:
-                ubicacion = 6
-            if oportunidad.genero == None or estudiante.persona.genero == oportunidad.genero:
-                genero = 2
-            if oportunidad.tipo_puesto == None or oportunidad.tipo_puesto in estudiante.tipo_puesto.all():
-                tipo_puesto = 12
-            if oportunidad.carga_horaria == None or estudiante.carga_horaria == oportunidad.carga_horaria:
-                carga_horaria = 11
-            if oportunidad.idioma.count() == 0:
-                idioma = 11
-            else:
-                peso_idioma = 11/ oportunidad.idioma.count()
-                for i in oportunidad.idioma.all():
-                    for x in estudiante.idioma.filter():
-                        if x.idiomabase == i.idiomabase and x.orden >= i.orden:
-                            idioma = idioma + peso_idioma
-                            break
-            if oportunidad.conocimiento.count() == 0:
-                conocimiento = 9
-            else:
-                peso_conocimiento = 9 /oportunidad.conocimiento.count()
-                for i in oportunidad.conocimiento.all():
-                    for x in estudiante.conocimiento.filter():
-                        if x.id == i.id:
-                            conocimiento = conocimiento + peso_conocimiento
-                            break
-
-            compatibilidad_academica =  carrera + universidad + grado_estudio + edad + ubicacion + genero + tipo_puesto + idioma + \
-                                        carga_horaria + conocimiento
-
+            compatibilidad_academica =  calcular_compatibilidad_academica_estudiante(estudiante, oportunidad)
             try:
+
                 estudiante_cultura, create_ec = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.pk,
-                                                                                     empresa_id = oportunidad.empresa.id )
+                                                                                         empresa_id = oportunidad.empresa.id )
                 if create_ec:
                     estudiante_cultura.estudiante = estudiante
                     estudiante_cultura.empresa = oportunidad.empresa
                     estudiante_cultura.compatibilidad_cultural = 0
                     estudiante_cultura.save()
+
                 oportunidad_comp, create = OportunidadCompatibilidad.objects.get_or_create(oportunidad_id = oportunidad.id,
                                                                                        estudiante_id = estudiante.id)
                 if create:
@@ -302,10 +253,36 @@ def actualizar_compatibilidad(estudiante):
                 oportunidad_comp.compatibilidad_promedio = (oportunidad_comp.compatibilidad_academica + oportunidad_comp.compatibilidad_cultural) / 2
                 oportunidad_comp.save()
                 data = "ok"
-            except:
-                data= "error"
-    except:
-        data = "error"
+            except Exception, e:
+                data = str(e)
+    except Exception, e:
+        data = str(e)
+    return data
+
+#calcula la compatibilidad de oportunidades de una empresa, por estudiante,
+#debe recibir la compatibilidad cultural entre el estudiante y la empresa
+def actualizar_compatibilidad_empresa(estudiante, empresa, compatibilidad_cultural):
+    try:
+        data = None
+        oportunidades = Oportunidad.objects.filter(estado = 'A', empresa_id = empresa.id)
+
+        for oportunidad in oportunidades.all():
+            compatibilidad_academica =  calcular_compatibilidad_academica_estudiante(estudiante, oportunidad)
+            try:
+                oportunidad_comp, create = OportunidadCompatibilidad.objects.get_or_create(oportunidad_id = oportunidad.id,
+                                                                                       estudiante_id = estudiante.id)
+                if create:
+                    oportunidad_comp.estudiante = estudiante
+                    oportunidad_comp.oportunidad = oportunidad
+                oportunidad_comp.compatibilidad_academica = compatibilidad_academica
+                oportunidad_comp.compatibilidad_cultural = compatibilidad_cultural
+                oportunidad_comp.compatibilidad_promedio = (oportunidad_comp.compatibilidad_academica + oportunidad_comp.compatibilidad_cultural) / 2
+                oportunidad_comp.save()
+                data = "ok"
+            except Exception, e:
+                data = str(e)
+    except Exception, e:
+        data = str(e)
     return data
 
 

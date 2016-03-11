@@ -23,7 +23,7 @@ from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
 from cStringIO import StringIO
-from .compatibilidad import calcular_compatibilidad, guardar_compatibilidad, actualizar_compatibilidad
+from .compatibilidad import calcular_compatibilidad, guardar_compatibilidad, actualizar_compatibilidad_oportunidades
 
 
 # Create your views here.
@@ -594,8 +594,7 @@ def total_compatibles(request):
 def actualizar_compatibilidad_estudiante(request):
     persona = get_object_or_404(Persona, usuario_id = request.user.id)
     estudiante = get_object_or_404(Estudiante, persona_id= persona)
-
-    resp = actualizar_compatibilidad(estudiante)
+    resp = actualizar_compatibilidad_oportunidades(estudiante)
     data = json.dumps(resp)
     return HttpResponse(data, content_type='application/json')
 
