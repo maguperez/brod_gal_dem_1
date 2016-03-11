@@ -257,6 +257,11 @@
 <script>
     var iniciado = false;
     var selected;
+
+    var seleccionados = [];
+
+    var estadoMarcaTodos = [];
+
     $(function(){
 
         $.ajax({
@@ -283,6 +288,53 @@
                 $('.estado label').html('oportunidad archivada');
 			});
 		});
+
+        $('#marcar-todos').change(function(){
+            var check = $(this).is(':checked');
+            var tabla = $('#tb_candidatos').DataTable();
+            var checkboxes = $('#tb_candidatos tbody tr input:checkbox');
+
+            _.forEach(checkboxes,function(value, key){
+                    value.checked = check;
+                });
+
+            var datos = tabla.rows().data();
+
+            var pagina = tabla.page();
+
+            if(check){
+                _.forEach(datos,function(value, key){
+                    var objeto = {id_estudiante: value.id_estudiante, pag:pagina, id:value.id};
+
+                    seleccionados =  _.filter(seleccionados, function(ele) {
+                        return !(ele.id_estudiante == objeto.id_estudiante && ele.pag==objeto.pag);
+                    });
+
+                    seleccionados.push(objeto);
+                });
+            }
+            else{
+                //Eliminar todos los elementos que tengo la pagina
+               seleccionados =  _.filter(seleccionados, function(ele) {
+                    return !(ele.pag==pagina);
+                });
+
+            }
+
+            var estadoObjeto = {pag:pagina, estado:check};
+
+            if(estadoMarcaTodos.length > 0){
+                var objEncontrado = _.find(estadoMarcaTodos, { pag: pagina});
+                if(objEncontrado){
+                    estadoMarcaTodos =  _.filter(estadoMarcaTodos, function(ele) {
+                        return !(ele.pag==pagina);
+                    });
+
+                }
+            }
+            estadoMarcaTodos.push(estadoObjeto);
+
+        });
 
     })
     var JSCandidatos = function () {
@@ -391,6 +443,7 @@
                     serverSide: true,
                     processing: true,
                     lengthChange: false,
+                    iDisplayLength: 10,
                     stateSave: true,
                     stateSaveCallback: function (settings, data) {
 //                debugger;
@@ -452,20 +505,107 @@
         $("#tb_candidatos").on("change",".checking", function() {
            selected = new Array();
            var data = table.api().row($(this).parents('tr')).data();
-           if ($(this).is(":checked"))
+
+           if ($(this).is(":checked")){
                selected[data.id] = data;
-               else if (selected[data.id] != null) selected[data.id] = null;
+           }
+           else if (selected[data.id] != null) {
+               selected[data.id] = null;
+           }
+
+           if(!$(this).is(":checked") && $('#marcar-todos').is(":checked")){
+               var tabla = $('#tb_candidatos').DataTable();
+               var pagina = tabla.page();
+
+               $('#marcar-todos')[0].checked = false;
+
+               var estadoObjeto = {pag:pagina, estado:false};
+
+                if(estadoMarcaTodos.length > 0){
+                    var objEncontrado = _.find(estadoMarcaTodos, { pag: pagina});
+                    if(objEncontrado){
+                        estadoMarcaTodos =  _.filter(estadoMarcaTodos, function(ele) {
+                            return !(ele.pag==pagina);
+                        });
+
+                    }
+                }
+                estadoMarcaTodos.push(estadoObjeto);
+           }
+
+            var check = $(this).is(":checked");
+            var id_estudiante = data.id_estudiante;
+            var id = data.id;
+
+
+
+            actualizarSeleccionadosPorFila(id_estudiante,check,id);
        });
 
-        $('#siguiente-fase').click(function (event) {
-            ids = new Array();
-            $("input:checked", table.fnGetNodes()).each(function(index, value){
-                ids[index] = $(this).data("id");
-            });
+        $('#tb_candidatos').on( 'draw.dt', function () {
+            $('#marcar-todos')[0].checked = false;
 
-            ids_estudiante = new Array();
-            $("input:checked", table.fnGetNodes()).each(function(index, value){
-                ids_estudiante[index] = $(this).data("info");
+            var tabla = $(this).DataTable();
+
+            var pagina = tabla.page();
+
+            var datos = tabla.rows().data();
+
+            if(datos.length){
+
+                var elementos = $('#tb_candidatos tbody tr');//seleccionar TRs
+
+
+                //si en el TR el id existe dentro de el arreglo de seleccionados
+                //colocar check
+                for(var i=0;i<elementos.length;i++){
+
+                    //selecciona id del estudiante dentro del tr
+                    var id_estudiante = $(elementos[i])[0].cells[2].innerHTML;
+
+
+                    var candidatos =  _.filter(seleccionados, function(ele) {
+                        return (ele.id_estudiante == id_estudiante && ele.pag == pagina);
+                    });
+
+                    //selecciona el TD donde esta el checkbox
+                    var e = $(elementos[i])[0].cells[0];
+
+                    var booleanExistencia = candidatos.length > 0;
+
+                    $(e)[0].firstChild.checked = booleanExistencia;
+
+                }
+
+                if(estadoMarcaTodos.length > 0){
+                    var objEncontrado = _.find(estadoMarcaTodos, { pag: pagina});
+                    if(objEncontrado){
+                        $('#marcar-todos')[0].checked = objEncontrado.estado;
+                    }
+
+                }
+
+            }
+
+        } );
+
+        $('#siguiente-fase').click(function (event) {
+{#            ids = new Array();#}
+{#            $("input:checked", table.fnGetNodes()).each(function(index, value){#}
+{#                ids[index] = $(this).data("id");#}
+{#            });#}
+{##}
+{#            ids_estudiante = new Array();#}
+{#            $("input:checked", table.fnGetNodes()).each(function(index, value){#}
+{#                ids_estudiante[index] = $(this).data("info");#}
+{#            });#}
+
+            var ids = [];
+            var ids_estudiante = [];
+
+            _.forEach(seleccionados,function(value){
+                ids.push(value.id);
+                ids_estudiante.push(value.id_estudiante);
             });
 
             $("#fase").val( parseInt($(".proceso .active").data("info")) + 1);
@@ -548,6 +688,32 @@
        });
 
    });
+
+    function actualizarSeleccionadosPorFila(id_estudiante,check,id){
+
+        var tabla = $('#tb_candidatos').DataTable();
+        var pagina = tabla.page();
+
+        var elementos =  _.filter(seleccionados, function(ele) {
+            return (ele.id_estudiante == id_estudiante && ele.pag==pagina);
+        });
+
+        if(elementos.length > 0){
+            if(!check){
+                seleccionados =  _.filter(seleccionados, function(ele) {
+                    return !(ele.id_estudiante == id_estudiante && ele.pag==pagina);
+                });
+            }
+        }
+        else{
+            if(check){
+                var objeto = {id_estudiante: id_estudiante, pag:pagina, id:id};
+                seleccionados.push(objeto);
+            }
+
+        }
+
+    }
 
     function fnCambioFase(ids, ids_estudiante){
         $.ajax({
