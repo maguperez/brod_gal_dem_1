@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% csrf_token %}
-<l class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
+<div class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
     <div class="box header">
         <img class="imagen" src="{{oportunidad.empresa.set_logo}}" />
         <div class="descripcion">
@@ -16,7 +16,7 @@
                         <li><a href="{%url 'oportunidad-editar' request.GET.id%}"><span>Editar</span><div class="clear"></div></a></li>
                         <li><a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
                         <li><a class="archivar" data-id="{{oportunidad.id}}"><span>Archivar</span><div class="clear"></div></a></li>
-                    <ul>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -68,108 +68,8 @@
         </div>
     </div>
     <div class="clear"></div>
-</l>
-<!--
-<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
-<script src="{% static 'js/chartist.min.js' %}"></script>
-<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
-<script src="{% static 'js/moment.js' %}"></script>
-<script src="{% static 'js/moment-with-locales.js' %}"></script>
-<link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>-->
-<script>
-/*	moment.locale('es');
-	panel = new MixpanelExport({
-		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
-		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
-	});
+</div>
 
-	$(function() {
-	$("#link-oportunidades").addClass("active");
-		var date = moment().format("YYYY-MM-DD");
-		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
-
-		$(".sparklines").each(function () {
-			var id = $(this).data("id");
-			var data = $(this).data("info");
-			var obj = $(this)
-			panel.retention({
-				from_date: last,
-				to_date: date,
-				expire: 8798798765,
-				retention_type: "compounded",
-				event: "Vista Oportunidad",
-				//born_event: "Visita Oportunidad",
-				where: 'properties["OportunidadID"] == "'+ id +'"'
-			}).then(function(data) {
-				var array = new Array();
-				var total = 0;
-				for (var i = 6; i >= 0 ; i--) {
-					var last = moment().subtract(i, 'days');
-					array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
-					total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
-				}
-				//$("#visualizaciones-"+id).html(total);
-				$(obj).sparkline(array, {
-					type: 'bar',
-					height: '50px',
-					barSpacing: 7,
-					barWidth: 10,
-					barColor: '#5d9cf9'
-				});
-				$.ajax({
-					data : {'id':id},
-					url: '{%url "contador-visitas-oportunidad-obtener" %}',
-					type: 'get',
-					success: function(data){
-						$("#visualizaciones-"+id).html(data["total"]);
-					}
-				});
-			});
-		});
-		var array = new Array();
-		for (var i = 6; i >= 0 ; i--) {
-			var last = moment().subtract(i, 'days');
-			array.push(last.format('dddd'));
-		}
-		$(".ct-chart").each(function(){
-			var id = $(this).data("id");
-			var d = [];
-			$.ajax({
-				data: {'id': id},
-				url: '{%url "empresa-oportunidad-postulaciones" %}',
-				type: 'get',
-				success: function (data) {
-					$("#cifra-"+id).html(data[0][0]);
-					new Chartist.Line("#chart-id-"+id, {
-						labels: array,
-						colors:["#333", "#222", "#111", "#000"],
-						series: [data[0][1]]
-					}, {
-						low: 0,
-						showArea: true
-					});
-				}
-			});
-		});
-		$(".fotos-post").each(function(){
-			var ele = $(this).attr("id").split("-");
-			var id = ele[2];
-			$.ajax({
-				data: {'id': id},
-				url: '{%url "empresa-oportunidad-estudiantes" %}',
-				type: 'get',
-				success: function (data) {
-					var html = "";
-					for(var i = 0; i <data.length ; i++) {
-						html += '<img src="'+ data[i][0] +'" title="'+data[i][1]+'"/>';
-					}
-					$("img").tooltip();
-					$("#foto-post-"+id).html(html);
-				}
-			});
-		});
-	})*/
-</script>
 <style>
 	.ct-chart { margin-left: -40px; margin-top: -20px;}
 </style>

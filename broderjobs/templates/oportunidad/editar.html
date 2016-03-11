@@ -410,6 +410,13 @@
 		{secuencia: 4,descripcion:'Ciclo 4'},
 		{secuencia: 5,descripcion:'Ciclo 5'}];
 	$(function(){
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $("#id_direccion_map").attr("readonly", true);
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;
@@ -497,12 +504,14 @@
 					}
 				});
 			}
+			/*
 			else{
+				LlamarValidacionElemento('id_pais');*/
 				var options = '';
 				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").val("").trigger("change");
 				$("#id_ciudad").attr('disabled', false);
-			}
+			//}
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
@@ -928,7 +937,7 @@
 				grado_estudio:{
                     required: true
                 },
-				pais:{
+				id_pais:{
                     required: true
                 },
 				id_ciudad:{

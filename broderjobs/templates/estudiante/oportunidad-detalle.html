@@ -37,7 +37,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 							{%if oportunidad.remuneracion.id == 3 %}
 								$ {{oportunidad.remuneracion_min}}
 							{%elif oportunidad.remuneracion.id == 2 %}
-								$ {{oportunidad.remuneracion_max}} - {{oportunidad.remuneracion_min}}
+								{{oportunidad.remuneracion_min}} - $ {{oportunidad.remuneracion_max}}
 							{%else%}
 								{{oportunidad.remuneracion}}
 							{%endif%}</label>
@@ -268,9 +268,6 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             Detalle.map = new google.maps.Map(mapCanvas, mapOptions);
-            google.maps.event.addListener(Detalle.map, 'click', function (event) {
-                Detalle.marcar_mapa(event.latLng);
-            });
             if ($("#id_latitud").html().replace(",",".") != "" && $("#id_latitud").html() != "None") {
                 var latitud = $("#id_latitud").html().replace(",",".");
                 var longitud = $("#id_longitud").html().replace(",",".");
