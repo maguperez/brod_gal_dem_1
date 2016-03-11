@@ -298,14 +298,14 @@
 					}
 				});
 				LlamarValidacionElemento('id_pais');
-			}
+			}/*
 			else{
-				LlamarValidacionElemento('id_pais');
+				LlamarValidacionElemento('id_pais');*/
 				var options = '';
 				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").val("").trigger("change");
 				$("#id_ciudad").attr('disabled', false);
-			}
+			//}
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
