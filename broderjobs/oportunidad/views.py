@@ -153,6 +153,11 @@ class OportunidadCrearView(FormView):
         oportunidad.latitud = latitud
         oportunidad.usuario_creacion = str(user.username)
         oportunidad.usuario_modificacion = str(user.username)
+
+        oportunidad.edad_desde = edad_desde
+        oportunidad.edad_hasta = edad_hasta
+        oportunidad.genero = genero
+
         oportunidad.fecha_creacion = datetime.now()
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
@@ -238,6 +243,9 @@ class OportunidadEditarView(FormView):
                 'longitud': oportunidad.longitud,
                 'latitud': oportunidad.latitud,
                 'pais': oportunidad.pais,
+                'edad_desde': oportunidad.edad_desde,
+                'edad_hasta': oportunidad.edad_hasta,
+                'genero': oportunidad.genero,
                 'ciudad_hidden': ciudad_id,
                 'periodo_graduacion_hidden': periodo_graduacion_hidden}
 
