@@ -1,5 +1,4 @@
-{% load staticfiles %}
-{%for opo in oportunidades%}
+{% for opo in oportunidades %}
 <li>
 	<div class="box oportunidad-box">
 		<div class="content">
@@ -17,7 +16,7 @@
 							{%if opo.oportunidad.remuneracion.id == 3 %}
 								{{opo.oportunidad.remuneracion_min}}
 							{%elif opo.oportunidad.remuneracion.id == 2 %}
-								{{opo.oportunidad.remuneracion_min}} - {{opo.oportunidad.remuneracion_max}}
+								{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
 							{%else%}
 								{{opo.oportunidad.remuneracion}}
 							{%endif%}
@@ -62,64 +61,4 @@
 		</div>
 	</div>
 </li>
-{%endfor%}
-
-<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
-<script>
-    var CompatibilidadJD = function(){
-        this.fnCargar = function(id, empresa) {
-            $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){
-                debugger;
-{#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
-{#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
-{#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}
-            });
-        }
-    };
-    var compatibilidad = new CompatibilidadJD();
-	 $(function(){
-	    $("#link-oportunidad").addClass("active");
-	   	$("body").on("mouseenter", ".compatibilidad", function(){
-			$(this).find(".consolidado").css("opacity",0);
-		  	$(this).find(".desglose").css("opacity",1);
-			var data = 0;
-			data = $(this).find(".cultural .circular-bar-chart").data("percent");
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
-			data = $(this).find(".academico .circular-bar-chart").data("percent");
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
-		});
-	   	$("body").on("mouseleave", ".compatibilidad", function(){
-		   	$(this).find(".consolidado").css("opacity",1);
-		  	$(this).find(".desglose").css("opacity",0);
-			$('.chart').data('easyPieChart').update(40);
-		});
-		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#5D9CF9",
-					size: 65,
-				});
-		 $('.cultural .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#27ae60",
-					size: 65,
-				});
-		 $('.academico .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#c0392b",
-					size: 65,
-				});
-         $(".class").each(function() {
-        });
-         $(".Compatibilidad").each(function(index, obj){
-             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );
-        });
-	});
-</script>
+{% endfor %}

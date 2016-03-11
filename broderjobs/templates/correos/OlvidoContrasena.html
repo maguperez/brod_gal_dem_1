@@ -21,9 +21,8 @@ and open the template in the editor.
             }
         </style>
     </head>
-    <body style = "font-family: 'Roboto Light'; background-color:#F2F2F2">
+    <body style = "font-family: Helvetica; background-color:#F2F2F2;">
         <div style ="text-align: center; margin: 50px;">
-            <img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.svg' %}"/>
             <img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.png' %}"/>
         </div>
         <div style ="background-color:white; margin: 15px; padding: 45px" >
@@ -39,7 +38,7 @@ and open the template in the editor.
                 <a href="{{ protocol }}://{{ domain }}{% url 'contrasena-recuperar' uidb64=uid token=token %}" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 300px; text-decoration: none">Reestablecer contraseña</a>
             </div>
         </div>
-        <div style="margin-top: 30px; margin-bottom: 10px; text-align: center; color: #999; font-size: 14pt">
+        <div style="font-family: Helvetica; margin-top: 30px; margin-bottom: 10px; text-align: center; color: #999; font-size: 14pt">
             ¿Preguntas? <a href="callto:989505387" style="font-family: Helvetica; text-decoration: none; color: #999;">989 505 387</a>
         </div>
         <div style="text-align: center">

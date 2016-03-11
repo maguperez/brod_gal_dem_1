@@ -340,32 +340,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel right">
-					<div class="box alcance">
-						<div class="content">
-							<section class="grafico">
-								<h4>Alcance de Candidatos</h4>
-								<label><i class="alcance bajo"></i><span class="cifra">Cargando</span> candidatos</label>
-								<div class="grafico-alcance">
-									<div class="alto inactive">
-										<div class="adecuado inactive">
-											<div class="bajo inactive">
-												<label>Bajo</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section class="caracteristicas">
-								<label><span class="bold">Carrera: </span>Ingenier&iacute;a Industrial, Administraci&oacute;n, Hoteler&iacute;a</label>
-								<label><span class="bold">Idiomas: </span>Ingl&eacute;s avanzado</label>
-								<label><span class="bold">Conocimientos: </span>Office</label>
-								<label><span class="bold">Jornada: </span>Full time</label>
-								<label><span class="bold">Ubicaci&oacute;n: </span>Lima, Per&uacute;</label>
-							</section>
-						</div>
-					</div>
-				</div>
+{#				<div class="panel right">#}
+{#					<div class="box alcance">#}
+{#						<div class="content">#}
+{#							<section class="grafico">#}
+{#								<h4>Alcance de Candidatos</h4>#}
+{#								<label><i class="alcance bajo"></i><span class="cifra">Cargando</span> candidatos</label>#}
+{#								<div class="grafico-alcance">#}
+{#									<div class="alto inactive">#}
+{#										<div class="adecuado inactive">#}
+{#											<div class="bajo inactive">#}
+{#												<label>Bajo</label>#}
+{#											</div>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</section>#}
+{#							<section class="caracteristicas">#}
+{#								<label><span class="bold">Carrera: </span>Ingenier&iacute;a Industrial, Administraci&oacute;n, Hoteler&iacute;a</label>#}
+{#								<label><span class="bold">Idiomas: </span>Ingl&eacute;s avanzado</label>#}
+{#								<label><span class="bold">Conocimientos: </span>Office</label>#}
+{#								<label><span class="bold">Jornada: </span>Full time</label>#}
+{#								<label><span class="bold">Ubicaci&oacute;n: </span>Lima, Per&uacute;</label>#}
+{#							</section>#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
 				<div class="clear"></div>
 			</div>
 		</section>
@@ -410,6 +410,13 @@
 		{secuencia: 4,descripcion:'Ciclo 4'},
 		{secuencia: 5,descripcion:'Ciclo 5'}];
 	$(function(){
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $("#id_direccion_map").attr("readonly", true);
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;
@@ -497,12 +504,14 @@
 					}
 				});
 			}
+			/*
 			else{
+				LlamarValidacionElemento('id_pais');*/
 				var options = '';
 				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").val("").trigger("change");
 				$("#id_ciudad").attr('disabled', false);
-			}
+			//}
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());
@@ -928,7 +937,7 @@
 				grado_estudio:{
                     required: true
                 },
-				pais:{
+				id_pais:{
                     required: true
                 },
 				id_ciudad:{

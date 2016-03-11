@@ -452,7 +452,14 @@
         },
     };
 	$(function(){
-        $("[data-toggle=tooltip]").tooltip()
+        $("[data-toggle=tooltip]").tooltip();
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $("#id_direccion_map").attr("readonly", true);
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var text_length = $(this).val().length;
@@ -582,12 +589,14 @@
 					}
 				});
 			}
+			/*
 			else{
+				LlamarValidacionElemento('id_pais');*/
 				var options = '';
 				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").val("").trigger("change");
 				$("#id_ciudad").attr('disabled', false);
-			}
+			//}
 
 			LlamarValidacionElemento('id_pais');
 		});

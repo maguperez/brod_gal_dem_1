@@ -60,8 +60,6 @@ INSTALLED_APPS = (
     'contador_visitas',
     'disc',
     'cultura_empresarial',
-
-
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -139,7 +137,6 @@ else:
 			# 'PORT': '5432',
 		}
 	}
-
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {

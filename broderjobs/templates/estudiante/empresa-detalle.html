@@ -423,7 +423,7 @@
                                                 {%if opo.oportunidad.remuneracion.id == 3 %}
                                                     	{{opo.oportunidad.remuneracion_min}}
                                                 	{%elif opo.oportunidad.remuneracion.id == 2 %}
-                                                    	{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
+                                                    	{{opo.oportunidad.remuneracion_min}} - {{opo.oportunidad.remuneracion_max}}
                                                 	{%else%}
                                                     	{{opo.oportunidad.remuneracion}}
                                                 	{%endif%}
@@ -601,15 +601,6 @@
     .owl-controls{
         height: 27px;
     }
-    /*
-    .owl-carousel .item{
-        margin: 3px;
-    }
-    .owl-carousel .item img{
-        display: block;
-        width: 100%;
-        height: auto;
-    }*/
 </style>
 
 {% endblock content %}
@@ -622,6 +613,8 @@
         if(cant > 1)
             initial_img = 1;
         $('.owl-carousel').owlCarousel({
+             nav: true,
+             navText: ['',''],
 			 autoPlay: true,
              items: initial_img,
 		     singleItem: true,

@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <div class="slider">
-    <div class="owl-carousel">
+    <div class="oc-images owl-carousel owl-theme full-width owl-loaded owl-drag owl-carousel-init image-carousel">
     {%if imagenes%}
 		{%for i in imagenes.all%}
             <div class="item">
@@ -31,6 +31,8 @@
         if(cant > 1)
             initial_img = 1;
 	     $('.owl-carousel').owlCarousel({
+             nav: true,
+             navText: ['',''],
 			 autoPlay: true,
              items:initial_img ,
 		     singleItem: true,
