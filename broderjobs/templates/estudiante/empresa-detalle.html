@@ -679,21 +679,21 @@
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#1dcfac",
+            barColor: "#5D9CF9",
             size: 65,
         });
         $('.cultural .circular-bar-chart').easyPieChart({
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#c0392b",
+            barColor: "#27ae60",
             size: 65,
         });
         $('.academico .circular-bar-chart').easyPieChart({
             animate: 2000,
             scaleLength: 0,
             lineWidth: 5,
-            barColor: "#5d9cf9",
+            barColor: "#c0392b",
             size: 65,
         });
         //or for example
@@ -774,20 +774,20 @@
           $(item).find(".progress").parent().removeClass();
           $(item).find(".progress .water").css("top", val + "%");
 
-          if(valOrig < colorInc * 1)
+          /*if(valOrig < colorInc * 1)
             $(item).find(".progress").parent().addClass("red");
           else if(valOrig < colorInc * 2)
             $(item).find(".progress").parent().addClass("orange");
-          else
+          else*/
             $(item).find(".progress").parent().addClass("green");
         }
         else
         {
           $(item).find(".progress").parent().removeClass();
-            if (val == 100)
+            //if (val == 100)
                 $(item).find(".progress").parent().addClass("green");
-            else if (val == 0)
-                $(item).find(".progress").parent().addClass("red");
+           /* else if (val == 0)
+                $(item).find(".progress").parent().addClass("red");*/
           $(item).find(".progress .water").css("top", 100 - val + "%");
           $(item).find(".progress .percent").text(val + "%");
 

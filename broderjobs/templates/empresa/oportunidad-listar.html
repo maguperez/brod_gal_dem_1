@@ -2,26 +2,25 @@
 {% block content %}
 {%load endless%}
  <section class="oportunidades-empresa">
-			<div class="centered">
-				<select class="filtro">
-					<option value="A">Oportunidades Abiertas</option>
-					<option value="C">Oportunidades Cerradas</option>
-					<option value="P">Oportunidades Pendientes</option>
-				</select>
-				<div class="clear"></div>
-				<ul class="list" id ="oportunidad-lista">
-					{% paginate 6 oportunidades %}
-						{% for oportunidad in oportunidades.all%}
-
-					<li class="oportunidad-estadistica">
-						<div class="box header">
-							<img class="imagen" src="{{empresa.set_logo}}" />
-							<div class="descripcion">
-								<a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
-								<div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
+     <div class="centered">
+         <select class="filtro">
+             <option value="A">Oportunidades Abiertas</option>
+             <option value="C">Oportunidades Cerradas</option>
+             <option value="P">Oportunidades Pendientes</option>
+         </select>
+         <div class="clear"></div>
+         <ul class="list" id ="oportunidad-lista">
+             {% paginate 6 oportunidades %}
+             {% for oportunidad in oportunidades.all%}
+                 <li class="oportunidad-estadistica">
+                     <div class="box header">
+                         <img class="imagen" src="{{empresa.set_logo}}" />
+                         <div class="descripcion">
+                             <a href="candidatos_oportunidad.html"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+                             <div class="empresa"><i class="empresa"></i><label>{{empresa.nombre}}</label></div>
 							</div>
 							<div class="opciones" onclick="opciones({{oportunidad.id}})">
-								<i class="menu"></i>
+                                <i class="menu"></i>
 								<div class="contextual-menu" id="menu-{{oportunidad.id}}">
 									<div class="wrapper">
 										<div class="pin"></div>
@@ -87,19 +86,17 @@
 						</div>
 						<div class="clear"></div>
 					</li>
-						{% endfor %}
-						{% show_pages %}
-				</ul>
-			</div>
+             {% endfor %}
+             {% show_pages %}
+         </ul>
+     </div>
 </section>
 <div id='loading-image'></div>
- {% endblock %}
+{% endblock %}
 {% block js%}
-
 <script>
 $(function() {
 	$("#link-oportunidades").addClass("active");
 })
 </script>
-
 {% endblock %}

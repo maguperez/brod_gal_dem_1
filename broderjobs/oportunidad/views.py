@@ -201,6 +201,11 @@ class OportunidadEditarView(FormView):
 
         beneficios_extra_str = ','.join([str(x.id) for x in beneficios_extra]) if beneficios_extra.count() > 0 else ''
 
+        if oportunidad.graduacion_desde is not None and oportunidad.graduacion_hasta is not None:
+            periodo_graduacion_hidden = str(oportunidad.graduacion_desde.id)+','+str(oportunidad.graduacion_hasta.id)
+        else:
+            periodo_graduacion_hidden = ''
+
         if oportunidad.ciudad is not None:
             ciudad_id = oportunidad.ciudad.id
         else:
@@ -232,7 +237,9 @@ class OportunidadEditarView(FormView):
                 'beneficio': oportunidad.beneficio.all(),
                 'longitud': oportunidad.longitud,
                 'latitud': oportunidad.latitud,
-                'pais': oportunidad.pais, 'ciudad_hidden': ciudad_id}
+                'pais': oportunidad.pais,
+                'ciudad_hidden': ciudad_id,
+                'periodo_graduacion_hidden': periodo_graduacion_hidden}
 
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
@@ -292,9 +299,12 @@ class OportunidadEditarView(FormView):
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
+        periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
         id = self.kwargs["id"]
         oportunidad = get_object_or_404(Oportunidad, id = id)
 
+        longitud = form.cleaned_data['longitud']
+        latitud = form.cleaned_data['latitud']
 
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
@@ -312,6 +322,27 @@ class OportunidadEditarView(FormView):
         oportunidad.remuneracion = remuneracion
         oportunidad.remuneracion_min = remuneracion_min
         oportunidad.remuneracion_max = remuneracion_max
+
+        # periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
+
+        if periodo_graduacion_hidden is not None and periodo_graduacion_hidden != '':
+            periodo_split = periodo_graduacion_hidden.split(',')
+            periodo_desde = periodo_split[0]
+            periodo_hasta = periodo_split[1]
+        else:
+            periodo_desde = ''
+            periodo_hasta = ''
+
+        if periodo_desde == '' or periodo_hasta == '':
+            periodo_graduacion_desde = None
+            periodo_graduacion_hasta = None
+        else:
+            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=int(periodo_desde))
+            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=int(periodo_hasta))
+
+        oportunidad.graduacion_desde = periodo_graduacion_desde
+        oportunidad.graduacion_hasta = periodo_graduacion_hasta
+
 
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
@@ -356,6 +387,10 @@ class OportunidadEditarView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.usuario_modificacion = user.username
         oportunidad.fecha_modificacion = datetime.now()
+
+        oportunidad.longitud = longitud
+        oportunidad.latitud = latitud
+
         oportunidad.save()
 
         beneficios_hidden = form.cleaned_data['beneficios_hidden']
