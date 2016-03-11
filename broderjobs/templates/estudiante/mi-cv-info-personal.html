@@ -12,9 +12,12 @@
 		background-color: #f9f9f9 !important;
 		border-color: #ccc !important;
 	}
+    .tooltip {
+        z-index: 5000;
+    }
 </style>
 <div style="margin:0 50px">
-	<form action="{% url 'mi-cv-info-personal' %}" method="post" autocomplete="off">
+	<form id = "form-info-personal" action="{% url 'mi-cv-info-personal' %}" method="post" autocomplete="off">
 		{%csrf_token%}
 		<div class="form-horizontal">
 			<h3><i class="academic"></i> &nbsp;Información académica</h3><br>
@@ -47,12 +50,6 @@
 					{{form.ano_inicio_estudio}}
 				</div>
 			</div>
-            <div class ="form-group {%if form.grado_estudio.value != 1%} hidden {% endif %}"   id ="ciclo-actual">
-				<label class = "col-sm-3">Ciclo Actual</label>
-				<div class = "col-sm-4">
-					{{form.semestre_actual}}
-				</div>
-			</div>
 			<div class ="form-group">
 				<label class = "col-sm-3">Graduación / Grad. estimada</label>
 				<div class = "col-sm-4">
@@ -60,6 +57,12 @@
 				</div>
 				<div class = "col-sm-4">
 					{{form.ano_graduacion}}
+				</div>
+			</div>
+            <div class ="form-group {%if form.grado_estudio.value != 1%} hidden {% endif %}"   id ="ciclo-actual">
+				<label class = "col-sm-3">Ciclo Actual</label>
+				<div class = "col-sm-4">
+					{{form.semestre_actual}}
 				</div>
 			</div><br>
 			<h3><i class="info"></i> &nbsp;Información personal</h3><br>
@@ -136,9 +139,7 @@
 		},'Debe seleccionar una carrera existente');
 
 		$.validator.addMethod('validarCiclos',function(value, element, param){
-			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
-				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
-
+			return (parseInt($("#id_ano_graduacion").val() + $("#id_semestre_graduacion").val()) >= parseInt($("#id_ano_inicio_estudio").val() +$("#id_semestre_inicio_estudio").val()));
 		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
 
 
@@ -152,7 +153,7 @@
 				}
 				else{
 					flagSeleccionarUniversidad = true;
-					var validator = $("form").validate();
+					var validator = $("#form-info-personal").validate();
 					validator.element( "#id_universidades" );
 				}
 			}
@@ -171,7 +172,7 @@
 				}
 				else{
 					flagSeleccionarCarrera = true;
-					var validator = $("form").validate();
+					var validator = $("#form-info-personal").validate();
 					validator.element( "#id_carreras" );
 				}
 			}
@@ -226,26 +227,11 @@
 		IniciarCiudades();
 		InicializarValidaciones();
 
-		$("#id_ano_inicio_estudio").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_ano_inicio_estudio');
+		$("#id_ano_inicio_estudio, #id_ano_graduacion, "+
+            "#id_semestre_inicio_estudio, #id_semestre_graduacion").change(function() {
+            if ($(this).val() != "")
+			LlamarValidacionCiclos($(this).attr("id"));
 		});
-
-		$("#id_ano_graduacion").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_ano_graduacion');
-		});
-
-		$("#id_semestre_inicio_estudio").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_semestre_inicio_estudio');
-		});
-
-		$("#id_semestre_graduacion").change(function() {
-			LlamarValidacionCiclos();
-//			LlamarValidacionElemento('id_semestre_graduacion');
-		});
-
         $("#id_grado_estudio").change(function(){
             if($("#id_grado_estudio").val()== 1){
                 $("#ciclo-actual").removeClass("hidden");
@@ -278,54 +264,58 @@
 		});
 	}
 
-	function LlamarValidacionCiclos(){
-		LlamarValidacionElemento('id_ano_inicio_estudio');
-		LlamarValidacionElemento('id_ano_graduacion');
-		LlamarValidacionElemento('id_semestre_inicio_estudio');
-		LlamarValidacionElemento('id_semestre_graduacion');
+	function LlamarValidacionCiclos(id){
+		if (id != "id_ano_inicio_estudio") LlamarValidacionElemento('id_ano_inicio_estudio');
+		if (id != "id_ano_graduacion") LlamarValidacionElemento('id_ano_graduacion');
+		if (id != "id_semestre_inicio_estudio") LlamarValidacionElemento('id_semestre_inicio_estudio');
+		if (id != "id_semestre_graduacion") LlamarValidacionElemento('id_semestre_graduacion');
 	}
 
 	function LlamarValidacionElemento(id){
-		var validator = $( "form" ).validate();
-		validator.element('#'+id);
+		$('#'+id).valid();
 	}
 
 	function InicializarValidaciones(){
-		$("form").validate({
+		$("#form-info-personal").validate({
             errorPlacement: function (error, element) {
+                var object, placement;
+                if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' ){
+                    debugger;
+					object = $(element);
+					placement = "right";
 
-                $(element).tooltip('destroy');
-
-				if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'
-						|| element[0].id == 'id_telefono'){
-
-					$(element).tooltip({
-						animation: true,
-						placement: "right",
-						title: $(error).text(),
-						trigger: "manual"
-                	} );
-
+				} else if(error[0].innerText == "El ciclo de ingreso debe ser menor que la graduacion estimada"){
+                    debugger;
+					if (element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+						object = $(element);
+						placement = "right";
+					}
+                    else {
+                        $(element).tooltip('hide');
+                    }
+				}
+				else if(element[0].id == 'id_telefono'){
+                    object = $(element);
+                    placement: "right";
 				}
 				else if(element[0].id == 'id_genero_0'){
-					$('#id_genero_1').tooltip({
-						animation: true,
-						placement: "right",
-						title: $(error).text(),
-						trigger: "manual"
-                	} );
-					$('#id_genero_1').tooltip('show');
+					object = $('#id_genero_1');
+                    placement = "right";
 				}
-				else{
-					$(element).tooltip({
-						animation: true,
-						placement: "left",
-						title: $(error).text(),
-						trigger: "manual"
-					} );
+                else{
+					object = $(element);
+					placement = "left";
 				}
-
-                $(element).tooltip('show');
+                debugger;
+                $(object).tooltip('destroy');
+                $(object).tooltip({
+					animation: true,
+					container: 'body',
+					placement: placement,
+					title: $(error).text(),
+					trigger: "manual"
+				});
+                $(object).tooltip('show');
 
             },
             success: function (label, element) {
