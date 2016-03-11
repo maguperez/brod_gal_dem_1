@@ -44,7 +44,7 @@
 <body style="margin: 30px">
 <div class = "candidato obx">
 <header class="header">
-     <img src="{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
+     <img src="{{ protocol }}://{{ domain }}{{estudiante.set_foto}}" id="imgen_perfil" class="imagen"/>
 
      <div class="detalle div">
          <h3 class ="h3" >{{estudiante | upper}}</h3>

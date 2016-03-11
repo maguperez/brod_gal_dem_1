@@ -1216,7 +1216,9 @@ def cv_pdf(request, id = "0"):
                                         'conocimientos_extras':conocimientos_extras,
                                         'actividades_extra': actividades_extra,
                                         'experiencias_profesionales': experiencias_profesionales,
-                                        'voluntariados': voluntariados})
+                                        'voluntariados': voluntariados,
+                                        'domain': request.META['HTTP_HOST'],
+                                        'protocol': 'http'})
     html = template.render(context)
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), dest=result)
