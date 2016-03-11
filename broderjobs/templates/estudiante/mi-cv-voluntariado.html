@@ -54,9 +54,10 @@
         });
 
         $('textarea').on("keyup", function() {
-            var text_length = $(this).val().length;
-
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+            var characterCount = enteredText.length + numberOfLineBreaks;
+            $(this).next().html(characterCount + ' caracteres');;
         });
 
 		$("#cv-voluntariado input:not(:checkbox)").addClass("form-control");
