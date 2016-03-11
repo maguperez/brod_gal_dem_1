@@ -648,6 +648,10 @@
 								$('#slider-periodo').slider('setAttribute', 'enabled', true);
 								$('#slider-periodo').slider('refresh');
 
+                                cad_id =  ordenado[0].id+','+ordenado[3].id;
+
+						        $('#id_periodo_graduacion_hidden').val(cad_id);
+
 								periodoGraduacion = data;
 							}
 						}
