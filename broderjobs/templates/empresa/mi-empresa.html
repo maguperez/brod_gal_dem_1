@@ -16,6 +16,9 @@
 		background-color: #f9f9f9 !important;
 		border-color: #ccc !important;
 	}
+    #btn-logo + .tooltip {
+        margin-top: -10px;
+    }
 	/*.select2-selection--single .select2-selection__arrow{*/
 		/*right: -46px  !important;*/ #ccc
 	/*}*/
@@ -65,14 +68,14 @@
 					<!--</div>-->
 					<!--<a class="btn-edit" id="btn-edit">Editar</a>-->
 					<div id="slider-empresa"></div>
-					<div class ="boton-imagen edit" id="btn-imagenes">
-						<a class data-toggle="tooltip" data-placement="top"
-						 title="Se recomienda que las dimensiones de la imagen sean mayores a 725x370 píxeles"><i class="fa fa-picture-o"></i></a>
-					</div>
-                    <div class ="boton-video edit" id="btn-videos">
-						<a class data-toggle="tooltip" data-placement="top"
-						 title="Ingresa las url de Youtube"><i class="fa fa-video-camera"></i></a>
-					</div>
+
+					<a><div data-toggle="tooltip" data-placement="top"
+						 title="Se recomienda que las dimensiones de la imagen sean mayores a 725x370 píxeles" class ="boton-imagen edit" id="btn-imagenes"><i class="fa fa-picture-o"></i>
+					</div></a>
+                    <a><div data-toggle="tooltip" data-placement="top"
+						 title="Ingresa las url de Youtube" class ="boton-video edit" id="btn-videos">
+						<i class="fa fa-video-camera"></i>
+					</div></a>
 					<!--<a href="{%url 'upload-new'%}" class="btn-edit" data-toggle="modal" data-target="#imagenes"></a>-->
 				</header>
 				<div class="content">
