@@ -129,7 +129,9 @@
 		})
 
 		InicializarTypeaheadElementos();
-
+        $.validator.addMethod('validarSemestreActual',function(value, element, param){
+			return $("#id_grado_estudio option[value=1]").is(":selected") && $("#id_semestre_actual").val() != "" ;
+		},'Debe seleccionar su ciclo actual');
 		$.validator.addMethod('universidadExistente',function(value, element, param){
 			return flagSeleccionarUniversidad;
 		},'Debe seleccionar una universidad existente');
@@ -280,12 +282,10 @@
             errorPlacement: function (error, element) {
                 var object, placement;
                 if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' ){
-                    debugger;
 					object = $(element);
 					placement = "right";
 
 				} else if(error[0].innerText == "El ciclo de ingreso debe ser menor que la graduacion estimada"){
-                    debugger;
 					if (element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
 						object = $(element);
 						placement = "right";
@@ -294,19 +294,19 @@
                         $(element).tooltip('hide');
                     }
 				}
-				else if(element[0].id == 'id_telefono'){
+				else if(element[0].id == 'id_telefono' || element[0].id == 'id_semestre_actual'){
                     object = $(element);
-                    placement: "right";
+                    placement = "right";
 				}
 				else if(element[0].id == 'id_genero_0'){
 					object = $('#id_genero_1');
                     placement = "right";
 				}
+
                 else{
 					object = $(element);
 					placement = "left";
 				}
-                debugger;
                 $(object).tooltip('destroy');
                 $(object).tooltip({
 					animation: true,
@@ -358,6 +358,9 @@
 				email: {
                     required: true,
                     email: true
+                },
+                semestre_actual:{
+                    validarSemestreActual: true,
                 },
 				telefono: {
                     digits: true
