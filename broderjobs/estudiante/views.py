@@ -22,7 +22,7 @@ from cultura_empresarial.models import EstudianteEmpresaCultura
 from main import utils
 from main.utils import LoginRequiredMixin
 from empresa.utils import actualizar_ranking_empresa
-from oportunidad.compatibilidad import actualizar_compatibilidad
+from oportunidad.compatibilidad import actualizar_compatibilidad_oportunidades
 
 from xhtml2pdf import pisa
 import cStringIO as StringIO
@@ -53,11 +53,9 @@ def registro_cv(request):
             semestre_graduacion = form.cleaned_data['semestre_graduacion']
             carga_horaria = form.cleaned_data['carga_horaria']
 
-            try:
-                estudiante = Estudiante.objects.get(persona_id = persona.id)
-            except Estudiante.DoesNotExist:
-                estudiante = None
-            if estudiante is None:
+
+            estudiante, creado = Estudiante.objects.get_or_create(persona_id = persona.id)
+            if creado:
                 estudiante = Estudiante()
                 estudiante.persona = persona
 
@@ -99,7 +97,8 @@ def registro_cv(request):
             r, created = Resumen.objects.get_or_create(estudiante_id = estudiante.id)
             if created is True:
                 r.save()
-            actualizar_compatibilidad(estudiante)
+
+            resp = actualizar_compatibilidad_oportunidades(estudiante)
             return redirect('mi-cv')
         else:
             print(form.errors)
@@ -133,6 +132,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
 
         except RankingEmpresa.DoesNotExist:
+            ranking = RankingEmpresa()
             ranking.ranking_general = 0
             ranking.linea_carrera = 0
             ranking.flexibilidad_horarios = 0
@@ -234,7 +234,7 @@ class OportunidadesEmpresaView(TemplateView):
         estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, pk=id)
         oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
-                                                                  oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()[:2]
+                                                                  oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
         context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades

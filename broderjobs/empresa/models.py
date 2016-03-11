@@ -74,7 +74,7 @@ class CategoriaEmpresa(models.Model):
         ordering = ["orden"]
 
     def __unicode__(self):
-        return unicode('%s' % (self.persona)) or u''
+        return unicode(self.persona) or u''
 
 class Empresa(models.Model):
 
@@ -103,7 +103,7 @@ class Empresa(models.Model):
 
 
     def __unicode__(self):
-        return '%s' % (self.nombre)
+        return unicode(self.nombre) or u''
 
     @property
     def set_logo(self):
@@ -162,7 +162,7 @@ class RankingEmpresa(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode('%s' % (self.empresa)) or u''
+        return unicode(self.empresa) or u''
 
 class Empresa_Imagenes(models.Model):
 
@@ -256,7 +256,7 @@ class EmpresaRedesSociales(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-        return unicode('%s' % (self.empresa)) or u''
+        return unicode(self.empresa) or u''
 
 
 

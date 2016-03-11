@@ -40,7 +40,7 @@ class Estudiante(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-		return unicode((self.persona)) or u''
+		return unicode(self.persona) or u''
 
     @property
     def set_foto(self):
@@ -51,7 +51,7 @@ class Estudiante(models.Model):
 
 class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)
-    descripcion = models.CharField(max_length="1000", default=None, null=True, blank=True)
+    descripcion = models.TextField(default=None, null=True, blank=True)
 
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
@@ -88,7 +88,7 @@ class ExperienciaProfesional(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-		return unicode('%s' % (self.estudiante)) or u''
+		return unicode(self.estudiante) or u''
 
 class Voluntariado(models.Model):
     estudiante =  models.ForeignKey(Estudiante, default=None, null=True, blank=True)
@@ -104,7 +104,7 @@ class Voluntariado(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
-		return unicode('%s' % (self.cargo)) or u''
+		return unicode(self.cargo) or u''
 
 class ConocimientoExtra(models.Model):
     descripcion = models.CharField(max_length="50", default=None, null=True, blank=True)

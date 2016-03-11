@@ -15,5 +15,5 @@ class VisitasOportunidad(models.Model):
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
-    # def __unicode__(self):
-    #     return unicode('%s' % (self.id)) or u''
+    def __unicode__(self):
+        return unicode(self.id) or u''
