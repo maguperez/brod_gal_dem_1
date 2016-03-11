@@ -120,32 +120,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel right">
-					<div class="box alcance">
-						<div class="content">
-							<section class="grafico">
-								<h4>Alcance de Candidatos</h4>
-								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>
-								<div class="grafico-alcance">
-									<div class="alto inactive">
-										<div class="adecuado inactive">
-											<div class="bajo active">
-												<label>Bajo</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section class="caracteristicas">
-								<label><span class="bold">Carrera: </span>{% for i in oportunidad.carrera.all%} {{i}} {%endfor%}</label>
-								<label><span class="bold">Idiomas: </span>{% for i in oportunidad.idioma.all%} {{i}} {%endfor%}</label>
-								<label><span class="bold">Conocimientos: </span>{% for i in oportunidad.conocimiento.all%} {{i}} {%endfor%}</label>
-								<label><span class="bold">Jornada: </span>{{oportunidad.carga_horaria}}</label>
-								<label><span class="bold">Ubicaci&oacute;n: </span>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
-							</section>
-						</div>
-					</div>
-				</div>
+{#				<div class="panel right">#}
+{#					<div class="box alcance">#}
+{#						<div class="content">#}
+{#							<section class="grafico">#}
+{#								<h4>Alcance de Candidatos</h4>#}
+{#								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>#}
+{#								<div class="grafico-alcance">#}
+{#									<div class="alto inactive">#}
+{#										<div class="adecuado inactive">#}
+{#											<div class="bajo active">#}
+{#												<label>Bajo</label>#}
+{#											</div>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</section>#}
+{#							<section class="caracteristicas">#}
+{#								<label><span class="bold">Carrera: </span>{% for i in oportunidad.carrera.all%} {{i}} {%endfor%}</label>#}
+{#								<label><span class="bold">Idiomas: </span>{% for i in oportunidad.idioma.all%} {{i}} {%endfor%}</label>#}
+{#								<label><span class="bold">Conocimientos: </span>{% for i in oportunidad.conocimiento.all%} {{i}} {%endfor%}</label>#}
+{#								<label><span class="bold">Jornada: </span>{{oportunidad.carga_horaria}}</label>#}
+{#								<label><span class="bold">Ubicaci&oacute;n: </span>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>#}
+{#							</section>#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
 				<div class="clear"></div>
 			</div>
 		</section>

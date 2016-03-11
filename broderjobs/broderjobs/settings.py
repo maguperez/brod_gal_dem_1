@@ -60,8 +60,6 @@ INSTALLED_APPS = (
     'contador_visitas',
     'disc',
     'cultura_empresarial',
-
-
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
