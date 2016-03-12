@@ -8,6 +8,8 @@
 
         <!-- Stylesheets
         ============================================= -->
+
+        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}">
         <link rel="stylesheet" href="{% static 'template/css/bootstrap.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/style.css' %}" type="text/css" />
         <link rel="stylesheet" href="{% static 'template/css/dark.css' %}" type="text/css" />
@@ -98,8 +100,8 @@
                         <!-- Logo
                         ============================================= -->
                         <div id="logo">
-                            <a href="{% url 'empresa' %}" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
-                            <a href="{% url 'empresa' %}" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo.svg' %}" alt="Broderjobs"></a>
+                            <a href="{% url 'empresa' %}" class="standard-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo-dark.svg' %}" alt="Broderjobs"></a>
+                            <a href="{% url 'empresa' %}" class="retina-logo" data-dark-logo="{% static 'template/images/logo-dark.svg' %}"><img src="{% static 'template/images/logo-dark.svg' %}" alt="Broderjobs"></a>
                         </div><!-- #logo end -->
 
                         <!-- Primary Navigation
@@ -262,16 +264,20 @@
 
                         <div class="col_half col_last tright">
                             <div class="fright clearfix">
-                                <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                <a href="http://www.facebook.com/broderjobs" target= "_blank" class="social-icon si-small si-borderless si-facebook">
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
                                 </a>
+                                <a href="http://www.snapchat.com/broderjobs" target= "_blank" class="social-icon si-small si-borderless si-snapchat">
+                                    <i><img src="{% static 'template/images/logo-snapchat-grey.png' %}" height="14"></i>
+                                    <i><img src="{% static 'template/images/logo-snapchat-white.png' %}"  height="14"></i>
+                                </a>
+                                <!--
 
                                 <a href="#" class="social-icon si-small si-borderless si-twitter">
                                     <i class="icon-twitter"></i>
                                     <i class="icon-twitter"></i>
                                 </a>
-                                <!--
                                 <a href="#" class="social-icon si-small si-borderless si-gplus">
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
@@ -347,7 +353,7 @@
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">¿Olvidaste tu contraseña?</a>
+                                    <a id = "a-recordar_clave" href = "#" data-toggle="modal" data-dismiss="modal" data-target="#reset" class="fright">¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
                             </form>
@@ -426,7 +432,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Olvide Contraseña</h4>
+                            <h4 class="modal-title text-center">Recordar Contraseña</h4>
                         </div>
                         <div class="modal-body text-center">
                             <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
@@ -478,7 +484,9 @@
                     if ($(this).val()=="")
                         $(this).css("color", "#a5a5a5");
                 });
-                $("#id_registro-empresa").tooltip();
+                $("#id_registro-email").attr('title','Recuerda que debes usar el correo de la compañía para registrarte');
+                $("#id_registro-email").attr('data-placement', 'right');
+                $("#id_registro-email").tooltip();
                 $("#login-form").validate({
                     highlight: function( label ) {
                         $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -597,15 +605,17 @@
                 });
             });
             window.onload = function(){
-                $("#primary-menu a").on("click", function(){
+                $("#primary-menu a, #a-recordar_clave").on("click", function(){
                     sessionStorage.setItem("main", $(this).attr("data-target"));
                 })
+                {%if message_login or message_registro or message_reset %}
                 if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
 					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
 				}
                 else {
                     $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
                 }
+                {%endif %}
             }
         </script>
     </body>

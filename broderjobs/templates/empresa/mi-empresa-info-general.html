@@ -93,9 +93,10 @@
         });
 
         $('textarea').on("keyup", function() {
-            var text_length = $(this).val().length;
-
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+            var characterCount = enteredText.length + numberOfLineBreaks;
+            $(this).next().html(characterCount + ' caracteres');
         });
 
 		$("#empresa-info_general input").addClass("form-control");
@@ -115,10 +116,27 @@
 
 		$.validator.addMethod('checkurl',function(value, element, param){
 
-			return /^(www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);
+            if( !(value.substr(0,7) == 'http://' || value.substr(0,8) == 'https://') ){
+                value = 'http://' + value;
+            }
+
+            if(value.substr(value.length-1, 1) != '/'){
+                value = value + '/';
+            }
+            return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
 		},'URL inválida');
 
-
+        /*
+        $.validator.addMethod("cus_url", function(value, element) {
+    if(value.substr(0,7) != 'http://'){
+        value = 'http://' + value;
+    }
+    if(value.substr(value.length-1, 1) != '/'){
+        value = value + '/';
+    }
+    return this.optional(element) || /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value);
+}, "Not valid url.");
+         */
 
 		$("#empresa-info_general").validate({
             errorPlacement: function (error, element) {
@@ -249,12 +267,14 @@
 					}
 				});
 			}
+			/*
 			else{
+				LlamarValidacionElemento('id_pais');*/
 				var options = '';
 				$("#id_ciudad").html(options);
-				$("#id_ciudad").select2("val", "");
+				$("#id_ciudad").val("").trigger("change");
 				$("#id_ciudad").attr('disabled', false);
-			}
+			//}
 		});
 		$("#id_ciudad").change(function() {
 			$('#id_ciudad_hidden').val($(this).val());

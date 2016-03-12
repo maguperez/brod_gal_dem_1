@@ -8,14 +8,13 @@ items_registro = utils.estado_registro()
 class Persona(models.Model):
     usuario = models.OneToOneField(User)
     telefono = models.CharField(default=None, null=True, blank=True, max_length=20)
-    fecha_nacimiento = models.DateField(null=True)
+    fecha_nacimiento = models.DateField(default=None, null=True, blank=True)
     tipo_persona = models.CharField(max_length=1, default="E")
     genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
 
     fecha_creacion = models.DateField(default=  datetime.now, null=True, blank=True)
     fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
-    estado2 =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
 		return unicode(self.usuario.first_name+ " "+self.usuario.last_name) or u''

@@ -6,6 +6,51 @@
 		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
 	</form>
 </div>
+<style>
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+        background-color: #fff !important;
+        /*font-family: Roboto;*/
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+    }
+    #pac-input:focus {
+        border-color: #4d90fe;
+    }
+    .pac-container {
+        /*font-family: Roboto;*/
+        z-index: 3000;
+    }
+
+    #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+    #type-selector label {
+        /*font-family: Roboto;*/
+        font-size: 13px;
+        font-weight: 300;
+    }
+    #target {
+        width: 345px;
+    }
+</style>
+<input id="pac-input" class="controls" type="text" placeholder="Búsqueda">
 <div id = "ubicacion-map" style = "height: 350px"></div>
 <script>
     var Ubicacion = {
@@ -28,6 +73,36 @@
                 var punto = new google.maps.LatLng(latitud, longitud);
                 Ubicacion.marcar_mapa(punto);
             }
+
+            /*Búsqueda*/
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            Ubicacion.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            Ubicacion.map.addListener('bounds_changed', function() {
+                searchBox.setBounds(Ubicacion.map.getBounds());
+            });
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+                if (places.length == 0) {
+                    return;
+                }
+              // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                Ubicacion.map.fitBounds(bounds);
+            });
         },
         marcar_mapa: function(coordenadas){
             Ubicacion.borrar_marca();
@@ -61,7 +136,7 @@
     var interval;
     $(function(){
         interval = setInterval(function(){
-            if ($("#ubicacion-map").width != 0){
+            if ($("#ubicacion-map").width() != 0){
                 clearInterval(interval);
                 Ubicacion.inicializar_mapa();
             }

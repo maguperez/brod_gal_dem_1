@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 from estudiante.models import Estudiante
 from .models import EmpresaRespuestas, PreguntaCultura, EmpresaCultura, EstudianteCultura, EstudianteEmpresaCultura
-from .cultura_empresarial import calcular_cultura_empresa
+from oportunidad.compatibilidad import actualizar_compatibilidad_empresa
 
 admin.site.register(models.PerfilCultura)
 
@@ -39,9 +39,9 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
             empresa_cultura.save()
 
             for e in EstudianteCultura.objects.filter(estado='A'):
-                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.id,
+                est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = e.estudiante.id,
                                                                                            empresa_id = empresa_cultura.empresa.id)
-                if created is True:
+                if created:
                     est_empr_cultura.estudiante = e.estudiante
                     est_empr_cultura.empresa = empresa_cultura.empresa
                 clan = (e.porcentaje_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
@@ -54,7 +54,8 @@ class EmpresaRespuestasAdmin(admin.ModelAdmin):
                 est_empr_cultura.porcentaje_jerarquica = jerarquica
                 est_empr_cultura.porcentaje_racional = racional
                 est_empr_cultura.save()
-
+                #Calcula la compatibilidad para todas las oportunidades dada el estudiante la empresa y la compatibilidad culrural entre ellos
+                resp = actualizar_compatibilidad_empresa(est_empr_cultura.estudiante, empresa_cultura.empresa, est_empr_cultura.compatibilidad_cultural)
 
 
 admin.site.register(models.EmpresaRespuestas, EmpresaRespuestasAdmin)

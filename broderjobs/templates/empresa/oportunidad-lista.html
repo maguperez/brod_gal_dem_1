@@ -90,10 +90,13 @@
 				success: function (data) {
 					var par = '';
 					$('#oportunidad-lista').html('');
-					if (data.length > 0)
-						fnCargarOportunidad(data, 0);
-					else
-						$('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+					if (data.length > 0) {
+                        fnCargarOportunidad(data, 0);
+                        $('#vacio').html('');
+                    }
+					else {
+                        $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+                    }
 				}
 			});
 	}

@@ -61,9 +61,10 @@
         });
 
         $('textarea').on("keyup", function() {
-            var text_length = $(this).val().length;
-
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+            var characterCount = enteredText.length + numberOfLineBreaks;
+            $(this).next().html(characterCount + ' caracteres');
         });
 
 		if($("#id_descripcion").val()){
@@ -145,14 +146,14 @@
 
  			}
  		});
-
+        debugger;
 		InicializarValidaciones();
 	});
 
 	function InicializarValidaciones(){
 
 		$.validator.addMethod('validarFecha',function(value, element, param){
-
+				debugger;
  			if(element.id == 'id_fecha_desde'){
  				if(!value){
  					return false;

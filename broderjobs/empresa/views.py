@@ -24,7 +24,7 @@ from cStringIO import StringIO
 from django.views.generic import CreateView, DeleteView, ListView
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
-from main.utils import LoginRequiredMixin
+from main.utils import LoginRequiredMixin, calular_edad
 from django.core.paginator import InvalidPage, Paginator
 from datetime import date,datetime
 
@@ -56,7 +56,10 @@ class MiEmpresaView(FormView):
         # imagenes = Picture.objects.filter(empresa_id = empresa.id)
         # videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
-        redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
+        redes_sociales, crear =EmpresaRedesSociales.objects.get_or_create(empresa_id=representante.empresa.id, estado = 'A')
+        if crear:
+            redes_sociales.empresa = representante.empresa
+            redes_sociales.save()
 
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
@@ -179,7 +182,10 @@ class RedesSocialesView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         try:
-            redes_empresa = EmpresaRedesSociales.objects.get(empresa_id=representante.empresa.id, estado = 'A')
+            redes_empresa, crear =EmpresaRedesSociales.objects.get_or_create(empresa_id=representante.empresa.id, estado = 'A')
+            if crear:
+                redes_empresa.empresa = representante.empresa
+                redes_empresa.save()
         except EmpresaRedesSociales.DoesNotExist:
             redes_empresa = EmpresaRedesSociales()
         return {
@@ -246,7 +252,7 @@ class OportunidadListarView(TemplateView):
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("fecha_publicacion")
+        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id).order_by("-fecha_publicacion")
         context = super(OportunidadListarView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -278,7 +284,7 @@ class OportunidadBusquedaView(TemplateView):
         return HttpResponse(data, content_type='application/json')
 
 def oportunidades(request):
-    oportunidades = Oportunidad.objects.all().order_by('fecha_publicacion')
+    oportunidades = Oportunidad.objects.all().order_by('-fecha_publicacion')
     a_oportunidades =[]
     for i in range(0, len(oportunidades)):
         empresa = Empresa.objects.get(id=oportunidades[i].empresa.id)
@@ -412,6 +418,11 @@ class OportunidadCandidatosCV(TemplateView):
 
         conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id = estudiante.id)
 
+        fecha_nac = estudiante.persona.fecha_nacimiento
+
+        edad = calular_edad(fecha_nac)
+
+        context['edad'] = edad
         context['oportunidad'] = oportunidad
         context['estudiante'] = estudiante
         context['resumen'] = Resumen.objects.get(estudiante_id=estudiante.id)

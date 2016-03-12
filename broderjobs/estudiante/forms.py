@@ -29,7 +29,7 @@ class RegistroCVForm(forms.ModelForm):
                 'grado_estudio': Select(attrs={'class': 'form-control'}),
                 'tipo_puesto': CheckboxSelectMultiple(),
                 'carga_horaria': RadioSelect(),
-                'semestre_actual': TextInput(attrs={'class': 'form-control'}),
+                'semestre_actual': Select(attrs={'class': 'form-control'}),
             }
 
     def __init__(self, *args, **kwargs):
@@ -77,7 +77,7 @@ class EstudianteForm(forms.ModelForm):
         widgets = {
                 'remuneracion_min': TextInput(attrs={'placeholder': 'Desde'}),
                 'remuneracion_max': TextInput(attrs={'placeholder': 'Hasta'}),
-                'semestre_actual': TextInput(attrs={'class': 'form-control'}),
+                'semestre_actual': Select(attrs={'class': 'form-control'}),
 
             }
 

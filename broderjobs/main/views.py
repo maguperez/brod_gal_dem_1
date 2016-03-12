@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.views.generic import TemplateView,FormView
 from django.core.urlresolvers import reverse_lazy, reverse
 from .models import Persona, Ciudad, Pais, Carrera, TipoCarrera, PeriodosGraduacion, Universidad
+from estudiante.models import Estudiante
 from empresa.models import Representante, Empresa
 from main.utils import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
@@ -31,6 +32,10 @@ from django.db.models.query_utils import Q
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 from .models import User
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 def homepage(request):
     message_registro = None
@@ -96,12 +101,15 @@ def homepage(request):
                     persona.fecha_nacimiento = fecha
                     persona.tipo_persona = "E"
                     persona.save()
+                    estudiante = Estudiante()
+                    estudiante.persona = persona
+                    estudiante.save()
                     new_user = authenticate(username=request.POST['registro-email'],
                                             password=request.POST['registro-password1'])
                     login(request, new_user)
                     return redirect('registro-cv')
                 else:
-                    message_registro= "Error al registrar"
+                    message_registro= "El email ya ha sido  registrado"
             if '_reset' in request.POST:
                 data = None
                 if reset_form.is_valid():
@@ -110,36 +118,49 @@ def homepage(request):
                     associated_users= User.objects.filter(Q(email=data)|Q(username=data))
                     if associated_users.exists():
                         for user in associated_users:
-                                 # Copied from django/contrib/auth/views.py : password_reset
-                            opts = {
-                                'use_https': request.is_secure(),
-                                'email_template_name': 'plantillas/contrasena-recuperar-email.html',
-                                'subject_template_name': 'plantillas/contrasena-recuperar-subject.txt',
-                                'request': request,
-                                # 'html_email_template_name': provide an HTML content template if you desire.
-                            }
+                            # opts = {
+                            #     'use_https': request.is_secure(),
+                            #     'email_template_name': 'correos/OlvidoContrasena.html',
+                            #     'subject_template_name': 'correos/OlvidoContrasenaSubject.txt',
+                            #     'request': request,
+                            #     # 'html_email_template_name': provide an HTML content template if you desire.
+                            # }
                             # This form sends the email on save()
-                            reset_form.save(**opts)
-                                # c = {
-                                #     'email': user.email,
-                                #     'domain': request.META['HTTP_HOST'],
-                                #     'site_name': 'your site',
-                                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                #     'user': user,
-                                #     'token': default_token_generator.make_token(user),
-                                #     'protocol': 'http',
-                                #     }
-                                # subject_template_name='plantillas/contrasena-recuperar-subject.txt'
-                                # # copied from django/contrib/admin/templates/registration/password_reset_subject.txt to templates directory
-                                # email_template_name='plantillas/contrasena-recuperar-email.html'
-                                # # copied from django/contrib/admin/templates/registration/password_reset_email.html to templates directory
-                                # subject = loader.render_to_string(subject_template_name, c)
-                                # # Email subject *must not* contain newlines
-                                # subject = ''.join(subject.splitlines())
-                                # email = loader.render_to_string(email_template_name, c)
-                                # send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
-                        # result = self.form_valid(form)
-                        message_reset= "se ha enviado un correo"# return result
+                            # reset_form.save(**opts)
+                            # c = {
+                            #     'email': user.email,
+                            #     'domain': request.META['HTTP_HOST'],
+                            #     'site_name': 'your site',
+                            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                            #     'user': user,
+                            #     'token': default_token_generator.make_token(user),
+                            #     'protocol': 'http',
+                            # }
+                            #
+                            # subject_template_name='correos/OlvidoContrasenaSubject.txt'
+                            # email_template_name='correos/OlvidoContrasena.html'
+                            # subject = loader.render_to_string(subject_template_name, c)
+                            # subject = ''.join(subject.splitlines())
+                            # email = loader.render_to_string(email_template_name, c)
+                            # send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
+                            # result = reset_form(form)
+                            plaintext = get_template('correos/OlvidoContrasenaSubject.txt')
+                            htmly     = get_template('correos/OlvidoContrasena.html')
+                            d = Context({ 'nombre': user.first_name, 'email': user.email,
+                                          'domain': request.META['HTTP_HOST'],
+                                          'site_name': 'your site',
+                                          'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                          'user': user,
+                                          'token': default_token_generator.make_token(user),
+                                          'protocol': 'http'
+                                          })
+                            subject, from_email, to = 'Recuperar Contraseña', DEFAULT_FROM_EMAIL, user.email
+                            text_content = plaintext.render(d)
+                            html_content = htmly.render(d)
+                            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                            msg.attach_alternative(html_content, "text/html")
+                            msg.send()
+                        message_reset= "se ha enviado un correo"
                     else:
                         message_reset = "No pudimos encontrar el correo"
                     # return result
@@ -205,27 +226,65 @@ def homepage_empresa(request):
                     # new_user = authenticate(username=request.POST['registro-email'], password=request.POST['registro-password1'])
                     # login(request, new_user)
 
-                    # Envio de Mensaje a Broder INfo
-                    datos = {
-                        'persona': user.first_name + ' ' + user.last_name,
-                        'empresa': representante.empresa,
-                        'email': user.email,
-                        'telefono': persona.telefono
-                    }
-                    email_template_name='plantillas/registro_empresa_broder.html'
-                    subject = 'Registro de Empresa'
-                    email = loader.render_to_string(email_template_name, datos)
-                    send_mail(subject, email, DEFAULT_FROM_EMAIL , [DEFAULT_FROM_EMAIL], fail_silently=False)
+                    ## Mensaje a Usuario Nuevo
+                    plaintext = get_template('correos/CuentaRegistroEmpresaSubject.txt')
+                    htmly     = get_template('correos/CuentaRegistroEmpresa.html')
+                    d = Context({ 'nombre': user.first_name, 'email': user.email,
+                                  'domain': request.META['HTTP_HOST'],
+                                  'site_name': 'your site',
+                                  'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                  'user': user,
+                                  'token': default_token_generator.make_token(user),
+                                  'protocol': 'http'
+                                })
+                    subject, from_email, to = 'Registro en BroderJobs', DEFAULT_FROM_EMAIL, user.email
+                    text_content = plaintext.render(d)
+                    html_content = htmly.render(d)
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
 
-                    #Envio de mensaje a Representante
-                    email_template_name='plantillas/registro_empresa_representante.html'
-                    subject = 'Registro de Empresa'
-                    email = loader.render_to_string(email_template_name, datos)
-                    send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
+                    # Envio de mensaje a info
+                    plaintext = get_template('correos/AvisoRegistroEmpresaSubject.txt')
+                    htmly     = get_template('correos/AvisoRegistroEmpresa.html')
+                    d = Context({ 'nombre': user.first_name, 'email': user.email,
+                                  'domain': request.META['HTTP_HOST'],
+                                  'site_name': 'your site',
+                                  'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                  'user': user,
+                                  'persona': persona,
+                                  'representante': representante,
+                                  'token': default_token_generator.make_token(user),
+                                  'protocol': 'http'
+                                })
+                    subject, from_email, to = 'Nuevo Registro en Empresas', DEFAULT_FROM_EMAIL, DEFAULT_FROM_EMAIL
+                    text_content = plaintext.render(d)
+                    html_content = htmly.render(d)
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+                    # # Envio de Mensaje a Broder INfo
+                    # datos = {
+                    #     'persona': user.first_name + ' ' + user.last_name,
+                    #     'empresa': representante.empresa,
+                    #     'email': user.email,
+                    #     'telefono': persona.telefono
+                    # }
+                    # email_template_name='correos/AvisoRegistroEmpresa.html'
+                    # subject = 'correos/AvisoRegistroEmpresaSubject.txt'
+                    # email = loader.render_to_string(email_template_name, datos)
+                    # send_mail(subject, email, DEFAULT_FROM_EMAIL , [DEFAULT_FROM_EMAIL], fail_silently=False)
+
+                    # #Envio de mensaje a Representante
+                    # email_template_name='correos/CuentaRegistroEmpresa.html'
+                    # subject = 'correos/CuentaRegistroEmpresaSubject.txt'
+                    # email = loader.render_to_string(email_template_name, datos)
+                    # send_mail(subject, email, DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
 
                     message_registro = "Tu usuario esta siendo validado pronto nos comunicaremos contigo"
                 else:
-                    message_registro= "error al registrar"
+                    message_registro= "El email ya ha sido  registrado"
 
             if '_reset' in request.POST:
                 data = None
@@ -235,12 +294,28 @@ def homepage_empresa(request):
                     associated_users= User.objects.filter(Q(email=data)|Q(username=data))
                     if associated_users.exists():
                         for user in associated_users:
-                            opts = {
-                                'use_https': request.is_secure(),
-                                'email_template_name': 'plantillas/contrasena-recuperar-email.html',
-                                'subject_template_name': 'plantillas/contrasena-recuperar-subject.txt',
-                                'request': request,
-                            }
+                            # opts = {
+                            #     'use_https': request.is_secure(),
+                            #     'email_template_name': 'correos/OlvidoContrasena.html',
+                            #     'subject_template_name': 'correos/OlvidoContrasenaSubject.txt',
+                            #     'request': request,
+                            # }
+                            plaintext = get_template('correos/OlvidoContrasenaSubject.txt')
+                            htmly     = get_template('correos/OlvidoContrasena.html')
+                            d = Context({ 'nombre': user.first_name, 'email': user.email,
+                                          'domain': request.META['HTTP_HOST'],
+                                          'site_name': 'your site',
+                                          'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                          'user': user,
+                                          'token': default_token_generator.make_token(user),
+                                          'protocol': 'http'
+                                          })
+                            subject, from_email, to = 'Recuperar Contraseña', DEFAULT_FROM_EMAIL, user.email
+                            text_content = plaintext.render(d)
+                            html_content = htmly.render(d)
+                            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                            msg.attach_alternative(html_content, "text/html")
+                            msg.send()
                             reset_form.save(**opts)
                         message_reset= "se ha enviado un correo"
                     else:
@@ -381,15 +456,31 @@ class CuentaCrearView(LoginRequiredMixin, FormView):
         reset_form = PasswordResetForm(self.request.POST)
         reset_form.is_valid()  # Must trigger validation
         # Copied from django/contrib/auth/views.py : password_reset
-        opts = {
-            'use_https': self.request.is_secure(),
-            'email_template_name': 'plantillas/cuenta-creada-email.html',
-            'subject_template_name': 'plantillas/cuenta-creada-subject.txt',
-            'request': self.request,
-            # 'html_email_template_name': provide an HTML content template if you desire.
-        }
-        # This form sends the email on save()
-        reset_form.save(**opts)
+        # opts = {
+        #     'use_https': self.request.is_secure(),
+        #     'email_template_name': 'correos/CuentaCreada.html',
+        #     'subject_template_name': 'correos/CuentaCreadaSubject.txt',
+        #     'request': self.request,
+        #     # 'html_email_template_name': provide an HTML content template if you desire.
+        # }
+        # # This form sends the email on save()
+        # reset_form.save(**opts)
+        plaintext = get_template('correos/CuentaCreadaSubject.txt')
+        htmly     = get_template('correos/CuentaCreada.html')
+        d = Context({ 'nombre': usuario.first_name, 'email': usuario.email,
+                      'domain': self.request.META['HTTP_HOST'],
+                      'site_name': 'your site',
+                      'uid': urlsafe_base64_encode(force_bytes(usuario.pk)),
+                      'user': usuario,
+                      'token': default_token_generator.make_token(usuario),
+                      'protocol': 'http'
+                    })
+        subject, from_email, to = 'Recuperar Contraseña', DEFAULT_FROM_EMAIL, usuario.email
+        text_content = plaintext.render(d)
+        html_content = htmly.render(d)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         return super(CuentaCrearView, self).form_valid(form)
         # return redirect('usuarios')
 

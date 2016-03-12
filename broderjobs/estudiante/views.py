@@ -22,7 +22,7 @@ from cultura_empresarial.models import EstudianteEmpresaCultura
 from main import utils
 from main.utils import LoginRequiredMixin
 from empresa.utils import actualizar_ranking_empresa
-from oportunidad.compatibilidad import actualizar_compatibilidad
+from oportunidad.compatibilidad import actualizar_compatibilidad_oportunidades
 
 from xhtml2pdf import pisa
 import cStringIO as StringIO
@@ -53,11 +53,9 @@ def registro_cv(request):
             semestre_graduacion = form.cleaned_data['semestre_graduacion']
             carga_horaria = form.cleaned_data['carga_horaria']
 
-            try:
-                estudiante = Estudiante.objects.get(persona_id = persona.id)
-            except Estudiante.DoesNotExist:
-                estudiante = None
-            if estudiante is None:
+
+            estudiante, creado = Estudiante.objects.get_or_create(persona_id = persona.id)
+            if creado:
                 estudiante = Estudiante()
                 estudiante.persona = persona
 
@@ -99,7 +97,8 @@ def registro_cv(request):
             r, created = Resumen.objects.get_or_create(estudiante_id = estudiante.id)
             if created is True:
                 r.save()
-            actualizar_compatibilidad(estudiante)
+
+            resp = actualizar_compatibilidad_oportunidades(estudiante)
             return redirect('mi-cv')
         else:
             print(form.errors)
@@ -120,7 +119,11 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         id = self.kwargs['id']
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado = 'A').order_by("fecha_publicacion")[:2]
+        user = self.request.user
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
+        oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
+                                                                  oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()[:2]
         try:
             redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
         except EmpresaRedesSociales.DoesNotExist:
@@ -129,6 +132,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             ranking = RankingEmpresa.objects.get(empresa_id = empresa.id)
 
         except RankingEmpresa.DoesNotExist:
+            ranking = RankingEmpresa()
             ranking.ranking_general = 0
             ranking.linea_carrera = 0
             ranking.flexibilidad_horarios = 0
@@ -225,8 +229,12 @@ class OportunidadesEmpresaView(TemplateView):
     template_name = 'estudiante/oportunidades-empresa.html'
     def get_context_data(self, **kwargs):
         id = kwargs.get('id', None)
+        user = self.request.user
+        persona = get_object_or_404(Persona, usuario_id=user.id)
+        estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, pk=id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado = 'A').order_by("fecha_publicacion")
+        oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
+                                                                  oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
         context = super(OportunidadesEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -1006,6 +1014,7 @@ class OportunidadDetalleView(LoginRequiredMixin, TemplateView):
         except Postulacion.DoesNotExist:
             postulacion = None
         context = super(OportunidadDetalleView, self).get_context_data(**kwargs)
+        context['estudiante'] = estudiante
         context['empresa'] = empresa
         context['oportunidad'] = oportunidad
         context['postulacion'] = postulacion
@@ -1092,7 +1101,7 @@ def oportunidad_cargar_lista(request):
         Q(oportunidad__ciudad__descripcion__icontains=busqueda) | Q(oportunidad__pais__descripcion__icontains = busqueda) |
         Q(oportunidad__tipo_puesto__descripcion__startswith=busqueda) | Q(oportunidad__carga_horaria__descripcion__startswith=busqueda) |
         Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda))).exclude(
-        oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio')
+        oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
 
     return render_to_response('estudiante/oportunidad-cargar-lista.html', {'oportunidades': oportunidades},
                               context_instance = RequestContext(request))
@@ -1189,6 +1198,8 @@ from django.http import HttpResponse
 def cv_pdf(request, id = "0"):
     estudiante = get_object_or_404(Estudiante, id = id)
 
+    edad = None
+
     if estudiante.persona.fecha_nacimiento is not None:
             edad = utils.calular_edad(estudiante.persona.fecha_nacimiento)
     conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id)
@@ -1197,14 +1208,18 @@ def cv_pdf(request, id = "0"):
     experiencias_profesionales = ExperienciaProfesional.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
     voluntariados = Voluntariado.objects.filter(estudiante_id=estudiante.id).order_by('-fecha_desde')
 
+    url = estudiante.foto
+
     template = get_template("estudiante/estudiante-cv-pdf.html")
     context = Context({'pagesize':'A4','estudiante': estudiante,
-                                        # 'edad': edad,
+                                        'edad': edad,
                                         'resumen': resumen,
                                         'conocimientos_extras':conocimientos_extras,
                                         'actividades_extra': actividades_extra,
                                         'experiencias_profesionales': experiencias_profesionales,
-                                        'voluntariados': voluntariados})
+                                        'voluntariados': voluntariados,
+                                        'domain': request.META['HTTP_HOST'],
+                                        'protocol': 'http'})
     html = template.render(context)
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), dest=result)

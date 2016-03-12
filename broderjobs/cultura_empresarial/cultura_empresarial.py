@@ -1,7 +1,7 @@
 from .models import EmpresaRespuestas, PreguntaCultura, EmpresaCultura, CulturaMatrizDISC, EstudianteCultura, EstudianteEmpresaCultura
 from disc.models import EstudiantePatron
 from empresa.models import Empresa
-
+from oportunidad.compatibilidad import actualizar_compatibilidad_empresa
 
 def calcular_cultura_empresa(empresa):
 
@@ -84,7 +84,7 @@ def calcular_cultura_estudiate(estudiante):
         for empresa_cultura in EmpresaCultura.objects.filter(estado = 'A'):
             est_empr_cultura, created = EstudianteEmpresaCultura.objects.get_or_create(estudiante_id = estudiante.id,
                                                                                        empresa_id = empresa_cultura.empresa.id)
-            if created is True:
+            if created:
                 est_empr_cultura.estudiante = estudiante
                 est_empr_cultura.empresa = empresa_cultura.empresa
             clan = (compatibilidad_clan/100.00) * (empresa_cultura.porcentaje_clan/100.00)
@@ -97,7 +97,11 @@ def calcular_cultura_estudiate(estudiante):
             est_empr_cultura.porcentaje_jerarquica = jerarquica
             est_empr_cultura.porcentaje_racional = racional
             est_empr_cultura.save()
-        return 1
-    except:
+
+            #Calcula la compatibilidad para todas las oportunidades dada el estudiante la empresa y la compatibilidad culrural entre ellos
+            resp = actualizar_compatibilidad_empresa(estudiante, empresa_cultura.empresa, est_empr_cultura.compatibilidad_cultural)
+        return est_empr_cultura.compatibilidad_cultural
+    except Exception, e:
+        mensaje = str(e)
         return -1
     return 0

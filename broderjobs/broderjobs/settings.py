@@ -30,6 +30,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+ADMINS = [('Gabriela', 'sotofgabriela@gmail.com'), ('Admin', 'info@broderjobs.com')]
+
 
 # Application definition
 

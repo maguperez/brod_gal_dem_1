@@ -23,7 +23,7 @@ from django.db.models import Q, CharField
 from datetime import date, datetime
 import json
 from cStringIO import StringIO
-from .compatibilidad import calcular_compatibilidad, guardar_compatibilidad, actualizar_compatibilidad
+from .compatibilidad import calcular_compatibilidad, guardar_compatibilidad, actualizar_compatibilidad_oportunidades
 
 
 # Create your views here.
@@ -111,11 +111,11 @@ class OportunidadCrearView(FormView):
             periodo_hasta = ''
 
         if periodo_desde == '' or periodo_hasta == '':
-            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=periodo_desde)
-            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=periodo_hasta)
-        else:
             periodo_graduacion_desde = None
             periodo_graduacion_hasta = None
+        else:
+            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=int(periodo_desde))
+            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=int(periodo_hasta))
 
         oportunidad = Oportunidad()
         oportunidad.empresa = empresa
@@ -153,15 +153,21 @@ class OportunidadCrearView(FormView):
         oportunidad.latitud = latitud
         oportunidad.usuario_creacion = str(user.username)
         oportunidad.usuario_modificacion = str(user.username)
+
+        oportunidad.edad_desde = edad_desde
+        oportunidad.edad_hasta = edad_hasta
+        oportunidad.genero = genero
+
         oportunidad.fecha_creacion = datetime.now()
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
 
         for be in list_beneficios_extras:
-            Be_extra = BeneficioExtra()
-            Be_extra.descripcion = be
-            Be_extra.oportunidad = oportunidad
-            Be_extra.save()
+            if be != '':
+                Be_extra = BeneficioExtra()
+                Be_extra.descripcion = be
+                Be_extra.oportunidad = oportunidad
+                Be_extra.save()
 
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
@@ -172,10 +178,11 @@ class OportunidadCrearView(FormView):
         oportunidad.beneficio = list_beneficios
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
-        total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
-                                       oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
-                                       oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
-                                       oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        # total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
+        #                                oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
+        #                                oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
+        #                                oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        resp = guardar_compatibilidad(oportunidad)
         return super(OportunidadCrearView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -198,6 +205,11 @@ class OportunidadEditarView(FormView):
         beneficios_extra = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id)
 
         beneficios_extra_str = ','.join([str(x.id) for x in beneficios_extra]) if beneficios_extra.count() > 0 else ''
+
+        if oportunidad.graduacion_desde is not None and oportunidad.graduacion_hasta is not None:
+            periodo_graduacion_hidden = str(oportunidad.graduacion_desde.id)+','+str(oportunidad.graduacion_hasta.id)
+        else:
+            periodo_graduacion_hidden = ''
 
         if oportunidad.ciudad is not None:
             ciudad_id = oportunidad.ciudad.id
@@ -230,7 +242,12 @@ class OportunidadEditarView(FormView):
                 'beneficio': oportunidad.beneficio.all(),
                 'longitud': oportunidad.longitud,
                 'latitud': oportunidad.latitud,
-                'pais': oportunidad.pais, 'ciudad_hidden': ciudad_id}
+                'pais': oportunidad.pais,
+                'edad_desde': oportunidad.edad_desde,
+                'edad_hasta': oportunidad.edad_hasta,
+                'genero': oportunidad.genero,
+                'ciudad_hidden': ciudad_id,
+                'periodo_graduacion_hidden': periodo_graduacion_hidden}
 
     def get_context_data(self, **kwargs):
         id = self.kwargs["id"]
@@ -290,9 +307,12 @@ class OportunidadEditarView(FormView):
         carrera = form.cleaned_data['carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
+        periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
         id = self.kwargs["id"]
         oportunidad = get_object_or_404(Oportunidad, id = id)
 
+        longitud = form.cleaned_data['longitud']
+        latitud = form.cleaned_data['latitud']
 
         oportunidad.titulo = titulo
         oportunidad.carga_horaria  = carga_horaria
@@ -311,6 +331,27 @@ class OportunidadEditarView(FormView):
         oportunidad.remuneracion_min = remuneracion_min
         oportunidad.remuneracion_max = remuneracion_max
 
+        # periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
+
+        if periodo_graduacion_hidden is not None and periodo_graduacion_hidden != '':
+            periodo_split = periodo_graduacion_hidden.split(',')
+            periodo_desde = periodo_split[0]
+            periodo_hasta = periodo_split[1]
+        else:
+            periodo_desde = ''
+            periodo_hasta = ''
+
+        if periodo_desde == '' or periodo_hasta == '':
+            periodo_graduacion_desde = None
+            periodo_graduacion_hasta = None
+        else:
+            periodo_graduacion_desde = PeriodosGraduacion.objects.get(id=int(periodo_desde))
+            periodo_graduacion_hasta = PeriodosGraduacion.objects.get(id=int(periodo_hasta))
+
+        oportunidad.graduacion_desde = periodo_graduacion_desde
+        oportunidad.graduacion_hasta = periodo_graduacion_hasta
+
+
         if fecha_cese is not None:
             oportunidad.fecha_cese = fecha_cese
 
@@ -324,8 +365,9 @@ class OportunidadEditarView(FormView):
         estado_anterior = oportunidad.estado_oportunidad
 
         beneficios_extras_hidden = form.cleaned_data['beneficios_extras_hidden']
-        beneficios_extras_ids = beneficios_extras_hidden.split(',')
+
         # beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
+        beneficios_extras = None
 
         if beneficios_extras_hidden.strip() != '':
             beneficios_extras_ids = beneficios_extras_hidden.split(',')
@@ -354,36 +396,43 @@ class OportunidadEditarView(FormView):
         oportunidad.estado = constants.estado_activo
         oportunidad.usuario_modificacion = user.username
         oportunidad.fecha_modificacion = datetime.now()
+
+        oportunidad.longitud = longitud
+        oportunidad.latitud = latitud
         oportunidad.save()
 
         beneficios_hidden = form.cleaned_data['beneficios_hidden']
-        beneficios_nuevos_hidden = form.cleaned_data['beneficios_nuevos_hidden']
-        beneficios_ids = beneficios_hidden.split(',')
-        beneficios_nuevos_ids = beneficios_nuevos_hidden.split(',')
-        if '' not in  beneficios_ids and len(beneficios_ids) == 1:
+
+        # beneficios = None
+
+        if beneficios_hidden.strip() != '':
+            beneficios_ids = beneficios_hidden.split(',')
             beneficios = Beneficio.objects.filter(id__in=beneficios_ids)
-        else:
-            oportunidad.beneficio.all().delete()
+            oportunidad.beneficio = beneficios
 
-        if '_abrir' not in self.request.POST:
-            if beneficios_extras_hidden.strip() != '':
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
-            else:
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
         else:
-            if beneficios_extras_hidden.strip() != '':
-                for be in beneficios_extras:
-                    be.oportunidad = oportunidad
-                    be.save()
-            else:
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
+            # b = Beneficio()
+            oportunidad.beneficio = []
 
-        for be in beneficios_nuevos_ids:
-            if be.strip() != '':
-                Be_extra = BeneficioExtra()
-                Be_extra.descripcion = be
-                Be_extra.oportunidad = oportunidad
-                Be_extra.save()
+        if beneficios_extras is not None:
+            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
+            # for be in beneficios_extras:
+            #     be.oportunidad = oportunidad
+            #     be.save()
+        else:
+            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
+
+        beneficios_nuevos_hidden = form.cleaned_data['beneficios_nuevos_hidden']
+
+        if beneficios_nuevos_hidden.strip() != '':
+            list_beneficios_hidden = beneficios_nuevos_hidden.split(',')
+            for be in list_beneficios_hidden:
+                if be != '':
+                    Be_extra = BeneficioExtra()
+                    Be_extra.descripcion = be
+                    Be_extra.oportunidad = oportunidad
+                    Be_extra.save()
+
 
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
@@ -394,10 +443,11 @@ class OportunidadEditarView(FormView):
         oportunidad.estado_oportunidad = estado_nuevo
         oportunidad.grado_estudio = grado_estudio
         oportunidad.save()
-        total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
-                                       oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
-                                       oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
-                                       oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        # total = guardar_compatibilidad(oportunidad.carrera.all(), oportunidad.universidad.all(), oportunidad.grado_estudio,
+        #                                oportunidad.edad_desde, oportunidad.edad_hasta, oportunidad.pais, oportunidad.ciudad,
+        #                                oportunidad.genero, oportunidad.tipo_puesto, oportunidad.carga_horaria,
+        #                                oportunidad.idioma, oportunidad.conocimiento, oportunidad.empresa, oportunidad.id)
+        resp = guardar_compatibilidad(oportunidad)
         return super(OportunidadEditarView, self).form_valid(form)
 
 class OportunidadArchivarView(FormView):
@@ -557,6 +607,10 @@ def total_compatibles(request):
     carga_horaria   = request.POST.get('carga_horaria')
     idioma          = request.POST.get('idioma')
     conocimiento    = request.POST.get('conocimiento')
+    remuneracion_min    = request.POST.get('remuneracion_min')
+    remuneracion_max    = request.POST.get('remuneracion_max')
+    remuneracion_min    = request.POST.get('remuneracion_min')
+    remuneracion_max    = request.POST.get('remuneracion_max')
 
     user = get_object_or_404(User, pk = request.user.id)
     persona = get_object_or_404(Persona, usuario_id=user.id)
@@ -579,15 +633,15 @@ def total_compatibles(request):
     # conocimiento    = request.GET.get('conocimiento')
     # # experiencia     = request.GET.get('conocimiento')
     total = calcular_compatibilidad(carrera, universidad, grado_estudio, edad_desde, edad_hasta, pais, ciudad, genero,
-                                    tipo_puesto, carga_horaria, idioma, conocimiento, representante.empresa.id)
+                                    tipo_puesto, carga_horaria, idioma, conocimiento, remuneracion_min, remuneracion_max,
+                                    representante.empresa.id)
     data = json.dumps(total)
     return HttpResponse(data, content_type='application/json')
 
 def actualizar_compatibilidad_estudiante(request):
     persona = get_object_or_404(Persona, usuario_id = request.user.id)
     estudiante = get_object_or_404(Estudiante, persona_id= persona)
-
-    resp = actualizar_compatibilidad(estudiante)
+    resp = actualizar_compatibilidad_oportunidades(estudiante)
     data = json.dumps(resp)
     return HttpResponse(data, content_type='application/json')
 

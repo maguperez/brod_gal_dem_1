@@ -87,6 +87,21 @@
             .fullcoveredvideo video, .fullscreenvideo video{
                 background-image:url({% static 'template/images/videos/video.png' %});
             }
+            #div-pasos h3 {
+            	font-weight: 600;
+            	margin: 0px;
+            	font-family: 'Roboto';
+            	color: #292929;
+            	font-size: 30px;
+            }
+            #div-pasos p {
+            	line-height: 1.8; 
+            	width: 70%;
+            	margin: auto;
+            	font-family: 'Roboto Thin';
+            	font-size: 19px;
+            	color: #292929;
+            }
         </style>
 
     </head>
@@ -121,9 +136,9 @@
                             <ul>
                                 <li><a class = "emphasis" href="{% url 'empresa' %}"><div><span>Para Empresas</span></div></a>
                                 </li>
-                                <li><a href = "#" data-toggle="modal" data-target="#login"><div><span>Iniciar Sesión</span></div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#login"><div>Iniciar Sesión</div></a>
                                 </li>
-                                <li><a href = "#" data-toggle="modal" data-target="#register"><div><span>Regístrate</span></div></a>
+                                <li><a href = "#" data-toggle="modal" data-target="#register"><div>Regístrate</div></a>
                                 </li>
                             </ul>
 
@@ -356,15 +371,15 @@
                 </script>
                 <div class="section nobottommargin notopmargin" style="padding-bottom: 150px;">
 
-                    <div class="home-img left hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url({% static 'template/images/bicicleta.jpg' %}) bottom right no-repeat; background-size: cover"></div>
+                    <div class="home-img left hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url('/static/template/images/bicicleta.jpg') bottom right no-repeat; background-size: cover"></div>
 
                     <div class="container clearfix " style="z-index: 1;">
 
-                        <div class="col-md-6 nobottommargin dark">
+                        <div class="col-md-6 bottommargin-lg topmargin-lg dark">
 
-                            <div class="heading-block topmargin-sm">
+                            <div class="heading-block">
                                 <h2>Haz match con las empresas</h2>
-                                <span>Comienza tu carrera y descubre la compatibilidad que tiene tu perfil profesional y tu personalidad con las mejores empresas.</span>
+                                <span class = "bottommargin-lg">Comienza tu carrera y descubre la compatibilidad que tiene tu perfil profesional y tu personalidad con las mejores empresas.</span>
                             </div>
 
 {#                            <p>Comienza tu carrera y descubre la compatibilidad que tiene tu perfil profesional y tu personalidad con las mejores empresas.</p>#}
@@ -376,13 +391,13 @@
 
                 </div>
                 <div class="section notopmargin nobottommargin" style="padding-bottom: 150px;">
-                    <div class="home-img right hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url({% static 'template/images/empresa.jpg' %}) bottom right no-repeat; background-size: cover"></div>
+                    <div class="home-img right hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url('/static/template/images/empresa.jpg') bottom right no-repeat; background-size: cover"></div>
                     <div class="container clearfix">
-                        <div class="col-md-6 col-md-offset-6 nobottommargin topmargin-lg col_last dark">
+                        <div class="col-md-6 col-md-offset-6 bottommargin-lg topmargin-lg col_last dark">
 
-                            <div class="heading-block topmargin-sm">
+                            <div class="heading-block">
                                 <h2>Descubre como trabajan</h2>
-                                <span>Explora los ambientes de trabajo y conoce la cultura organizacional de las compañías que combinan contigo.</span>
+                                <span class = "bottommargin-lg">Explora los ambientes de trabajo y conoce la cultura organizacional de las compañías que combinan contigo.</span>
                             </div>
 
 {#                            <p>Explora los ambientes de trabajo y conoce la cultura organizacional de las compañías que combinan contigo.</p>#}
@@ -391,15 +406,15 @@
                 </div>
                 <div class="section nobottommargin notopmargin" style="padding-bottom: 150px;">
 
-                    <div class="home-img left hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url({% static 'template/images/estado.jpg' %}) top right no-repeat; background-size: cover"></div>
+                    <div class="home-img left hidden-sm hidden-xs" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: transparent url('/static/template/images/estado.jpg') top right no-repeat; background-size: cover"></div>
 
                     <div class="container clearfix " style="z-index: 1;">
 
-                        <div class="col-md-6 nobottommargin dark">
+                        <div class="col-md-6 bottommargin-lg topmargin-lg  dark">
 
-                            <div class="heading-block topmargin-sm ">
+                            <div class="heading-block">
                                 <h2>Sigue tus postulaciones</h2>
-                                <span>Acompaña en tiempo real el estado de tus procesos de selección y mantén comunicación con los reclutadores.</span>
+                                <span class = "bottommargin-lg">Acompaña en tiempo real el estado de tus procesos de selección y mantén comunicación con los reclutadores.</span>
                             </div>
 
 {#                            <p>Acompaña en tiempo real el estado de tus procesos de selección y mantén comunicación con los reclutadores.</p>#}
@@ -417,32 +432,32 @@
 {#                        Encuentra el trabajo de tus sueños en las mejores empresas del país.#}
 {#                    </div>#}
 {#                </a>#}
-                <div class="col_full common-height nobottommargin">
+                <div id = "div-pasos" class="col_full common-height nobottommargin  text-center">
 
-                    <div class="col-md-4 dark col-padding ohidden" style="background-color: #1abc9c;">
+                    <div class="col-md-4 col-padding ohidden" >
                         <div>
-                            <h3 class="uppercase" style="font-weight: 600;">PASO 1</h3>
-                            <p style="line-height: 1.8;">Ingresa tu información académica y profesional.</p>
+                            <img src="{% static 'template/images/paso1.png' %}">
+                            <h3 class="" >Paso 1</h3>
+                            <p>Déjanos saber tu perfil y qué tipo de trabajo buscas.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
-                            <i class="icon-bulb bgicon"></i>
                         </div>
                     </div>
 
-                    <div class="col-md-4 dark col-padding ohidden" style="background-color: #34495e;">
+                    <div class="col-md-4 col-padding ohidden  text-center">
                         <div>
-                            <h3 class="uppercase" style="font-weight: 600;">PASO 2</h3>
-                            <p style="line-height: 1.8;">Completa el test para saber como eres en el trabajo.</p>
+                            <img src="{% static 'template/images/paso2.png' %}">
+                            <h3 class="">Paso 2</h3>
+                            <p >Completa el test para saber cómo eres en el trabajo.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
-                            <i class="icon-cog bgicon"></i>
                         </div>
                     </div>
 
-                    <div class="col-md-4 dark col-padding ohidden" style="background-color: #e74c3c;">
+                    <div class="col-md-4 col-padding ohidden text-center">
                         <div>
-                            <h3 class="uppercase" style="font-weight: 600;">PASO 3</h3>
-                            <p style="line-height: 1.8;">Es hora de postular a las mejores empresas para ti.</p>
+                            <img src="{% static 'template/images/paso3.png' %}">
+                            <h3 class="">Paso 3</h3>
+                            <p >Es hora de postular a las mejores empresas para ti.</p>
 {#                            <a href="#" class="button button-border button-light button-rounded uppercase nomargin">Read More</a>#}
-                            <i class="icon-thumbs-up bgicon"></i>
                         </div>
                     </div>
 
@@ -509,16 +524,20 @@
 
                         <div class="col_half col_last tright">
                             <div class="fright clearfix">
-                                <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                <a href="http://www.facebook.com/broderjobs" target= "_blank"  class="social-icon si-small si-borderless si-facebook">
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
                                 </a>
-
+                                <a href="http://www.snapchat.com/broderjobs" target= "_blank"  class="social-icon si-small si-borderless si-snapchat">
+                                    <i><img src="{% static 'template/images/logo-snapchat-grey.png' %}" height="14"></i>
+                                    <i><img src="{% static 'template/images/logo-snapchat-white.png' %}"  height="14"></i>
+                                </a>
+<!--
                                 <a href="#" class="social-icon si-small si-borderless si-twitter">
                                     <i class="icon-twitter"></i>
                                     <i class="icon-twitter"></i>
                                 </a>
-                                <!--
+
                                 <a href="#" class="social-icon si-small si-borderless si-gplus">
                                     <i class="icon-gplus"></i>
                                     <i class="icon-gplus"></i>
@@ -598,7 +617,7 @@
                                     <button class="button button-3d nomargin" id="login-form-submit" name="_login" value="login">Ingresar</button>
                                     <div class="clear"></div>
                                     <br><br>
-                                    <a href = "#" data-toggle="modal" data-target="#reset" class="fright">
+                                    <a id = "a-recordar_clave" href = "#" data-toggle="modal" data-dismiss="modal" data-target="#reset" class="fright">
                                     ¿Olvidaste tu contraseña?</a>
                                     <div class="clear"></div>
                                 </div>
@@ -693,7 +712,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-center">Olvide Contraseña</h4>
+                            <h4 class="modal-title text-center">Recordar Contraseña</h4>
                         </div>
                         <div class="modal-body text-center">
                             <form id="reset-form" name="reset-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
@@ -864,16 +883,20 @@
                     }
                 });
             });
+
             window.onload = function(){
-                $("#primary-menu a").on("click", function(){
+                $("#primary-menu a, #a-recordar_clave").on("click", function(){
                     sessionStorage.setItem("main", $(this).attr("data-target"));
                 })
+                {%if message_registro or message_login or message_reset %}
                 if (sessionStorage.getItem("main") != null && sessionStorage.getItem("main") != "undefined"){
 					$("[data-target="+sessionStorage.getItem("main") + "]").trigger("click");
 				}
                 else {
                     $("[data-target=#" + $(":target").attr("id") + "]").trigger("click");
                 }
+
+                {%endif%}
             }
         </script>
     </body>
