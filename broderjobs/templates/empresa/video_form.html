@@ -81,7 +81,6 @@
          $(this).parents("tr").remove();
      });
     $(".table-videos").on("click", ".cargar", function(){
-         debugger;
          var input = $(this);
          var tr = $(this).parents("tr");
          var form = new FormData();
@@ -98,7 +97,6 @@
                     console.log(x.responseText);
                 },
                 success: function(data){
-                    debugger;
                     if(data != '-1'){
                          input.data("id", data);
                     }
@@ -111,7 +109,6 @@
             });
     });
     $(".table-videos").on("click", ".delete", function(){
-        debugger;
         var tr = $(this).parents("tr");
         var form = new FormData();
         form.append('id', $(this).parents("tr").find("input").data("id"));
@@ -126,7 +123,6 @@
                 console.log(x.responseText);
             },
             success: function(data){
-                debugger;
                 if(data != '-1'){
                     tr.remove();
                 }

@@ -214,6 +214,9 @@
 					$.get("{% url 'mensaje-notificacion-vistas' %}?id=" + {{user.id}}, function(data) {
 			$('#cantidad-notificaciones').html("0");
 		});
+        $("body").on("hide.bs.modal",".modal", function(){
+             $(".tooltip").hide();
+        });
 	});
 
 </script>
