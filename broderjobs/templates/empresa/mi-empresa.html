@@ -16,10 +16,6 @@
 		background-color: #f9f9f9 !important;
 		border-color: #ccc !important;
 	}
-    #btn-logo + .tooltip {}
-	/*.select2-selection--single .select2-selection__arrow{*/
-		/*right: -46px  !important;*/ #ccc
-	/*}*/
 </style>
 <section class="empresa empresa-detalle">
 	<div class="centered">
@@ -333,64 +329,23 @@
 			$('#slider-empresa').load('slider-imagenes/'+{{empresa.id}} );
 		},
 	 };
-//	 var formAjaxSubmit = function(form, modal) {
-//		 var valid = $(form).validate().valid();
-//		 if (valid){
-//			 $(form).submit(function (e) {
-//				 e.preventDefault();
-//				 $.ajax({
-//					 type: $(this).attr('method'),
-//					 url: $(this).attr('action'),
-//					 data: $(this).serialize(),
-//					 success: function (xhr, ajaxOptions, thrownError) {
-//						 if ($(xhr).find('.has-error').length > 0) {
-//							 $(modal).find('.modal-body').html(xhr);
-//							 formAjaxSubmit(form, modal);
-//						 } else {
-//							 var validez = $(form).validate().valid();
-//							 if(validez) {
-//								 $(modal).modal('toggle');
-//								 window.location.reload();
-//							 }
-//						 }
-//					 },
-//					 error: function (xhr, ajaxOptions, thrownError) { }
-//				 });
-//			 });
-//		 }
-//	 }
-//	 var formAjaxImagen = function(form, modal) {
-//			 $(form).submit(function (e) {
-//				 e.preventDefault();
-//				 $.ajax({
-//					 type: $(this).attr('method'),
-//					 url: $(this).attr('action'),
-//					 data: $(this).serialize(),
-//					 success: function (xhr, ajaxOptions, thrownError) {
-//							window.location.reload();
-//					 },
-//					 error: function (xhr, ajaxOptions, thrownError) { }
-//				 });
-//			 });
-//		 //}
-//	 }
 	 $("#modal-listo").click(function (){
-			 Empresa.slider_imagenes();
+         Empresa.slider_imagenes();
 	 });
 	 $("#box-logo" ).mouseover(function() {
-		$(".botones-imagen").css("visibility", "visible");
+         $(".botones-imagen").css("visibility", "visible");
 	 });
 	 $("#box-logo" ).mouseout(function() {
-		$(".botones-imagen").css("visibility", "hidden");
+         $(".botones-imagen").css("visibility", "hidden");
 	 });
 	 $("#btn-logo").click(function(e) {
-	  $("#id_logo").click();
+         $("#id_logo").click();
 	 });
 	 $("#remover-imagen").click(function(e) {
-	    $("#cambiar_imagen").click();
+         $("#cambiar_imagen").click();
 	 });
 	 $("#id_logo").change(function(){
-        $("#cambiar_imagen").click();
+         $("#cambiar_imagen").click();
 	 });
      $('#info-general-button').click(function() {
 		 $('#modal-aceptar').css("display", "inline");
@@ -398,7 +353,6 @@
 		 $('#modal-cerrar').css("display", "inline");
 		 $('#form-modal-body').load('info-general/', function () {
         	$('#form-modal').modal('toggle');
-
 			formAjaxSubmit('#form-modal-body form', '#form-modal');
 		 });
 	 });
@@ -406,7 +360,6 @@
 		 $('#modal-aceptar').css("display", "inline");
 		 $('#form-modal-body').load('redes-sociales/', function () {
         	$('#form-modal').modal('toggle');
-			//formAjaxSubmit('#form-modal-body form', '#editar-imagenform-modal');
 		 });
 	 });
 	 $('#btn-imagenes').click(function() {
@@ -414,7 +367,6 @@
 		 $('#modal-cerrar').css("display", "none");
 		 $('#form-modal-body').load('imagenes/', function () {
         	$('#form-modal').modal('toggle');
-			//formAjaxImagen('#form-modal-body form', '#form-modal');
 		 });
 	 });
      $('#btn-videos').click(function() {
@@ -422,18 +374,22 @@
 		 $('#modal-cerrar').css("display", "none");
 		 $('#form-modal-body').load('videos/', function () {
         	$('#form-modal').modal('toggle');
-			//formAjaxImagen('#form-modal-body form', '#form-modal');
 		 });
 	 });
 	 $('#ubicacion-button').click(function() {
      	$('#form-modal-body').load('ubicacion/', function () {
         	$('#form-modal').modal('toggle');
-			//formAjaxSubmit('#form-modal-body form', '#form-modal');
 			google.maps.event.trigger(Empresa.map, "resize");
 		});
 	 });
 	 $("#form-modal .btn-submit").on("click", function(){
 		 $(this).parents("#form-modal").find("form").submit();
 	 });
+     var reload = false;
+     $("body").on("hide.bs.modal",".modal", function(){
+         if (reload != null && reload ){
+             window.location.reload();
+         }
+     });
  </script>
 {%endblock%}

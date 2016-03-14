@@ -51,7 +51,7 @@ class OportunidadCrearView(FormView):
         persona = get_object_or_404(Persona, usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id=persona.id)
         empresa = get_object_or_404(Empresa, id=representante.empresa.id)
-        fase = fase =  get_object_or_404(ProcesoFase, pk = 1)
+        fase = fase =  get_object_or_404(ProcesoFase, orden = 1)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']
@@ -274,7 +274,7 @@ class OportunidadEditarView(FormView):
 
     def form_valid(self, form):
         user = get_object_or_404(User, pk = self.request.user.id)
-        fase_postulacion = fase =  get_object_or_404(ProcesoFase, pk = 1)
+        fase_postulacion = fase =  get_object_or_404(ProcesoFase, orden = 1)
         titulo = form.cleaned_data['titulo']
         carga_horaria = form.cleaned_data['carga_horaria']
         pais = form.cleaned_data['pais']

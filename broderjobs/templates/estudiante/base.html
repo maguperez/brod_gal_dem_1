@@ -39,7 +39,9 @@
 		<script type="text/javascript" src="{% static 'js/select2.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-
+        {% if completo_test == False%}
+        <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
+        {% endif %}
         <style>
             .modal{
                 z-index: 1200;
@@ -249,14 +251,10 @@
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             $(this).next().html("0 caracteres");
-        });/*html(text_max + ' caracteres');
-
-        $('#textarea').keyup(function() {
-            var text_length = $('#textarea').val().length;
-            var text_remaining = text_max - text_length;
-
-            $('#textarea_feedback').html(text_remaining + ' characters remaining');
-        });*/
+        });
+        $("body").on("hide.bs.modal",".modal", function(){
+             $(".tooltip").hide();
+        });
     })
 </script>
 

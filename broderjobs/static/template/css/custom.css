@@ -28,33 +28,32 @@
     background-color: rgb(128,32,0);
 }
 #header:not(.sticky-header) .standard-logo{
-    height: 100px;    
+    height: 100px !Important;
 }
 #header.sticky-header .standard-logo{
-    height: 60px;    
-}
-#header .standard-logo {
-    display: flex !Important;
-    align-items: center;
-    justify-content: center;
+    height: 60px !Important;
 }
 #header .standard-logo img{
     height: 33px !Important;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 #header.sticky-header #header-wrap{
     background-color: #FB4100;
+}
+#header .emphasis div {
+    text-align: right;
+}
+.icon-reorder:before{
+    color: white;
 }
 div#logo,
 div#header-wrap,
 #primary-menu .sf-js-enabled{
     border: none !Important;
 }
-@media (max-width: 991px) {
-    #header.semi-transparent, #header.transparent-header {
-        background: #FB4100 !Important;
-        border-bottom: none;
-    }
-}
+
 #footer {
     margin-top: 0px !Important;
 }
@@ -81,9 +80,9 @@ div#header-wrap,
     color: white;
 }
 #header:not(.sticky-header) #primary-menu ul li a.emphasis:hover span{
-    color: white !Important;
+    color: white;
     background-color: #FB4100;
-    border: solid 1.2px #FB4100 !Important;
+    border: solid 1.2px #FB4100 ;
 }
 #header #primary-menu span{
     border-radius: 4px !important;
@@ -103,7 +102,7 @@ div#header-wrap,
     content: '';
     position: absolute;
     height: 100%;
-    width: 100%; 
+    width: 100%;
 }
 .home-img.left::after {
     background: rgba(0,0,0,0.4);
@@ -133,6 +132,30 @@ footer#footer a{
 }
 footer#footer a:hover{
     color:#EEE;
+}
+body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content ul ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content.col-2>ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content.col-3>ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content.col-4>ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content.col-5>ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li .mega-menu-content.style-2 li, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul ul, body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul ul li{
+    border-top-color: rgba(255,255,255,0.2) !important;
+}
+@media (max-width: 991px) {
+    #header span{
+        padding: 0px;
+        margin-right: 0px;
+    }
+    #header .emphasis div {
+        text-align: left;
+    }
+    #header.semi-transparent, #header.transparent-header {
+        background: #FB4100 !Important;
+        border-bottom: none;
+    }
+    #header #primary-menu ul li a.emphasis span,
+    #header #primary-menu ul li a.emphasis:hover span{
+        border: none !Important;
+    }
+    #header #primary-menu ul li a:hover div,
+    #header #primary-menu ul li a.emphasis:hover span{
+        color: black !Important;
+    }
 }
 .rs-background-video-layer::after,
 .tp-bgimg.defaultimg::after{

@@ -69,7 +69,6 @@
     var CompatibilidadJD = function(){
         this.fnCargar = function(id, empresa) {
             $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){
-                debugger;
 {#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
 {#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
 {#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}

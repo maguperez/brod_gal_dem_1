@@ -376,14 +376,10 @@
                 validacionInfoPersonal(formulario);
 			});
 		 });
+
 		 $('#disponibilidad-button').click(function() {
 			$('#form-modal-body').load('disponibilidad/', function () {
 				$('#form-modal').modal('toggle');
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
-
-{#                $('#guardar').click(function(){#}
-{#                   alert("entro");#}
-{#                });#}
 			});
 		 });
 		 $('#idioma-button').click(function() {
@@ -392,8 +388,6 @@
 				$("#id_idioma").select2({
                     placeholder: "Seleccione por favor"//,
                 });
-	//			$("#id_idioma").val(['1','2']).trigger("change");
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 			});
 		 });
 		 $('#conocimiento-button').click(function() {
@@ -417,8 +411,6 @@
 					var nuevos = $("#id_conocimiento option:selected[data-select2-tag='true']").map(function(){return this.value}).get();
 					$('#id_conocimientos_nuevos_hidden').val(nuevos);
 				});
-
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 			});
 		 });
 		 $('.experiencia-botton').click(function() {
@@ -428,14 +420,12 @@
 			 if (accion == 'editar') {
 				 $('#form-modal-body').load('experiencia/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
                      validacionExperiencia(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
 				 $('#form-modal-body').load('experiencia-eliminar/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 				 });
 			 }
 		 });
@@ -443,8 +433,6 @@
 			 var id = $(this).find("button").attr("id");
 			$('#form-modal-body').load('experiencia-crear/', function () {
 				$('#form-modal').modal('toggle');
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
-
                 validacionExperiencia(formulario);
 			});
 		 });
@@ -455,14 +443,12 @@
 			 if (accion == 'editar') {
 				 $('#form-modal-body').load('voluntariado/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
                      validacionVoluntariado(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
 				 $('#form-modal-body').load('voluntariado-eliminar/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 				 });
 			 }
 		 });
@@ -470,7 +456,6 @@
 			 var id = $(this).find("button").attr("id");
 			$('#form-modal-body').load('voluntariado-crear/', function () {
 				$('#form-modal').modal('toggle');
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
                 validacionVoluntariado(formulario);
 			});
 		 });
@@ -481,14 +466,12 @@
 			 if (accion == 'editar') {
 				 $('#form-modal-body').load('actividad-extra/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
                      validacionActividadesExtras(formulario);
 				 });
 			 }
 			 if (accion == 'eliminar') {
 				 $('#form-modal-body').load('actividad-extra-eliminar/' + id + '/', function () {
 					 $('#form-modal').modal('toggle');
-{#					 formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 				 });
 			 }
 		 });
@@ -497,7 +480,6 @@
 			$('#form-modal-body').load('actividad-extra-crear/', function () {
 				$('#form-modal').modal('toggle');
                 validacionActividadesExtras(formulario);
-{#				formAjaxSubmit('#form-modal-body form', '#form-modal');#}
 			});
 		 });
 		 $("#form-modal .btn-submit").on("click", function() {
@@ -506,7 +488,6 @@
 
              if(formularioPrueba.id == 'cv-experiencia'){
                  var validez = $(formularioPrueba).validate();
-{#                var validator = $( "form" ).validate();#}
 		        var validezElemento = validez.element('#id_puestos');
              }
 

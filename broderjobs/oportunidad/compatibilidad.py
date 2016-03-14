@@ -208,10 +208,8 @@ def guardar_compatibilidad(oportunidad):
                     c.compatibilidad_promedio = (c.compatibilidad_academica + c.compatibilidad_cultural) / 2
                     c.estado = oportunidad.estado
                     c.save()
-
             if compatibilidad_academica > 10:
                 total_compatibles =  total_compatibles + 1
-
         nivel = (total_compatibles * 100)/total_estudiantes if total_compatibles > 0 else 0
     except Exception, e:
         mensaje = str(e)
