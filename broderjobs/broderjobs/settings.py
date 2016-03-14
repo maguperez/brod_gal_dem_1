@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'django.contrib.postgres',
-    'crispy_forms',
     'main',
     'estudiante',
     'empresa',
@@ -58,7 +57,6 @@ INSTALLED_APPS = (
 
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
