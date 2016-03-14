@@ -685,16 +685,16 @@
                                             {{message_registro}}
                                         </div>
 
-                                        {%if registro_form.errors %}
-                                        <div class="alert alert-warning alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                            {{ registro_form.first_name.errors }}
-                                            {{ registro_form.last_name.errors }}
-                                            {{ registro_form.email.errors }}
-                                            {{ registro_form.password1.errors }}
-                                            {{ registro_form.password2.errors }}
-                                        </div>
-                                        {% endif%}
+{#                                        {%if registro_form.errors %}#}
+{#                                        <div class="alert alert-warning alert-dismissible" role="alert">#}
+{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>#}
+{#                                            {{ registro_form.first_name.errors }}#}
+{#                                            {{ registro_form.last_name.errors }}#}
+{#                                            {{ registro_form.email.errors }}#}
+{#                                            {{ registro_form.password1.errors }}#}
+{#                                            {{ registro_form.password2.errors }}#}
+{#                                        </div>#}
+{#                                        {% endif%}#}
 									{% endif%}
                                     <div class="form-group nobottommargin">
                                         <button class="button button-3d nomargin" id="register-form-submit" name="_registro" value="register">Registrarme</button>

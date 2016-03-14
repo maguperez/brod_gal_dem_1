@@ -49,8 +49,10 @@ def homepage(request):
             persona = None
         if persona is not None:
             if persona.tipo_persona == 'E':
+                estudiante = get_object_or_404(Estudiante, persona_id = persona.id)
                 return redirect('estudiante-oportunidad-listar')
             if persona.tipo_persona == 'R':
+                representante = get_object_or_404(Representante, persona_id = persona.id)
                 return redirect('empresa-oportunidad-listar')
         else:
             login_form = LoginForm(prefix='login')
@@ -199,14 +201,18 @@ def homepage_empresa(request):
                         persona = Persona()
                         try:
                             persona = Persona.objects.get(usuario_id=user.id, tipo_persona="R")
-                        except persona.DoesNotExist:
+                        except Persona.DoesNotExist:
                             persona = None
                         if persona is not None:
-                            if user.is_active and persona.estado == 'A':
-                                login(request, user)
-                                return redirect('empresa-oportunidad-listar')
-                            else:
-                                message_login = "Tu usuario esta siendo validado pronto nos comunicaremos contigo"
+                            try:
+                                representante = Representante.objects.get( persona_id = persona.id)
+                                if user.is_active and persona.estado == 'A':
+                                    login(request, user)
+                                    return redirect('empresa-oportunidad-listar')
+                                else:
+                                    message_login = "Tu usuario esta siendo validado pronto nos comunicaremos contigo"
+                            except Representante.DoesNotExist:
+                                message_login = "Usuario o Email errados"
                     else:
                         message_login = "Email o contraseña incorrecta"
             if '_registro' in request.POST:
