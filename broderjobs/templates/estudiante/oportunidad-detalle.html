@@ -120,10 +120,10 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 						<div class="detalle">
 							<p>
 								{% for beneficio in oportunidad.beneficio.all%}
-								<span class="tag">{{beneficio}}</span>
+								<span class="tag">{{beneficio.descripcion}}</span>
 								{%endfor%}
 								{% for beneficio in beneficios_extras%}
-								<span class="tag">{{beneficio}}</span>
+								<span class="tag">{{beneficio.descripcion}}</span>
 								{%endfor%}
 							<div class="clear"></div>
 						</div>
