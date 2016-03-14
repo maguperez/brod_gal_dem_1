@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<h3>Registro de Empresa / Representante</h3>
+<p>La Persona {{ user.first_name }} {{ user.last_name }}, se ha registro bajo la empresa {{ representante.empresa }}</p>
+<p>Datos de contacto: </p>
+<p>Email: {{ user.email }}</p>
+<p>Telefono: {{persona.telefono }}</p>
+</body>
+</html>
