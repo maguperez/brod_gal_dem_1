@@ -454,7 +454,7 @@
 	$(function(){
         $("[data-toggle=tooltip]").tooltip();
         $(window).keydown(function(event){
-            if(event.keyCode == 13) {
+            if(event.keyCode == 13 && event.target.localName != "textarea") {
                 event.preventDefault();
                 return false;
             }
@@ -932,61 +932,5 @@
             }
         });
 	}
-
-{#    $('.actualizar').change(function(){#}
-{#        alert("cambio");#}
-{#            ids = new Array();#}
-{#            ids_estudiante = new Array();#}
-{#            ids_estudiante = $(".candidatos").val();#}
-{#            var form = new FormData();#}
-{#            form.append('carrera', $('#id_carrera').val()== null ? 0 : $('#id_carrera').val() );#}
-{#            form.append('universidad', $('#id_universidad').val() == null ? 0 : $('#id_universidad').val() );#}
-{#            form.append('grado_estudio', $('#id_grado_estudio').val() == '' ? 0 : $('#id_grado_estudio').val() );#}
-{#            form.append('edad_desde', $('#id_edad_desde').val() == '' ? 0 : $('#id_edad_desde').val() );#}
-{#            form.append('edad_hasta', $('#id_edad_hasta').val() == '' ? 0 : $('#id_edad_hasta').val() );#}
-{#            form.append('pais', $('#id_pais').val() == '' ? 0 : $('#id_pais').val() );#}
-{#            form.append('ciudad', $('#id_ciudad').val() == '' ? 0 : $('#id_ciudad').val() );#}
-{#            form.append('genero', $('#id_genero').val() == '' ? 0 : $('#id_genero').val() );#}
-{#            form.append('tipo_puesto', $('input[name=tipo_puesto]:checked').val() == null ? 0 : $('input[name=tipo_puesto]:checked').val() );#}
-{#            form.append('carga_horaria',$('input[name=carga_horaria]:checked').val() == null ? 0 :$('input[name=carga_horaria]:checked').val() );#}
-{#            form.append('idioma', $('#id_idioma').val()== null ? 0 : $('#id_idioma').val() );#}
-{#            form.append('conocimiento', $('#id_conocimiento').val()== null ? 0 : $('#id_conocimiento').val() );#}
-{#            form.append('remuneracion_min', $('#id_remuneracion_min').val()== null ? 0 : $('#id_remuneracion_min').val() );#}
-{#            form.append('remuneracion_max', $('#id_remuneracion_max').val()== null ? 0 : $('#id_remuneracion_max').val() );#}
-{#            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());#}
-{#            $(".alcance .cifra").html("Calculando...");#}
-{#            $.ajax({#}
-{#                type:"POST",#}
-{#                url:"{%url 'total-compatibles' %}",#}
-{#                data: form,#}
-{#                processData: false,#}
-{#                contentType: false,#}
-{#                error: function(x){#}
-{#                    console.log(x);#}
-{#                    $(".alcance .cifra").html("error...");#}
-{#                },#}
-{#                success: function(data){#}
-{#                    $(".alcance .cifra").html(data.total +'(' + data.nivel +'%)');#}
-{#                    $(".grafico-alcance div").removeClass("active");#}
-{##}
-{#                    if (data.nivel <= 29){#}
-{#                        $(".grafico-alcance .bajo").removeClass("inactive");#}
-{#                        $(".grafico-alcance .bajo").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Bajo");#}
-{#                    }#}
-{#                    else if (data.nivel <= 70){#}
-{#                        $(".grafico-alcance .adecuado").removeClass("inactive");#}
-{#                        $(".grafico-alcance .adecuado").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Medio");#}
-{#                    }#}
-{#                    else {#}
-{#                        $(".grafico-alcance .alto").removeClass("inactive");#}
-{#                        $(".grafico-alcance .alto").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Alto");#}
-{#                    }#}
-{#                }#}
-{#            });#}
-{#       });#}
-
 </script>
 {% endblock%}
