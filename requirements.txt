@@ -1,4 +1,5 @@
 awsebcli==3.5.5
+boto==2.38.0
 botocore==1.3.4
 cement==2.4.0
 colorama==0.3.3
