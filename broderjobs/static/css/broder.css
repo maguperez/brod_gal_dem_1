@@ -1515,6 +1515,7 @@ a:hover {
 -----------------------------------------------------------------*/
 
 .owl-theme .owl-controls {
+    margin-top: 0px !Important;
 	text-align: center;
 	-webkit-tap-highlight-color: transparent;
 }
@@ -1594,7 +1595,7 @@ a:hover {
 .owl-theme .owl-dots .owl-dot {
 	display: inline-block;
 	zoom: 1;
-	margin-top: 30px;
+	margin-top: 15px;
 	*display: inline;
 }
 
@@ -1626,7 +1627,7 @@ a:hover {
 .owl-carousel .owl-nav {
 	top: 50%;
 	position: absolute;
-	margin-top: -20px;
+	margin-top: -80px;
 	width: 100%;
 }
 
@@ -1734,9 +1735,10 @@ a:hover {
 	right: 6px;
 }
 
-.owl-carousel.full-width .owl-nav [class*="owl-"], .owl-carousel.full-width .owl-nav [class*="owl-"]:hover, .owl-carousel.big-nav .owl-nav [class*="owl-"], .owl-carousel.big-nav .owl-nav [class*="owl-"]:hover {
-	height: auto;
-	padding: 20px 0;
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next{
+	height: auto !Important;
+	padding: 20px 0 !Important;
 }
 
 .owl-carousel.full-width .owl-nav .owl-prev, .owl-carousel.big-nav .owl-nav .owl-prev {
