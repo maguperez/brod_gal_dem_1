@@ -153,6 +153,11 @@ class OportunidadCrearView(FormView):
         oportunidad.latitud = latitud
         oportunidad.usuario_creacion = str(user.username)
         oportunidad.usuario_modificacion = str(user.username)
+
+        oportunidad.edad_desde = edad_desde
+        oportunidad.edad_hasta = edad_hasta
+        oportunidad.genero = genero
+
         oportunidad.fecha_creacion = datetime.now()
         oportunidad.fecha_modificacion = datetime.now()
         oportunidad.save()
@@ -238,6 +243,9 @@ class OportunidadEditarView(FormView):
                 'longitud': oportunidad.longitud,
                 'latitud': oportunidad.latitud,
                 'pais': oportunidad.pais,
+                'edad_desde': oportunidad.edad_desde,
+                'edad_hasta': oportunidad.edad_hasta,
+                'genero': oportunidad.genero,
                 'ciudad_hidden': ciudad_id,
                 'periodo_graduacion_hidden': periodo_graduacion_hidden}
 
@@ -357,8 +365,9 @@ class OportunidadEditarView(FormView):
         estado_anterior = oportunidad.estado_oportunidad
 
         beneficios_extras_hidden = form.cleaned_data['beneficios_extras_hidden']
-        beneficios_extras_ids = beneficios_extras_hidden.split(',')
+
         # beneficios_extras = BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).filter(id__in=beneficios_extras_ids)
+        beneficios_extras = None
 
         if beneficios_extras_hidden.strip() != '':
             beneficios_extras_ids = beneficios_extras_hidden.split(',')
@@ -390,37 +399,40 @@ class OportunidadEditarView(FormView):
 
         oportunidad.longitud = longitud
         oportunidad.latitud = latitud
-
         oportunidad.save()
 
         beneficios_hidden = form.cleaned_data['beneficios_hidden']
-        beneficios_nuevos_hidden = form.cleaned_data['beneficios_nuevos_hidden']
-        beneficios_ids = beneficios_hidden.split(',')
-        beneficios_nuevos_ids = beneficios_nuevos_hidden.split(',')
-        if '' not in  beneficios_ids and len(beneficios_ids) == 1:
+
+        # beneficios = None
+
+        if beneficios_hidden.strip() != '':
+            beneficios_ids = beneficios_hidden.split(',')
             beneficios = Beneficio.objects.filter(id__in=beneficios_ids)
-        else:
-            oportunidad.beneficio.all().delete()
+            oportunidad.beneficio = beneficios
 
-        if '_abrir' not in self.request.POST:
-            if beneficios_extras_hidden.strip() != '':
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
-            else:
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
         else:
-            if beneficios_extras_hidden.strip() != '':
-                for be in beneficios_extras:
-                    be.oportunidad = oportunidad
-                    be.save()
-            else:
-                BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
+            # b = Beneficio()
+            oportunidad.beneficio = []
 
-        for be in beneficios_nuevos_ids:
-            if be.strip() != '':
-                Be_extra = BeneficioExtra()
-                Be_extra.descripcion = be
-                Be_extra.oportunidad = oportunidad
-                Be_extra.save()
+        if beneficios_extras is not None:
+            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).exclude(id__in = beneficios_extras).delete()
+            # for be in beneficios_extras:
+            #     be.oportunidad = oportunidad
+            #     be.save()
+        else:
+            BeneficioExtra.objects.filter(oportunidad_id=oportunidad.id).delete()
+
+        beneficios_nuevos_hidden = form.cleaned_data['beneficios_nuevos_hidden']
+
+        if beneficios_nuevos_hidden.strip() != '':
+            list_beneficios_hidden = beneficios_nuevos_hidden.split(',')
+            for be in list_beneficios_hidden:
+                if be != '':
+                    Be_extra = BeneficioExtra()
+                    Be_extra.descripcion = be
+                    Be_extra.oportunidad = oportunidad
+                    Be_extra.save()
+
 
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
