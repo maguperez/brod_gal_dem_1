@@ -30,7 +30,6 @@ pickleshare==0.5
 Pillow==3.0.0
 pisa==3.0.33
 Pmw==2.0.0
-preppy==2.3.5
 psycopg2==2.6.1
 pyDatalog==0.17.1
 pyflakes==1.0.0
