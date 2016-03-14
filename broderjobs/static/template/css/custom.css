@@ -28,21 +28,22 @@
     background-color: rgb(128,32,0);
 }
 #header:not(.sticky-header) .standard-logo{
-    height: 100px;    
+    height: 100px !Important;
 }
 #header.sticky-header .standard-logo{
-    height: 60px;    
-}
-#header .standard-logo {
-    display: flex !Important;
-    align-items: center;
-    justify-content: center;
+    height: 60px !Important;
 }
 #header .standard-logo img{
     height: 33px !Important;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 #header.sticky-header #header-wrap{
     background-color: #FB4100;
+}
+.icon-reorder:before{
+    color: white;
 }
 div#logo,
 div#header-wrap,
