@@ -27,7 +27,6 @@ path.py==8.1.2
 pathspec==0.3.3
 pep8==1.6.2
 pickleshare==0.5
-PIL==1.1.7
 Pillow==3.0.0
 pisa==3.0.33
 Pmw==2.0.0
