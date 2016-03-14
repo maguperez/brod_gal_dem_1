@@ -385,5 +385,11 @@
 	 $("#form-modal .btn-submit").on("click", function(){
 		 $(this).parents("#form-modal").find("form").submit();
 	 });
+     var reload = false;
+     $("body").on("hide.bs.modal",".modal", function(){
+         if (reload != null && reload ){
+             window.location.reload();
+         }
+     });
  </script>
 {%endblock%}
