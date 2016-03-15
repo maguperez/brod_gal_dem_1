@@ -411,7 +411,7 @@
 		{secuencia: 5,descripcion:'Ciclo 5'}];
 	$(function(){
         $(window).keydown(function(event){
-            if(event.keyCode == 13) {
+            if(event.keyCode == 13 && event.target.localName != "textarea") {
                 event.preventDefault();
                 return false;
             }

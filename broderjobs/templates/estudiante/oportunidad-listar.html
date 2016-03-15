@@ -18,21 +18,6 @@
 
 <script>
    $(function(){
-	  // fnCargarOportunidades();
-	   //fnBusqueda();
-//	   $("#link-oportunidad").addClass("active");
-//	   	$("body").on("mouseenter", ".compatibilidad", function(){
-//			$(this).find(".consolidado").css("opacity",0);
-//		  	$(this).find(".desglose").css("opacity",1);
-//			var data = 0;
-//			data = $(this).find(".cultural .circular-bar-chart").data("percent");
-//			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
-//			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
-//
-//			data = $(this).find(".academico .circular-bar-chart").data("percent");
-//			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
-//			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
-//		});
 
 	fnCargarOportunidad();
    });
@@ -41,6 +26,7 @@
 	function fnBusqueda(){
 		var busqueda = $('#busqueda').val();
 		$.ajax({
+            cache: false,
 			data : {'busqueda':busqueda},
 			url: '{%url "estudiante-oportunidad-busqueda" %}',
 			type: 'get',

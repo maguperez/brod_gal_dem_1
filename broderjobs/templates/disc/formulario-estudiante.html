@@ -45,7 +45,7 @@
      <div class="introduccion">
          <div class="row">
              <div class="col-sm-12"><h3 class="title"><i class="fa fa-pencil-square-o"></i>  ¡Queremos conocerte!</h3></div>
-             <div class="col-sm-12">zz
+             <div class="col-sm-12">
                 <p>Cuéntanos cómo eres, respondiendo a las siguientes preguntas dinos con cual te identificas mas
                     <i class="fa fa-thumbs-o-up"></i> y cuál crees que te describe menos <i class="fa fa-thumbs-o-down"></i>.</p>
                  <p>Para ello ten encuenta que:</p>
@@ -88,9 +88,9 @@
          </div>
      </div>
      <div class="row error">
-         <div class="col-sm-12"><h3><i class="fa fa-exclamation-circle"></i>¡Error!: </h3></div>
+         <div class="col-sm-12"><h3><i class="fa fa-exclamation-circle"></i>¡Ups!, tenemos un problema: </h3></div>
          <div class="col-sm-12">
-            <p>Lo lamentamos, tus respuestas no fueron concluyentes debes completar el test nuevamente.</p>
+            <p>Tus respuestas no fueron concluyentes, te invitamos a que te relajes, leas bien las respuestas y tomes el test nuevamente.</p>
          </div>
      </div>
 <style>
@@ -252,10 +252,12 @@
                         $('#btn-guardar').hide();
                         $('#btn-cancelar').hide();
                         $('#btn-cerrar').show();
+                        $('#btn-repetir').hide();
                         $('#preguntas-alert').hide();
                     }
                     else {
                         $('#wizard').hide();
+                        $('#btn-repetir').show();
                         $('.error').show();
                         $('#btn-guardar').hide();
                         $('#btn-cancelar').show();
@@ -311,6 +313,13 @@
         $('#btn-cancelar').click(function(){
             Preguntas.finalizar_test(-1); // cancela y borra todas las respuestas hasta ahora del estudiante
             $('#btn-cerrar').click();
+        });
+        $("#btn-repetir").click(function(){
+            $(this).hide();
+            $('#wizard').show();
+            $('.finalizo').hide();
+            $('.error').hide();
+            $('.wizard-progress').bootstrapWizard("show", 0);
         });
 
 
