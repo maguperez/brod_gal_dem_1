@@ -18,11 +18,19 @@
 								<h1>{{oportunidad.titulo}}s</h1>
 								<a><h4>{{empresa.nombre | upper}}</h4></a>
 								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
-								<label>Remuneraci&oacute;n: {{oportunidad.remuneracion}}</label>
+								<label>Remuneraci&oacute;n:
+                                    {%if oportunidad.remuneracion.id == 3 %}
+                                        $ {{oportunidad.remuneracion_min}}
+                                    {%elif oportunidad.remuneracion.id == 2 %}
+                                        {{oportunidad.remuneracion_min}} - $ {{oportunidad.remuneracion_max}}
+                                    {%else%}
+                                        {{oportunidad.remuneracion}}
+                                    {%endif%}
+                                </label>
 							</div>
 							<div class="postulacion">
 								<a class="btn-action" href="{%url 'oportunidad-editar' oportunidad.id%}">EDITAR</a>
-								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese |date:"j.m.Y"}}</label>
 							</div>
 							<div class="clear"></div>
 						</header>

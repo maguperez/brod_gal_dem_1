@@ -53,11 +53,11 @@ urlpatterns = [
 
 	url(r'^estudiante-puesto-busqueda/$', views.EstudiantePuestoBusquedaView.as_view(), name="puesto-busqueda"),
 
-	url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
+	# url(r'^oportunidad-listar/', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
-	url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
+	# url(r'^oportunidad-busqueda/$', views.OportunidadBusquedaView.as_view(), name="estudiante-oportunidad-busqueda"),
 
-	url(r'^oportunidad-cargar-lista/$', 'estudiante.views.oportunidad_cargar_lista', name="estudiante-oportunidad-cargar-lista"),
+	# url(r'^oportunidad-cargar-lista/$', 'estudiante.views.oportunidad_cargar_lista', name="estudiante-oportunidad-cargar-lista"),
 
 	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),
 
@@ -73,6 +73,9 @@ urlpatterns = [
 
 	url(r'^compatibilidad/$', 'estudiante.views.compatibilidad_oportunidad', name='estudiante-compatibilidad'),
 
+	url(r'^oportunidad-cargar-lista/$', 'estudiante.views.oportunidad_cargar_lista', name='estudiante-oportunidad-cargar'),
+
+	url(r'^oportunidad-listar/$', 'estudiante.views.oportunidad_listar', name='estudiante-oportunidad-listar'),
 
 ]
 

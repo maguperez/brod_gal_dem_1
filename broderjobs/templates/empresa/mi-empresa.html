@@ -159,11 +159,19 @@
 											<div class="datos">
 												<div class="empresa"><i class="empresa"></i><label>{{oportunidad.empresa | upper}}</label></div>
 												<div class="ubicacion"><i class="ubicacion"></i><label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label></div>
-												<div class="remuneracion"><i class="remuneracion"></i><label>{{oportunidad.remuneracion}}</label></div>
+												<div class="remuneracion"><i class="remuneracion"></i><label>
+                                                    {%if oportunidad.remuneracion.id == 3 %}
+                                                        $ {{oportunidad.remuneracion_min}}
+                                                    {%elif oportunidad.remuneracion.id == 2 %}
+                                                        {{oportunidad.remuneracion_min}} - $ {{oportunidad.remuneracion_max}}
+                                                    {%else%}
+                                                        {{oportunidad.remuneracion}}
+                                                    {%endif%}
+                                                </label></div>
 											</div>
 											<div class="ver-oportunidad">
 												<a class="btn-action" href="{%url 'oportunidad-editar' oportunidad.id%}">VER OPORTUNIDAD</a>
-												<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+												<label class="cierre">CIERRA EL {{oportunidad.fecha_cese |date:"j.m.Y"}}</label>
 											</div>
 											<div class="clear"></div>
 										</div>

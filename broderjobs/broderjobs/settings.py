@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'django.contrib.postgres',
-    'crispy_forms',
+    # 'crispy_forms',
     'main',
     'estudiante',
     'empresa',
@@ -109,34 +109,6 @@ WSGI_APPLICATION = 'broderjobs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-
-if 'RDS_HOSTNAME' in os.environ:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.mysql',
-			'NAME': os.environ['RDS_DB_NAME'],
-			'USER': os.environ['RDS_USERNAME'],
-			'PASSWORD': os.environ['RDS_PASSWORD'],
-			'HOST': os.environ['RDS_HOSTNAME'],
-			'PORT': os.environ['RDS_PORT'],
-		}
-	}
-else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': 'BroderJobs1',
-			'USER': 'broder',
-			'PASSWORD': 'br753des',
-			'HOST': '191.168.19.11',
-			'PORT': '5434',
-			# 'NAME': 'BroderJobs',
-			# 'USER': 'sa',
-			# 'PASSWORD': 'abc#123',
-			# 'HOST': 'localhost',
-			# 'PORT': '5432',
-		}
-	}
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
@@ -325,4 +297,6 @@ AWS_STORAGE_BUCKET_NAME = 'elasticbeanstalk-us-west-2-953444065529'
 #CSRF_COOKIE_SECURE = True
 #AWS_ACCESS_KEY_ID = '##################'
 #AWS_SECRET_ACCESS_KEY = '##################'
+
+ENDLESS_PAGINATION_PER_PAGE = 4
 
