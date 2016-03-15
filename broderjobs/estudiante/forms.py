@@ -1,7 +1,6 @@
 # coding=utf-8
 from django import forms
 from django.contrib.auth.models import User
-from crispy_forms.helper import FormHelper
 from django.forms import RadioSelect, Select, CheckboxSelectMultiple, TextInput
 from docutils.parsers.rst.directives import choice
 from .models import ExperienciaProfesional, Voluntariado, ActividadesExtra, Estudiante
@@ -147,12 +146,6 @@ class ExperienciaForm(forms.ModelForm):
             'descripcion': forms.widgets.Textarea
         }
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
 
 class VoluntariadoForm(forms.ModelForm):
     # fecha_desde = forms.DateField(widget=forms.DateInput())
@@ -165,24 +158,10 @@ class VoluntariadoForm(forms.ModelForm):
         model = Voluntariado
         fields = ('cargo', 'organizacion', 'descripcion')
 
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
-
 class ActividadesExtraForm(forms.ModelForm):
     class Meta:
         model = ActividadesExtra
         fields = ('organizacion', 'descripcion')
-
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.form_tag = False # don't render form DOM element
-        helper.render_unmentioned_fields = True # render all fields
-        return helper
 
 class EvaluacionForm(forms.ModelForm):
     class Meta:
