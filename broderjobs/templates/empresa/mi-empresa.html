@@ -1,6 +1,7 @@
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
 {% block content %}
+<script src="{% static 'js/jquery.inputmask.js' %}"></script>
 <script src="{% static 'js/owl.carousel.js' %}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
@@ -93,7 +94,7 @@
 									</label>
 								</div>
 								<div>
-									<h4>Facturamiento anual</h4>
+									<h4>Facturación anual</h4>
 									<label>
 										{% if empresa.facturacion_anual != None %}
 											{{empresa.facturacion_anual}}
@@ -180,7 +181,9 @@
 								</li>
 							{% endfor %}
 						</ul>
+                        {% if oportunidades|length > 2 %}
 						<a class="link ver-mas" href="{%url 'empresa-oportunidad-listar'%}">Ver m&aacute;s oportunidades</a>
+                        {% endif%}
 					</section>
 					<section class="redes">
 						<h3 class="title"><i class="network"></i>Redes sociales<button id="redes-sociales-button" class="link editar">Editar</button></h3>

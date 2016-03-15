@@ -23,15 +23,15 @@ class OportunidadForm(forms.ModelForm):
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud',
                   'tipo_carrera')
         widgets = {
-            'titulo': TextInput(attrs={'placeholder': 'Escriba el titulo de su vacante', 'class': 'full'}),
+            'titulo': TextInput(attrs={'placeholder': 'Escriba el título de su vacante', 'class': 'full'}),
             'carga_horaria': RadioSelect(attrs={'class': 'actualizar'}),
             'tipo_puesto': RadioSelect(attrs={'class': 'actualizar'}),
             'remuneracion': RadioSelect(attrs={'class': 'actualizar'}),
             'resumen': Textarea(),
-            'remuneracion_min': TextInput(attrs={'placeholder': 'Valor minimo'}),
-            'remuneracion_max': TextInput(attrs={'placeholder': 'Valor maximo'}),
-            'fecha_cese': DateInput(attrs={'placeholder': 'Dia / Mes / Año'}),
-            'direccion_map': TextInput(attrs={'placeholder': 'Direccion', 'class': 'full'}),
+            'remuneracion_min': TextInput(attrs={'placeholder': 'Valor mínimo'}),
+            'remuneracion_max': TextInput(attrs={'placeholder': 'Valor máximo'}),
+            'fecha_cese': DateInput(attrs={'placeholder': 'Día / Mes / Año'}),
+            'direccion_map': TextInput(attrs={'placeholder': 'Dirección', 'class': 'full'}),
             'longitud': TextInput(attrs={'placeholder': 'longitud'}),
             'latitud': TextInput(attrs={'placeholder': 'latitud'}),
             'carrera': SelectMultiple(attrs={'class': 'full actualizar'}),
@@ -52,7 +52,7 @@ class OportunidadForm(forms.ModelForm):
         self.fields['remuneracion'].empty_label = None
 
         self.fields['grado_estudio'].empty_label = "Seleccione"
-        self.fields['pais'].empty_label = "Pais"
+        self.fields['pais'].empty_label = "País"
         self.fields['genero'].empty_label = "Indistinto"
         # self.fields['genero'].choices = genero()
 

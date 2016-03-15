@@ -142,7 +142,7 @@
                 {%if no_concluyente_test == False %}
                     <div class="alert alert-danger">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" id="cerrar-preguntas-alert">&times;</a>
-                        <strong>¡Importante!</strong> Debes completar el test de compatibilidad para conocer las oportunidades perfectas para ti.
+                        <strong>¡Importante!</strong> Debes completar el test de compatibilidad para poder postular a las oportunidades.
                         <a id="completar-test">Completar Test</a>
                     </div>
                 {%else%}
@@ -173,6 +173,7 @@
                 <div class="modal-footer text-left">
                     <input type="button" class="btn btn-primary btn-submit" id="btn-comenzar" value = "Comenzar">
                     <input type="button" class="btn btn-primary btn-submit" disabled id="btn-guardar" value = "Guardar">
+                    <input type="button" class="btn btn-danger btn-submit" id="btn-repetir" value = "Repetir" style = "display: none">
                     <input type="button" class="btn btn-primary btn-submit" id="btn-cancelar" value = "En otro momento...">
                     <button type="button" class="btn btn-default" data-dismiss="modal"  id="btn-cerrar">Finalizar</button>
                 </div>

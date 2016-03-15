@@ -28,7 +28,21 @@
 </div>
 <script>
 	$(function(){
-
+        $("#form-modal .modal-title").html('<i class="network"></i> Redes sociales');
+        $("#empresa-redes-sociales input").each(function(){
+            var $input = $(this);
+            $(this).inputmask({
+                definitions: {
+                    i: {
+                        validator: ".",
+                        cardinality: 1
+                    }
+                },
+                mask: $input.is("#id_facebook")? "\\www.f\\acebook.co\\m/i{+}" : "\\www.tw\\itter.co\\m/i{+}",
+                insertMode: !1,
+                autoUnmask: !1
+            });
+        });
 		$.validator.addMethod('checkurl',function(value, element, param){
 			if (value){
 				return /^(www\.)[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);

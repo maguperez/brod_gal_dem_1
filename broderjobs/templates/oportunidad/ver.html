@@ -15,14 +15,14 @@
 						<header class="oportunidad-resumen">
 							<img class="imagen" src="{{empresa.set_logo}}" alt="{{empresa.nombre}}" />
 							<div class="detalle">
-								<h1>{{oportunidad.titulo}}s</h1>
+								<h1>{{oportunidad.titulo}}</h1>
 								<a><h4>{{empresa.nombre | upper}}</h4></a>
 								<label>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>
 								<label>Remuneraci&oacute;n:
                                     {%if oportunidad.remuneracion.id == 3 %}
                                         $ {{oportunidad.remuneracion_min}}
                                     {%elif oportunidad.remuneracion.id == 2 %}
-                                        {{oportunidad.remuneracion_min}} - $ {{oportunidad.remuneracion_max}}
+                                        $ {{oportunidad.remuneracion_min}} - {{oportunidad.remuneracion_max}}
                                     {%else%}
                                         {{oportunidad.remuneracion}}
                                     {%endif%}
