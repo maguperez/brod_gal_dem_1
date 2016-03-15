@@ -86,24 +86,30 @@
 </div>
 <script>
 	$(function(){
+        $("#empresa-info_general input").addClass("form-control");
+		$("#empresa-info_general select").addClass("form-control");
+		$("#empresa-info_general textarea").addClass("form-control");
+		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
+		$("#id_quienes_somos").hide();
+
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            var text_length = $(this).val().length;
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');
-        });
 
-		$("#empresa-info_general input").addClass("form-control");
-		$("#empresa-info_general select").addClass("form-control");
-		$("#empresa-info_general textarea").addClass("form-control");
-		$("#txt-quienes_somos").val($("#id_quienes_somos").val());
-		$("#id_quienes_somos").hide();
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
+        });
 
 		$('#id_website').prop( "placeholder", 'Ej: www.example.com' );
 

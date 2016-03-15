@@ -1,95 +1,55 @@
 {% extends 'estudiante/base.html' %}
+{% load staticfiles %}
 {% block content %}
 <section class="oportunidades-estudiante">
-			<div class="centered">
-				<input id="busqueda" class="search" type="text" placeholder="Buscar por puesto, empresa, ciudad, etc." />
-				<div class="centered"></div>
-				<ul class="panel left principal" id="oportunidad-lista">
-				</ul>
+    <div class="centered">
+	    <input id="busqueda" class="search" type="text" placeholder="Buscar por puesto, empresa, ciudad, etc." />
+        <div class="centered"></div>
+		<ul class="panel left principal" id="oportunidad-lista">
 
-				<div class="clear"></div>
-			</div>
-<div id="vacio"></div>
-		</section>
-{% endblock%}
-
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="vacio"></div>
+</section>
+{% endblock %}
 {% block js %}
-{% load staticfiles %}
-
+<script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
+<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
 <script>
-   $(function(){
 
-	fnCargarOportunidad();
-   });
+	 $(function(){
+         fnCargarOportunidad();
 
-	//$('#busqueda').keyup(fnBusqueda);
-	function fnBusqueda(){
-		var busqueda = $('#busqueda').val();
-		$.ajax({
-            cache: false,
-			data : {'busqueda':busqueda},
-			url: '{%url "estudiante-oportunidad-busqueda" %}',
-			type: 'get',
-			success: function(data){
-
-				var html = ""
-				for(var i = 0; i<data.length ; i++){
-					var url = "{%url 'estudiante-oportunidad-detalle' 1 %}";
-					url = url.replace('1', data[i].id);
-
-					html += '<li><div class="box oportunidad-box"><div class="content">';
-					html += '<a href="'+url+'"><img class="imagen" src="'+ data[i].logo + '"/></a>';
-					html += '<div class="detalle">';
-					html += '<a class="titulo" href="'+url+'"><h2 class="link">'+data[i].titulo+'</h2></a>'
-					html += '<div class="descripcion"><div class="datos">';
-                    html += '<div class="empresa"><i class="empresa"></i><label class ="text-uppercase">'+data[i].empresa+'</label></div>';
-                    html += '<div class="ubicacion"><i class="ubicacion"></i><label>'+data[i].ubicacion+'</label></div>';
-					html +=	'<div class="remuneracion"><i class="remuneracion"></i><label>'+data[i].remuneracion+'</label></div></div>';
-					html += '<div class="compatibilidad">' +
-							'<div class = "consolidado"><div class="circular-bar "><div class="circular-bar-chart" data-percent="73"><label><span class="percent">73</span>%</label></div></div><label class="resultado">Compatible</label></div>' +
-							'<div class = "desglose" style = "opacity: 0">' +
-							'<div class = "cultural"><div class="circular-bar"><div class="circular-bar-chart" data-percent="63"><label><span class="percent">53</span>%</label></div></div><label class="resultado">Cultural</label></div>' +
-							'<div class = "academico"><div class="circular-bar"><div class="circular-bar-chart" data-percent="49"><label><span class="percent">49</span>%</label></div></div><label class="resultado">Académico</label></div></div></div>';
-					html += '<div class="ver-oportunidad"><a class="btn-action" href="'+url+'">VER OPORTUNIDAD</a>';
-					html += '<label class="cierre">CIERRA '+ data[i].fecha_cese + '</label></div><div class="clear"></div></div></div><div class="clear"></div></div></div></li>';
-				}
-				$('#datos').html(html);
-				$('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#5D9CF9",
-					size: 65,
-				});
-				$('.cultural .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#27ae60",
-					size: 65,
-				});
-				$('.academico .circular-bar-chart').easyPieChart({
-					animate: 2000,
-					scaleLength: 0,
-					lineWidth: 5,
-					barColor: "#c0392b",
-					size: 65,
-				});
-			}
-
+        $("#link-oportunidad").addClass("active");
+        $("body").on("mouseenter", ".compatibilidad", function(){
+			$(this).find(".consolidado").css("opacity",0);
+		  	$(this).find(".desglose").css("opacity",1);
+			var data = 0;
+			data = $(this).find(".cultural .circular-bar-chart").data("percent");
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
+			data = $(this).find(".academico .circular-bar-chart").data("percent");
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
+			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
+		});
+	   	$("body").on("mouseleave", ".compatibilidad", function(){
+		   	$(this).find(".consolidado").css("opacity",1);
+		  	$(this).find(".desglose").css("opacity",0);
+			$('.chart').data('easyPieChart').update(40);
 		});
 
-        document.ready
-	}
 
-   	$('#busqueda').keyup(function() {
-		if($('#busqueda').val().length > 3 || $('#busqueda').val().length == 0 )
-			fnCargarOportunidad();
-        
 	});
 
-	function fnCargarOportunidad() {
-		$.get("{% url 'estudiante-oportunidad-cargar-lista' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
+    $('#busqueda').keyup(function() {
+		if($('#busqueda').val().length > 3 || $('#busqueda').val().length == 0 )
+			fnCargarOportunidad();
+
+	});
+
+    function fnCargarOportunidad(){
+        $.get("{% url 'estudiante-oportunidad-cargar' %}?b=" + $('#busqueda').val(), function(htmlexterno) {
             if($.trim(htmlexterno)==""){
                 $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
             }
@@ -98,11 +58,29 @@
                 if ($(".box.oportunidad-box").length ==0){
                     $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
                 }
+                $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+                    animate: 2000,
+                    scaleLength: 0,
+                    lineWidth: 5,
+                    barColor: "#5D9CF9",
+                    size: 65,
+                });
+                $('.cultural .circular-bar-chart').easyPieChart({
+                    animate: 2000,
+                    scaleLength: 0,
+                    lineWidth: 5,
+                    barColor: "#27ae60",
+                    size: 65,
+                });
+                $('.academico .circular-bar-chart').easyPieChart({
+                    animate: 2000,
+                    scaleLength: 0,
+                    lineWidth: 5,
+                    barColor: "#c0392b",
+                    size: 65,
+                });
             }
 		});
-		document.ready
-	}
-
+    }
 </script>
-
-{% endblock js %}
+{% endblock%}

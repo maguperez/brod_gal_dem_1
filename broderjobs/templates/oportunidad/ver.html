@@ -30,7 +30,7 @@
 							</div>
 							<div class="postulacion">
 								<a class="btn-action" href="{%url 'oportunidad-editar' oportunidad.id%}">EDITAR</a>
-								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese}}</label>
+								<label class="cierre">CIERRA EL {{oportunidad.fecha_cese |date:"j.m.Y"}}</label>
 							</div>
 							<div class="clear"></div>
 						</header>
