@@ -37,7 +37,7 @@
 		</div>
 		<div class = "form-group">
 			<label class = "control-label">Describe tus actividades</label>
-			<textarea id = "txt-descripcion" name="descripcion_txt">{{voluntariado_descripcion}}</textarea>
+			<textarea id = "txt-descripcion" name="descripcion_txt" maxlength="1000">{{voluntariado_descripcion}}</textarea>
 				{{form.descripcion}}
 		</div>
 	</form>
@@ -47,17 +47,27 @@
 
 	$(function(){
 //		$(".modal-dialog").css("width", "700px")
+        $("#txt-descripcion").on("input", function(){
+			$("#id_descripcion").val($("#txt-descripcion").val());
+		});
+
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            var text_length = $(this).val().length;
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
 		$("#cv-voluntariado input:not(:checkbox)").addClass("form-control");
