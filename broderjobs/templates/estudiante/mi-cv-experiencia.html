@@ -56,20 +56,26 @@
 		});
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            var text_length = $(this).val().length;
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
-		if($("#id_descripcion").val()){
+		//if($("#id_descripcion").val()){
 //			$("#txt-descripcion").val($("#id_descripcion").val());
-		}
+		//}
 
 		$("#id_experiencia_actual").change(function(e){
  //			console.log($(this).is(":checked"));

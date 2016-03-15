@@ -590,15 +590,6 @@
         } );
 
         $('#siguiente-fase').click(function (event) {
-{#            ids = new Array();#}
-{#            $("input:checked", table.fnGetNodes()).each(function(index, value){#}
-{#                ids[index] = $(this).data("id");#}
-{#            });#}
-{##}
-{#            ids_estudiante = new Array();#}
-{#            $("input:checked", table.fnGetNodes()).each(function(index, value){#}
-{#                ids_estudiante[index] = $(this).data("info");#}
-{#            });#}
 
             var ids = [];
             var ids_estudiante = [];
@@ -608,8 +599,11 @@
                 ids_estudiante.push(value.id_estudiante);
             });
 
-            $("#fase").val( parseInt($(".proceso .active").data("info")) + 1);
-            fnCambioFase(ids, ids_estudiante);
+            if(ids.length > 0 && ids_estudiante.length > 0){
+                $("#fase").val( parseInt($(".proceso .active").data("info")) + 1);
+                fnCambioFase(ids, ids_estudiante);
+            }
+
         });
 
         $('#eliminar').click(function (event) {

@@ -462,16 +462,23 @@
         $("#id_direccion_map").attr("readonly", true);
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            var text_length = $(this).val().length;
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
+
 		$(window).scroll(function() {
 			if ( $(this).scrollTop() > 60 )
 				$(".box.alcance").addClass("fixed");
@@ -876,13 +883,14 @@
 				},
                 edad_desde: {
                     RangoEdad: true,
+                    max: 99,
                     min: 1
                 },
                 edad_hasta: {
                     RangoEdad: true,
+                    max: 99,
                     min: 1
                 }
-
             },
             messages: {
                 titulo: {
@@ -923,12 +931,13 @@
 					required: "Este campo es obligatorio"
 				},
                 edad_desde: {
-                    min: "Debe ser un número mayor a 1"
+                    max: "Debe ser un numero menor o igual a 99",
+                    min: "Debe ser un número mayor o igual a 1"
                 },
                 edad_hasta: {
+                    max: "Debe ser un numero menor o igual a 99",
                     min: "Debe ser un número mayor a 1"
                 }
-
             }
         });
 	}

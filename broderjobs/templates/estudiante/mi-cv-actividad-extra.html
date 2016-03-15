@@ -18,25 +18,35 @@
 		$("#cv-actividad_extra textarea").addClass("form-control");
 		$("#form-modal .modal-title").html('<i class="clip"></i> &nbsp;Actividades extra-académicas');
 		//$("#id_descripcion").hide();
-		$('#id_descripcion').prop('placeholder', 'Académicos, Deportivos, Artisticos, Sociales, etc.')
-		$("#txt-descripcion").on("input", function(){
+		$('#id_descripcion').prop('placeholder', 'Académicos, Deportivos, Artisticos, Sociales, etc.');
+        $('#id_descripcion').prop("maxlength", 1000);
+		/*$("#txt-descripcion").on("input", function(){
 			$("#id_descripcion").val($("#txt-descripcion").val());
 		});
-         $('textarea').each(function(){
+
+
+		if($("#id_descripcion").val()){
+			$("#txt-descripcion").val($("#id_descripcion").val());
+            $("#txt-descripcion").attr("maxlength", $("#id_descripcion").attr("maxlength"));
+		}*/
+        $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            $(this).next().html("0 caracteres");
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');
-        });
 
-		if($("#id_descripcion").val()){
-			$("#txt-descripcion").val($("#id_descripcion").val());
-		}
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
+        });
 
 		InicializarValidaciones();
 	});

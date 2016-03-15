@@ -106,22 +106,22 @@
 									</p>
 								</div>
 								<div>
-									<label>Ciclo de ingresos</label>
+									<label>Ciclo de ingreso</label>
                                     <p><div class = "row">
+                                        <div class = "col-sm-6">
+										{{form.ano_inicio_estudio}}</div>
 										<div class = "col-sm-6">
 										{{form.semestre_inicio_estudio}}</div>
-										<div class = "col-sm-6">
-										{{form.ano_inicio_estudio}}</div>
 									</div></p>
 
 								</div>
 								<div>
 									<label>Graduaci&oacute;n / Grad. estimada</label>
 									<p><div class = "row">
+                                        <div class = "col-sm-6">
+										{{form.ano_graduacion}}</div>
 										<div class = "col-sm-6">
 										{{form.semestre_graduacion}}</div>
-										<div class = "col-sm-6">
-										{{form.ano_graduacion}}</div>
 									</div></p>
 								</div>
                                 <div id ="ciclo-actual" class="hidden">
@@ -415,12 +415,25 @@
 				if ($(element).parent().find(".select2").length > 0) {
 					object = $(element).parent().find(".select2");
 					placement = "left";
-				} else if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' ){
+				/*} else if(element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion' ){
 					object = $(element);
 					placement = "right";
 
 				} else if(error[0].innerText == "El ciclo de ingreso debe ser menor que la graduacion estimada"){
 					if (element[0].id == 'id_ano_inicio_estudio' || element[0].id == 'id_ano_graduacion'){
+						object = $(element);
+						placement = "right";
+					}
+                    else {
+                        $(element).tooltip('hide');
+                    }
+				}*/
+                } else if(element[0].id == 'id_semestre_inicio_estudio' || element[0].id == 'id_semestre_graduacion' ){
+					object = $(element);
+					placement = "right";
+
+				} else if(error[0].innerText == "El ciclo de ingreso debe ser menor que la graduacion estimada"){
+					if (element[0].id == 'id_semestre_inicio_estudio' || element[0].id == 'id_semestre_graduacion'){
 						object = $(element);
 						placement = "right";
 					}

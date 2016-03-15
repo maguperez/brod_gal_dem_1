@@ -14,20 +14,27 @@
 	$(function(){
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
-            var text_length = $(this).val().length;
-            $(this).next().html(text_length + ' caracteres');
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
         $('textarea').on("keyup", function() {
             var enteredText = $(this).val();
             var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
             var characterCount = enteredText.length + numberOfLineBreaks;
-            $(this).next().html(characterCount + ' caracteres');
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
         });
 
 		$("#form-modal .modal-title").html('<i class="profile"></i> &nbsp;Resumen');
 //		$("#div_id_resumen").removeClass('form-group');form-control
 		$("#id_resumen").addClass('form-control');
+        $("#id_resumen").attr('max-length', 1000);
 		InicializarValidaciones()
 
 	});

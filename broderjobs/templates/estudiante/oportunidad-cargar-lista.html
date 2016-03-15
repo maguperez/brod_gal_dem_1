@@ -1,124 +1,85 @@
+{#{% extends 'estudiante/base.html' %}#}
 {% load staticfiles %}
-{%for opo in oportunidades%}
-<li>
-	<div class="box oportunidad-box">
-		<div class="content">
-			<a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}"><img class="imagen" src="{{opo.oportunidad.empresa.set_logo}}"/></a>
-			<div class="detalle">
-				<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}"><h2 class="link">{{opo.oportunidad.titulo}}</h2></a>
-				<div class="descripcion">
-					<div class="datos">
-						<div class="empresa">
-							<i class="empresa"></i>
-							<label class ="text-uppercase"><a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}">{{opo.oportunidad.empresa}}</a></label>
-						</div>
-						<div class="ubicacion"><i class="ubicacion"></i><label>{{opo.oportunidad.ciudad}}, {{opo.oportunidad.pais}}</label></div>
-						<div class="remuneracion"><i class="remuneracion"></i><label>
-							{%if opo.oportunidad.remuneracion.id == 3 %}
-								{{opo.oportunidad.remuneracion_min}}
-							{%elif opo.oportunidad.remuneracion.id == 2 %}
-								{{opo.oportunidad.remuneracion_min}} - {{opo.oportunidad.remuneracion_max}}
-							{%else%}
-								{{opo.oportunidad.remuneracion}}
-							{%endif%}
-						</label></div>
-					</div>
-					<div class="compatibilidad" data-info="{{opo.oportunidad.empresa.id}}" id="oport-{{opo.oportunidad.id}}" data-id="{{opo.oportunidad.id}}">
-						<div class = "consolidado">
-							<div class="circular-bar ">
-								<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_promedio }}">
-									<label><span class="percent">{{ opo.compatibilidad_promedio }}</span>%</label>
-								</div>
-							</div>
-							<label class="resultado">Compatible</label>
-						</div>
-						<div class = "desglose" style = "opacity: 0">
-							<div class = "cultural">
-								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_cultural}}">
-										<label><span class="percent">{{ opo.compatibilidad_cultural}}</span>%</label>
-									</div>
-								</div>
-								<label class="resultado">Cultural</label>
-							</div>
-							<div class = "academico">
-								<div class="circular-bar">
-									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_academica}}">
-										<label><span class="percent">{{ opo.compatibilidad_academica}}</span>%</label>
-									</div>
-								</div>
-								<label class="resultado">Académico</label>
-							</div>
-						</div>
-					</div>
-					<div class="ver-oportunidad">
-						<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id %}">VER OPORTUNIDAD</a>
-						<label class="cierre">CIERRA {{ opo.oportunidad.fecha_cese | date:"j.m.Y"}}</label>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-</li>
-{%endfor%}
 
-<script src="{% static 'js/jquery.easypiechart.js' %}"></script>
+{% include page_template %}
+
+
+{{ block.super }}
+
 <script>
-    var CompatibilidadJD = function(){
-        this.fnCargar = function(id, empresa) {
-            $.get("{% url 'estudiante-compatibilidad' %}?id=" + id+"%e="+empresa, function(data){
-{#                $("#oport-"+id).find(".academico .circular-bar-chart").data('easyPieChart').update(data["academico"]);#}
-{#                $("#oport-"+id).find(".cultural .circular-bar-chart").data('easyPieChart').update(data["cultural"]);#}
-{#                $("#oport-"+id).find(".consolidado .circular-bar-chart").data('easyPieChart').update(data["consolidado"]);#}
-            });
-        }
-    };
-    var compatibilidad = new CompatibilidadJD();
-	 $(function(){
-	    $("#link-oportunidad").addClass("active");
-	   	$("body").on("mouseenter", ".compatibilidad", function(){
-			$(this).find(".consolidado").css("opacity",0);
-		  	$(this).find(".desglose").css("opacity",1);
-			var data = 0;
-			data = $(this).find(".cultural .circular-bar-chart").data("percent");
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);
-			data = $(this).find(".academico .circular-bar-chart").data("percent");
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);
-			$(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);
-		});
-	   	$("body").on("mouseleave", ".compatibilidad", function(){
-		   	$(this).find(".consolidado").css("opacity",1);
-		  	$(this).find(".desglose").css("opacity",0);
-			$('.chart').data('easyPieChart').update(40);
-		});
-		 $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
+    $.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollMargin: 20,
+            onClick: function(context, fragment) {
+
+            },
+            onCompleted: function(context, fragment) {
+            $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
 					barColor: "#5D9CF9",
 					size: 65,
 				});
-		 $('.cultural .circular-bar-chart').easyPieChart({
+		    $('.cultural .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
 					barColor: "#27ae60",
 					size: 65,
 				});
-		 $('.academico .circular-bar-chart').easyPieChart({
+		    $('.academico .circular-bar-chart').easyPieChart({
 					animate: 2000,
 					scaleLength: 0,
 					lineWidth: 5,
 					barColor: "#c0392b",
 					size: 65,
 				});
-         $(".class").each(function() {
-        });
-         $(".Compatibilidad").each(function(index, obj){
-             compatibilidad.fnCargar($(obj).data("id"), $(obj).data("info") );
-        });
-	});
+            }
+    });
+
+{#    $(function() {#}
+{##}
+{#        $("#link-oportunidad").addClass("active");#}
+{#        $("body").on("mouseenter", ".compatibilidad", function () {#}
+{#            $(this).find(".consolidado").css("opacity", 0);#}
+{#            $(this).find(".desglose").css("opacity", 1);#}
+{#            var data = 0;#}
+{#            data = $(this).find(".cultural .circular-bar-chart").data("percent");#}
+{#            $(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(0);#}
+{#            $(this).find(".cultural .circular-bar-chart").data('easyPieChart').update(data);#}
+{#            data = $(this).find(".academico .circular-bar-chart").data("percent");#}
+{#            $(this).find(".academico .circular-bar-chart").data('easyPieChart').update(0);#}
+{#            $(this).find(".academico .circular-bar-chart").data('easyPieChart').update(data);#}
+{#        });#}
+{#        $("body").on("mouseleave", ".compatibilidad", function () {#}
+{#            $(this).find(".consolidado").css("opacity", 1);#}
+{#            $(this).find(".desglose").css("opacity", 0);#}
+            {#			$('.chart').data('easyPieChart').update(40);#}
+{#        });#}
+{##}
+{#        $('.compatibilidad .consolidado .circular-bar-chart').easyPieChart({#}
+{#					animate: 2000,#}
+{#					scaleLength: 0,#}
+{#					lineWidth: 5,#}
+{#					barColor: "#5D9CF9",#}
+{#					size: 65,#}
+{#				});#}
+{#        $('.cultural .circular-bar-chart').easyPieChart({#}
+{#                            animate: 2000,#}
+{#                            scaleLength: 0,#}
+{#                            lineWidth: 5,#}
+{#                            barColor: "#27ae60",#}
+{#                            size: 65,#}
+{#                        });#}
+{#        $('.academico .circular-bar-chart').easyPieChart({#}
+{#                            animate: 2000,#}
+{#                            scaleLength: 0,#}
+{#                            lineWidth: 5,#}
+{#                            barColor: "#c0392b",#}
+{#                            size: 65,#}
+{#                        });#}
+{#    });#}
+
+
 </script>
