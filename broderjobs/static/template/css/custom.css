@@ -27,13 +27,15 @@
 .section {
     background-color: rgb(128,32,0);
 }
-#header:not(.sticky-header) .standard-logo{
+#header:not(.sticky-header) .standard-logo,
+#header .retina-logo
+{
     height: 100px !Important;
 }
 #header.sticky-header .standard-logo{
     height: 60px !Important;
 }
-#header .standard-logo img{
+#header img{
     height: 33px !Important;
     position: relative;
     top: 50%;
