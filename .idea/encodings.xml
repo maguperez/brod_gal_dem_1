@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-cargar-lista.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-lista.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidad-listar.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/oportunidades.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/empresa/prueba.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista-item.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/broderjobs/templates/estudiante/oportunidad-cargar-lista.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje-crear.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje-listar.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broderjobs/templates/mensaje/mensaje-relacionados-listar.html" charset="UTF-8" />

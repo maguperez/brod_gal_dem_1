@@ -318,9 +318,9 @@ def oportunidades(request):
     return HttpResponse(data, content_type='application/json')
 
 def oportunidades_listar( request ):
-    user = request.user
-    persona = get_object_or_404(Persona, usuario_id=user.id)
-    representante = get_object_or_404(Representante, persona_id =persona.id)
+    # user = request.user
+    # persona = get_object_or_404(Persona, usuario_id=user.id)
+    # representante = get_object_or_404(Representante, persona_id =persona.id)
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
 
 def oportunidad_busqueda(request):

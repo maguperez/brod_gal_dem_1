@@ -105,8 +105,9 @@
 
                                 <div class="clear"></div>
                             </a></li>
+                            {% if oportunidad.estado_oportunidad != 'P'%}
                             <li><a class="archivar"><span>Archivar</span>
-
+                            {% endif %}
                                 <div class="clear"></div>
                             </a></li>
                             </ul>
@@ -161,6 +162,8 @@
                             <th>Graduaci&oacute;n</th>
                             <th>Inscripci&oacute;n</th>
                             <th>Compatibilidad</th>
+                            <th>Cultural</th>
+                            <th>Acádemico</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -385,7 +388,7 @@
                     responsive: {
                         details: {
                             type: 'control',
-                            target: 9
+                            target: 11
                         }
                     },
                     destroy: true,
@@ -394,11 +397,11 @@
                         url: "{%static 'js/dataTable-i18n/es-ES.json' %}"
                     },
                     columnDefs: [
-                        {sortable: false, targets: [0, 9, 8]},
-                        {searchable: false, targets: [0, 9, 8]},
-                        {class: "all", targets: [0, 3, 5, 6, 7, 8, 9]},
-                        {class: "none", targets: [10]},
-                        {class: "never", targets: [1,2,11,12]},
+                        {sortable: false, targets: [0, 11, 10, 9, 8]},
+                        {searchable: false, targets: [0, 11, 10, 9, 8]},
+                        {class: "all", targets: [0, 3, 5, 6, 7, 8, 9,10,11]},
+                        {class: "none", targets: [12]},
+                        {class: "never", targets: [1,2,13,14]},
                         {
                             targets: 0,
                             className: 'dt-body-center',
@@ -411,14 +414,14 @@
                             }
                         },
                         {
-                            targets: 9,
+                            targets: 11,
                             className: 'dt-expandir',
                             render: function (data, type, full, meta) {
                                 return '<i class="menu"></i>';
                             }
                         },
                         {
-                            targets: 10,
+                            targets: 12,
                             render: function (data, type, full, meta) {
                                 var html =  '<div class="" data-id="' + full["id"] + '" data-info="' + full["id_estudiante"] + '">';
                                 if(full.estado_fase == 'A'){
@@ -466,6 +469,8 @@
                         {data: "graduacion"},
                         {data: "fecha_postulacion"},
                         {data: "compatibilidad"},
+                        {data: "compatibilidad_academica"},
+                        {data: "compatibilidad_cultural"},
                         {data: "botones"},
                         {data: "botones"},
                         {data: "estado"},

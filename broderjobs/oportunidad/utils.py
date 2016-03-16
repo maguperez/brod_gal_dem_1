@@ -12,7 +12,7 @@ def obtener_candidatos (objects):
     for p in objects:
         estudiante = Estudiante.objects.get(pk = p.estudiante.id)
         try:
-            compatibilidad = OportunidadCompatibilidad.objects.get(estudiante_id = estudiante.id,
+            comp = OportunidadCompatibilidad.objects.get(estudiante_id = estudiante.id,
                                                                    oportunidad_id = p.oportunidad_id)
         except Exception, e:
             compatibilidad = OportunidadCompatibilidad()
@@ -23,10 +23,13 @@ def obtener_candidatos (objects):
         carrera = str(estudiante.carrera)
         graduacion = "Ciclo " + str(estudiante.semestre_graduacion) + " del año " + str(estudiante.ano_graduacion)
         fecha_postulacion = str(p.fecha_creacion)
-        compatibilidad = str(compatibilidad.compatibilidad_promedio)+ "%"
+        compatibilidad = str(comp.compatibilidad_promedio)+ "%"
+        compatibilidad_academica = str(comp.compatibilidad_academica)+ "%"
+        compatibilidad_cultural = str(comp.compatibilidad_cultural)+ "%"
         records = {"checkbox":"", "id":id, "id_estudiante": estudiante.id, "nombre":nombre,"universidad":universidad,
                    "carrera":carrera,"graduacion":graduacion, "fecha_postulacion": fecha_postulacion,
-                   "compatibilidad": compatibilidad,"botones":"", "estado": p.estado,
+                   "compatibilidad": compatibilidad, "compatibilidad_academica": compatibilidad_academica,
+                   "compatibilidad_cultural": compatibilidad_cultural,"botones":"", "estado": p.estado,
                    "estado_fase": p.estado_fase}
         data_records.append(records)
 
