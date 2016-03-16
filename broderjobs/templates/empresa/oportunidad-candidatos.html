@@ -15,7 +15,6 @@
     }
 
     .not-active {
-       pointer-events: none;
        cursor: default;
     }
 
@@ -604,8 +603,27 @@
 
         } );
 
+        $(".not-active").each(function(){
+            var opcion = $(this).is("#siguiente-fase") ?
+                    "poder pasar a la siguiente fase" : ($(this).is("#eliminar") ? "eliminarlo" : "enviarle un mensaje");
+            $(this).popover({
+                trigger: "manual",
+                content: "<i class ='fa fa-exclamation-triangle' style = 'color: #FB4100'></i> " +
+                "Debe seleccionar al menos un candidato para poder "+opcion,
+                html: true,
+                placement: "top",
+            });
+        });
+        $('.not-active').on("mouseleave", function(){
+            $(this).popover("hide");
+        })
+        $(".not-active").on("click", function(e){
+            e.preventDefault();
+            $(this).popover("show");
+        })
         $('#siguiente-fase').click(function (event) {
-
+            if ($(this).is(".not-active"))
+                return;
             var ids = [];
             var ids_estudiante = [];
 
@@ -622,6 +640,8 @@
         });
 
         $('#eliminar').click(function (event) {
+            if ($(this).is(".not-active"))
+                return;
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("id");
