@@ -255,7 +255,12 @@
                 </header>
                 <div class="content">
                     <h3 class="link">{{empresa.nombre | upper}}</h3>
-                    <label class="descripcion">{{empresa.sector | upper}}</label>
+                     {% if empresa.sector %}
+                         <label class="descripcion">{{empresa.sector | upper}}</label>
+                     {% else %}
+                         <label>Sin definir sector</label>
+                     {% endif %}
+
                 </div>
             </div>
             <div class="box evaluacion">
