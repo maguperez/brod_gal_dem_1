@@ -191,7 +191,6 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 {% block js %}
 <script>
 	$("#link-oportunidad").addClass("active");
-
 	$('#postular').click(function(event) {
 		fnCargarPopup();
 		window.location = '#resultado-postulacion';
@@ -216,27 +215,42 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 			url: '{%url "estudiante-oportunidad-postular" %}',
 			type: 'get',
 			success: function(data){
-				$("#postular").text(data[0]);
+
 				if(data[0] == "CANCELAR") {
 					$("#postular").removeClass("btn-action");
 					$("#postular").addClass("btn-action-invertido");
+                    $("#postular").text(data[0]);
 				}
+                else if(data[0] == "ERROR"){
+                    fnCargarPopup("ERROR");
+                    window.location = '#resultado-postulacion';
+                    $('body').addClass('static');
+
+
+                }
 				else{
 					$("#postular").removeClass("btn-action-invertido");
 					$("#postular").addClass("btn-action");
+                    $("#postular").text(data[0]);
 				}
 			}
 
 		});
 	}
 
-	function fnCargarPopup(){
+	function fnCargarPopup(estado){
 
 		html = '<section class="header">';
 		html += '<h4 class="link">CONFIRMACI&Oacute;N</h4>';
 		html += '</section>';
 		html += '<section class="mensaje">';
-		if($.trim($("#postular").text()) =='CANCELAR') {
+
+        if(estado  == "ERROR"){
+            html += '<p>"Lo siento tu postulación no ha podido ser procesado, la oportunidad ha sido cerrada"</p>';
+
+            $("#postular").hide();
+        }
+		else if($.trim($("#postular").text()) =='CANCELAR') {
 			html += '<p>¿Estas seguro que deseas cancelar está postulaci&oacute;n ?!</p>';
 			html += '<div class="botones-popup">';
 			html += '<a class="btn-save" onclick="window.history.back();">CANCELAR</a>';
