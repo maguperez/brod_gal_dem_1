@@ -1,9 +1,9 @@
 html, body, div, span, a, label, p, h1, h2, h3, h4, h5, h6, input, select, table, tr, th, td, img, ul, ol, li {margin: 0; padding: 0; }
-body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #a5a5a5;}
-::-webkit-input-placeholder {color: #a5a5a5}
-:-moz-placeholder {color: #a5a5a5}
-::-moz-placeholder {color: #a5a5a5}
-:-ms-input-placeholder {color: #a5a5a5}
+body, label, h1, h2, h3, h4, h5, h6, p, a, input, select, textarea, th, td, img {font-family: 'Arial'; font-weight: normal; font-size: 13.4px; color: #9A9A9A;}
+::-webkit-input-placeholder {color: #9A9A9A}
+:-moz-placeholder {color: #9A9A9A}
+::-moz-placeholder {color: #9A9A9A}
+:-ms-input-placeholder {color: #9A9A9A}
 body.static {overflow: hidden;}
 body { background-color: #fdfdfd; }
 body > section {margin-bottom: 50px;}
@@ -91,7 +91,7 @@ input[type="checkbox"]:disabled + label {opacity: 0.3;}
 .wrapper {width: 100%; height: 100%; position: relative;}
 .link {color: #5d9cf9;}
 .orange {color: #f50;}
-.bold {font-weight: bold; color: #848484;}
+.bold {font-weight: bold; color: #838383;}
 .align-left {text-align: left}
 .pos-relative {position: relative;}
 .invisible {opacity: 0; pointer-events: none;}
@@ -99,13 +99,13 @@ input[type="checkbox"]:disabled + label {opacity: 0.3;}
 /*TABLAS*/
 table.bj-table {width: 100%; border-spacing: 0; border-collapse: collapse;}
 table.bj-table thead {text-align: center;}
-table.bj-table th {padding: 12px 10px !important; color: #848484; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center; border-left: none !Important; border-right:none !Important; font-size: 14px !Important}
+table.bj-table th {padding: 12px 10px !important; color: #838383; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center; border-left: none !Important; border-right:none !Important; font-size: 14px !Important}
 table.bj-table th i {margin-left: 5px; margin-bottom: 2px;}
 table.bj-table td { border-left: none !Important; border-right:none !Important; }
 table.bj-table td:not(.child):not(.align-left):not(.align-right) { text-align: center; }
 table.bj-table tr.child:hover td { background-color: transparent !Important }
-table.bj-table.dark thead {border: 1px solid #848484;}
-table.bj-table.dark th {padding: 10px 12px; color: #fff; background: #848484; border: none; text-align: left;}
+table.bj-table.dark thead {border: 1px solid #838383;}
+table.bj-table.dark th {padding: 10px 12px; color: #fff; background: #838383; border: none; text-align: left;}
 table.bj-table.dark tbody {border: 1px solid #ddd;}
 table.bj-table td {padding: 10px 12px !Important; cursor: pointer; font-size: 14px !Important;}
 table.bj-table tr:nth-child(2n+1) td {background: #f9f9f9;}
@@ -208,7 +208,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box header {border-bottom: 1px solid #ddd;}
 .box .content section:not(:last-child) {padding-bottom: 30px; border-bottom: 1px solid #ddd;}
 .box .content section:not(:first-child) {padding-top: 28px;}
-.box .content section .title {margin-bottom: 25px; line-height: 26px; color: #848484; font-weight: bold; display: block;}
+.box .content section .title {margin-bottom: 25px; line-height: 26px; color: #838383; font-weight: bold; display: block;}
 .box .content section .title i {margin-right: 10px;}
 .box .content section .title .comment {margin-left: 5px; font-size: 0.75em; font-weight: normal;}
 .box .content section .title .editar {margin-left: 20px; font-size: 0.65em;}
@@ -216,7 +216,7 @@ a.delete:hover {background-position: 0 -9px;}
 .box .content section .detalle {margin-left: 37px;}
 .box .content section .detalle  > div:not(:last-child) {margin-bottom: 30px;}
 .box .content section .detalle  > div.less-margin {margin-bottom: 20px;}
-.box .content section .detalle > div > label {font-size: 14px; font-weight: bold; color: #848484; float: left;}
+.box .content section .detalle > div > label {font-size: 14px; font-weight: bold; color: #838383; float: left;}
 .box .content section .detalle > div > p {float: left;}
 .box .content section .detalle.col-2-8 label {width: 20%;}
 .box .content section .detalle.col-2-8 p {width: 80%;}
@@ -308,7 +308,7 @@ a:hover { text-decoration: none !Important }
 .home .login .datos.registro {margin-top: 20px;}
 .home .login .datos.registro .cumpleanos { display:inline-block; width: 31.5%; height: 22px; padding-right: 0px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #aaa; font-size: 0.8em;}
 .home .login .datos input{width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #333; font-size: 0.8em;}
-.home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #a5a5a5; font-size: 0.8em;}
+.home .login .datos select  {width: 100%; height: 22px; line-height: 20px; padding-left: 5px; margin: 4px 0; border: none; color: #9A9A9A; font-size: 0.8em;}
 .home .login .opciones {margin-top: -5px; text-align: center;}
 .home .login .opciones a, .home .login .opciones label{font-size: 10px; color: #fff; font-weight: normal !important;}
 .home .login .opciones input{margin: 0 5px -1px 0;}
@@ -323,7 +323,7 @@ a:hover { text-decoration: none !Important }
 .home .login .division .line.full {width: 100%;}
 .home .login .division label {width: 10%; line-height: 1px; float: left; text-align: center; color: #fff;}
 .home .login .close {position: absolute; top: -22px; right: -18px; font-weight: bold; font-size: 0.85em;
-    color: #a5a5a5 !Important; opacity: 1 !Important}
+    color: #9A9A9A !Important; opacity: 1 !Important}
 .home footer {width: 100%; padding: 12px 0; position: fixed; bottom: 0; left: 0; background: rgba(0,0,0,0.3); z-index:1;}
 .home footer ul.links {margin-top: 8px; text-indent: 30px;}
 
@@ -358,10 +358,10 @@ a:hover { text-decoration: none !Important }
 .final-registro .logo {margin: 0 auto; margin-bottom: 40px; display: block;}
 .final-registro .box {width: 430px; padding: 20px 35px; margin: 0 auto;}
 .final-registro .hola {margin-bottom: 15px; text-align: center; font-family: 'Roboto Condensed'; font-size: 1.3em; display: block;}
-.final-registro .hola .bold {color: #a5a5a5;}
+.final-registro .hola .bold {color: #9A9A9A;}
 .final-registro .indicacion {font-size: 1em;}
 .final-registro .datos {margin-top: 25px;}
-.final-registro .datos > div > label {margin-top: 12px; color: #848484; display: block;}
+.final-registro .datos > div > label {margin-top: 12px; color: #838383; display: block;}
 .final-registro .datos p {margin-top: 15px;}
 .final-registro .datos .full {width: 100%;}
 .final-registro .datos .half-2 {width: 65%;}
@@ -388,7 +388,7 @@ header.principal .options {height: 18px; margin-top: 9px;}
 header.principal .options a {width: 23px; height: 18px; float: right; margin-left: 20px; position: relative; text-indent: -20000px;}
 header.principal .options a:hover, header.principal .options a.active {background-position: 0 -18px;}
 header.principal .options a .notificaciones {display: none;}
-header.principal .options a.active .notificaciones {width: 18px; height: 18px; line-height: 18px; position: absolute; top: -8px; right: -8px; text-indent: 0; cursor: pointer; text-align: center; border-radius: 50%; border: 1px solid #fff; background: #848484; color: #fff; display: block;}
+header.principal .options a.active .notificaciones {width: 18px; height: 18px; line-height: 18px; position: absolute; top: -8px; right: -8px; text-indent: 0; cursor: pointer; text-align: center; border-radius: 50%; border: 1px solid #fff; background: #838383; color: #fff; display: block;}
 header.principal .options .mensajes {background: transparent url('../img/icons/mensajes.png') 0 0 no-repeat;}
 
 header.principal .options .procesos {background: transparent url('../img/icons/procesos.png') 0 0 no-repeat;}
@@ -396,7 +396,7 @@ header.principal .actions {margin-top: 10px; margin-right: 10px}
 header.principal .actions a {padding: 8px 15px; border: 1px solid #fff; color: #fff; border-radius: 7px; font-size: 0.95em;}
 header.principal .actions a:hover {color: #f50; background: #fff;}
 header.menu {width: 100%;  border-bottom: 1px solid #ddd; background-color: white;}
-header.menu a {height: 47px; line-height: 50px; margin: 0 25px 2px 25px; font-family: 'Helvetica'; font-size: 16px; float: left; color: #a5a5a5}
+header.menu a {height: 47px; line-height: 50px; margin: 0 25px 2px 25px; font-family: 'Helvetica'; font-size: 16px; float: left; color: #9A9A9A}
 header.menu a:hover, header.menu a.active {color: #f50; text-decoration: none}
 header.menu a.active {margin-bottom: -1px; border-bottom: 3px solid #f50;}
 header.menu .centered { height: 47px; }
@@ -424,7 +424,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-resumen .imagen {width: 130px; height: 130px;}
 .oportunidad-resumen .detalle {width: 350px; margin-left: 60px !important;}
 .oportunidad-resumen .detalle h1, .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label {display: block;}
-.oportunidad-resumen .detalle h1 { font-size: 26px; margin: 12px 0 5px 0; color: #848484;}
+.oportunidad-resumen .detalle h1 { font-size: 26px; margin: 12px 0 5px 0; color: #838383;}
 .oportunidad-resumen .detalle a, .oportunidad-resumen .detalle label,
 .oportunidad-resumen .detalle a h4{line-height: 25px !important; font-size: 14px;}
 
@@ -433,7 +433,7 @@ header.menu .centered { height: 47px; }
 .oportunidades-estudiante .box.oportunidad-box:hover{ box-shadow: 0 0 10px #555; }
 .oportunidad-detalle .breadcrumb {margin-bottom: 30px;}
 .oportunidad-detalle header {position: relative;}
-.oportunidad-detalle header h3 {color: #848484; font-weight: bold;}
+.oportunidad-detalle header h3 {color: #838383; font-weight: bold;}
 .oportunidad-detalle .indicacion {margin-top: 5px; font-size: 12.24; display: block;}
 .oportunidad-detalle header .descripcion {float: left;}
 .oportunidad-detalle header > .btn-action { background-color: white; width: 85px; height: 30px; line-height: 30px; margin-left: 10px; float: right;}
@@ -448,7 +448,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-detalle .box.alcance .grafico > label {margin-top: 15px; font-size: 14px; text-align: center; display: block;}
 .oportunidad-detalle .box.alcance .grafico .cifra {font-size: 18px; font-weight: bold;}
 .oportunidad-detalle .box.alcance .caracteristicas {padding-top: 20px;}
-.oportunidad-detalle .box.alcance .grafico h4 {font-size: 14px; font-weight: bold; color: #848484; text-align: center; display: block;}
+.oportunidad-detalle .box.alcance .grafico h4 {font-size: 14px; font-weight: bold; color: #838383; text-align: center; display: block;}
 .oportunidad-detalle .box.alcance .grafico-alcance {margin-top: 15px;}
 .oportunidad-detalle .box.alcance .grafico-alcance div {border-radius: 50%;}
 .oportunidad-detalle .box.alcance .grafico-alcance label {color: #fff; line-height: 52px;}
@@ -485,7 +485,7 @@ header.menu .centered { height: 47px; }
 .empresa .detail header {padding: 0; margin: -1px;}
 .empresa .detail header .slider img {width: 725px; height:369px;}
 .empresa .about .double {margin-top: 15px;}
-.empresa .about h4 {line-height: 40px; margin-top: 15px; font-weight: bold; color: #848484; font-size: 1em;}
+.empresa .about h4 {line-height: 40px; margin-top: 15px; font-weight: bold; color: #838383; font-size: 1em;}
 .empresa section.evaluacion .criterio {width: 25%; float: left;}
 .empresa section.evaluacion .criterio > label {display: block; text-align: center;}
 .empresa section.evaluacion .criterio .calificacion {font-size: 1.4em; font-weight: bold;}
@@ -528,7 +528,7 @@ header.menu .centered { height: 47px; }
 .proceso-detalle .oportunidad-resumen .detalle {width: 480px;}
 .proceso-detalle .oportunidad-resumen .estado {padding-top: 50px;}
 .proceso-detalle .oportunidad-resumen .estado label {display: block; margin-bottom: 7px; font-size: 14px;}
-.proceso-detalle .oportunidad-resumen .estado label:nth-child(2) {font-weight: bold; color: #848484;}
+.proceso-detalle .oportunidad-resumen .estado label:nth-child(2) {font-weight: bold; color: #838383;}
 .proceso-detalle .menu {width: 170px; display:inline-block; vertical-align: top}
 .proceso-detalle .menu a {padding: 6px 10px; margin-bottom: 12px; border-bottom: 1px solid #ddd; font-size: 14px; display: block;}
 .proceso-detalle .menu a:hover, .proceso .menu a.active, .proceso-detalle .menu a.active {color: #5d9cf9 !important;}
@@ -546,7 +546,7 @@ header.menu .centered { height: 47px; }
 .proceso-detalle .grafico .dots .dot {width: 4px; height: 4px; margin: 0 4px; float: left; border-radius: 50%; background: #ddd;}
 .proceso-detalle .grafico .dots.active .dot {background: #5d9cf9;}
 .proceso-detalle .mensajes {/*border-top: 1px solid #ddd;*/}
-.proceso-detalle .mensajes .unread td {font-weight: bold; color: #848484;}
+.proceso-detalle .mensajes .unread td {font-weight: bold; color: #838383;}
 
 /*MI CV*/
 .cv .left {width: 70% !important;}
@@ -558,13 +558,13 @@ header.menu .centered { height: 47px; }
 .cv header .box-imagen, .cv header .detalle {float: left;}
 .cv header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;}
 .cv header .detalle {margin: 20px 0 0 60px; max-width: 240px;}
-.cv header .detalle h3 {color: #848484; font-weight: bold; font-size: 18px; }
+.cv header .detalle h3 {color: #838383; font-weight: bold; font-size: 18px; }
 .cv header .detalle label {margin-top: 10px; display: block; font-size: 14px;}
 .cv .timeline .fecha {font-size: 12px !important;}
 .cv .timeline .tipo {margin-top: 12px; font-size: 14px !important;}
 .cv .timeline .nombre {margin-bottom: 15px; font-weight: normal !important; font-size: 13px !important;}
 .cv .wizard {padding: 24px;}
-.cv .wizard h4 {margin-bottom: 5px; font-size: 14px; color: #848484; font-weight: bold;}
+.cv .wizard h4 {margin-bottom: 5px; font-size: 14px; color: #838383; font-weight: bold;}
 .cv .wizard i {margin: 16px 10px -3px 0; display: inline-block;}
 
 /*POPUPS CV*/
@@ -576,7 +576,7 @@ header.menu .centered { height: 47px; }
 .popup.experiencia input.fecha {width: 150px;}
 .popup.experiencia input[type="checkbox"] {margin-left: 5px;}
 .popup.experiencia input[type="checkbox"] + label {font-size: 1.05em;}
-.popup.experiencia label.actividades {margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #848484; display: block;}
+.popup.experiencia label.actividades {margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #838383; display: block;}
 .popup.experiencia .anadir {font-size: 0.85em;}
 
 /*OPORTUNIDADES EMPRESA*/
@@ -626,7 +626,7 @@ header.menu .centered { height: 47px; }
 .oportunidad-empresa .header .estado label:nth-child(1) {width: 130px; height: 23px; line-height: 23px; margin-bottom: 5px; background: #f50; color: #fff;}
 .oportunidad-empresa .header .estado label:nth-child(2) {font-size: 0.75em;}
 .oportunidad-empresa .candidatos .content {padding: 25px;}
-.oportunidad-empresa .candidatos h2 {margin-top: 8px; float: left; font-size: 1.25em; font-weight: bold; color: #848484;}
+.oportunidad-empresa .candidatos h2 {margin-top: 8px; float: left; font-size: 1.25em; font-weight: bold; color: #838383;}
 .oportunidad-empresa .candidatos .estadistica {float: right; margin: -12px 0 -15px 25px;}
 .oportunidad-empresa .candidatos .estadistica label {text-align: center; display: block;}
 .oportunidad-empresa .candidatos .estadistica .cifra {font-size: 34px; font-weight: bold;}
@@ -650,17 +650,17 @@ header.menu .centered { height: 47px; }
 .modal .candidato header .imagen, .popup.candidato header .detalle {float: left;}
 .modal .candidato header .imagen {width: 130px; height: 130px; border-radius: 50%; border: 1px solid #ddd;}
 .modal .candidato header .detalle {margin: 20px 0 0 60px; float: left}
-.modal .candidato header .detalle h3 {color: #848484; font-weight: bold;}
+.modal .candidato header .detalle h3 {color: #838383; font-weight: bold;}
 .modal .candidato header .detalle label {margin-top: 10px; display: block; font-size: 0.95em;}
 .modal .candidato .detalle {margin-left: 37px !important;}
 .modal .candidato .content section:not(:last-child) {padding-bottom: 30px !important; border-bottom: 1px solid #ddd !important;}
 
 /*POPUP MENSAJE EDIT*/
 .popup.mensaje-edit .header {padding-bottom: 25px !important; border-bottom: 1px solid #ddd !important;}
-.popup.mensaje-edit .header h3 {margin: 5px 0 0 10px; float: left; font-size: 1.25em; font-weight: bold; color: #848484;}
+.popup.mensaje-edit .header h3 {margin: 5px 0 0 10px; float: left; font-size: 1.25em; font-weight: bold; color: #838383;}
 .popup.mensaje-edit .header .btn-action,.popup.mensaje .btn-action {width: 85px; height: 30px; line-height: 30px; float: right;}
 .popup.mensaje-edit .destinatarios {margin: 15px 5px;}
-.popup.mensaje-edit .destinatarios > label {font-size: 1em; margin: 10px; float: left; color: #848484;}
+.popup.mensaje-edit .destinatarios > label {font-size: 1em; margin: 10px; float: left; color: #838383;}
 .popup.mensaje-edit li {float: left; margin-left: 10px;}
 .popup.mensaje-edit li .imagen {margin: 3px 5px -6px 0;}
 .popup.mensaje-edit li .nombre {font-size: 1em;}
@@ -692,7 +692,7 @@ header.menu .centered { height: 47px; }
 
 /*AVISOS*/
 .popup.aviso .header {padding-bottom: 8px !important; border-bottom: 1px solid #ddd !important;}
-.popup.aviso h4 {margin-bottom: 5px; color: #a5a5a5; font-size: 0.85em; font-weight: bold;}
+.popup.aviso h4 {margin-bottom: 5px; color: #9A9A9A; font-size: 0.85em; font-weight: bold;}
 .popup.aviso .mensaje {padding-top: 15px !important;}
 .popup.aviso section {padding-bottom: 0 !important;}
 
@@ -924,7 +924,7 @@ img.img-me {
 .evaluacion-empresa .tooltip .tooltip-inner{ background-color: #f50 !Important; }
 .evaluacion-empresa .tooltip .tooltip-arrow{ border-left-color: #f50 !Important; border-right-color: #f50 !Important; }
 .home .login .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: white; border-radius: 0px; text-align: center; font-family: Roboto Condensed;}
-.modal-content .alert-warning, .cv .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: #848484; border-radius: 0px; text-align: center; }
+.modal-content .alert-warning, .cv .alert-warning { background-color: rgba(255,85,0,0.3); border-color: rgba(255,85,0,0.3); color: #838383; border-radius: 0px; text-align: center; }
 .home #registro #acepto { vertical-align: top; }
 
 .empresa .panel.left .content h3.link { margin: 0px !important; }
@@ -1041,7 +1041,7 @@ html.dark .wizard-progress .wizard-steps li a {
 	display: block;
 	padding: 25px 8px 0;
 	font-size: 11px;
-	color: #a5a5a5;
+	color: #9A9A9A;
 	line-height: 1;
 	text-align: center;
 	text-decoration: none;
@@ -1240,7 +1240,7 @@ a:hover {
 }
 .modal-title {
     font-weight:  bold;
-    color: #848484;
+    color: #838383;
 }
 .compatibilidad {
     text-align: center;
