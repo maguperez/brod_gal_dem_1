@@ -32,10 +32,10 @@
                 <li>{{oportunidad.titulo}}</li>
             </ol>
             <ol class="proceso">
-                <li data-info="1" {%if oportunidad.fase.id == 1%} class="active" {%endif%}>Postulaci&oacute;n</li>
-                <li data-info="2" {%if oportunidad.fase.id == 2%} class="active" {%endif%}>Entrevista Grupal</li>
-                <li data-info="3" {%if oportunidad.fase.id == 3%} class="active" {%endif%}>Entrevista Personal</li>
-                <li data-info="4" {%if oportunidad.fase.id == 4%} class="active" {%endif%}>Contrataci&oacute;n</li>
+                <li data-info="1" {%if oportunidad.fase.orden == 1%} class="active" {%endif%}>Postulaci&oacute;n</li>
+                <li data-info="2" {%if oportunidad.fase.orden == 2%} class="active" {%endif%}>Entrevista Grupal</li>
+                <li data-info="3" {%if oportunidad.fase.orden == 3%} class="active" {%endif%}>Entrevista Personal</li>
+                <li data-info="4" {%if oportunidad.fase.orden == 4%} class="active" {%endif%}>Contrataci&oacute;n</li>
             </ol>
             <div class="clear"></div>
         </div>
