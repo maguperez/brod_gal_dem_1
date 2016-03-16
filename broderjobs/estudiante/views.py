@@ -1070,21 +1070,26 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
 
-@login_required(login_url='/estudiante-registro/')
+@login_required(login_url='homepage')
 def oportunidad_listar(request):
-    return render(request, 'estudiante/oportunidad-listar.html')
+    if request.user.is_authenticated():
+        return render(request, 'estudiante/oportunidad-listar.html')
+    else:
+        return render(request, 'main/homepage.html')
 
-@login_required(login_url='/estudiante-registro/')
+@login_required(login_url='homepage')
 def oportunidad_cargar_lista(request, template='estudiante/oportunidad-cargar-lista.html',
            page_template='estudiante/oportunidad-cargar-lista-item.html'):
 
     busqueda = "" if request.GET.get('b') is None else request.GET.get('b')
+    busqueda = str(busqueda)
     oportunidades = OportunidadCompatibilidad.objects.filter(
         Q(estudiante__persona__usuario_id = request.user.id) & (
         Q(oportunidad__titulo__unaccent__icontains=busqueda) | Q(oportunidad__empresa__nombre__icontains = busqueda) |
         Q(oportunidad__ciudad__descripcion__icontains=busqueda) | Q(oportunidad__pais__descripcion__icontains = busqueda) |
         Q(oportunidad__tipo_puesto__descripcion__startswith=busqueda) | Q(oportunidad__carga_horaria__descripcion__startswith=busqueda) |
-        Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda))).order_by('-compatibilidad_promedio').distinct()
+        Q(oportunidad__carrera__descripcion__startswith=busqueda) | Q(oportunidad__conocimiento__descripcion__startswith=busqueda))).exclude(
+        oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
     # if request.is_ajax():
     #     template = page_template
     context = {
@@ -1256,5 +1261,4 @@ def prueba(request, template='estudiante/oportunidad-cargar-lista.html',
 def prueba_base(request):
     return render_to_response('estudiante/prueba-base.html',
                               context_instance=RequestContext(request))
-
 

@@ -26,7 +26,7 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
         try:
             estudiante = Estudiante.objects.get(id = id, estado = 'A')
             postulacion = Estudiante.objects.get(estudiante_id = estudiante.id, oportunidad_id = oportunidad.id,
-                                                 estado_postulacion = 'A')
+                                                 estado= 'A')
             mensaje_destinatarios = Mensaje_Destinatario()
             mensaje_destinatarios.mensaje = mensaje
             mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
@@ -80,6 +80,7 @@ def enviar_notificacion(oportunidad, usuario_destinatario, asunto, es_mensaje, u
     notificacion.save()
 
 def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunto, es_mensaje, usuario_creacion):
+
     for id in ids_estudiantes:
         estudiante = Estudiante.objects.get(id = id)
         postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
