@@ -255,7 +255,12 @@
                 </header>
                 <div class="content">
                     <h3 class="link">{{empresa.nombre | upper}}</h3>
-                    <label class="descripcion">{{empresa.sector | upper}}</label>
+                     {% if empresa.sector %}
+                         <label class="descripcion">{{empresa.sector | upper}}</label>
+                     {% else %}
+                         <label>Sin definir sector</label>
+                     {% endif %}
+
                 </div>
             </div>
             <div class="box evaluacion">
@@ -332,10 +337,15 @@
                             <div>
                                 <div>
                                     <h4>Sector</h4>
+                                    {% if empresa.sector %}
                                     <label>{{empresa.sector}}</label>
+                                    {% else %}
+                                    <label>Sin definir sector</label>
+                                    {% endif %}
                                 </div>
                                 <div>
                                     <h4>Fundaci&oacute;n</h4>
+
                                     <label>{{empresa.ano_fundacion}}</label>
                                 </div>
                                 <div>

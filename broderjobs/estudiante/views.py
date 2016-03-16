@@ -191,7 +191,11 @@ class EmpresaListaView(LoginRequiredMixin, TemplateView):
 class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
-        empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda))
+        empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda) | Q(sector__descripcion__contains = busqueda)
+                                          | Q(pais__descripcion__contains = busqueda)
+                                          | Q(ciudad__descripcion__contains = busqueda)).exclude(
+                                            id  = 7).order_by('nombre').distinct()
+
         a_empresas =[]
         for i in range(0, len(empresas)):
             ranking = RankingEmpresa()
@@ -203,7 +207,7 @@ class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
                 ranking_general = str(round(float(ranking.ranking_general), 1))
             else:
                 ranking_general = "0.0"
-            sector = empresas[i].nombre
+            sector = "Sin definir sector" if empresas[i].sector is None else empresas[i].sector
             if empresas[i].sector is not None:
                 sector = Sector.objects.get(id=empresas[i].sector.id).descripcion
             total_evaluadores = EvaluacionEmpresa.objects.filter(empresa_id = empresas[i].id, estado = 'A').count()
