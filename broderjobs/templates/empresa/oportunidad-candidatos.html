@@ -13,6 +13,14 @@
     .ocultar {
         display: none;
     }
+
+    .not-active {
+       pointer-events: none;
+       cursor: default;
+    }
+
+
+
 </style>
 {%endblock%}
 
@@ -146,9 +154,9 @@
                 <section>
                     <div class="opciones">
                         <input type="checkbox" id="marcar-todos"/><label for="marcar-todos">Marcar todos</label>
-                        <a class="btn-option" id="eliminar"><i class="delete"></i>Eliminar</a>
-                        <a class="btn-option" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
-                        <a class="btn-option" id="abrir-mensaje" href="#mensaje"><i class="message"></i>Mensaje</a>
+                        <a class="btn-option not-active" id="eliminar"><i class="delete"></i>Eliminar</a>
+                        <a class="btn-option not-active" id="siguiente-fase"><i class="next"></i>Siguiente fase</a>
+                        <a class="btn-option not-active" id="abrir-mensaje" href="#mensaje"><i class="message"></i>Mensaje</a>
                     </div>
                     <table id="tb_candidatos" class="table table-striped table-bordered responsive" data-info="P">
                         <thead>
@@ -315,13 +323,15 @@
 
                     seleccionados.push(objeto);
                 });
+
+                $('#eliminar,#siguiente-fase,#abrir-mensaje').removeClass('not-active');
             }
             else{
                 //Eliminar todos los elementos que tengo la pagina
                seleccionados =  _.filter(seleccionados, function(ele) {
                     return !(ele.pag==pagina);
                 });
-
+                $('#eliminar,#siguiente-fase,#abrir-mensaje').addClass('not-active');
             }
 
             var estadoObjeto = {pag:pagina, estado:check};
@@ -709,9 +719,14 @@
                 var objeto = {id_estudiante: id_estudiante, pag:pagina, id:id};
                 seleccionados.push(objeto);
             }
-
         }
 
+        if(seleccionados.length > 0){
+            $('#eliminar,#siguiente-fase,#abrir-mensaje').removeClass('not-active');
+        }
+        else{
+            $('#eliminar,#siguiente-fase,#abrir-mensaje').addClass('not-active');
+        }
     }
 
     function fnCambioFase(ids, ids_estudiante){
