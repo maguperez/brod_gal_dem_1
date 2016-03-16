@@ -15,7 +15,9 @@
                     <ul>
                         <li><a href="{%url 'oportunidad-editar' request.GET.id%}"><span>Editar</span><div class="clear"></div></a></li>
                         <li><a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
+                        {% if oportunidad.estado_oportunidad != 'P'%}
                         <li><a class="archivar" data-id="{{oportunidad.id}}"><span>Archivar</span><div class="clear"></div></a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

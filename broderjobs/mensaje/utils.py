@@ -23,15 +23,20 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
 
     #Mensaje Destinatarios
     for id in ids_estudiantes:
-        estudiante = Estudiante.objects.get(id = id)
-        mensaje_destinatarios = Mensaje_Destinatario()
-        mensaje_destinatarios.mensaje = mensaje
-        mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
-        mensaje_destinatarios.fecha_envio = datetime.now()
-        mensaje_destinatarios.fecha_creacion = datetime.now()
-        mensaje_destinatarios.mensaje_previo = mensaje_previo
-        mensaje_destinatarios.save()
-        enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
+        try:
+            estudiante = Estudiante.objects.get(id = id, estado = 'A')
+            postulacion = Estudiante.objects.get(estudiante_id = estudiante.id, oportunidad_id = oportunidad.id,
+                                                 estado= 'A')
+            mensaje_destinatarios = Mensaje_Destinatario()
+            mensaje_destinatarios.mensaje = mensaje
+            mensaje_destinatarios.usuario_destinatario = estudiante.persona.usuario
+            mensaje_destinatarios.fecha_envio = datetime.now()
+            mensaje_destinatarios.fecha_creacion = datetime.now()
+            mensaje_destinatarios.mensaje_previo = mensaje_previo
+            mensaje_destinatarios.save()
+            enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
+        except:
+            pass
 
 def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido,
                    permite_respuesta, mensaje_previo):
@@ -75,6 +80,7 @@ def enviar_notificacion(oportunidad, usuario_destinatario, asunto, es_mensaje, u
     notificacion.save()
 
 def enviar_notificacion_multiple_estudiantes(oportunidad, ids_estudiantes, asunto, es_mensaje, usuario_creacion):
+
     for id in ids_estudiantes:
         estudiante = Estudiante.objects.get(id = id)
         postulacion = Postulacion.objects.get(oportunidad_id = oportunidad.id, estudiante_id = estudiante.id)
