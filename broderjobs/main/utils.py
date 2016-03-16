@@ -32,14 +32,14 @@ def semestre_rango():
     semestres = []
     for y in range(1,3):
         semestres.append((str(y), "Ciclo " + str(y)))
-    return [('', 'Ciclo')] + semestres
+    return semestres
 
 #carga el rango de semestre para el  select
 def semestre_carrera():
     semestres = []
     for y in range(1,11):
         semestres.append((str(y), "Ciclo " + str(y)))
-    return [('', 'Ciclo')] + semestres
+    return semestres
 
 #carga el rango de semestre para el  select
 def dias_del_mes():
