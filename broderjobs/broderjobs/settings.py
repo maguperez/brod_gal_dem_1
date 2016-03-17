@@ -125,8 +125,8 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            # 'NAME': 'broderjobsinstance',
-            'NAME': 'AWS',
+            'NAME': 'broderjobsinstance',
+            'NAME': 'BroderJobs1',
             'USER': 'broder',
             'PASSWORD': 'br753des',
             'HOST': '191.168.19.11',

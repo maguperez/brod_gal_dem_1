@@ -49,6 +49,9 @@ urlpatterns = [
     url(r'^mi-empresa/video-list/view/$', 'empresa.views.video_url_list', name='empresa-video-list'),
     url(r'^mi-empresa/videos/$', views.VideosListView.as_view(), name='videos-list'),
 
+    url(r'^prueba/$','empresa.views.prueba', name='prueba'),
+    url(r'^prueba_empresa/$','empresa.views.prueba_empresa', name='prueba_empresa'),
+
 ]
 
 handler404 = 'app.views.404_view'
