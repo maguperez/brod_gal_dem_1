@@ -415,7 +415,6 @@
                             targets: 0,
                             className: 'dt-body-center',
                             render: function (data, type, full, meta) {
-                                debugger;
                                 if(full.estado_fase == 'A') {
                                     return '<input class = "checking" type="checkbox"' +"data-info='" + full.id_estudiante +
                                             "' data-id='" + full.id + "'" +
@@ -542,7 +541,6 @@
                         estadoMarcaTodos =  _.filter(estadoMarcaTodos, function(ele) {
                             return !(ele.pag==pagina);
                         });
-
                     }
                 }
                 estadoMarcaTodos.push(estadoObjeto);
@@ -551,8 +549,6 @@
             var check = $(this).is(":checked");
             var id_estudiante = data.id_estudiante;
             var id = data.id;
-
-
 
             actualizarSeleccionadosPorFila(id_estudiante,check,id);
        });
@@ -621,13 +617,18 @@
         $('.not-active').on("mouseleave", function(){
             $(this).popover("hide");
         })
-        $(".not-active").on("click", function(e){
-            e.preventDefault();
-            $(this).popover("show");
-        })
+
+{#        $(".not-active").on("click", function(e){#}
+{#            e.preventDefault();#}
+{#            $(this).popover("show");#}
+{#        })#}
         $('#siguiente-fase').click(function (event) {
-            if ($(this).is(".not-active"))
+
+            if ($(this).is(".not-active")){
+                $(this).popover("show");
                 return;
+            }
+
             var ids = [];
             var ids_estudiante = [];
 
@@ -644,8 +645,11 @@
         });
 
         $('#eliminar').click(function (event) {
-            if ($(this).is(".not-active"))
+            if ($(this).is(".not-active")){
+                $(this).popover("show");
                 return;
+            }
+
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("id");
@@ -674,7 +678,7 @@
         $("table").on("click",".btn-option.mensaje", function(){
             $("#contenido-mensaje").val('');
         })
-        $('#abrir-mensaje').click(function(){
+        $('#abrir-mensaje').click(function(e){
             $(".destinatarios ul").html('');
             $("#contenido-mensaje").val('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){
