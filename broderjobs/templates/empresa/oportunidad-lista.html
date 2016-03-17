@@ -51,6 +51,7 @@
 		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
 	});
 	$( document ).ready( function() {
+        rango_fechas();
         $("#link-oportunidades").addClass("active");
 		$( '#filtro' ).change( function() {
 			fnCargarOportunidades();
@@ -194,6 +195,19 @@
         });
 
     }
+
+function rango_fechas (){
+
+    $.ajax({
+                data : {'id':142},
+                url: '{%url "contador-visitas-oportunidad-rango-fechas" %}',
+                type: 'get',
+                success: function(data){
+                    debugger;
+                   console.log(data);
+                }
+            });
+}
 
 </script>
 
