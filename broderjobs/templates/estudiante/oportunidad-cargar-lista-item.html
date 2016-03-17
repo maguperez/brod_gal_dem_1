@@ -1,0 +1,68 @@
+{% load endless %}
+{% paginate oportunidades %}
+{% for opo in oportunidades %}
+<li>
+	<div class="box oportunidad-box">
+		<div class="content">
+			<a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}"><img class="imagen" src="{{opo.oportunidad.empresa.set_logo}}"/></a>
+			<div class="detalle">
+				<a class="titulo" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id%}"><h2 class="link">{{opo.oportunidad.titulo}}</h2></a>
+				<div class="descripcion">
+					<div class="datos">
+						<div class="empresa">
+							<i class="empresa"></i>
+							<label class ="text-uppercase"><a href="{%url 'estudiante_empresa_detalle' opo.oportunidad.empresa.id %}">{{opo.oportunidad.empresa}}</a></label>
+						</div>
+						<div class="ubicacion"><i class="ubicacion"></i><label>{{opo.oportunidad.ciudad}}, {{opo.oportunidad.pais}}</label></div>
+						<div class="remuneracion"><i class="remuneracion"></i><label>
+							{%if opo.oportunidad.remuneracion.id == 3 %}
+								{{opo.oportunidad.remuneracion_min}}
+							{%elif opo.oportunidad.remuneracion.id == 2 %}
+								{{opo.oportunidad.remuneracion_max}} - {{opo.oportunidad.remuneracion_min}}
+							{%else%}
+								{{opo.oportunidad.remuneracion}}
+							{%endif%}
+						</label></div>
+					</div>
+					<div class="compatibilidad" data-info="{{opo.oportunidad.empresa.id}}" id="oport-{{opo.oportunidad.id}}" data-id="{{opo.oportunidad.id}}">
+						<div class = "consolidado">
+							<div class="circular-bar ">
+								<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_promedio }}">
+									<label><span class="percent">{{ opo.compatibilidad_promedio }}</span>%</label>
+								</div>
+							</div>
+							<label class="resultado">Compatible</label>
+						</div>
+						<div class = "desglose" style = "opacity: 0">
+							<div class = "cultural">
+								<div class="circular-bar">
+									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_cultural}}">
+										<label><span class="percent">{{ opo.compatibilidad_cultural}}</span>%</label>
+									</div>
+								</div>
+								<label class="resultado">Cultural</label>
+							</div>
+							<div class = "academico">
+								<div class="circular-bar">
+									<div class="circular-bar-chart" data-percent="{{ opo.compatibilidad_academica}}">
+										<label><span class="percent">{{ opo.compatibilidad_academica}}</span>%</label>
+									</div>
+								</div>
+								<label class="resultado">Académico</label>
+							</div>
+						</div>
+					</div>
+					<div class="ver-oportunidad">
+						<a class="btn-action" href="{%url 'estudiante-oportunidad-detalle' opo.oportunidad.id %}">VER OPORTUNIDAD</a>
+						<label class="cierre">CIERRA {{ opo.oportunidad.fecha_cese | date:"j.m.Y"}}</label>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</li>
+{% endfor %}
+
+{% show_more %}

@@ -1,10 +1,12 @@
-{% load staticfiles %}
-{% csrf_token %}
-<div class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
+{% load endless %}
+{% paginate oportunidades %}
+    {% for oportunidad in oportunidades%}
+     <li class="oportunidad-estadistica">
+         <div class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
     <div class="box header">
         <img class="imagen" src="{{oportunidad.empresa.set_logo}}" />
         <div class="descripcion">
-            <a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+            <a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
             <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{oportunidad.empresa.nombre}}</label></div>
         </div>
         <div class="opciones" onclick="opciones({{request.GET.id}})">
@@ -13,8 +15,8 @@
                 <div class="wrapper">
                     <div class="pin"></div>
                     <ul>
-                        <li><a href="{%url 'oportunidad-editar' request.GET.id%}"><span>Editar</span><div class="clear"></div></a></li>
-                        <li><a href="{%url 'empresa-oportunidad-candidatos' request.GET.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
+                        <li><a href="{%url 'oportunidad-editar' oportunidad.id%}"><span>Editar</span><div class="clear"></div></a></li>
+                        <li><a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
                         {% if oportunidad.estado_oportunidad != 'P'%}
                         <li><a class="archivar" data-id="{{oportunidad.id}}"><span>Archivar</span><div class="clear"></div></a></li>
                         {% endif %}
@@ -40,11 +42,11 @@
         <div class="box">
             <div class="estadistica">
                 <div class="cifra">
-                    <label id = "visualizaciones-{{request.GET.id}}"></label>
+                    <label id = "visualizaciones-{{oportunidad.id}}"></label>
                     <label>Visualizaciones</label>
                 </div>
                 <div class="grafico grafico-barras">
-                    <span class = "sparklines" data-id = "{{request.GET.id}}"/>
+                    <span class = "sparklines" data-id = "{{oportunidad.id}}"/>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -53,7 +55,7 @@
                     <label id="cifra-{{request.GET.id}}"></label>
                     <label>Inscripciones</label>
                 </div>
-                <div class="grafico usuarios fotos-post" id="foto-post-{{request.GET.id}}">
+                <div class="grafico usuarios fotos-post" id="foto-post-{{oportunidad.id}}">
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
@@ -64,16 +66,13 @@
         <div class="box">
             <label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
             <div class="grafico grafico-inscripciones">
-                <div id = "chart-id-{{request.GET.id}}" data-id="{{request.GET.id}}" class="ct-chart " data-info = "[[5, 9, 7, 8, 5, 3, 5, 4]]"></div>
+                <div id = "chart-id-{{request.GET.id}}" data-id="{{oportunidad.id}}" class="ct-chart " data-info = "[[5, 9, 7, 8, 5, 3, 5, 4]]"></div>
                 {{postulaciones}}
             </div>
         </div>
     </div>
     <div class="clear"></div>
 </div>
-
-<style>
-	.ct-chart { margin-left: -40px; margin-top: -20px;}
-</style>
-
-
+        </li>
+    {% endfor %}
+{% show_pages %}

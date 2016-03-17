@@ -126,10 +126,10 @@
                     <label>oportunidad archivada</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'A' %}
-                    <label style = "background: #16a085">postulacion abierta</label>
+                    <label style = "background: #16a085">postulación abierta</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'C' %}
-                    <label style = "background: #c0392b">postulacion cerrada</label>
+                    <label style = "background: #c0392b">postulación cerrada</label>
                 {%endif%}
                 <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
             </div>
@@ -541,7 +541,6 @@
                         estadoMarcaTodos =  _.filter(estadoMarcaTodos, function(ele) {
                             return !(ele.pag==pagina);
                         });
-
                     }
                 }
                 estadoMarcaTodos.push(estadoObjeto);
@@ -550,8 +549,6 @@
             var check = $(this).is(":checked");
             var id_estudiante = data.id_estudiante;
             var id = data.id;
-
-
 
             actualizarSeleccionadosPorFila(id_estudiante,check,id);
        });
@@ -587,7 +584,10 @@
 
                     var booleanExistencia = candidatos.length > 0;
 
-                    $(e)[0].firstChild.checked = booleanExistencia;
+                    if($(e)[0].firstChild){
+                        $(e)[0].firstChild.checked = booleanExistencia;
+                    }
+
 
                 }
 
@@ -617,13 +617,18 @@
         $('.not-active').on("mouseleave", function(){
             $(this).popover("hide");
         })
-        $(".not-active").on("click", function(e){
-            e.preventDefault();
-            $(this).popover("show");
-        })
+
+{#        $(".not-active").on("click", function(e){#}
+{#            e.preventDefault();#}
+{#            $(this).popover("show");#}
+{#        })#}
         $('#siguiente-fase').click(function (event) {
-            if ($(this).is(".not-active"))
+
+            if ($(this).is(".not-active")){
+                $(this).popover("show");
                 return;
+            }
+
             var ids = [];
             var ids_estudiante = [];
 
@@ -640,8 +645,11 @@
         });
 
         $('#eliminar').click(function (event) {
-            if ($(this).is(".not-active"))
+            if ($(this).is(".not-active")){
+                $(this).popover("show");
                 return;
+            }
+
             ids = new Array();
             $("input:checked", table.fnGetNodes()).each(function(index, value){
                 ids[index] = $(this).data("id");
@@ -670,7 +678,7 @@
         $("table").on("click",".btn-option.mensaje", function(){
             $("#contenido-mensaje").val('');
         })
-        $('#abrir-mensaje').click(function(){
+        $('#abrir-mensaje').click(function(e){
             $(".destinatarios ul").html('');
             $("#contenido-mensaje").val('');
             $("input:checked", table.fnGetNodes()).each(function(index, value){

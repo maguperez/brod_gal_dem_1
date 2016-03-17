@@ -232,6 +232,7 @@ EMAIL_HOST_PASSWORD = 'infbrodperu123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
+
 SOCIAL_AUTH_PIPELINE = (
     # 'social.pipeline.social_auth.social_details',
     # 'social.pipeline.social_auth.social_uid',
@@ -263,3 +264,7 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email',
 }
+
+
+ENDLESS_PAGINATION_PER_PAGE = 4
+

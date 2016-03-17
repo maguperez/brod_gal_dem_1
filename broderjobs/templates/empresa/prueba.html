@@ -1,0 +1,32 @@
+{% extends 'empresa/base.html' %}
+{% load staticfiles %}
+{% block content %}
+     <section class="oportunidades-empresa">
+     <div class="centered">
+         <select class="filtro">
+             <option value="A">Oportunidades Abiertas</option>
+             <option value="C">Oportunidades Cerradas</option>
+             <option value="P">Oportunidades Pendientes</option>
+         </select>
+         <div class="clear"></div>
+         <ul class="list" id ="oportunidad-lista">
+             {% include page_template %}
+         </ul>
+     </div>
+</section>
+    <div id='loading-image'></div>
+{% endblock %}
+{% block js%}
+{#    {{ block.super }}#}
+{#    <script src="http://code.jquery.com/jquery-latest.js"></script>#}
+{#    <script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>#}
+{#     <script>#}
+{#        $.endlessPaginate({#}
+{#            paginateOnScroll: true,#}
+{#            paginateOnScrollMargin: 20#}
+{#        });#}
+{#    </script>#}
+{% endblock %}
+
+
+

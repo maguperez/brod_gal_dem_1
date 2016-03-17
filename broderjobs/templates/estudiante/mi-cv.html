@@ -820,12 +820,6 @@
 			return flagSeleccionarCarrera;
 		},'Debe seleccionar una carrera existente');
 
-		$.validator.addMethod('validarCiclos',function(value, element, param){
-			return $("#id_ano_graduacion").val() >= $("#id_ano_inicio_estudio").val() &&
-				$("#id_semestre_graduacion").val() >= $("#id_semestre_inicio_estudio").val();
-
-		},'El ciclo de ingreso debe ser menor que la graduacion estimada');
-
         $.validator.addMethod('MaximoMayorMinimo',function(value, element, param){
 
 

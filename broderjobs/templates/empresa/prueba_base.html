@@ -1,61 +1,42 @@
-
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
 {% block content %}
-<section class="oportunidades-empresa" data-id="{{oportunidad.od}}">
-    <div class="centered">
-        <select class="filtro" id="filtro">
-            <option value="A">Postulaciones Abiertas</option>
-            <option value="C">Postulaciones Cerradas</option>
-            <option value="P">Oportunidades Archivadas</option>
-        </select>
-        <div class="clear"></div>
-        <ul class="list" id ="oportunidad-lista"></ul>
-        <div id="vacio"></div>
-    </div>
-	<div id="archivar-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h3 class="modal-title"><strong>Archivar Oportunidad</strong></h3>
-                    </div>
-             <div id="archivar-modal-body" class="modal-body">
-				<p>Al archivar la Oportunidad todas las postulaciones relacionadas serán
-					finalizadas.</p>
 
-			</div>
-            <div class="modal-footer">
-				<button type="button" class="btn btn-default btn-archivar" id="btn_archivar">Aceptar</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+ <section class="oportunidades-empresa">
+     <div class="centered">
+         <select class="filtro">
+             <option value="A">Oportunidades Abiertas</option>
+             <option value="C">Oportunidades Cerradas</option>
+             <option value="P">Oportunidades Pendientes</option>
+         </select>
+         <div class="clear"></div>
+         <ul class="list" id ="oportunidad-lista">
 
+         </ul>
+     </div>
 </section>
+<div id='loading-image'></div>
+{% endblock %}
+{% block js%}
 
-{% csrf_token %}
-{% endblock%}
-{% block js %}
-<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
 <script src="{% static 'js/chartist.min.js' %}"></script>
-<!--<script src="{% static 'js/mixpanel_data_export.js' %}"></script>-->
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
 <script src="{% static 'js/moment.js' %}"></script>
 <script src="{% static 'js/moment-with-locales.js' %}"></script>
 <link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
-<script type="text/javascript">
+<script>
     moment.locale('es');
-	/*panel = new MixpanelExport({
+	panel = new MixpanelExport({
 		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
 		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
-	});*/
-	$( document ).ready( function() {
+	});
+    $(function(){
         $("#link-oportunidades").addClass("active");
 		$( '#filtro' ).change( function() {
 			fnCargarOportunidades();
 		});
-		fnCargarOportunidades();
+        fnCargarOportunidades();
 		$('#oportunidad-lista').on('click', '.archivar', function(){
 			$('.btn-archivar').data('id', $(this).data('id'));
 			$("#archivar-modal-body").html('<p>Al archivar la Oportunidad todas las postulaciones' +
@@ -75,47 +56,18 @@
 
 	});
 
+    function fnCargarOportunidades(){
+        $.get("{% url 'prueba_empresa' %}?b=" + $('.filtro').val(), function(htmlexterno) {
+            if($.trim(htmlexterno)==""){
+                $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+            }
+            else {
+                $('#oportunidad-lista').html(htmlexterno);
+{#                fnCargarInfo();#}
+            }
 
-	function opciones(id) {
-		if ($('#menu-' + id).hasClass('active'))
-			$('#menu-' + id).removeClass('active');
-		else
-			$('#menu-' + id).addClass('active')
-	}
-	function fnCargarOportunidades(){
-		$.ajax({
-				data: {'b': $( '#filtro' ).val() },
-				url: "{% url 'empresa-oportunidad-buscar' %}",
-				type: 'get',
-				success: function (data) {
-					var par = '';
-					$('#oportunidad-lista').html('');
-					if (data.length > 0) {
-                        fnCargarOportunidad(data, 0);
-                        $('#vacio').html('');
-                    }
-					else {
-                        $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
-                    }
-				}
-			});
-	}
-	function fnCargarOportunidad(arra, index) {
-		$(".loading-wrapper").show();
-		if (arra.length > index){
-			$.get("{% url 'empresa-oportunidad-cargar-lista' %}?id=" + arra[index].id, function(htmlexterno){
-   				$('#oportunidad-lista').append(htmlexterno);
-                fnCargarInfo();
-				fnCargarOportunidad(arra, index+1);
-			});
-		}
-		else{
-			$(".loading-wrapper").hide();
-		}
-	}
-
-
-
+		});
+    }
 
     function fnCargarInfo(){
         var id = $(".sparklines").last().data("id");
@@ -123,7 +75,7 @@
         var obj = $(".sparklines").last();
         var date = moment().format("YYYY-MM-DD");
 		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
-        /*panel.retention({
+        panel.retention({
             from_date: last,
             to_date: date,
             expire: 8798798765,
@@ -138,14 +90,7 @@
                 var last = moment().subtract(i, 'days');
                 array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
                 total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
-            }*/
-            $.ajax({
-                data : {'id':id},
-                url: '{%url "contador-visitas-oportunidad-rango-fechas" %}',
-                type: 'get',
-                success: function(array){
-                    debugger;
-                   console.log(data);
+            }
             //$("#visualizaciones-"+id).html(total);
             $(obj).sparkline(array, {
                 type: 'bar',
@@ -162,10 +107,7 @@
                     $("#visualizaciones-"+id).html(data["total"]);
                 }
             });
-
-                }
-            });
-        //});
+        });
         var array = new Array();
 		for (var i = 6; i >= 0 ; i--) {
 			var last = moment().subtract(i, 'days');
@@ -208,9 +150,6 @@
         });
 
     }
-
 </script>
+{% endblock%}
 
-
-
-{%endblock%}
