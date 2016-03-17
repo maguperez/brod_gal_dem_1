@@ -618,14 +618,14 @@
             $(this).popover("hide");
         })
 
-{#        $(".not-active").on("click", function(e){#}
-{#            e.preventDefault();#}
-{#            $(this).popover("show");#}
-{#        })#}
+        $(".opciones").on("click", ".not-active", function(e){
+             e.preventDefault();
+             $(this).popover("show");
+        });
         $('#siguiente-fase').click(function (event) {
 
             if ($(this).is(".not-active")){
-                $(this).popover("show");
+           //     $(this).popover("show");
                 return;
             }
 
@@ -646,7 +646,7 @@
 
         $('#eliminar').click(function (event) {
             if ($(this).is(".not-active")){
-                $(this).popover("show");
+             //   $(this).popover("show");
                 return;
             }
 
