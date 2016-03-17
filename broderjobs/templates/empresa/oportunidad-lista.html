@@ -40,18 +40,17 @@
 {% block js %}
 <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 <script src="{% static 'js/chartist.min.js' %}"></script>
-<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<!--<script src="{% static 'js/mixpanel_data_export.js' %}"></script>-->
 <script src="{% static 'js/moment.js' %}"></script>
 <script src="{% static 'js/moment-with-locales.js' %}"></script>
 <link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
 <script type="text/javascript">
     moment.locale('es');
-	panel = new MixpanelExport({
+	/*panel = new MixpanelExport({
 		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
 		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
-	});
+	});*/
 	$( document ).ready( function() {
-        rango_fechas();
         $("#link-oportunidades").addClass("active");
 		$( '#filtro' ).change( function() {
 			fnCargarOportunidades();
@@ -114,13 +113,17 @@
 			$(".loading-wrapper").hide();
 		}
 	}
+
+
+
+
     function fnCargarInfo(){
         var id = $(".sparklines").last().data("id");
         var data = $(".sparklines").last().data("info");
         var obj = $(".sparklines").last();
         var date = moment().format("YYYY-MM-DD");
 		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
-        panel.retention({
+        /*panel.retention({
             from_date: last,
             to_date: date,
             expire: 8798798765,
@@ -135,7 +138,14 @@
                 var last = moment().subtract(i, 'days');
                 array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
                 total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
-            }
+            }*/
+            $.ajax({
+                data : {'id':id},
+                url: '{%url "contador-visitas-oportunidad-rango-fechas" %}',
+                type: 'get',
+                success: function(array){
+                    debugger;
+                   console.log(data);
             //$("#visualizaciones-"+id).html(total);
             $(obj).sparkline(array, {
                 type: 'bar',
@@ -152,7 +162,10 @@
                     $("#visualizaciones-"+id).html(data["total"]);
                 }
             });
-        });
+
+                }
+            });
+        //});
         var array = new Array();
 		for (var i = 6; i >= 0 ; i--) {
 			var last = moment().subtract(i, 'days');
@@ -195,19 +208,6 @@
         });
 
     }
-
-function rango_fechas (){
-
-    $.ajax({
-                data : {'id':142},
-                url: '{%url "contador-visitas-oportunidad-rango-fechas" %}',
-                type: 'get',
-                success: function(data){
-                    debugger;
-                   console.log(data);
-                }
-            });
-}
 
 </script>
 
