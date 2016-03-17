@@ -415,6 +415,7 @@
                             targets: 0,
                             className: 'dt-body-center',
                             render: function (data, type, full, meta) {
+                                debugger;
                                 if(full.estado_fase == 'A') {
                                     return '<input class = "checking" type="checkbox"' +"data-info='" + full.id_estudiante +
                                             "' data-id='" + full.id + "'" +
@@ -587,7 +588,10 @@
 
                     var booleanExistencia = candidatos.length > 0;
 
-                    $(e)[0].firstChild.checked = booleanExistencia;
+                    if($(e)[0].firstChild){
+                        $(e)[0].firstChild.checked = booleanExistencia;
+                    }
+
 
                 }
 
