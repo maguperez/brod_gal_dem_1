@@ -126,10 +126,10 @@
                     <label>oportunidad archivada</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'A' %}
-                    <label style = "background: #16a085">postulacion abierta</label>
+                    <label style = "background: #16a085">postulación abierta</label>
                 {%endif%}
                 {%if oportunidad.estado_oportunidad == 'C' %}
-                    <label style = "background: #c0392b">postulacion cerrada</label>
+                    <label style = "background: #c0392b">postulación cerrada</label>
                 {%endif%}
                 <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
             </div>
