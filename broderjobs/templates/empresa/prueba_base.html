@@ -1,0 +1,155 @@
+{% extends 'empresa/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+ <section class="oportunidades-empresa">
+     <div class="centered">
+         <select class="filtro">
+             <option value="A">Oportunidades Abiertas</option>
+             <option value="C">Oportunidades Cerradas</option>
+             <option value="P">Oportunidades Pendientes</option>
+         </select>
+         <div class="clear"></div>
+         <ul class="list" id ="oportunidad-lista">
+
+         </ul>
+     </div>
+</section>
+<div id='loading-image'></div>
+{% endblock %}
+{% block js%}
+
+<script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
+<script src="{% static 'js/chartist.min.js' %}"></script>
+<script src="{% static 'js/mixpanel_data_export.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
+<link rel = "stylesheet" href="{% static 'css/chartist.min.css' %}"/>
+<script>
+    moment.locale('es');
+	panel = new MixpanelExport({
+		api_key: "b374f1f8bfadcf8c42f2e06c3db07a88",
+		api_secret: "be1d1645e65e9a294c102cdb8dbbf209"
+	});
+    $(function(){
+        $("#link-oportunidades").addClass("active");
+		$( '#filtro' ).change( function() {
+			fnCargarOportunidades();
+		});
+        fnCargarOportunidades();
+		$('#oportunidad-lista').on('click', '.archivar', function(){
+			$('.btn-archivar').data('id', $(this).data('id'));
+			$("#archivar-modal-body").html('<p>Al archivar la Oportunidad todas las postulaciones' +
+					                       ' relacionadas serán finalizadas</p>');
+			$('.btn-archivar').show();
+        	$('#archivar-modal').modal('toggle');
+
+		});
+		$('.oportunidades-empresa').on('click', '.btn-archivar', function(){
+			var id = $(this).data('id');
+        	$.get("{% url 'oportunidad-archivar' %}?id=" +id, function(data){
+				$("#archivar-modal-body").html('<p>'+data+'</p>');
+				$('.btn-archivar').hide();
+				$("#oportunidad-lista li[data-id='"+id+"']").hide();
+			});
+		});
+
+	});
+
+    function fnCargarOportunidades(){
+        $.get("{% url 'prueba_empresa' %}?b=" + $('.filtro').val(), function(htmlexterno) {
+            if($.trim(htmlexterno)==""){
+                $('#vacio').html('<h4 class = "no-results">No se encontraron resultados</h4>');
+            }
+            else {
+                $('#oportunidad-lista').html(htmlexterno);
+{#                fnCargarInfo();#}
+            }
+
+		});
+    }
+
+    function fnCargarInfo(){
+        var id = $(".sparklines").last().data("id");
+        var data = $(".sparklines").last().data("info");
+        var obj = $(".sparklines").last();
+        var date = moment().format("YYYY-MM-DD");
+		var last = moment().subtract(7, 'days').format("YYYY-MM-DD");
+        panel.retention({
+            from_date: last,
+            to_date: date,
+            expire: 8798798765,
+            retention_type: "compounded",
+            event: "Vista Oportunidad",
+            //born_event: "Visita Oportunidad",
+            where: 'properties["OportunidadID"] == "'+ id +'"'
+        }).then(function(data) {
+            var array = new Array();
+            var total = 0;
+            for (var i = 6; i >= 0 ; i--) {
+                var last = moment().subtract(i, 'days');
+                array.push(data[last.format("YYYY-MM-DD")] == null ? 0 : data[last.format("YYYY-MM-DD")].first);
+                total+= data[last.format("YYYY-MM-DD")] == null ? 0 : parseInt(data[last.format("YYYY-MM-DD")].first);
+            }
+            //$("#visualizaciones-"+id).html(total);
+            $(obj).sparkline(array, {
+                type: 'bar',
+                height: '50px',
+                barSpacing: 7,
+                barWidth: 10,
+                barColor: '#5d9cf9'
+            });
+            $.ajax({
+                data : {'id':id},
+                url: '{%url "contador-visitas-oportunidad-obtener" %}',
+                type: 'get',
+                success: function(data){
+                    $("#visualizaciones-"+id).html(data["total"]);
+                }
+            });
+        });
+        var array = new Array();
+		for (var i = 6; i >= 0 ; i--) {
+			var last = moment().subtract(i, 'days');
+			array.push(last.format('dddd'));
+		}
+
+        var id = $(".ct-chart").last().data("id");
+        var d = [];
+        $.ajax({
+            data: {'id': id},
+            url: '{%url "empresa-oportunidad-postulaciones" %}',
+            type: 'get',
+            success: function (data) {
+                $("#cifra-"+id).html(data[0][0]);
+                new Chartist.Line("#chart-id-"+id, {
+                    labels: array,
+                    colors:["#333", "#222", "#111", "#000"],
+                    series: [data[0][1]]
+                }, {
+                    low: 0,
+                    showArea: true
+                });
+            }
+        });
+
+        var ele = $(".fotos-post").last().attr("id").split("-");
+        var id = ele[2];
+        $.ajax({
+            data: {'id': id},
+            url: '{%url "empresa-oportunidad-estudiantes" %}',
+            type: 'get',
+            success: function (data) {
+                var html = "";
+                for(var i = 0; i <data.length ; i++) {
+                    html += '<img src="'+ data[i][0] +'" title="'+data[i][1]+'"/>';
+                }
+                $("img").tooltip();
+                $("#foto-post-"+id).html(html);
+            }
+        });
+
+    }
+</script>
+{% endblock%}
+

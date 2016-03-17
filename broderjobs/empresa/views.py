@@ -612,3 +612,33 @@ def canditado_cv_pdf(request):
                                                'conocimientos_extras' : conocimientos_extras},
                             context_instance=RequestContext(request))
     return generar_pdf(html)
+
+@login_required(login_url='homepage')
+def prueba(request):
+    if request.user.is_authenticated():
+        return render(request, 'empresa/prueba_base.html')
+    else:
+        return render(request, 'main/homepage.html')
+
+@login_required(login_url='homepage')
+def prueba_empresa(request, template='empresa/prueba.html',
+           page_template='empresa/prueba_page.html'):
+
+    # busqueda = request.GET.get('b')
+    user = request.user
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
+    # busqueda = "" if request.GET.get('b') is None else request.GET.get('b')
+    # oportunidades = Oportunidad.objects.filter(estado_oportunidad = busqueda, empresa_id= representante.empresa.id).order_by(
+    #     "-fecha_publicacion")
+    oportunidades = Oportunidad.objects.filter().order_by(
+        "-fecha_publicacion")
+
+    if request.is_ajax():
+        template = page_template
+    context = {
+        'oportunidades': oportunidades,
+        'page_template': page_template,
+    }
+    return render_to_response(
+        template, context, context_instance=RequestContext(request))

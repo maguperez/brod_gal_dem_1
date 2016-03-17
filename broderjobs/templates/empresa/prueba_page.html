@@ -1,0 +1,78 @@
+{% load endless %}
+{% paginate oportunidades %}
+    {% for oportunidad in oportunidades%}
+     <li class="oportunidad-estadistica">
+         <div class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
+    <div class="box header">
+        <img class="imagen" src="{{oportunidad.empresa.set_logo}}" />
+        <div class="descripcion">
+            <a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><h2 class="link">{{oportunidad.titulo}}</h2></a>
+            <div class="empresa"><i class="empresa"></i><label class = "text-uppercase">{{oportunidad.empresa.nombre}}</label></div>
+        </div>
+        <div class="opciones" onclick="opciones({{request.GET.id}})">
+            <i class="menu"></i>
+            <div class="contextual-menu" id="menu-{{request.GET.id}}">
+                <div class="wrapper">
+                    <div class="pin"></div>
+                    <ul>
+                        <li><a href="{%url 'oportunidad-editar' oportunidad.id%}"><span>Editar</span><div class="clear"></div></a></li>
+                        <li><a href="{%url 'empresa-oportunidad-candidatos' oportunidad.id%}"><span>Ver candidatos</span><div class="clear"></div></a></li>
+                        {% if oportunidad.estado_oportunidad != 'P'%}
+                        <li><a class="archivar" data-id="{{oportunidad.id}}"><span>Archivar</span><div class="clear"></div></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="estado">
+            {%if oportunidad.estado_oportunidad == 'P' %}
+                <label>oportunidad archivada</label>
+            {%endif%}
+            {%if oportunidad.estado_oportunidad == 'A' %}
+                <label style = "background: #16a085">postulación abierta</label>
+            {%endif%}
+            {%if oportunidad.estado_oportunidad == 'C' %}
+                <label style = "background: #c0392b">postulación cerrada</label>
+            {%endif%}
+            <label>CIERRA EL {{oportunidad.fecha_cese | date:"j.m.Y"}}</label>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="visualizaciones">
+        <div class="box">
+            <div class="estadistica">
+                <div class="cifra">
+                    <label id = "visualizaciones-{{oportunidad.id}}"></label>
+                    <label>Visualizaciones</label>
+                </div>
+                <div class="grafico grafico-barras">
+                    <span class = "sparklines" data-id = "{{oportunidad.id}}"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="estadistica">
+                <div class="cifra" >
+                    <label id="cifra-{{request.GET.id}}"></label>
+                    <label>Inscripciones</label>
+                </div>
+                <div class="grafico usuarios fotos-post" id="foto-post-{{oportunidad.id}}">
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="inscripciones">
+        <div class="box">
+            <label class="titulo">Inscripciones en los &uacute;ltimos 7 d&iacute;as</label>
+            <div class="grafico grafico-inscripciones">
+                <div id = "chart-id-{{request.GET.id}}" data-id="{{oportunidad.id}}" class="ct-chart " data-info = "[[5, 9, 7, 8, 5, 3, 5, 4]]"></div>
+                {{postulaciones}}
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+        </li>
+    {% endfor %}
+{% show_pages %}
