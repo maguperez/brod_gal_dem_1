@@ -8,7 +8,7 @@ import json
 from cStringIO import StringIO
 from oportunidad.models import Oportunidad, Postulacion
 from .models import VisitasOportunidad
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 def oportunidad_enviar( request ):
     id = request.GET['id']
@@ -56,6 +56,24 @@ def oportunidad_obtener(request):
     }
     data.append(('total', total))
     data_json = json.dumps(response)
+    # #serialize to json
+    # s = StringIO()
+    # json.dump(response, s)
+    # s.seek(0)
+    # return HttpResponse(s.read())
+    return HttpResponse(data_json, content_type='application/json')
+
+def oportunidad_rango_fechas(request):
+    id = request.GET['id']
+    data = []
+    dia = datetime.now() - timedelta(days = 7)
+    for i in range(0,7):
+        dia = dia + timedelta(days = 1)
+        total = VisitasOportunidad.objects.filter(oportunidad_id = id, fecha_creacion = dia).count()
+
+        data.append(total)
+
+    data_json = json.dumps(data)
     # #serialize to json
     # s = StringIO()
     # json.dump(response, s)
