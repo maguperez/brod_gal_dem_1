@@ -1,4 +1,3 @@
-# coding=utf-8
 from django.db import models
 from django.contrib.auth.models import User
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma,\

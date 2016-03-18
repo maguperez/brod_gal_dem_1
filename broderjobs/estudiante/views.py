@@ -1048,7 +1048,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
         return HttpResponse(data, content_type='application/json')
 
 class OportunidadPostularView(LoginRequiredMixin, TemplateView):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, id,  *args, **kwargs):
         # id = request.GET['id']
 
         oportunidad =get_object_or_404(Oportunidad, id = id)
