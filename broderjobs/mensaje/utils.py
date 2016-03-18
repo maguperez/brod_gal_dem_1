@@ -36,7 +36,7 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
             mensaje_destinatarios.save()
             enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
         except Exception, e:
-            mensaje = str(e)
+            error = str(e)
             pass
 
 def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido,

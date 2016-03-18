@@ -341,7 +341,6 @@ def homepage_empresa(request):
                             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                             msg.attach_alternative(html_content, "text/html")
                             msg.send()
-                            reset_form.save(**opts)
                         message_reset= "se ha enviado un correo"
                     else:
                         message_reset = "No pudimos encontrar el correo"
