@@ -52,7 +52,9 @@ class MiEmpresaView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
+        oportunidades_lista =  Oportunidad.objects.filter(empresa_id = empresa.id)
+        oportunidades_total = oportunidades_lista.count()
+        oportunidades = oportunidades_lista[:2]
         # imagenes = Picture.objects.filter(empresa_id = empresa.id)
         # videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
@@ -64,6 +66,7 @@ class MiEmpresaView(FormView):
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
+        context['oportunidades_total'] = oportunidades_total
         # context['imagenes'] = imagenes
         context['redes_sociales'] = redes_sociales
         # context['videos'] = videos
