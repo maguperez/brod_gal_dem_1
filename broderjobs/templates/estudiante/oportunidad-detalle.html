@@ -212,7 +212,7 @@ if (sessionStorage.getItem("mixpanel{{oportunidad.id}}") == null){
 		var id = {{oportunidad.id}};
 		$.ajax({
 			data : {'id':id},
-			url: '{%url "estudiante-oportunidad-postular" %}',
+			url: '{%url "estudiante-oportunidad-postular" oportunidad.id %}',
 			type: 'GET',
 			success: function(data){
 
