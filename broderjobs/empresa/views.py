@@ -27,6 +27,7 @@ from .serialize import serialize
 from main.utils import LoginRequiredMixin, calular_edad
 from django.core.paginator import InvalidPage, Paginator
 from datetime import date,datetime
+from broderjobs.settings import MEDIA_URL
 
 # import ho.pisa as pisa
 # import cStringIO as StringIO
@@ -484,10 +485,13 @@ class PictureListView(ListView):
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
         pictures = Picture.objects.filter(empresa_id = empresa.id)
+
         return pictures
 
     def render_to_response(self, context, **response_kwargs):
         files = [ serialize(p) for p in self.get_queryset() ]
+        for p in files:
+            p['url'] = MEDIA_URL+p['url']
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
