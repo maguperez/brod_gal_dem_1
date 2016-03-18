@@ -122,38 +122,12 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div id = "map"></div>
+									<div id="map" style="height: 350px; width: 100%"></div>
 						</div>
 					</section>
 						</div>
 					</div>
 				</div>
-{#				<div class="panel right">#}
-{#					<div class="box alcance">#}
-{#						<div class="content">#}
-{#							<section class="grafico">#}
-{#								<h4>Alcance de Candidatos</h4>#}
-{#								<label><i class="alcance bajo"></i><span class="cifra">30</span> candidatos</label>#}
-{#								<div class="grafico-alcance">#}
-{#									<div class="alto inactive">#}
-{#										<div class="adecuado inactive">#}
-{#											<div class="bajo active">#}
-{#												<label>Bajo</label>#}
-{#											</div>#}
-{#										</div>#}
-{#									</div>#}
-{#								</div>#}
-{#							</section>#}
-{#							<section class="caracteristicas">#}
-{#								<label><span class="bold">Carrera: </span>{% for i in oportunidad.carrera.all%} {{i}} {%endfor%}</label>#}
-{#								<label><span class="bold">Idiomas: </span>{% for i in oportunidad.idioma.all%} {{i}} {%endfor%}</label>#}
-{#								<label><span class="bold">Conocimientos: </span>{% for i in oportunidad.conocimiento.all%} {{i}} {%endfor%}</label>#}
-{#								<label><span class="bold">Jornada: </span>{{oportunidad.carga_horaria}}</label>#}
-{#								<label><span class="bold">Ubicaci&oacute;n: </span>{{oportunidad.ciudad}}, {{oportunidad.pais}}</label>#}
-{#							</section>#}
-{#						</div>#}
-{#					</div>#}
-{#				</div>#}
 				<div class="clear"></div>
 			</div>
 		</section>
@@ -168,23 +142,60 @@ $(function(){
 		else $(".box.alcance").removeClass("fixed");
 	});
 
-    if($('#latitud').val() && $('#longitud').val()){
-        var geocoder = new google.maps.Geocoder();
+{#    if($('#latitud').val() && $('#longitud').val()){#}
+{#        var geocoder = new google.maps.Geocoder();#}
+{##}
+{#        var strLatitud = $('#latitud').val().replace(',','.');#}
+{#        var strLongitud = $('#longitud').val().replace(',','.');#}
+{##}
+{#        var latitud = parseFloat(strLatitud);#}
+{#        var longitud = parseFloat(strLongitud);#}
+{#        if(latitud && longitud){#}
+{#            geocoder.geocode({#}
+{#            location: new google.maps.LatLng(latitud,longitud)#}
+{#                }, function (response, status) {#}
+{#                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")#}
+{#                        $("#direccion_map").html(response[0]["formatted_address"]);#}
+{#            });#}
+{#        }#}
+{#    }#}
 
-        var strLatitud = $('#latitud').val().replace(',','.');
-        var strLongitud = $('#longitud').val().replace(',','.');
+    var Ubicacion = {
+        map: null,
+        marca: null,
+        inicializar_mapa: function () {
+            var mapCanvas = document.getElementById('map');
+            var mapOptions = {
+                center: new google.maps.LatLng(-12.0570208,-77.0372896),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            Ubicacion.map = new google.maps.Map(mapCanvas, mapOptions);
+            if ($("#latitud").val().replace(",",".") != "" && $("#latitud").val() != "None") {
+                var latitud = $("#latitud").val().replace(",",".");
+                var longitud = $("#longitud").val().replace(",",".");
+                var punto = new google.maps.LatLng(latitud, longitud);
+                Ubicacion.marcar_mapa(punto);
+            }
+        },
+        marcar_mapa: function (coordenadas) {
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                map: Ubicacion.map
+            });
+            Ubicacion.marca = marker;
 
-        var latitud = parseFloat(strLatitud);
-        var longitud = parseFloat(strLongitud);
-        if(latitud && longitud){
+            Ubicacion.map.setCenter(coordenadas);
+            var geocoder = new google.maps.Geocoder();
             geocoder.geocode({
-            location: new google.maps.LatLng(latitud,longitud)
+                location: new google.maps.LatLng(coordenadas.lat(),coordenadas.lng())
                 }, function (response, status) {
                     if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
                         $("#direccion_map").html(response[0]["formatted_address"]);
             });
         }
-    }
+    };
+    Ubicacion.inicializar_mapa();
 })
 </script>
 {%endblock%}
