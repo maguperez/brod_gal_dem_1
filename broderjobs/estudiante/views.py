@@ -118,8 +118,13 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         user = self.request.user
         persona = get_object_or_404(Persona, usuario_id=user.id)
         estudiante = get_object_or_404(Estudiante, persona_id=persona.id)
-        oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
-                                                                  oportunidad__estado = 'A').exclude(oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()[:2]
+        lista_oportunidades =  OportunidadCompatibilidad.objects.filter(estudiante_id = estudiante.id, oportunidad__empresa_id = empresa.id,
+                                                                  oportunidad__estado = 'A').exclude(
+            oportunidad__estado_oportunidad ='P').order_by('-compatibilidad_promedio').distinct()
+        oportunidades_total = lista_oportunidades.count()
+        oportunidades = lista_oportunidades[:2]
+
+
         try:
             redes_sociales = EmpresaRedesSociales.objects.get(empresa_id = empresa.id)
         except EmpresaRedesSociales.DoesNotExist:
@@ -150,6 +155,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
+        context['oportunidades_total'] = oportunidades_total
         context['ranking'] = ranking
         context['mi_evaluacion'] = mi_evaluacion
         context['redes_sociales'] = redes_sociales
@@ -180,7 +186,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         id = self.kwargs['id']
         if id != None:
             #return reverse_lazy('estudiante-empresa-lista')
-            return "/broderjobs/estudiante/empresa-detalle/"+id+"/#resultado-evaluacion"
+            return "/estudiante/empresa-detalle/"+id+"/#resultado-evaluacion"
         else:
             return reverse_lazy('estudiante-empresa-lista')
 
@@ -191,9 +197,9 @@ class EmpresaListaView(LoginRequiredMixin, TemplateView):
 class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         busqueda = request.GET['busqueda']
-        empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda) | Q(sector__descripcion__contains = busqueda)
-                                          | Q(pais__descripcion__contains = busqueda)
-                                          | Q(ciudad__descripcion__contains = busqueda)).exclude(
+        empresas = Empresa.objects.filter(Q(nombre__icontains=busqueda) | Q(sector__descripcion__icontains = busqueda)
+                                          | Q(pais__descripcion__icontains = busqueda)
+                                          | Q(ciudad__descripcion__icontains = busqueda)).exclude(
                                             id  = 7).order_by('nombre').distinct()
 
         a_empresas =[]

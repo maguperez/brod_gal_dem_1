@@ -34,7 +34,7 @@ from datetime import date,datetime
 from django.template.loader import render_to_string
 
 # Create your views here.
-@login_required(login_url='/empresa-registro/')
+@login_required(login_url='/empresa/')
 def oportunidad_listar(request):
     user = request.user
     persona = Persona.objects.get(usuario_id=user.id)
@@ -52,7 +52,9 @@ class MiEmpresaView(FormView):
         persona = Persona.objects.get(usuario_id=user.id)
         representante = get_object_or_404(Representante, persona_id =persona.id)
         empresa = Empresa.objects.get(id=representante.empresa.id)
-        oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id)[:3]
+        oportunidades_lista =  Oportunidad.objects.filter(empresa_id = empresa.id)
+        oportunidades_total = oportunidades_lista.count()
+        oportunidades = oportunidades_lista[:2]
         # imagenes = Picture.objects.filter(empresa_id = empresa.id)
         # videos = VideoUrl.objects.filter(empresa_id = empresa.id)
 
@@ -64,6 +66,7 @@ class MiEmpresaView(FormView):
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
+        context['oportunidades_total'] = oportunidades_total
         # context['imagenes'] = imagenes
         context['redes_sociales'] = redes_sociales
         # context['videos'] = videos
@@ -318,9 +321,9 @@ def oportunidades(request):
     return HttpResponse(data, content_type='application/json')
 
 def oportunidades_listar( request ):
-    # user = request.user
-    # persona = get_object_or_404(Persona, usuario_id=user.id)
-    # representante = get_object_or_404(Representante, persona_id =persona.id)
+    user = request.user
+    persona = get_object_or_404(Persona, usuario_id=user.id)
+    representante = get_object_or_404(Representante, persona_id =persona.id)
     return render_to_response('empresa/oportunidad-lista.html', context_instance=RequestContext(request))
 
 def oportunidad_busqueda(request):
@@ -431,54 +434,6 @@ class OportunidadCandidatosCV(TemplateView):
         context['voluntariados'] = Voluntariado.objects.filter(estudiante_id=estudiante.id)
         context['conocimientos_extras'] = conocimientos_extras
         return context
-
-#
-# def datatables_view(request):
-#     objects = .objects.all()
-#     list_display = ['field1', 'field2', ...]
-#     list_filter = [f.name for f in MyModel._meta.fields if isinstance(f, CharField)]
-#     #a simple way to bring all CharFields, can be defined in specifics
-#
-#     # count total items:
-#     iTotalRecords = objects.count()
-#
-#     #filter on list_filter using __contains
-#     search = request.GET['sSearch']
-#     queries = [Q(**{f+'__contains' : search}) for f in list_filter]
-#     qs = reduce(lambda x, y: x|y, queries)
-#     objects = objects.filter(qs)
-#
-#     #sorting
-#     order = dict( enumerate(list_display) )
-#     dirs = {'asc': '', 'desc': '-'}
-#     ordering = dirs[request.GET['sSortDir_0']] + order[int(request.GET['iSortCol_0'])]
-#     objects = objects.order_by(order_by)
-#
-#     # count items after filtering:
-#     iTotalDisplayRecords = objects.count()
-#
-#
-#     # finally, slice according to length sent by dataTables:
-#     start = int(request.GET['iDisplayStart'])
-#     length = int(request.GET['iDisplayLength'])
-#     objects = objects[ start : (start+length)]
-#
-#     # extract information
-#     data = [map(lambda field: getattr(obj, field), list_display) for obj in objects]
-#
-#     #define response
-#     response = {
-#         'aaData': data,
-#         'iTotalRecords': iTotalRecords,
-#         'iTotalDisplayRecords': iTotalDisplayRecords,
-#         'sEcho': request.GET['sEcho']
-#     }
-#
-#     #serialize to json
-#     s = StringIO()
-#     json.dump(response, s)
-#     s.seek(0)
-#     return HttpResponse(s.read())
 
 class PictureCreateView(CreateView):
     model = Picture

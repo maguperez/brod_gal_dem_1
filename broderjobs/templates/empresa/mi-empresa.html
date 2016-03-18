@@ -33,7 +33,13 @@
 				</header>
 				<div class="content">
 					<h3 class="link">{{empresa.nombre | upper}}</h3>
-					<label class="descripcion">{{empresa.sector | upper}}</label>
+					<label class="descripcion">
+                        {% if empresa.sector != None %}
+                            {{empresa.sector | upper}}
+                        {% else %}
+                            Sin definir sector
+                        {%endif%}
+                        </label>
 				</div>
 			</div>
 		</div>
@@ -90,6 +96,8 @@
 									<label>
 										{% if empresa.numero_funcionarios != None %}
 											{{empresa.numero_funcionarios}}
+                                        {% else %}
+                                            No especificado
 										{%endif%}
 									</label>
 								</div>
@@ -98,6 +106,8 @@
 									<label>
 										{% if empresa.facturacion_anual != None %}
 											{{empresa.facturacion_anual}}
+                                        {% else %}
+                                            No especificado
 										{%endif%}
 									</label>
 								</div>
@@ -110,6 +120,8 @@
 											{%else%}
 												{{empresa.ciudad}}
 											{%endif%}
+                                        {% else %}
+                                            No especificado
 										{%endif%}
 									</label>
 								</div>
@@ -120,6 +132,8 @@
 									<label>
 										{% if empresa.sector != None %}
 											{{empresa.sector}}
+                                        {% else %}
+                                            No especificado
 										{%endif%}
 									</label>
 								</div>
@@ -181,9 +195,13 @@
 								</li>
 							{% endfor %}
 						</ul>
-                        {% if oportunidades|length > 2 %}
-						<a class="link ver-mas" href="{%url 'empresa-oportunidad-listar'%}">Ver m&aacute;s oportunidades</a>
-                        {% endif%}
+                        {% if oportunidades_total > 0 %}
+                            {% if oportunidades_total > 2 %}
+                            <a class="link ver-mas" href="{%url 'empresa-oportunidad-listar'%}">Ver m&aacute;s oportunidades</a>
+                            {% endif%}
+                        {% else  %}
+                        No se ha publicado ninguna postulación
+                    {% endif %}
 					</section>
 					<section class="redes">
 						<h3 class="title"><i class="network"></i>Redes sociales<button id="redes-sociales-button" class="link editar">Editar</button></h3>

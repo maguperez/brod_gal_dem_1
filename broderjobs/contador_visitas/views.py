@@ -17,12 +17,20 @@ def oportunidad_enviar( request ):
     else:
         usuario = None
     oportunidad = get_object_or_404(Oportunidad, pk = id)
-    contador = VisitasOportunidad()
-    contador.oportunidad = oportunidad
-    contador.usuario_creacion = usuario
-    contador.ip = get_ip(request)
-    contador.fecha_creacion = datetime.now()
-    contador.save()
+    try:
+        contador = VisitasOportunidad.objects.filter(usuario_creacion = usuario,
+                                                  oportunidad_id = oportunidad.id,
+                                                  fecha_creacion = datetime.now()).count()
+        if contador == 0:
+            contador = VisitasOportunidad()
+            contador.oportunidad = oportunidad
+            contador.usuario_creacion = usuario
+            contador.ip = get_ip(request)
+            contador.fecha_creacion = datetime.now()
+            contador.save()
+
+    except Exception, e:
+        error = str(e)
 
     total = VisitasOportunidad.objects.filter(oportunidad_id = id).count()
     response = {
