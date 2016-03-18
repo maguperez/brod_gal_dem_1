@@ -25,7 +25,7 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
     for id in ids_estudiantes:
         try:
             estudiante = Estudiante.objects.get(id = id, estado = 'A')
-            postulacion = Estudiante.objects.get(estudiante_id = estudiante.id, oportunidad_id = oportunidad.id,
+            postulacion = Postulacion.objects.get(estudiante_id = estudiante.id, oportunidad_id = oportunidad.id,
                                                  estado= 'A')
             mensaje_destinatarios = Mensaje_Destinatario()
             mensaje_destinatarios.mensaje = mensaje
@@ -35,7 +35,8 @@ def enviar_mensaje_multiple_estudiantes(oportunidad, ususrio_remitente, ids_estu
             mensaje_destinatarios.mensaje_previo = mensaje_previo
             mensaje_destinatarios.save()
             enviar_notificacion(oportunidad, estudiante.persona.usuario, asunto, True, ususrio_remitente.username)
-        except:
+        except Exception, e:
+            mensaje = str(e)
             pass
 
 def enviar_mensaje(oportunidad, ususrio_remitente, usuario_destinatario, asunto, contenido,

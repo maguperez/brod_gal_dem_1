@@ -65,9 +65,11 @@
 
 		});
 		$('.oportunidades-empresa').on('click', '.btn-archivar', function(){
-			var id = $(this).data('id');
+			debugger;
+            var id = $(this).data('id');
         	$.get("{% url 'oportunidad-archivar' %}?id=" +id, function(data){
-				$("#archivar-modal-body").html('<p>'+data+'</p>');
+				debugger;
+                $("#archivar-modal-body").html('<p>'+data+'</p>');
 				$('.btn-archivar').hide();
 				$("#oportunidad-lista li[data-id='"+id+"']").hide();
 			});
@@ -144,8 +146,7 @@
                 url: '{%url "contador-visitas-oportunidad-rango-fechas" %}',
                 type: 'get',
                 success: function(array){
-                    debugger;
-                   console.log(data);
+
             //$("#visualizaciones-"+id).html(total);
             $(obj).sparkline(array, {
                 type: 'bar',

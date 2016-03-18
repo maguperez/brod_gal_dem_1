@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% csrf_token %}
+<li data-id="{{oportunidad.id}}">
 <div class="oportunidad-estadistica" data-id="{{oportunidad.id}}">
     <div class="box header">
         <img class="imagen" src="{{oportunidad.empresa.set_logo}}" />
@@ -71,7 +72,7 @@
     </div>
     <div class="clear"></div>
 </div>
-
+</li>
 <style>
 	.ct-chart { margin-left: -40px; margin-top: -20px;}
 </style>
