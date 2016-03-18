@@ -186,10 +186,11 @@ def homepage_empresa(request):
     message_registro = None
     message_reset = None
     persona = Persona()
-    login_form = LoginForm(prefix='login')
-    registro_form = RegisterForm(prefix='registro')
-    reset_form = PasswordResetForm(prefix='reset')
+
     if request.user.is_authenticated():
+        login_form = LoginForm(prefix='login')
+        registro_form = RegisterForm(prefix='registro')
+        reset_form = PasswordResetForm(prefix='reset')
         try:
             persona = Persona.objects.get(usuario_id=request.user.id)
         except persona.DoesNotExist:
@@ -207,7 +208,9 @@ def homepage_empresa(request):
                                     context_instance=RequestContext(request))
     else:
         if request.method == "POST":
-
+            login_form = LoginForm(request.POST, prefix='login')
+            registro_form = RegisterForm(request.POST, prefix='registro')
+            reset_form = PasswordResetForm(request.POST, prefix='reset')
             if '_login' in request.POST:
                 if login_form.is_valid():
                     email = request.POST["login-email"]
