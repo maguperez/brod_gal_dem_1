@@ -23,19 +23,19 @@ and open the template in the editor.
     </head>
     <body style = "font-family: Helvetica; background-color:#F2F2F2;">
         <div style ="text-align: center; margin: 50px;">
-            <<img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.png' %}"/>
+            <img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.png' %}"/>
         </div>
         <div style ="background-color:white; margin: 15px; padding: 45px" >
             <div style ="font-size: 31pt; color: #5F5F5F; text-align: center"> 
                 Su cuenta ya está activa </div>
             <table style = "margin: 60px auto; border-spacing: 10px; ">
+                <tr><td>Datos: </td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td></tr>
                 <tr><td>Usuario:</td>
-                    <td>somosnestle@nestle.com</td></tr>
-                <tr><td>Contraseña:</td>
-                    <td>1a2b3c4d5e6f</td></tr>
+                    <td>{{user.email}}</td></tr>
             </table>
             <div style="text-align: center; display: block">
-                <a href="#" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 200px; text-decoration: none">Comenzar</a>
+                <a href="{{ protocol }}://{{ domain }}/empresa" style = "display: inline-block;background-color: #FB4100; padding: 10px; border-radius: 4px; font-size: 16pt; color: white; width: 200px; text-decoration: none">Comenzar</a>
             </div>
         </div>
         <div style="margin:30px;text-align: center">

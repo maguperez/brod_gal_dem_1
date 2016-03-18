@@ -11,7 +11,7 @@ class Persona(models.Model):
     fecha_nacimiento = models.DateField(default=None, null=True, blank=True)
     tipo_persona = models.CharField(max_length=1, default="E")
     genero = models.CharField(choices=utils.genero(), max_length=1, default='', null=True, blank=True)
-
+    enviar_correo = models.BooleanField(default=False, blank = True)
     fecha_creacion = models.DateField(default=  datetime.now, null=True, blank=True)
     fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)

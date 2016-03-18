@@ -482,9 +482,8 @@
                             </li>
                             {% endfor %}
                         </ul>
-
-                    {% if oportunidades %}
-                        {% if oportunidades|length > 2 %}
+                    {% if oportunidades_total > 0 %}
+                        {% if oportunidades_total > 2 %}
                         <a class="link ver-mas" href="{%url 'estudiante-oportunidades-empresa' empresa.id%}">Ver m&aacute;s
                             oportunidades</a>
                         {% endif %}
