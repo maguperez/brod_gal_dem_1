@@ -1049,7 +1049,7 @@ class OportunidadBusquedaView(LoginRequiredMixin, TemplateView):
 
 class OportunidadPostularView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
-        id = request.GET['id']
+        # id = request.GET['id']
 
         oportunidad =get_object_or_404(Oportunidad, id = id)
         data =[]
@@ -1085,6 +1085,44 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
             data.append(('ERROR'))
         data_json = json.dumps(data)
         return HttpResponse(data_json, content_type='application/json')
+
+def oportunidad_postular(request):
+    id = request.GET['id']
+    oportunidad =get_object_or_404(Oportunidad, id = id)
+    data =[]
+    if oportunidad is not None and oportunidad.estado_oportunidad == 'A':
+        persona = get_object_or_404(Persona, usuario_id = request.user.id)
+        estudiante =  get_object_or_404(Estudiante, persona_id = persona.id)
+
+        p, created = Postulacion.objects.get_or_create(oportunidad_id = id, estudiante_id = estudiante.id)
+        if created is True:
+            p.fecha_creacion = date.today()
+            p.estado = 'A'
+            p.estado_postulacion = 'P'
+            fase =  get_object_or_404(ProcesoFase, pk = 1)
+            p.fase = fase
+            p.save()
+            data.append(('CANCELAR'))
+        else:
+            estado = p.estado
+            if estado == 'A':
+                p.estado = 'I'
+                p.estado_postulacion = ''
+                p.fase = None
+                data.append(('POSTULAR'))
+            else:
+                p.estado = 'A'
+                p.estado_postulacion = 'P'
+                fase =  get_object_or_404(ProcesoFase, id = 1)
+                p.fase = fase
+                data.append(('CANCELAR'))
+            p.fecha_creacion = date.today()
+            p.save()
+    else:
+        data.append(('ERROR'))
+    data_json = json.dumps(data)
+    return HttpResponse(data_json, content_type='application/json')
+
 
 @login_required(login_url='homepage')
 def oportunidad_listar(request):
