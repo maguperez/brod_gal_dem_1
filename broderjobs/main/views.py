@@ -185,8 +185,27 @@ def homepage_empresa(request):
     message_login = None
     message_registro = None
     message_reset = None
+    persona = Persona()
+
     if request.user.is_authenticated():
-        return redirect('empresa-oportunidad-listar')
+        login_form = LoginForm(prefix='login')
+        registro_form = RegisterForm(prefix='registro')
+        reset_form = PasswordResetForm(prefix='reset')
+        try:
+            persona = Persona.objects.get(usuario_id=request.user.id)
+        except persona.DoesNotExist:
+            persona = None
+            if persona is not None:
+                if persona.tipo_persona == 'R':
+                    representante = get_object_or_404(Representante, persona_id = persona.id)
+                    return redirect('empresa-oportunidad-listar')
+        return render_to_response('main/home-empresa.html', {'message_login': message_login,
+                                                             'message_registro': message_registro,
+                                                              'message_reset': message_reset,
+                                                            'login_form': login_form ,
+                                                                'registro_form': registro_form,
+                                                                'reset_form': reset_form},
+                                    context_instance=RequestContext(request))
     else:
         if request.method == "POST":
             login_form = LoginForm(request.POST, prefix='login')

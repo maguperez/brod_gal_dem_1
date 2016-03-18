@@ -31,7 +31,8 @@ def obtener_ultimas_postulaciones(oportunidad_id):
     #     # print(fecha.strftime('%a'))
     for i in range(7):
         fecha += timedelta(days=1)
-        postulados.append((Postulacion.objects.filter(oportunidad_id = oportunidad_id, fecha_creacion = fecha).count()))
+        postulados.append((Postulacion.objects.filter(oportunidad_id = oportunidad_id, estado= 'A',
+                                                      fecha_creacion = fecha).count()))
     return postulados
 
 
