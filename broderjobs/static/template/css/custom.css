@@ -212,9 +212,12 @@ body:not(.dark) #header:not(.dark) #header-wrap:not(.dark) #primary-menu ul li, 
 .login .modal-title{
     font-family: 'Roboto Condensed';
 }
-.login .modal-dialog{
-    width: 400px;
+@media (min-width: 768px){
+    .login .modal-dialog{
+        width: 400px;
+    }
 }
+
 .login .modal-content{
     border-radius: 2px;
 }
