@@ -1,6 +1,7 @@
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
 {% block content %}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <section class="oportunidad-detalle">
 			<div class="centered">
 				<div>
@@ -107,18 +108,17 @@
 						<div class="detalle">
 							<div class ="form-group">
 										<label class = "col-sm-3">Direcci&oacute;n</label>
-										<div class = "col-sm-9">
-											{{form.direccion_map}}
+										<div class = "col-sm-9" id="direccion_map">
 										</div>
 										<br>
 									</div>
 									<div class ="form-group">
 										<label class = "col-sm-3"></label>
 										<div class = "col-sm-3">
-											{{form.latitud}}
+											<input type="hidden" id="latitud" value="{{oportunidad.latitud}}"/>
 										</div>
 										<div class = "col-sm-3">
-											{{form.longitud}}
+                                            <input type="hidden"  id="longitud" value="{{oportunidad.longitud}}"/>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -167,6 +167,24 @@ $(function(){
 			$(".box.alcance").addClass("fixed");
 		else $(".box.alcance").removeClass("fixed");
 	});
+
+    if($('#latitud').val() && $('#longitud').val()){
+        var geocoder = new google.maps.Geocoder();
+
+        var strLatitud = $('#latitud').val().replace(',','.');
+        var strLongitud = $('#longitud').val().replace(',','.');
+
+        var latitud = parseFloat(strLatitud);
+        var longitud = parseFloat(strLongitud);
+        if(latitud && longitud){
+            geocoder.geocode({
+            location: new google.maps.LatLng(latitud,longitud)
+                }, function (response, status) {
+                    if (response != null && response.length > 0 && response.status != "ZERO_RESULTS")
+                        $("#direccion_map").html(response[0]["formatted_address"]);
+            });
+        }
+    }
 })
 </script>
 {%endblock%}
