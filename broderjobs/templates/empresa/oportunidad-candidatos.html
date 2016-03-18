@@ -292,7 +292,7 @@
 
 		});
 		$('.btn-archivar').click(function(){
-        	$.get("{% url 'oportunidad-archivar' %}?id=" + $(this).data('id'), function(data){
+        	$.get("{% url 'oportunidad-archivar' %}?id=" + {{oportunidad.id}}, function(data){
 				$("#archivar-modal-body").html('<p>'+data+'</p>');
 				$('.btn-archivar').hide();
                 $('.estado label').html('oportunidad archivada');

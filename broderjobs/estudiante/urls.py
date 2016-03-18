@@ -61,7 +61,7 @@ urlpatterns = [
 
 	url(r'^oportunidad-detalle/(?P<id>\d+)/$', views.OportunidadDetalleView.as_view(), name="estudiante-oportunidad-detalle"),
 
-	url(r'^oportunidad-postular/$', views.OportunidadPostularView.as_view(), name="estudiante-oportunidad-postular"),
+	url(r'^oportunidad-postular/(?P<id>\d+)/$', views.OportunidadPostularView.as_view(), name="estudiante-oportunidad-postular"),
 
 	url(r'^oportunidades-empresa/(?P<id>\d+)/$', views.OportunidadesEmpresaView.as_view(), name='estudiante-oportunidades-empresa'),
 
