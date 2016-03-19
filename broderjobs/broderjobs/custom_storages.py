@@ -6,3 +6,6 @@ class StaticStorage(S3BotoStorage):
 
 class MediaStorage(S3BotoStorage):
    location = settings.MEDIAFILES_LOCATION
+
+   def path(self, name):
+      return self._normalize_name(name)
