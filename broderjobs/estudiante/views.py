@@ -1062,7 +1062,7 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
                 p.fecha_creacion = date.today()
                 p.estado = 'A'
                 p.estado_postulacion = 'P'
-                fase =  get_object_or_404(ProcesoFase, pk = 1)
+                fase =  get_object_or_404(ProcesoFase, orden = 1)
                 p.fase = fase
                 p.save()
                 data.append(('CANCELAR'))
@@ -1076,7 +1076,7 @@ class OportunidadPostularView(LoginRequiredMixin, TemplateView):
                 else:
                     p.estado = 'A'
                     p.estado_postulacion = 'P'
-                    fase =  get_object_or_404(ProcesoFase, id = 1)
+                    fase =  get_object_or_404(ProcesoFase, orden = 1)
                     p.fase = fase
                     data.append(('CANCELAR'))
                 p.fecha_creacion = date.today()
@@ -1099,7 +1099,7 @@ def oportunidad_postular(request):
             p.fecha_creacion = date.today()
             p.estado = 'A'
             p.estado_postulacion = 'P'
-            fase =  get_object_or_404(ProcesoFase, pk = 1)
+            fase =  get_object_or_404(ProcesoFase, orden = 1)
             p.fase = fase
             p.save()
             data.append(('CANCELAR'))
@@ -1113,7 +1113,7 @@ def oportunidad_postular(request):
             else:
                 p.estado = 'A'
                 p.estado_postulacion = 'P'
-                fase =  get_object_or_404(ProcesoFase, id = 1)
+                fase =  get_object_or_404(ProcesoFase, orden = 1)
                 p.fase = fase
                 data.append(('CANCELAR'))
             p.fecha_creacion = date.today()
