@@ -23,7 +23,7 @@ and open the template in the editor.
     </head>
     <body style = "font-family: Helvetica; background-color:#F2F2F2;">
         <div style ="text-align: center; margin: 50px;">
-            <img src ="{{ protocol }}://{{ domain }}{%static 'archivos/logo.png' %}"/>
+            <img src ="{%static 'archivos/logo.png' %}"/>
         </div>
         <div style ="background-color:white; margin: 15px; padding: 45px" >
 
@@ -40,12 +40,12 @@ and open the template in the editor.
 {#            </div>#}
         </div>
         <div style="margin:30px;text-align: center">
-            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-facebook.png' %}" width = 45 /></a>
-            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-twitter.png' %}" width = 45 /></a>
-            <a href="#"><img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-snapchat.png' %}" width = 45 /></a>
+            <a href="#"><img src="{% static 'archivos/icon-facebook.png' %}" width = 45 /></a>
+            <a href="#"><img src="{% static 'archivos/icon-twitter.png' %}" width = 45 /></a>
+            <a href="#"><img src="{% static 'archivos/icon-snapchat.png' %}" width = 45 /></a>
         </div>
         <div style="margin:15px;text-align: center; font-size: 11pt; color: #999 ">
-            Enviado con <img src="{{ protocol }}://{{ domain }}{% static 'archivos/icon-corazon.png' %}" width = 11 /> por personas que aman lo que hacen
+            Enviado con <img src="{% static 'archivos/icon-corazon.png' %}" width = 11 /> por personas que aman lo que hacen
         </div>
     </body>
 </html>
