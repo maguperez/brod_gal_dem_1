@@ -490,12 +490,6 @@ class PictureListView(ListView):
 
     def render_to_response(self, context, **response_kwargs):
         files = [ serialize(p) for p in self.get_queryset() ]
-        for p in files:
-            # p['url'] = MEDIA_URL+p['url']
-            # p['thumbnailUrl'] = MEDIA_URL+p['thumbnailUrl']
-            p['url'] = 'https://broderjobs.s3.amazonaws.com/media/pictures/miguelitos.jpg'
-            p['thumbnailUrl'] = 'https://broderjobs.s3.amazonaws.com/media/pictures/miguelitos.jpg'
-
         data = {'files': files}
         response = JSONResponse(data, mimetype=response_mimetype(self.request))
         response['Content-Disposition'] = 'inline; filename=files.json'
