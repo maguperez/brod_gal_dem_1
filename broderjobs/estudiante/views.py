@@ -571,7 +571,7 @@ class ConocimientoView(LoginRequiredMixin, FormView):
         conocimientos_extras_hidden = form.cleaned_data['conocimientos_extras_hidden']
         conocimientos_extras_ids = conocimientos_extras_hidden.split(',')
 
-        if conocimientos_extras_hidden.strip() != '':
+        if conocimientos_extras_hidden.strip() != '' and len(conocimientos_extras_hidden) > 0:
             conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).filter(id__in=conocimientos_extras_ids)
             ConocimientoExtra.objects.filter(estudiante_id=estudiante.id).exclude(id__in = conocimientos_extras).delete()
             for be in conocimientos_extras:
@@ -582,13 +582,17 @@ class ConocimientoView(LoginRequiredMixin, FormView):
 
         conocimientos_hidden = form.cleaned_data['conocimientos_hidden']
 
-        conocimientos_nuevos_hidden = form.cleaned_data['conocimientos_nuevos_hidden']
-
         conocimientos_ids = conocimientos_hidden.split(',')
 
-        conocimientos_nuevos_ids = conocimientos_nuevos_hidden.split(',')
+        conocimientos = []
 
-        conocimientos = Conocimiento.objects.filter(id__in=conocimientos_ids)
+        if conocimientos_hidden.strip() != '' and len(conocimientos_hidden) > 0:
+           conocimientos = Conocimiento.objects.filter(id__in=conocimientos_ids)
+
+
+        conocimientos_nuevos_hidden = form.cleaned_data['conocimientos_nuevos_hidden']
+
+        conocimientos_nuevos_ids = conocimientos_nuevos_hidden.split(',')
 
         for be in conocimientos_nuevos_ids:
             if be.strip() != '':
@@ -598,8 +602,8 @@ class ConocimientoView(LoginRequiredMixin, FormView):
                 Be_extra.save()
 
         estudiante.conocimiento = conocimientos
-
         estudiante.save()
+        
         return super(ConocimientoView, self).form_valid(form)
 
 class ActividadExtraView(LoginRequiredMixin, SuccessMessageMixin,UpdateView):
