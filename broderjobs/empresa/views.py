@@ -562,7 +562,7 @@ def generar_pdf(html):
 def canditado_cv_pdf(request):
     # vista de ejemplo con un hipotético modelo Libro
 
-    id_estudiante = request.get('id', None)
+    id_estudiante = request.GET.get('id', None)
     estudiante = get_object_or_404(Estudiante, pk = id_estudiante)
     conocimientos_extras = ConocimientoExtra.objects.filter(estudiante_id = estudiante.id)
     html = render_to_string('candidato_cv_pdf.html', {'pagesize':'A4', 'estudiante':estudiante,
