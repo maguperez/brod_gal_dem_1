@@ -507,10 +507,20 @@
 
                         <div>
                             <div class="facebook">
-                                <h4><a href="//{{redes_sociales.facebook}}" target="_blank"> FACEBOOK</a></h4>
+                               <h4>FACEBOOK</h4>
+								<div>
+                                    {% if  redes_sociales.facebook  %}
+                                    <a target="_blank" href="http://{{redes_sociales.facebook}}">{{redes_sociales.facebook}}</a>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="twitter">
-                                <h4><a href="//{{redes_sociales.twitter}}" target="_blank">TWITTER</a></h4>
+                               <h4>TWITTER</h4>
+								<div>
+                                    {% if  redes_sociales.twitter  %}
+                                    <a target="_blank" href="http://{{redes_sociales.twitter}}">{{redes_sociales.twitter}}</a>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="clear"></div>
                         </div>
