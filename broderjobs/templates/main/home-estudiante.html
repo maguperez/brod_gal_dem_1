@@ -590,13 +590,13 @@
                             <h4 class="modal-title text-center">Hola</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>
-                            <div class="division">
-                                <div class="line notopmargin nobottommargin"></div>
-                                <label>o</label>
-                                <div class="line notopmargin nobottommargin"></div>
-                                <div class="clear"></div>
-                            </div>
+{#                            <a  href="{% url 'social:begin' 'facebook' %}" class="link-facebook">INGRESA CON FACEBOOK</a>#}
+{#                            <div class="division">#}
+{#                                <div class="line notopmargin nobottommargin"></div>#}
+{#                                <label>o</label>#}
+{#                                <div class="line notopmargin nobottommargin"></div>#}
+{#                                <div class="clear"></div>#}
+{#                            </div>#}
                             <form id="login-form" name="login-form" class="nobottommargin" action="" method="post" autocomplete="off">{%csrf_token%}
                                 <div class="form-group">
                                     {{ login_form.email }}
@@ -634,8 +634,9 @@
                         <div class="modal-body text-center">
 
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">
-									REG&Iacute;STRATE CON FACEBOOK</a><br>
+{#                            <a class="link-facebook" href="{% url 'social:begin' 'facebook' %}">#}
+{#									REG&Iacute;STRATE CON FACEBOOK</a>#}
+                            <br>
                             <span>Es más fácil y rápido</span>
                             <div class="division">
                                 <div class="line notopmargin nobottommargin"></div>
