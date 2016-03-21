@@ -17,7 +17,7 @@ class Sector(models.Model):
     orden = models.IntegerField(null= True, blank= True)
 
     class Meta:
-        ordering = ["orden"]
+        ordering = ["descripcion"]
 
     def __unicode__(self):
         return self.descripcion
@@ -95,6 +95,7 @@ class Empresa(models.Model):
     longitud = models.FloatField(verbose_name='longitud', default=None, null=True, blank=True )
     latitud = models.FloatField(verbose_name='latitud', default=None, null=True, blank=True )
 
+    orden = models.IntegerField(null= True, blank= True)
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
     usuario_modificacion = models.CharField(max_length="50", default=None, null=True, blank=True)
@@ -111,6 +112,9 @@ class Empresa(models.Model):
             return self.logo.url
         else:
             return STATIC_URL+"img/profile/profile_default.png"
+
+    class Meta:
+        ordering = ["orden"]
 
 class Representante(models.Model):
 

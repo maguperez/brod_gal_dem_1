@@ -125,15 +125,22 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'broderjobsinstance',
-            'NAME': 'BroderJobs1',
-            'USER': 'broder',
-            'PASSWORD': 'br753des',
-            'HOST': '191.168.19.11',
-            'PORT': '5434',
+            # 'NAME': 'broderjobsinstance',
+            # 'NAME': 'BroderJobs1',
+            # 'USER': 'broder',
+            # 'PASSWORD': 'br753des',
+            # 'HOST': '191.168.19.11',
+            # 'PORT': '5434',
 
             # 'HOST': 'broderjobsinstance.cscdf74uioh9.us-west-2.rds.amazonaws.com',
             # 'PORT': '5432'
+
+            'NAME': 'BroderJobs',
+            'USER': 'sa',
+            'PASSWORD': 'abc#123',
+            'HOST': 'localhost',
+            'PORT': '5432',
+
 
         }
     }
