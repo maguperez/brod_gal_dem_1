@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^disc/', include('disc.urls')),
 
     #ADMIN
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^brodadminpage/', include(admin.site.urls)),
 
     url('^', include('django.contrib.auth.urls')),
 
