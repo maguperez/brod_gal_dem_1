@@ -64,12 +64,28 @@ class MiEmpresaView(FormView):
             redes_sociales.empresa = representante.empresa
             redes_sociales.save()
 
+        website_empresa = empresa.website
+
+        website_https = website_empresa.replace('https://', '')
+
+        website_http = website_empresa.replace('http://', '')
+
+        website = ''
+
+        if len(website_empresa) != len(website_https):
+            website = 'https://'+website_https
+        elif len(website_empresa) != len(website_http):
+            website = 'http://'+website_http
+        else:
+            website = 'http://'+website_empresa
+
         context = super(MiEmpresaView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
         context['oportunidades_total'] = oportunidades_total
         # context['imagenes'] = imagenes
         context['redes_sociales'] = redes_sociales
+        context['website'] = website
         # context['videos'] = videos
 
         return context

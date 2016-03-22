@@ -152,6 +152,24 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
             mi_evaluacion.salarios = 0
         imagenes = Picture.objects.filter(empresa_id = empresa.id)
         videos = VideoUrl.objects.filter(empresa_id = empresa.id)
+
+        website_empresa = empresa.website
+
+        website_https = website_empresa.replace('https://', '')
+
+        website_http = website_empresa.replace('http://', '')
+
+        website = ''
+
+        if len(website_empresa) != len(website_https):
+            website = 'https://'+website_https
+        elif len(website_empresa) != len(website_http):
+            website = 'http://'+website_http
+        else:
+            website = 'http://'+website_empresa
+
+
+
         context = super(EmpresaDetalleView, self).get_context_data(**kwargs)
         context['empresa'] = empresa
         context['oportunidades'] = oportunidades
@@ -162,6 +180,7 @@ class EmpresaDetalleView(LoginRequiredMixin, FormView):
         context['imagenes'] = imagenes
         context['videos'] = videos
         context['total_evaluadores'] = str(total_evaluadores).zfill(3)
+        context['website'] = website
         return context
 
     def form_valid(self, form):
