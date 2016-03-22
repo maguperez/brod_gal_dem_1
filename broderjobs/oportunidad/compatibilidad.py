@@ -136,11 +136,11 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
     conocimiento = 0
 
     if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
-        carrera = 11
+        carrera = 20
     if oportunidad.universidad.filter().count() == 0 or e.universidad in oportunidad.universidad.all():
-        universidad = 5
+        universidad = 6
     if oportunidad.grado_estudio is None or e.grado_estudio == oportunidad.grado_estudio:
-        grado_estudio = 11
+        grado_estudio = 8
     if( oportunidad.edad_desde == '' or oportunidad.edad_desde is None) or (oportunidad.edad_hasta == '' or
                                                                             oportunidad.edad_hasta is None):
         edad = 8
@@ -159,11 +159,11 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
     if oportunidad.genero == None or e.persona.genero == oportunidad.genero:
         genero = 2
     if oportunidad.tipo_puesto == None or e.tipo_puesto.filter(id = oportunidad.tipo_puesto.id).count()>0:
-        tipo_puesto = 12
+        tipo_puesto = 10
     if oportunidad.carga_horaria == None or e.carga_horaria == oportunidad.carga_horaria:
-        carga_horaria = 11
+        carga_horaria = 9
     if oportunidad.idioma.count() == 0:
-        idioma = 11
+        idioma = 8
     else:
         peso_idioma = 11/ oportunidad.idioma.count()
         for i in oportunidad.idioma.all():
@@ -173,7 +173,7 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
                     break
     if oportunidad.conocimiento.count() == 0:
         # or e.conocimiento.filter(id__in = map(int, p_conocimiento)).count() > 0 :
-        conocimiento = 9
+        conocimiento = 7
     else:
         peso_conocimiento = 9 / oportunidad.conocimiento.count()
         for i in oportunidad.conocimiento.all():
