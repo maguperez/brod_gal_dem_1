@@ -490,7 +490,7 @@ class OportunidadView(TemplateView):
 def datatable_candidatos(request):
     id = request.GET['id']
     f = request.GET['f']
-    objects = Postulacion.objects.filter(oportunidad_id = id, fase_id = int(f))
+    objects = Postulacion.objects.filter(oportunidad_id = id, fase__orden = int(f))
     list_display = ['semestre_inicio_estudio', 'ano_inicio_estudio', 'semestre_graduacion']
     list_filter = [f.name for f in Estudiante._meta.fields if isinstance(f, CharField)]
     #a simple way to bring all CharFields, can be defined in specifics
@@ -552,7 +552,7 @@ def siguiente_fase( request ):
     #actualiza a la siguiente fase
     if id_fase > 0:
         estado_postulacion = 'E'
-        fase = ProcesoFase.objects.get(pk = id_fase)
+        fase = ProcesoFase.objects.get(orden = id_fase)
         res_postulaciones = Postulacion.objects.filter(pk__in=ids, estado = 'A').update(fase = fase,
                                                                                         estado_postulacion = estado_postulacion,
                                                                                         fecha_modificacion = datetime.now(),

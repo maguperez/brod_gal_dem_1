@@ -125,8 +125,13 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'NAME': 'AWS',
+            # 'USER': 'postgres',
+            # 'PASSWORD': 'abc#123',
+            # 'HOST': 'localhost',
+            # 'PORT': '5432',
             'NAME': 'AWS',
-            'USER': 'postgres',
+            'USER': 'sa',
             'PASSWORD': 'abc#123',
             'HOST': 'localhost',
             'PORT': '5432',
