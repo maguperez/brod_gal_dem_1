@@ -249,8 +249,8 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<input type="hidden" id="fase" value="{{oportunidad.fase.id}}">
-<input type="hidden" id="fase-activa" value="{{oportunidad.fase.id}}">
+<input type="hidden" id="fase" value="{{oportunidad.fase.orden}}">
+<input type="hidden" id="fase-activa" value="{{oportunidad.fase.orden}}">
 <input type="hidden" id="f-postulados" value="1">
 <input type="hidden" id="f-grupal" value="2">
 <input type="hidden" id="f-personal" value="3">
@@ -291,7 +291,8 @@
         	$('#archivar-modal').modal('toggle');
 
 		});
-		$('.btn-archivar').click(function(){
+
+        $('.btn-archivar').click(function(){
         	$.get("{% url 'oportunidad-archivar' %}?id=" + {{oportunidad.id}}, function(data){
 				$("#archivar-modal-body").html('<p>'+data+'</p>');
 				$('.btn-archivar').hide();
