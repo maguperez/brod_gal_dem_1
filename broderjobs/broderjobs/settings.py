@@ -131,10 +131,10 @@ else:
             # 'HOST': 'localhost',
             # 'PORT': '5432',
             'NAME': 'AWS',
-            'USER': 'sa',
-            'PASSWORD': 'abc#123',
-            'HOST': 'localhost',
-            'PORT': '5432',
+            'USER': 'broder',
+            'PASSWORD': 'br753des',
+            'HOST': '191.168.19.11',
+            'PORT': '5434',
         }
     }
 
