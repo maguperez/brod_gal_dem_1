@@ -52,6 +52,8 @@ urlpatterns = [
     url(r'^prueba/$','empresa.views.prueba', name='prueba'),
     url(r'^prueba_empresa/$','empresa.views.prueba_empresa', name='prueba_empresa'),
 
+    # url(r'^empresa-busqueda/$', views.EmpresaBusquedaView.as_view(), name="empresa-busqueda"),
+
 ]
 
 handler404 = 'app.views.404_view'
