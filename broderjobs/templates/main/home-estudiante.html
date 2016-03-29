@@ -537,7 +537,7 @@
                                     <i class="icon-facebook"></i>
                                     <i class="icon-facebook"></i>
                                 </a>
-                                <a href="http://www.snapchat.com/broderjobs" target= "_blank"  class="social-icon si-small si-borderless si-snapchat">
+                                <a href="#" data-toggle="modal" data-target="#snapchat" class="social-icon si-small si-borderless si-snapchat">
                                     <i><img src="{% static 'template/images/logo-snapchat-grey.png' %}" height="14"></i>
                                     <i><img src="{% static 'template/images/logo-snapchat-white.png' %}"  height="14"></i>
                                 </a>
@@ -752,6 +752,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id = "snapchat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <img src ="{% static 'template/images/snapcode.png' %}" width="400">
+                            <h2 class = "nobottommargin">broderjobs</h2>
+                            <h4 style="color:#ACACAC">Somos personas que amamos lo que hacemos<br>
+                                Siguenos en SnapChat</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Go To Top
         ============================================= -->
         <div id="gotoTop" class="icon-angle-up"></div>

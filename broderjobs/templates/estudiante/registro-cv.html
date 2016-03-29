@@ -133,10 +133,11 @@
 										{{form.semestre_graduacion}}</div>
 									</div></p>
 								</div>
-                                <div id ="ciclo-actual" class="hidden">
-									<label>Ciclo de Actual</label>
+                                <div>
+									<label>Ciclo actual</label>
                                     <p>
 										{{form.semestre_actual}}
+                                        * Solo para estudiantes
 										</p>
 								</div>
 								<div>
@@ -602,12 +603,14 @@
         $("select").on("click", function(){
             $(this).css("color", "black");
         });
+        $("#id_semestre_actual").attr("disabled",true);
         $("#id_grado_estudio").change(function(){
-            $("form").valid();
+            $(".tooltip").hide();
+            // $("form").valid();
             if($("#id_grado_estudio").val()== 1){
-                $("#ciclo-actual").removeClass("hidden");
+                $("#id_semestre_actual").attr("disabled",false);
             }else{
-                $("#ciclo-actual").addClass("hidden");
+                $("#id_semestre_actual").attr("disabled",true);
             }
 
         });

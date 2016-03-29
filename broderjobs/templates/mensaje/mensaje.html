@@ -319,6 +319,8 @@
                 success: function(data){
                     fnActivaTab('message-detail1');
                     $("#summernote").summernote("reset");
+                    $(".candidatos").select2("val","");
+                    $("#oportunidad_redactar_id").select2("val","")
                     $('#li-1').click();
                     $('#message-detail1').html('<div class="panel-heading messages message-result">' +
                                             '<h2 class="p-t-20 w-500">Su mensaje se ha enviado correctamente</h2></div>');

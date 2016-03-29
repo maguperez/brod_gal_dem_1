@@ -332,6 +332,12 @@
 	 }
 
 	 $(function(){
+         $("#guardar").on("click", function(){
+             sessionStorage.setItem("scroll", $(window).scrollTop());
+        });
+        if (sessionStorage.getItem("scroll") != null){
+            $(window).scrollTop(parseInt(sessionStorage.getItem("scroll")));
+        }
          $("input[type=file]").addClass("cropit-image-input");
 
          var formulario = '#form-modal-body form';

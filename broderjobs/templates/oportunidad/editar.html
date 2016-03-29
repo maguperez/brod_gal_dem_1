@@ -418,6 +418,7 @@
         });
         AgregarAnchoLabelRemuneracion();
         $("#id_direccion_map").attr("readonly", true);
+        $("#id_direccion_map").attr("required", true);
         $('textarea').each(function(){
             $(this).after("<div class = 'textarea-feedback'></div>");
             var enteredText = $(this).val();
@@ -972,12 +973,15 @@
                 edad_desde: {
                     RangoEdad: true,
                     max: 99,
-                    min: 1
+                    min: 18
                 },
                 edad_hasta: {
                     RangoEdad: true,
                     max: 99,
-                    min: 1
+                    min: 18
+                },
+                direccion_map: {
+                    required: true
                 }
             },
             messages: {
@@ -1017,11 +1021,14 @@
 				},
                 edad_desde: {
                     max: "Debe ser un numero menor o igual a 99",
-                    min: "Debe ser un número mayor o igual a 1"
+                    min: "Debe ser un número mayor o igual a 18"
                 },
                 edad_hasta: {
                     max: "Debe ser un numero menor o igual a 99",
-                    min: "Debe ser un número mayor a 1"
+                    min: "Debe ser un número mayor a 18"
+                },
+                direccion_map: {
+                    required: "Debe hacer click y marcar un punto en el mapa"
                 }
             }
         });
