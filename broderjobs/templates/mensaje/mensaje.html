@@ -1,8 +1,10 @@
 {% extends 'empresa/base.html' %}
 {% load staticfiles %}
 {%block css%}
+    <link rel="stylesheet" href="{% static 'css/summernote.css' %}">
     <style>
         .note-toolbar { display : none; }
+        .note-editor.note-frame { border: none; }
         .mensaje > .centered { max-height: 500px; padding-bottom: 30px; }
         #main-content.page-mailbox h2,
         #main-content.page-mailbox h3,
@@ -300,9 +302,10 @@
             form.append('ids_estudiante',JSON.stringify(ids_estudiante));
             form.append('o',$('#oportunidad_redactar_id').val());
             form.append('a',$('.asunto').val());
-            form.append('c',$('.note-codable').val());
+            form.append('c',$("#summernote").summernote("code").replace(/<\/?[^>]+(>|$)/g, ""));
             form.append('p', $('#permite-respuesta').is(':checked')? 'S' : 'N');
             form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());
+
 
             $.ajax({
                 type:"POST",
@@ -315,6 +318,7 @@
                 },
                 success: function(data){
                     fnActivaTab('message-detail1');
+                    $("#summernote").summernote("reset");
                     $('#li-1').click();
                     $('#message-detail1').html('<div class="panel-heading messages message-result">' +
                                             '<h2 class="p-t-20 w-500">Su mensaje se ha enviado correctamente</h2></div>');

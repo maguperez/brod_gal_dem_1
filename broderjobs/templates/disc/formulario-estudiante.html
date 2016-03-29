@@ -147,6 +147,7 @@
                 },
                 success: function(preguntas){
                     if(preguntas.length  > 0 ) {
+                        $('#btn-repetir').hide();
                         $.each(preguntas, function (i, pregunta) {
                             $(".wizard-steps").append(
                                     '<li' + (i == 0 ? ' class="active"' : "") + '>' +
@@ -299,6 +300,7 @@
 
         });
         $('#btn-comenzar').click(function(){
+            $('#btn-repetir').hide();
             $('.introduccion').hide();
             $('#btn-comenzar').hide();
             $('#wizard').show();

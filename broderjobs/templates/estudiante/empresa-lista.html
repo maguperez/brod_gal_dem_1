@@ -31,7 +31,10 @@
 			url: '{%url "estudiante-empresa-busqueda" %}',
 			type: 'get',
 			success: function(data){
-
+                if (data.length == 0){
+                    $("#datos").html('<div id="vacio"><h4 class = "no-results">No se encontraron resultados</h4></div>');
+                    return false;
+                }
 				var html = ""
 				for(var i = 0; i<data.length ; i++){
 					var url = "{%url 'estudiante_empresa_detalle' 1 %}";
