@@ -172,6 +172,26 @@
 {% block js %}
 <script type="text/javascript" src="{% static 'js/jquery.bootstrap.wizard.js' %}"></script>
 <script>
+    $(function(){
+        $('textarea').each(function(){
+            $(this).after("<div class = 'textarea-feedback'></div>");
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
+        });
+
+        $('textarea').on("keyup", function() {
+            var enteredText = $(this).val();
+            var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+            var characterCount = enteredText.length + numberOfLineBreaks;
+
+            var totalText = 1000 - characterCount;
+            $(this).next().html(totalText + ' caracteres');
+        });
+    });
 	$(".loading-wrapper").hide();
 	$("#link-procesos").addClass("active");
 	$('.popup').click(function(e) {

@@ -323,34 +323,68 @@
                             <div>
                                 <div>
                                     <h4>N&uacute;mero de funcionarios</h4>
-                                    <label>{{empresa.numero_funcionarios}}</label>
+                                    <label>
+                                        {% if empresa.numero_funcionarios != None %}
+											{{empresa.numero_funcionarios}}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+                                    </label>
                                 </div>
                                 <div>
                                     <h4>Facturación anual</h4>
-                                    <label>{{empresa.facturacion_anual}}</label>
+                                    <label>
+										{% if empresa.facturacion_anual != None %}
+											{{empresa.facturacion_anual}}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+									</label>
                                 </div>
                                 <div>
                                     <h4>Sede Global</h4>
-                                    <label>{{empresa.ciudad}}, {{empresa.pais}}</label>
+                                    <label>
+										{% if empresa.ciudad != None %}
+											{% if empresa.pais != None %}
+												{{empresa.ciudad}}, {{empresa.pais}}
+											{%else%}
+												{{empresa.ciudad}}
+											{%endif%}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+									</label>
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <h4>Sector</h4>
-                                    {% if empresa.sector %}
-                                    <label>{{empresa.sector}}</label>
-                                    {% else %}
-                                    <label>Sin definir sector</label>
-                                    {% endif %}
+                                    <label>
+										{% if empresa.sector != None %}
+											{{empresa.sector}}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+									</label>
                                 </div>
                                 <div>
                                     <h4>Fundaci&oacute;n</h4>
 
-                                    <label>{{empresa.ano_fundacion}}</label>
+                                    <label>
+                                        {% if empresa.ano_fundacion != None and empresa.ano_fundacion != ''%}
+                                            {{empresa.ano_fundacion}}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+                                    </label>
                                 </div>
                                 <div>
                                     <h4>Sitio web</h4>
-                                    <a href="{{website}}">{{empresa.website}}</a>
+                                    {% if empresa.website != None and empresa.website != ''%}
+                                         <a href="{{website}}" target="_blank">{{empresa.website}}</a>
+                                     {% else %}
+                                         No especificado
+                                     {%endif%}
                                 </div>
                             </div>
                             <div class="clear"></div>

@@ -9,7 +9,10 @@
                 <div class="content">
                     <section class="pos-relative">
                         <h3 class="title"><i class="info"></i>Usuarios de la Empresa</h3>
-						<a class="btn-action" href="{% url 'cuenta-editar' %}" style="right: 170px;">EDITAR MI CUENTA</a>
+						<a class="btn-action" href="{% url 'cuenta-editar' %}"
+						    {% if administrador %}
+						        style="right:170px"
+                            {% endif %} >EDITAR MI CUENTA</a>
                         {% if administrador %}
                             <a class="btn-action" href="{% url 'cuenta-crear' %}">AÑANDIR USUARIO</a>
                         {% endif %}

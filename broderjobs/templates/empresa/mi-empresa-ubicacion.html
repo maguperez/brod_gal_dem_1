@@ -5,6 +5,9 @@
         {{form.latitud}}
 		<!--<input type="submit" class="btn btn-submit col-md-offset-2">-->
 	</form>
+
+    <div id="mi-empresa-ubicacion-error" class ="text-center" style ="color:red"></div>
+    <br>
 </div>
 <style>
     .controls {
@@ -53,6 +56,14 @@
 <input id="pac-input" class="controls" type="text" placeholder="Búsqueda">
 <div id = "ubicacion-map" style = "height: 350px"></div>
 <script>
+    $(function(){
+        $("#modal-aceptar").on("click", function(){
+            if(Ubicacion.marca == null){
+                $("#mi-empresa-ubicacion-error").html("Debe hacer click en el mapa para marcar un punto en él");
+                return false;
+            }
+        });
+    });
     var Ubicacion = {
         map: null,
         marca: null,

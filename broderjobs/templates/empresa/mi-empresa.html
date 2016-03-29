@@ -139,11 +139,22 @@
 								</div>
 								<div>
 									<h4>Año de Fundaci&oacute;n</h4>
-									<label>{{empresa.ano_fundacion}}</label>
+									<label>
+                                        {% if empresa.ano_fundacion != None and empresa.ano_fundacion != ''%}
+                                            {{empresa.ano_fundacion}}
+                                        {% else %}
+                                            No especificado
+										{%endif%}
+                                    </label>
 								</div>
 								<div>
 									<h4>Sitio web</h4>
-									<a href="{{website}}" target="_blank">{{empresa.website}}</a>
+                                     {% if empresa.website != None and empresa.website != ''%}
+                                         <a href="{{website}}" target="_blank">{{empresa.website}}</a>
+                                     {% else %}
+                                         No especificado
+                                     {%endif%}
+
 								</div>
 							</div>
 							<div class="clear"></div>
