@@ -34,10 +34,10 @@ def estudiante_foto(request):
 
 def mensajes_actuales(request):
     cantidad_mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id).count()
-    mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id)
+    mensajes = Mensaje_Destinatario.objects.filter(leido = False, usuario_destinatario = request.user.id).order_by("-fecha_envio")
     return {'cantidad_mensajes': cantidad_mensajes, 'mensajes': mensajes}
 
 def notificaciones(request):
     cantidad_notificaciones = Notificacion.objects.filter(leido = False, usuario_destinatario = request.user.id).count()
-    notificaciones = Notificacion.objects.filter(usuario_destinatario = request.user.id).order_by("-fecha_envio")[:10]
+    notificaciones = Notificacion.objects.filter(usuario_destinatario = request.user.id).order_by("-fecha_envio")
     return {'cantidad_notificaciones': cantidad_notificaciones, 'notificaciones': notificaciones}

@@ -24,7 +24,8 @@ def buzon_entrada(request):
     persona = get_object_or_404(Persona, usuario_id=user.id)
     representante = get_object_or_404(Representante, persona_id =persona.id)
     empresa = Empresa.objects.get(id=representante.empresa.id)
-    oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado='A').order_by("fecha_publicacion")
+    oportunidades =  Oportunidad.objects.filter(empresa_id = empresa.id, estado='A').exclude(
+                                                estado_oportunidad = 'P').order_by("fecha_publicacion")
     return render_to_response('mensaje/mensaje.html', {'oportunidades' : oportunidades},
                               context_instance=RequestContext(request))
 # Create your views here.
@@ -158,7 +159,8 @@ class MensajeBuscarView(LoginRequiredMixin, TemplateView):
                                'fecha_envio': m.fecha_envio,
                                'asunto': m.mensaje.asunto,
                                'contenido': m.mensaje.contenido,
-                               'oportunidad': m.mensaje.oportunidad}
+                               'oportunidad': m.mensaje.oportunidad,
+                               'leido': m.leido}
                     mensajes.append(mensaje)
                 except Persona.DoesNotExist:
                     pass
@@ -193,6 +195,8 @@ class MensajeAbrirConRelacionados(LoginRequiredMixin, TemplateView):
         tipo = request.GET.get('t')
         if id != '0':
             m_actual = get_object_or_404(Mensaje_Destinatario, pk= id)
+            m_actual.leido = True
+            m_actual.save()
             if(tipo == '0'):
                 remitente = Estudiante.objects.get(persona__usuario =  m_actual.mensaje.usuario_remitente.id)
                 foto = remitente.set_foto
