@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from oportunidad.models import Postulacion, Oportunidad
-
+from datetime import date, datetime
 from main import utils
 
 
@@ -17,8 +17,8 @@ class Mensaje(models.Model):
     # mensaje_previo = models.ForeignKey('self', null=True, related_name='respuesta')
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
@@ -43,8 +43,8 @@ class Mensaje_Destinatario(models.Model):
     mensaje_previo = models.ForeignKey('self', null=True, related_name='respuesta')
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
-    fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def get_anteriores(self):
@@ -71,7 +71,7 @@ class Notificacion(models.Model):
 
     usuario_creacion = models.CharField(max_length="50", default=None, null=True, blank=True)
     fecha_creacion = models.DateField(default=None, null=True, blank=True)
-    fecha_modificacion = models.DateField(default=None, null=True, blank=True)
+    fecha_modificacion = models.DateField(default=datetime.now, null=True, blank=True)
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     def __unicode__(self):
