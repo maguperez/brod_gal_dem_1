@@ -615,3 +615,11 @@ def prueba_empresa(request, template='empresa/prueba.html',
     }
     return render_to_response(
         template, context, context_instance=RequestContext(request))
+
+class EmpresaBusquedaView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        busqueda = request.GET['busqueda']
+        carreras = Empresa.objects.filter(Q(nombre__icontains=busqueda))
+        data = serializers.serialize('json', carreras,
+                                     fields=('id','nombre'))
+        return HttpResponse(data, content_type='application/json')
