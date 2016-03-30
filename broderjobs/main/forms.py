@@ -52,10 +52,15 @@ class RegisterForm(UserCreationForm):
     items_dias = dias_del_mes()
 
      #Carga items a Grado de Estudio
-    empresas= []
-    for e in Empresa.objects.all():
-        empresas.append((e.id, e.nombre))
-    items_empresa =[('','Empresa')] + empresas
+    # empresas= []
+    # for e in Empresa.objects.all():
+    #     empresas.append((e.id, e.nombre))
+    # items_empresa =[('','Empresa')] + empresas
+
+    empresas_campo = forms.CharField(required = True,  max_length = 50, widget=forms.TextInput(attrs={'placeholder': 'Ingrese una Empresa', 'class': 'form-control'}))
+    empresas_hidden = forms.CharField(widget=forms.HiddenInput())
+
+    RUC = forms.CharField(required = True,  max_length = 20, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
     username = forms.CharField(required = False, max_length = 30, widget=forms.TextInput(attrs={'placeholder': 'username', 'class': 'form-control'}))
@@ -69,7 +74,7 @@ class RegisterForm(UserCreationForm):
     mes = forms.ChoiceField(choices=items_meses, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     dia = forms.ChoiceField(choices=items_dias, required = False, widget=forms.Select(attrs={'class': 'cumpleanos form-control'}))
     telefono = forms.CharField(required = False, max_length = 20, widget=forms.TextInput(attrs={'placeholder': 'Numero telefonico', 'class': 'form-control'}))
-    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False, widget=forms.Select(attrs={'class': 'form-control'}))
+    # empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), empty_label="Empresa",  required = False, widget=forms.Select(attrs={'class': 'form-control'}))
 
     def __init__(self, *args, **kwargs):
         """

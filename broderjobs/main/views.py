@@ -242,11 +242,25 @@ def homepage_empresa(request):
                     persona.tipo_persona = "R"
                     persona.telefono = registro_form.cleaned_data['telefono']
                     persona.estado= 'I'
-                    empresa = registro_form.cleaned_data['empresa']
+                    empresa_id = registro_form.cleaned_data['empresas_hidden']
+                    empresa_nombre = registro_form.cleaned_data['empresas_campo']
+                    ruc = registro_form.cleaned_data['RUC']
+
+                    if empresa_id != '0':
+                        empresa = Empresa.objects.get(id= empresa_id )
+                    else:
+                        empresa = Empresa()
+                        empresa.nombre = empresa_nombre
+                        empresa.RUC = ruc
+                        empresa.estado = 'I'
+                        empresa.save()
+
                     persona.save()
+
                     representante = Representante()
                     representante.persona = persona
                     representante.empresa = empresa
+
                     representante.save()
                     # new_user = authenticate(username=request.POST['registro-email'], password=request.POST['registro-password1'])
                     # login(request, new_user)

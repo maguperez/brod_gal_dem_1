@@ -46,6 +46,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/layers.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'template/include/rs-plugin/css/navigation.css' %}">
 
+        <script type="text/javascript" src="{% static 'js/bootstrap3-typeahead.js' %}"></script>
+
         <!-- Document Title
         ============================================= -->
 
@@ -380,7 +382,7 @@
                             <h4 class="modal-title text-center">Regístrate con tu E-mail</h4>
                         </div>
                         <div class="modal-body text-center">
-                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                            <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post" autocomplete="off">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     {{ registro_form.first_name }}
@@ -391,8 +393,15 @@
                                 <div class="form-group">
                                     {{ registro_form.email }}
                                 </div>
+{#                                <div class="form-group">#}
+{#                                    {{ registro_form.empresa }}#}
+{#                                </div>#}
                                 <div class="form-group">
-                                    {{ registro_form.empresa }}
+                                    {{ registro_form.empresas_campo }}
+                                    {{ registro_form.empresas_hidden }}
+                                </div>
+                                <div class="form-group">
+                                    {{ registro_form.RUC }}
                                 </div>
                                 <div class="form-group">
                                     {{ registro_form.telefono }}
@@ -499,6 +508,19 @@
 		<script src="{% static 'template/js/jstorage.js' %}"></script>
         <script>
             $(function(){
+                $("#id_registro-empresas_hidden").val('0');
+                InicializarTypeaheadElementos();
+
+                $('#id_registro-empresas_campo').on("blur", function(){
+                    var strInput = $('#id_registro-empresas_campo').val();
+                    var objSeleccionado = $('#id_registro-empresas_campo').typeahead('getActive');
+
+                    if(objSeleccionado && objSeleccionado.name != strInput){
+                        $("#id_registro-empresas_hidden").val('0');
+                        $("#id_registro-RUC").val('');
+                    }
+                });
+
                 $("select").on("change", function(){
 					$(this).val() != "" ?
 						$(this).css("color", "#555555"):
@@ -576,8 +598,9 @@
                         "registro-email": { required: true, email: true },
                         "registro-password1": { required: true, minlength: 6 },
                         "registro-password2": { required: true, minlength: 6, equalTo: "#id_registro-password1" },
-                        "registro-empresa": { required: true },
+                        "registro-empresas_campo": { required: true },
                         "registro-telefono": { required: true,digits: true,	maxlength: 20 },
+                        "registro-RUC":{required: true,maxlength: 20,digits: true},
                         groups: {
                             date: "registro-dia registro-mes registro-ano"
                         },
@@ -595,11 +618,16 @@
                         "registro-password2": { required: "Este campo es obligatorio",
                                                 minlength: "La contraseña debe tener al menos seis (6) caracteres",
                                                 equalTo: "Las contraseñas deben ser iguales" },
-                        "registro-empresa": { required: "Este campo es obligatorio" },
+                        "registro-empresas_campo": { required: "Este campo es obligatorio" },
                         "registro-telefono": { required: "Este campo es obligatorio",
                                                digits: "Este campo solo contiene digitos",
                                                maxlength: "Este campo no puede superar los 20 digitos" },
-                        tyc: { required: "Debe aceptar los términos y condiciones" }
+                        tyc: { required: "Debe aceptar los términos y condiciones" },
+                        "registro-RUC": {
+                            required: "Este campo es obligatorio",
+                            maxlength: "Este campo no puede superar los 20 caracteres",
+                            digits: "Este campo solo contiene digitos"
+                        }
                     }
                 });
                 //Recordar ContraseñaEstudiante
@@ -641,6 +669,57 @@
                 }
                 {%endif %}
             }
+
+    function InicializarTypeahead(idElemento, idHidden, ruta){
+		$("#"+idElemento).typeahead({
+			source: function(buscar,cargarResultado){
+
+				$.ajax({
+					data : {'busqueda': buscar},
+					url: ruta,
+					type: 'get',
+					success: function(data){
+
+						if(data){
+							if(data.length > 0 && $.isArray(data)) {
+								var arreglo = [];
+								data.forEach(function(obj){
+									var obje = {};
+									obje.id = obj.pk;
+									obje.name = obj.fields.nombre;
+                                    obje.RUC = obj.fields.RUC;
+									arreglo.push(obje);
+								});
+								cargarResultado(arreglo);
+							}
+						}
+					}
+				});
+			},
+			minLength: 3
+		});
+
+		$("#"+idElemento).change(function() {
+			var current = $("#"+idElemento).typeahead("getActive");
+			if (current) {
+				// Some item from your model is active!
+				if (current.name == $("#"+idElemento).val()) {
+					$("#"+idHidden).val(current.id);
+                    $("#id_registro-RUC").val(current.RUC);
+				}
+                else {
+
+				}
+			}
+            else {
+				// Nothing is active so it is a new value (or maybe empty value)
+			}
+		});
+	}
+
+	function InicializarTypeaheadElementos(){
+		InicializarTypeahead('id_registro-empresas_campo', 'id_registro-empresas_hidden', '{%url "empresa-busqueda" %}');
+	}
         </script>
     </body>
 </html>
