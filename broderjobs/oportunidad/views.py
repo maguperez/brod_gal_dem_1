@@ -265,9 +265,40 @@ class OportunidadEditarView(FormView):
 
         beneficios_universo = Beneficio.objects.filter().exclude(id__in = beneficios)
 
+        universidades = Universidad.objects.filter(estado='A')
+
+        universidades_seleccionadas = oportunidad.universidad.all()
+
+        universidades_lista = []
+
+        for u in universidades:
+
+            exists = False
+
+            if any(x.id == u.id for x in universidades_seleccionadas):
+                exists = True
+
+            descripcion = ''
+
+            if u.nemonico is not None and u.nemonico != '':
+                descripcion = u.descripcion+' - ( '+u.nemonico+' )'
+            else:
+                descripcion = u.descripcion
+
+            universidad = {
+               'id': u.id,
+               'descripcion': descripcion,
+               'seleccionada': exists}
+            universidades_lista.append(universidad)
+
+
+
         context['beneficios'] = beneficios
         context['beneficios_extra'] = beneficios_extra
         context['beneficios_universo'] = beneficios_universo
+
+        context['universidades'] = universidades_lista
+        # context['universidades_seleccionadas'] = universidades_seleccionadas
 
         return context
 

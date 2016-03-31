@@ -234,7 +234,15 @@
 									<div class ="form-group ">
 										<label class = "col-sm-3 control-label">Universidades de preferencia</label>
 										<div class = "col-sm-9">
-											{{form.universidad}}
+											<select id="id_universidad" name="universidad" multiple>
+                                                {% for u in universidades %}
+                                                    {% if u.seleccionada %}
+											 	        <option selected="selected" value="{{ u.id }}">{{ u.descripcion }}</option>
+                                                    {% else %}
+                                                        <option value="{{ u.id }}">{{ u.descripcion }}</option>
+                                                    {% endif %}
+											    {% endfor %}
+                                            </select>
 											<label class="descripcion">Complete este campo s&oacute;lo si tiene una preferencia por los candidatos de alguna universidad. Introduzca las siglas de la universidad y seleccione de la lista.</label>
 										</div>
 										<div class="clear"></div>
@@ -1055,60 +1063,6 @@
 
 		});
 	}
-
-{#    $('.actualizar').change(function(){#}
-{#        alert("cambio");#}
-{#            ids = new Array();#}
-{#            ids_estudiante = new Array();#}
-{#            ids_estudiante = $(".candidatos").val();#}
-{#            var form = new FormData();#}
-{#            form.append('carrera', $('#id_carrera').val()== null ? 0 : $('#id_carrera').val() );#}
-{#            form.append('universidad', $('#id_universidad').val() == null ? 0 : $('#id_universidad').val() );#}
-{#            form.append('grado_estudio', $('#id_grado_estudio').val() == '' ? 0 : $('#id_grado_estudio').val() );#}
-{#            form.append('edad_desde', $('#id_edad_desde').val() == '' ? 0 : $('#id_edad_desde').val() );#}
-{#            form.append('edad_hasta', $('#id_edad_hasta').val() == '' ? 0 : $('#id_edad_hasta').val() );#}
-{#            form.append('pais', $('#id_pais').val() == '' ? 0 : $('#id_pais').val() );#}
-{#            form.append('ciudad', $('#id_ciudad').val() == '' ? 0 : $('#id_ciudad').val() );#}
-{#            form.append('genero', $('#id_genero').val() == '' ? 0 : $('#id_genero').val() );#}
-{#            form.append('tipo_puesto', $('input[name=tipo_puesto]:checked').val() == null ? 0 : $('input[name=tipo_puesto]:checked').val() );#}
-{#            form.append('carga_horaria',$('input[name=carga_horaria]:checked').val() == null ? 0 :$('input[name=carga_horaria]:checked').val() );#}
-{#            form.append('idioma', $('#id_idioma').val()== null ? 0 : $('#id_idioma').val() );#}
-{#            form.append('conocimiento', $('#id_conocimiento').val()== null ? 0 : $('#id_conocimiento').val() );#}
-{#            form.append('csrfmiddlewaretoken',$('[name="csrfmiddlewaretoken"]').val());#}
-{#            $(".alcance .cifra").html("Calculando...");#}
-{#            $.ajax({#}
-{#                type:"POST",#}
-{#                url:"{%url 'total-compatibles' %}",#}
-{#                data: form,#}
-{#                processData: false,#}
-{#                contentType: false,#}
-{#                error: function(x){#}
-{#                    console.log(x);#}
-{#                    $(".alcance .cifra").html("error...");#}
-{#                },#}
-{#                success: function(data){#}
-{#                    $(".alcance .cifra").html(data.total);#}
-{#                    $(".grafico-alcance div").removeClass("active");#}
-{##}
-{#                    if (data.nivel <= 29){#}
-{#                        $(".grafico-alcance .bajo").removeClass("inactive");#}
-{#                        $(".grafico-alcance .bajo").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Bajo");#}
-{#                    }#}
-{#                    else if (data.nivel <= 70){#}
-{#                        $(".grafico-alcance .adecuado").removeClass("inactive");#}
-{#                        $(".grafico-alcance .adecuado").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Medio");#}
-{#                    }#}
-{#                    else {#}
-{#                        $(".grafico-alcance .alto").removeClass("inactive");#}
-{#                        $(".grafico-alcance .alto").addClass("active");#}
-{#                        $(".grafico-alcance label").html("Alto");#}
-{#                    }#}
-{#                }#}
-{#            });#}
-{#       });#}
-
 
 </script>
 
