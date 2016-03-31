@@ -34,8 +34,12 @@ class OportunidadCrearView(FormView):
 
     def get_context_data(self, **kwargs):
         beneficio =Beneficio.objects.all()
+
+        universidades = Universidad.objects.filter(estado='A')
+
         context = super(OportunidadCrearView, self).get_context_data(**kwargs)
         context['beneficios'] = beneficio
+        context['universidades'] = universidades
         return context
 
     def get_initial(self):
