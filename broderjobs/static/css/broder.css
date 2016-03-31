@@ -1278,7 +1278,7 @@ a:hover {
 .notify.navbar-nav>li>.dropdown-menu { padding: 0px }
 .notify.navbar-nav>li>a { padding: 0px 10px !Important; color: white; background-color: transparent !Important;}
 .notify.navbar-nav>li>a:hover { background-color: transparent !Important;}
-.header-menu  #notifications-header .dropdown-menu li ul li a { display: inline-block; padding: 12px 10px 6px 10px !Important; }
+.header-menu  #notifications-header .dropdown-menu li ul li a { display: block; padding: 12px 10px 6px 10px !Important; }
 .header-menu .dropdown-menu > li > a.pull-left, .header-menu .dropdown-menu > li > a.pull-right { clear: none; }
 .header-menu .dropdown-menu li ul li .dropdown-time {
     color: #c4c4c4;
