@@ -30,9 +30,9 @@ class Estudiante(models.Model):
     tipo_puesto = models.ManyToManyField(TipoPuesto, default=None, blank=True, verbose_name="Tipo Puesto")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
-    remuneracion_min = models.CharField(max_length="50", default=None, null=True, blank=True,  )
-    remuneracion_max = models.CharField(max_length="50", default=None, null=True, blank=True )
+    remuneracion = models.CharField(max_length="50", default=None, null=True, blank=True,  )
     foto = models.ImageField('foto perfil', upload_to='img/%Y/%m/%d', null=True, blank=True)
+    foto_facebook_url =  models.URLField(default=None, null=True, blank=True)
     completo_test = models.BooleanField(default=False)
 
     fecha_creacion = models.DateField(default=datetime.now, null=True, blank=True)
@@ -47,7 +47,10 @@ class Estudiante(models.Model):
         if self.foto:
             return self.foto.url
         else:
-            return "/static/img/profile/profile_default.png"
+            if self.foto_facebook_url:
+                return self.foto_facebook_url
+            else:
+                return "/static/img/profile/profile_default.png"
 
 class Resumen(models.Model):
     estudiante =  models.ForeignKey(Estudiante)

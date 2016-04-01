@@ -124,7 +124,7 @@ def calcular_compatibilidad(p_carreras, p_universidades, p_grado_estudios, p_eda
 #calcula la compatibilidad academica dado un estudiante y oportunidad
 def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
     e = estudiante
-    carrera = 0
+    carrera = 20
     universidad = 0
     grado_estudio = 0
     edad = 0
@@ -134,9 +134,9 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
     carga_horaria = 0
     idioma = 0
     conocimiento = 0
-
-    if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
-        carrera = 20
+    #
+    # if  oportunidad.carrera.all() == 0 or  e.carrera in oportunidad.carrera.all():
+    #     carrera = 20
     if oportunidad.universidad.filter().count() == 0 or e.universidad in oportunidad.universidad.all():
         universidad = 6
     if oportunidad.grado_estudio is None or e.grado_estudio == oportunidad.grado_estudio:
@@ -188,9 +188,11 @@ def calcular_compatibilidad_academica_estudiante(estudiante, oportunidad):
 
 def guardar_compatibilidad(oportunidad):
     try:
+        ramas_carreras = oportunidad.carrera.filter().values('rama_carrera')
         total_compatibles = 0
         estudiantes_cultura = EstudianteEmpresaCultura.objects.filter(empresa_id = oportunidad.empresa).values('estudiante_id')
-        estudiantes = Estudiante.objects.filter(pk__in = estudiantes_cultura)
+        estudiantes = Estudiante.objects.filter(pk__in = estudiantes_cultura,
+                                                carrera__rama_carrera__in= ramas_carreras)
         total_estudiantes = estudiantes.count()
 
         for e in estudiantes:

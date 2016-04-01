@@ -90,6 +90,7 @@ def registro_cv(request):
             estudiante.ano_graduacion = ano_graduacion
             estudiante.semestre_graduacion = semestre_graduacion
             estudiante.carga_horaria = carga_horaria
+            estudiante.estado = 'A'
             estudiante.save()
 
             estudiante.tipo_puesto = tipo_puesto
@@ -390,8 +391,7 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
             'semestre_inicio_estudio': estudiante.semestre_inicio_estudio,
             'ano_inicio_estudio': estudiante.ano_inicio_estudio,
             'genero': persona.genero,
-            'remuneracion_max': estudiante.remuneracion_max,
-            'remuneracion_min': estudiante.remuneracion_min,
+            'remuneracion': estudiante.remuneracion,
             'semestre_actual': estudiante.semestre_actual}
 
     def form_invalid(self, form):
@@ -442,12 +442,10 @@ class InfoPersonalView(LoginRequiredMixin, FormView):
         id_ciudad = form.cleaned_data['ciudad_hidden']
 
         genero = form.cleaned_data['genero']
-        remuneracion_min = form.cleaned_data['remuneracion_min']
-        remuneracion_max = form.cleaned_data['remuneracion_max']
+        remuneracion= form.cleaned_data['remuneracion']
 
         persona.genero = genero
-        estudiante.remuneracion_min = remuneracion_min
-        estudiante.remuneracion_max = remuneracion_max
+        estudiante.remuneracion = remuneracion
 
         estudiante.pais = pais
 

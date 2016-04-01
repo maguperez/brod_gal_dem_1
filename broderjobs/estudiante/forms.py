@@ -72,10 +72,9 @@ class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
         fields = ('grado_estudio', 'semestre_inicio_estudio', 'ano_inicio_estudio',
-                  'semestre_graduacion', 'ano_graduacion', 'remuneracion_max', 'remuneracion_min', 'semestre_actual')
+                  'semestre_graduacion', 'ano_graduacion','remuneracion', 'semestre_actual')
         widgets = {
-                'remuneracion_min': TextInput(attrs={'placeholder': 'Desde'}),
-                'remuneracion_max': TextInput(attrs={'placeholder': 'Hasta'}),
+                'remuneracion': TextInput(attrs={'class': 'form-control'}),
                 'semestre_actual': Select(attrs={'class': 'form-control'}),
 
             }

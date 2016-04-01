@@ -295,7 +295,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '7119ba6ba620df948721cb20fc9189cc'
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email',
+    'fields': 'id, name, email, gender, first_name, last_name ',
 }
 
 

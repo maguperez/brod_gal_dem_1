@@ -8,6 +8,18 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from broderjobs.settings import DEFAULT_FROM_EMAIL
 
+
+
+class CarreraInline(admin.TabularInline):
+    model = models.Carrera
+
+class RamasAdmin(admin.ModelAdmin):
+    inlines = [CarreraInline]
+
+    def add_view(self, request, form_url = '', extra_context = None):
+        self.readonly_fields = ()
+        return super(RamasAdmin, self).add_view(request, form_url, extra_context)
+
 class PersonaAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
@@ -46,6 +58,8 @@ admin.site.register(models.Universidad)
 admin.site.register(models.Carrera)
 
 admin.site.register(models.TipoCarrera)
+
+admin.site.register(models.RamaCarrera, RamasAdmin)
 
 admin.site.register(models.IdiomaBase)
 

@@ -19,9 +19,9 @@ def error404(request):
 
 def login_facebook(request):
     user = request.user
-    persona = Persona.objects.get(usuario_id = user.id)
+    persona = Persona.objects.get(usuario_id = user.id, estado= 'A')
     if persona.tipo_persona == 'E':
-        if Estudiante.objects.filter(persona=persona).exists():
+        if Estudiante.objects.filter(persona=persona, estado = 'A').exists():
             return redirect('estudiante-oportunidad-listar')
         else:
             return redirect('registro-cv')
