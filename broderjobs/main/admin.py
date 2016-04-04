@@ -7,18 +7,45 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from broderjobs.settings import DEFAULT_FROM_EMAIL
+from django import forms
 
 
 
 class CarreraInline(admin.TabularInline):
     model = models.Carrera
 
-class RamasAdmin(admin.ModelAdmin):
-    inlines = [CarreraInline]
+# class RamasAdmin(admin.ModelAdmin):
+#     inlines = [CarreraInline]
+#
+#     def add_view(self, request, form_url = '', extra_context = None):
+#         self.readonly_fields = ()
+#         return super(RamasAdmin, self).add_view(request, form_url, extra_context)
 
-    def add_view(self, request, form_url = '', extra_context = None):
-        self.readonly_fields = ()
-        return super(RamasAdmin, self).add_view(request, form_url, extra_context)
+
+class RamaCarreraForm(forms.ModelForm):
+    class Meta:
+        model = models.RamaCarrera
+        fields = ('descripcion', 'fecha_creacion')
+
+    carreras = forms.ModelMultipleChoiceField(queryset=models.Carrera.objects.all(), widget=forms.CheckboxSelectMultiple(),)
+
+    def __init__(self, *args, **kwargs):
+        super(RamaCarreraForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            self.fields['carreras'].initial = self.instance.carrera_set.all()
+
+    def save(self, *args, **kwargs):
+        # FIXME: 'commit' argument is not handled
+        # TODO: Wrap reassignments into transaction
+        # NOTE: Previously assigned RamaCarreras are silently reset
+        instance = super(RamaCarreraForm, self).save(commit=False)
+        self.fields['carreras'].initial.update(rama_carrera=None)
+        self.cleaned_data['carreras'].update(rama_carrera=instance)
+        return instance
+
+
+class RamasAdmin(admin.ModelAdmin):
+    form = RamaCarreraForm
 
 class PersonaAdmin(admin.ModelAdmin):
 

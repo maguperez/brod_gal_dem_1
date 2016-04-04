@@ -99,6 +99,7 @@ class OportunidadCrearView(FormView):
         universidad = form.cleaned_data['universidad']
         tipo_carrera = form.cleaned_data['tipo_carrera']
         carrera = form.cleaned_data['carrera']
+        rama_carrera = form.cleaned_data['rama_carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
         longitud = form.cleaned_data['longitud']
@@ -176,6 +177,7 @@ class OportunidadCrearView(FormView):
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
         oportunidad.carrera = carrera
+        oportunidad.rama_carrera = rama_carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
         # oportunidad.beneficio = beneficio
@@ -241,6 +243,7 @@ class OportunidadEditarView(FormView):
                 'universidad': oportunidad.universidad.all(),
                 'tipo_carrera': oportunidad.tipo_carrera,
                 'carrera': oportunidad.carrera.all(),
+                'rama_carrera': oportunidad.rama_carrera.all(),
                 'idioma': oportunidad.idioma.all(),
                 'conocimiento': oportunidad.conocimiento.all(),
                 'beneficio': oportunidad.beneficio.all(),
@@ -340,6 +343,7 @@ class OportunidadEditarView(FormView):
         universidad = form.cleaned_data['universidad']
         tipo_carrera = form.cleaned_data['tipo_carrera']
         carrera = form.cleaned_data['carrera']
+        rama_carrera = form.cleaned_data['rama_carrera']
         idioma = form.cleaned_data['idioma']
         conocimiento = form.cleaned_data['conocimiento']
         periodo_graduacion_hidden = form.cleaned_data['periodo_graduacion_hidden']
@@ -472,6 +476,7 @@ class OportunidadEditarView(FormView):
         oportunidad.universidad = universidad
         oportunidad.tipo_carrera = tipo_carrera
         oportunidad.carrera = carrera
+        oportunidad.rama_carrera = rama_carrera
         oportunidad.idioma = idioma
         oportunidad.conocimiento = conocimiento
 

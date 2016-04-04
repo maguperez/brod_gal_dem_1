@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from main.models import Persona, Pais, Ciudad, GradoEstudio, Universidad, Carrera, TipoPuesto, CargaHoraria, Idioma, \
-    Conocimiento, TipoRemuneracion, Beneficio, PeriodosGraduacion, TipoCarrera
+    Conocimiento, TipoRemuneracion, Beneficio, PeriodosGraduacion, TipoCarrera, RamaCarrera
 from empresa.models import Empresa
 from estudiante.models import Estudiante
 from django.contrib.auth.models import User
@@ -54,6 +54,7 @@ class Oportunidad(models.Model):
     universidad = models.ManyToManyField(Universidad, default=None, blank=True, verbose_name="universidad")
     tipo_carrera = models.ForeignKey(TipoCarrera, default=None, null=True, blank=True)
     carrera = models.ManyToManyField(Carrera, default=None, blank=True, verbose_name="carrera")
+    rama_carrera = models.ManyToManyField(RamaCarrera, default=None, blank=True, verbose_name="rama carrera")
     idioma = models.ManyToManyField(Idioma, default=None, blank=True, verbose_name="Idioma")
     conocimiento = models.ManyToManyField(Conocimiento, default=None, blank=True, verbose_name="Conocimiento")
     experiencia = models.CharField(choices=anos_experiencia, max_length="1", default=None, null=True, blank=True)

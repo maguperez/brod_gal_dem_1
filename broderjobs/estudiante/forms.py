@@ -100,7 +100,6 @@ class InfoPersonalForm(EstudianteForm):
 class ResumenForm(forms.Form):
     resumen = forms.CharField(required=True, widget=forms.Textarea)
 
-
 class DisponibilidadForm(forms.ModelForm):
     class Meta:
             model = Estudiante

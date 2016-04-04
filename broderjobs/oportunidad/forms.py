@@ -21,7 +21,7 @@ class OportunidadForm(forms.ModelForm):
                   # 'fecha_cese', 'beneficio', 'resumen', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'fecha_cese', 'resumen','edad_desde', 'edad_hasta', 'genero', 'carga_horaria', 'tipo_puesto', 'estado', 'estado_oportunidad',
                   'grado_estudio', 'universidad', 'idioma', 'conocimiento', 'carrera', 'direccion_map', 'longitud', 'latitud',
-                  'tipo_carrera')
+                  'tipo_carrera', 'rama_carrera')
         widgets = {
             'titulo': TextInput(attrs={'placeholder': 'Escriba el título de su vacante', 'class': 'full'}),
             'carga_horaria': RadioSelect(attrs={'class': 'actualizar'}),
@@ -35,6 +35,7 @@ class OportunidadForm(forms.ModelForm):
             'longitud': TextInput(attrs={'placeholder': 'longitud'}),
             'latitud': TextInput(attrs={'placeholder': 'latitud'}),
             'carrera': SelectMultiple(attrs={'class': 'full actualizar'}),
+            'rama_carrera': SelectMultiple(attrs={'class': 'full actualizar'}),
             'universidad': SelectMultiple(attrs={'class': 'actualizar'}),
             'idioma': SelectMultiple(attrs={'class': 'full actualizar'}),
             'grado_estudio': Select(attrs={'class': 'full actualizar'}),

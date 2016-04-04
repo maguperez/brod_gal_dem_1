@@ -102,7 +102,7 @@ class TipoCarrera(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
-        ordering = ["orden"]
+        ordering = ["orden", "descripcion"]
 
     def __unicode__(self):
 		return unicode(self.descripcion) or u''
@@ -118,7 +118,7 @@ class Carrera(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
-        ordering = ["orden"]
+        ordering = ["orden", "descripcion"]
 
     def __unicode__(self):
 		return unicode(self.descripcion) or u''
@@ -132,7 +132,7 @@ class TipoPuesto(models.Model):
     estado =  models.CharField(choices=items_registro, max_length=1, default='A', null=True, blank=True)
 
     class Meta:
-        ordering = ["orden"]
+        ordering = ["orden", "descripcion"]
 
     def __unicode__(self):
 		return unicode(self.descripcion) or u''
